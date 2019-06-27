@@ -1,0 +1,85 @@
+@import '../../../assets/css/variables.scss';
+
+.header {
+  background-color: $dark-blue-2;
+  padding: 0;
+  font-family: $regular-font;
+  padding-top: 16px;
+  .uk-grid {
+    .logo-tagline {
+      .logo {
+        button {
+          color: #000;
+          border-radius: 4px;
+          background: $default-font-color;
+          text-transform: capitalize;
+          border: none;
+          font-size: 18px;
+          width: 160px;
+          height: 48px;
+        }
+      }
+      .tagline {
+        margin-top: 13px;
+        span {
+          color: $default-font-color;
+          font-size: 18px;
+        }
+      }
+    }
+    .location {
+      color: $default-font-color;
+      font-size: 18px;
+      padding: 10px;
+    }
+    .sign-in-button {
+      button {
+        background-color: $primary-btn;
+        border-radius: 4px;
+        font-size: 18px;
+        border: none;
+        color: #fff;
+        text-transform: capitalize;
+        width: 160px;
+        height: 48px;
+      }
+    }
+  }
+
+  .ecp-navbar {
+    margin-top: 40px;
+    background: none;
+    & > .uk-tab {
+      &:before {
+        content: unset;
+      }
+      & > li {
+        & > a {
+          min-height: 46px;
+          text-transform: none;
+          font-size: 18px;
+          background-color: $header-nav-button-background-color;
+          border-radius: 4px 4px 0px 0px;
+          border: 1px solid $header-nav-button-background-color;
+          padding: 4px 10px;
+          line-height: 46px;
+          transition: 0.3s all ease;
+          color: $header-nav-button-color;
+
+          &:hover,
+          &:focus {
+            color: $header-nav-button-hover-color;
+            background-color: $header-nav-button-hover-background-color;
+          }
+        }
+        &.uk-active {
+          & > a {
+            color: $header-nav-button-active-color;
+            background-color: $header-nav-button-active-background-color;
+            border-color: $header-nav-button-active-background-color;
+          }
+        }
+      }
+    }
+  }
+}

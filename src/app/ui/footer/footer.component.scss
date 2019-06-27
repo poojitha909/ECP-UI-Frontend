@@ -1,0 +1,75 @@
+@import '../../../assets/css/variables.scss';
+
+.footer {
+  background-color: $dark-blue-2;
+  font-family: $regular-font;
+  .footer-upper {
+    padding-top: 44px;
+    .upper-grid {
+      .logo-tagline {
+        .logo {
+          h1 {
+            margin-bottom: 0;
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 600;
+          }
+        }
+        .tagline {
+          color: $default-font-color;
+          font-size: 15px;
+          line-height: 24px;
+        }
+      }
+      .helpline-note {
+        button {
+          span {
+            margin-right: 8px;
+          }
+          background-color: $dark-blue-1;
+          color: #ffffff;
+          border: unset;
+          border-radius: 4px;
+          padding: 13px 29px;
+          font-size: 18px;
+          text-transform: capitalize;
+          &:hover,
+          &:focus {
+            background-color: #ffffff;
+            color: $primary-btn;
+          }
+        }
+      }
+    }
+  }
+  .footer-lower {
+    padding-top: 54px;
+    padding-bottom: 60px;
+    .column-grid {
+      .col-link {
+        h4 {
+          font-size: 18px;
+          color: $default-font-color;
+          font-weight: 900;
+        }
+        ul {
+          padding: 0;
+          li {
+            list-style-type: none;
+            margin-bottom: 16px;
+            a {
+              color: #ffffff;
+              font-size: 18px;
+              text-decoration: underline $default-font-color;
+              &:hover,
+              &focus {
+                text-decoration: unset;
+                color: $primary-btn;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

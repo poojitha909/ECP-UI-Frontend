@@ -2,17 +2,17 @@
   <div class="uk-container">
     <div class="uk-grid-small uk-child-width-expand@s" uk-grid>
       <div>
-        <div class="logo-tagline">
+        <div class="logo-tagline uk-text-left@s uk-text-center">
           <div class="logo">
             <button class="uk-button uk-button-default">logo</button>
           </div>
-          <div class="tagline uk-visible@s">
+          <div class="tagline">
             <span>An ElderSpring Initiative by Tata Trusts</span>
           </div>
         </div>
       </div>
       <div>
-        <div class="uk-child-width-1-2 uk-text-center" uk-grid>
+        <div class="uk-child-width-1-2 uk-text-center uk-visible@s" uk-grid>
           <div>
             <div class="location uk-text-right">
               <span>Gowlipura, Hyderabad</span>
@@ -26,15 +26,49 @@
         </div>
       </div>
     </div>
-    <nav class="uk-container ecp-navbar">
+    <nav class="uk-container ecp-navbar uk-visible@s">
       <ul class="uk-child-width-expand" uk-tab>
         <li class="uk-active"><a routerLink="">Home</a></li>
         <li><a href="#">Products</a></li>
         <li><a routerLink="services">Services</a></li>
-        <li><a href="#">Community</a></li>
+        <li><a href="#" class="uk-text-truncate">Community</a></li>
         <li><a href="#">Articles</a></li>
-        <li><a href="#">As a Question</a></li>
+        <li><a href="#" class="uk-text-truncate">As a Question</a></li>
       </ul>
     </nav>
+    <nav class="uk-container ecp-navbar uk-hidden@s mobile-menu uk-align-center">
+      <ul class="uk-flex-nowrap uk-overflow-auto mobile-ul uk-text-truncate" uk-tab>
+        <li class="uk-active"><a routerLink="">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a routerLink="services">Services</a></li>
+        <li><a href="#" class="uk-text-truncate">Community</a></li>
+        <li><a href="#">Articles</a></li>
+        <li><a href="#" class="uk-text-truncate">As a Question</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div class="uk-container seperate-box uk-hidden@s uk-align-center">
+  <div class="uk-grid-small" uk-grid>
+    <div class="uk-align-center uk-margin-remove-bottom">
+      <div class="location uk-text-center">
+        <div class="uk-margin">
+          <div uk-form-custom="target: > * > span:first-child">
+            <select>
+              <option value="Gowlipura, Hyderabad">Gowlipura, Hyderabad</option>
+            </select>
+            <button class="uk-button uk-button-default" type="button" tabindex="-1">
+              <span></span>
+              <span uk-icon="icon: chevron-down"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="uk-align-center uk-margin-remove-top uk-margin-remove-bottom">
+      <div class="sign-in-button">
+        <button class="uk-button uk-button-default">Signin</button>
+      </div>
+    </div>
   </div>
 </div>

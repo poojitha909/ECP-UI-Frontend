@@ -1,4 +1,4 @@
-@import '../../../assets/css/variables.scss';
+@import "../../../assets/css/variables.scss";
 
 .header {
   background-color: $dark-blue-2;
@@ -85,6 +85,18 @@
     }
   }
   .mobile-menu {
+    ::-webkit-scrollbar {
+      width: auto;
+      height: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #2a415e;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: $dark-blue-2;
+    }
     .mobile-ul {
       margin: 0;
       li {

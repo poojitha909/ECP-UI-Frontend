@@ -1,0 +1,21 @@
+.search-result{
+    padding: 24px 40px;
+}
+
+.uk-tab{
+    &::before {
+        border-bottom: none;
+    }
+    
+    & > * > a {
+        border-bottom: 3px solid #161c2d3d;
+        font-size: 18px;
+        line-height: 165%;
+    }
+    
+    & > .uk-active > a {
+        color: #1A73E8;
+        border-color: #1e87f0;
+    }
+}
+

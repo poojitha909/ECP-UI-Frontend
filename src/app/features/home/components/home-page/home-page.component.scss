@@ -1,7 +1,7 @@
-@import "../../../../assets/css/variables.scss";
+@import "src/assets/css/variables.scss";
 
 .banner {
-  background: url("../../../../assets/images/bg.png");
+  background: url("/assets/images/bg.png");
   padding-top: 24px;
   border-radius: 8px;
   font-family: $regular-font;

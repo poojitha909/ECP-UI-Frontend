@@ -1,4 +1,4 @@
-@import "../../../../../../assets/css/variables.scss";
+@import "../../../../../assets/css/variables.scss";
 
 .search-container {
   background-color: #ecf4ff;
@@ -41,11 +41,51 @@
     background-color: #e4eefb;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
-    padding: 21px 40px 21px 92px;
+    padding: 21px 40px 21px 40px;
     color: #161c2d;
     font-size: 18px;
     p {
       margin: 0;
     }
   }
+  
+}
+.uk-button-default{
+  color:#1A73E8;
+  border: 1px solid #1A73E8;
+  border-radius: 4px;
+}
+
+.w-150{
+  width: 150px;
+}
+
+.reset-search{
+  background-color: transparent;
+  color: red;
+  border-radius: 50%;
+  padding: 2px 5px;
+  border: 1px solid red;
+  cursor: pointer;
+  &:focus{
+    outline:none;
+   }
+}
+
+.reset-link{
+  margin: 0 5px;
+    background:none;
+    color: red;
+     border:none; 
+     padding:0!important;
+     font: inherit;
+     cursor: pointer;
+     &:focus{
+      outline:none;
+     }
+
+}
+
+.uk-search .uk-search-icon:not(a):not(button):not(input){
+  pointer-events: all;
 }

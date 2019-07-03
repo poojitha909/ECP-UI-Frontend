@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
-import { HomePageComponent } from './home-page/home-page.component';
+
 import { CoreModule } from 'src/app/core';
 import { UiModule, HeaderComponent, LayoutComponent, FooterComponent } from 'src/app/ui';
-import { SearchContainerComponent } from './home-page/components/search-container/search-container.component';
-import { SearchResultsComponent } from './home-page/components/search-results/search-results.component';
-import { PopularSearchComponent } from './home-page/components/popular-search/popular-search.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { SearchContainerComponent } from './components/search-container/search-container.component';
+import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { PopularSearchComponent } from './components/popular-search/popular-search.component';
+
 
 @NgModule({
   declarations: [
@@ -21,4 +23,4 @@ import { PopularSearchComponent } from './home-page/components/popular-search/po
   ],
   imports: [CommonModule, UiModule, HomeRoutingModule, CoreModule]
 })
-export class HomeModule {}
+export class HomeModule { }

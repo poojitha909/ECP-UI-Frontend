@@ -9,19 +9,20 @@
       <div class="uk-margin uk-width-1-1 uk-width-expand@s">
         <form class="uk-search uk-search-default">
           <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon><button *ngIf="showReset"
-              (click)="resetSearch()" class="reset-search">X
+              (click)="resetSearch()" class="reset-search">
+              <fa-icon [icon]="['fas', 'times-circle']"></fa-icon>
             </button>
             <button *ngIf="showReset" class="reset-link" (click)="resetSearch()">Search again
             </button>
           </span>
-          <input class="uk-search-input search-box" [(ngModel)]="searchValue" (keyup)="onSearch($event.target.value)"
+          <input class="uk-search-input search-box" [(ngModel)]="searchValue" (keyup)="onSearchChange($event.target.value)"
             required type="text" placeholder="Search..." name="search" />
 
         </form>
       </div>
 
       <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">
-        <button class="uk-button uk-button-default search-btn">Search</button>
+        <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
       </div>
     </div>
   </div>
@@ -38,7 +39,15 @@
   <!-- <div class="uk-container popular-search-list"></div> -->
   <div class="quote-line uk-margin-remove" uk-grid>
     <div class="uk-width-expand@s uk-padding-remove">
-      <p>All Products and Services are 100% verified. Buy with Trust!</p>
+      <p>
+        <span class="mr-3">
+          <span class="verified-icon"></span>
+        </span>All
+        Products
+        and Services are
+        100% verified. Buy with
+        Trust!
+      </p>
     </div>
     <div class="uk-width-auto@s uk-text-center">
       <button class="uk-button uk-button-default">View All Products</button>

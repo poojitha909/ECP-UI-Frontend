@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { PageParam } from 'src/app/core';
+import { HomeService } from '../../home.service';
+
+
 @Component({
   selector: 'app-search-container',
   templateUrl: './search-container.component.html',
@@ -9,12 +13,17 @@ export class SearchContainerComponent implements OnInit {
 
   showReset: boolean;
   searchValue: string;
-  constructor() { }
+  searchPageParam: PageParam = {
+    p: 0,
+    s: 10,
+    term: ''
+  };
+  constructor(private homeService: HomeService) { }
 
   ngOnInit() {
   }
 
-  onSearch(value) {
+  onSearchChange(value) {
     if (value !== "") {
       this.showReset = true
     } else {
@@ -26,4 +35,17 @@ export class SearchContainerComponent implements OnInit {
     this.searchValue = "";
     this.showReset = false;
   }
+
+  onSearch() {
+    if (this.searchValue && this.searchValue !== '') {
+      this.searchPageParam.term = this.searchValue;
+      this.homeService.getServices(this.searchPageParam).subscribe((data) => {
+        console.log(data);
+      },
+        error => {
+          console.log(error);
+        });
+    }
+  }
+
 }

@@ -1,0 +1,52 @@
+<div class="uk-section">
+    <div class="uk-container uk-container-large">
+        <div class="signup-title" uk-grid>
+            <div class="uk-flex uk-flex-middle uk-width-expand">
+                <h3>Signup for ABCD </h3>
+            </div>
+            <div class="uk-width-auto">
+                <a routerLink="/"><span class="close-icon"></span></a>
+            </div>
+        </div>
+        <hr>
+        <div class="uk-child-width-1-2@s uk-padding-small" uk-grid>
+            <div class="uk-visible@s uk-flex">
+                <img src=" assets/images/illustration.png" />
+            </div>
+            <div>
+                <!-- SignIn types View START -->
+                <app-signin-types-view></app-signin-types-view>
+
+                <!-- Addidtional info form  -->
+                <!-- <app-additional-info-form></app-additional-info-form> -->
+
+
+                <!-- Signup discription link START-->
+                <div class="signup-detail uk-text-center">
+                    <div class="list uk-padding">
+                        <h3>Signin for ABCD </h3>
+                        <ul class="uk-list">
+                            <li>
+                                <fa-icon icon="star" [style]="{'float': 'left'}"></fa-icon>Participate in Events and
+                                Discussions
+                            </li>
+                            <li>
+                                <fa-icon icon="star" [style]="{'float': 'left'}"></fa-icon>Find Products and Services
+                                suit your need
+                            </li>
+                            <li>
+                                <fa-icon icon="star" [style]="{'float': 'left'}"></fa-icon>Ask questions to domain
+                                experts, privately
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="member uk-padding-small">
+                        Already a member? <a class="m-l-1" routerLink="/user/signin">Signin here</a>
+                    </div>
+                </div>
+                <!-- Signup discription link END-->
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

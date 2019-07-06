@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-detail-card.component.scss']
 })
 export class ProductDetailCardComponent implements OnInit {
-
+  currentRate = 4;
   constructor() { }
 
   ngOnInit() {

@@ -1,0 +1,33 @@
+a{
+    color: #1A72E8;
+}
+.signup-title{
+    h3{
+        font-size: 24px;
+        font-family:"HKGroteskRegular";    
+    }
+    padding: 0 24px;
+}
+
+hr{
+    margin: 8px;
+}
+
+.signup-detail{
+      padding-top: 48px;
+    .list{
+        @media (min-width: 1200px) {
+        .uk-list{
+            padding: 0 85px;
+        }
+    }
+        background-color: #ECF4FF;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+    .member{
+        background-color: #E4EEFB;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+}

@@ -11327,3 +11327,7 @@ on tables, feel free to add more*/
 .no-text-decoration:hover{
     text-decoration: unset !important;
 }
+
+.fit-inline-size{
+    inline-size: fit-content !important;
+}

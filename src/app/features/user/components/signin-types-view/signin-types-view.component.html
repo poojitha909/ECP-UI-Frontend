@@ -1,0 +1,35 @@
+<div>
+  <form [formGroup]="verifyPhoneForm" class="uk-form-stacked">
+    <div class="uk-margin">
+      <label class="uk-form-label" for="form-stacked-text">Phone Number</label>
+      <div class="uk-form-controls">
+        <input class="uk-input" id="form-stacked-text" formControlName="phoneNumber" type="text" placeholder="Phone Number...">
+      </div>
+    </div>
+    <div class="uk-margin">
+      <div class="uk-form-controls">
+        <input class="uk-input" id="form-stacked-text" formControlName="otp" type="number" placeholder="Enter OTP...">
+      </div>
+    </div>
+  </form>
+  <div class="m-b-40" uk-grid>
+    <div class="uk-width-expand uk-flex uk-flex-middle">- An OTP will be sent to the above number</div>
+    <div class="uk-width-auto"> <button class="uk-button uk-button-default otp-btn">Request OTP</button></div>
+  </div>
+  <hr>
+  <div class="uk-child-width-1-2@l m-t-30" uk-grid>
+    <div>
+      <button class="fb-btn uk-button uk-button-default font-regular">
+        <fa-icon [icon]="['fab', 'facebook-square']" [style]="{'float': 'left'}"></fa-icon>
+        Login with Facebook
+      </button>
+    </div>
+
+    <div>
+      <button class="google-btn uk-button uk-button-default font-regular">
+        <fa-icon [icon]="['fab','google']" [style]="{'float': 'left'}"></fa-icon>
+        Login with Google
+      </button>
+    </div>
+  </div>
+</div>

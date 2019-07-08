@@ -14,16 +14,25 @@
         <img src=" assets/images/illustration.png" />
       </div>
       <div>
+
+        <div *ngIf="isLoading" class="uk-text-center pt-40">
+          <div class="spinner-border"></div>
+        </div>
+
         <!-- SignIn types View START -->
-        <app-signin-types-view></app-signin-types-view>
+        <ng-container *ngIf="!isLoading && !user">
+          <app-signin-types-view></app-signin-types-view>
+        </ng-container>
 
         <!-- Addidtional info form  -->
-        <!-- <app-additional-info-form></app-additional-info-form> -->
+        <ng-container *ngIf="user">
+          <app-additional-info-form [verifiedString]="verifiedString"></app-additional-info-form>
+        </ng-container>
 
 
 
 
-        <div class="newuser uk-padding-small mt-40">
+        <div *ngIf="!user" class="newuser uk-padding-small mt-40">
           Don’t have an account? <a class="m-l-1" routerLink="/user/signup">Create an account </a>
         </div>
 

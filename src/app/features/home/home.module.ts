@@ -5,24 +5,19 @@ import { HomeRoutingModule } from './home-routing.module';
 
 import { CoreModule } from 'src/app/core';
 import { SharedModule } from 'src/app/shared';
-import { UiModule, HeaderComponent, LayoutComponent, FooterComponent } from 'src/app/ui';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { SearchContainerComponent } from './components/search-container/search-container.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { PopularSearchComponent } from './components/popular-search/popular-search.component';
 
 
-
 @NgModule({
   declarations: [
     HomePageComponent,
-    HeaderComponent,
-    LayoutComponent,
-    FooterComponent,
     SearchContainerComponent,
     SearchResultsComponent,
     PopularSearchComponent
   ],
-  imports: [CommonModule, UiModule, CoreModule, HomeRoutingModule, SharedModule]
+  imports: [CommonModule, CoreModule, HomeRoutingModule, SharedModule]
 })
 export class HomeModule { }

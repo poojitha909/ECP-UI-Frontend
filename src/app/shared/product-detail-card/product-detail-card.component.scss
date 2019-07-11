@@ -19,9 +19,21 @@ a{
     color: #423d27;
 }
 
-.price {
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 1.2em;
-    color: #000;
+
+
+.prize-card{
+    text-align: center;
+    padding:  38px 0;
+    background-color:  #ECF4FF;
+    border-radius: 4px;
+    .price {
+        font-family:"HKGroteskRegular"; 
+        font-size: 32px;
+        color: #2F7F4A;
+    }
+}
+
+.price-border{
+    padding: 8px 16px;
+    border-left: 1px solid #D7E0EF;
 }

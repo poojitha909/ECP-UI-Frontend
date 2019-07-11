@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from 'src/app/ui';
-import { ServicesPageComponent } from './components/services-page/services-page.component';
+import { Routes, RouterModule } from '@angular/router';
 
+import { CommunityPageComponent } from './components/community-page/community-page.component';
 
 const routes: Routes = [
   {
@@ -11,7 +11,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ServicesPageComponent
+        component: CommunityPageComponent
       }
     ]
   }
@@ -21,4 +21,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ServicesRoutingModule { }
+export class CommunityRoutingModule { }

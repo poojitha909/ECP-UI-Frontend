@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { LayoutComponent } from 'src/app/ui';
 import { Routes, RouterModule } from '@angular/router';
 
+import { LayoutComponent } from 'src/app/ui';
 import { CommunityPageComponent } from './components/community-page/community-page.component';
 
 const routes: Routes = [
@@ -21,4 +21,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CommunityRoutingModule { }
+export class CommunityRoutingModule {}

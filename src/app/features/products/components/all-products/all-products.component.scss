@@ -1,0 +1,86 @@
+.uk-breadcrumb 
+{
+    font-family:"HKGroteskRegular";
+    & > :nth-child(n+2):not(.uk-first-column)::before{
+        content: ">";
+        margin: 0 5px;
+        color: #000;
+    } 
+    
+    & > * > *{
+        
+        font-size: 18px;
+        color: #1A73E8;
+    }
+}
+
+h3{
+    margin: 0px;
+    font-family:"HKGroteskRegular";
+    font-size: 32px;
+}
+
+.service-type{
+    a{
+        color: #fff;
+    }
+    padding: 20px 40px;
+    background-color: #161C2D;
+}
+
+.category-box{
+    border: 1px solid #D7E0EF;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 16px;    
+    .uk-badge{
+        background: #D9DADC;
+        color: #000;
+        border-radius:5px;
+    }
+}
+
+.uk-checkbox{
+    height: 30px;
+    width: 30px;
+}
+
+.whatapp-icon{
+    background:#009487;
+    color:#fff;
+}
+
+.fb-icon{
+    background:#2a415e;
+    color:#fff;
+}
+
+.email-icon{
+    background:#1772eb;
+    color:#fff;
+
+}
+
+.uk-button-group{
+    button:first-child{
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+    button:last-child{
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+    }
+
+    .uk-button{
+        &.uk-active{
+            background-color: #1A73E8;
+            color: #fff;
+        }
+    }
+}
+
+@media (max-width: 640px){
+    .text-center-xs{
+    text-align: center;
+    }
+}

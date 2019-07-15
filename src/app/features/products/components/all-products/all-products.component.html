@@ -1,0 +1,129 @@
+<div class="uk-section">
+  <div class="uk-text-center">
+
+    <ul class="uk-breadcrumb uk-flex-center">
+      <li><a href="">Home</a></li>
+      <li><span>Products</span></li>
+    </ul>
+    <h3>
+      All Products
+    </h3>
+  </div>
+
+  <div class="uk-child-width-1-3@s m-t-40 uk-grid-match" uk-grid>
+    <div>
+      <div class="uk-card uk-card-default">
+        <div class="uk-card-media-top">
+          <img class="w-100" src="assets/images/product-bg.png" alt="">
+        </div>
+        <div class="uk-card-body uk-text-center service-type">
+          <a>Utility</a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="uk-card uk-card-default">
+        <div class="uk-card-media-top">
+          <img class="w-100" src="assets/images/product-bg2.png" alt="">
+        </div>
+        <div class="uk-card-body uk-text-center service-type">
+          <a>Leisure</a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="uk-card uk-card-default">
+        <div class="uk-card-media-top">
+          <img class="w-100" src="assets/images/product-bg3.png" alt="">
+        </div>
+        <div class="uk-card-body uk-text-center service-type">
+          <a>Entertainment</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-t-60" uk-grid>
+
+    <div class="uk-width-1-3@m">
+
+      <div class="uk-inline w-100">
+        <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: search"></a>
+        <input class="uk-input" type="text">
+      </div>
+
+      <div class="m-t-40 category-box">
+        <h4>Categories</h4>
+        <ul class="uk-list uk-list-large p-2">
+          <li>List item 1 <span class="uk-badge uk-float-right">100</span></li>
+          <li>List item 2 <span class="uk-badge uk-float-right">100</span></li>
+          <li>List item 3 <span class="uk-badge uk-float-right">100</span></li>
+        </ul>
+      </div>
+
+      <div class="m-t-40 category-box uk-flex-middle uk-flex">
+        <label class="m-0"><input class="uk-checkbox m-r-10" type="checkbox" checked> Show only
+          Verified Profiles</label>
+      </div>
+
+      <div class="m-t-40 category-box">
+
+        <div class="m-b-20">
+          <a href="" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a> <a> Share via
+            Whatsapp</a>
+        </div>
+
+        <div class="m-b-20">
+          <a href="" class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail"> </a> <a> Share via Email</a>
+        </div>
+
+        <div>
+          <a href="" class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a> Share via
+            Facebook</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="uk-width-expand@m">
+
+      <div uk-grid>
+        <div class="uk-width-2-3@s text-center-xs">
+          <div class="uk-button-group" uk-switcher="toggle: > *">
+            <button class="uk-button uk-button-default">Item</button>
+            <button class="uk-button uk-button-default">Item</button>
+            <button class="uk-button uk-button-default">Item</button>
+          </div>
+        </div>
+        <div class="uk-width-1-3@s">
+          <div class="uk-flex uk-flex-middle m-0" uk-grid>
+            <div class="p-0 m-r-5">
+              Sort-by
+            </div>
+            <div class="p-0 uk-width-expand">
+              <select class="uk-select">
+                <option>Option 01</option>
+                <option>Option 02</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products list  -->
+      <div class="m-t-20">
+        <app-product-detail-card></app-product-detail-card>
+        <app-product-detail-card></app-product-detail-card>
+        <app-product-detail-card></app-product-detail-card>
+        <app-product-detail-card></app-product-detail-card>
+        <app-product-detail-card></app-product-detail-card>
+        <app-product-detail-card></app-product-detail-card>
+        <app-product-detail-card></app-product-detail-card>
+        <app-product-detail-card></app-product-detail-card>
+
+      </div>
+      <hr>
+    </div>
+
+  </div>
+
+</div>

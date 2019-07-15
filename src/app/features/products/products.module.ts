@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ProductsPageComponent } from './components/products-page/products-page.component';
 import { ProductsRoutingModule } from './products-routing.module';
 import { SharedModule } from 'src/app/shared';
+import { AllProductsComponent } from './components/all-products/all-products.component';
 
 @NgModule({
-  declarations: [ProductsPageComponent],
+  declarations: [ProductsPageComponent, AllProductsComponent],
   imports: [
     CommonModule,
     ProductsRoutingModule,

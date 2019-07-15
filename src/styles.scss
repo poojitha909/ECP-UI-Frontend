@@ -14,8 +14,24 @@
 // 4. Import UIkit.
 @import "~uikit/src/scss/uikit-theme.scss";
 // 5. Import Font
-@import url("https://fontlibrary.org/face/hk-grotesk");
+// @import url("https://fontlibrary.org/face/hk-grotesk");
 @import "assets/css/suedo.css";
+
+// =============================================================================
+// Font Face
+// =============================================================================
+@mixin font-face($name, $path, $weight: null, $style: null) {
+  $src: $path;
+  @font-face {
+    font-family: quote($name);
+    font-style: $style;
+    font-weight: $weight;
+    src: url($src) format("truetype");
+  }
+}
+
+@include font-face('HKGroteskRegular', 'assets/font/hk-grotesk/HKGrotesk-Regular.ttf');
+
 
 .font-regular{
     font-size: 18px;

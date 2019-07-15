@@ -9,6 +9,10 @@ const routes: Routes = [
   {
     path: 'services',
     loadChildren: () => import('src/app/features/services/services.module').then((mod) => mod.ServicesModule)
+  },
+  {
+    path: 'community',
+    loadChildren: () => import('src/app/features/community/community.module').then((mod) => mod.CommunityModule)
   }
 ];
 

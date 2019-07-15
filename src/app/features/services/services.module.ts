@@ -6,10 +6,12 @@ import { ServicesPageComponent } from './components/services-page/services-page.
 import { CoreModule } from 'src/app/core';
 import { SharedModule } from 'src/app/shared';
 import { AllServicesComponent } from './components/all-services/all-services.component';
+import { SearchContainerComponent } from './components/search-container/search-container.component';
+import { PopularSearchComponent } from './components/popular-search/popular-search.component';
 
 
 @NgModule({
-  declarations: [ServicesPageComponent, AllServicesComponent],
+  declarations: [ServicesPageComponent, AllServicesComponent, SearchContainerComponent, PopularSearchComponent],
   imports: [CommonModule, ServicesRoutingModule, SharedModule, CoreModule]
 })
 export class ServicesModule { }

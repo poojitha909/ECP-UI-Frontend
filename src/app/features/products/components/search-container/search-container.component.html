@@ -1,0 +1,51 @@
+<div class="uk-container search-container">
+  <div class="header-label">
+    <h3>Search for Products, Services, Events, and Discussions</h3>
+  </div>
+
+  <!-- Search Form START -->
+  <div class="search-form">
+    <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
+      <div class="uk-margin uk-width-1-1 uk-width-expand@s">
+        <form class="uk-search uk-search-default">
+          <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon><button *ngIf="showReset"
+              (click)="resetSearch()" class="reset-search">
+              <fa-icon [icon]="['fas', 'times-circle']"></fa-icon>
+            </button>
+            <button *ngIf="showReset" class="reset-link" (click)="resetSearch()">Search again
+            </button>
+          </span>
+          <input class="uk-search-input search-box" [(ngModel)]="searchValue" (keyup)="onSearchChange($event.target.value)"
+            required type="text" placeholder="Search..." name="search" />
+
+        </form>
+      </div>
+
+      <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">
+        <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
+      </div>
+    </div>
+  </div>
+  <!-- Search Form END -->
+
+  <!-- Popular search START -->
+  <app-popular-search></app-popular-search>
+
+  <!-- <div class="uk-container popular-search-list"></div> -->
+  <div class="quote-line uk-margin-remove" uk-grid>
+    <div class="uk-width-expand@s uk-padding-remove uk-flex uk-flex-middle">
+      <div class="uk-flex uk-flex-middle">
+        <span class="mr-3">
+          <span class="verified-icon"></span>
+        </span>All
+        Products
+        and Services are
+        100% verified. Buy with
+        Trust!
+      </div>
+    </div>
+    <div class="uk-width-auto@s uk-text-center">
+      <button routerLink="/products/all" class="uk-button uk-button-default">View All Products</button>
+    </div>
+  </div>
+</div>

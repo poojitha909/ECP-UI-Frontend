@@ -1,3 +1,137 @@
-<p>
-  community-page works!
-</p>
+<div class="uk-container banner">
+  <div class="logo">
+    <h3>Community</h3>
+  </div>
+  <div class="uk-child-width-expand@s uk-child-width-1-1" uk-grid>
+    <div class="para-info uk-text-center uk-text-left@s">
+      <p>
+        An online presence for elders to find reliable products and services.
+        And engage in Events and Discussions
+      </p>
+    </div>
+    <div class="couple-img uk-width-1-2@s uk-width-1-1">
+      <img
+        data-src="assets/images/indian_couple-_slide1-300x206.png"
+        alt=""
+        uk-img
+        class="uk-align-right@s uk-align-center"
+      />
+    </div>
+  </div>
+</div>
+<!-- Search Container starts -->
+<div class="uk-container search-container">
+  <div class="header-label">
+    <h3>Search for Events and Discussions</h3>
+  </div>
+
+  <!-- Search Form START -->
+  <div class="search-form">
+    <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
+      <div class="uk-margin uk-width-1-1 uk-width-expand@s">
+        <form class="uk-search uk-search-default">
+          <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon><button *ngIf="showReset"
+              (click)="resetSearch()" class="reset-search">
+              <fa-icon [icon]="['fas', 'times-circle']"></fa-icon>
+            </button>
+            <button *ngIf="showReset" class="reset-link" (click)="resetSearch()">Search again
+            </button>
+          </span>
+          <input class="uk-search-input search-box" [(ngModel)]="searchValue" (keyup)="onSearchChange($event.target.value)"
+            required type="text" placeholder="Search..." name="search" />
+
+        </form>
+      </div>
+
+      <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">
+        <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
+      </div>
+    </div>
+  </div>
+  <!-- Search Form END -->
+
+  <!-- Search Result START -->
+  <div class="search-result uk-grid">
+    <div class="uk-width-1-2@m">
+      <div class="community-result-head">
+        <h3>Upcoming Events & Activities</h3>
+      </div>
+      <div class="community-result-body">
+        <ul>
+          <li>
+            <h4>Painting For Fun</h4>
+            <div>Date: 23-05-2019   (today)</div>
+          </li>
+          <li>
+              <h4>Painting For Fun</h4>
+              <div>Date: 23-05-2019   (today)</div>
+          </li>
+          <li>
+              <h4>Painting For Fun</h4>
+              <div>Date: 23-05-2019   (today)</div>
+          </li>
+        </ul>
+      </div>
+      <div class="community-result-footer">
+          View All Events 
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="3" width="9" height="18">
+            <path d="M16.0009 12.0006C16.0009 12.2673 15.9006 12.518 15.7193 12.7066L8.82585 19.8542C8.78113 19.9009 8.72793 19.9379 8.66931 19.9631C8.61069 19.9883 8.54784 20.0011 8.48439 20.0009C8.35578 20.0009 8.23425 19.9489 8.14358 19.8542C8.09839 19.8081 8.06251 19.7531 8.03802 19.6924C8.01353 19.6318 8.00092 19.5667 8.00092 19.5009C8.00092 19.4351 8.01353 19.37 8.03802 19.3094C8.06251 19.2487 8.09839 19.1937 8.14358 19.1475L15.0363 12.0006L8.14358 4.85366C8.09839 4.80751 8.06251 4.7525 8.03802 4.69184C8.01353 4.63118 8.00091 4.56607 8.00091 4.50031C8.00091 4.43455 8.01353 4.36945 8.03802 4.30878C8.06251 4.24812 8.09839 4.19312 8.14358 4.14697C8.18809 4.10012 8.24115 4.06292 8.29966 4.03753C8.35817 4.01213 8.42096 3.99906 8.48439 3.99906C8.54782 3.99906 8.61061 4.01213 8.66912 4.03753C8.72763 4.06292 8.78069 4.10012 8.8252 4.14696L15.7186 11.2939C15.8085 11.3865 15.8797 11.4966 15.9281 11.6179C15.9766 11.7392 16.0013 11.8693 16.0009 12.0006Z" fill="black"/>
+            </mask>
+            <g mask="url(#mask0)">
+            <rect width="24" height="24" fill="white"/>
+            </g>
+          </svg>
+      </div>
+    </div>
+    <div class="uk-width-1-2@m">
+        <div class="community-result-head">
+          <h3>Popular Discussions</h3>
+        </div>
+        <div class="community-result-body">
+          <ul>
+            <li>
+              <h4>What Did You learn in School That you never forget in your life</h4>
+              <div>111 comments &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by Akshay Varma</div>
+            </li>
+            <li>
+                <h4>What books impacted your life in a Position of life or death</h4>
+                <div>41 comments &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by Srihari Venkatraman   (today)</div>
+            </li>
+            <li>
+                <h4>Signals that Baffled Astronormers for 17 Years</h4>
+                <div>18 comments &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by Deepa Gupta</div>
+            </li>
+          </ul>
+        </div>
+        <div class="community-result-footer">
+          View All Discussions
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="3" width="9" height="18">
+            <path d="M16.0009 12.0006C16.0009 12.2673 15.9006 12.518 15.7193 12.7066L8.82585 19.8542C8.78113 19.9009 8.72793 19.9379 8.66931 19.9631C8.61069 19.9883 8.54784 20.0011 8.48439 20.0009C8.35578 20.0009 8.23425 19.9489 8.14358 19.8542C8.09839 19.8081 8.06251 19.7531 8.03802 19.6924C8.01353 19.6318 8.00092 19.5667 8.00092 19.5009C8.00092 19.4351 8.01353 19.37 8.03802 19.3094C8.06251 19.2487 8.09839 19.1937 8.14358 19.1475L15.0363 12.0006L8.14358 4.85366C8.09839 4.80751 8.06251 4.7525 8.03802 4.69184C8.01353 4.63118 8.00091 4.56607 8.00091 4.50031C8.00091 4.43455 8.01353 4.36945 8.03802 4.30878C8.06251 4.24812 8.09839 4.19312 8.14358 4.14697C8.18809 4.10012 8.24115 4.06292 8.29966 4.03753C8.35817 4.01213 8.42096 3.99906 8.48439 3.99906C8.54782 3.99906 8.61061 4.01213 8.66912 4.03753C8.72763 4.06292 8.78069 4.10012 8.8252 4.14696L15.7186 11.2939C15.8085 11.3865 15.8797 11.4966 15.9281 11.6179C15.9766 11.7392 16.0013 11.8693 16.0009 12.0006Z" fill="black"/>
+            </mask>
+            <g mask="url(#mask0)">
+            <rect width="24" height="24" fill="white"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+  </div>
+  <!-- Search Result END -->
+
+  <!-- <div class="uk-container popular-search-list"></div> -->
+  <div class="quote-line uk-margin-remove" uk-grid>
+    <div class="uk-width-expand@s uk-padding-remove uk-flex uk-flex-middle">
+      <div class="uk-flex uk-flex-middle">
+        <span class="mr-3">
+          <span class="verified-icon"></span>
+        </span>All
+        Products
+        and Services are
+        100% verified. Buy with
+        Trust!
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Search Container ends -->

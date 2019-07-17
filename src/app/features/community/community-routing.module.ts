@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LayoutComponent } from 'src/app/ui';
 import { CommunityPageComponent } from './components/community-page/community-page.component';
+import { EventsListPageComponent } from './components/events-list/events-list-page.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
       {
         path: '',
         component: CommunityPageComponent
+      },
+      {
+        path: 'eventslist',
+        component: EventsListPageComponent
       }
     ]
   }

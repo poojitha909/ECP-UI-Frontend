@@ -20,7 +20,7 @@
     margin: 24px 40px 0;
     padding-bottom: 24px;
     font-size: 18px;
-    color: rgba(22, 28, 45, 0.87);
+    color: $font-color-black;
   }
   .couple-img {
     margin-right: 36px;
@@ -43,7 +43,7 @@
   margin-bottom: 48px;
   .header-label {
     font-size: 24px;
-    color: rgba(22, 28, 45, 0.87);
+    color: $font-color-black;
     margin: 40px 40px 16px 40px;
     h3 {
       font-family: $regular-font;
@@ -145,7 +145,7 @@
     font-size: 24px;
     font-weight: 400;
     align-items: center;
-    color: rgba(22, 28, 45, 0.87);
+    color:$font-color-black;
     padding-left:24px;
     margin-bottom: 0px;
     line-height: 60px;
@@ -162,7 +162,7 @@
     font-weight: 200;
     font-size: 18px;
     margin-bottom: 5px;
-    color: rgba(22, 28, 45, 0.87);
+    color: $font-color-black;
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -182,8 +182,9 @@
     font-size: 18px;
     padding-left:24px;
     line-height: 60px;
-    color: #FFF;
+    color: $default-font-color;
     margin-bottom: 20px;
+    cursor: pointer;
 }
 .community-result-footer svg{
     float: right;

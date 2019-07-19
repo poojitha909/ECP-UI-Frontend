@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
+
+import { User } from '../../interfaces';
+import { ApiConstants } from 'src/app/api.constants';
+
+const authHeaders = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+});
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +40,16 @@ export class AuthService {
     return this.user$.asObservable();
   }
 
+  signup(userData: User): Observable<any> {
+    return this.http.post<any>(ApiConstants.USER_SIGNUP, userData, { headers: authHeaders });
+  }
+
+  login(userCredentail: User): Observable<any> {
+    return this.http.post<any>(ApiConstants.USER_LOGIN, userCredentail, { headers: authHeaders });
+  }
+
+  logout(): Observable<any> {
+    return this.http.get<any>(ApiConstants.USER_LOGOUT);
+  }
 
 }

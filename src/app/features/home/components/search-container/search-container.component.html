@@ -15,8 +15,8 @@
             <button *ngIf="showReset" class="reset-link" (click)="resetSearch()">Search again
             </button>
           </span>
-          <input class="uk-search-input search-box" [(ngModel)]="searchValue" (keyup)="onSearchChange($event.target.value)"
-            required type="text" placeholder="Search..." name="search" />
+          <input class="uk-search-input search-box font-regular" [(ngModel)]="searchValue" (keyup)="onSearchChange($event.target.value)"
+            required type="text" placeholder="Search here" name="search" />
 
         </form>
       </div>
@@ -49,8 +49,8 @@
         Trust!
       </div>
     </div>
-    <div class="uk-width-auto@s uk-text-center">
+    <!-- <div class="uk-width-auto@s uk-text-center">
       <button class="uk-button uk-button-default">View All Products</button>
-    </div>
+    </div> -->
   </div>
 </div>

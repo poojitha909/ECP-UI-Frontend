@@ -1,0 +1,48 @@
+@import "src/assets/css/variables.scss";
+
+.event-summary{
+    border: solid 1px #D7E0EF;
+    margin-bottom:20px;
+    border-radius: 4px 4px 4px 4px;
+    text-align: start;
+    color: $font-color-black;
+    .event-summary-head{
+        align-items: center;
+        background-color: #D7E0EF;
+        border-radius: 4px 4px 0px 0px;
+        min-height: 100px;
+        padding: 0 15px;
+        .title{
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 27px;
+            color: $primary-txt-color;
+        }
+    }
+    .event-summary-body{
+        padding: 20px 15px;
+        font-size: 18px;
+        .detail{
+            font-size: 15px;
+        }
+    }
+    .event-summary-footer{
+        padding: 0 15px 10px;
+        font-size: 18px;
+        align-items: center;
+        span{
+            cursor: pointer;
+        }
+        .right-text{
+            color: #1A73E8;
+            text-align: right;
+            span{
+                border-bottom: 1px solid #b7d6ff
+            }
+        }
+        .left-text{
+            color: #C83F3F;
+        }
+    }
+
+}

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { PageParam } from 'src/app/core';
 
 @Component({
-  selector: 'app-community-page',
-  templateUrl: './community-page.component.html',
-  styleUrls: ['./community-page.component.scss']
+  selector: 'app-events-list-page',
+  templateUrl: './events-list-page.component.html',
+  styleUrls: ['./events-list-page.component.scss']
 })
-export class CommunityPageComponent implements OnInit {
+export class EventsListPageComponent implements OnInit {
 
   showReset: boolean;
   searchValue: string;
@@ -37,7 +37,6 @@ export class CommunityPageComponent implements OnInit {
   onSearch() {
     if (this.searchValue && this.searchValue !== '') {
       this.searchPageParam.term = this.searchValue;
-      
     }
   }
 

@@ -10,7 +10,6 @@
     background-color: #8DD38B;
     h3 {
       font-family: $regular-font;
-      letter-spacing: $letter-spacing;
       padding: 12px 0 12px 40px;
       font-weight: 600;
       margin: 0;
@@ -139,7 +138,6 @@
     font-family: $regular-font;
     background: #D7E0EF;
     border-radius: 8px 8px 0px 0px;
-    letter-spacing: $letter-spacing;
 }
 .community-result-head h3{
     font-size: 24px;
@@ -153,7 +151,6 @@
 .community-result-body{
     font-family: $regular-font;
     background-color: #FFF;
-    letter-spacing: $letter-spacing;
     font-size: 15px;
     color: rgba(22, 28, 45, 0.68);
     
@@ -176,7 +173,6 @@
 }
 .community-result-footer{
     font-family: $regular-font;
-    letter-spacing: $letter-spacing;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 100%), #1A73E8;
     border-radius: 0px 0px 8px 8px;
     font-size: 18px;

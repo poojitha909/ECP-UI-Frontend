@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from 'src/app/ui';
 import { CommunityPageComponent } from './components/community-page/community-page.component';
 import { EventsListPageComponent } from './components/events-list/events-list-page.component';
+import { EventDetailPageComponent } from './components/event-detail/event-detail-page.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: 'eventslist',
         component: EventsListPageComponent
+      },
+      {
+        path: 'eventdetail',
+        component: EventDetailPageComponent
       }
     ]
   }

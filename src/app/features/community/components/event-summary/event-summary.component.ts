@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PageParam } from 'src/app/core';
 
 @Component({
   selector: 'app-event-summary',

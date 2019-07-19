@@ -9,13 +9,14 @@
       content: ">";
     }
     .uk-breadcrumb {
+      font-size: 18px; 
       color: $primary-txt-color;
       margin-top: 20px;
     }
     .uk-breadcrumb b {
-    font-size: 1rem;
-    color:#000;
-    font-weight: bold;
+      font-size: 18px;
+      color:#000;
+      font-weight: bold;
     }
   }
   .uk-tab > .uk-active > a {
@@ -23,7 +24,6 @@
     color: $primary-txt-color;
     text-transform: none;
     font-size: 18px;
-    letter-spacing: $letter-spacing;
     border-bottom: 4px solid $primary-txt-color !important;
   }
   .uk-tab a{

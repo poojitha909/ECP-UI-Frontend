@@ -1,0 +1,34 @@
+@import "../../../../../assets/css/variables.scss";
+
+.eventslist {
+  font-family: $regular-font;
+  .breadcrumbs {
+    margin-top: 20px;
+    .uk-breadcrumb > :nth-child(n+2):not(.uk-first-column)::before{
+      margin: 0 5px;
+      content: ">";
+    }
+    .uk-breadcrumb {
+      font-size: 18px; 
+      color: $primary-txt-color;
+      margin-top: 20px;
+    }
+    .uk-breadcrumb b {
+      font-size: 18px;
+      color:#000;
+      font-weight: bold;
+    }
+  }
+  .uk-tab > .uk-active > a {
+    font-weight: bold;
+    color: $primary-txt-color;
+    text-transform: none;
+    font-size: 18px;
+    border-bottom: 4px solid $primary-txt-color !important;
+  }
+  .uk-tab a{
+    text-transform: none;
+    font-size: 18px;
+    color: rgba(22, 28, 45, 0.68);
+  }
+}

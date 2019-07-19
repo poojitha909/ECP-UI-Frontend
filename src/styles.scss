@@ -30,8 +30,8 @@
   }
 }
 
-@include font-face('HKGroteskRegular', 'assets/font/hk-grotesk/HKGrotesk-Regular.ttf');
-
+@include font-face('HKGroteskRegular', 'assets/font/hk-grotesk/HKGrotesk-Regular.ttf',normal,normal);
+@include font-face('HKGroteskRegular', 'assets/font/hk-grotesk/HKGrotesk-SemiBold.ttf',bold,normal);
 
 .font-regular{
     font-size: 18px;

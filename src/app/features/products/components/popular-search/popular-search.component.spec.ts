@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CoreModule } from 'src/app/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { PopularSearchComponent } from './popular-search.component';
 
@@ -8,7 +10,9 @@ describe('PopularSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PopularSearchComponent ]
+      imports: [CoreModule],
+      declarations: [ PopularSearchComponent ],
+      schemas:[NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));

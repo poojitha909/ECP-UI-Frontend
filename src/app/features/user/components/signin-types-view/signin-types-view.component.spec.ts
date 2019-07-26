@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SigninTypesViewComponent } from './signin-types-view.component';
+import { CoreModule } from 'src/app/core';
 
 describe('SigninTypesViewComponent', () => {
   let component: SigninTypesViewComponent;
@@ -8,9 +9,10 @@ describe('SigninTypesViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SigninTypesViewComponent ]
+      imports: [CoreModule],
+      declarations: [SigninTypesViewComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

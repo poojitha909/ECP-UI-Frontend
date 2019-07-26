@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CommunityPageComponent } from './community-page.component';
+import { CoreModule } from 'src/app/core';
 
 describe('CommunityPageComponent', () => {
   let component: CommunityPageComponent;
@@ -8,6 +9,7 @@ describe('CommunityPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [CoreModule],
       declarations: [ CommunityPageComponent ]
     })
     .compileComponents();

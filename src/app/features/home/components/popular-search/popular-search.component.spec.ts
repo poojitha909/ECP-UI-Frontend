@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PopularSearchComponent } from './popular-search.component';
+import { CoreModule } from 'src/app/core';
 
 describe('PopularSearchComponent', () => {
   let component: PopularSearchComponent;
@@ -8,9 +9,10 @@ describe('PopularSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PopularSearchComponent ]
+      imports: [CoreModule],
+      declarations: [PopularSearchComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

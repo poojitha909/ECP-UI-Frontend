@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PageParam } from 'src/app/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
+import EventService from '../../services/events.service';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-community-page',
@@ -10,15 +14,26 @@ export class CommunityPageComponent implements OnInit {
 
   showReset: boolean;
   searchValue: string;
-  searchPageParam: PageParam = {
-    p: 0,
-    s: 10,
-    term: ''
-  };
+  searchParams: {
+    p: number,
+    s: number,
+    searchTxt: string,
+    eventType: number,
+  }
 
-  constructor() { }
+  events$: Observable<any[]>;
+  private searchEventsTerms = new BehaviorSubject<any>(null);
+ 
+  constructor(private http: HttpClient, private eventService: EventService) {
+  }
 
-  ngOnInit() {
+
+  ngOnInit(): void {
+    this.events$ = this.searchEventsTerms.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((term: any) => { return this.eventService.searchEvents(term);}),
+    );
   }
 
   onSearchChange(value) {
@@ -27,6 +42,7 @@ export class CommunityPageComponent implements OnInit {
     } else {
       this.showReset = false;
     }
+    this.searchValue = value;
   }
 
   resetSearch() {
@@ -35,10 +51,13 @@ export class CommunityPageComponent implements OnInit {
   }
 
   onSearch() {
-    if (this.searchValue && this.searchValue !== '') {
-      this.searchPageParam.term = this.searchValue;
-      
+    this.searchParams = {
+      p: 0,
+      s: 3,
+      searchTxt: this.searchValue,
+      eventType: 0,
     }
+    console.log(this.searchParams);
+    this.searchEventsTerms.next(this.searchParams);
   }
-
 }

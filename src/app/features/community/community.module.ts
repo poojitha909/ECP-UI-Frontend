@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from 'src/app/core';
 import { CommunityRoutingModule } from './community-routing.module';
 import { CommunityPageComponent } from './components/community-page/community-page.component';
@@ -9,6 +10,6 @@ import { EventDetailPageComponent } from './components/event-detail/event-detail
 
 @NgModule({
   declarations: [CommunityPageComponent,EventsListPageComponent,EventSummaryComponent,EventDetailPageComponent],
-  imports: [CommonModule, CommunityRoutingModule,CoreModule]
+  imports: [CommonModule, HttpClientModule, CommunityRoutingModule,CoreModule]
 })
 export class CommunityModule {}

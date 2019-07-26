@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { ProductDetailCardComponent } from './product-detail-card.component';
+import { CoreModule } from 'src/app/core';
 
 describe('ProductDetailCardComponent', () => {
   let component: ProductDetailCardComponent;
@@ -8,9 +10,11 @@ describe('ProductDetailCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductDetailCardComponent ]
+      imports: [CoreModule],
+      declarations: [ProductDetailCardComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

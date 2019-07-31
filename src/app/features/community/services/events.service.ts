@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
  
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root'})
 export default class EventService {
@@ -13,13 +12,9 @@ export default class EventService {
 
     constructor(private http: HttpClient) { }
 
-    getEvents (): Observable<any[]> {
-        return this.http.get<any[]>(this.eventUrl)
-          .pipe(
-            tap(_ => this.log('fetched events')),
-            catchError(this.handleError<any[]>('getEvents', []))
-          );
-    }
+    // getEvents (): Observable<any[]> {
+    //     return this.http.get<any[]>(this.eventUrl+ "/page");
+    // }
 
     searchEvents(searchPageParams: any): Observable<any[]> {
         let queryParams = "";
@@ -34,20 +29,9 @@ export default class EventService {
         if(queryParams == ""){
             return of([]);
         }
-        return this.http.get<any[]>(`${this.eventUrl}/page?${queryParams}`).pipe(
-          tap(_ => this.log(`found events matching "${queryParams}"`)),
-          catchError(this.handleError<any[]>('searchHeroes', []))
-        );
+        return this.http.get<any[]>(`${this.eventUrl}/page?${queryParams}`);
     }
 
-
-    private handleError<T> (operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-            console.error(error);
-            this.log(`${operation} failed: ${error.message}`);
-            return of(result as T);
-        };
-    }
 
     private log(message: string) {
         //this.messageService.add(`HeroService: ${message}`);

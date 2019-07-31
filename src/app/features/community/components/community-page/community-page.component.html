@@ -37,12 +37,10 @@
             <button *ngIf="showReset" class="reset-link" (click)="resetSearch()">Search again
             </button>
           </span>
-          <input class="uk-search-input search-box" [(ngModel)]="searchValue" (keyup)="onSearchChange($event.target.value)"
+          <input class="uk-search-input search-box" [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event.target.value)"
             required type="text" placeholder="Search..." name="search" />
-
         </form>
       </div>
-
       <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">
         <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
       </div>
@@ -58,21 +56,13 @@
       </div>
       <div class="community-result-body">
         <ul>
-          <li>
-            <h4>Painting For Fun</h4>
-            <div>Date: 23-05-2019   (today)</div>
-          </li>
-          <li>
-              <h4>Painting For Fun</h4>
-              <div>Date: 23-05-2019   (today)</div>
-          </li>
-          <li>
-              <h4>Painting For Fun</h4>
-              <div>Date: 23-05-2019   (today)</div>
+          <li *ngFor="let event of eventsList">
+            <h4>{{event.title}}</h4>
+            <div>Date: {{event.datetime | date: 'dd-MM-yyyy'}} <span>{{ showTodayText(event.datetime) }}</span></div>
           </li>
         </ul>
       </div>
-      <div class="community-result-footer" routerLink="/community/eventslist">
+      <div class="community-result-footer" routerLink="/community/events">
           View All Events 
           <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="3" width="9" height="18">

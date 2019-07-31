@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PageParam } from 'src/app/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
 import EventService from '../../services/events.service';
-import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-community-page',
@@ -13,7 +9,7 @@ import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 export class CommunityPageComponent implements OnInit {
 
   showReset: boolean;
-  searchValue: string;
+  eventsList: any[];
   searchParams: {
     p: number,
     s: number,
@@ -21,19 +17,44 @@ export class CommunityPageComponent implements OnInit {
     eventType: number,
   }
 
-  events$: Observable<any[]>;
-  private searchEventsTerms = new BehaviorSubject<any>(null);
- 
-  constructor(private http: HttpClient, private eventService: EventService) {
+  constructor(private eventService: EventService) {
   }
 
 
   ngOnInit(): void {
-    this.events$ = this.searchEventsTerms.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      switchMap((term: any) => { return this.eventService.searchEvents(term);}),
-    );
+    this.searchParams = {
+      p: 0,
+      s: 3,
+      searchTxt: "",
+      eventType: 0,
+    }
+    this.showEvents();
+  }
+
+  showEvents(){
+    this.eventService.searchEvents(this.searchParams).subscribe( (response:any) =>{
+      const data = response.data;
+      this.eventsList = [];
+      if(data.content){
+        this.eventsList = data.content;
+      }
+    });
+  }
+
+  showTodayText(timestamp: number){
+    const today = new Date();
+    let checkDay = new Date(timestamp);
+    if(checkDay.getDate() == today.getDate() && 
+        checkDay.getMonth() == today.getMonth() && 
+        checkDay.getFullYear() == today.getFullYear()){
+      return "(Today)";
+    }
+    checkDay = new Date(timestamp - 86400000);
+    if(checkDay.getDate() == today.getDate() && 
+        checkDay.getMonth() == today.getMonth() && 
+        checkDay.getFullYear() == today.getFullYear()){
+      return "(Tomorrow)";
+    }
   }
 
   onSearchChange(value) {
@@ -42,22 +63,16 @@ export class CommunityPageComponent implements OnInit {
     } else {
       this.showReset = false;
     }
-    this.searchValue = value;
+    this.searchParams.searchTxt = value;
   }
 
   resetSearch() {
-    this.searchValue = "";
+    this.searchParams.searchTxt = "";
     this.showReset = false;
+    this.showEvents();
   }
 
   onSearch() {
-    this.searchParams = {
-      p: 0,
-      s: 3,
-      searchTxt: this.searchValue,
-      eventType: 0,
-    }
-    console.log(this.searchParams);
-    this.searchEventsTerms.next(this.searchParams);
+    this.showEvents();
   }
 }

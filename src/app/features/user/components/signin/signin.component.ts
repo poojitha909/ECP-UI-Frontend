@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
+
 import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/core';
+import { User } from 'src/app/core/interfaces';
 
 @Component({
   selector: 'app-signin',
@@ -22,7 +24,7 @@ export class SigninComponent implements OnInit {
     //value from route params
     this.activeroute.queryParams.subscribe(({ state }) => {
       if (state === environment.facebook.urlState) {
-        const loginResponse = this.queryStringToJSON(window.location.href);
+        const loginResponse = this.auth.queryStringToJSON(window.location.href);
         console.log("loginResponse", loginResponse);
         if (loginResponse.access_token) {
           localStorage.setItem('loginCredential', loginResponse.access_token);
@@ -32,38 +34,28 @@ export class SigninComponent implements OnInit {
     });
   }
 
-  //Fetch Facebook access token from query param
-  queryStringToJSON(queryString): any {
-    if (queryString.indexOf('?') > -1) {
-      queryString = queryString.split('?')[1];
-    }
-    let pairs = queryString.split('&');
-    let result = {};
-    pairs.forEach((pair, index) => {
-      if (index == 0) {
-        pair = pair.split('#');
-        // console.log('token', token);
-        pair.forEach((value) => {
-          pair = value.split('=');
-          result[pair[0]] = decodeURIComponent(pair[1] || '');
-        });
-        // pair = pair.split('=');
-      } else {
-        pair = pair.split('=');
-        result[pair[0]] = decodeURIComponent(pair[1] || '');
-      }
-    });
-    return result;
-  }
 
   //Get Facebook user details
   getFbUserData() {
     this.isLoading = true;
     this.auth.getFbUserData().subscribe(data => {
-      this.user = data;
-      this.verifiedString = `Welcome ${this.user.name}`;
-      console.log(data);
-      this.isLoading = false;
+      if (data) {
+        this.user = data;
+        this.verifiedString = `Welcome ${this.user.name}`;
+        console.log(data);
+        this.isLoading = false;
+        const user: User = {
+          email: data.email
+        };
+
+        this.auth.login(user).subscribe(
+          userData => console.log("login response", userData),
+          error => {
+            console.log(error);
+          }
+
+        );
+      }
     },
       error => {
         console.log(error)

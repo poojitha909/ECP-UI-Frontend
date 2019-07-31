@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -13,6 +14,7 @@ export class SigninTypesViewComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private router: Router
   ) {
 
     this.verifyPhoneForm = this.fb.group({
@@ -23,13 +25,14 @@ export class SigninTypesViewComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log(this.router.url);
   }
 
   //Signin with facebook
   signinWithFacebook() {
     console.log("submit login to facebook");
 
-    window.open(`https://www.facebook.com/v3.3/dialog/oauth?client_id=${environment.facebook.clientId}&response_type=token,code&redirect_uri=https://localhost:4200/user/signin?state=${environment.facebook.urlState}&scope=email&state={${environment.facebook.urlState}}`, '_self');
+    window.open(`https://www.facebook.com/v3.3/dialog/oauth?client_id=${environment.facebook.clientId}&response_type=token,code&redirect_uri=${environment.facebook.redirectUrl}${this.router.url}?state=${environment.facebook.urlState}&scope=email&state={${environment.facebook.urlState}}`, '_self');
   }
 
 

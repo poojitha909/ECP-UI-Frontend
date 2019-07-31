@@ -27,7 +27,6 @@ export class AuthService {
     console.log("postData", accessToken);
     return this.http.get<any>(url).pipe(
       map((response) => {
-        this.user$.next(response)
         return response;
       })
     );
@@ -41,15 +40,52 @@ export class AuthService {
   }
 
   signup(userData: User): Observable<any> {
-    return this.http.post<any>(ApiConstants.USER_SIGNUP, userData, { headers: authHeaders });
+    return this.http.post<any>(ApiConstants.USER_SIGNUP, userData, { headers: authHeaders }).pipe(
+      map((response) => {
+        this.user$.next(response);
+
+        return response;
+      })
+    );
   }
 
   login(userCredentail: User): Observable<any> {
-    return this.http.post<any>(ApiConstants.USER_LOGIN, userCredentail, { headers: authHeaders });
+    return this.http.post<any>(ApiConstants.USER_LOGIN, userCredentail, { headers: authHeaders }).pipe(
+      map((response) => {
+        this.user$.next(response);
+
+        return response;
+      })
+    );
   }
 
   logout(): Observable<any> {
     return this.http.get<any>(ApiConstants.USER_LOGOUT);
   }
+
+  //Fetch Facebook access token from query param
+  queryStringToJSON(queryString): any {
+    if (queryString.indexOf('?') > -1) {
+      queryString = queryString.split('?')[1];
+    }
+    let pairs = queryString.split('&');
+    let result = {};
+    pairs.forEach((pair, index) => {
+      if (index == 0) {
+        pair = pair.split('#');
+        // console.log('token', token);
+        pair.forEach((value) => {
+          pair = value.split('=');
+          result[pair[0]] = decodeURIComponent(pair[1] || '');
+        });
+        // pair = pair.split('=');
+      } else {
+        pair = pair.split('=');
+        result[pair[0]] = decodeURIComponent(pair[1] || '');
+      }
+    });
+    return result;
+  }
+
 
 }

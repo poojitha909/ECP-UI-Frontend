@@ -1,6 +1,6 @@
 <div class="uk-container search-container">
   <div class="header-label">
-    <h3>Search for Products, Services, Events, and Discussions</h3>
+    <h3>Search for Services</h3>
   </div>
 
   <!-- Search Form START -->
@@ -15,8 +15,9 @@
             <button *ngIf="showReset" class="reset-link" (click)="resetSearch()">Search again
             </button>
           </span>
-          <input class="uk-search-input search-box font-regular" [(ngModel)]="searchValue" (keyup)="onSearchChange($event.target.value)"
-            required type="text" placeholder="Search here" name="search" />
+          <input class="uk-search-input search-box font-regular" [(ngModel)]="searchValue"
+            (keyup)="onSearchChange($event.target.value)" required type="text" placeholder="Search here"
+            name="search" />
 
         </form>
       </div>

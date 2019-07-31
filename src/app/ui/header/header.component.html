@@ -11,15 +11,20 @@
           </div>
         </div>
       </div>
-      <div>
-        <div class="uk-child-width-1-2 uk-text-center uk-visible@s" uk-grid>
-          <div>
+      <div class="uk-visible@s">
+        <div class="uk-flex uk-flex-right" uk-grid>
+          <!-- <div>
             <div class="location uk-text-right">
               <span>Gowlipura, Hyderabad</span>
             </div>
+          </div> -->
+          <div class="helpline-note">
+            <button class="uk-button uk-button-default">
+              <span uk-icon="receiver"></span>Call Our Helpline Number 14567
+            </button>
           </div>
           <div>
-            <div class="sign-in-button uk-text-right">
+            <div class="sign-in-button">
               <button routerLink="/user/signin" class="uk-button uk-button-default">Signin</button>
             </div>
           </div>
@@ -29,10 +34,14 @@
     <nav class="uk-container ecp-navbar uk-visible@s">
       <ul class="uk-child-width-expand" uk-tab>
         <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home</a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/products">Products</a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/services">Services</a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/community">Community</a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/articles">Articles</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/products">Products</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/services">Services</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/community">Community</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/articles">Articles</a></li>
         <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">As
             a Question</a></li>
       </ul>
@@ -40,10 +49,14 @@
     <nav class="uk-container ecp-navbar uk-hidden@s mobile-menu uk-align-center">
       <ul class="uk-flex-nowrap uk-overflow-auto mobile-ul uk-text-truncate" uk-tab>
         <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home</a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/products">Products</a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/services">Services</a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/community">Community</a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/articles">Articles</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/products">Products</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/services">Services</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/community">Community</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/articles">Articles</a></li>
         <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">As
             a Question</a></li>
       </ul>
@@ -69,7 +82,7 @@
     </div>
     <div class="uk-align-center uk-margin-remove-top uk-margin-remove-bottom">
       <div class="sign-in-button">
-        <button routerLink="signup" class="uk-button uk-button-default">Signin</button>
+        <button routerLink="/user/signin" class="uk-button uk-button-default">Signin</button>
       </div>
     </div>
   </div>

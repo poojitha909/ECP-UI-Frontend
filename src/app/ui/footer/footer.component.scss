@@ -21,25 +21,7 @@
           line-height: 24px;
         }
       }
-      .helpline-note {
-        button {
-          span {
-            margin-right: 8px;
-          }
-          background-color: $dark-blue-1;
-          color: #ffffff;
-          border: unset;
-          border-radius: 4px;
-          padding: 13px 29px;
-          font-size: 18px;
-          text-transform: capitalize;
-          &:hover,
-          &:focus {
-            background-color: #ffffff;
-            color: $primary-btn;
-          }
-        }
-      }
+
     }
   }
   .footer-lower {
@@ -111,4 +93,19 @@
 
 .p-t-20{
   padding-top: 20px;
+}
+
+.location {
+  color: $default-font-color;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.info-block{
+  background-color: #E4EEFB;
+  @media (min-width: 960px){
+  .divider{
+    border-right: 1px solid #161c2dad;
+  }
+}
 }

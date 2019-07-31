@@ -1,3 +1,57 @@
+<div *ngIf="showInfoFooter" class="uk-section uk-section-default info-block">
+  <div class="uk-container uk-container-expand">
+    <div class="uk-grid-match uk-child-width-1-3@m uk-text-center@m" uk-grid>
+      <div class="divider">
+        <div class="uk-flex uk-flex-center">
+          <div>
+            <fa-icon [icon]="['fas', 'truck']" [style]="{'color' : '#2A415E'}" size="3x"></fa-icon>
+          </div>
+          <div class="m-l-15">
+            <div class="font-regular">
+              Free Shipping & Return
+            </div>
+            <div class="m-t-5 font-regular-15">
+              Easy return policies to help you
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider">
+        <div class="uk-flex uk-flex-center">
+          <div>
+            <fa-icon [icon]="['fas', 'hand-holding-usd']" [style]="{'color' : '#2A415E'}" size="3x">
+            </fa-icon>
+          </div>
+          <div class="m-l-15">
+            <div class="font-regular">
+              Money Back Guarantee
+            </div>
+            <div class="m-t-5 font-regular-15">
+              30 Days Money Back Guarantee
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="uk-flex uk-flex-center">
+          <div>
+            <fa-icon [icon]="['fas', 'headset']" [style]="{'color' : '#2A415E'}" size="3x"></fa-icon>
+          </div>
+          <div class="m-l-15">
+            <div class="font-regular">
+              14567
+            </div>
+            <div class="m-t-5 font-regular-15">
+              24/7 Available Support
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="footer">
   <div class="uk-container footer-upper">
     <div class="uk-grid-small uk-child-width-expand@s upper-grid" uk-grid>
@@ -9,11 +63,16 @@
           <span>An Elder Spring Initiative by Tata Trusts</span>
         </div>
       </div>
-      <div class="helpline-note uk-text-center uk-text-right@s">
+      <div>
+        <div class="location uk-text-center uk-text-right@s">
+          <span>Gowlipura, Hyderabad</span>
+        </div>
+      </div>
+      <!-- <div class="helpline-note uk-text-center uk-text-right@s">
         <button class="uk-button uk-button-default">
           <span uk-icon="receiver"></span>Call Our Helpline Number 14567
         </button>
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="uk-container footer-lower uk-visible@s">

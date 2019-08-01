@@ -10,6 +10,7 @@ export class EventsListPageComponent implements OnInit {
 
   showReset: boolean;
   eventsList: any[];
+  countData: {"all":0,"outdoor":0,"indoor":0};
   searchParams: {
     p: number,
     s: number,
@@ -26,7 +27,7 @@ export class EventsListPageComponent implements OnInit {
       searchTxt: "",
       eventType: 0,
     }
-    this.showEvents();
+    this.onSearch();
   }
 
   showEvents(){
@@ -35,8 +36,13 @@ export class EventsListPageComponent implements OnInit {
       this.eventsList = [];
       if(data.content){
         this.eventsList = data.content;
-        console.log(this.eventsList);
       }
+    });
+  }
+
+  showEventsCount(){
+    this.eventService.searchEventsCount({"searchTxt": this.searchParams.searchTxt,"eventType":0}).subscribe( (response:any) =>{
+      this.countData = response.data;
     });
   }
 
@@ -56,6 +62,10 @@ export class EventsListPageComponent implements OnInit {
     }
   }
 
+  onTabChange(value) {
+    this.searchParams.eventType = value;
+    this.showEvents();
+  }
   onSearchChange(value) {
     if (value !== "") {
       this.showReset = true
@@ -68,11 +78,12 @@ export class EventsListPageComponent implements OnInit {
   resetSearch() {
     this.searchParams.searchTxt = "";
     this.showReset = false;
-    this.showEvents();
+    this.onSearch();
   }
 
   onSearch() {
     this.showEvents();
+    this.showEventsCount();
   }
 
 }

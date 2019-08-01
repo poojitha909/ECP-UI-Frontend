@@ -32,8 +32,24 @@ export default class EventService {
         return this.http.get<any[]>(`${this.eventUrl}/page?${queryParams}`);
     }
 
+    searchEventsCount(searchPageParams: any): Observable<any[]> {
+        let queryParams = "";
+        Object.keys(searchPageParams)
+            .forEach((key, i) => {
+                if (i > 0) {
+                    queryParams += `&${key}=${searchPageParams[key]}`;
+                } else {
+                    queryParams += `${key}=${searchPageParams[key]}`;
+                }
+            });
+        if(queryParams == ""){
+            return of([]);
+        }
+        return this.http.get<any[]>(`${this.eventUrl}/count?${queryParams}`);
+    }
 
-    private log(message: string) {
-        //this.messageService.add(`HeroService: ${message}`);
+    getEvent(eventId: string): Observable<any[]> {
+        let queryParams = "eventId=" + eventId;
+        return this.http.get<any[]>(`${this.eventUrl}?${queryParams}`);
     }
 }

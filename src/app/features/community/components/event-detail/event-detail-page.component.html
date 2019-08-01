@@ -1,10 +1,10 @@
-<div class="event-detail">
+<div class="event-detail" *ngIf="event!=undefined && event.id != ''">
     <!-- Bread crumbs Start -->
     <div class="breadcrumbs">
         <ul class="uk-breadcrumb">
             <li routerLink="/community" class="fa fa-angle-right">Community</li>
             <li routerLink="/events" class="fa fa-angle-right">Events</li>
-            <li class="fa fa-angle-right"><b>1-on-1 Basic Computer Skills, Gowlipura Convention Center</b></li>
+            <li class="fa fa-angle-right"><b>{{event.title}}</b></li>
         </ul>
     </div>
     <!-- Bread crumbs End -->
@@ -12,7 +12,7 @@
         <div class="uk-grid uk-grid-large">
             <div class="uk-width-1-3@m">
                 <div class="m-t-40 category-box">
-                    <h3>Gowlipura Convention Center</h3>
+                    <h3>{{event.organiser}}</h3>
                     <p>Organiser</p>
                 </div>
             
@@ -33,12 +33,9 @@
                 </div>
             </div>
             <div class="uk-width-2-3@m">
-                <h2>1-on-1 Basic Computer Skills, Gowlipura Convention Center</h2>
+                <h2>{{event.title}}</h2>
                 <div class="description">
-                        1 to 1 sessions on basic computer skills. For absolute beginners or those just looking for 
-                        a bit more experience using computers. These sessions will help you develop the skills needed 
-                        to operate a PC or laptop or help you navigate around a tablet or smartphone. Sessions are available 
-                        on Wednesdays or Thursdays. Contact us to book a slot on +91 88450 68923.
+                        {{event.description}}
                 </div>
                 <hr/>
                 <div class="details">
@@ -49,13 +46,16 @@
                                     Email
                                 </p>
                                 <p class="description textblue">
-                                    devendra.yadav@gmail.com
+                                    {{event.email}}
                                 </p>
                                 <p class="heading">
                                     Location
                                 </p>
                                 <p class="description">
-                                    Gowlipura Convention Center (<span class="textblue">View on Google Maps</span>)
+                                        {{event.location}} 
+                                        <span *ngIf="event.locLat && event.locLat && event.locLat!='' && event.locLng!=''">
+                                            (<a target="_blank" href="https://maps.google.com?q={{event.locLat + ','+ event.locLng}}"><span class="textblue">View on Google Maps</span></a>)
+                                        </span>
                                 </p>
                             </div>
                             <div class="uk-width-1-2@s description">
@@ -63,13 +63,13 @@
                                     Languages
                                 </p>
                                 <p class="description">
-                                    English, Hindi, Urdu, Marathi, Tamil
+                                    {{event.languages}}
                                 </p>
                                 <p class="heading">
                                     Phone Number
                                 </p>
                                 <p class="description">
-                                    +91 8080808080
+                                    {{event.phone}}
                                 </p>
                             </div>
                     </div>

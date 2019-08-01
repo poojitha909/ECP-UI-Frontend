@@ -1,4 +1,4 @@
-<div class="event-summary">
+<div class="event-summary" *ngIf="event.eventType == eventType || eventType==0">
     <div class="event-summary-head uk-grid uk-grid-collapse">
         <div class="title uk-width-4-5@s">
             {{event.title}}

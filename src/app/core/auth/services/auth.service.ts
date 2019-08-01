@@ -21,10 +21,9 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  getFbUserData(): Observable<any> {
-    const accessToken = localStorage.getItem("loginCredential");
-    const url = `https://graph.facebook.com/me?fields=id,name,email&access_token=${accessToken}`;
-    console.log("postData", accessToken);
+  getFbUserData(token): Observable<any> {
+    // const accessToken = localStorage.getItem("loginCredential");
+    const url = `https://graph.facebook.com/me?fields=id,name,email&access_token=${token}`;
     return this.http.get<any>(url).pipe(
       map((response) => {
         return response;

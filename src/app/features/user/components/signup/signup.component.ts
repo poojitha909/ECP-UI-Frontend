@@ -26,8 +26,8 @@ export class SignupComponent implements OnInit {
         const loginResponse = this.auth.queryStringToJSON(window.location.href);
         console.log("loginResponse", loginResponse);
         if (loginResponse.access_token) {
-          localStorage.setItem('loginCredential', loginResponse.access_token);
-          this.getFbUserData();
+          // localStorage.setItem('loginCredential', loginResponse.access_token);
+          this.getFbUserData(loginResponse.access_token);
         }
       }
     });
@@ -36,34 +36,38 @@ export class SignupComponent implements OnInit {
 
 
   //Get Facebook user details
-  getFbUserData() {
+  getFbUserData(token) {
     this.isLoading = true;
-    this.auth.getFbUserData().subscribe(data => {
+    this.auth.getFbUserData(token).subscribe(data => {
       if (data) {
         this.user = data;
         this.verifiedString = `Welcome ${this.user.name}`;
         console.log(data);
         this.isLoading = false;
-
-        const user: User = {
-          email: data.email,
-          userName: data.name,
-          userIdType: 0,
-          userRegType: 0,
-          socialSignOnId: data.id,
-          socialSignOnPlatform: 'facebook'
-
-        }
-        this.auth.signup(user).subscribe(
-          userData => console.log("signup response", userData),
-          error => {
-            console.log(error);
-          });
+        this.userSignup(data);
       }
     },
       error => {
         console.log(error)
         this.isLoading = false;
+      });
+  }
+
+  //Signup using api 
+  userSignup(userData) {
+    const user: User = {
+      email: userData.email,
+      userName: userData.name,
+      userIdType: 0,
+      userRegType: 0,
+      socialSignOnId: userData.id,
+      socialSignOnPlatform: 'facebook'
+
+    }
+    this.auth.signup(user).subscribe(
+      userData => console.log("signup response", userData),
+      error => {
+        console.log(error);
       });
   }
 

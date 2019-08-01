@@ -25,10 +25,9 @@ export class SigninComponent implements OnInit {
     this.activeroute.queryParams.subscribe(({ state }) => {
       if (state === environment.facebook.urlState) {
         const loginResponse = this.auth.queryStringToJSON(window.location.href);
-        console.log("loginResponse", loginResponse);
         if (loginResponse.access_token) {
-          localStorage.setItem('loginCredential', loginResponse.access_token);
-          this.getFbUserData();
+          // localStorage.setItem('loginCredential', loginResponse.access_token);
+          this.getFbUserData(loginResponse.access_token);
         }
       }
     });
@@ -36,30 +35,33 @@ export class SigninComponent implements OnInit {
 
 
   //Get Facebook user details
-  getFbUserData() {
+  getFbUserData(token) {
     this.isLoading = true;
-    this.auth.getFbUserData().subscribe(data => {
+    this.auth.getFbUserData(token).subscribe(data => {
       if (data) {
         this.user = data;
         this.verifiedString = `Welcome ${this.user.name}`;
         console.log(data);
         this.isLoading = false;
-        const user: User = {
-          email: data.email
-        };
-
-        this.auth.login(user).subscribe(
-          userData => console.log("login response", userData),
-          error => {
-            console.log(error);
-          }
-
-        );
+        this.userSignIn(data)
       }
     },
       error => {
         console.log(error)
         this.isLoading = false;
+      });
+  }
+
+  //SignIn user using api
+  userSignIn(userData) {
+    const user: User = {
+      email: userData.email
+    };
+
+    this.auth.login(user).subscribe(
+      userData => console.log("login response", userData),
+      error => {
+        console.log(error);
       });
   }
 

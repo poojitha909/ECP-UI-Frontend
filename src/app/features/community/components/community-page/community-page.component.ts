@@ -15,6 +15,7 @@ export class CommunityPageComponent implements OnInit {
     s: number,
     searchTxt: string,
     eventType: number,
+    startDatetime: number
   }
 
   constructor(private eventService: EventService) {
@@ -27,6 +28,7 @@ export class CommunityPageComponent implements OnInit {
       s: 3,
       searchTxt: "",
       eventType: 0,
+      startDatetime: (new Date()).getTime()
     }
     this.showEvents();
   }

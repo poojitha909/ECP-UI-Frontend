@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiBaseUrl: 'http://localhost:8080/BY/api',
+  encryptKey: 'SECRET',
   facebook: {
     clientId: '2776633365685417',
     appSecret: 'c389467f403dae30c9604e3846fe32ef',

@@ -6,6 +6,9 @@ import { map, catchError } from 'rxjs/operators';
 import { User } from '../../interfaces';
 import { ApiConstants } from 'src/app/api.constants';
 
+import { AppConstants } from 'src/app/app.constants';
+import { StorageHelperService } from '../../services';
+
 const authHeaders = new HttpHeaders({
   'Content-Type': 'application/json',
   'Accept': 'application/json'
@@ -16,10 +19,9 @@ const authHeaders = new HttpHeaders({
 })
 export class AuthService {
 
-  user: any;
   private user$ = new BehaviorSubject<any>(this.user);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private storage: StorageHelperService) { }
 
   getFbUserData(token): Observable<any> {
     // const accessToken = localStorage.getItem("loginCredential");
@@ -31,18 +33,12 @@ export class AuthService {
     );
   }
 
-  /**
-  * Return user as observable
-  */
-  get userSource(): Observable<any> {
-    return this.user$.asObservable();
-  }
-
   signup(userData: User): Observable<any> {
     return this.http.post<any>(ApiConstants.USER_SIGNUP, userData, { headers: authHeaders }).pipe(
       map((response) => {
-        this.user$.next(response);
-
+        this.user$.next(response.data.user);
+        this.storage.store(AppConstants.USER, JSON.stringify(response.data.user));
+        this.storage.store(AppConstants.AUTH_SESSION, response.data.sessionId);
         return response;
       })
     );
@@ -51,15 +47,48 @@ export class AuthService {
   login(userCredentail: User): Observable<any> {
     return this.http.post<any>(ApiConstants.USER_LOGIN, userCredentail, { headers: authHeaders }).pipe(
       map((response) => {
-        this.user$.next(response);
-
+        this.user$.next(response.data.user);
+        this.storage.store(AppConstants.USER, JSON.stringify(response.data.user));
+        this.storage.store(AppConstants.AUTH_SESSION, response.data.sessionId);
         return response;
       })
     );
   }
 
   logout(): Observable<any> {
-    return this.http.get<any>(ApiConstants.USER_LOGOUT);
+    return this.http.get<any>(ApiConstants.USER_LOGOUT).pipe(map(response => {
+      if (response) {
+        this.storage.clear();
+      }
+    }));
+  }
+
+  /**
+  * Return user details
+  */
+  get user(): User {  
+    return this.storage.retrieve(AppConstants.USER) ?  JSON.parse(this.storage.retrieve(AppConstants.USER)) : undefined;
+  }
+
+  /**
+  * Return user details
+  */
+  get userSession(): User {
+    return this.storage.retrieve(AppConstants.AUTH_SESSION);
+  }
+
+  /**
+  * Return boolean if user data found in LS
+  */
+  get isAuthenticate(): boolean {
+    return !!this.storage.retrieve(AppConstants.AUTH_SESSION);
+  }
+
+  /**
+   * Return user as observable
+   */
+  get userSource(): Observable<User> {
+    return this.user$.asObservable();
   }
 
   //Fetch Facebook access token from query param

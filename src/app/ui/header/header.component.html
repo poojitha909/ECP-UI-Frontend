@@ -25,7 +25,8 @@
           </div>
           <div>
             <div class="sign-in-button">
-              <button routerLink="/user/signin" class="uk-button uk-button-default">Signin</button>
+              <button (click)="navigateUser()"
+                class="uk-button uk-button-default">{{ auth.isAuthenticate ? auth.user.userName : 'SignIn' }}</button>
             </div>
           </div>
         </div>

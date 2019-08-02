@@ -4,12 +4,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+// import { NgxWebstorageModule } from 'ngx-webstorage';
 
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule,HttpClientModule],
-  providers: [],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

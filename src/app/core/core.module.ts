@@ -23,8 +23,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
-    FontAwesomeModule,
-
+    FontAwesomeModule
   ]
 })
 export class CoreModule {

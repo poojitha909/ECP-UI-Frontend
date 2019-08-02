@@ -25,7 +25,17 @@
           </div>
           <div>
             <div class="sign-in-button">
-              <button routerLink="/user/signin" class="uk-button uk-button-default">Signin</button>
+
+              <button *ngIf="!auth.isAuthenticate" routerLink="/user/signin"
+                class="uk-button uk-button-default">SignIn</button>
+              <div class="uk-inline" *ngIf="auth.isAuthenticate">
+                <button (click)="navigateUser()" class="uk-button uk-button-default">{{ auth.user.userName  }}</button>
+                <div uk-dropdown>
+                  <ul class="uk-nav uk-dropdown-nav">
+                    <li><a (click)="logout()" class="uk-padding-remove font-regular">Logout</a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -82,7 +92,16 @@
     </div>
     <div class="uk-align-center uk-margin-remove-top uk-margin-remove-bottom">
       <div class="sign-in-button">
-        <button routerLink="/user/signin" class="uk-button uk-button-default">Signin</button>
+        <button *ngIf="!auth.isAuthenticate" routerLink="/user/signin"
+          class="uk-button uk-button-default">Signin</button>
+        <div class="uk-inline" *ngIf="auth.isAuthenticate">
+          <button (click)="navigateUser()" class="uk-button uk-button-default">{{ auth.user.userName  }}</button>
+          <div uk-dropdown>
+            <ul class="uk-nav uk-dropdown-nav">
+              <li><a (click)="logout()" class="uk-padding-remove font-regular">Logout</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>

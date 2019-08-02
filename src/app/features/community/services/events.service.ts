@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
- 
+
 import { Observable, of } from 'rxjs';
 
-@Injectable({ providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export default class EventService {
-    private eventUrl = 'http://localhost:8080/BY/api/v1/event';  
+    private eventUrl = 'http://localhost:8080/BY/api/v1/event';
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
@@ -21,12 +21,12 @@ export default class EventService {
         Object.keys(searchPageParams)
             .forEach((key, i) => {
                 if (i > 0) {
-                queryParams += `&${key}=${searchPageParams[key]}`;
+                    queryParams += `&${key}=${searchPageParams[key]}`;
                 } else {
-                queryParams += `${key}=${searchPageParams[key]}`;
+                    queryParams += `${key}=${searchPageParams[key]}`;
                 }
             });
-        if(queryParams == ""){
+        if (queryParams == "") {
             return of([]);
         }
         return this.http.get<any[]>(`${this.eventUrl}/page?${queryParams}`);
@@ -42,7 +42,7 @@ export default class EventService {
                     queryParams += `${key}=${searchPageParams[key]}`;
                 }
             });
-        if(queryParams == ""){
+        if (queryParams == "") {
             return of([]);
         }
         return this.http.get<any[]>(`${this.eventUrl}/count?${queryParams}`);

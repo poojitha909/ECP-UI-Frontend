@@ -8,9 +8,15 @@ export const environment = {
   encryptKey: 'SECRET',
   facebook: {
     clientId: '2776633365685417',
-    appSecret: 'c389467f403dae30c9604e3846fe32ef',
-    urlState: '"{st=state123abc,ds=123456789}"',
-    redirectUrl: 'https://localhost:4200'
+    urlState: '"{st=fbState,ds=123456789}"',
+    redirectUrl: 'https://localhost:4200',
+    auth_uri: "https://www.facebook.com/v3.3/dialog/oauth"
+  },
+  google: {
+    client_id: "251496429893-3m1dqbmrlfuanl5ndaoak7mk05ul3a6m.apps.googleusercontent.com",
+    urlState: 'google-St-123456789-ds',
+    redirectUrl: 'https://localhost:4200',
+    auth_uri: "https://accounts.google.com/o/oauth2/auth",
   }
 };
 

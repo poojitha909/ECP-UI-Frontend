@@ -3,7 +3,8 @@
     <div class="uk-margin">
       <label class="uk-form-label" for="form-stacked-text">Phone Number</label>
       <div class="uk-form-controls">
-        <input class="uk-input" id="form-stacked-text" formControlName="phoneNumber" type="text" placeholder="Phone Number...">
+        <input class="uk-input" id="form-stacked-text" formControlName="phoneNumber" type="text"
+          placeholder="Phone Number...">
       </div>
     </div>
     <div class="uk-margin">
@@ -26,7 +27,7 @@
     </div>
 
     <div>
-      <button class="google-btn uk-button uk-button-default font-regular">
+      <button class="google-btn uk-button uk-button-default font-regular" (click)="signinWithGoogle()">
         <fa-icon [icon]="['fab','google']" [style]="{'float': 'left'}"></fa-icon>
         Login with Google
       </button>

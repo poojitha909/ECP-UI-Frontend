@@ -33,6 +33,16 @@ export class AuthService {
     );
   }
 
+  getGoogleUserData(token): Observable<any> {
+    // const accessToken = localStorage.getItem("loginCredential");
+    const url = `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`;
+    return this.http.get<any>(url).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
+
   signup(userData: User): Observable<any> {
     return this.http.post<any>(ApiConstants.USER_SIGNUP, userData, { headers: authHeaders }).pipe(
       map((response) => {
@@ -92,29 +102,16 @@ export class AuthService {
     return this.user$.asObservable();
   }
 
-  //Fetch Facebook access token from query param
-  queryStringToJSON(queryString): any {
-    if (queryString.indexOf('?') > -1) {
-      queryString = queryString.split('?')[1];
-    }
-    let pairs = queryString.split('&');
+  //Fetch  access token from url hash
+  hashUrlToJSON(hash): any {
+    let pairs = hash.split('&');
     let result = {};
-    pairs.forEach((pair, index) => {
-      if (index == 0) {
-        pair = pair.split('#');
-        // console.log('token', token);
-        pair.forEach((value) => {
-          pair = value.split('=');
-          result[pair[0]] = decodeURIComponent(pair[1] || '');
-        });
-        // pair = pair.split('=');
-      } else {
-        pair = pair.split('=');
-        result[pair[0]] = decodeURIComponent(pair[1] || '');
-      }
+    pairs.forEach((pair) => {
+      const objpair = pair.split('=');
+      result[objpair[0]] = decodeURIComponent(objpair[1] || '');
     });
-    return result;
-  }
 
+    return result
+  }
 
 }

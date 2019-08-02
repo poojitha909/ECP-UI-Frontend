@@ -5,6 +5,6 @@ export const environment = {
     clientId: '2776633365685417',
     appSecret: 'c389467f403dae30c9604e3846fe32ef',
     urlState: '"{st=state123abc,ds=123456789}"',
-    redirectUrl: 'https://localhost:4200'
+    redirectUrl: 'https://139.59.37.95'
   }
 };

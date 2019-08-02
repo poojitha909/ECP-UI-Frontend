@@ -21,7 +21,6 @@ export class EventDetailPageComponent implements OnInit {
   getEvent(){
     this.eventService.getEvent(this.eventId).subscribe( (response:any) =>{
       const data = response.data;
-      console.log(data);
       if(data){
         this.event = data;
       }

@@ -44,5 +44,24 @@
             color: #C83F3F;
         }
     }
-
+    .outdoor-icon{
+        background-image: url(/assets/images/outdoor.svg);
+        background-size: contain;
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        position: relative;
+        top: -20px;
+        right: -25px;
+    }
+    .indoor-icon{
+        background-image: url(/assets/images/indoor.svg);
+        background-size: contain;
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        position: relative;
+        top: -20px;
+        right: -25px;
+    }
 }

@@ -4,7 +4,8 @@
             {{event.title}}
         </div>
         <div class="icon uk-width-1-5@s">
-            ii
+            <a href="" *ngIf="event.eventType==1" class="uk-margin-small-right outdoor-icon" title="Outdoor Event"></a>
+            <a href="" *ngIf="event.eventType==2" class="uk-margin-small-right indoor-icon" title="Indoor Event"></a>
         </div>
     </div>
     <div class="event-summary-body">

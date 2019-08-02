@@ -16,11 +16,11 @@ const routes: Routes = [
         component: CommunityPageComponent
       },
       {
-        path: 'eventslist',
+        path: 'events',
         component: EventsListPageComponent
       },
       {
-        path: 'eventdetail',
+        path: 'event/:id',
         component: EventDetailPageComponent
       }
     ]

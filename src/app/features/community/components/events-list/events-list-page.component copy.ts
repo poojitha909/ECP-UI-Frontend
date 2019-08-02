@@ -9,41 +9,44 @@ import EventService from '../../services/events.service';
 export class EventsListPageComponent implements OnInit {
 
   showReset: boolean;
-  eventsList: any[];
-  countData: {"all":0,"outdoor":0,"indoor":0};
+  eventType: string;
+  eventsList: any;
+  countData: any;
   searchParams: {
     p: number,
     s: number,
     searchTxt: string,
     eventType: number,
-    startDatetime: number,
   }
 
-  constructor(private eventService: EventService) { }
-
-  ngOnInit() {
+  constructor(private eventService: EventService) {
     this.searchParams = {
       p: 0,
       s: 18,
       searchTxt: "",
       eventType: 0,
-      startDatetime: (new Date()).getTime()
     }
+    this.eventType = "all";
+    this.eventsList = {"all": [],"outdoor": [],"indoor": []};
+    this.countData = {"all":0,"outdoor":0,"indoor":0};
+  }
+
+  ngOnInit() {
     this.onSearch();
   }
 
   showEvents(){
     this.eventService.searchEvents(this.searchParams).subscribe( (response:any) =>{
       const data = response.data;
-      this.eventsList = [];
       if(data.content){
-        this.eventsList = data.content;
+        console.log(this.eventType);
+        this.eventsList[this.eventType] = data.content;
+        console.log(this.eventsList);
       }
     });
   }
-
   showEventsCount(){
-    this.eventService.searchEventsCount({"searchTxt": this.searchParams.searchTxt,"eventType":0,"startDatetime":this.searchParams.startDatetime}).subscribe( (response:any) =>{
+    this.eventService.searchEventsCount({"searchTxt": this.searchParams.searchTxt}).subscribe( (response:any) =>{
       this.countData = response.data;
     });
   }
@@ -64,10 +67,6 @@ export class EventsListPageComponent implements OnInit {
     }
   }
 
-  onTabChange(value) {
-    this.searchParams.eventType = value;
-    this.showEvents();
-  }
   onSearchChange(value) {
     if (value !== "") {
       this.showReset = true
@@ -75,6 +74,20 @@ export class EventsListPageComponent implements OnInit {
       this.showReset = false;
     }
     this.searchParams.searchTxt = value;
+  }
+
+  onTabChange(value) {
+    if(value == "all"){
+      this.searchParams.eventType = 0;  
+    }
+    else if(value == "outdoor"){
+      this.searchParams.eventType = 1;
+    }
+    else if(value == "indoor"){
+      this.searchParams.eventType = 2;
+    }
+    this.eventType = value;
+    this.showEvents();
   }
 
   resetSearch() {
@@ -87,5 +100,4 @@ export class EventsListPageComponent implements OnInit {
     this.showEvents();
     this.showEventsCount();
   }
-
 }

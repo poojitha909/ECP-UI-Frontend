@@ -59,6 +59,7 @@ export class AuthService {
     return this.http.get<any>(ApiConstants.USER_LOGOUT).pipe(map(response => {
       if (response) {
         this.storage.clear();
+        this.user$.next(null);
       }
     }));
   }
@@ -66,8 +67,8 @@ export class AuthService {
   /**
   * Return user details
   */
-  get user(): User {  
-    return this.storage.retrieve(AppConstants.USER) ?  JSON.parse(this.storage.retrieve(AppConstants.USER)) : undefined;
+  get user(): User {
+    return this.storage.retrieve(AppConstants.USER) ? JSON.parse(this.storage.retrieve(AppConstants.USER)) : undefined;
   }
 
   /**

@@ -22,4 +22,8 @@ export class HeaderComponent implements OnInit {
     }
 
   }
+
+  logout() {
+    this.auth.logout().subscribe(response => console.log(response));
+  }
 }

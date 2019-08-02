@@ -21,17 +21,30 @@ export class SigninComponent implements OnInit {
     private auth: AuthService) { }
 
   ngOnInit() {
-    //value from route params
-    this.activeroute.queryParams.subscribe(({ state }) => {
-      if (state === environment.facebook.urlState) {
-        const loginResponse = this.auth.queryStringToJSON(window.location.href);
-        if (loginResponse.access_token) {
-          // localStorage.setItem('loginCredential', loginResponse.access_token);
-          this.getFbUserData(loginResponse.access_token);
+    if (window.location.hash) {
+      //Get hash string From url
+      const hash = window.location.hash.replace("#", "");
+      const loginCred = this.auth.hashUrlToJSON(hash);
+
+      //value from route params
+      this.activeroute.queryParams.subscribe(({ state }) => {
+        if (state === environment.facebook.urlState) {
+          if (loginCred.access_token) {
+            // localStorage.setItem('loginCredential', loginResponse.access_token);
+            this.getFbUserData(loginCred.access_token);
+          }
+        } else {
+          if (loginCred.state === environment.google.urlState) {
+            this.getGoogleUserData(loginCred.access_token);
+          }
         }
-      }
-    });
+      });
+
+    }
   }
+
+
+
 
 
   //Get Facebook user details
@@ -52,10 +65,29 @@ export class SigninComponent implements OnInit {
       });
   }
 
+  //Get Google user details
+  getGoogleUserData(token) {
+    this.isLoading = true;
+    this.auth.getGoogleUserData(token).subscribe(data => {
+      if (data) {
+        this.user = data;
+        this.verifiedString = `Welcome ${this.user.name}`;
+        console.log(data);
+        this.isLoading = false;
+        this.userSignIn(data)
+      }
+    },
+      error => {
+        console.log(error)
+        this.isLoading = false;
+      });
+  }
+
   //SignIn user using api
   userSignIn(userData) {
     const user: User = {
-      email: userData.email
+      email: userData.email,
+      userName: userData.name
     };
 
     this.auth.login(user).subscribe(

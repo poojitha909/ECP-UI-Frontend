@@ -32,8 +32,13 @@ export class SigninTypesViewComponent implements OnInit {
   signinWithFacebook() {
     console.log("submit login to facebook");
 
-    window.open(`https://www.facebook.com/v3.3/dialog/oauth?client_id=${environment.facebook.clientId}&response_type=token,code&redirect_uri=${environment.facebook.redirectUrl}${this.router.url}?state=${environment.facebook.urlState}&scope=email&state={${environment.facebook.urlState}}`, '_self');
+    window.open(`${environment.facebook.auth_uri}?client_id=${environment.facebook.clientId}&response_type=token,code&redirect_uri=${environment.facebook.redirectUrl}${this.router.url}?state=${environment.facebook.urlState}&scope=email&state={${environment.facebook.urlState}}`, '_self');
   }
 
+
+  signinWithGoogle() {
+    console.log("submit login to google",encodeURIComponent(environment.google.redirectUrl));
+    window.open(`${environment.google.auth_uri}?scope=profile email&include_granted_scopes=true&state=${environment.google.urlState}&redirect_uri=${encodeURIComponent(environment.google.redirectUrl)}${encodeURIComponent(this.router.url)}&response_type=token&client_id=${environment.google.client_id}`, '_self');
+  }
 
 }

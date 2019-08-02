@@ -19,3 +19,8 @@ export interface User {
     userTags?: string[];
     permissions?: any[];
 }
+
+export enum SocialAccount {
+    GOOGLE = "google",
+    FACEBOOK = 'facebook'
+}

@@ -4,7 +4,7 @@ import { ApiConstants } from 'src/app/api.constants';
 import { Observable, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export default class EventService {
+export class EventService {
     private eventUrl = ApiConstants.EVENTS_SERVICES;
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })

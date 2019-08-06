@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { ApiConstants } from 'src/app/api.constants';
 import { Observable, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export default class EventService {
-    private eventUrl = 'http://localhost:8080/BY/api/v1/event';
+    private eventUrl = ApiConstants.EVENTS_SERVICES;
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };

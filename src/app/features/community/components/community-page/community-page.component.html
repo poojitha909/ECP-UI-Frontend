@@ -80,17 +80,9 @@
         </div>
         <div class="community-result-body">
           <ul>
-            <li>
-              <h4>What Did You learn in School That you never forget in your life</h4>
-              <div>111 comments &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by Akshay Varma</div>
-            </li>
-            <li>
-                <h4>What books impacted your life in a Position of life or death</h4>
-                <div>41 comments &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by Srihari Venkatraman   (today)</div>
-            </li>
-            <li>
-                <h4>Signals that Baffled Astronormers for 17 Years</h4>
-                <div>18 comments &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by Deepa Gupta</div>
+            <li *ngFor="let discuss of discussionsList">
+              <h4>{{discuss.title}}</h4>
+              <div>{{discuss.aggrReplyCount}} comments &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by {{discuss.username}}</div>
             </li>
           </ul>
         </div>

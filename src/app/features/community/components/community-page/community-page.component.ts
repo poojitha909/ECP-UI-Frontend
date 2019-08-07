@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {EventService} from '../../services/events.service';
+import {DiscussionService} from '../../services/discussions.service';
 
 @Component({
   selector: 'app-community-page',
@@ -10,15 +11,22 @@ export class CommunityPageComponent implements OnInit {
 
   showReset: boolean;
   eventsList: any[];
+  discussionsList: any[];
   searchParams: {
     p: number,
     s: number,
     searchTxt: string,
     eventType: number,
     startDatetime: number
+  };
+  searchParamsDiscussions: {
+    p: number,
+    s: number,
+    searchTxt: string,
+    isFeatured: boolean
   }
 
-  constructor(private eventService: EventService) {
+  constructor(private eventService: EventService,private discussionService: DiscussionService) {
   }
 
 
@@ -30,7 +38,14 @@ export class CommunityPageComponent implements OnInit {
       eventType: 0,
       startDatetime: (new Date()).getTime()
     }
+    this.searchParamsDiscussions= {
+      p: 0,
+      s: 3,
+      searchTxt: "",
+      isFeatured: true
+    }
     this.showEvents();
+    this.showDiscussions();
   }
 
   showEvents(){
@@ -39,6 +54,16 @@ export class CommunityPageComponent implements OnInit {
       this.eventsList = [];
       if(data.content){
         this.eventsList = data.content;
+      }
+    });
+  }
+  showDiscussions(){
+    this.discussionService.searchDiscussions(this.searchParamsDiscussions).subscribe( (response:any) =>{
+      const data = response.data;
+      this.discussionsList = [];
+      if(data.content){
+        this.discussionsList = data.content;
+        console.log(this.discussionsList);
       }
     });
   }
@@ -66,15 +91,19 @@ export class CommunityPageComponent implements OnInit {
       this.showReset = false;
     }
     this.searchParams.searchTxt = value;
+    this.searchParamsDiscussions.searchTxt = value;
   }
 
   resetSearch() {
     this.searchParams.searchTxt = "";
+    this.searchParamsDiscussions.searchTxt = "";
     this.showReset = false;
     this.showEvents();
+    this.showDiscussions();
   }
 
   onSearch() {
     this.showEvents();
+    this.showDiscussions();
   }
 }

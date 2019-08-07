@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { EventDetailPageComponent } from './event-detail-page.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('EventDetailPageComponent', () => {
   let component: EventDetailPageComponent;
@@ -8,9 +10,10 @@ describe('EventDetailPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EventDetailPageComponent ]
+      imports: [RouterTestingModule, HttpClientTestingModule],
+      declarations: [EventDetailPageComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

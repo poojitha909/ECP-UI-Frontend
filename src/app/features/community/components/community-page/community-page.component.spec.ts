@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { CommunityPageComponent } from './community-page.component';
 import { CoreModule } from 'src/app/core';
@@ -9,10 +10,10 @@ describe('CommunityPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [CoreModule],
-      declarations: [ CommunityPageComponent ]
+      imports: [CoreModule, HttpClientTestingModule],
+      declarations: [CommunityPageComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

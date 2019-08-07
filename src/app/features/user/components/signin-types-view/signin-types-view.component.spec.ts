@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { SigninTypesViewComponent } from './signin-types-view.component';
 import { CoreModule } from 'src/app/core';
@@ -9,7 +10,7 @@ describe('SigninTypesViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [CoreModule],
+      imports: [CoreModule, RouterTestingModule],
       declarations: [SigninTypesViewComponent]
     })
       .compileComponents();

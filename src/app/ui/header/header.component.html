@@ -20,7 +20,7 @@
           </div> -->
           <div class="helpline-note">
             <button class="uk-button uk-button-default">
-              <span uk-icon="receiver"></span>Elder Spring Response Center 14567
+              <span uk-icon="receiver"></span>Elder Spring Response Center <b>14567</b>
             </button>
           </div>
           <div>
@@ -29,7 +29,8 @@
               <button *ngIf="!auth.isAuthenticate" routerLink="/user/signin"
                 class="uk-button uk-button-default">SignIn</button>
               <div class="uk-inline" *ngIf="auth.isAuthenticate">
-                <button (click)="navigateUser()" class="uk-button uk-button-default">{{ auth.user.userName ? auth.user.userName : 'Guest User' }}</button>
+                <button (click)="navigateUser()"
+                  class="uk-button uk-button-default">{{ auth.user.userName ? auth.user.userName : 'Guest User' }}</button>
                 <div uk-dropdown>
                   <ul class="uk-nav uk-dropdown-nav">
                     <li><a (click)="logout()" class="uk-padding-remove font-regular">Logout</a></li>
@@ -52,8 +53,8 @@
             routerLink="/community">Community</a></li>
         <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
             routerLink="/articles">Articles</a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">As
-            a Question</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">Ask a
+            Question</a></li>
       </ul>
     </nav>
     <nav class="uk-container ecp-navbar uk-hidden@s mobile-menu uk-align-center">
@@ -67,7 +68,7 @@
             routerLink="/community">Community</a></li>
         <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
             routerLink="/articles">Articles</a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">As
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">Ask
             a Question</a></li>
       </ul>
     </nav>

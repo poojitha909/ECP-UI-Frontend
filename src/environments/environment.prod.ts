@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'http://142.93.215.78/BY/api',
+  apiBaseUrl: 'https://ec.code-alpha.org:8080/BY/api',
   encryptKey: 'SECRET',
   facebook: {
     clientId: '2776633365685417',

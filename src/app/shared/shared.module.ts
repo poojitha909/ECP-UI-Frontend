@@ -7,16 +7,17 @@ import { ProductDetailCardComponent } from './product-detail-card/product-detail
 import { ServiceDetailCardComponent } from './service-detail-card/service-detail-card.component';
 import { CoreModule } from '../core';
 import { ServicesListComponent } from './services-list/services-list.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
-  declarations: [ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, ServicesListComponent],
+  declarations: [ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, ServicesListComponent, PaginationComponent],
   imports: [
     CommonModule,
     SharedRoutingModule,
     CoreModule
   ],
   exports: [
-    ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent
+    ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, PaginationComponent
   ]
 })
 export class SharedModule { }

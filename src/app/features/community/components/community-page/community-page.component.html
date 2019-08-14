@@ -80,21 +80,13 @@
         </div>
         <div class="community-result-body">
           <ul>
-            <li>
-              <h4>What Did You learn in School That you never forget in your life</h4>
-              <div>111 comments &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by Akshay Varma</div>
-            </li>
-            <li>
-                <h4>What books impacted your life in a Position of life or death</h4>
-                <div>41 comments &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by Srihari Venkatraman   (today)</div>
-            </li>
-            <li>
-                <h4>Signals that Baffled Astronormers for 17 Years</h4>
-                <div>18 comments &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by Deepa Gupta</div>
+            <li *ngFor="let discuss of discussionsList">
+              <h4>{{discuss.title}}</h4>
+              <div>{{discuss.aggrReplyCount}} comments &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by {{discuss.username}}</div>
             </li>
           </ul>
         </div>
-        <div class="community-result-footer">
+        <div class="community-result-footer" routerLink="/community/discussions">
           View All Discussions
           <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="3" width="9" height="18">

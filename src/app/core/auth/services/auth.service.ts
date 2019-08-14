@@ -43,6 +43,33 @@ export class AuthService {
     );
   }
 
+  sendOtp(mobileNo): Observable<any> {
+    const url = `${ApiConstants.SEND_OTP}?mobile=${mobileNo}`;
+    return this.http.get<any>(url).pipe(
+      map((response) => {
+        return JSON.parse(response.data);
+      })
+    );
+  }
+
+  reSendOtp(mobileNo): Observable<any> {
+    const url = `${ApiConstants.RESEND_OTP}?mobile=${mobileNo}`;
+    return this.http.get<any>(url).pipe(
+      map((response) => {
+        return JSON.parse(response.data);
+      })
+    );
+  }
+
+  verfiyOtp(mobileNo, code): Observable<any> {
+    const url = `${ApiConstants.VERIFY_OTP}?mobile=${mobileNo}&otp=${code}`;
+    return this.http.get<any>(url).pipe(
+      map((response) => {
+        return JSON.parse(response.data);
+      })
+    );
+  }
+
   signup(userData: User): Observable<any> {
     return this.http.post<any>(ApiConstants.USER_SIGNUP, userData, { headers: authHeaders }).pipe(
       map((response) => {

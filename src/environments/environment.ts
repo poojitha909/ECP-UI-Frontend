@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:8080/BY/api',
+  apiBaseUrl: 'https://ec.code-alpha.org/BY/api',
   encryptKey: 'SECRET',
   facebook: {
     clientId: '2776633365685417',

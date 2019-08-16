@@ -1,0 +1,9 @@
+<!-- Pagination start -->
+<div class="uk-container pagination">
+  <ul class="uk-pagination" uk-margin>
+      <li><span uk-pagination-previous></span> Previous</li>
+      <li class="pagenum" *ngFor="let i of items" [ngClass]="{'uk-active': i==currentPage}">{{i}}</li>
+      <li>Next <span uk-pagination-next></span></li>
+  </ul>
+</div>
+<!-- Pagination end -->

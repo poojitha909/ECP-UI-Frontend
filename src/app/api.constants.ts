@@ -11,5 +11,5 @@ export class ApiConstants {
     public static SEND_OTP: string = `${environment.apiBaseUrl}/v1/users/sendOtp`;
     public static RESEND_OTP: string = `${environment.apiBaseUrl}/v1/users/resendOtp`;
     public static VERIFY_OTP: string = `${environment.apiBaseUrl}/v1/users/verifyOtp`;
-
+    public static DISCUSSIONS_SERVICES: string = `${environment.apiBaseUrl}/v1/discuss`;
 }

@@ -8,5 +8,8 @@ export class ApiConstants {
     public static USER_LOGOUT: string = `${environment.apiBaseUrl}/v1/users/logout`;
     public static USER_PROFILE: string = `${environment.apiBaseUrl}/v1/userProfile`;
     public static EVENTS_SERVICES: string = `${environment.apiBaseUrl}/v1/event`;
+    public static SEND_OTP: string = `${environment.apiBaseUrl}/v1/users/sendOtp`;
+    public static RESEND_OTP: string = `${environment.apiBaseUrl}/v1/users/resendOtp`;
+    public static VERIFY_OTP: string = `${environment.apiBaseUrl}/v1/users/verifyOtp`;
     public static DISCUSSIONS_SERVICES: string = `${environment.apiBaseUrl}/v1/discuss`;
 }

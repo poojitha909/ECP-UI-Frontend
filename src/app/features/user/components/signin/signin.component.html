@@ -21,7 +21,9 @@
 
         <!-- SignIn types View START -->
         <ng-container *ngIf="!isLoading && !user">
-          <app-signin-types-view></app-signin-types-view>
+          <app-signin-types-view [otpGenerated]="isOtpGenerated" (requestForOtp)="requestForOtp($event)"
+            (verfiyOtp)="verfiyOtp($event)">
+          </app-signin-types-view>
         </ng-container>
 
         <!-- Addidtional info form  -->

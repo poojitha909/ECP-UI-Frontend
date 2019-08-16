@@ -13,6 +13,7 @@ import { User } from 'src/app/core/interfaces';
 export class SigninComponent implements OnInit {
 
   isLoading: boolean;
+  isOtpGenerated: boolean;
   verifiedString: string;
   user: any;
 
@@ -97,4 +98,41 @@ export class SigninComponent implements OnInit {
       });
   }
 
+  requestForOtp(number) {
+    if (number) {
+      this.auth.sendOtp(number).subscribe(response => {
+        console.log(response);
+        if (response.type === "success") {
+          this.isOtpGenerated = true;
+        }
+      },
+        error => {
+          console.log(error);
+        });
+    } else {
+      this.isOtpGenerated = false;
+    }
+    console.log(number);
+  }
+
+  verfiyOtp(verification) {
+    this.isLoading = true;
+    this.auth.verfiyOtp(verification.number, verification.code).subscribe(response => {
+      console.log(response);
+      if (response.type === "success") {
+        this.isLoading = false;
+        this.user = verification;
+        this.verifiedString = `Welcome ${verification.number}`;
+        const user = {
+          email: verification.number,
+          userName: verification.number
+        }
+        this.userSignIn(user);
+      }
+    },
+      error => {
+        console.log(error);
+      });
+    console.log(verification);
+  }
 }

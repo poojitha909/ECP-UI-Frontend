@@ -22,5 +22,6 @@ export interface User {
 
 export enum SocialAccount {
     GOOGLE = "google",
-    FACEBOOK = 'facebook'
+    FACEBOOK = 'facebook',
+    MOBILE = "mobile"
 }

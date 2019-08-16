@@ -12,7 +12,7 @@ import { User, SocialAccount } from 'src/app/core/interfaces';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-
+  isOtpGenerated: boolean;
   isLoading: boolean;
   verifiedString: string;
   user: any;
@@ -94,6 +94,43 @@ export class SignupComponent implements OnInit {
     }
     this.auth.signup(user).subscribe(
       userData => console.log("signup response", userData),
+      error => {
+        console.log(error);
+      });
+  }
+
+  requestForOtp(number) {
+    if (number) {
+      this.auth.sendOtp(number).subscribe(response => {
+        console.log(response);
+        if (response.type === "success") {
+          this.isOtpGenerated = true;
+        }
+      },
+        error => {
+          console.log(error);
+        });
+    } else {
+      this.isOtpGenerated = false;
+    }
+  }
+
+  verfiyOtp(verification) {
+    this.isLoading = true;
+    this.auth.verfiyOtp(verification.number, verification.code).subscribe(response => {
+      console.log(response);
+      if (response.type === "success") {
+        this.isLoading = false;
+        this.user = verification;
+        this.verifiedString = `Welcome ${verification.number}`;
+        const user = {
+          email: verification.number,
+          userName: verification.number,
+          id: verification.number
+        }
+        this.userSignup(user, SocialAccount.MOBILE);
+      }
+    },
       error => {
         console.log(error);
       });

@@ -11,6 +11,7 @@ export class DiscussionsListPageComponent implements OnInit {
   showReset: boolean;
   discussionsList: any[];
   countData: number;
+  selCategory: string;
   searchParams: {
     p: number,
     s: number,
@@ -27,6 +28,7 @@ export class DiscussionsListPageComponent implements OnInit {
     }
     this.countData = 0;
     this.onSearch();
+    this.selCategory = "";
   }
 
   showDiscussions(){
@@ -46,6 +48,7 @@ export class DiscussionsListPageComponent implements OnInit {
   }
 
   onTabChange(value) {
+    this.selCategory = value;
     this.showDiscussions();
   }
 

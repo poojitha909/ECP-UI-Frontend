@@ -125,7 +125,7 @@ export class SignupComponent implements OnInit {
         this.verifiedString = `Welcome ${verification.number}`;
         const user = {
           email: verification.number,
-          userName: verification.number,
+          name: verification.number,
           id: verification.number
         }
         this.userSignup(user, SocialAccount.MOBILE);

@@ -133,6 +133,21 @@ export class SigninComponent implements OnInit {
       error => {
         console.log(error);
       });
-    console.log(verification);
+  }
+
+  resendOtp(number) {
+    if (number) {
+      this.auth.resendOtp(number).subscribe(response => {
+        console.log(response);
+        if (response.type === "success") {
+        }
+      },
+        error => {
+          console.log(error);
+        });
+    } else {
+      this.isOtpGenerated = false;
+    }
+    console.log(number);
   }
 }

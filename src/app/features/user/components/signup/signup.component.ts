@@ -136,4 +136,20 @@ export class SignupComponent implements OnInit {
       });
   }
 
+  resendOtp(number) {
+    if (number) {
+      this.auth.resendOtp(number).subscribe(response => {
+        console.log(response);
+        if (response.type === "success") {
+        }
+      },
+        error => {
+          console.log(error);
+        });
+    } else {
+      this.isOtpGenerated = false;
+    }
+    console.log(number);
+  }
+
 }

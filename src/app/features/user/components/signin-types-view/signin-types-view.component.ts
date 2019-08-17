@@ -11,6 +11,7 @@ export class SigninTypesViewComponent implements OnInit {
   @Input() otpGenerated: boolean;
   @Output() requestForOtp = new EventEmitter();
   @Output() verfiyOtp = new EventEmitter();
+  @Output() resendOtp = new EventEmitter();
 
   mobileNumber: string;
   OtpCode: string;
@@ -42,7 +43,7 @@ export class SigninTypesViewComponent implements OnInit {
       this.requestForOtp.emit(this.mobileNumber);
     }
 
-    if (this.otpGenerated) {
+    if (this.otpGenerated && this.OtpCode) {
       const verfication = {
         number: this.mobileNumber,
         code: this.OtpCode
@@ -54,6 +55,12 @@ export class SigninTypesViewComponent implements OnInit {
   changeNumber() {
     this.mobileNumber = null;
     this.requestForOtp.emit(this.mobileNumber);
+  }
+
+  requestResendOtp() {
+    if (this.mobileNumber) {
+      this.resendOtp.emit(this.mobileNumber);
+    }
   }
 
 }

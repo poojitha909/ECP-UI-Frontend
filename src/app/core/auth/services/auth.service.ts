@@ -52,7 +52,7 @@ export class AuthService {
     );
   }
 
-  reSendOtp(mobileNo): Observable<any> {
+  resendOtp(mobileNo): Observable<any> {
     const url = `${ApiConstants.RESEND_OTP}?mobile=${mobileNo}`;
     return this.http.get<any>(url).pipe(
       map((response) => {

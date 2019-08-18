@@ -63,7 +63,6 @@ export class CommunityPageComponent implements OnInit {
       this.discussionsList = [];
       if(data.content){
         this.discussionsList = data.content;
-        console.log(this.discussionsList);
       }
     });
   }

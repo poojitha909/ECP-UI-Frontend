@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DiscussionService {
-    private eventUrl = ApiConstants.DISCUSSIONS_SERVICES;
+    private discussionUrl = ApiConstants.DISCUSSIONS_SERVICES;
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
@@ -13,8 +13,12 @@ export class DiscussionService {
     constructor(private http: HttpClient) { }
 
     // getEvents (): Observable<any[]> {
-    //     return this.http.get<any[]>(this.eventUrl+ "/page");
+    //     return this.http.get<any[]>(this.discussionUrl+ "/page");
     // }
+
+    summary(tags: string): Observable<any[]> {
+        return this.http.get<any[]>(`${this.discussionUrl}/summary?tagsData=${tags}`);
+    }
 
     searchDiscussions(searchPageParams: any): Observable<any[]> {
         let queryParams = "";
@@ -29,7 +33,7 @@ export class DiscussionService {
         if (queryParams == "") {
             return of([]);
         }
-        return this.http.get<any[]>(`${this.eventUrl}/page?${queryParams}`);
+        return this.http.get<any[]>(`${this.discussionUrl}/page?${queryParams}`);
     }
 
     searchDiscussionsCount(searchPageParams: any): Observable<any[]> {
@@ -45,11 +49,11 @@ export class DiscussionService {
         if (queryParams == "") {
             return of([]);
         }
-        return this.http.get<any[]>(`${this.eventUrl}/count?${queryParams}`);
+        return this.http.get<any[]>(`${this.discussionUrl}/count?${queryParams}`);
     }
 
     getDiscussion(eventId: string): Observable<any[]> {
         let queryParams = "discussId=" + eventId;
-        return this.http.get<any[]>(`${this.eventUrl}?${queryParams}`);
+        return this.http.get<any[]>(`${this.discussionUrl}?${queryParams}`);
     }
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/core';
-import { User } from 'src/app/core/interfaces';
+import { User, UserIdType } from 'src/app/core/interfaces';
 
 @Component({
   selector: 'app-signin',
@@ -15,11 +15,13 @@ export class SigninComponent implements OnInit {
   isLoading: boolean;
   isOtpGenerated: boolean;
   verifiedString: string;
+  errorMessage: string;
   user: any;
 
   constructor(
     private activeroute: ActivatedRoute,
-    private auth: AuthService) { }
+    private auth: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
     if (window.location.hash) {
@@ -53,10 +55,6 @@ export class SigninComponent implements OnInit {
     this.isLoading = true;
     this.auth.getFbUserData(token).subscribe(data => {
       if (data) {
-        this.user = data;
-        this.verifiedString = `Welcome ${this.user.name}`;
-        console.log(data);
-        this.isLoading = false;
         this.userSignIn(data)
       }
     },
@@ -71,10 +69,6 @@ export class SigninComponent implements OnInit {
     this.isLoading = true;
     this.auth.getGoogleUserData(token).subscribe(data => {
       if (data) {
-        this.user = data;
-        this.verifiedString = `Welcome ${this.user.name}`;
-        console.log(data);
-        this.isLoading = false;
         this.userSignIn(data)
       }
     },
@@ -86,14 +80,27 @@ export class SigninComponent implements OnInit {
 
   //SignIn user using api
   userSignIn(userData) {
+    this.errorMessage = null;
     const user: User = {
       email: userData.email,
-      userName: userData.name
+      userIdType: UserIdType.EMAIL
     };
 
+    if (userData.phoneNumber) {
+      user.phoneNumber = userData.phoneNumber;
+      user.userIdType = UserIdType.MOBILE;
+    }
     this.auth.login(user).subscribe(
-      userData => console.log("login response", userData),
+      userData => {
+        this.user = userData;
+        this.verifiedString = `Welcome ${this.user.userName}`;
+        this.isLoading = false;
+        this.router.navigateByUrl("/");
+        console.log("login response", userData);
+      },
       error => {
+        this.isLoading = false;
+        this.errorMessage = error.error.error.errorMsg;
         console.log(error);
       });
   }
@@ -120,12 +127,10 @@ export class SigninComponent implements OnInit {
     this.auth.verfiyOtp(verification.number, verification.code).subscribe(response => {
       console.log(response);
       if (response.type === "success") {
-        this.isLoading = false;
-        this.user = verification;
-        this.verifiedString = `Welcome ${verification.number}`;
         const user = {
-          email: verification.number,
-          userName: verification.number
+          email: "",
+          phoneNumber: verification.number,
+
         }
         this.userSignIn(user);
       }

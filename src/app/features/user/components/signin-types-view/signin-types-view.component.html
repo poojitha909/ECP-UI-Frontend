@@ -1,4 +1,9 @@
 <div>
+  <!-- Error box START-->
+  <div *ngIf="numberError" class="uk-alert-danger uk-animation-fade" uk-alert>
+    <p>{{ numberError }}</p>
+  </div>
+  <!-- Error box END-->
   <div class="uk-form-stacked">
     <div class="uk-margin">
       <label class="uk-form-label" for="form-stacked-text">Phone Number</label>
@@ -6,23 +11,26 @@
 
         <div class="uk-inline mobile-number">
           <a *ngIf="mobileNumber" class="uk-form-icon uk-form-icon-flip" (click)="changeNumber()">Change Number</a>
-          <input class="uk-input" id="form-stacked-text" type="text" [(ngModel)]="mobileNumber"
-            placeholder="Enter number with country code(+91)..." />
+          <input class="uk-input" [ngClass]="{'uk-form-danger' : mobile.invalid && (mobile.dirty || mobile.touched) }"
+            id="form-stacked-text" type="text" [(ngModel)]="mobileNumber"
+            placeholder="Enter number with country code(+91)..." required #mobile="ngModel" />
         </div>
       </div>
     </div>
     <div class="uk-margin">
       <div class="uk-form-controls">
-        <input class="uk-input" id="form-stacked-text" name="otpcode" [(ngModel)]="OtpCode" placeholder="Enter OTP..."
-          [disabled]="!otpGenerated" />
-        <a *ngIf="otpGenerated" (click)="requestResendOtp()" href="javascript:void(0)" class="resend-otp"> Resend OTP</a>
+        <input class="uk-input" id="form-stacked-text" type="number" name="otpcode" [(ngModel)]="OtpCode"
+          placeholder="Enter OTP..." [disabled]="!otpGenerated" />
+        <a *ngIf="otpGenerated" (click)="requestResendOtp()" href="javascript:void(0)" class="resend-otp"> Resend
+          OTP</a>
       </div>
     </div>
   </div>
   <div class="m-b-40" uk-grid>
     <div *ngIf="!otpGenerated" class="uk-width-expand uk-flex uk-flex-middle">- An OTP will be sent to the above number.
     </div>
-    <div *ngIf="otpGenerated" class="uk-width-expand uk-flex uk-flex-middle">- 4-digit OTP was sent to
+    <div *ngIf="otpGenerated" class="uk-width-expand uk-flex uk-flex-middle">- 4-digit OTP was
+      {{ otpResend ? 'resent': 'sent' }} to
       {{ mobileNumber }}.</div>
     <div class="uk-width-auto"> <button class="uk-button uk-button-default otp-btn"
         (click)="requestOtp()">{{ otpGenerated ?  'Verify OTP' :'Request OTP'}}</button></div>

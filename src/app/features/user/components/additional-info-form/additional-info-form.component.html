@@ -3,30 +3,32 @@
     <span class="verified-icon font-100"></span>
     <p class="font-regular">{{ verifiedString }}</p>
   </div>
-  <form class="uk-form-stacked">
+  <form class="uk-form-stacked" [formGroup]="userform">
     <div class="uk-margin">
       <label class="uk-form-label" for="form-stacked-text">What’s your name?</label>
       <div class="uk-form-controls">
-        <input class="uk-input" id="form-stacked-text" type="text" placeholder="Your Name...">
+        <input class="uk-input" id="form-stacked-text" type="text" formControlName="firstName"
+          placeholder="Your Name...">
       </div>
     </div>
 
-    <div class="uk-margin">
+    <!-- <div class="uk-margin">
       <label class="uk-form-label" for="form-stacked-text">Age</label>
       <div class="uk-form-controls">
         <input class="uk-input" id="form-stacked-text" type="text" placeholder="Your age in years...">
       </div>
-    </div>
+    </div> -->
 
     <div class="uk-margin">
       <div class="uk-form-label">Gender</div>
-      <label class="mr-4"><input class="uk-radio" type="radio" name="radio2" checked> Male</label>
-      <label class="mr-4"><input class="uk-radio" type="radio" name="radio2"> Female</label>
-      <label><input class="uk-radio" type="radio" name="radio2"> Transgender</label>
+      <label class="mr-4"><input class="uk-radio" value="1" type="radio" formControlName="gender" checked> Male</label>
+      <label class="mr-4"><input class="uk-radio" value="0" type="radio" formControlName="gender"> Female</label>
+      <label><input class="uk-radio" type="radio" value="3" formControlName="gender"> Transgender</label>
     </div>
 
     <div class="uk-margin">
-      <button class="uk-button uk-button-default submit-btn w-100">Submit</button>
+      <button class="uk-button uk-button-default submit-btn w-100" [disabled]="userform.invalid"
+        (click)="onSubmit()">Submit</button>
     </div>
   </form>
 

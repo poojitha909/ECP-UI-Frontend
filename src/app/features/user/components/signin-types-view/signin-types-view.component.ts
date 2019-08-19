@@ -13,7 +13,9 @@ export class SigninTypesViewComponent implements OnInit {
   @Output() verfiyOtp = new EventEmitter();
   @Output() resendOtp = new EventEmitter();
 
+  otpResend: boolean;
   mobileNumber: string;
+  numberError: string;
   OtpCode: string;
   constructor(
     private router: Router
@@ -39,27 +41,47 @@ export class SigninTypesViewComponent implements OnInit {
   }
 
   requestOtp() {
-    if (this.mobileNumber && !this.otpGenerated) {
-      this.requestForOtp.emit(this.mobileNumber);
-    }
+    this.numberError = null;
+    if (this.mobileNumber && this.mobileValidation()) {
+      if (!this.otpGenerated) {
+        this.requestForOtp.emit(this.mobileNumber);
+      }
 
-    if (this.otpGenerated && this.OtpCode) {
-      const verfication = {
-        number: this.mobileNumber,
-        code: this.OtpCode
-      };
-      this.verfiyOtp.emit(verfication);
+      if (this.otpGenerated && this.OtpCode) {
+        const verfication = {
+          number: this.mobileNumber,
+          code: this.OtpCode
+        };
+        this.verfiyOtp.emit(verfication);
+      }
+    } else {
+      this.numberError = "Please enter a valid mobile number";
     }
   }
 
   changeNumber() {
     this.mobileNumber = null;
+    this.otpResend = false;
     this.requestForOtp.emit(this.mobileNumber);
   }
 
   requestResendOtp() {
-    if (this.mobileNumber) {
+    this.numberError = null;
+    if (this.mobileNumber && this.mobileValidation()) {
+      this.otpResend = true;
       this.resendOtp.emit(this.mobileNumber);
+    } else {
+      this.numberError = "Please enter a valid mobile number";
+    }
+  }
+
+  mobileValidation(): boolean {
+    const regex = /^\d*$/;
+    if (this.mobileNumber.indexOf("+") > -1) {
+      const number = this.mobileNumber.split("+")[1];
+      return regex.test(number);
+    } else {
+      return regex.test(this.mobileNumber);
     }
   }
 

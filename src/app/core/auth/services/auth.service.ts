@@ -70,24 +70,24 @@ export class AuthService {
     );
   }
 
-  signup(userData: User): Observable<any> {
+  signup(userData: User): Observable<User> {
     return this.http.post<any>(ApiConstants.USER_SIGNUP, userData, { headers: authHeaders }).pipe(
       map((response) => {
         this.user$.next(response.data.user);
         this.storage.store(AppConstants.USER, JSON.stringify(response.data.user));
         this.storage.store(AppConstants.AUTH_SESSION, response.data.sessionId);
-        return response;
+        return response.data.user;
       })
     );
   }
 
-  login(userCredentail: User): Observable<any> {
+  login(userCredentail: User): Observable<User> {
     return this.http.post<any>(ApiConstants.USER_LOGIN, userCredentail, { headers: authHeaders }).pipe(
       map((response) => {
         this.user$.next(response.data.user);
         this.storage.store(AppConstants.USER, JSON.stringify(response.data.user));
         this.storage.store(AppConstants.AUTH_SESSION, response.data.sessionId);
-        return response;
+        return response.data.user;
       })
     );
   }

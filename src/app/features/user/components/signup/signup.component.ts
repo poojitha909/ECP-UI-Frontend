@@ -86,7 +86,7 @@ export class SignupComponent implements OnInit {
 
     if (userData.phoneNumber) {
       user.phoneNumber = userData.phoneNumber;
-      user.userRegType = UserIdType.MOBILE;
+      user.userRegType = UserIdType.EMAIL;
       user.userIdType = UserIdType.MOBILE;
     }
 

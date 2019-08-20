@@ -9,11 +9,6 @@ import { ApiConstants } from 'src/app/api.constants';
 import { AppConstants } from 'src/app/app.constants';
 import { StorageHelperService } from '../../services';
 
-const authHeaders = new HttpHeaders({
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-});
-
 @Injectable({
   providedIn: 'root'
 })
@@ -71,7 +66,7 @@ export class AuthService {
   }
 
   signup(userData: User): Observable<User> {
-    return this.http.post<any>(ApiConstants.USER_SIGNUP, userData, { headers: authHeaders }).pipe(
+    return this.http.post<any>(ApiConstants.USER_SIGNUP, userData).pipe(
       map((response) => {
         this.user$.next(response.data.user);
         this.storage.store(AppConstants.USER, JSON.stringify(response.data.user));
@@ -82,7 +77,7 @@ export class AuthService {
   }
 
   login(userCredentail: User): Observable<User> {
-    return this.http.post<any>(ApiConstants.USER_LOGIN, userCredentail, { headers: authHeaders }).pipe(
+    return this.http.post<any>(ApiConstants.USER_LOGIN, userCredentail).pipe(
       map((response) => {
         this.user$.next(response.data.user);
         this.storage.store(AppConstants.USER, JSON.stringify(response.data.user));
@@ -111,7 +106,7 @@ export class AuthService {
   /**
   * Return user details
   */
-  get userSession(): User {
+  get userSession(): string {
     return this.storage.retrieve(AppConstants.AUTH_SESSION);
   }
 

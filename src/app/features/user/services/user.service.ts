@@ -5,21 +5,21 @@ import { ApiConstants } from 'src/app/api.constants';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserProfile } from 'src/app/core/interfaces';
+import { AuthService } from 'src/app/core';
 
-const authHeaders = new HttpHeaders({
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-});
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private auth: AuthService) { }
 
   createUserProfile(userData: UserProfile): Observable<UserProfile> {
-    return this.http.post<any>(ApiConstants.USER_PROFILE, userData, { headers: authHeaders }).pipe(
+    return this.http.post<any>(ApiConstants.USER_PROFILE, userData).pipe(
       map
         ((response) => {
           return response.data;

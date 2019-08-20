@@ -56,7 +56,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
                         // window.location.href = `${ENV.PUBLIC_APP}/sign-in?appType=${AppType.Dashboard}&url=${redirectUrl}`;
                         // return of();
-                        case 500:
+                        case 400:
                             this.auth.logout();
                             return of();
                         default:

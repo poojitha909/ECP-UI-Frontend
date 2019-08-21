@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/core';
-import { User, SocialAccount } from 'src/app/core/interfaces';
+import { User, SocialAccount, UserIdType } from 'src/app/core/interfaces';
 
 
 @Component({
@@ -15,6 +15,7 @@ export class SignupComponent implements OnInit {
   isOtpGenerated: boolean;
   isLoading: boolean;
   verifiedString: string;
+  errorMessage: string;
   user: any;
 
   constructor(private activeroute: ActivatedRoute, private auth: AuthService) { }
@@ -49,11 +50,6 @@ export class SignupComponent implements OnInit {
     this.isLoading = true;
     this.auth.getFbUserData(token).subscribe(data => {
       if (data) {
-        this.user = data;
-        this.verifiedString = `Welcome ${this.user.name}`;
-        console.log(data);
-        this.isLoading = false;
-        console.log(SocialAccount.FACEBOOK);
         this.userSignup(data, SocialAccount.FACEBOOK);
       }
     },
@@ -68,10 +64,6 @@ export class SignupComponent implements OnInit {
     this.isLoading = true;
     this.auth.getGoogleUserData(token).subscribe(data => {
       if (data) {
-        this.user = data;
-        this.verifiedString = `Welcome ${this.user.name}`;
-        console.log(data);
-        this.isLoading = false;
         this.userSignup(data, SocialAccount.GOOGLE);
       }
     },
@@ -86,15 +78,29 @@ export class SignupComponent implements OnInit {
     const user: User = {
       email: userData.email,
       userName: userData.name,
-      userIdType: 0,
-      userRegType: 0,
+      userIdType: UserIdType.EMAIL,
+      userRegType: UserIdType.EMAIL,
       socialSignOnId: userData.id,
       socialSignOnPlatform: socialPlatform
-
     }
+
+    if (userData.phoneNumber) {
+      user.phoneNumber = userData.phoneNumber;
+      user.userRegType = UserIdType.EMAIL;
+      user.userIdType = UserIdType.MOBILE;
+    }
+
     this.auth.signup(user).subscribe(
-      userData => console.log("signup response", userData),
+      userData => {
+        this.user = userData;
+        this.verifiedString = `Welcome ${this.user.userName}`;
+        this.isLoading = false;
+        console.log("signup response", userData)
+      },
       error => {
+        this.isLoading = false;
+        this.errorMessage = error.error.error.errorMsg;
+        this.isOtpGenerated = false;
         console.log(error);
       });
   }
@@ -120,13 +126,11 @@ export class SignupComponent implements OnInit {
     this.auth.verfiyOtp(verification.number, verification.code).subscribe(response => {
       console.log(response);
       if (response.type === "success") {
-        this.isLoading = false;
-        this.user = verification;
-        this.verifiedString = `Welcome ${verification.number}`;
         const user = {
-          email: verification.number,
-          userName: verification.number,
-          id: verification.number
+          email: "",
+          name: verification.number,
+          id: verification.number,
+          phoneNumber: verification.number
         }
         this.userSignup(user, SocialAccount.MOBILE);
       }
@@ -134,6 +138,22 @@ export class SignupComponent implements OnInit {
       error => {
         console.log(error);
       });
+  }
+
+  resendOtp(number) {
+    if (number) {
+      this.auth.resendOtp(number).subscribe(response => {
+        console.log(response);
+        if (response.type === "success") {
+        }
+      },
+        error => {
+          console.log(error);
+        });
+    } else {
+      this.isOtpGenerated = false;
+    }
+    console.log(number);
   }
 
 }

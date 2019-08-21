@@ -21,8 +21,14 @@
 
                 <!-- SignIn types View START -->
                 <ng-container *ngIf="!isLoading && !user">
+                    <!-- Error box START-->
+                    <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
+                        <a class="uk-alert-close" uk-close></a>
+                        <p>{{ errorMessage }}</p>
+                    </div>
+                    <!-- Error box END-->
                     <app-signin-types-view [otpGenerated]="isOtpGenerated" (requestForOtp)="requestForOtp($event)"
-                        (verfiyOtp)="verfiyOtp($event)">
+                        (verfiyOtp)="verfiyOtp($event)" (resendOtp)="resendOtp($event)">
                     </app-signin-types-view>
                 </ng-container>
 

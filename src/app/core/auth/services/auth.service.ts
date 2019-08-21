@@ -9,11 +9,6 @@ import { ApiConstants } from 'src/app/api.constants';
 import { AppConstants } from 'src/app/app.constants';
 import { StorageHelperService } from '../../services';
 
-const authHeaders = new HttpHeaders({
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-});
-
 @Injectable({
   providedIn: 'root'
 })
@@ -52,7 +47,7 @@ export class AuthService {
     );
   }
 
-  reSendOtp(mobileNo): Observable<any> {
+  resendOtp(mobileNo): Observable<any> {
     const url = `${ApiConstants.RESEND_OTP}?mobile=${mobileNo}`;
     return this.http.get<any>(url).pipe(
       map((response) => {
@@ -70,24 +65,24 @@ export class AuthService {
     );
   }
 
-  signup(userData: User): Observable<any> {
-    return this.http.post<any>(ApiConstants.USER_SIGNUP, userData, { headers: authHeaders }).pipe(
+  signup(userData: User): Observable<User> {
+    return this.http.post<any>(ApiConstants.USER_SIGNUP, userData).pipe(
       map((response) => {
         this.user$.next(response.data.user);
         this.storage.store(AppConstants.USER, JSON.stringify(response.data.user));
         this.storage.store(AppConstants.AUTH_SESSION, response.data.sessionId);
-        return response;
+        return response.data.user;
       })
     );
   }
 
-  login(userCredentail: User): Observable<any> {
-    return this.http.post<any>(ApiConstants.USER_LOGIN, userCredentail, { headers: authHeaders }).pipe(
+  login(userCredentail: User): Observable<User> {
+    return this.http.post<any>(ApiConstants.USER_LOGIN, userCredentail).pipe(
       map((response) => {
         this.user$.next(response.data.user);
         this.storage.store(AppConstants.USER, JSON.stringify(response.data.user));
         this.storage.store(AppConstants.AUTH_SESSION, response.data.sessionId);
-        return response;
+        return response.data.user;
       })
     );
   }
@@ -111,7 +106,7 @@ export class AuthService {
   /**
   * Return user details
   */
-  get userSession(): User {
+  get userSession(): string {
     return this.storage.retrieve(AppConstants.AUTH_SESSION);
   }
 

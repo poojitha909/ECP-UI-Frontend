@@ -29,7 +29,8 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: () => import('src/app/features/user/user.module').then((mod) => mod.UserModule)
-  }
+  },
+  { path: '**',   redirectTo: '/',pathMatch: 'full' }
 ];
 
 @NgModule({

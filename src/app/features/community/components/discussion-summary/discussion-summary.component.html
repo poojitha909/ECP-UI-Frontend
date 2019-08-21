@@ -12,11 +12,11 @@
         <div>
             <button class="latest">LATEST</button>
         </div>
-        <div class="title">
+        <div class="title" *ngIf="category.discussionLatest">
             <a [routerLink]="['/community/discussion', category.discussionLatest.id ]">{{category.discussionLatest.title}}</a>
         </div>
     </div>
-    <div class="discussion-summary-footer">
+    <div class="discussion-summary-footer" *ngIf="category.discussionLatest">
         <strong>{{category.discussionLatest.createdAt | date: 'dd-MM-yyyy'}}</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by {{category.discussionLatest.username}}
     </div>
 </div>

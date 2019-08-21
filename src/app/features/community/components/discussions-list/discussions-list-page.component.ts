@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DiscussionService} from '../../services/discussions.service';
+import {DiscussionService} from '../../services/discussion.service';
 import {MenuService} from '../../services/menu.service';
 
 @Component({

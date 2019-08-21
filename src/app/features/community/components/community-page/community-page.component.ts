@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {EventService} from '../../services/events.service';
-import {DiscussionService} from '../../services/discussions.service';
+import {DiscussionService} from '../../services/discussion.service';
 
 @Component({
   selector: 'app-community-page',

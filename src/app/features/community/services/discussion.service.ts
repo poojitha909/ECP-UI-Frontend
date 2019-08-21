@@ -6,20 +6,22 @@ import { Observable, of } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class DiscussionService {
     private discussionUrl = ApiConstants.DISCUSSIONS_SERVICES;
+    private discussionDetailUrl = ApiConstants.DISCUSSION_DETAIL;
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
     constructor(private http: HttpClient) { }
 
-    // getEvents (): Observable<any[]> {
-    //     return this.http.get<any[]>(this.discussionUrl+ "/page");
-    // }
-
     summary(tags: string): Observable<any[]> {
         return this.http.get<any[]>(`${this.discussionUrl}/summary?tagsData=${tags}`);
     }
 
+    addDiscussion(discussType: string, text: string, title: string, userId: string, username:string,
+             systemTags: string[], topicId: string[], contentType: number): Observable<any[]> {
+        return this.http.post<any[]>(`${this.discussionUrl}`,{discussType,text,title,userId,username,systemTags,topicId,contentType});
+    }
+    
     searchDiscussions(searchPageParams: any): Observable<any[]> {
         let queryParams = "";
         Object.keys(searchPageParams)
@@ -52,8 +54,8 @@ export class DiscussionService {
         return this.http.get<any[]>(`${this.discussionUrl}/count?${queryParams}`);
     }
 
-    getDiscussion(eventId: string): Observable<any[]> {
-        let queryParams = "discussId=" + eventId;
-        return this.http.get<any[]>(`${this.discussionUrl}?${queryParams}`);
+    getDiscussion(discussId: string): Observable<any[]> {
+        let queryParams = "discussId=" + discussId;
+        return this.http.get<any[]>(`${this.discussionDetailUrl}?${queryParams}`);
     }
 }

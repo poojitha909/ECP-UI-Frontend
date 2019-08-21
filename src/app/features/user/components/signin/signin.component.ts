@@ -101,6 +101,7 @@ export class SigninComponent implements OnInit {
       error => {
         this.isLoading = false;
         this.errorMessage = error.error.error.errorMsg;
+        this.isOtpGenerated = false;
         console.log(error);
       });
   }

@@ -33,7 +33,12 @@ export class DiscussionsListPageComponent implements OnInit {
     this.countData = 0;
     this.onSearch();
     this.selCategory = "";
-    this.menuService.getMenus("564071623e60f5b66f62df27").subscribe( (response:any) =>{
+    this.getCategories();
+
+  }
+
+  getCategories(){
+    this.menuService.getMenus("564071623e60f5b66f62df27",this.searchParams.searchTxt).subscribe( (response:any) =>{
       const data = response;
       this.categoryList = [];
       let tags = [];
@@ -60,7 +65,6 @@ export class DiscussionsListPageComponent implements OnInit {
         }
       });
     });
-
   }
 
   showDiscussions(){
@@ -101,8 +105,11 @@ export class DiscussionsListPageComponent implements OnInit {
   }
 
   onSearch() {
-    this.showDiscussions();
-    this.showDiscussionsCount();
+    this.getCategories();
+    if(this.selCategory){
+      this.showDiscussions();
+      this.showDiscussionsCount();
+    }
   }
 
 }

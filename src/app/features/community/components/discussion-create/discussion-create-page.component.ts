@@ -24,7 +24,7 @@ export class DiscussionCreatePageComponent implements OnInit {
     this.selCategory = "";
     this.discussId = this.route.snapshot.params['id'];
     this.selCategory = "";
-    this.menuService.getMenus("564071623e60f5b66f62df27").subscribe( (response:any) =>{
+    this.menuService.getMenus("564071623e60f5b66f62df27","").subscribe( (response:any) =>{
       const data = response;
       this.categoryList = [];
       if(data.length > 0){

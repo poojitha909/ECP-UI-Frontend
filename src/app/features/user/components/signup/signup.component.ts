@@ -75,6 +75,7 @@ export class SignupComponent implements OnInit {
 
   //Signup using api 
   userSignup(userData, socialPlatform) {
+    this.errorMessage = null;
     const user: User = {
       email: userData.email,
       userName: userData.name,
@@ -90,7 +91,7 @@ export class SignupComponent implements OnInit {
       user.userIdType = UserIdType.MOBILE;
     }
 
-    this.auth.signup(user).subscribe(
+    this.auth.login(user).subscribe(
       userData => {
         this.user = userData;
         this.verifiedString = `Welcome ${this.user.userName}`;
@@ -107,10 +108,14 @@ export class SignupComponent implements OnInit {
 
   requestForOtp(number) {
     if (number) {
+      this.errorMessage = null;
       this.auth.sendOtp(number).subscribe(response => {
         console.log(response);
         if (response.type === "success") {
           this.isOtpGenerated = true;
+        } else {
+          this.errorMessage = response.message;
+          this.isOtpGenerated = false;
         }
       },
         error => {
@@ -123,6 +128,7 @@ export class SignupComponent implements OnInit {
 
   verfiyOtp(verification) {
     this.isLoading = true;
+    this.errorMessage = null;
     this.auth.verfiyOtp(verification.number, verification.code).subscribe(response => {
       console.log(response);
       if (response.type === "success") {
@@ -133,6 +139,10 @@ export class SignupComponent implements OnInit {
           phoneNumber: verification.number
         }
         this.userSignup(user, SocialAccount.MOBILE);
+      } else {
+        this.isLoading = false;
+        this.errorMessage = response.message;
+        this.isOtpGenerated = false;
       }
     },
       error => {
@@ -142,9 +152,13 @@ export class SignupComponent implements OnInit {
 
   resendOtp(number) {
     if (number) {
+      this.isLoading = true;
       this.auth.resendOtp(number).subscribe(response => {
         console.log(response);
         if (response.type === "success") {
+        } else {
+          this.errorMessage = response.message;
+          this.isOtpGenerated = false;
         }
       },
         error => {

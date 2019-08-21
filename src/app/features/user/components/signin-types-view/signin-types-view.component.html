@@ -11,7 +11,7 @@
 
         <div class="uk-inline mobile-number">
           <a *ngIf="mobileNumber" class="uk-form-icon uk-form-icon-flip" (click)="changeNumber()">Change Number</a>
-          <input class="uk-input" [ngClass]="{'uk-form-danger' : mobile.invalid && (mobile.dirty || mobile.touched) }"
+          <input class="uk-input otpnumber" [ngClass]="{'uk-form-danger' : mobile.invalid && (mobile.dirty || mobile.touched) }"
             id="form-stacked-text" type="number" [(ngModel)]="mobileNumber"
             placeholder="Enter number with country code(+91)..." required #mobile="ngModel" />
         </div>

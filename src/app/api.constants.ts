@@ -12,4 +12,8 @@ export class ApiConstants {
     public static RESEND_OTP: string = `${environment.apiBaseUrl}/v1/users/resendOtp`;
     public static VERIFY_OTP: string = `${environment.apiBaseUrl}/v1/users/verifyOtp`;
     public static DISCUSSIONS_SERVICES: string = `${environment.apiBaseUrl}/v1/discuss`;
+    public static DISCUSSION_DETAIL: string = `${environment.apiBaseUrl}/v1/discussDetail`;
+    public static DISCUSSION_LIKE: string = `${environment.apiBaseUrl}/v1/discussLike`;
+    public static DISCUSSION_REPLY_LIKE: string = `${environment.apiBaseUrl}/v1/discussReplyLike`;
+    public static MENU_SERVICES: string = `${environment.apiBaseUrl}/v1/menu`;
 }

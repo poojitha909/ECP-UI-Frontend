@@ -1,22 +1,22 @@
 <div class="discussion-summary">
     <div class="discussion-summary-head">
         <div class="category">
-            {{discussion.title | ellipsis:35}}
+            {{category.label | ellipsis:35}}
         </div>
     </div>
     <div class="discussion-summary-body">
         <div class="comments">
-            {{discussion.aggrReplyCount}} Discussions
+            {{category.totalCount}} Discussions
         </div>
         <hr>
         <div>
             <button class="latest">LATEST</button>
         </div>
-        <div class="title">
-            <a [routerLink]="['/community/discussion', discussion.id ]">{{discussion.title}}</a>
+        <div class="title" *ngIf="category.discussionLatest">
+            <a [routerLink]="['/community/discussion', category.discussionLatest.id ]">{{category.discussionLatest.title}}</a>
         </div>
     </div>
-    <div class="discussion-summary-footer">
-        <strong>{{discussion.createdAt | date: 'dd-MM-yyyy'}}</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by {{discussion.username}}
+    <div class="discussion-summary-footer" *ngIf="category.discussionLatest">
+        <strong>{{category.discussionLatest.createdAt | date: 'dd-MM-yyyy'}}</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by {{category.discussionLatest.username}}
     </div>
 </div>

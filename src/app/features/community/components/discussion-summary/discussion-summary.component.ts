@@ -7,9 +7,8 @@ import { Component,Input, OnInit } from '@angular/core';
 })
 export class DiscussionSummaryComponent implements OnInit {
 
-  @Input() discussion: any;
+  @Input() category: any;
 
   constructor() { }
-    ngOnInit() {
-  }
+    ngOnInit() { }
 }

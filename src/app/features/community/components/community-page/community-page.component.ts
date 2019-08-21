@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {EventService} from '../../services/events.service';
-import {DiscussionService} from '../../services/discussions.service';
+import {DiscussionService} from '../../services/discussion.service';
 
 @Component({
   selector: 'app-community-page',
@@ -63,7 +63,6 @@ export class CommunityPageComponent implements OnInit {
       this.discussionsList = [];
       if(data.content){
         this.discussionsList = data.content;
-        console.log(this.discussionsList);
       }
     });
   }

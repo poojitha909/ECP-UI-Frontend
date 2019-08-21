@@ -5,6 +5,7 @@ import { LayoutComponent } from 'src/app/ui';
 import { CommunityPageComponent } from './components/community-page/community-page.component';
 import { EventsListPageComponent } from './components/events-list/events-list-page.component';
 import { EventDetailPageComponent } from './components/event-detail/event-detail-page.component';
+import { DiscussionDetailPageComponent } from './components/discussion-detail/discussion-detail-page.component';
 import {DiscussionsListPageComponent} from './components/discussions-list/discussions-list-page.component'
 import {DiscussionCreatePageComponent} from './components/discussion-create/discussion-create-page.component'
 const routes: Routes = [
@@ -35,7 +36,11 @@ const routes: Routes = [
       {
         path: 'discussion/edit/:id',
         component: DiscussionCreatePageComponent
-      }
+      },
+      {
+        path: 'discussion/:id',
+        component: DiscussionDetailPageComponent
+      },
     ]
   }
 ];

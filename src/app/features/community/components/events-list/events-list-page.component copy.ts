@@ -39,9 +39,7 @@ export class EventsListPageComponent implements OnInit {
     this.eventService.searchEvents(this.searchParams).subscribe( (response:any) =>{
       const data = response.data;
       if(data.content){
-        console.log(this.eventType);
         this.eventsList[this.eventType] = data.content;
-        console.log(this.eventsList);
       }
     });
   }

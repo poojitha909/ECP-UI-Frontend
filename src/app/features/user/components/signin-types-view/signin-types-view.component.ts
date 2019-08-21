@@ -76,13 +76,11 @@ export class SigninTypesViewComponent implements OnInit {
   }
 
   mobileValidation(): boolean {
-    const regex = /^\d*$/;
-    if (this.mobileNumber.indexOf("+") > -1) {
-      const number = this.mobileNumber.split("+")[1];
-      return regex.test(number);
-    } else {
-      return regex.test(this.mobileNumber);
+    console.log(this.mobileNumber.toString().length);
+    if (this.mobileNumber.toString().length > 10) {
+      return false
     }
+    return true;
   }
 
 }

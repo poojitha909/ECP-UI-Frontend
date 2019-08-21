@@ -7,11 +7,18 @@
     <div class="uk-margin">
       <label class="uk-form-label" for="form-stacked-text">What’s your name?</label>
       <div class="uk-form-controls">
-        <input class="uk-input" id="form-stacked-text" type="text" formControlName="firstName"
-          placeholder="Your Name...">
+        <input class="uk-input" id="form-stacked-text"
+          [ngClass]="{'uk-form-danger' : formControl.firstName.invalid && (formControl.firstName.dirty || formControl.firstName.touched) }"
+          type="text" formControlName="firstName" placeholder="Your Name...">
       </div>
     </div>
 
+    <div class="uk-margin">
+      <label class="uk-form-label" for="form-stacked-text">Email</label>
+      <div class="uk-form-controls">
+        <input class="uk-input" id="form-stacked-text" type="text" formControlName="email" placeholder="Your Email...">
+      </div>
+    </div>
     <!-- <div class="uk-margin">
       <label class="uk-form-label" for="form-stacked-text">Age</label>
       <div class="uk-form-controls">

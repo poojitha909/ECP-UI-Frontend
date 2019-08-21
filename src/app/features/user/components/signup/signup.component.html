@@ -23,7 +23,6 @@
                 <ng-container *ngIf="!isLoading && !user">
                     <!-- Error box START-->
                     <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
-                        <a class="uk-alert-close" uk-close></a>
                         <p>{{ errorMessage }}</p>
                     </div>
                     <!-- Error box END-->
@@ -56,9 +55,9 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="member uk-padding-small">
+                    <!-- <div class="member uk-padding-small">
                         Already a member? <a class="m-l-1" routerLink="/user/signin">Signin here</a>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- Signup discription link END-->
             </div>

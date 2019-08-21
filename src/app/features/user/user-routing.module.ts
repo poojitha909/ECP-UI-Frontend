@@ -5,12 +5,12 @@ import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 
 const routes: Routes = [
+  // {
+  //   path: 'signin',
+  //   component: SigninComponent
+  // },
   {
     path: 'signin',
-    component: SigninComponent
-  },
-  {
-    path: 'signup',
     component: SignupComponent
   }
 

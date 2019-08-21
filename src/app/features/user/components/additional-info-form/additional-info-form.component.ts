@@ -16,8 +16,13 @@ export class AdditionalInfoFormComponent implements OnInit {
   // userform: FormGroup;
   userform = this.fb.group({
     firstName: ['', Validators.required],
+    email: [''],
     gender: ['', Validators.required]
   });
+
+  get formControl() {
+    return this.userform.controls;
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -41,6 +46,10 @@ export class AdditionalInfoFormComponent implements OnInit {
           gender: +this.userform.controls.gender.value
         }
       };
+
+      if (this.userform.controls.email.value) {
+        userData.basicProfileInfo.primaryEmail = this.userform.controls.email.value;
+      }
 
       this.userService.createUserProfile(userData).subscribe(
         response => {

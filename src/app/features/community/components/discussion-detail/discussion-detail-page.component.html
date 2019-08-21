@@ -40,11 +40,40 @@
                 <div class="uk-card uk-card-default comment">
                     <div class="uk-card-body">
                         <span class="p-b-5">Comment</span>
-                        <textarea></textarea>
+                        <textarea id="commentarea" name="commentarea" [(ngModel)]="commentTxt"></textarea>
                     </div>
                     <div class="uk-card-footer">
                         <div class="uk-flex uk-flex-right">
-                            <button class="btn-primary">Submit Comment</button>
+                            <button class="btn-primary" (click)="addComment()">Submit Comment</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-card uk-card-default">
+                    <div class="uk-card-header">
+                        <div class="uk-grid-small uk-flex-middle" uk-grid>
+                            <div class="uk-width-auto">
+                                <img class="uk-border-circle" *ngIf="discussion.userProfile && discussion.userProfile.basicProfileInfo && discussion.userProfile.basicProfileInfo.profileImage && discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage" 
+                                    width="40" height="40" src="{{discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage}}">
+                            </div>
+                            <div class="uk-width-expand">
+                                <h3 class="uk-card-title uk-margin-remove-bottom">{{discussion.username}}</h3>
+                                <p class="uk-text-meta uk-margin-remove-top" *ngIf="discussion.userProfile"> Joined: {{ discussion.userProfile.createdAt | date:"MMM yyyy" }}</p>
+                            </div>
+                            <div class="uk-width-auto">
+                                <p class="uk-text-meta">{{ discussion.createdAt | timeago }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-card-body" [innerHTML]="discussion.text">
+                    </div>
+                    <div class="uk-card-footer">
+                        <div class="uk-grid-collapse uk-child-width-expand@s" uk-grid>
+                            <div class="like-container">
+                                <img src="/assets/images/like-outline.svg" (click)="likeDiscussion()"> <span class="like" (click)="likeDiscussion()">{{discussion.aggrLikeCount}}</span>
+                            </div>
+                            <div class="reply-container">
+                                <img src="/assets/images/reply.svg"> <label class="reply" for="commentarea"> Reply</label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -69,10 +98,10 @@
                     <div class="uk-card-footer">
                         <div class="uk-grid-collapse uk-child-width-expand@s" uk-grid>
                             <div class="like-container">
-                                <img src="/assets/images/like-outline.svg"> <span class="like">{{reply.likeCount}}</span>
+                                <img src="/assets/images/like-outline.svg" (click)="likeReply(reply)"> <span class="like" (click)="likeReply(reply)">{{reply.likeCount}}</span>
                             </div>
                             <div class="reply-container">
-                                <img src="/assets/images/reply.svg"> <span class="reply"> Reply</span>
+                                <img src="/assets/images/reply.svg"> <label class="reply" for="commentarea"> Reply</label>
                             </div>
                         </div>
                     </div>

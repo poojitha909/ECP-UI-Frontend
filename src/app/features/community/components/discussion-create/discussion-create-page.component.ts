@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DiscussionService} from '../../services/discussion.service';
 import {MenuService} from '../../services/menu.service';
-
+import {Router} from "@angular/router"
 @Component({
   selector: 'app-discussion-create-page',
   templateUrl: './discussion-create-page.component.html',
@@ -16,7 +16,7 @@ export class DiscussionCreatePageComponent implements OnInit {
   description: string;
 
 
-  constructor(private route:ActivatedRoute,private discussionService: DiscussionService, private menuService: MenuService) { }
+  constructor(private route:ActivatedRoute,private router: Router, private discussionService: DiscussionService, private menuService: MenuService) { }
   
   ngOnInit() {
     this.title = "";
@@ -58,12 +58,14 @@ export class DiscussionCreatePageComponent implements OnInit {
   
   onSubmit(){
     if(this.selCategory != "" && this.title!= "" && this.description!= ""){
-      this.discussionService.addDiscussion("Q", this.description, this.title, "123", "username 123", 
+      this.discussionService.addDiscussion("P", this.description, this.title, "123", "username 123", 
             this.categoryList[ this.selCategory ].tags
             ,[ this.categoryList[ this.selCategory ].id ],
             0)
-        .subscribe( (response) => {
-          console.log(response);
+        .subscribe( (response:any) => {
+          if(response.data.id != ""){
+            this.router.navigate(['/community/discussion', response.data.id]);
+          }
         });
     }
     else{

@@ -99,7 +99,7 @@ export class SignupComponent implements OnInit {
     this.auth.login(user).subscribe(
       userData => {
         this.user = userData;
-        this.verifiedString = `Welcome ${this.user.userName}`;
+        this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
         // this.isLoading = false;
         this.getUserProfile();
         console.log("signup response", userData)

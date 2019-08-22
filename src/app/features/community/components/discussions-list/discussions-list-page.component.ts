@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
 import {DiscussionService} from '../../services/discussion.service';
 import {MenuService} from '../../services/menu.service';
 
@@ -13,15 +14,17 @@ export class DiscussionsListPageComponent implements OnInit {
   discussionsList: any[];
   countData: number;
   selCategory: string;
-  categoryList: any[];
+  categoryList: any;
+  dropDownList: any[];
   searchParams: {
     p: number,
     s: number,
     searchTxt: string
     tags: string;
-  }
+  };
+  paramsSubs: any;
 
-  constructor(private discussionService: DiscussionService, private menuService: MenuService) { }
+  constructor(private route:ActivatedRoute,private router: Router, private discussionService: DiscussionService, private menuService: MenuService) { }
 
   ngOnInit() {
     this.searchParams = {
@@ -30,18 +33,30 @@ export class DiscussionsListPageComponent implements OnInit {
       searchTxt: "",
       tags: ""
     }
-    this.countData = 0;
-    this.onSearch();
-    this.selCategory = "";
-    this.getCategories();
-
+    this.paramsSubs = this.route.params.subscribe(params => {
+      this.initiate();
+    });
+  }
+  ngOnDestroy(){
+    this.paramsSubs.unsubscribe();
   }
 
+  initiate(){
+    this.countData = 0;
+    this.discussionsList = [];
+    this.categoryList = null;
+    this.selCategory = "";
+    if(this.route.snapshot.params['category']){
+      this.selCategory = this.route.snapshot.params['category'];
+    }
+    this.onSearch();
+  }
+  
   getCategories(){
     this.menuService.getMenus("564071623e60f5b66f62df27",this.searchParams.searchTxt).subscribe( (response:any) =>{
       const data = response;
-      this.categoryList = [];
       let tags = [];
+      this.categoryList = {};
       if(data.length > 0){
         for(let i in data){
           this.categoryList[ data[i].id ] = {id: data[i].id, label: data[i].displayMenuName, tagIds:[], totalCount:0, discussionLatest:null};
@@ -52,18 +67,20 @@ export class DiscussionsListPageComponent implements OnInit {
             tags[i] = data[i].id + "_" + this.categoryList[ data[i].id ].tagIds.join("_"); // this si just to pass extrs key in tags which is menu item id
           }
         }
-      }
-
-      this.discussionService.summary(tags.join(",")).subscribe((response:any) =>{
-        if(data.length > 0){
-          for(let i in data){
-            this.categoryList[data[i].id].totalCount = response.data[data[i].id].totalCount;
-            if(response.data[data[i].id].discussPage && response.data[data[i].id].discussPage.content && response.data[data[i].id].discussPage.content[0]){
-              this.categoryList[data[i].id].discussionLatest = response.data[data[i].id].discussPage.content[0];
-            }
-          }
+        if(this.dropDownList === undefined){
+          this.dropDownList = JSON.parse(JSON.stringify(this.categoryList));
         }
-      });
+        if(this.selCategory==""){
+          this.discussionService.summary(tags.join(",")).subscribe((response:any) =>{
+            for(let i in data){
+              this.categoryList[data[i].id].totalCount = response.data[data[i].id].totalCount;
+              if(response.data[data[i].id].discussPage && response.data[data[i].id].discussPage.content && response.data[data[i].id].discussPage.content[0]){
+                this.categoryList[data[i].id].discussionLatest = response.data[data[i].id].discussPage.content[0];
+              }
+            }
+          });
+        }
+      }
     });
   }
 
@@ -85,8 +102,10 @@ export class DiscussionsListPageComponent implements OnInit {
 
   onTabChange(value) {
     this.selCategory = value;
-    this.searchParams.tags = this.categoryList[this.selCategory].tagIds.join(",");
-    this.showDiscussions();
+    if(this.selCategory){
+      this.searchParams.tags = this.dropDownList[this.selCategory].tagIds.join(",");
+    }
+    this.router.navigate(['/community/discussions', this.selCategory]);
   }
 
   onSearchChange(value) {

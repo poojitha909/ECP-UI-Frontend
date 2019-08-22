@@ -5,7 +5,7 @@
                 src="{{discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage}}" style="width:90px;" />
         </div>
         <div class="uk-width-expand">
-            <h2 class="title" [routerLink]="['/community/discussion', discussion.id ]">{{discussion.title | ellipsis:65}}</h2>
+            <h2 class="title" [routerLink]="['/community/discussion', discussion.id, category ]">{{discussion.title | ellipsis:65}}</h2>
             <p class="author">by <span>{{discussion.username}}</span></p>
             <p>{{discussion.createdAt | date: 'dd MMM yyyy'}} at {{discussion.createdAt | date: 'hh:ss a'}}</p>
         </div>

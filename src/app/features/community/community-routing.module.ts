@@ -30,6 +30,10 @@ const routes: Routes = [
         component: DiscussionsListPageComponent
       },
       {
+        path: 'discussions/:category',
+        component: DiscussionsListPageComponent
+      },
+      {
         path: 'discussion/add',
         component: DiscussionCreatePageComponent
       },
@@ -39,6 +43,10 @@ const routes: Routes = [
       },
       {
         path: 'discussion/:id',
+        component: DiscussionDetailPageComponent
+      },
+      {
+        path: 'discussion/:id/:category',
         component: DiscussionDetailPageComponent
       },
     ]

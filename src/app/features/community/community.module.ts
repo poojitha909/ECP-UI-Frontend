@@ -12,11 +12,30 @@ import { EventSummaryComponent } from './components/event-summary/event-summary.
 import { EventDetailPageComponent } from './components/event-detail/event-detail-page.component';
 import { DiscussionDetailPageComponent } from './components/discussion-detail/discussion-detail-page.component';
 import { PaginationComponent } from '../../shared/pagination/pagination.component';
+import { DiscussionNoRecordComponent } from './components/discussion-no-record/discussion-no-record.component';
 import { EllipsisPipe } from '../../shared/ellipsis.pipe';
 import { TimeAgoPipe } from '../../shared/timeago.pipe';
 
 @NgModule({
-  declarations: [EllipsisPipe, TimeAgoPipe, CommunityPageComponent, EventsListPageComponent, DiscussionDetailPageComponent, DiscussionCreatePageComponent, DiscussionSummaryComponent, DiscussionSummaryCatComponent, EventSummaryComponent, EventDetailPageComponent, DiscussionsListPageComponent, PaginationComponent],
-  imports: [CommonModule, CommunityRoutingModule, CoreModule]
+  declarations: [
+        EllipsisPipe,
+        TimeAgoPipe,
+        CommunityPageComponent,
+        DiscussionNoRecordComponent,
+        EventsListPageComponent,
+        DiscussionDetailPageComponent,
+        DiscussionCreatePageComponent,
+        DiscussionSummaryComponent,
+        DiscussionSummaryCatComponent,
+        EventSummaryComponent,
+        EventDetailPageComponent,
+        DiscussionsListPageComponent,
+        PaginationComponent
+    ],
+  imports: [
+        CommonModule,
+        CommunityRoutingModule,
+        CoreModule
+    ]
 })
 export class CommunityModule { }

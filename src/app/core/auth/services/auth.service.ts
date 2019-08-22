@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 import { User } from '../../interfaces';
 import { ApiConstants } from 'src/app/api.constants';
@@ -65,23 +65,23 @@ export class AuthService {
     );
   }
 
-  signup(userData: User): Observable<User> {
-    return this.http.post<any>(ApiConstants.USER_SIGNUP, userData).pipe(
-      map((response) => {
-        this.user$.next(response.data.user);
-        this.storage.store(AppConstants.USER, JSON.stringify(response.data.user));
-        this.storage.store(AppConstants.AUTH_SESSION, response.data.sessionId);
-        return response.data.user;
-      })
-    );
-  }
+  // signup(userData: User): Observable<User> {
+  //   return this.http.post<any>(ApiConstants.USER_SIGNUP, userData).pipe(
+  //     map((response) => {
+  //       this.user$.next(response.data.user);
+  //       this.storage.store(AppConstants.USER, JSON.stringify(response.data.user));
+  //       this.storage.store(AppConstants.AUTH_SESSION, response.data.sessionId);
+  //       return response.data.user;
+  //     })
+  //   );
+  // }
 
   login(userCredentail: User): Observable<User> {
     return this.http.post<any>(ApiConstants.USER_LOGIN, userCredentail).pipe(
       map((response) => {
         this.user$.next(response.data.user);
-        this.storage.store(AppConstants.USER, JSON.stringify(response.data.user));
-        this.storage.store(AppConstants.AUTH_SESSION, response.data.sessionId);
+        this.user = response.data.user;
+        this.userSession = response.data.sessionId;
         return response.data.user;
       })
     );
@@ -104,11 +104,26 @@ export class AuthService {
   }
 
   /**
-  * Return user details
+   * Set user details
+   */
+  set user(user: User) {
+    this.storage.store(AppConstants.USER, JSON.stringify(user));
+  }
+
+  /**
+  * Return user session details
   */
   get userSession(): string {
     return this.storage.retrieve(AppConstants.AUTH_SESSION);
   }
+
+  /**
+  * Set user session details
+  */
+  set userSession(sessionId: string) {
+    this.storage.store(AppConstants.AUTH_SESSION, sessionId);
+  }
+
 
   /**
   * Return boolean if user data found in LS

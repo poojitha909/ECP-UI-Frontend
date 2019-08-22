@@ -18,6 +18,7 @@ export interface User {
     phoneNumber?: any;
     userTags?: string[];
     permissions?: any[];
+    hasProfile?: boolean;
 }
 
 export enum SocialAccount {

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserProfile } from 'src/app/core/interfaces';
+import { UserProfile, UserIdType } from 'src/app/core/interfaces';
 import { AuthService } from 'src/app/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
@@ -16,9 +16,10 @@ export class AdditionalInfoFormComponent implements OnInit {
   // userform: FormGroup;
   userform = this.fb.group({
     firstName: ['', Validators.required],
-    email: [''],
-    gender: ['', Validators.required]
+    primaryEmail: [this.auth.user.email, Validators.required],
+    primaryPhoneNo: [this.auth.user.phoneNumber, Validators.required]
   });
+  userIdType = UserIdType;
 
   get formControl() {
     return this.userform.controls;
@@ -26,12 +27,13 @@ export class AdditionalInfoFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private auth: AuthService,
+    public auth: AuthService,
     private userService: UserService,
     private router: Router
   ) { }
 
   ngOnInit() {
+
   }
 
   onSubmit() {
@@ -39,17 +41,8 @@ export class AdditionalInfoFormComponent implements OnInit {
 
       let userData: UserProfile = {
         userId: this.auth.user.id,
-        basicProfileInfo: {
-          firstName: this.userform.controls.firstName.value
-        },
-        individualInfo: {
-          gender: +this.userform.controls.gender.value
-        }
+        basicProfileInfo: this.userform.value
       };
-
-      if (this.userform.controls.email.value) {
-        userData.basicProfileInfo.primaryEmail = this.userform.controls.email.value;
-      }
 
       this.userService.createUserProfile(userData).subscribe(
         response => {

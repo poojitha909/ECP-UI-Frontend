@@ -32,7 +32,7 @@
                 </ng-container>
 
                 <!-- Addidtional info form  -->
-                <ng-container *ngIf="user">
+                <ng-container *ngIf="user && !isLoading">
                     <app-additional-info-form [verifiedString]="verifiedString"></app-additional-info-form>
                 </ng-container>
 

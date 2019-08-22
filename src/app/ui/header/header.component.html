@@ -1,7 +1,7 @@
 <div class="header">
   <div class="uk-container">
     <div class="uk-grid-small uk-child-width-expand@s" uk-grid>
-      <div>
+      <div class="uk-width-auto">
         <div class="logo-tagline uk-text-left@s uk-text-center">
           <div class="logo">
             <button class="uk-button uk-button-default" routerLink="/">ABCD Logo</button>
@@ -11,7 +11,7 @@
           </div>
         </div>
       </div>
-      <div class="uk-visible@s">
+      <div class="uk-visible@s uk-width-expand">
         <div class="uk-flex uk-flex-right" uk-grid>
           <!-- <div>
             <div class="location uk-text-right">
@@ -30,7 +30,7 @@
                 class="uk-button uk-button-default">SignIn</button>
               <div class="uk-inline" *ngIf="auth.isAuthenticate">
                 <button (click)="navigateUser()"
-                  class="uk-button uk-button-default">{{ auth.user.userName ? auth.user.userName : 'Guest User' }}</button>
+                  class="uk-button uk-button-default">{{ auth.user.userName || auth.user.email || auth.user.phoneNumber }}</button>
                 <div uk-dropdown>
                   <ul class="uk-nav uk-dropdown-nav">
                     <li><a (click)="logout()" class="uk-padding-remove font-regular">Logout</a></li>
@@ -96,7 +96,8 @@
         <button *ngIf="!auth.isAuthenticate" routerLink="/user/signin"
           class="uk-button uk-button-default">Signin</button>
         <div class="uk-inline" *ngIf="auth.isAuthenticate">
-          <button (click)="navigateUser()" class="uk-button uk-button-default">{{ auth.user.userName  }}</button>
+          <button (click)="navigateUser()"
+            class="uk-button uk-button-default">{{  auth.user.userName || auth.user.email || auth.user.phoneNumber  }}</button>
           <div uk-dropdown>
             <ul class="uk-nav uk-dropdown-nav">
               <li><a (click)="logout()" class="uk-padding-remove font-regular">Logout</a></li>

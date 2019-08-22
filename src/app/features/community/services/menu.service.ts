@@ -15,4 +15,7 @@ export class MenuService {
     getMenus(parentId: string,searchTxt: string): Observable<any[]> {
         return this.http.get<any[]>(`${this.menuUrl}/getMenu?parentId=${parentId}&searchTxt=${searchTxt}`);
     }
+    getMenuItem(id: string): Observable<any[]> {
+        return this.http.get<any[]>(`${this.menuUrl}/getMenu?id=${id}`);
+    }
 }

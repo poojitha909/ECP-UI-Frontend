@@ -103,6 +103,10 @@ export class AuthService {
     return this.storage.retrieve(AppConstants.USER) ? JSON.parse(this.storage.retrieve(AppConstants.USER)) : undefined;
   }
 
+  set user(user: User) {
+    this.storage.store(AppConstants.USER, JSON.stringify(user));
+  }
+
   /**
   * Return user details
   */

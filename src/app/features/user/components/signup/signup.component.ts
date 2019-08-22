@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/core';
 import { User, SocialAccount, UserIdType } from 'src/app/core/interfaces';
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -18,7 +19,11 @@ export class SignupComponent implements OnInit {
   errorMessage: string;
   user: any;
 
-  constructor(private activeroute: ActivatedRoute, private auth: AuthService) { }
+  constructor(
+    private activeroute: ActivatedRoute,
+    private auth: AuthService,
+    private userService: UserService,
+    private router: Router) { }
 
   ngOnInit() {
     if (window.location.hash) {
@@ -95,7 +100,8 @@ export class SignupComponent implements OnInit {
       userData => {
         this.user = userData;
         this.verifiedString = `Welcome ${this.user.userName}`;
-        this.isLoading = false;
+        // this.isLoading = false;
+        this.getUserProfile();
         console.log("signup response", userData)
       },
       error => {
@@ -168,6 +174,23 @@ export class SignupComponent implements OnInit {
       this.isOtpGenerated = false;
     }
     console.log(number);
+  }
+
+  getUserProfile() {
+    this.userService.getUserProfile().subscribe(
+      userProfie => {
+        if (userProfie.basicProfileInfo.firstName) {
+          this.router.navigateByUrl("/");
+        } else {
+          this.isLoading = false;
+        }
+      },
+      error => {
+        this.isLoading = false;
+        this.errorMessage = error.error.error.errorMsg;
+        this.isOtpGenerated = false;
+      }
+    );
   }
 
 }

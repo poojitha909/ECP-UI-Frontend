@@ -9,14 +9,22 @@
       <div class="uk-form-controls">
         <input class="uk-input" id="form-stacked-text"
           [ngClass]="{'uk-form-danger' : formControl.firstName.invalid && (formControl.firstName.dirty || formControl.firstName.touched) }"
-          type="text" formControlName="firstName" placeholder="Your Name...">
+          type="text" formControlName="firstName" placeholder="Your Display Name...">
       </div>
     </div>
 
-    <div class="uk-margin">
+    <div [hidden]="auth.user?.userIdType === userIdType.EMAIL" class="uk-margin">
       <label class="uk-form-label" for="form-stacked-text">Email</label>
       <div class="uk-form-controls">
         <input class="uk-input" id="form-stacked-text" type="text" formControlName="email" placeholder="Your Email...">
+      </div>
+    </div>
+
+    <div [hidden]="auth.user?.userIdType === userIdType.MOBILE" class="uk-margin">
+      <label class="uk-form-label" for="form-stacked-text">Mobile Number</label>
+      <div class="uk-form-controls">
+        <input class="uk-input" id="form-stacked-text" type="text" formControlName="phoneNumber"
+          placeholder="Your Mobile Number...">
       </div>
     </div>
     <!-- <div class="uk-margin">

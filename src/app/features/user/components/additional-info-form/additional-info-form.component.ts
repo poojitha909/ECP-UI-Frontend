@@ -16,9 +16,8 @@ export class AdditionalInfoFormComponent implements OnInit {
   // userform: FormGroup;
   userform = this.fb.group({
     firstName: ['', Validators.required],
-    email: [this.auth.user.email],
-    phoneNumber: [this.auth.user.phoneNumber],
-    gender: ['', Validators.required]
+    primaryEmail: [this.auth.user.email, Validators.required],
+    primaryPhoneNo: [this.auth.user.phoneNumber, Validators.required]
   });
   userIdType = UserIdType;
 
@@ -42,14 +41,7 @@ export class AdditionalInfoFormComponent implements OnInit {
 
       let userData: UserProfile = {
         userId: this.auth.user.id,
-        basicProfileInfo: {
-          firstName: this.userform.controls.firstName.value,
-          primaryEmail:this.userform.controls.email.value,
-          primaryPhoneNo:this.userform.controls.phoneNumber.value
-        },
-        individualInfo: {
-          gender: +this.userform.controls.gender.value
-        }
+        basicProfileInfo: this.userform.value
       };
 
       this.userService.createUserProfile(userData).subscribe(

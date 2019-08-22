@@ -22,10 +22,14 @@ export class UserService {
     return this.http.post<any>(ApiConstants.USER_PROFILE, userData).pipe(
       map
         ((response) => {
-          if (response.data.basicProfileInfo.firstName) {
+          if (response.data.basicProfileInfo && response.data.basicProfileInfo.firstName) {
             let currentUser: User = this.auth.user;
             currentUser.userName = response.data.basicProfileInfo.firstName;
+            currentUser.hasProfile = true;
             this.auth.user = currentUser;
+          } else if (response.data.sessionId) {
+            this.auth.userSession = response.data.sessionId;
+            this.auth.user = response.data.user;
           }
           return response.data;
         })

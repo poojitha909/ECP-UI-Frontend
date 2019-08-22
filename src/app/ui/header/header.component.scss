@@ -36,7 +36,7 @@
         font-size: 18px;
         border: none;
         color: #fff;
-        text-transform: capitalize;
+        text-transform: none;
         padding: 5px 30px;
         &:focus{
           color: $primary-btn;
@@ -153,7 +153,7 @@
       font-size: 18px;
       border: none;
       color: #fff;
-      text-transform: capitalize;
+      text-transform: none;
       width: 160px;
       margin: 12px 0;
     }

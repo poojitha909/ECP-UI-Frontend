@@ -96,7 +96,8 @@
         <button *ngIf="!auth.isAuthenticate" routerLink="/user/signin"
           class="uk-button uk-button-default">Signin</button>
         <div class="uk-inline" *ngIf="auth.isAuthenticate">
-          <button (click)="navigateUser()" class="uk-button uk-button-default">{{ auth.user.userName  }}</button>
+          <button (click)="navigateUser()"
+            class="uk-button uk-button-default">{{  auth.user.userName || auth.user.email || auth.user.phoneNumber  }}</button>
           <div uk-dropdown>
             <ul class="uk-nav uk-dropdown-nav">
               <li><a (click)="logout()" class="uk-padding-remove font-regular">Logout</a></li>

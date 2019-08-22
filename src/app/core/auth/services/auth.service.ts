@@ -120,7 +120,7 @@ export class AuthService {
   /**
   * Set user session details
   */
-  set userSession(sessionId) {
+  set userSession(sessionId: string) {
     this.storage.store(AppConstants.AUTH_SESSION, sessionId);
   }
 

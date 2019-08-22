@@ -23,7 +23,9 @@ export class SignupComponent implements OnInit {
     private activeroute: ActivatedRoute,
     private auth: AuthService,
     private userService: UserService,
-    private router: Router) { }
+    private router: Router) {
+    this.user = this.auth.user;
+  }
 
   ngOnInit() {
     if (window.location.hash) {
@@ -182,6 +184,9 @@ export class SignupComponent implements OnInit {
         if (userProfie.basicProfileInfo.firstName) {
           this.router.navigateByUrl("/");
         } else {
+          let user = this.auth.user;
+          user.hasProfile = false;
+          this.auth.user = user;
           this.isLoading = false;
         }
       },

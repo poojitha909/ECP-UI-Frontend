@@ -1,4 +1,4 @@
-<div class="uk-container events" *ngIf="eventsList!=undefined">
+<div class="uk-container events" *ngIf="eventsList!==undefined">
     <!-- Bread crumbs Start -->
     <div class="breadcrumbs">
         <ul class="uk-breadcrumb">
@@ -51,6 +51,9 @@
           </li>
         </ul>
     </div>
+    <div *ngIf="(eventsList && eventsList.length == 0)">
+        <app-event-no-record></app-event-no-record>
+    </div>
     <!-- Tabs with list end -->
-    <app-pagination [totalRecords]="15" [currentPage]="2" [perPage]="3"></app-pagination>
+    <app-pagination *ngIf="(eventsList && eventsList.length > 0)" [totalRecords]="15" [currentPage]="2" [perPage]="3"></app-pagination>
 </div>

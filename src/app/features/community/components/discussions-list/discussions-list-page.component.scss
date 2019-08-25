@@ -5,10 +5,11 @@
   .add-dicsussion{
     margin-bottom: 20px;
   }
-  h2{
-    color: rgba(22, 28, 45, 0.68);
+  .heading{ 
     font-family: $regular-font;
+    font-size: 32px;
     font-weight: bold;
+    color: $font-light-black;
   }
   
   .add-dicsussion-inner{
@@ -48,7 +49,7 @@
   .uk-tab a{
     text-transform: none;
     font-size: 18px;
-    color: rgba(22, 28, 45, 0.68);
+    color: $font-light-black;
   }
   .search-form {
     @media screen and (max-width: 960px) {
@@ -66,7 +67,7 @@
           height: 40px;
           border-radius: 4px;
           background-color: #ffffff;
-          color: rgba(22, 28, 45, 0.68);
+          color: $font-light-black;
         }
       }
       .search-btn {

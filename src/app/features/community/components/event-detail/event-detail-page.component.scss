@@ -21,17 +21,16 @@
         font-weight: bold;
       }
     }
-    h2{
-      font-size:24px;
+    .heading{ 
+      font-family: $regular-font;
+      font-size: 32px;
+      font-weight: bold;
       color: $font-light-black;
     }
     h3{
       font-size:18px;
     }
-    .heading{
-      color: $font-light-black;
-    }
-    .heading, .description{
+    .description{
       font-size:15px;
     }
     .textblue{

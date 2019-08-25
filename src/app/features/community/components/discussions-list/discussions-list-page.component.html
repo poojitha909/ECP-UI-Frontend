@@ -9,7 +9,7 @@
     <!-- Bread crumbs End -->
     <!-- Tabs with list start -->
     <div class="uk-container">
-        <h2>{{selCategory=='' ? 'All' : dropDownList[selCategory].label}} Discussions</h2>
+        <h2 class="heading">{{selCategory=='' ? 'All' : dropDownList[selCategory].label}} Discussions</h2>
         <div class="uk-grid">
             <div class="uk-width-1-3@m">
                 <select class="uk-select" [ngModel]="selCategory" (change)="onTabChange($event.target.value)">

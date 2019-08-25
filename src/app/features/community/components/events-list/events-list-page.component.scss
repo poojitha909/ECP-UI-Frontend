@@ -2,6 +2,13 @@
 
 .events {
   font-family: $regular-font;
+  h2{
+    color: $font-light-black;
+    font-family: $regular-font;
+    font-weight: bold;
+    margin-top:0px;
+    margin-bottom:0px;
+  }
   .breadcrumbs {
     margin-top: 20px;
     .uk-breadcrumb > :nth-child(n+2):not(.uk-first-column)::before{
@@ -29,7 +36,7 @@
   .uk-tab a{
     text-transform: none;
     font-size: 18px;
-    color: rgba(22, 28, 45, 0.68);
+    color: $font-light-black;
   }
   .search-form {
     margin-top: 16px;
@@ -42,7 +49,7 @@
           height: 40px;
           border-radius: 4px;
           background-color: #ffffff;
-          color: rgba(22, 28, 45, 0.68);
+          color: $font-light-black;
         }
       }
       .search-btn {

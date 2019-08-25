@@ -58,7 +58,7 @@
           height: 56px;
           border-radius: 4px;
           background-color: #ffffff;
-          color: rgba(22, 28, 45, 0.68);
+          color: $font-light-black;
         }
       }
       .search-btn {
@@ -98,26 +98,12 @@
   height: 48px;
 }
 
-.w-150{
-  width: 150px;
+.w-105{
+  width: 105px;
 }
-
-.reset-search{
-  background-color: transparent;
-  color: red;
-  border-radius: 50%;
-  padding: 2px 5px;
-  border: unset;
-  cursor: pointer;
-  margin: 0;
-  font-family: $regular-font;
-  font-size: 16px;
-  line-height: 1em  ;
-  &:focus{
-    outline:none;
-   }
+.pr-105{
+  padding-right:105px !important;
 }
-
 .reset-link{
   margin: 0 5px;
     background:none;
@@ -156,7 +142,7 @@
     font-family: $regular-font;
     background-color: #FFF;
     font-size: 15px;
-    color: rgba(22, 28, 45, 0.68);
+    color: $font-light-black;
     min-height: 220px;
 }
 .community-result-body h4{

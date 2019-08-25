@@ -13,6 +13,7 @@ import { EventDetailPageComponent } from './components/event-detail/event-detail
 import { DiscussionDetailPageComponent } from './components/discussion-detail/discussion-detail-page.component';
 import { PaginationComponent } from '../../shared/pagination/pagination.component';
 import { DiscussionNoRecordComponent } from './components/discussion-no-record/discussion-no-record.component';
+import { EventNoRecordComponent } from './components/event-no-record/event-no-record.component';
 import { EllipsisPipe } from '../../shared/ellipsis.pipe';
 import { TimeAgoPipe } from '../../shared/timeago.pipe';
 
@@ -27,6 +28,7 @@ import { TimeAgoPipe } from '../../shared/timeago.pipe';
         DiscussionCreatePageComponent,
         DiscussionSummaryComponent,
         DiscussionSummaryCatComponent,
+        EventNoRecordComponent,
         EventSummaryComponent,
         EventDetailPageComponent,
         DiscussionsListPageComponent,

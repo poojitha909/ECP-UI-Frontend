@@ -8,7 +8,7 @@ import { Component,Input, OnInit } from '@angular/core';
 export class EventSummaryComponent implements OnInit {
 
   @Input() event: any;
-  @Input() eventType: any;
+  @Input() eventType: number;
 
   constructor() { }
   ngOnInit() {

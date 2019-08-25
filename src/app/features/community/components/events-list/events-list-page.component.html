@@ -1,11 +1,11 @@
-<div class="uk-container events" *ngIf="eventsList!=undefined">
+<div class="uk-container events" *ngIf="eventsList!==undefined">
     <!-- Bread crumbs Start -->
     <div class="breadcrumbs">
         <ul class="uk-breadcrumb">
             <li routerLink="/community" class="fa fa-angle-right">Community</li>
-            <li class="fa fa-angle-right"><b>Events</b></li>
         </ul>
     </div>
+    <h2>All Events</h2>
     <!-- Bread crumbs End -->
     <!-- Tabs with list start -->
     <div class="uk-container uk-position-relative">
@@ -13,13 +13,10 @@
             <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
                 <div class="uk-margin uk-width-1-1 uk-width-expand@s">
                 <form class="uk-search uk-search-default">
-                    <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
-                        <button *ngIf="showReset" (click)="resetSearch()" class="reset-search">
-                            <fa-icon [icon]="['fas', 'times-circle']"></fa-icon>
-                        </button>
-                        <button *ngIf="showReset" class="reset-link" (click)="resetSearch()">Reset&nbsp;&nbsp;</button>
+                    <span class="uk-search-icon-flip" [ngClass]="{ 'w-105':showReset}" uk-search-icon>
+                        <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)"><fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Reset&nbsp;&nbsp;</button>
                     </span>
-                    <input class="uk-search-input search-box" [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event.target.value)"
+                    <input class="uk-search-input search-box" [ngClass]="{ 'pr-105':showReset}" [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)"
                     required type="text" placeholder="Search..." name="search" />
                 </form>
                 </div>
@@ -28,8 +25,8 @@
                 </div>
             </div>
         </div>
-        <ul uk-tab>
-          <li (click)="onTabChange(0)" class="uk-active"><a href="#">All Events ({{countData.all}})</a></li>
+        <ul id="eventtab" uk-tab>
+          <li (click)="onTabChange(0)" ><a href="#">All Events ({{countData.all}})</a></li>
           <li (click)="onTabChange(1)" ><a href="#">Outdoor Events ({{countData.outdoor}})</a></li>
           <li (click)="onTabChange(2)" ><a href="#">Indoor Events({{countData.indoor}})</a></li>
         </ul>
@@ -51,6 +48,9 @@
           </li>
         </ul>
     </div>
+    <div *ngIf="(eventsList && eventsList.length == 0)">
+        <app-event-no-record></app-event-no-record>
+    </div>
     <!-- Tabs with list end -->
-    <app-pagination [totalRecords]="15" [currentPage]="2" [perPage]="3"></app-pagination>
+    <app-pagination *ngIf="(eventsList && eventsList.length > 0)" [totalRecords]="15" [currentPage]="2" [perPage]="3"></app-pagination>
 </div>

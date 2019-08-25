@@ -83,7 +83,8 @@ export class CommunityPageComponent implements OnInit {
     }
   }
 
-  onSearchChange(value) {
+  onSearchChange(event: any) {
+    const value = event.target.value;
     if (value !== "") {
       this.showReset = true
     } else {
@@ -91,14 +92,18 @@ export class CommunityPageComponent implements OnInit {
     }
     this.searchParams.searchTxt = value;
     this.searchParamsDiscussions.searchTxt = value;
+    if(event.key=="Enter"){
+      this.onSearch();
+    }
   }
 
-  resetSearch() {
-    this.searchParams.searchTxt = "";
-    this.searchParamsDiscussions.searchTxt = "";
-    this.showReset = false;
-    this.showEvents();
-    this.showDiscussions();
+  resetSearch(event: any) {
+    if(event.clientX!=0){ // this is to make sure it is an event not raise by hitting enter key
+      this.searchParams.searchTxt = "";
+      this.searchParamsDiscussions.searchTxt = "";
+      this.showReset = false;
+      this.onSearch()
+    }
   }
 
   onSearch() {

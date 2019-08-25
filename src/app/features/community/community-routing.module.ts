@@ -22,6 +22,10 @@ const routes: Routes = [
         component: EventsListPageComponent
       },
       {
+        path: 'events/:type',
+        component: EventsListPageComponent
+      },
+      {
         path: 'event/:id',
         component: EventDetailPageComponent
       },

@@ -4,10 +4,11 @@
     font-family: $regular-font;
     color: $font-color-black;
     margin-bottom: 48px;
-    h2{
-      color: rgba(22, 28, 45, 0.68);
+    .heading{ 
       font-family: $regular-font;
+      font-size: 32px;
       font-weight: bold;
+      color: $font-light-black;
     }
     .breadcrumbs {
       margin-top: 20px;

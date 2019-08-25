@@ -9,7 +9,7 @@
     <!-- Bread crumbs End -->
     <!-- Tabs with list start -->
     <div class="uk-container">
-        <h2>{{selCategory=='' ? 'All' : dropDownList[selCategory].label}} Discussions</h2>
+        <h2 class="heading">{{selCategory=='' ? 'All' : dropDownList[selCategory].label}} Discussions</h2>
         <div class="uk-grid">
             <div class="uk-width-1-3@m">
                 <select class="uk-select" [ngModel]="selCategory" (change)="onTabChange($event.target.value)">
@@ -21,13 +21,10 @@
                 <div class="uk-grid uk-grid-small search-field">
                     <div class="uk-width-3-4@m">
                         <form class="uk-search uk-search-default">
-                            <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
-                                <button *ngIf="showReset" (click)="resetSearch()" class="reset-search">
-                                    <fa-icon [icon]="['fas', 'times-circle']"></fa-icon>
-                                </button>
-                                <button *ngIf="showReset" class="reset-link" (click)="resetSearch()">Reset&nbsp;&nbsp;</button>
+                            <span class="uk-search-icon-flip" [ngClass]="{ 'w-105':showReset}" uk-search-icon>
+                                <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)"><fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Reset&nbsp;&nbsp;</button>
                             </span>
-                            <input class="uk-search-input search-box" [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event.target.value)"
+                            <input class="uk-search-input search-box" [ngClass]="{ 'pr-105':showReset}" [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)"
                             required type="text" placeholder="Search..." name="search" />
                         </form>
                     </div>

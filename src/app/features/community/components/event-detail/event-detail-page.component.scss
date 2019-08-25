@@ -27,11 +27,23 @@
       font-weight: bold;
       color: $font-light-black;
     }
+    .heading2{
+      font-family: $regular-font;
+      font-size: 24px;
+      font-weight: bold;
+      color: $font-light-black;      
+    }
+    .label{
+      font-size: 15px;
+      color: $font-light-black;
+      margin-bottom: 5px;
+    }
     h3{
       font-size:18px;
     }
     .description{
       font-size:15px;
+      margin-top: 5px;
     }
     .textblue{
       color:$primary-txt-color;

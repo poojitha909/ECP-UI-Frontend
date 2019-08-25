@@ -8,7 +8,7 @@ import {MenuService} from '../../services/menu.service';
   templateUrl: './discussions-list-page.component.html',
   styleUrls: ['./discussions-list-page.component.scss']
 })
-export class DiscussionsListPageComponent implements OnInit {
+export class DiscussionsListPageComponent implements OnInit,OnDestroy {
 
   showReset: boolean;
   discussionsList: any[];
@@ -108,19 +108,27 @@ export class DiscussionsListPageComponent implements OnInit {
     this.router.navigate(['/community/discussions', this.selCategory]);
   }
 
-  onSearchChange(value) {
+  
+  
+  onSearchChange(event:any) {
+    const value = event.target.value;
     if (value !== "") {
       this.showReset = true
     } else {
       this.showReset = false;
     }
     this.searchParams.searchTxt = value;
+    if(event.key === "Enter"){
+      this.onSearch();    
+    }
   }
 
-  resetSearch() {
-    this.searchParams.searchTxt = "";
-    this.showReset = false;
-    this.onSearch();
+  resetSearch(event: any) {
+    if(event.clientX!=0){ // this is to make sure it is an event not raise by hitting enter key
+      this.searchParams.searchTxt = "";
+      this.showReset = false;
+      this.onSearch();
+    }
   }
 
   onSearch() {

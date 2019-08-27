@@ -49,11 +49,44 @@ export class DiscussionsListPageComponent implements OnInit,OnDestroy {
     if(this.route.snapshot.params['category']){
       this.selCategory = this.route.snapshot.params['category'];
     }
-    this.onSearch();
+    if(this.route.snapshot.params['searchTxt']){
+      this.searchParams.searchTxt = this.route.snapshot.params['searchTxt'];
+    }
+    this.getAllCategories();
   }
-  
-  getCategories(){
-    this.menuService.getMenus("564071623e60f5b66f62df27",this.searchParams.searchTxt).subscribe( (response:any) =>{
+
+  onSearchChange(event:any) {
+    const value = event.target.value;
+    if (value !== "") {
+      this.showReset = true
+    } else {
+      this.showReset = false;
+    }
+    this.searchParams.searchTxt = value;
+    if(event.key === "Enter"){
+      this.submitSearch();
+    }
+  }
+
+  submitSearch(){
+    this.router.navigate(['/community/discussions', {category: this.selCategory, searchTxt:  this.searchParams.searchTxt}]);
+  }
+
+  onTabChange(value) {
+    this.selCategory = value;
+    this.router.navigate(['/community/discussions', {category: this.selCategory, searchTxt:  this.searchParams.searchTxt}]);
+  }
+
+  resetSearch(event: any) {
+    if(event.clientX!=0){ // this is to make sure it is an event not raise by hitting enter key
+      this.searchParams.searchTxt = "";
+      this.showReset = false;
+      this.search();
+    }
+  }
+
+  getAllCategories(){
+    this.menuService.getMenus("564071623e60f5b66f62df27","").subscribe( (response:any) =>{
       const data = response;
       let tags = [];
       this.categoryList = {};
@@ -67,10 +100,30 @@ export class DiscussionsListPageComponent implements OnInit,OnDestroy {
             tags[i] = data[i].id + "_" + this.categoryList[ data[i].id ].tagIds.join("_"); // this si just to pass extrs key in tags which is menu item id
           }
         }
-        if(this.dropDownList === undefined){
-          this.dropDownList = JSON.parse(JSON.stringify(this.categoryList));
-        }
-        if(this.selCategory==""){
+        this.dropDownList = JSON.parse(JSON.stringify(this.categoryList));
+        this.search();
+      }
+    });
+  }
+
+
+  search() {
+    if(this.selCategory==""){
+      this.menuService.getMenus("564071623e60f5b66f62df27",this.searchParams.searchTxt).subscribe( (response:any) =>{
+        const data = response;
+        let tags = [];
+        this.categoryList = {};
+        if(data.length > 0){
+          for(let i in data){
+            this.categoryList[ data[i].id ] = {id: data[i].id, label: data[i].displayMenuName, tagIds:[], totalCount:0, discussionLatest:null};
+            if(data[i].tags){
+              for(let j in data[i].tags){
+                this.categoryList[ data[i].id ].tagIds[j] = data[i].tags[j].id; 
+              }
+              tags[i] = data[i].id + "_" + this.categoryList[ data[i].id ].tagIds.join("_"); // this si just to pass extrs key in tags which is menu item id
+            }
+          }
+
           this.discussionService.summary(tags.join(",")).subscribe((response:any) =>{
             for(let i in data){
               this.categoryList[data[i].id].totalCount = response.data[data[i].id].totalCount;
@@ -80,8 +133,13 @@ export class DiscussionsListPageComponent implements OnInit,OnDestroy {
             }
           });
         }
-      }
-    });
+      });
+    }
+    else{
+      this.searchParams.tags = this.dropDownList[this.selCategory].tagIds.join(",");
+      this.showDiscussions();
+      this.showDiscussionsCount();
+    }
   }
 
   showDiscussions(){
@@ -99,44 +157,4 @@ export class DiscussionsListPageComponent implements OnInit,OnDestroy {
       this.countData = response.data.z;
     });
   }
-
-  onTabChange(value) {
-    this.selCategory = value;
-    if(this.selCategory){
-      this.searchParams.tags = this.dropDownList[this.selCategory].tagIds.join(",");
-    }
-    this.router.navigate(['/community/discussions', this.selCategory]);
-  }
-
-  
-  
-  onSearchChange(event:any) {
-    const value = event.target.value;
-    if (value !== "") {
-      this.showReset = true
-    } else {
-      this.showReset = false;
-    }
-    this.searchParams.searchTxt = value;
-    if(event.key === "Enter"){
-      this.onSearch();    
-    }
-  }
-
-  resetSearch(event: any) {
-    if(event.clientX!=0){ // this is to make sure it is an event not raise by hitting enter key
-      this.searchParams.searchTxt = "";
-      this.showReset = false;
-      this.onSearch();
-    }
-  }
-
-  onSearch() {
-    this.getCategories();
-    if(this.selCategory){
-      this.showDiscussions();
-      this.showDiscussionsCount();
-    }
-  }
-
 }

@@ -17,7 +17,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     CoreModule
   ],
   exports: [
-    ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, PaginationComponent
+    ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, PaginationComponent, ServicesListComponent
   ]
 })
 export class SharedModule { }

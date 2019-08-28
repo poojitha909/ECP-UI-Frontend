@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EpcServiceService } from '../../epc-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-popular-search',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PopularSearchComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private ecpService: EpcServiceService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  getCategoryServices(category, catId) {
+    this.ecpService.serviceParam.category = category;
+    this.ecpService.serviceParam.catID = catId;
+    this.router.navigateByUrl('/services/all');
   }
 
 }

@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ServiceDetailCardComponent implements OnInit {
 
   @Input() service: any;
-  currentRate = 3;
+
 
   constructor() { }
 

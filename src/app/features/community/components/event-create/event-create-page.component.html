@@ -1,0 +1,83 @@
+<div class="event-create">
+        <!-- Bread crumbs Start -->
+        <div class="breadcrumbs">
+            <ul class="uk-breadcrumb">
+                <li routerLink="/community" class="fa fa-angle-right">Community</li>
+                <li routerLink="/community/events" class="fa fa-angle-right">Events</li>
+            </ul>
+        </div>
+        <!-- Bread crumbs End -->
+        <div class="uk-container">
+            <h2 class="heading">Create an Event</h2>
+            <hr/>
+            <form class="uk-form">
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-text">Pick a Category</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-select" name="category" [ngModel]="selCategory" (change)="onCategorySelect($event.target.value)" >
+                            <option value="">Select Category</option>
+                            <option *ngFor="let cat of categoryList | keyvalue" value="{{cat.key}}">{{cat.value.label}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label">Title</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" name="title" type="text" [(ngModel)]="title" placeholder="What’s the title of your event?">
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label">Description</label>
+                    <div class="uk-form-controls">
+                        <textarea class="uk-textarea" name="description" rows="5" [(ngModel)]="description" placeholder="Type event description here"></textarea>
+                    </div>
+                </div>
+                <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
+                    <div>
+                        <label class="uk-form-label">Address</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" name="address" [(ngModel)]="address" placeholder="Eg.: HSR layout, sector 6" />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="uk-form-label">Landmark</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" name="landmark" [(ngModel)]="landmark" placeholder="Eg.: Infront of Bhagvati Hospital" />
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
+                    <div>
+                        <label class="uk-form-label">Organiser Email address</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" name="orgEmail" [(ngModel)]="orgEmail" placeholder="abcd@xyz.com" />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="uk-form-label">Organiser Phone number</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" name="orgPhone" [(ngModel)]="orgPhone" placeholder="+91 99 9999 9999" />
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
+                    <div>
+                        <label class="uk-form-label" >Event Capacity</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" name="capacity" [(ngModel)]="capacity" placeholder="Eg. 75 People" />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="uk-form-label">Event Paticular</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" name="entrytype" [(ngModel)]="entrytype" placeholder="Free entry" />
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <button class="uk-button uk-button-default m-r-15" (click)="onReset()">Cancel & Go Back</button>
+                    <button class="uk-button uk-button-primary" (click)="onSubmit()">{{!!user ? 'Publish' : 'Signin to create Event'}}</button>
+                </div>
+            </form>
+        </div>
+    </div>

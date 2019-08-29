@@ -44,7 +44,7 @@
                     </div>
                     <div class="uk-card-footer">
                         <div class="uk-flex uk-flex-right">
-                            <button class="btn-primary" (click)="addComment()">Submit Comment</button>
+                            <button class="btn-primary" (click)="addComment()">{{!!user ? 'Submit Comment' : 'Signin to Comment'}}</button>
                         </div>
                     </div>
                 </div>

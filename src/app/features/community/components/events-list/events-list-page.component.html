@@ -27,8 +27,8 @@
         </div>
         <ul id="eventtab" uk-tab>
           <li (click)="onTabChange(0)" ><a href="#">All Events ({{countData.all}})</a></li>
-          <li (click)="onTabChange(1)" ><a href="#">Outdoor Events ({{countData.outdoor}})</a></li>
-          <li (click)="onTabChange(2)" ><a href="#">Indoor Events({{countData.indoor}})</a></li>
+          <li (click)="onTabChange(-1)" ><a href="#">Upcoming Events ({{countData.upcoming}})</a></li>
+          <li (click)="onTabChange(1)" ><a href="#">Past Events({{countData.past}})</a></li>
         </ul>
         <ul class="uk-switcher uk-margin">
           <li>
@@ -46,17 +46,17 @@
                         <div>Create an Event</div>
                     </div>
                 </div>
-                <app-event-summary *ngFor="let event of eventsList" [event]="event" [eventType]="0"></app-event-summary>
+                <app-event-summary *ngFor="let event of eventsList" [event]="event" [isPast]="0"></app-event-summary>
             </div>
           </li>
           <li>
             <div class="uk-grid uk-grid-large uk-flex-left uk-text-center uk-child-width-1-3@m">
-                <app-event-summary *ngFor="let event of eventsList" [event]="event" [eventType]="1"></app-event-summary>
+                <app-event-summary *ngFor="let event of eventsList" [event]="event" [isPast]="-1"></app-event-summary>
             </div>
           </li>
           <li>
             <div class="uk-grid uk-grid-large uk-flex-left uk-text-center uk-child-width-1-3@m">
-                <app-event-summary *ngFor="let event of eventsList" [event]="event" [eventType]="2"></app-event-summary>
+                <app-event-summary *ngFor="let event of eventsList" [event]="event" [isPast]="1"></app-event-summary>
             </div>
           </li>
         </ul>

@@ -18,7 +18,7 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
     s: number,
     searchTxt: string,
     eventType: number,
-    startDatetime: number
+    pastEvents: number
   };
   paramsSubs: any;
 
@@ -31,7 +31,7 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
       s: 18,
       searchTxt: "",
       eventType: 0,
-      startDatetime: (new Date()).getTime()
+      pastEvents: 0
     }
     this.paramsSubs = this.route.params.subscribe(params => {
       this.initiate();
@@ -47,7 +47,7 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
       s: 18,
       searchTxt: "",
       eventType: 0,
-      startDatetime: (new Date()).getTime()
+      pastEvents: 0
     }
     if(this.route.snapshot.params['type'] !== undefined){
       this.searchParams.eventType = this.route.snapshot.params['type'];
@@ -68,7 +68,7 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
   }
 
   showEventsCount(){
-    this.eventService.searchEventsCount({"searchTxt": this.searchParams.searchTxt,"eventType":0,"startDatetime":this.searchParams.startDatetime}).subscribe( (response:any) =>{
+    this.eventService.searchEventsCount({"searchTxt": this.searchParams.searchTxt,"eventType":0}).subscribe( (response:any) =>{
       this.countData = response.data;
     });
   }
@@ -90,9 +90,10 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
   }
 
   onTabChange(value) {
-    this.searchParams.eventType = value;
+    this.searchParams.pastEvents = value;
     this.showEvents();
   }
+
   onSearchChange(event: any) {
     const value = event.target.value;
     if (value !== "") {

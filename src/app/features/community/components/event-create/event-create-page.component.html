@@ -14,9 +14,10 @@
                 <div class="uk-margin">
                     <label class="uk-form-label" for="form-stacked-text">Pick a Category</label>
                     <div class="uk-form-controls">
-                        <select class="uk-select" name="category" [ngModel]="selCategory" (change)="onCategorySelect($event.target.value)" >
-                            <option value="">Select Category</option>
-                            <option *ngFor="let cat of categoryList | keyvalue" value="{{cat.key}}">{{cat.value.label}}</option>
+                        <select class="uk-select" name="category" [(ngModel)]="eventType" >
+                            <option value="0">Select Category</option>
+                            <option value="1">Outdoor</option>
+                            <option value="2">Indoor</option>
                         </select>
                     </div>
                 </div>
@@ -70,7 +71,7 @@
                     <div>
                         <label class="uk-form-label">Event Paticular</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" name="entrytype" [(ngModel)]="entrytype" placeholder="Free entry" />
+                            <input class="uk-input" type="number" name="entryFee" [(ngModel)]="entryFee" placeholder="Free entry" />
                         </div>
                     </div>
                 </div>

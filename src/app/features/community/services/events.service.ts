@@ -12,10 +12,6 @@ export class EventService {
 
     constructor(private http: HttpClient) { }
 
-    // getEvents (): Observable<any[]> {
-    //     return this.http.get<any[]>(this.eventUrl+ "/page");
-    // }
-
     searchEvents(searchPageParams: any): Observable<any[]> {
         let queryParams = "";
         Object.keys(searchPageParams)
@@ -51,5 +47,9 @@ export class EventService {
     getEvent(eventId: string): Observable<any[]> {
         let queryParams = "eventId=" + eventId;
         return this.http.get<any[]>(`${this.eventUrl}?${queryParams}`);
+    }
+
+    addEvents(event: any): Observable<any[]> {
+        return this.http.post<any[]>(`${this.eventUrl}`,{...event});
     }
 }

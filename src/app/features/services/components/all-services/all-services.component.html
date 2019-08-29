@@ -2,7 +2,7 @@
   <div class="uk-text-center">
 
     <ul class="uk-breadcrumb uk-flex-center">
-      <li><a href="">Home</a></li>
+      <li><a routerLink="/services">Home</a></li>
       <li><span>Services</span></li>
     </ul>
     <h3>
@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="uk-card-body uk-text-center service-type">
-          <a>Caretakers & Nurses</a>
+          <a (click)="getCategoryServices('Patient Care Taker Services','12087781')">Caretakers & Nurses</a>
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="uk-card-body uk-text-center service-type">
-          <a>Home for the Elders</a>
+          <a (click)="getCategoryServices('Home Nursing Services','10250587')">Home for the Elders</a>
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@
           </div>
         </div>
         <div class="uk-card-body uk-text-center service-type">
-          <a>Doctor</a>
+          <a (click)="getCategoryServices('Clinics','10101647')">Doctor</a>
         </div>
       </div>
     </div>
@@ -119,15 +119,11 @@
 
       <!-- Service list  -->
       <div class="m-t-20">
-
-        <app-service-detail-card></app-service-detail-card>
-        <app-service-detail-card></app-service-detail-card>
-        <app-service-detail-card></app-service-detail-card>
-        <app-service-detail-card></app-service-detail-card>
-
-        <app-service-detail-card></app-service-detail-card>
+        <app-services-list [services]="services"></app-services-list>
       </div>
-      <hr>
+      <app-pagination *ngIf="services" [totalRecords]="services.length" [currentPage]="ecpService.serviceParam.pageNo"
+        [perPage]="ecpService.serviceParam.max">
+      </app-pagination>
     </div>
 
   </div>

@@ -6,12 +6,6 @@ import { environment } from 'src/environments/environment';
 import { ApiConstants } from 'src/app/api.constants';
 import { PageParam } from 'src/app/core';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-  })
-};
-
 @Injectable({
   providedIn: 'root'
 })
@@ -32,7 +26,7 @@ export class HomeService {
         }
       });
 
-    return this.http.get(`${ApiConstants.GET_SERVICES}?${queryParams}`, httpOptions);
+    return this.http.get(`${ApiConstants.GET_SERVICES}?${queryParams}`);
   }
 
 }

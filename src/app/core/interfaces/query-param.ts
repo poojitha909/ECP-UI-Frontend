@@ -4,3 +4,10 @@ export interface PageParam {
     s: number,
     term: string
 }
+
+export interface JDserviceParam {
+    category: string;
+    catID: string;
+    max?: number;
+    pageNo?: number;
+}

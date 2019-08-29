@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
 import {EventService} from '../../services/events.service';
 import {MenuService} from '../../services/menu.service';
 import {Router} from "@angular/router";
@@ -12,31 +11,35 @@ import {StorageHelperService} from "../../../../core/services/storage-helper.ser
 })
 export class EventCreatePageComponent implements OnInit {
 
-  selCategory: string;
   categoryList: any[];
   title: string;
   description: string;
+  datetime: Date;
   address: string;
   landmark: string;
   orgEmail: string;
   orgPhone: string;
   capacity: string;
-  entrytype: string;
+  entryFee: string;
+  eventType: string;
+  languages: string;
+  organiser: string;
   user: any;
 
-  constructor(private route:ActivatedRoute,private router: Router, private eventService: EventService, private menuService: MenuService, private store: StorageHelperService) { }
+  constructor(private router: Router, private eventService: EventService, private menuService: MenuService, private store: StorageHelperService) { }
 
   ngOnInit() {
-    this.selCategory = "";
     this.categoryList = [];
     this.title = "";
     this.description = "";
+    this.datetime = new Date();
     this.address = "";
     this.landmark = "";
     this.orgEmail = "";
     this.orgPhone = "";
     this.capacity = "";
-    this.entrytype = "";
+    this.eventType = "";
+    this.entryFee = "";
     this.user = this.store.retrieve("ECP-USER");
     if(this.user){
       this.user = JSON.parse(this.user);
@@ -44,7 +47,6 @@ export class EventCreatePageComponent implements OnInit {
     let event = this.store.retrieve("new-event");
     if(event){
       event = JSON.parse(event);
-      this.selCategory = event.selCategory;
       this.title = event.title;
       this.description = event.description;
       this.address = event.address;
@@ -52,13 +54,13 @@ export class EventCreatePageComponent implements OnInit {
       this.orgEmail = event.orgEmail;
       this.orgPhone = event.orgPhone;
       this.capacity = event.capacity;
-      this.entrytype = event.entrytype;
+      this.eventType = event.entryType;
+      this.entryFee = event.entryFee;
       this.store.clear("new-discuss");
     }
   }
 
   onReset(){
-    this.selCategory = "";
     this.title = "";
     this.description = "";
     this.address = "";
@@ -66,40 +68,54 @@ export class EventCreatePageComponent implements OnInit {
     this.orgEmail = "";
     this.orgPhone = "";
     this.capacity = "";
-    this.entrytype = "";
+    this.eventType = "";
+    this.entryFee = "";
   }
   
   onSubmit(){
     if(!this.user){
     
       this.store.store("new-event", JSON.stringify(
-        { selCategory: this.selCategory,
-          title: this.title,
+        { title: this.title,
           description: this.description,
           address: this.address,
           landmark: this.landmark,
           orgEmail: this.orgEmail,
           orgPhone: this.orgPhone,
           capacity: this.capacity,
-          entrytype: this.entrytype}
+          entryType: this.eventType,
+          entryFee: this.entryFee,
+          languages: this.languages,
+          organiser: this.organiser
+        }
       ));
       this.router.navigate(['/user/signin']);
       return;
     }
-
-    if(this.selCategory != "" && this.title!= "" && this.description!= ""){
-      // this.discussionService.addDiscussion("P", this.description, this.title, this.user.id, this.user.userName, 
-      //       this.categoryList[ this.selCategory ].tags
-      //       ,[ this.categoryList[ this.selCategory ].id ],
-      //       0)
-      //   .subscribe( (response:any) => {
-      //     if(response.data.id != ""){
-      //       this.router.navigate(['/community/discussion', response.data.id]);
-      //     }
-      //     else{
-      //       alert("Oops! something wrong happen, please try again.");            
-      //     }
-      //   });
+    
+    if(this.eventType != "" && this.title!= "" && this.description!= ""){
+      this.eventService.addEvents({
+        "title": this.title,
+        "datetime": this.datetime,
+        "description": this.description,
+        "capacity": this.capacity,
+        "entryFee": this.entryFee,
+        "eventType": this.eventType,
+        "status": 1,
+        "address": this.address,
+        "landmark": this.landmark,
+        "languages": this.languages,
+        "organiser": this.organiser,
+        "orgPhone": this.orgPhone,
+        "orgEmail": this.orgEmail
+        }).subscribe( (response:any) => {
+        if(response.data.id != ""){
+          this.router.navigate(['/community/events']);
+        }
+        else{
+          alert("Oops! something wrong happen, please try again.");            
+        }
+      });
     }
     else{
       alert("All fields are required, please fill all fields.");

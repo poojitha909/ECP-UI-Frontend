@@ -14,7 +14,7 @@
             <div class="uk-margin">
                 <label class="uk-form-label" for="form-stacked-text">Pick a Category</label>
                 <div class="uk-form-controls">
-                    <select class="uk-select" name="category" id="form-stacked-select" (change)="onCategorySelect($event.target.value)">
+                    <select class="uk-select" name="category" id="form-stacked-select" [ngModel]="selCategory" (change)="onCategorySelect($event.target.value)" >
                         <option value="">Select Category</option>
                         <option *ngFor="let cat of categoryList | keyvalue" value="{{cat.key}}">{{cat.value.label}}</option>
                     </select>
@@ -34,7 +34,7 @@
             </div>
             <div class="uk-margin">
                 <button class="uk-button uk-button-default m-r-15" (click)="onReset()">Cancel & Go Back</button>
-                <button class="uk-button uk-button-primary" (click)="onSubmit()">Start a Discussion</button>
+                <button class="uk-button uk-button-primary" (click)="onSubmit()">{{!!user ? 'Start a Discussion' : 'Signin to create this Discussion'}}</button>
             </div>
         </form>
     </div>

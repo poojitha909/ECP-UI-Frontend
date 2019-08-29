@@ -10,6 +10,7 @@ import { DiscussionSummaryComponent } from './components/discussion-summary/disc
 import { DiscussionSummaryCatComponent } from './components/discussion-summary-cat/discussion-summary-cat.component';
 import { EventSummaryComponent } from './components/event-summary/event-summary.component';
 import { EventDetailPageComponent } from './components/event-detail/event-detail-page.component';
+import { EventCreatePageComponent } from './components/event-create/event-create-page.component';
 import { DiscussionDetailPageComponent } from './components/discussion-detail/discussion-detail-page.component';
 import { PaginationComponent } from '../../shared/pagination/pagination.component';
 import { DiscussionNoRecordComponent } from './components/discussion-no-record/discussion-no-record.component';
@@ -24,6 +25,7 @@ import { TimeAgoPipe } from '../../shared/timeago.pipe';
         CommunityPageComponent,
         DiscussionNoRecordComponent,
         EventsListPageComponent,
+        EventCreatePageComponent,
         DiscussionDetailPageComponent,
         DiscussionCreatePageComponent,
         DiscussionSummaryComponent,

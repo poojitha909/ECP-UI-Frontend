@@ -23,7 +23,7 @@ const routes: Routes = [
         component: EventsListPageComponent
       },
       {
-        path: 'events/:type',
+        path: 'events/:past',
         component: EventsListPageComponent
       },
       {

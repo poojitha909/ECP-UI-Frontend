@@ -33,6 +33,25 @@
       font-weight: bold;
       color: $font-light-black;      
     }
+    .no-top-m{
+      margin-top: 0pc !important;
+    }
+    .outdoor-icon{
+      background-image: url(/assets/images/outdoor.svg);
+      background-size: contain;
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      float: right;
+  }
+  .indoor-icon{
+      background-image: url(/assets/images/indoor.svg);
+      background-size: contain;
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      float: right;
+  }
     .label{
       font-size: 15px;
       color: $font-light-black;

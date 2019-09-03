@@ -8,8 +8,17 @@
     </div>
     <!-- Bread crumbs End -->
     <div class="uk-container">
-        <h2 class="heading">{{event.title}}</h2>
         <div class="uk-grid uk-grid-large">
+            <div class="uk-width-3-4@m">
+                <h2 class="heading">{{event.title}}</h2>
+            </div>
+            <div class="uk-width-1-4@m">
+                <a href="" *ngIf="event?.eventType==1" class="uk-margin-small-right outdoor-icon" title="Outdoor Event"></a>
+                <a href="" *ngIf="event?.eventType==2" class="uk-margin-small-right indoor-icon" title="Indoor Event"></a>
+            </div>
+        </div>
+        
+        <div class="no-top-m uk-grid uk-grid-large">
             <div class="uk-width-1-3@m">
                 <div class="category-box">
                     <h3>{{event.organiser}}</h3>

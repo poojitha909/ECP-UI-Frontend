@@ -17,6 +17,7 @@ import { DiscussionNoRecordComponent } from './components/discussion-no-record/d
 import { EventNoRecordComponent } from './components/event-no-record/event-no-record.component';
 import { EllipsisPipe } from '../../shared/ellipsis.pipe';
 import { TimeAgoPipe } from '../../shared/timeago.pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { TimeAgoPipe } from '../../shared/timeago.pipe';
   imports: [
         CommonModule,
         CommunityRoutingModule,
-        CoreModule
+        CoreModule,
+        NgxPaginationModule
     ]
 })
 export class CommunityModule { }

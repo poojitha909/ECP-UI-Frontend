@@ -21,6 +21,9 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
     pastEvents: number
   };
   paramsSubs: any;
+  totalRecords: number;
+  currentPage: number;
+  perPage: number;
 
   constructor(private route:ActivatedRoute,private eventService: EventService) { }
 
@@ -44,16 +47,31 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
   initiate(){
     this.searchParams = {
       p: 0,
-      s: 18,
+      s: 4,
       searchTxt: "",
       eventType: 0,
       pastEvents: 0
     }
-    if(this.route.snapshot.params['type'] !== undefined){
-      this.searchParams.eventType = this.route.snapshot.params['type'];
+    
+    this.totalRecords = 0;
+    this.currentPage = this.searchParams.p;
+    this.perPage = this.searchParams.s; 
+    
+    if(this.route.snapshot.params['past'] !== undefined){
+      this.searchParams.pastEvents = this.route.snapshot.params['past'];
     }
     this.onSearch();
-    setTimeout( ()=> {UIkit.tab("#eventtab").show(this.searchParams.eventType);},500);
+    setTimeout( ()=> {
+      if(this.searchParams.pastEvents == -1){
+        UIkit.tab("#eventtab").show(1);
+      }
+      else if(this.searchParams.pastEvents == 1){
+        UIkit.tab("#eventtab").show(2);
+      }
+      else if(this.searchParams.pastEvents == 0){
+        UIkit.tab("#eventtab").show(0);
+      }
+    },500);
   }
 
   showEvents(){
@@ -63,6 +81,9 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
       this.eventsList = [];
       if(data.content){
         this.eventsList = data.content;
+        this.totalRecords = data.total;
+        this.currentPage = this.searchParams.p;
+        this.perPage = this.searchParams.s; 
       }
     });
   }

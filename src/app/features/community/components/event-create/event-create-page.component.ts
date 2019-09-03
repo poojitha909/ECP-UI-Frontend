@@ -3,6 +3,7 @@ import {EventService} from '../../services/events.service';
 import {MenuService} from '../../services/menu.service';
 import {Router} from "@angular/router";
 import {StorageHelperService} from "../../../../core/services/storage-helper.service";
+declare var UIKit;
 
 @Component({
   selector: 'app-event-create',
@@ -13,8 +14,10 @@ export class EventCreatePageComponent implements OnInit {
 
   categoryList: any[];
   title: string;
+  date: string;
+  startTime: string;
+  duration: string;
   description: string;
-  datetime: Date;
   address: string;
   landmark: string;
   orgEmail: string;
@@ -32,7 +35,9 @@ export class EventCreatePageComponent implements OnInit {
     this.categoryList = [];
     this.title = "";
     this.description = "";
-    this.datetime = new Date();
+    this.date = "";
+    this.startTime = "";
+    this.duration = "";
     this.address = "";
     this.landmark = "";
     this.orgEmail = "";
@@ -40,6 +45,8 @@ export class EventCreatePageComponent implements OnInit {
     this.capacity = "";
     this.eventType = "";
     this.entryFee = "";
+    this.languages = "";
+    this.organiser = "";
     this.user = this.store.retrieve("ECP-USER");
     if(this.user){
       this.user = JSON.parse(this.user);
@@ -48,6 +55,9 @@ export class EventCreatePageComponent implements OnInit {
     if(event){
       event = JSON.parse(event);
       this.title = event.title;
+      this.date = event.date;
+      this.startTime = event.startTime;
+      this.duration = event.duration;
       this.description = event.description;
       this.address = event.address;
       this.landmark = event.landmark;
@@ -56,12 +66,17 @@ export class EventCreatePageComponent implements OnInit {
       this.capacity = event.capacity;
       this.eventType = event.entryType;
       this.entryFee = event.entryFee;
+      this.languages = "";
+      this.organiser = "";
       this.store.clear("new-discuss");
     }
   }
 
   onReset(){
     this.title = "";
+    this.date = "";
+    this.startTime = "";
+    this.duration = "";
     this.description = "";
     this.address = "";
     this.landmark = "";
@@ -70,6 +85,8 @@ export class EventCreatePageComponent implements OnInit {
     this.capacity = "";
     this.eventType = "";
     this.entryFee = "";
+    this.languages = "";
+    this.organiser = "";
   }
   
   onSubmit(){
@@ -77,6 +94,9 @@ export class EventCreatePageComponent implements OnInit {
     
       this.store.store("new-event", JSON.stringify(
         { title: this.title,
+          date: this.date,
+          startTime: this.startTime,
+          duration: this.duration,
           description: this.description,
           address: this.address,
           landmark: this.landmark,
@@ -86,7 +106,7 @@ export class EventCreatePageComponent implements OnInit {
           entryType: this.eventType,
           entryFee: this.entryFee,
           languages: this.languages,
-          organiser: this.organiser
+          organiser: this.organiser,
         }
       ));
       this.router.navigate(['/user/signin']);
@@ -96,7 +116,8 @@ export class EventCreatePageComponent implements OnInit {
     if(this.eventType != "" && this.title!= "" && this.description!= ""){
       this.eventService.addEvents({
         "title": this.title,
-        "datetime": this.datetime,
+        "datetime": this.date + "T" + this.startTime + "+05:30",
+        "duration": this.duration,
         "description": this.description,
         "capacity": this.capacity,
         "entryFee": this.entryFee,
@@ -121,5 +142,4 @@ export class EventCreatePageComponent implements OnInit {
       alert("All fields are required, please fill all fields.");
     }
   }
-
 }

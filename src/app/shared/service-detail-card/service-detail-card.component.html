@@ -2,8 +2,8 @@
   <div class="uk-card-media-left uk-width-1-5@m uk-width-1-3@s p-16">
     <img [src]="service?.thumbnail" width="152" height="152" alt="">
   </div>
-  
-  <div class="uk-card-body uk-width-expand p-16">
+
+  <div class="uk-card-body uk-width-expand p-16" routerLink="/services/detail">
     <h4 class="font-regular font-weight-600 m-0">{{service?.name}}</h4>
     <div>
       <ngb-rating [rate]="service?.compRating" [readonly]="true" [max]="5">
@@ -19,8 +19,8 @@
     </div>
     <div class="m-t-15">
       <p class="m-0"><span>{{ service?.city}}</span></p>
-      <p class="m-0 font-regular"><a href="#" class="">{{ service?.type}}</a></p>
+      <p class="m-0 font-regular"><a href="javascript:void(0)" class="">{{ service?.type}}</a></p>
     </div>
   </div>
-  
+
 </div>

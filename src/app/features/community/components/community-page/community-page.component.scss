@@ -176,3 +176,15 @@
     float: right;
     margin: 13px;
 }
+
+.community-banner{
+  min-height: 224px;
+  margin: 24px 0 48px 0;
+  border-radius: 8px;
+  font-family: $regular-font;
+  h1{
+    font-family: $regular-font;
+    font-size: 32px;
+    font-weight: 600;
+  }
+}

@@ -20,6 +20,9 @@ export class DiscussionDetailPageComponent implements OnInit {
   urltxt:string;
   replies: any[];
   user: any;
+  replyId: string;
+  replyParentUser: string;
+  replyParentText: string;
 
   constructor(private router: Router,private route:ActivatedRoute,private discussionService: DiscussionService, private menuService: MenuService, private store: StorageHelperService) { }
   
@@ -30,6 +33,9 @@ export class DiscussionDetailPageComponent implements OnInit {
       this.category = this.route.snapshot.params['category'];
     }
     this.commentTxt = "";
+    this.replyId = "";
+    this.replyParentText = "";
+    this.replyParentUser = "";
     this.user = this.store.retrieve("ECP-USER");
     let comment = this.store.retrieve("new-d-comment");
     if(comment){
@@ -49,10 +55,11 @@ export class DiscussionDetailPageComponent implements OnInit {
          this.router.navigate(['/user/signin']);
          return;
       }
-      this.discussionService.addComment( {type:0}, this.discussionId, "", this.commentTxt).subscribe( (response:any) =>{
+      this.discussionService.addComment( {type:0}, this.discussionId, this.replyId, this.commentTxt).subscribe( (response:any) =>{
         if(response.data.replies){
           this.commentTxt = "";
-          this.replies = response.data.replies;
+          let replies = response.data.replies;
+          this.setReplies(replies);
         }
       });
     }
@@ -60,6 +67,19 @@ export class DiscussionDetailPageComponent implements OnInit {
       alert("Please write comment first!");
     }
   }
+
+  recursiveReplies(reply,parentText,parentUser){
+    reply.parentText = parentText;
+    reply.parentUser = parentUser;
+    this.replies[this.replies.length] = reply;
+
+    if(reply.replies && reply.replies.length > 0){
+      for(let rep of reply.replies){
+        this.recursiveReplies(rep,reply.text,reply.userName);
+      }
+    }
+  }
+
   likeDiscussion(){
     this.discussionService.likeDiscussionReply(this.discussionId).subscribe( (response:any) =>{
       if(response.data.id){
@@ -90,8 +110,30 @@ export class DiscussionDetailPageComponent implements OnInit {
     this.discussionService.getDiscussion(this.discussionId).subscribe( (response:any) =>{
       if(response.data.discuss){
         this.discussion = response.data.discuss;
-        this.replies = response.data.replies;
+        let replies = response.data.replies;
+        this.setReplies(replies);
       }
     });
+  }
+
+  setReplies(replies){
+    this.replies = [];
+    for(let ri in replies){
+      this.recursiveReplies(replies[ri],"","");
+    }
+    this.replies.sort(  (a,b) => {  
+      if (a['createdAt'] < b['createdAt']) {  
+          return 1;  
+      } else if (a['createdAt'] > b['createdAt']) {  
+          return -1;  
+      }  
+      return 0;
+    });
+  }
+
+  setReplyId(id,user,text){
+    this.replyId = id;
+    this.replyParentUser = user;
+    this.replyParentText = text;
   }
 }

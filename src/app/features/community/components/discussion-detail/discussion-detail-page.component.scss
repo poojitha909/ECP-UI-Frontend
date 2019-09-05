@@ -24,6 +24,17 @@
     .textblue{
       color:$primary-txt-color;
     }
+    .reply_reply{
+      padding: 10px 0px 10px 15px;
+      background-color: #E4EEFB;
+      border-radius: 4px;
+      color:$font-light-black;
+    }
+    .reply_reply_inner{
+      border-left:4px solid #D7E0EF;
+      padding: 0px 10px 0px 10px;
+      color: $font-color-black;
+    }
     .comment .uk-card-body{
       padding-top: 20px;
     }

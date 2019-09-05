@@ -1,0 +1,126 @@
+@import "../../../../../assets/css/variables.scss";
+
+.uk-breadcrumb 
+{
+    font-family:"HKGroteskRegular";
+    & > :nth-child(n+2):not(.uk-first-column)::before{
+        content: ">";
+        margin: 0 5px;
+        color: #000;
+    } 
+    
+    & > * > *{
+        
+        font-size: 18px;
+        color: #1A73E8;
+    }
+}
+h3{
+    margin: 0px;
+    font-family:"HKGroteskRegular";
+    font-size: 32px;
+    color: #151c2c;
+}
+
+.category-box{
+    border: 1px solid #D7E0EF;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 16px;    
+    .uk-badge{
+        background: #D9DADC;
+        color: #000;
+        border-radius:5px;
+    }
+}
+.whatapp-icon{
+    background:#009487;
+    color:#fff;
+}
+
+.fb-icon{
+    background:#2a415e;
+    color:#fff;
+}
+
+.email-icon{
+    background:#1772eb;
+    color:#fff;
+
+}
+
+.info{
+    .lable{
+        color: #151c2c;
+    }
+
+}
+.review-form{
+    input,textarea,select{
+        border-radius: 4px;
+    }
+    button{
+        background-color: $primary-btn;
+        border-radius: 4px;
+        font-size: 18px;
+        border: none;
+        color: #fff;
+        text-transform: none;
+        padding: 2px 30px;
+        &:focus{
+          color: $primary-btn;
+          background-color: #fff;
+        }
+    }
+}
+.details-box{
+    border: 1px solid #D7E0EF;
+    box-sizing: border-box;
+    border-radius: 4px;
+    img{
+        width: 100%;
+        height:126px;
+    }
+    button{
+        background-color: $primary-btn;
+        border-radius: 4px;
+        font-size: 18px;
+        border: none;
+        color: #fff;
+        text-transform: none;
+        padding: 5px 30px;
+        &:focus{
+          color: $primary-btn;
+          background-color: #fff;
+        }
+    }
+    .verified{
+        position: relative;
+        button{
+        right: 10px;    
+        position: absolute;
+        background-color: $primary-btn;
+        border-radius: 4px;
+        color: #fff;
+        padding: 7px 10px;
+        display: flex;
+        top: 10px;
+        span{
+            font-size: 18px;
+        }
+        }
+    }
+}
+
+.review-avatar{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.replay-link{
+    a{
+        color: #1A73E8; 
+    }
+}
+

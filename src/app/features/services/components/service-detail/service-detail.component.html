@@ -1,0 +1,253 @@
+<div class="uk-section">
+
+
+    <ul class="uk-breadcrumb">
+        <li><a routerLink="/services">Home</a></li>
+        <li><span>Services</span></li>
+    </ul>
+    <h3>
+        All Services
+    </h3>
+    <hr />
+
+    <div uk-grid>
+
+        <div class="uk-width-1-3@m">
+
+            <!-- Conatact Service details -->
+            <div class="details-box">
+
+                <div class="verified">
+                    <img src="assets/images/test-detail.png" />
+                    <button><span class="verified-icon-w"></span></button>
+                </div>
+                <div class="uk-text-center">
+                    <p class="m-t-20 m-b-10 uk-text-bold font-regular">Devendra Yadav</p>
+                    <p class="m-t-0">Home Nurse</p>
+                    <button class="uk-button uk-button-default">Contact Devendra Yadav</button>
+                    <div class="m-t-10 m-b-20">
+                        <a>
+                            <fa-icon icon="flag" class="m-r-5"></fa-icon> Report this vendor
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Socailmedia share box  -->
+            <div class="m-t-30 category-box">
+                <div class="m-b-20">
+                    <a href="" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a> <a>
+                        Share via
+                        Whatsapp</a>
+                </div>
+
+                <div class="m-b-20">
+                    <a href="" class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail"> </a> <a> Share via
+                        Email</a>
+                </div>
+
+                <div>
+                    <a href="" class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a>
+                        Share via
+                        Facebook</a>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="uk-width-expand@m">
+            <!-- About -->
+            <div>
+                <h1 class="font-regular-24 font-weight-600">About</h1>
+                <p>
+                    BPTh/BPT, MPTh/MPT - Musculoskeletal Physiotherapy, MD - Alternate Medicine, Diploma in Acupuncture.
+                    20 years experience overall
+                </p>
+            </div>
+            <hr />
+
+            <!-- service informations -->
+            <div class="info">
+                <h1 class="font-regular-24 font-weight-600">Details</h1>
+                <div uk-grid>
+                    <div class="uk-width-2-5@s">
+
+                        <p class="font-regular-15 m-b-10 lable">Email</p>
+                        <p class="font-regular m-t-0">devendra.yadav@gmail.com</p>
+
+                        <p class="font-regular-15 m-b-10 lable">Email</p>
+                        <p class="font-regular m-t-0">devendra.yadav@gmail.com</p>
+
+                        <p class="font-regular-15 m-b-10 lable">Email</p>
+                        <p class="font-regular m-t-0">devendra.yadav@gmail.com</p>
+                    </div>
+
+                    <div>
+                        <p class="font-regular-15 m-b-10 lable">Email</p>
+                        <p class="font-regular m-t-0">devendra.yadav@gmail.com</p>
+
+                        <p class="font-regular-15 m-b-10 lable">Email</p>
+                        <p class="font-regular m-t-0">devendra.yadav@gmail.com</p>
+
+                        <p class="font-regular-15 m-b-10 lable">Email</p>
+                        <p class="font-regular m-t-0">devendra.yadav@gmail.com</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Write Review Form -->
+            <div class="m-t-30">
+                <div class="category-box">
+                    <h1 class="font-regular-24 font-weight-600">Write a Review</h1>
+                    <hr />
+                    <form class="uk-form-stacked review-form">
+
+                        <div class="uk-child-width-expand " uk-grid>
+                            <div>
+                                <div class="uk-margin">
+                                    <label class="uk-form-label" for="form-stacked-text">Text</label>
+                                    <div class="uk-form-controls">
+                                        <input class="uk-input" id="form-stacked-text" type="text"
+                                            placeholder="Some text...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="uk-margin">
+                                    <label class="uk-form-label" for="form-stacked-select">Select</label>
+                                    <div class="uk-form-controls">
+                                        <select class="uk-select" id="form-stacked-select">
+                                            <option>Option 01</option>
+                                            <option>Option 02</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-stacked-text">Text</label>
+                            <div class="uk-form-controls">
+                                <textarea class="uk-input min-h-200" id="form-stacked-text"
+                                    placeholder="Some text..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="uk-text-right">
+                            <button class="uk-button uk-button-default">Post Review</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Reviews Section-->
+            <div class="m-t-30">
+                <h1 class="font-regular-24 font-weight-600"> Reviews (29)</h1>
+
+                <!-- Reviews -->
+                <div class="m-t-30">
+                    <div uk-grid>
+                        <div class="uk-width-expand">
+                            <div class="child-width-auto" uk-grid>
+                                <div>
+                                    <img class="review-avatar" src="assets/images/discussion-user.png" />
+                                </div>
+                                <div class="p-l-20">
+                                    <p class="font-regular m-0">Dubbal Singh</p>
+                                    <div>
+                                        <ngb-rating rate="4" [readonly]="true" [max]="5">
+                                            <ng-template let-fill="fill" let-index="index">
+                                                <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                                            </ng-template>
+                                        </ngb-rating>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="font-regular-15">3 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="m-t-30">
+                        <p class="font-regular">I need to tell this to the world that this is the best and right place
+                            for people who are
+                            suffering with any type of physical pain</p>
+                    </div>
+                    <div class="m-t-30 m-b-30">
+                        <div uk-grid>
+                            <div class="uk-width-expand">
+                                <span>
+                                    <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5"></fa-icon> 17
+                                </span>
+                                <span class="m-l-5">
+                                    <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5"></fa-icon> 20
+                                </span>
+                            </div>
+                            <div class="replay-link">
+                                <a class="font-regular">
+                                    <fa-icon [icon]="['far', 'comments']" class="m-r-5"></fa-icon> Reply
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+                <!-- Reviews -->
+                <div class="m-t-30">
+                    <div uk-grid>
+                        <div class="uk-width-expand">
+                            <div class="child-width-auto" uk-grid>
+                                <div>
+                                    <img class="review-avatar" src="assets/images/discussion-user.png" />
+                                </div>
+                                <div class="p-l-20">
+                                    <p class="font-regular m-0">Dubbal Singh</p>
+                                    <div>
+                                        <ngb-rating rate="4" [readonly]="true" [max]="5">
+                                            <ng-template let-fill="fill" let-index="index">
+                                                <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                                            </ng-template>
+                                        </ngb-rating>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="font-regular-15">3 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="m-t-30">
+                        <p class="font-regular">I need to tell this to the world that this is the best and right place
+                            for people who are
+                            suffering with any type of physical pain</p>
+                    </div>
+                    <div class="m-t-30 m-b-30">
+                        <div uk-grid>
+                            <div class="uk-width-expand">
+                                <span>
+                                    <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5"></fa-icon> 17
+                                </span>
+                                <span class="m-l-5">
+                                    <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5"></fa-icon> 20
+                                </span>
+                            </div>
+                            <div class="replay-link">
+                                <a class="font-regular">
+                                    <fa-icon [icon]="['far', 'comments']" class="m-r-5"></fa-icon> Reply
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

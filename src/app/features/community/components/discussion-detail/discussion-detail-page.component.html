@@ -39,6 +39,12 @@
             <div class="uk-width-2-3@m">
                 <div class="uk-card uk-card-default comment">
                     <div class="uk-card-body">
+                        <div class="reply_reply" style="background-color: #FFF" *ngIf="replyParentText!=''">
+                            <div class="reply_reply_inner">
+                                <b>{{replyParentUser}}</b><br/>
+                                {{replyParentText}}
+                            </div>
+                        </div>
                         <span class="p-b-5">Comment</span>
                         <textarea id="commentarea" name="commentarea" [(ngModel)]="commentTxt"></textarea>
                     </div>
@@ -71,7 +77,7 @@
                             <div class="like-container">
                                 <img src="/assets/images/like-outline.svg" (click)="likeDiscussion()"> <span class="like" (click)="likeDiscussion()">{{discussion.aggrLikeCount}}</span>
                             </div>
-                            <div class="reply-container">
+                            <div class="reply-container" (click)="setReplyId('','','')">
                                 <img src="/assets/images/reply.svg"> <label class="reply" for="commentarea"> Reply</label>
                             </div>
                         </div>
@@ -93,14 +99,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="uk-card-body" [innerHTML]="reply.text">
+                    <div class="uk-card-body">
+                    <div class="reply_reply" *ngIf="reply.parentText!=''">
+                        <div class="reply_reply_inner">
+                            <b>{{reply.parentUser}}</b><br/>
+                            {{reply.parentText}}
+                        </div>
+                    </div>
+                    <div [innerHTML]="reply.text">
+                    </div>
                     </div>
                     <div class="uk-card-footer">
                         <div class="uk-grid-collapse uk-child-width-expand@s" uk-grid>
                             <div class="like-container">
                                 <img src="/assets/images/like-outline.svg" (click)="likeReply(reply)"> <span class="like" (click)="likeReply(reply)">{{reply.likeCount}}</span>
                             </div>
-                            <div class="reply-container">
+                            <div class="reply-container" (click)="setReplyId(reply.id,reply.userName,reply.text)">
                                 <img src="/assets/images/reply.svg"> <label class="reply" for="commentarea"> Reply</label>
                             </div>
                         </div>

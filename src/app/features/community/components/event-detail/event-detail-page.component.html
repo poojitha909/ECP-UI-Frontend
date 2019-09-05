@@ -13,8 +13,12 @@
                 <h2 class="heading">{{event.title}}</h2>
             </div>
             <div class="uk-width-1-4@m">
-                <a href="" *ngIf="event?.eventType==1" class="uk-margin-small-right outdoor-icon" title="Outdoor Event"></a>
-                <a href="" *ngIf="event?.eventType==2" class="uk-margin-small-right indoor-icon" title="Indoor Event"></a>
+                <a href="" *ngIf="event?.eventType==1" class="uk-margin-small-right outdoor-icon" title="Outdoor Event">
+                    <span class="icontxt">Outdoor</span>
+                </a>
+                <a href="" *ngIf="event?.eventType==2" class="uk-margin-small-right indoor-icon" title="Indoor Event">
+                    <span class="icontxt">Indoor</span>
+                </a>
             </div>
         </div>
         
@@ -23,6 +27,17 @@
                 <div class="category-box">
                     <h3>{{event.organiser}}</h3>
                     <p>Organiser</p>
+                    <div>
+                        <button class="uk-button uk-button-default cont-org" (click)="showOrganiserDetails()"> Contact Organiser</button>
+                        <p *ngIf="showOrg">
+                            You can contact Organiser at : <br>
+                            Phone: {{event.orgPhone}}<br/>
+                            Email: {{event.orgEmail}}
+                        </p>
+                    </div>
+                    <p>
+                        <a style="cursor:pointer;" href="mailto:{{reportEmail}}"><img src="/assets/images/flag.svg">Report This Vendor</a>
+                    </p>
                 </div>
             
                 <div class="m-t-40 category-box">
@@ -40,6 +55,20 @@
                         Facebook</a>
                     </div>
                 </div>
+                <div class="m-t-40 category-box favourite" *ngIf="user!=undefined && user!=null">
+                    <div *ngIf="!markIt" (click)="markFavourite()">
+                        <a class="uk-icon-button  uk-margin-small-right favourite-icon" uk-icon="heart"></a>
+                        <a> Favourite this Event</a>
+                    </div>
+                    <div *ngIf="markIt" (click)="markFavourite()">
+                        <a class="uk-icon-button  uk-margin-small-right favourite-icon" uk-icon="ban"></a>
+                        <a> Un-Favourite this Event</a>
+                    </div>
+                </div>
+                <div class="m-t-40 category-box favourite" *ngIf="user==undefined || user==null">
+                    <a class="uk-icon-button  uk-margin-small-right favourite-icon" uk-icon="user"></a>
+                    <a (click)="markFavourite()"> Login to favourite this Event</a>
+                </div>
             </div>
             <div class="uk-width-2-3@m">
                 <h2 class="heading2">About</h2>
@@ -52,9 +81,15 @@
                     <div class="uk-grid">
                             <div class="uk-width-1-2@s">
                                 <p class="label">
+                                    Event Category
+                                </p>
+                                <p class="description">
+                                    {{ (event.eventType==1 ? "Outdoor" : "Indoor") }}
+                                </p>
+                                <p class="label">
                                     Email
                                 </p>
-                                <p class="description textblue">
+                                <p class="description">
                                     {{event.orgEmail}}
                                 </p>
                                 <p class="label">
@@ -65,6 +100,12 @@
                                 </p>
                             </div>
                             <div class="uk-width-1-2@s description">
+                                <p class="label">
+                                    Event Entry
+                                </p>
+                                <p class="description">
+                                    {{ (event.entryFee >= 1 ? "Paid" : "Free") }}
+                                </p>
                                 <p class="label">
                                     Languages
                                 </p>

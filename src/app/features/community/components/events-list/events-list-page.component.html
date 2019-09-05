@@ -46,6 +46,7 @@
                         <div>Create an Event</div>
                     </div>
                 </div>
+                <!-- | paginate: { itemsPerPage: searchParams.s, currentPage: (searchParams.p + 1),  totalItems: totalRecords} -->
                 <app-event-summary *ngFor="let event of eventsList" [event]="event" [isPast]="0"></app-event-summary>
             </div>
           </li>
@@ -65,5 +66,8 @@
         <app-event-no-record></app-event-no-record>
     </div>
     <!-- Tabs with list end -->
-    <!-- <app-pagination *ngIf="(eventsList && eventsList.length > 0)" [totalRecords]="totalRecords" [currentPage]="currentPage" [perPage]="perPage"></app-pagination> -->
+    <!-- <div>
+    <pagination-controls (pageChange)="searchParams.p = ($event - 1)"></pagination-controls>
+    </div> -->
+    <!-- <app-pagination *ngIf="(eventsList && eventsList.length > 0)" [totalRecords]="totalRecords" [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)" #paginate></app-pagination> -->
 </div>

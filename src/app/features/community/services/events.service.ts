@@ -52,4 +52,8 @@ export class EventService {
     addEvents(event: any): Observable<any[]> {
         return this.http.post<any[]>(`${this.eventUrl}`,{...event});
     }
+
+    markFav(userId,eventId,markIt): Observable<any[]> {
+        return this.http.get<any[]>(`${this.eventUrl}/markfav?userId=${userId}&eventId=${eventId}&markIt=${markIt}`);
+    }
 }

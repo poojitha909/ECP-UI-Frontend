@@ -12,13 +12,11 @@ import { EventSummaryComponent } from './components/event-summary/event-summary.
 import { EventDetailPageComponent } from './components/event-detail/event-detail-page.component';
 import { EventCreatePageComponent } from './components/event-create/event-create-page.component';
 import { DiscussionDetailPageComponent } from './components/discussion-detail/discussion-detail-page.component';
-import { PaginationComponent } from '../../shared/pagination/pagination.component';
 import { DiscussionNoRecordComponent } from './components/discussion-no-record/discussion-no-record.component';
 import { EventNoRecordComponent } from './components/event-no-record/event-no-record.component';
 import { EllipsisPipe } from '../../shared/ellipsis.pipe';
 import { TimeAgoPipe } from '../../shared/timeago.pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
-
 @NgModule({
   declarations: [
         EllipsisPipe,
@@ -34,8 +32,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
         EventNoRecordComponent,
         EventSummaryComponent,
         EventDetailPageComponent,
-        DiscussionsListPageComponent,
-        PaginationComponent
+        DiscussionsListPageComponent
     ],
   imports: [
         CommonModule,

@@ -22,9 +22,7 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
   };
   paramsSubs: any;
   totalRecords: number;
-  currentPage: number;
-  perPage: number;
-
+  
   constructor(private route:ActivatedRoute,private eventService: EventService) { }
 
   ngOnInit() {
@@ -54,8 +52,6 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
     }
     
     this.totalRecords = 0;
-    this.currentPage = this.searchParams.p;
-    this.perPage = this.searchParams.s; 
     
     if(this.route.snapshot.params['past'] !== undefined){
       this.searchParams.pastEvents = this.route.snapshot.params['past'];
@@ -74,16 +70,18 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
     },500);
   }
 
+  changePage(page: number) {
+    this.searchParams.p = page;
+    this.onSearch()
+  }
+
   showEvents(){
-    
     this.eventService.searchEvents(this.searchParams).subscribe( (response:any) =>{
       const data = response.data;
       this.eventsList = [];
       if(data.content){
         this.eventsList = data.content;
         this.totalRecords = data.total;
-        this.currentPage = this.searchParams.p;
-        this.perPage = this.searchParams.s; 
       }
     });
   }
@@ -112,6 +110,7 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
 
   onTabChange(value) {
     this.searchParams.pastEvents = value;
+    this.searchParams.p = 0;
     this.showEvents();
   }
 

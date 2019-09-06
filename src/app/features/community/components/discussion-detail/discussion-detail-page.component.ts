@@ -49,12 +49,12 @@ export class DiscussionDetailPageComponent implements OnInit {
   }
 
   addComment(){
+    if(!this.user){
+      this.store.store("new-d-comment",JSON.stringify({discussionId: this.discussionId, commentTxt: this.commentTxt, category: this.category}));
+      this.router.navigate(['/user/signin']);
+      return;
+    }
     if(this.commentTxt !=""){
-      if(!this.user){
-         this.store.store("new-d-comment",JSON.stringify({discussionId: this.discussionId, commentTxt: this.commentTxt, category: this.category}));
-         this.router.navigate(['/user/signin']);
-         return;
-      }
       this.discussionService.addComment( {type:0}, this.discussionId, this.replyId, this.commentTxt).subscribe( (response:any) =>{
         if(response.data.replies){
           this.commentTxt = "";

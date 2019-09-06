@@ -87,6 +87,7 @@ export class EventCreatePageComponent implements OnInit {
     this.entryFee = "";
     this.languages = "";
     this.organiser = "";
+    this.router.navigate(['/community/events']);
   }
   
   onSubmit(){

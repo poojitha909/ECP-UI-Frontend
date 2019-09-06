@@ -16,29 +16,29 @@ import { DiscussionNoRecordComponent } from './components/discussion-no-record/d
 import { EventNoRecordComponent } from './components/event-no-record/event-no-record.component';
 import { EllipsisPipe } from '../../shared/ellipsis.pipe';
 import { TimeAgoPipe } from '../../shared/timeago.pipe';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { SharedModule } from 'src/app/shared';
 @NgModule({
   declarations: [
-        EllipsisPipe,
-        TimeAgoPipe,
-        CommunityPageComponent,
-        DiscussionNoRecordComponent,
-        EventsListPageComponent,
-        EventCreatePageComponent,
-        DiscussionDetailPageComponent,
-        DiscussionCreatePageComponent,
-        DiscussionSummaryComponent,
-        DiscussionSummaryCatComponent,
-        EventNoRecordComponent,
-        EventSummaryComponent,
-        EventDetailPageComponent,
-        DiscussionsListPageComponent
-    ],
+    EllipsisPipe,
+    TimeAgoPipe,
+    CommunityPageComponent,
+    DiscussionNoRecordComponent,
+    EventsListPageComponent,
+    EventCreatePageComponent,
+    DiscussionDetailPageComponent,
+    DiscussionCreatePageComponent,
+    DiscussionSummaryComponent,
+    DiscussionSummaryCatComponent,
+    EventNoRecordComponent,
+    EventSummaryComponent,
+    EventDetailPageComponent,
+    DiscussionsListPageComponent
+  ],
   imports: [
-        CommonModule,
-        CommunityRoutingModule,
-        CoreModule,
-        NgxPaginationModule
-    ]
+    CommonModule,
+    CommunityRoutingModule,
+    CoreModule,
+    SharedModule
+  ]
 })
 export class CommunityModule { }

@@ -12,15 +12,15 @@ export class PaginationComponent implements OnInit {
 
   items: number[];
   activeItem: number;
-  constructor() { 
+  constructor() {
     this.items = [];
     this.activeItem = 0;
   }
 
   ngOnInit() {
     const pages = Math.ceil(this.totalRecords / this.perPage);
-    for(let i = 0; i < pages;i++){
-      this.items[i] = i+1;
+    for (let i = 0; i < pages; i++) {
+      this.items[i] = i + 1;
     }
   }
 

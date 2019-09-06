@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ErrorComponent } from './shared';
 
 const routes: Routes = [
   {
@@ -30,7 +31,11 @@ const routes: Routes = [
     path: 'user',
     loadChildren: () => import('src/app/features/user/user.module').then((mod) => mod.UserModule)
   },
-  { path: '**',   redirectTo: '/',pathMatch: 'full' }
+  {
+    path: 'error',
+    component: ErrorComponent
+  },
+  { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -39,12 +39,7 @@ export class EpcServiceService {
   }
 
   getJDServiceDetail(service: string, docId: string): Observable<any> {
-    return this.http.get<any>(`${ApiConstants.GET_JD_SERVICES_DETAIL}?service${service}&docID${docId}`).pipe(
-      map(response => {
-        if (response) {
-          return response;
-        }
-      }));
+    return this.http.get<any>(`${ApiConstants.GET_JD_SERVICES_DETAIL}?service=${service}&docID=${docId}`);
   }
 
 

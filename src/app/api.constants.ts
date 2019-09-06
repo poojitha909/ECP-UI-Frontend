@@ -4,6 +4,7 @@ export class ApiConstants {
 
     public static GET_SERVICES: string = `${environment.apiBaseUrl}/v1/search/servicePageSearch`;
     public static GET_ALL_SERVICES: string = `${environment.apiBaseUrl}/v1/search/justdialService`;
+    public static GET_JD_SERVICES_DETAIL: string = `${environment.apiBaseUrl}/v1/search/justdialServiceDetail`;
     public static USER_LOGIN: string = `${environment.apiBaseUrl}/v1/users/login`;
     public static USER_SIGNUP: string = `${environment.apiBaseUrl}/v1/users`;
     public static USER_LOGOUT: string = `${environment.apiBaseUrl}/v1/users/logout`;

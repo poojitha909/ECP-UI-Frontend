@@ -124,6 +124,20 @@ export class AuthService {
     this.storage.store(AppConstants.AUTH_SESSION, sessionId);
   }
 
+  /**
+   * Set redirect url 
+   */
+  set redirectUrl(redirect: string) {
+    this.storage.store(AppConstants.REDIRECT_URL, redirect);
+  }
+
+  get redirectUrl(): string {
+    return this.storage.retrieve(AppConstants.REDIRECT_URL);
+  }
+
+  removeRedirectUrl() {
+    this.storage.clear(AppConstants.REDIRECT_URL);
+  }
 
   /**
   * Return boolean if user data found in LS

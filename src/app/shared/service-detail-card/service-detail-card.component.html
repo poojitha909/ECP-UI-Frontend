@@ -1,9 +1,10 @@
-<div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+<div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin cursor-pointer"
+  routerLink="/services/detail" uk-grid>
   <div class="uk-card-media-left uk-width-1-5@m uk-width-1-3@s p-16">
     <img [src]="service?.thumbnail" width="152" height="152" alt="">
   </div>
 
-  <div class="uk-card-body uk-width-expand p-16" routerLink="/services/detail">
+  <div class="uk-card-body uk-width-expand p-16">
     <h4 class="font-regular font-weight-600 m-0">{{service?.name}}</h4>
     <div>
       <ngb-rating [rate]="service?.compRating" [readonly]="true" [max]="5">

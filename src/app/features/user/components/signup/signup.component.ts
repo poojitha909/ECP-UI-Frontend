@@ -46,7 +46,6 @@ export class SignupComponent implements OnInit {
           }
         }
       });
-
     }
 
   }
@@ -182,7 +181,14 @@ export class SignupComponent implements OnInit {
     this.userService.getUserProfile().subscribe(
       userProfie => {
         if (userProfie.basicProfileInfo.firstName) {
-          this.router.navigateByUrl("/");
+
+          if (this.auth.redirectUrl) {
+            const redirect = this.auth.redirectUrl;
+            this.auth.removeRedirectUrl();
+            this.router.navigateByUrl(redirect);
+          } else {
+            this.router.navigateByUrl("/");
+          }
         } else {
           let user = this.auth.user;
           user.hasProfile = false;

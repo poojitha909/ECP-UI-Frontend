@@ -23,7 +23,7 @@
     <div class="event-summary-footer uk-grid uk-grid-collapse">
         <div class="left-text uk-width-1-2@s">
             <span *ngIf="event?.entryFee <= 0">Free Entry</span>
-            <span *ngIf="event?.entryFee <= 0">Entry Fees: Rs. {{event?.entryFee}}</span>
+            <span *ngIf="event?.entryFee > 0">Paid Entry</span>
         </div>
         <div class="right-text uk-width-1-2@s">
             <span [routerLink]="['/community/event', event?.id ]">Read More</span>

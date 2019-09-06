@@ -61,6 +61,7 @@ export class DiscussionCreatePageComponent implements OnInit {
     this.title = "";
     this.description = "";
     this.selCategory = "";
+    this.router.navigate(['/community/discussions']);
   }
   
   onSubmit(){

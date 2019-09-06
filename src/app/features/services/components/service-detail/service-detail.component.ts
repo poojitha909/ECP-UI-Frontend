@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ServiceDetail } from 'src/app/core/interfaces';
 
 @Component({
   selector: 'app-service-detail',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServiceDetailComponent implements OnInit {
 
-  constructor() { }
+  service: ServiceDetail;
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.service = this.route.snapshot.data.detail;
+    if (this.service.email) {
+      this.service.email = this.service.email.replace(",", " ");
+    }
   }
 
 }

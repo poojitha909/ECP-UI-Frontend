@@ -8,9 +8,10 @@ import { ServiceDetailCardComponent } from './service-detail-card/service-detail
 import { CoreModule } from '../core';
 import { ServicesListComponent } from './services-list/services-list.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
-  declarations: [ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, ServicesListComponent, PaginationComponent],
+  declarations: [ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, ServicesListComponent, PaginationComponent, ErrorComponent],
   imports: [
     CommonModule,
     SharedRoutingModule,

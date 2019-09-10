@@ -8,7 +8,7 @@
       </li>
       <li class="pagenum" *ngFor="let i of items" [ngClass]="{'uk-active': i==currentPage}" (click)="callParent(i)">{{i+1}}</li>
       <li>
-          <div *ngIf="currentPage<lastPage" (click)="callParent(currentPage+1)">
+          <div *ngIf="currentPage<lastPage" (click)="callParent(currentPage -- 1)">
             Next <span uk-pagination-next></span>
           </div>
       </li>

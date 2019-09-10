@@ -30,10 +30,30 @@ export class EpcServiceService {
         }
       });
 
-    return this.http.get<any>(`${ApiConstants.GET_ALL_SERVICES}?${queryParams}`).pipe(
+    return this.http.get<any>(`${ApiConstants.GET_ALL_JD_SERVICES}?${queryParams}`).pipe(
       map(response => {
         if (response) {
           return response.services;
+        }
+      }));
+  }
+
+  getAllServices(): Observable<any> {
+    let queryParams: string = "";
+
+    Object.keys(this.serviceParam)
+      .forEach((key, i) => {
+        if (i > 0) {
+          queryParams += `&${key}=${this.serviceParam[key]}`;
+        } else {
+          queryParams += `${key}=${this.serviceParam[key]}`;
+        }
+      });
+
+    return this.http.get<any>(`${ApiConstants.GET_ALL_SERVICES}?${queryParams}`).pipe(
+      map(response => {
+        if (response) {
+          return response.data;
         }
       }));
   }

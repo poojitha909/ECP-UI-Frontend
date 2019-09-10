@@ -3,7 +3,9 @@ import { environment } from 'src/environments/environment';
 export class ApiConstants {
 
     public static GET_SERVICES: string = `${environment.apiBaseUrl}/v1/search/servicePageSearch`;
-    public static GET_ALL_SERVICES: string = `${environment.apiBaseUrl}/v1/search/justdialService`;
+    public static GET_ALL_JD_SERVICES: string = `${environment.apiBaseUrl}/v1/search/justdialService`;
+    public static GET_ALL_SERVICES: string = `${environment.apiBaseUrl}/v1/userProfile/allServiceList`;
+    public static GET_JD_CATEGORIES:string =  `${environment.apiBaseUrl}/v1/search/justdailCategories`;
     public static GET_JD_SERVICES_DETAIL: string = `${environment.apiBaseUrl}/v1/search/justdialServiceDetail`;
     public static USER_LOGIN: string = `${environment.apiBaseUrl}/v1/users/login`;
     public static USER_SIGNUP: string = `${environment.apiBaseUrl}/v1/users`;

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Service } from 'src/app/core/interfaces';
 
 @Component({
   selector: 'app-service-detail-card',
@@ -7,12 +8,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ServiceDetailCardComponent implements OnInit {
 
-  @Input() service: any;
+  @Input() service: Service;
 
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  get isDBService(): boolean {
+    return this.service.hasOwnProperty('basicProfileInfo');
   }
 
 }

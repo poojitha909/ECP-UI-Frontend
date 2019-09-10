@@ -39,6 +39,76 @@ export interface Service {
     name?: string;
     opennow?: number;
     newadd?: string;
+    basicProfileInfo?: BasicProfileInfo;
+    featured?: boolean;
+    ratedByUser?: boolean;
+    lastModifiedAt?: string;
+    userTypes?: number[];
+    ratingCount?: number;
+    individualInfo?: IndividualInfo;
+    userId?: string;
+    serviceProviderInfo?: ServiceProviderInfo;
+    createdAt?: string;
+    serviceBranches?: any[];
+    reviewCount?: number;
+    systemTags?: SystemTag[];
+    userTags?: string[];
+    ratingPercentage?: number;
+    id?: string;
+    facilities?: any[];
+    reviewedByUser?: boolean;
+}
+
+export interface PrimaryUserAddress {
+    zip: string;
+    country: string;
+    city: string;
+    streetAddress: string;
+    locality: string;
+}
+
+export interface PhotoGalleryURL {
+    titleImage: string;
+    original: string;
+    thumbnailImage: string;
+}
+
+
+export interface ProfileImage {
+    titleImage: string;
+    original: string;
+    thumbnailImage: string;
+}
+
+export interface BasicProfileInfo {
+    firstName: string;
+    secondaryEmails: any[];
+    primaryUserAddress: PrimaryUserAddress;
+    otherAddresses: any[];
+    photoGalleryURLs: PhotoGalleryURL[];
+    description: string;
+    secondaryPhoneNos: any[];
+    profileImage: ProfileImage;
+    primaryEmail: string;
+    primaryPhoneNo: string;
+}
+
+export interface IndividualInfo {
+    gender: number;
+}
+
+export interface ServiceProviderInfo {
+    website: string;
+    homeVisits: boolean;
+    yearsExperience: number;
+    services: string[];
+}
+
+export interface SystemTag {
+    name: string;
+    description: string;
+    id: string;
+    type: number;
 }
 
 export interface ServiceDetail {
@@ -55,7 +125,7 @@ export interface ServiceDetail {
     tag_cname: string;
     userimage: string;
     verified: string;
-    city:string;
+    city: string;
     seo_dt: SeoDt;
 }
 
@@ -74,6 +144,11 @@ export interface SeoDt {
     title: string;
     key: string;
     desc: string;
+}
+
+export interface JDCategory {
+    category_name: string;
+    national_catid: string;
 }
 
 

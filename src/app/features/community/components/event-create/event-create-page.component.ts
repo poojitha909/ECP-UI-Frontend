@@ -3,6 +3,7 @@ import {EventService} from '../../services/events.service';
 import {MenuService} from '../../services/menu.service';
 import {Router} from "@angular/router";
 import {StorageHelperService} from "../../../../core/services/storage-helper.service";
+import {AuthService} from "../../../../core/auth/services/auth.service";
 declare var UIKit;
 
 @Component({
@@ -29,7 +30,7 @@ export class EventCreatePageComponent implements OnInit {
   organiser: string;
   user: any;
 
-  constructor(private router: Router, private eventService: EventService, private menuService: MenuService, private store: StorageHelperService) { }
+  constructor(private router: Router, private eventService: EventService, private menuService: MenuService, private store: StorageHelperService, private authService: AuthService) { }
 
   ngOnInit() {
     this.categoryList = [];
@@ -110,6 +111,7 @@ export class EventCreatePageComponent implements OnInit {
           organiser: this.organiser,
         }
       ));
+      this.authService.redirectUrl = "/community/event/add";
       this.router.navigate(['/user/signin']);
       return;
     }

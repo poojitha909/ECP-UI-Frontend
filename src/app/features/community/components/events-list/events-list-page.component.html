@@ -65,9 +65,5 @@
     <div *ngIf="(eventsList && eventsList.length == 0)">
         <app-event-no-record></app-event-no-record>
     </div>
-    <!-- Tabs with list end -->
-    <!-- <div>
-    <pagination-controls (pageChange)="searchParams.p = ($event - 1)"></pagination-controls>
-    </div> -->
-    <!-- <app-pagination *ngIf="(eventsList && eventsList.length > 0)" [totalRecords]="totalRecords" [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)" #paginate></app-pagination> -->
+    <app-pagination *ngIf="(eventsList && eventsList.length > 0)" [totalRecords]="totalRecords" [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)"></app-pagination>
 </div>

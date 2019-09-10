@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {DiscussionService} from '../../services/discussion.service';
 import {MenuService} from '../../services/menu.service';
 import {Router} from "@angular/router";
+import {AuthService} from "../../../../core/auth/services/auth.service";
 import {StorageHelperService} from "../../../../core/services/storage-helper.service";
 @Component({
   selector: 'app-discussion-create-page',
@@ -18,7 +19,7 @@ export class DiscussionCreatePageComponent implements OnInit {
   user: any;
 
 
-  constructor(private route:ActivatedRoute,private router: Router, private discussionService: DiscussionService, private menuService: MenuService, private store: StorageHelperService) { }
+  constructor(private route:ActivatedRoute,private router: Router, private discussionService: DiscussionService, private menuService: MenuService, private store: StorageHelperService,private authService : AuthService) { }
   
   ngOnInit() {
     this.title = "";
@@ -67,6 +68,7 @@ export class DiscussionCreatePageComponent implements OnInit {
   onSubmit(){
     if(!this.user){
       this.store.store("new-discuss",JSON.stringify({title: this.title, description: this.description, selCategory : this.selCategory,discussId: this.discussId}));
+      this.authService.redirectUrl = "community/discussion/add";
       this.router.navigate(['/user/signin']);
       return;
     }

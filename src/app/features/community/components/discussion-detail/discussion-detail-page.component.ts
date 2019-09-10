@@ -4,6 +4,7 @@ import {Router} from "@angular/router"
 import {DiscussionService} from '../../services/discussion.service';
 import {MenuService} from '../../services/menu.service';
 import {StorageHelperService} from "../../../../core/services/storage-helper.service";
+import {AuthService} from "../../../../core/auth/services/auth.service";
 
 @Component({
   selector: 'app-discussion-detail',
@@ -24,7 +25,7 @@ export class DiscussionDetailPageComponent implements OnInit {
   replyParentUser: string;
   replyParentText: string;
 
-  constructor(private router: Router,private route:ActivatedRoute,private discussionService: DiscussionService, private menuService: MenuService, private store: StorageHelperService) { }
+  constructor(private router: Router,private route:ActivatedRoute,private discussionService: DiscussionService, private menuService: MenuService, private store: StorageHelperService, private authService: AuthService) { }
   
   ngOnInit() {
     this.discussionId = this.route.snapshot.params['id'];
@@ -51,6 +52,7 @@ export class DiscussionDetailPageComponent implements OnInit {
   addComment(){
     if(!this.user){
       this.store.store("new-d-comment",JSON.stringify({discussionId: this.discussionId, commentTxt: this.commentTxt, category: this.category}));
+      this.authService.redirectUrl = "community/discussion/"+ this.discussionId +  (this.category ? "/" + this.category : "");
       this.router.navigate(['/user/signin']);
       return;
     }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {Router} from "@angular/router";
 import {EventService} from '../../services/events.service';
 import {StorageHelperService} from "../../../../core/services/storage-helper.service";
+import {AuthService} from "../../../../core/auth/services/auth.service";
 
 @Component({
   selector: 'app-event-detail',
@@ -16,7 +18,7 @@ export class EventDetailPageComponent implements OnInit {
   showOrg: boolean;
   user: any;
   markIt: boolean;
-  constructor(private route:ActivatedRoute,private eventService: EventService, private store: StorageHelperService) { }
+  constructor(private router: Router, private route:ActivatedRoute,private eventService: EventService, private store: StorageHelperService, private authService: AuthService) { }
   
   ngOnInit() {
     this.eventId = this.route.snapshot.params['id'];
@@ -64,7 +66,8 @@ export class EventDetailPageComponent implements OnInit {
       })
     }
     else {
-      alert("Please login first");
+      this.authService.redirectUrl = "community/event/" + this.eventId;
+      this.router.navigate(['/user/signin']);
     }
   }
 }

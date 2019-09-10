@@ -1,9 +1,17 @@
 <!-- Pagination start -->
 <div class="uk-container pagination">
   <ul class="uk-pagination" uk-margin>
-      <li><span uk-pagination-previous></span> Previous</li>
-      <li class="pagenum" *ngFor="let i of items" [ngClass]="{'uk-active': i==currentPage}">{{i}}</li>
-      <li>Next <span uk-pagination-next></span></li>
+      <li>
+        <div *ngIf="currentPage>0" (click)="callParent(currentPage-1)">
+          <span uk-pagination-previous></span> Previous
+        </div>
+      </li>
+      <li class="pagenum" *ngFor="let i of items" [ngClass]="{'uk-active': i==currentPage}" (click)="callParent(i)">{{i+1}}</li>
+      <li>
+          <div *ngIf="currentPage<lastPage" (click)="callParent(currentPage -- 1)">
+            Next <span uk-pagination-next></span>
+          </div>
+      </li>
   </ul>
 </div>
 <!-- Pagination end -->

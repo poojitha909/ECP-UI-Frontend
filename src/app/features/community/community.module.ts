@@ -16,7 +16,7 @@ import { DiscussionNoRecordComponent } from './components/discussion-no-record/d
 import { EventNoRecordComponent } from './components/event-no-record/event-no-record.component';
 import { EllipsisPipe } from '../../shared/ellipsis.pipe';
 import { TimeAgoPipe } from '../../shared/timeago.pipe';
-import { SharedModule } from 'src/app/shared';
+import { SharedModule } from '../../shared';
 @NgModule({
   declarations: [
     EllipsisPipe,

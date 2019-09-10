@@ -58,6 +58,6 @@
             <app-discussion-no-record></app-discussion-no-record>
         </div>
     </div>
-    <!-- Tabs with list end -->
-    <app-pagination *ngIf="(selCategory!='' && discussionsList.length > 0) || (selCategory=='' && categoryList)" [totalRecords]="15" [currentPage]="2" [perPage]="3"></app-pagination>
+    <!-- Tabs with list end   || (selCategory=='' && categoryList) -->
+    <app-pagination *ngIf="(selCategory!='' && discussionsList.length > 0)" [totalRecords]="totalRecords" [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)"></app-pagination>
 </div>

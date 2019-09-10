@@ -23,6 +23,7 @@ export class DiscussionsListPageComponent implements OnInit,OnDestroy {
     tags: string;
   };
   paramsSubs: any;
+  totalRecords: number;
 
   constructor(private route:ActivatedRoute,private router: Router, private discussionService: DiscussionService, private menuService: MenuService) { }
 
@@ -43,6 +44,7 @@ export class DiscussionsListPageComponent implements OnInit,OnDestroy {
 
   initiate(){
     this.countData = 0;
+    this.totalRecords = 0;
     this.discussionsList = [];
     this.categoryList = null;
     this.selCategory = "";
@@ -66,6 +68,11 @@ export class DiscussionsListPageComponent implements OnInit,OnDestroy {
     if(event.key === "Enter"){
       this.submitSearch();
     }
+  }
+
+  changePage(page){
+    this.searchParams.p = page;
+    this.search();
   }
 
   submitSearch(){
@@ -149,6 +156,7 @@ export class DiscussionsListPageComponent implements OnInit,OnDestroy {
       if(data.content){
         this.discussionsList = data.content;
       }
+      this.totalRecords = data.total;
     });
   }
 

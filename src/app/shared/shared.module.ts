@@ -15,7 +15,8 @@ import { ErrorComponent } from './error/error.component';
   imports: [
     CommonModule,
     SharedRoutingModule,
-    CoreModule
+    CoreModule,
+    // NgxPaginationModule
   ],
   exports: [
     ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, PaginationComponent, ServicesListComponent

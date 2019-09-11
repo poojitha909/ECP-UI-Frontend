@@ -11,7 +11,7 @@ import { JdCategoryService } from 'src/app/core/services';
   styleUrls: ['./all-services.component.scss']
 })
 export class AllServicesComponent implements OnInit {
-
+  id;
   services: Service;
 
   constructor(public ecpService: EpcServiceService, public JDcategory: JdCategoryService) { }

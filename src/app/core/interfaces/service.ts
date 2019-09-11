@@ -112,21 +112,39 @@ export interface SystemTag {
 }
 
 export interface ServiceDetail {
-    name: string;
-    email: string;
-    mobile: string;
-    contact: string;
-    website: string;
-    rating: string;
-    address: string;
-    HoursOfOperation: string;
-    Reviews: Review[];
-    disp_pic: string;
-    tag_cname: string;
-    userimage: string;
-    verified: string;
-    city: string;
-    seo_dt: SeoDt;
+    name?: string;
+    email?: string;
+    mobile?: string;
+    contact?: string;
+    website?: string;
+    rating?: string;
+    address?: string;
+    HoursOfOperation?: string;
+    Reviews?: Review[];
+    disp_pic?: string;
+    tag_cname?: string;
+    userimage?: string;
+    verified?: string;
+    city?: string;
+    seo_dt?: SeoDt;
+    basicProfileInfo?: BasicProfileInfo;
+    featured?: boolean;
+    ratedByUser?: boolean;
+    lastModifiedAt?: string;
+    userTypes?: number[];
+    ratingCount?: number;
+    individualInfo?: IndividualInfo;
+    userId?: string;
+    serviceProviderInfo?: ServiceProviderInfo;
+    createdAt?: string;
+    serviceBranches?: any[];
+    reviewCount?: number;
+    systemTags?: SystemTag[];
+    userTags?: string[];
+    ratingPercentage?: number;
+    id?: string;
+    facilities?: any[];
+    reviewedByUser?: boolean;
 }
 
 export interface Review {

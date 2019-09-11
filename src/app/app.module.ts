@@ -2,17 +2,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { NgxPaginationModule } from 'ngx-pagination';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './core';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 // import { NgxWebstorageModule } from 'ngx-webstorage';
 
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, NgbPaginationModule, AppRoutingModule, HttpClientModule],
   bootstrap: [AppComponent],
-  providers:[
+  providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

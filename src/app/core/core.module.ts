@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -17,13 +16,14 @@ import { far } from '@fortawesome/free-regular-svg-icons';
     ReactiveFormsModule,
     NgbModule,
     FontAwesomeModule,
-
+    // NgxPaginationModule
   ],
   exports: [
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    // NgxPaginationModule
   ]
 })
 export class CoreModule {

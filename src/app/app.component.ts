@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { JdCategoryService } from './core/services';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ecp-ui-frontend';
+
+  constructor(private JDCategory: JdCategoryService) {
+    this.JDCategory.fetchAllCategories();
+  }
 }

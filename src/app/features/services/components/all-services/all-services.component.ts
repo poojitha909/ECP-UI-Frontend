@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { EpcServiceService } from '../../epc-service.service';
-import { Service, JDserviceParam } from 'src/app/core/interfaces';
+import { Service } from 'src/app/core/interfaces';
+import { JdCategoryService } from 'src/app/core/services';
 
 
 @Component({
@@ -13,14 +14,14 @@ export class AllServicesComponent implements OnInit {
 
   services: Service;
 
-  constructor(public ecpService: EpcServiceService) { }
+  constructor(public ecpService: EpcServiceService, public JDcategory: JdCategoryService) { }
 
   ngOnInit() {
     this.getAllService();
   }
 
   getAllService() {
-    this.ecpService.getJDAllServices().subscribe(
+    this.ecpService.getAllServices().subscribe(
       response => {
         if (response) {
           this.services = response;

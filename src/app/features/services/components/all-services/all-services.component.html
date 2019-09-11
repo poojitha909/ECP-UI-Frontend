@@ -1,12 +1,12 @@
 <div class="uk-section">
- 
-    <ul class="uk-breadcrumb">
-      <li><a routerLink="/services">Home</a></li>
-      <li><span>Services</span></li>
-    </ul>
-    <h3>
-      All Services
-    </h3>
+
+  <ul class="uk-breadcrumb">
+    <li><a routerLink="/services">Home</a></li>
+    <li><span>Services</span></li>
+  </ul>
+  <h3>
+    All Services
+  </h3>
 
   <div class="uk-child-width-1-3@s m-t-40 uk-grid-match" uk-grid>
     <div>
@@ -60,10 +60,12 @@
 
       <div class="m-t-40 category-box">
         <h4>Categories</h4>
-        <ul class="uk-list uk-list-large p-2">
-          <li>List item 1 <span class="uk-badge uk-float-right">100</span></li>
-          <li>List item 2 <span class="uk-badge uk-float-right">100</span></li>
-          <li>List item 3 <span class="uk-badge uk-float-right">100</span></li>
+        <ul class="uk-list uk-list-large p-2 max-h-200 uk-overflow-auto">
+          <li *ngFor="let category of JDcategory.categories">
+            {{category.category_name}}
+          </li>
+          <!-- <li>List item 2 <span class="uk-badge uk-float-right">100</span></li>
+          <li>List item 3 <span class="uk-badge uk-float-right">100</span></li> -->
         </ul>
       </div>
 

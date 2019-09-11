@@ -1,26 +1,39 @@
 <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin cursor-pointer"
   [routerLink]="['/services', service.name, service.docid]" uk-grid>
   <div class="uk-card-media-left uk-width-1-5@m uk-width-1-3@s p-16">
-    <img [src]="service?.thumbnail" width="152" height="152" alt="">
+    <img *ngIf="isDBService" [src]="service?.basicProfileInfo?.profileImage?.thumbnailImage" width="152" height="152"
+      alt="No Image">
+    <img *ngIf="!isDBService" [src]="service?.thumbnail" width="152" height="152" alt="">
   </div>
 
   <div class="uk-card-body uk-width-expand p-16">
-    <h4 class="font-regular font-weight-600 m-0">{{service?.name}}</h4>
+    <h4 class="font-regular font-weight-600 m-0">{{ isDBService ? service?.basicProfileInfo.firstName :  service?.name}}
+    </h4>
     <div>
-      <ngb-rating [rate]="service?.compRating" [readonly]="true" [max]="5">
+      <ngb-rating *ngIf="isDBService" [rate]="service?.ratingCount" [readonly]="true" [max]="5">
         <ng-template let-fill="fill" let-index="index">
           <span class="star" [class.filled]="fill === 100">&#9733;</span>
         </ng-template>
       </ngb-rating>
-      <span class="ml-15">{{service?.totalReviews}} Reviews</span>
+
+      <ngb-rating *ngIf="!isDBService" [rate]="service?.compRating" [readonly]="true" [max]="5">
+        <ng-template let-fill="fill" let-index="index">
+          <span class="star" [class.filled]="fill === 100">&#9733;</span>
+        </ng-template>
+      </ngb-rating>
+
+      <span class="ml-15">{{isDBService ? service?.reviewCount : service?.totalReviews}} Reviews</span>
     </div>
     <div *ngIf="service?.verified == '1'" class="uk-label uk-flex uk-flex-middle fit-inline-size p-verified">
       <span class="verified-icon-w m-r-5"></span>
       <span> VERIFIED</span>
     </div>
     <div class="m-t-15">
-      <p class="m-0"><span>{{ service?.city}}</span></p>
-      <p class="m-0 font-regular"><a href="javascript:void(0)" class="">{{ service?.type}}</a></p>
+      <p class="m-0"><span>{{isDBService ? service?.basicProfileInfo.primaryUserAddress.city :  service?.city}}</span>
+      </p>
+      <p *ngIf="!isDBService" class="m-0 font-regular"><a href="javascript:void(0)" class="">{{service?.type}}</a></p>
+      <p *ngIf="isDBService && service?.systemTags.length > 0" class="m-0 font-regular"><a href="javascript:void(0)"
+          class="">{{service?.systemTags[0].name}}</a></p>
     </div>
   </div>
 

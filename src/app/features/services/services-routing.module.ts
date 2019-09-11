@@ -20,7 +20,7 @@ const routes: Routes = [
         component: AllServicesComponent
       },
       {
-        path: ':name/:docId',
+        path: 'detail',
         component: ServiceDetailComponent,
         resolve: { detail: DetailResolverService }
       }

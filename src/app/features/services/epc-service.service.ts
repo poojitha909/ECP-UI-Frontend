@@ -13,7 +13,7 @@ export class EpcServiceService {
   serviceParam: JDserviceParam = {
     category: "Hospitals",
     catID: "10253670",
-    max: 10,
+    max: 50,
     pageNo: 1
   }
   constructor(private http: HttpClient) { }

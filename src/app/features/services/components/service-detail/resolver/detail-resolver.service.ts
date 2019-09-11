@@ -13,22 +13,30 @@ export class DetailResolverService implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any | null> {
 
-    const service = route.params['name'];
-    const docId = route.params['docId'];
-
-    return this.epcService.getJDServiceDetail(service, docId)
-      .pipe(
-        map(response => {
-          if (response) {
-            return response;
-          }
-        }),
-        catchError(error => {
-          console.log(error);
-          this.router.navigateByUrl('/error');
-          return of(null);
-        })
-      )
+    const routedata: any = this.router.getCurrentNavigation().extras.state;
+    console.log(routedata);
+    if (routedata) {
+      if (routedata.isDBService) {
+        return of(routedata.service)
+      } else {
+        return this.epcService.getJDServiceDetail(routedata.service.name, routedata.service.docid)
+          .pipe(
+            map(response => {
+              if (response) {
+                return response;
+              }
+            }),
+            catchError(error => {
+              console.log(error);
+              this.router.navigateByUrl('/error');
+              return of(null);
+            })
+          );
+      }
+    } else {
+      this.router.navigateByUrl('/services');
+      return of(null);
+    }
   }
 
 }

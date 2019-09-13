@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="uk-card-body uk-text-center service-type">
-          <a (click)="getCategoryServices('Patient Care Taker Services','12087781')">Caretakers & Nurses</a>
+          <a (click)="getCategoryServices('Patient Care Taker Services')">Caretakers & Nurses</a>
         </div>
       </div>
     </div>
@@ -30,7 +30,7 @@
           </div>
         </div>
         <div class="uk-card-body uk-text-center service-type">
-          <a (click)="getCategoryServices('Home Nursing Services','10250587')">Home for the Elders</a>
+          <a (click)="getCategoryServices('Home Nursing Services')">Home for the Elders</a>
         </div>
       </div>
     </div>
@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="uk-card-body uk-text-center service-type">
-          <a (click)="getCategoryServices('Clinics','10101647')">Doctor</a>
+          <a (click)="getCategoryServices('Clinics')">Doctor</a>
         </div>
       </div>
     </div>
@@ -61,7 +61,8 @@
       <div class="m-t-40 category-box">
         <h4>Categories</h4>
         <ul class="uk-list uk-list-large p-2 max-h-200 uk-overflow-auto">
-          <li *ngFor="let category of JDcategory.categories">
+          <li class="cursor-pointer" *ngFor="let category of JDcategory.categories"
+            (click)="getCategoryServices(category.category_name)">
             {{category.category_name}}
           </li>
           <!-- <li>List item 2 <span class="uk-badge uk-float-right">100</span></li>

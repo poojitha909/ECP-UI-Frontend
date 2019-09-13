@@ -98,4 +98,9 @@
 .uk-search .uk-search-icon:not(a):not(button):not(input){
   pointer-events: all;
 }
-
+.uk-list{
+  background-color: #ffffff;
+  a{
+    color: #000;
+  }
+  }

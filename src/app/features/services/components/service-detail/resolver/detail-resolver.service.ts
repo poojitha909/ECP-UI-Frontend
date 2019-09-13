@@ -28,7 +28,7 @@ export class DetailResolverService implements Resolve<any> {
             }),
             catchError(error => {
               console.log(error);
-              this.router.navigateByUrl('/error');
+              this.router.navigateByUrl('services/not-found');
               return of(null);
             })
           );

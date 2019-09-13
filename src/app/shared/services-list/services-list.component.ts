@@ -9,6 +9,8 @@ import { Service } from 'src/app/core/interfaces';
 export class ServicesListComponent implements OnInit {
   @Input() services: Service[];
 
+  page = 1;
+  pageSize = 5;
   constructor() { }
 
   ngOnInit() {

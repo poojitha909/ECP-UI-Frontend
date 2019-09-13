@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { EpcServiceService } from '../../epc-service.service';
-import { Service } from 'src/app/core/interfaces';
+import { Service, PageParam } from 'src/app/core/interfaces';
 import { JdCategoryService } from 'src/app/core/services';
+import { HomeService } from 'src/app/features/home/home.service';
 
 
 @Component({
@@ -11,13 +12,18 @@ import { JdCategoryService } from 'src/app/core/services';
   styleUrls: ['./all-services.component.scss']
 })
 export class AllServicesComponent implements OnInit {
-  id;
   services: Service;
 
-  constructor(public ecpService: EpcServiceService, public JDcategory: JdCategoryService) { }
+  constructor(public ecpService: EpcServiceService, public JDcategory: JdCategoryService, private homeService: HomeService) { }
 
   ngOnInit() {
-    this.getAllService();
+
+    if (this.homeService.selectedCategory) {
+      this.getCategoryServices(this.homeService.selectedCategory);
+      this.homeService.selectedCategory = undefined;
+    } else {
+      this.getAllService();
+    }
   }
 
   getAllService() {
@@ -33,10 +39,16 @@ export class AllServicesComponent implements OnInit {
       })
   }
 
-  getCategoryServices(category, catId) {
-    this.ecpService.serviceParam.category = category;
-    this.ecpService.serviceParam.catID = catId;
-    this.getAllService();
+  getCategoryServices(category) {
+    console.log(category);
+    this.homeService.searchParam.s = 50;
+    this.homeService.searchParam.term = category;
+    this.homeService.getServices().subscribe(
+      response => {
+        if (response && response.data) {
+          this.services = response.data;
+        }
+      });
   }
 
 }

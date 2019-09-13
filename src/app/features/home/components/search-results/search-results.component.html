@@ -1,4 +1,5 @@
-<div class="search-result">
+<div class="search-result"
+  *ngIf="searchData.services.length > 0 || searchData.products.length > 0  || searchData.Communitys.length > 0 ">
   <ul uk-tab>
     <li class="uk-active"><a href="#" class="font-regular">Product</a></li>
     <li><a href="#" class="font-regular">Services</a></li>
@@ -11,7 +12,7 @@
       <div><button routerLink="/products/all" class="uk-button uk-button-default uk-width-1-1">View All</button></div>
     </li>
     <li>
-      <!-- <app-service-detail-card></app-service-detail-card> -->
+      <app-services-list [services]="searchData.services"></app-services-list>
       <div><button routerLink="/services/all" class="uk-button uk-button-default uk-width-1-1">View All</button></div>
     </li>
     <li>Community lists ......

@@ -15,11 +15,17 @@
             <button *ngIf="showReset" class="reset-link" (click)="resetSearch()">Search again
             </button>
           </span>
-          <input class="uk-search-input search-box font-regular" [(ngModel)]="searchValue"
+          <input class="uk-search-input search-box font-regular" [(ngModel)]="searchPageParam.term"
             (keyup)="onSearchChange($event.target.value)" required type="text" placeholder="Search here"
             name="search" />
 
         </form>
+        <ul *ngIf="autocompleteFields.length > 0" class="uk-list uk-list-large p-10 m-0">
+          <li class="cursor-pointer" *ngFor="let field of autocompleteFields">
+            <a href="javascript:void(0)" 
+              (click)="onAutocompleteClick(field.name || field.basicProfileInfo.firstName)">{{field.name ||  field.basicProfileInfo.firstName }}</a>
+          </li>
+        </ul>
       </div>
 
       <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">

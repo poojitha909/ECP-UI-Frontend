@@ -5,6 +5,7 @@ import { ServicesPageComponent } from './components/services-page/services-page.
 import { AllServicesComponent } from './components/all-services/all-services.component';
 import { ServiceDetailComponent } from './components/service-detail/service-detail.component';
 import { DetailResolverService } from './components/service-detail/resolver/detail-resolver.service';
+import { ErrorComponent } from 'src/app/shared';
 
 
 const routes: Routes = [
@@ -23,6 +24,11 @@ const routes: Routes = [
         path: 'detail',
         component: ServiceDetailComponent,
         resolve: { detail: DetailResolverService }
+      }, {
+
+        path: 'not-found',
+        component: ErrorComponent
+
       }
     ]
   }

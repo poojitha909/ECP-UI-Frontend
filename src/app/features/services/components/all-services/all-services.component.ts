@@ -16,7 +16,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   pageServices: Service[];
   pageSize = 5;
   maxPages: number;
-
+  isLoading: boolean;
   searchPageParam: PageParam = {
     p: 0,
     s: 5,
@@ -40,11 +40,13 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   }
 
   getAllService() {
+    this.isLoading = true;
     this.ecpService.getAllServices().subscribe(
       response => {
         if (response) {
           this.services = response;
           this.maxPages = Math.round(this.services.length / this.pageSize);
+          this.isLoading = false;
           console.log(response);
         }
       },
@@ -54,6 +56,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   }
 
   getCategoryServices(category) {
+    this.isLoading = true;
     console.log(category);
     this.homeService.searchParam.s = 50;
     this.homeService.searchParam.term = category;
@@ -62,6 +65,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
         if (response && response.data) {
           this.services = response.data;
           this.maxPages = Math.round(this.services.length / this.pageSize);
+          this.isLoading = false;
         }
       });
   }

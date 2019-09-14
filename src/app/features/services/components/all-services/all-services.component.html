@@ -127,16 +127,18 @@
       </div>
 
       <!-- Service list  -->
-
-      <div class="m-t-20" *ngIf="services && pageServices && pageServices.length > 0">
+      <div *ngIf="isLoading" class="m-t-50 uk-text-center">
+        <span uk-spinner="ratio: 3"></span>
+      </div>
+      <div class="m-t-20" *ngIf="services && pageServices && pageServices.length > 0 && !isLoading">
         <app-services-list [services]="pageServices"></app-services-list>
       </div>
       <!-- <app-pagination *ngIf="services" [totalRecords]="services.length" [currentPage]="ecpService.serviceParam.pageNo"
         [perPage]="ecpService.serviceParam.max">
       </app-pagination>
     -->
-      <app-frontend-pagination *ngIf="services && services.length > 0" [items]="services" [pageSize]="pageSize"
-        [maxPages]="maxPages" (changePage)="onChangePage($event)">
+      <app-frontend-pagination *ngIf="services && services.length > 0 && !isLoading" [items]="services"
+        [pageSize]="pageSize" [maxPages]="maxPages" (changePage)="onChangePage($event)">
       </app-frontend-pagination>
     </div>
 

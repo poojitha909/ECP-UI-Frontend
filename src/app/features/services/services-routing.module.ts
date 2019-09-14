@@ -21,7 +21,7 @@ const routes: Routes = [
         component: AllServicesComponent
       },
       {
-        path: 'detail',
+        path: ':name/:docId/:dbservice',
         component: ServiceDetailComponent,
         resolve: { detail: DetailResolverService }
       }, {

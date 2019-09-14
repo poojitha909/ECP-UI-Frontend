@@ -55,8 +55,16 @@
 
       <div class="uk-inline w-100">
         <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: search"></a>
-        <input class="uk-input" type="text">
+        <input class="uk-input" [(ngModel)]="searchPageParam.term" (keyup)="onSearchChange($event.target.value)"
+          required type="text" (keydown.enter)="onSearch($event.target.value)">
       </div>
+      <!-- Auto complete list -->
+      <ul *ngIf="autocompleteFields.length > 0" class="uk-list uk-list-large p-10 m-0 regular-link">
+        <li class="cursor-pointer" *ngFor="let field of autocompleteFields">
+          <a href="javascript:void(0)"
+            (click)="onSearch(field.name || field.basicProfileInfo.firstName)">{{field.name ||  field.basicProfileInfo.firstName }}</a>
+        </li>
+      </ul>
 
       <div class="m-t-40 category-box">
         <h4>Categories</h4>
@@ -119,13 +127,17 @@
       </div>
 
       <!-- Service list  -->
-      <div class="m-t-20">
-        <app-services-list [services]="services"></app-services-list>
+
+      <div class="m-t-20" *ngIf="services && pageServices && pageServices.length > 0">
+        <app-services-list [services]="pageServices"></app-services-list>
       </div>
       <!-- <app-pagination *ngIf="services" [totalRecords]="services.length" [currentPage]="ecpService.serviceParam.pageNo"
         [perPage]="ecpService.serviceParam.max">
       </app-pagination>
     -->
+      <app-frontend-pagination *ngIf="services && services.length > 0" [items]="services" [pageSize]="pageSize"
+        [maxPages]="maxPages" (changePage)="onChangePage($event)">
+      </app-frontend-pagination>
     </div>
 
   </div>

@@ -22,9 +22,11 @@ export class ServiceDetailCardComponent implements OnInit {
   }
 
   navigate() {
-    this.router.navigate(['/services/detail'], {
-      state: { service: this.service, isDBService: this.isDBService }
-    });
+    if (this.isDBService) {
+      this.router.navigate([`/services/${this.service.basicProfileInfo.firstName}/${this.service.id}/${this.isDBService}`]);
+    } else {
+      this.router.navigate([`/services/${this.service.name}/${this.service.docid}/${this.isDBService}`]);
+    }
   }
 
 }

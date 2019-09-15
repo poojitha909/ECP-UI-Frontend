@@ -4,18 +4,16 @@ import { ProductsPageComponent } from './components/products-page/products-page.
 import { ProductsRoutingModule } from './products-routing.module';
 import { SharedModule } from 'src/app/shared';
 import { AllProductsComponent } from './components/all-products/all-products.component';
-import { SearchContainerComponent } from './components/search-container/search-container.component';
 import { PopularSearchComponent } from './components/popular-search/popular-search.component';
 import { CoreModule } from 'src/app/core';
 
 @NgModule({
-  declarations: [ProductsPageComponent, AllProductsComponent, SearchContainerComponent, PopularSearchComponent],
+  declarations: [ProductsPageComponent, AllProductsComponent,  PopularSearchComponent],
   imports: [
     CommonModule,
     ProductsRoutingModule,
     CoreModule,
-    SharedModule,
-
+    SharedModule
   ]
 })
 export class ProductsModule { }

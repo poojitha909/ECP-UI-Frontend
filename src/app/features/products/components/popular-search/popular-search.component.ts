@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-popular-search',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PopularSearchComponent implements OnInit {
   currentRate = 4;
+  @Input() products: any[];
+
   constructor() { }
 
   ngOnInit() {

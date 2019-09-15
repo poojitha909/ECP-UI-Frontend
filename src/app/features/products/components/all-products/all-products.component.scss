@@ -13,7 +13,27 @@
         color: #1A73E8;
     }
 }
-
+.w-105{
+    width: 105px;
+}
+.pr-105{
+    padding-right:105px !important;
+}
+.uk-search-default {
+    width: 100%;
+}
+.reset-link {
+    margin: 0 5px;
+    background: none;
+    color: red;
+    border: none;
+    padding: 0 !important;
+    font: inherit;
+    cursor: pointer;
+}
+.uk-search .uk-search-icon:not(a):not(button):not(input){
+    pointer-events: all;
+}
 h3{
     margin: 0px;
     font-family:"HKGroteskRegular";

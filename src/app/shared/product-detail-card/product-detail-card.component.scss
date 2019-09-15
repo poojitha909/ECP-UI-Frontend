@@ -18,12 +18,20 @@ a{
     background-color: #E8B24A;
     color: #423d27;
 }
-
+.category{
+    font-size: 15px;
+    position: absolute;
+    bottom: 18px;
+}
+.category span{
+    color: #1A73E8;
+    font-size: 15px;
+}
 
 
 .prize-card{
     text-align: center;
-    padding:  38px 0;
+    padding:  52px 0;
     background-color:  #ECF4FF;
     border-radius: 4px;
     .price {

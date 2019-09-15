@@ -21,4 +21,5 @@ export class ApiConstants {
     public static DISCUSSION_LIKE: string = `${environment.apiBaseUrl}/v1/discussLike`;
     public static DISCUSSION_REPLY_LIKE: string = `${environment.apiBaseUrl}/v1/discussReplyLike`;
     public static MENU_SERVICES: string = `${environment.apiBaseUrl}/v1/menu`;
+    public static PRODUCTS_SERVICES: string = `${environment.apiBaseUrl}/v1/product`;
 }

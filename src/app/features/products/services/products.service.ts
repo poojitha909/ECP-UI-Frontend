@@ -56,4 +56,19 @@ export class ProductService {
     getCategoryList(): Observable<any[]> {
         return this.http.get<any[]>(`${this.productUrl}/category/page`);
     }
+
+    addComment(productId: string, commentTxt: string, username: string , rating : number){
+        return this.http.post<any[]>(`${this.productUrl}/review`,{
+                productId: productId,
+                review: commentTxt,
+                userName: username,
+                likeCount: 0,
+                unlikeCount: 0,
+                status: 0
+            });        
+    }
+
+    getReviewList(productId): Observable<any[]> {
+        return this.http.get<any[]>(`${this.productUrl}/review/page?p=0&s=10000&dir=1&sort=createdAt&productId=${productId}&searchTxt=&category=`);
+    }
 }

@@ -39,7 +39,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
 
-    const queryCategory = this.activeRoute.snapshot.queryParamMap.get("Category");
+    const queryCategory = this.activeRoute.snapshot.queryParamMap.get("category");
 
     if (this.homeService.selectedCategory) {
       this.getCategoryServices(this.homeService.selectedCategory);
@@ -69,7 +69,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
 
   getCategoryServices(category) {
 
-    this.router.navigate(['services/all'], { queryParams: { Category: category } });
+    this.router.navigate(['services/all'], { queryParams: { category: category } });
     this.isLoading = true;
     console.log(category);
     this.homeService.searchParam.s = 50;

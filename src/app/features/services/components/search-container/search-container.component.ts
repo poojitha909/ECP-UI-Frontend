@@ -13,6 +13,8 @@ import { Service } from 'src/app/core/interfaces';
 export class SearchContainerComponent implements OnInit {
 
   showReset: boolean;
+  popullarService: Service[];
+
   searchPageParam: PageParam = {
     p: 0,
     s: 5,
@@ -42,9 +44,18 @@ export class SearchContainerComponent implements OnInit {
   }
 
   onSearch() {
-    if (this.searchPageParam.term) {
-      this.homeService.selectedCategory = this.searchPageParam.term;
-      this.router.navigateByUrl('/services/all');
+    if (this.searchPageParam.term && this.searchPageParam.term !== '') {
+      this.autocompleteFields = [];
+      const param = this.searchPageParam.term;
+      this.homeService.searchParam = this.searchPageParam;
+      this.homeService.getServices().subscribe(response => {
+        this.popullarService = response.data;
+        this.searchPageParam.term = param;
+        // console.log(param);
+      },
+        error => {
+          console.log(error);
+        });
     }
   }
 

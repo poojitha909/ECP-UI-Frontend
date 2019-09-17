@@ -56,9 +56,12 @@ export class SearchContainerComponent implements OnInit {
   onSearch() {
     if (this.searchPageParam.term && this.searchPageParam.term !== '') {
       this.autocompleteFields = [];
+      const param = this.searchPageParam.term;
       this.homeService.searchParam = this.searchPageParam;
       this.homeService.getServices().subscribe(response => {
         this.searchData.services = response.data;
+        this.searchPageParam.term = param;
+        // console.log(param);
       },
         error => {
           console.log(error);

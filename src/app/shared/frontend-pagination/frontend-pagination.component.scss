@@ -24,11 +24,14 @@
 .uk-pagination > * > * {
     display: inline-block;
 }
-.uk-pagination > li:first-child{
-    width: 115px;
-    line-height: 50px;
+.uk-pagination {
+    
+    .first{
+        line-height: 50px;
+    }
 }
-.uk-pagination > li:last-child{
-    width: 95px;
-    line-height: 50px;
+.uk-pagination {       
+        .last{
+            line-height: 50px;
+        }
 }

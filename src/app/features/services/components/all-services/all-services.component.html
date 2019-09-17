@@ -71,7 +71,7 @@
         <ul class="uk-list uk-list-large p-2 max-h-200 uk-overflow-auto">
           <li class="cursor-pointer" *ngFor="let category of JDcategory.categories"
             (click)="getCategoryServices(category.category_name)"
-            [ngClass]="{'font-weight-600': category.category_name === searchPageParam.term}">
+            [ngClass]="{'cat-active': category.category_name === searchPageParam.term}">
             {{category.category_name}}
           </li>
           <!-- <li>List item 2 <span class="uk-badge uk-float-right">100</span></li>

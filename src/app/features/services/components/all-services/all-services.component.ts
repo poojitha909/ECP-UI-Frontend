@@ -29,7 +29,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     public JDcategory: JdCategoryService,
     private homeService: HomeService,
     private cdr: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private activeRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -37,9 +38,14 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+
+    const queryCategory = this.activeRoute.snapshot.queryParamMap.get("Category");
+
     if (this.homeService.selectedCategory) {
       this.getCategoryServices(this.homeService.selectedCategory);
       this.homeService.selectedCategory = undefined;
+    } else if (queryCategory) {
+      this.getCategoryServices(queryCategory);
     } else {
       this.getAllService();
     }

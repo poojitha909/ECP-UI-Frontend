@@ -59,7 +59,8 @@
           required type="text" (keydown.enter)="onSearch($event.target.value)">
       </div>
       <!-- Auto complete list -->
-      <ul *ngIf="autocompleteFields.length > 0" class="uk-list uk-list-large p-10 m-0 regular-link">
+      <ul *ngIf="autocompleteFields.length > 0"
+        class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto regular-link">
         <li class="cursor-pointer" *ngFor="let field of autocompleteFields">
           <a href="javascript:void(0)"
             (click)="onSearch(field.name || field.basicProfileInfo.firstName)">{{field.name ||  field.basicProfileInfo.firstName }}</a>

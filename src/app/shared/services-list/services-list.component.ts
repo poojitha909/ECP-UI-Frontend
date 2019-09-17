@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Service } from 'src/app/core/interfaces';
 
 @Component({
@@ -9,9 +9,11 @@ import { Service } from 'src/app/core/interfaces';
 export class ServicesListComponent implements OnInit {
   @Input() services: Service[];
 
+
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }

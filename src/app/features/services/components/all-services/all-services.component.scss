@@ -99,7 +99,15 @@ h3{
     text-align: center;
     }
 }
-
+.regular-link{
+    a{
+        color: #000000;
+    }
+}
+.cat-active{
+    font-weight: 600;
+    color: #1A73E8;
+}
 // .uk-subnav > *{
 //     border: 1px solid #D7E0EF;
 //     box-sizing: border-box;

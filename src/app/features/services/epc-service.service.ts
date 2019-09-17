@@ -4,6 +4,7 @@ import { PageParam, JDserviceParam } from 'src/app/core';
 import { Observable } from 'rxjs';
 import { ApiConstants } from 'src/app/api.constants';
 import { map } from 'rxjs/operators';
+import { UserProfile } from 'src/app/core/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,6 @@ import { map } from 'rxjs/operators';
 export class EpcServiceService {
 
   serviceParam: JDserviceParam = {
-    category: "Hospitals",
-    catID: "10253670",
     max: 50,
     pageNo: 1
   }
@@ -62,5 +61,8 @@ export class EpcServiceService {
     return this.http.get<any>(`${ApiConstants.GET_JD_SERVICES_DETAIL}?service=${service}&docID=${docId}`);
   }
 
+  getDBservice(userId: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_DB_SERVICE_DETAIL}/${userId}`);
+  }
 
 }

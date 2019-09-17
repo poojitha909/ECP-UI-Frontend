@@ -9,9 +9,10 @@ import { CoreModule } from '../core';
 import { ServicesListComponent } from './services-list/services-list.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { ErrorComponent } from './error/error.component';
+import { FrontendPaginationComponent } from './frontend-pagination/frontend-pagination.component';
 
 @NgModule({
-  declarations: [ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, ServicesListComponent, PaginationComponent, ErrorComponent],
+  declarations: [ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, ServicesListComponent, PaginationComponent, ErrorComponent, FrontendPaginationComponent],
   imports: [
     CommonModule,
     SharedRoutingModule,
@@ -19,7 +20,7 @@ import { ErrorComponent } from './error/error.component';
     // NgxPaginationModule
   ],
   exports: [
-    ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, PaginationComponent, ServicesListComponent
+    ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, PaginationComponent, ServicesListComponent, FrontendPaginationComponent
   ]
 })
 export class SharedModule { }

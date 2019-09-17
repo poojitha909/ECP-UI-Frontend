@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EpcServiceService } from '../../epc-service.service';
 import { Router } from '@angular/router';
+import { HomeService } from 'src/app/features/home/home.service';
 
 @Component({
   selector: 'app-popular-search',
@@ -11,15 +12,15 @@ export class PopularSearchComponent implements OnInit {
 
   constructor(
     private ecpService: EpcServiceService,
+    private homeService:HomeService,
     private router: Router
   ) { }
 
   ngOnInit() {
   }
 
-  getCategoryServices(category, catId) {
-    this.ecpService.serviceParam.category = category;
-    this.ecpService.serviceParam.catID = catId;
+  getCategoryServices(category) {
+    this.homeService.selectedCategory = category;
     this.router.navigateByUrl('/services/all');
   }
 

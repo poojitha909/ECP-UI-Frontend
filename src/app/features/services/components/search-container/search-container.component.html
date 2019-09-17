@@ -1,4 +1,4 @@
-<div class="uk-container search-container">
+<div class="uk-container search-container" (click)="autocompleteFields=[]">
   <div class="header-label">
     <h3>Search for Services</h3>
   </div>
@@ -15,11 +15,17 @@
             <button *ngIf="showReset" class="reset-link" (click)="resetSearch()">Search again
             </button>
           </span>
-          <input class="uk-search-input search-box font-regular" [(ngModel)]="searchValue"
-            (keyup)="onSearchChange($event.target.value)" required type="text" placeholder="Search here"
-            name="search" />
+          <input class="uk-search-input search-box font-regular" [(ngModel)]="searchPageParam.term"
+            (keyup)="onSearchChange($event.target.value)" (keydown.enter)="onSearch()" required type="text"
+            placeholder="Search here" name="search" />
 
         </form>
+        <ul *ngIf="autocompleteFields.length > 0" class="uk-list uk-list-large p-10 m-0">
+          <li class="cursor-pointer" *ngFor="let field of autocompleteFields">
+            <a href="javascript:void(0)"
+              (click)="onAutocompleteClick(field.name || field.basicProfileInfo.firstName)">{{field.name ||  field.basicProfileInfo.firstName }}</a>
+          </li>
+        </ul>
       </div>
 
       <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">
@@ -28,6 +34,15 @@
     </div>
   </div>
   <!-- Search Form END -->
+
+
+  <!-- Popular search component  -->
+
+  <div class="m-t-20 p-40" *ngIf="popullarService && popullarService.length > 0">
+    <app-services-list [services]="popullarService"></app-services-list>
+    <div><button routerLink="/services/all" class="uk-button uk-button-default uk-width-1-1">View All</button></div>
+  </div>
+  <!-- Popular search component  -->
 
   <!-- Popular search START -->
   <app-popular-search></app-popular-search>

@@ -13,30 +13,44 @@ export class DetailResolverService implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any | null> {
 
-    const routedata: any = this.router.getCurrentNavigation().extras.state;
-    console.log(routedata);
-    if (routedata) {
-      if (routedata.isDBService) {
-        return of(routedata.service)
-      } else {
-        return this.epcService.getJDServiceDetail(routedata.service.name, routedata.service.docid)
-          .pipe(
-            map(response => {
-              if (response) {
-                return response;
-              }
-            }),
-            catchError(error => {
-              console.log(error);
-              this.router.navigateByUrl('/error');
-              return of(null);
-            })
-          );
-      }
-    } else {
-      this.router.navigateByUrl('/services');
-      return of(null);
-    }
-  }
+    const service: string = route.params['name'];
+    const docId: string = route.params['docId'];
+    const isDBService: string = route.params['dbservice'];
 
+    if (isDBService === "true") {
+      console.log(true);
+      return this.epcService.getDBservice(docId)
+        .pipe(
+          map(response => {
+            if (response && response.data) {
+              return response.data;
+            } else {
+              this.router.navigateByUrl('services/not-found');
+            }
+          }),
+          catchError(error => {
+            console.log(error);
+            this.router.navigateByUrl('services/not-found');
+            return of(null);
+          })
+        );
+    } else {
+      return this.epcService.getJDServiceDetail(service, docId)
+        .pipe(
+          map(response => {
+            if (response) {
+              return response;
+            } else {
+              this.router.navigateByUrl('services/not-found');
+            }
+          }),
+          catchError(error => {
+            console.log(error);
+            this.router.navigateByUrl('services/not-found');
+            return of(null);
+          })
+        );
+    }
+
+  }
 }

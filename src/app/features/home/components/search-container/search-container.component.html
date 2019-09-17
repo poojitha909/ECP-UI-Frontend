@@ -1,4 +1,4 @@
-<div class="uk-container search-container">
+<div class="uk-container search-container" (click)="autocompleteFields=[]">
   <div class="header-label">
     <h3>Search for Products, Services, Events and Discussions</h3>
   </div>
@@ -15,11 +15,16 @@
             <button *ngIf="showReset" class="reset-link" (click)="resetSearch()">Search again
             </button>
           </span>
-          <input class="uk-search-input search-box font-regular" [(ngModel)]="searchValue"
-            (keyup)="onSearchChange($event.target.value)" required type="text" placeholder="Search here"
-            name="search" />
-
+          <input class="uk-search-input search-box font-regular" [(ngModel)]="searchPageParam.term"
+            (keyup)="onSearchChange($event.target.value)" (keydown.enter)="onSearch()" required type="text"
+            placeholder="Search here" name="search" />
         </form>
+        <ul *ngIf="autocompleteFields.length > 0" class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto">
+          <li class="cursor-pointer" *ngFor="let field of autocompleteFields">
+            <a href="javascript:void(0)"
+              (click)="onAutocompleteClick(field.name || field.basicProfileInfo.firstName)">{{field.name ||  field.basicProfileInfo.firstName }}</a>
+          </li>
+        </ul>
       </div>
 
       <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">
@@ -30,7 +35,7 @@
   <!-- Search Form END -->
 
   <!-- Search Result START -->
-  <app-search-results></app-search-results>
+  <app-search-results [searchData]="searchData"></app-search-results>
   <!-- Search Result END -->
 
   <!-- Popular search component  -->

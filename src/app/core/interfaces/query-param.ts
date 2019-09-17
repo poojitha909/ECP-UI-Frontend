@@ -6,8 +6,8 @@ export interface PageParam {
 }
 
 export interface JDserviceParam {
-    category: string;
-    catID: string;
+    category?: string;
+    catID?: string;
     max?: number;
     pageNo?: number;
 }

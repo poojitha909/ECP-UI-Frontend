@@ -66,17 +66,14 @@
       <div class="m-t-40 category-box">
         <h4>Categories</h4>
         <ul class="uk-list uk-list-large p-2" *ngIf="catsList!==undefined">
-          <li *ngFor="let cat of catsList">{{cat.name}} <span class="uk-badge uk-float-right">100</span></li>
+          <li *ngFor="let cat of catsList" (click)="onTabChange(cat.id)">{{cat.name}} <span class="uk-badge uk-float-right">100</span></li>
         </ul>
       </div>
-
-      <div class="m-t-40 category-box uk-flex-middle uk-flex">
+      <!-- <div class="m-t-40 category-box uk-flex-middle uk-flex">
         <label class="m-0"><input class="uk-checkbox m-r-10" type="checkbox" checked> Show only
           Verified Profiles</label>
-      </div>
-
+      </div> -->
       <div class="m-t-40 category-box">
-
         <div class="m-b-20">
           <a href="" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a> <a> Share via
             Whatsapp</a>
@@ -92,9 +89,7 @@
         </div>
       </div>
     </div>
-
     <div class="uk-width-expand@m">
-
       <!-- <div uk-grid>
         <div class="uk-width-2-3@s text-center-xs">
           <div class="uk-button-group" uk-switcher="toggle: > *">

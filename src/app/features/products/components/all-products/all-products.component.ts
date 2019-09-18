@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {ProductService} from '../../services/products.service';
 
 @Component({
@@ -16,20 +16,20 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     p: number,
     s: number,
     searchTxt: string,
-    category: string
+    productCategory: string
   };
   
   paramsSubs: any;
   totalRecords: number;
 
-  constructor(private route:ActivatedRoute,private productService: ProductService) { }
+  constructor(private route:ActivatedRoute, private router: Router, private productService: ProductService) { }
 
   ngOnInit() {
     this.searchParams = {
       p: 0,
       s: 2,
       searchTxt: "",
-      category: ""
+      productCategory: ""
     }
     this.paramsSubs = this.route.params.subscribe(params => {
       this.initiate();
@@ -44,13 +44,16 @@ export class AllProductsComponent implements OnInit, OnDestroy {
       p: 0,
       s: 10,
       searchTxt: "",
-      category: ""
+      productCategory: ""
     }
     
     this.totalRecords = 0;
-    
-    if(this.route.snapshot.params['category'] !== undefined){
-      this.searchParams.category = this.route.snapshot.params['category'];
+    console.log(this.route.snapshot.params);
+    if(this.route.snapshot.params['searchTxt'] !== undefined){
+      this.searchParams.searchTxt = this.route.snapshot.params['searchTxt'];
+    }
+    if(this.route.snapshot.params['productCategory'] !== undefined){
+      this.searchParams.productCategory = this.route.snapshot.params['productCategory'];
     }
     this.onSearch();
     this.productService.getCategoryList().subscribe( (response:any) =>{
@@ -79,8 +82,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   }
 
   onTabChange(value) {
-    this.searchParams.p = 0;
-    this.showProducts();
+    this.router.navigate(['/products/all', {productCategory: value, searchTxt:  this.searchParams.searchTxt}]);
   }
 
   onSearchChange(event: any) {
@@ -104,6 +106,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     }
   }
 
+  
   onSearch() {
     this.showProducts();
   }

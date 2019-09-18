@@ -28,9 +28,10 @@
                 <span uk-pagination-previous></span> Previous
             </div>
         </li>
-        <li class="pagenum" *ngFor="let page of pager.pages" [ngClass]="{'uk-active':pager.currentPage === page}"
+        <li class="pagenum" *ngFor="let page of getpages()" [ngClass]="{'uk-active':pager.currentPage === page}"
             (click)="setPage(page)">
-            {{page}}</li>
+            <a>{{page}}</a>
+        </li>
         <li class="last">
             <div *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(pager.currentPage + 1)">
                 Next <span uk-pagination-next></span>

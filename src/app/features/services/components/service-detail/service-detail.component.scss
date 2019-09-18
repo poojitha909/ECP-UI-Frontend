@@ -72,6 +72,20 @@ h3{
           background-color: #fff;
         }
     }
+
+    .uk-button-transparent{
+        background-color: transparent;
+        border-radius: 4px;
+        font-size: 18px;
+        border: 1px solid $primary-btn;
+        color:$primary-btn;
+        text-transform: none;
+        padding: 0px 30px;
+        &:focus{
+          color: $primary-btn;
+          background-color: #fff;
+        }
+      }
 }
 .details-box{
     border: 1px solid #D7E0EF;
@@ -110,6 +124,9 @@ h3{
             font-size: 18px;
         }
         }
+    }
+    a{
+        color: #151c2c;
     }
 }
 

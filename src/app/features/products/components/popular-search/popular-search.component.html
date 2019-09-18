@@ -3,7 +3,7 @@
     <p>Popular Products</p>
     <div *ngIf="products!==undefined && products.length  > 0" class="uk-child-width-1-3@m uk-grid-match" uk-grid>
       <div *ngFor="let prod of products">
-        <div class="uk-card uk-card-default p-10">
+        <div class="uk-card uk-card-default p-10 cursor" [routerLink]="['/products', prod.id]">
           <div class="uk-card-media-top">
             <img class="thumb-200" src="{{ prod.images[0] }}" alt="">
           </div>

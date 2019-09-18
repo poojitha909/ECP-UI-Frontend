@@ -1,3 +1,5 @@
+import { UserProfile } from './user';
+
 export interface Service {
     vertical_name?: string;
     opstring?: any;
@@ -169,4 +171,25 @@ export interface JDCategory {
     national_catid: string;
 }
 
+
+export interface Reviews {
+    id: string;
+    discussId: string;
+    userId: string;
+    userName: string;
+    replyType: number;
+    createdAt: number;
+    childrenCount: number;
+    directChildrenCount: number;
+    text: string;
+    lastModifiedAt?: any;
+    status: number;
+    verified: boolean;
+    userRatingPercentage: number;
+    userProfile: UserProfile;
+    likeCount: number;
+    replies: any[];
+    likedByUser: boolean;
+    editableByUser: boolean;
+}
 

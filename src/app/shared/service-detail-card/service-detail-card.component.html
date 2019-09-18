@@ -12,7 +12,8 @@
     <h4 class="font-regular font-weight-600 m-0">{{ isDBService ? service?.basicProfileInfo.firstName :  service?.name}}
     </h4>
     <div>
-      <ngb-rating *ngIf="isDBService" [rate]="service?.ratingCount" [readonly]="true" [max]="5">
+      <ngb-rating *ngIf="isDBService" [rate]="getDbServiceRating(service?.ratingPercentage)" [readonly]="true"
+        [max]="5">
         <ng-template let-fill="fill" let-index="index">
           <span class="star" [class.filled]="fill === 100">&#9733;</span>
         </ng-template>

@@ -273,11 +273,13 @@
             </div>
 
             <!-- Reviews Section-->
-            <div *ngIf="!isDBService" class="m-t-30">
-                <h1 class="font-regular-24 font-weight-600"> Reviews ({{service.Reviews.length}})</h1>
+            <div *ngIf=" dbReview.length > 0 || (service.Reviews && service?.Reviews.length > 0)" class="m-t-30">
+                <h1 *ngIf="!isDBService" class="font-regular-24 font-weight-600"> Reviews ({{service.Reviews.length}})
+                </h1>
+                <h1 *ngIf="isDBService" class="font-regular-24 font-weight-600"> Reviews ({{dbReview.length}})</h1>
 
                 <!-- Reviews -->
-                <ng-container *ngIf="service.Reviews.length > 0">
+                <ng-container *ngIf="!isDBService && service.Reviews.length > 0">
                     <div *ngFor="let review of service.Reviews" class="m-t-30">
                         <div uk-grid>
                             <div class="uk-width-expand">
@@ -303,6 +305,58 @@
                         </div>
                         <div class="m-t-30">
                             <p class="font-regular">{{review.review_text }}</p>
+                        </div>
+                        <div class="m-t-30 m-b-30">
+                            <div uk-grid>
+                                <div class="uk-width-expand">
+                                    <span>
+                                        <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5"></fa-icon> 17
+                                    </span>
+                                    <span class="m-l-5">
+                                        <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5"></fa-icon> 20
+                                    </span>
+                                </div>
+                                <div class="replay-link">
+                                    <a class="font-regular">
+                                        <fa-icon [icon]="['far', 'comments']" class="m-r-5"></fa-icon> Reply
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                    </div>
+                </ng-container>
+
+
+                <ng-container *ngIf="isDBService && dbReview.length > 0">
+                    <div *ngFor="let review of dbReview" class="m-t-30">
+                        <div uk-grid>
+                            <div class="uk-width-expand">
+                                <div class="child-width-auto" uk-grid>
+                                    <div>
+                                        <img class="review-avatar"
+                                            [src]="review?.userProfile.basicProfileInfo?.profileImage?.original || 'assets/images/default-thumbnail.png'" />
+                                    </div>
+                                    <div class="p-l-20">
+                                        <p class="font-regular m-0">
+                                            {{ review.userProfile?.basicProfileInfo?.firstName }}</p>
+                                        <div>
+                                            <ngb-rating [rate]="getDbServiceRating(review.userRatingPercentage)"
+                                                [readonly]="true" [max]="5">
+                                                <ng-template let-fill="fill" let-index="index">
+                                                    <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                                                </ng-template>
+                                            </ngb-rating>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="font-regular-15">{{review.createdAt | date:'mediumDate' }}</p>
+                            </div>
+                        </div>
+                        <div class="m-t-30">
+                            <div class="font-regular" [innerHTML]="review.text"></div>
                         </div>
                         <div class="m-t-30 m-b-30">
                             <div uk-grid>

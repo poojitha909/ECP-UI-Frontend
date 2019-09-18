@@ -17,9 +17,19 @@
     background-color: rgba(22, 28, 45, 0.4);
     color: #FFF;
     font-size: 18px;
+
 }
+.uk-pagination > li.pagenum:hover{
+    border: 1px solid #1A73E8;
+    background-color: white;
+    color: #1A73E8;
+}
+
 .uk-pagination > li.pagenum.uk-active{
     background-color: #1A73E8;
+    &:hover{
+        color: #FFF;
+    }
 }
 .uk-pagination > * > * {
     display: inline-block;

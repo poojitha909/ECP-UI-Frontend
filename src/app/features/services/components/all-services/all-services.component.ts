@@ -1,10 +1,10 @@
-import { Component, OnInit, AfterViewInit, AfterContentChecked, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 
 import { EpcServiceService } from '../../epc-service.service';
 import { Service, PageParam } from 'src/app/core/interfaces';
 import { JdCategoryService } from 'src/app/core/services';
 import { HomeService } from 'src/app/features/home/home.service';
-import { Route, Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({

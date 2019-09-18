@@ -61,8 +61,8 @@ export class EpcServiceService {
     return this.http.get<any>(`${ApiConstants.GET_JD_SERVICES_DETAIL}?service=${service}&docID=${docId}`);
   }
 
-  getDBservice(userId: string): Observable<any> {
-    return this.http.get<any>(`${ApiConstants.GET_DB_SERVICE_DETAIL}/${userId}`);
+  getDBserviceDetail(id: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_DB_SERVICE_DETAIL}/${id}`);
   }
 
 }

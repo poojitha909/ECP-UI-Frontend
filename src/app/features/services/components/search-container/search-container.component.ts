@@ -49,7 +49,7 @@ export class SearchContainerComponent implements OnInit {
       const param = this.searchPageParam.term;
       this.homeService.searchParam = this.searchPageParam;
       this.homeService.getServices().subscribe(response => {
-        this.popullarService = response.data;
+        this.popullarService = response.data.slice(0, 5);
         this.searchPageParam.term = param;
         // console.log(param);
       },

@@ -24,11 +24,6 @@ const routes: Routes = [
         path: ':name/:docId/:dbservice',
         component: ServiceDetailComponent,
         resolve: { detail: DetailResolverService }
-      }, {
-
-        path: 'not-found',
-        component: ErrorComponent
-
       }
     ]
   }

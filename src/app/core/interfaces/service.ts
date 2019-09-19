@@ -172,24 +172,17 @@ export interface JDCategory {
 }
 
 
-export interface Reviews {
-    id: string;
-    discussId: string;
-    userId: string;
-    userName: string;
-    replyType: number;
-    createdAt: number;
-    childrenCount: number;
-    directChildrenCount: number;
-    text: string;
-    lastModifiedAt?: any;
-    status: number;
-    verified: boolean;
-    userRatingPercentage: number;
-    userProfile: UserProfile;
-    likeCount: number;
-    replies: any[];
-    likedByUser: boolean;
-    editableByUser: boolean;
+export interface DBReviews {
+    id?: any;
+    serviceId?: string;
+    rating?: number;
+    review?: string;
+    likeCount?: any;
+    unLikeCount?: any;
+    status?: number;
+    userName?: string;
+    parentReviewId?: any;
+    createdAt?: number;
+    lastModifiedAt?: number;
 }
 

@@ -16,13 +16,14 @@
             </button>
           </span>
           <input class="uk-search-input search-box font-regular" [(ngModel)]="searchPageParam.term"
-            (keyup)="onSearchChange($event.target.value)" (keydown.enter)="onSearch()" required type="text"
-            placeholder="Search here" name="search" />
+            (keyup)="searchEvent($event)" (keydown.enter)="onSearch()" required type="text" placeholder="Search here"
+            name="search" />
         </form>
-        <ul *ngIf="autocompleteFields.length > 0" class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto">
-          <li class="cursor-pointer" *ngFor="let field of autocompleteFields">
-            <a href="javascript:void(0)"
-              (click)="onAutocompleteClick(field.name || field.basicProfileInfo.firstName)">{{field.name ||  field.basicProfileInfo.firstName }}</a>
+        <ul *ngIf="autocompleteFields.length > 0" class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto"
+          appKeyHandler (onItemSelected)="onItemSelected($event)">
+          <li class="cursor-pointer" *ngFor="let field of autocompleteFields"
+            (click)="onAutocompleteClick(field.name || field.basicProfileInfo.firstName)">
+            {{field.name ||  field.basicProfileInfo.firstName }}
           </li>
         </ul>
       </div>

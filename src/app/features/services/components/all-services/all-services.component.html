@@ -8,46 +8,85 @@
     All Services
   </h3>
 
-  <div class="uk-child-width-1-3@s m-t-40 uk-grid-match" uk-grid>
-    <div>
-      <div class="uk-card uk-card-default">
-        <div class="uk-card-media-top bg-card-peach">
-          <div class="p-40 uk-text-center">
-            <fa-icon icon="user-alt" [style]="{'margin-right':'40px'}" size="3x"></fa-icon>
-            <fa-icon icon="user-nurse" size="3x"></fa-icon>
+  <!-- Category Slider START-->
+
+  <div class="m-t-40 m-b-40 uk-position-relative" uk-slider>
+    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+
+      <ul class="uk-slider-items uk-grid-match uk-child-width-1-3@m uk-grid">
+        <li>
+          <div class="uk-card uk-card-default">
+            <div class="uk-card-media-top bg-card-peach">
+              <div class="p-40 uk-text-center">
+                <fa-icon icon="user-alt" [style]="{'margin-right':'40px'}" size="3x"></fa-icon>
+                <fa-icon icon="user-nurse" size="3x"></fa-icon>
+              </div>
+            </div>
+            <div class="uk-card-body uk-text-center service-type">
+              <a (click)="getCategoryServices('Patient Care Taker Services')">Caretakers & Nurses</a>
+            </div>
           </div>
-        </div>
-        <div class="uk-card-body uk-text-center service-type">
-          <a (click)="getCategoryServices('Patient Care Taker Services')">Caretakers & Nurses</a>
-        </div>
-      </div>
-    </div>
-    <div>
-      <div class="uk-card uk-card-default">
-        <div class="uk-card-media-top bg-card-yellow">
-          <div class="p-40 uk-text-center">
-            <fa-icon icon="hand-holding-heart" size="3x"></fa-icon>
+        </li>
+        <li>
+
+          <div class="uk-card uk-card-default">
+            <div class="uk-card-media-top bg-card-yellow">
+              <div class="p-40 uk-text-center">
+                <fa-icon icon="hand-holding-heart" size="3x"></fa-icon>
+              </div>
+            </div>
+            <div class="uk-card-body uk-text-center service-type">
+              <a (click)="getCategoryServices('Home Nursing Services')">Home for the Elders</a>
+            </div>
           </div>
-        </div>
-        <div class="uk-card-body uk-text-center service-type">
-          <a (click)="getCategoryServices('Home Nursing Services')">Home for the Elders</a>
-        </div>
-      </div>
-    </div>
-    <div>
-      <div class="uk-card uk-card-default">
-        <div class="uk-card-media-top bg-card-green">
-          <div class="p-40 uk-text-center">
-            <fa-icon icon="user-md" [style]="{'margin-right':'40px'}" size="3x"></fa-icon>
-            <fa-icon icon="user-nurse" size="3x"></fa-icon>
+        </li>
+        <li>
+
+          <div class="uk-card uk-card-default">
+            <div class="uk-card-media-top bg-card-green">
+              <div class="p-40 uk-text-center">
+                <fa-icon icon="user-md" [style]="{'margin-right':'40px'}" size="3x"></fa-icon>
+                <fa-icon icon="user-nurse" size="3x"></fa-icon>
+              </div>
+            </div>
+            <div class="uk-card-body uk-text-center service-type">
+              <a (click)="getCategoryServices('Clinics')">Doctor</a>
+            </div>
           </div>
-        </div>
-        <div class="uk-card-body uk-text-center service-type">
-          <a (click)="getCategoryServices('Clinics')">Doctor</a>
-        </div>
-      </div>
+
+        </li>
+        <li *ngFor="let category of JDcategory.categories">
+
+          <div class="uk-card uk-card-default">
+            <div class="uk-card-media-top bg-card-green">
+              <div class="p-40 uk-text-center">
+                <fa-icon icon="user-md" [style]="{'margin-right':'40px'}" size="3x"></fa-icon>
+                <fa-icon icon="user-nurse" size="3x"></fa-icon>
+              </div>
+            </div>
+            <div class="uk-card-body uk-text-center service-type">
+              <a (click)="getCategoryServices(category.category_name)">{{ category.category_name }}</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+
     </div>
+    <a class="uk-position-center-left uk-position-small uk-hidden-hover button-slidenav" href="#" uk-slidenav-previous
+      uk-slider-item="previous"></a>
+    <a class="uk-position-center-right uk-position-small uk-hidden-hover button-slidenav" href="#" uk-slidenav-next
+      uk-slider-item="next"></a>
+    <div class="uk-margin"></div>
   </div>
+
+  <!-- <div class="uk-child-width-1-3@s m-t-40 uk-grid-match" uk-grid>
+    <div>
+
+    </div>
+
+  </div> -->
+  <!-- Category Slider END-->
 
   <div class="m-t-60" uk-grid>
 
@@ -55,8 +94,8 @@
 
       <div class="uk-inline w-100">
         <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: search"></a>
-        <input class="uk-input" [(ngModel)]="searchPageParam.term" (keyup)="onSearchChange($event.target.value)"
-          required type="text" (keydown.enter)="onSearch($event.target.value)">
+        <input class="uk-input" [(ngModel)]="searchPageParam.term" (keyup)="searchEvent($event)" required type="text"
+          (keydown.enter)="onSearch($event.target.value)">
       </div>
       <!-- Auto complete list -->
       <ul *ngIf="autocompleteFields.length > 0"
@@ -81,7 +120,9 @@
       </div>
 
       <div class="m-t-40 category-box uk-flex-middle uk-flex">
-        <label class="m-0"><input class="uk-checkbox m-r-10" type="checkbox" checked> Show only
+        <label class="m-0"><input class="uk-checkbox m-r-10" type="checkbox"
+            (change)="onCheckVerified($event.target.checked)"> Show
+          only
           Verified Profiles</label>
       </div>
 

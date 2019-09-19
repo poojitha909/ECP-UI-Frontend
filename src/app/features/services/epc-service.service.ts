@@ -4,7 +4,7 @@ import { PageParam, JDserviceParam } from 'src/app/core';
 import { Observable } from 'rxjs';
 import { ApiConstants } from 'src/app/api.constants';
 import { map } from 'rxjs/operators';
-import { UserProfile } from 'src/app/core/interfaces';
+import { UserProfile, DBReviews } from 'src/app/core/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -65,8 +65,17 @@ export class EpcServiceService {
     return this.http.get<any>(`${ApiConstants.GET_DB_SERVICE_DETAIL}/${id}`);
   }
 
-  getDBserviceReview(id: string, verified: string): Observable<any> {
-    return this.http.get<any>(`${ApiConstants.GET_DB_SERVICE_REVIEWS}?reviewContentType=4&associatedId=${id}&verified=${verified}`).pipe(
+  getDBserviceReview(id: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_DB_SERVICE_REVIEWS}?serviceId=${id}&p=0&s=1000`).pipe(
+      map(response => {
+        if (response) {
+          return response.data;
+        }
+      }));
+  }
+
+  addDBserviceReview(review: DBReviews): Observable<any> {
+    return this.http.post<any>(`${ApiConstants.ADD_DB_SERVICE_REVIEWS}`, review).pipe(
       map(response => {
         if (response) {
           return response.data;

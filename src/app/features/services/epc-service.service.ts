@@ -61,8 +61,17 @@ export class EpcServiceService {
     return this.http.get<any>(`${ApiConstants.GET_JD_SERVICES_DETAIL}?service=${service}&docID=${docId}`);
   }
 
-  getDBservice(userId: string): Observable<any> {
-    return this.http.get<any>(`${ApiConstants.GET_DB_SERVICE_DETAIL}/${userId}`);
+  getDBserviceDetail(id: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_DB_SERVICE_DETAIL}/${id}`);
+  }
+
+  getDBserviceReview(id: string, verified: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_DB_SERVICE_REVIEWS}?reviewContentType=4&associatedId=${id}&verified=${verified}`).pipe(
+      map(response => {
+        if (response) {
+          return response.data;
+        }
+      }));
   }
 
 }

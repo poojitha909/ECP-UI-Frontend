@@ -18,19 +18,18 @@ export class DetailResolverService implements Resolve<any> {
     const isDBService: string = route.params['dbservice'];
 
     if (isDBService === "true") {
-      console.log(true);
-      return this.epcService.getDBservice(docId)
+      return this.epcService.getDBserviceDetail(docId)
         .pipe(
           map(response => {
             if (response && response.data) {
               return response.data;
             } else {
-              this.router.navigateByUrl('services/not-found');
+              this.router.navigateByUrl('error');
             }
           }),
           catchError(error => {
             console.log(error);
-            this.router.navigateByUrl('services/not-found');
+            this.router.navigateByUrl('error');
             return of(null);
           })
         );
@@ -41,12 +40,12 @@ export class DetailResolverService implements Resolve<any> {
             if (response) {
               return response;
             } else {
-              this.router.navigateByUrl('services/not-found');
+              this.router.navigateByUrl('error');
             }
           }),
           catchError(error => {
             console.log(error);
-            this.router.navigateByUrl('services/not-found');
+            this.router.navigateByUrl('error');
             return of(null);
           })
         );

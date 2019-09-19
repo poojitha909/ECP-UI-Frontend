@@ -227,18 +227,25 @@
 
             <!-- Write Review Form -->
             <div class="m-t-30">
-                <div class="category-box">
+                <div *ngIf="!auth.isAuthenticate" class="replay-link">
+                    <hr>
+                    <a (click)="login()" class="font-regular-24">
+                        Write a review
+                    </a>
+                    <hr>
+                </div>
+                <div *ngIf="auth.isAuthenticate" class="category-box">
                     <h1 class="font-regular-24 font-weight-600">Write a Review</h1>
                     <hr />
-                    <form class="uk-form-stacked review-form">
+                    <form [formGroup]="reviewForm" (ngSubmit)="onReviewSubmit()" class="uk-form-stacked review-form">
 
                         <div class="uk-child-width-expand " uk-grid>
                             <div>
                                 <div class="uk-margin">
                                     <label class="uk-form-label" for="form-stacked-text">Username</label>
                                     <div class="uk-form-controls">
-                                        <input class="uk-input" id="form-stacked-text" type="text"
-                                            placeholder="Enter your name">
+                                        <input class="uk-input" id="form-stacked-text" formControlName="userName"
+                                            type="text" placeholder="Enter your name">
                                     </div>
                                 </div>
                             </div>
@@ -246,9 +253,13 @@
                                 <div class="uk-margin">
                                     <label class="uk-form-label" for="form-stacked-select">Your Rating</label>
                                     <div class="uk-form-controls">
-                                        <select class="uk-select" id="form-stacked-select">
-                                            <option>Option 01</option>
-                                            <option>Option 02</option>
+                                        <select class="uk-select" formControlName="rating" id="form-stacked-select">
+                                            <option value="0">-</option>
+                                            <option value="90">5 Star</option>
+                                            <option value="80">4 Star</option>
+                                            <option value="60">3 Star</option>
+                                            <option value="40">2 Star</option>
+                                            <option value="20">1 Star</option>
                                         </select>
                                     </div>
                                 </div>
@@ -260,13 +271,14 @@
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-stacked-text">Your Review</label>
                             <div class="uk-form-controls">
-                                <textarea class="uk-input min-h-200" id="form-stacked-text"
+                                <textarea formControlName="review" class="uk-input min-h-200" id="form-stacked-text"
                                     placeholder="Enter your review here"></textarea>
                             </div>
                         </div>
 
                         <div class="uk-text-right">
-                            <button class="uk-button uk-button-default">Post Review</button>
+                            <button class="uk-button uk-button-default" type="submit"
+                                [disabled]="reviewForm.invalid">Post Review</button>
                         </div>
                     </form>
                 </div>
@@ -334,15 +346,14 @@
                             <div class="uk-width-expand">
                                 <div class="child-width-auto" uk-grid>
                                     <div>
-                                        <img class="review-avatar"
-                                            [src]="review?.userProfile.basicProfileInfo?.profileImage?.original || 'assets/images/default-thumbnail.png'" />
+                                        <img class="review-avatar" src="assets/images/default-thumbnail.png" />
                                     </div>
                                     <div class="p-l-20">
                                         <p class="font-regular m-0">
-                                            {{ review.userProfile?.basicProfileInfo?.firstName }}</p>
+                                            {{ review.userName }}</p>
                                         <div>
-                                            <ngb-rating [rate]="getDbServiceRating(review.userRatingPercentage)"
-                                                [readonly]="true" [max]="5">
+                                            <ngb-rating [rate]="getDbServiceRating(review.rating)" [readonly]="true"
+                                                [max]="5">
                                                 <ng-template let-fill="fill" let-index="index">
                                                     <span class="star" [class.filled]="fill === 100">&#9733;</span>
                                                 </ng-template>
@@ -356,7 +367,9 @@
                             </div>
                         </div>
                         <div class="m-t-30">
-                            <div class="font-regular" [innerHTML]="review.text"></div>
+                            <div class="font-regular">
+                                <p>{{ review.review}}</p>
+                            </div>
                         </div>
                         <div class="m-t-30 m-b-30">
                             <div uk-grid>
@@ -428,7 +441,7 @@
                 </div> -->
 
             </div>
-
+            <!-- Reviews Section END-->
         </div>
     </div>
 </div>

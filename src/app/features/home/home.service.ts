@@ -55,8 +55,7 @@ export class HomeService {
         if (response && response.data) {
           return response.data
         }
-      }),
-      debounceTime(5000)
+      })
     );
   }
 

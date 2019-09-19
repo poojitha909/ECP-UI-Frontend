@@ -9,7 +9,7 @@
   <div *ngIf="catsList!==undefined">
     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" >
       <div ngxSlickItem *ngFor="let slide of catsList" class="slide">
-          <div style="padding: 0 10px">
+          <div style="padding: 0 10px" (click)="onTabChange(slide.id)">
               <div class="uk-card uk-card-default">
                 <div class="uk-card-media-top">
                   <img class="w-100" src="assets/images/product-bg.png" alt="">

@@ -29,9 +29,11 @@
     "crypto-js": "^3.1.9-1",
     "jquery": "^3.4.1",
     "jw-paginate": "^1.0.4",
+    "ngx-slick-carousel": "^0.4.6",
     "ngx-webstorage": "^4.0.1",
     "popper.js": "^1.15.0",
     "rxjs": "~6.4.0",
+    "slick-carousel": "^1.8.1",
     "tslib": "^1.9.0",
     "uikit": "^3.1.6",
     "zone.js": "~0.9.1"

@@ -22,6 +22,8 @@ export class ProductDetailPageComponent implements OnInit {
   reviewId: string;
   replyParentUser: string;
   replyParentText: string;
+  activeSlideId: string;
+
   constructor(private router: Router, private route:ActivatedRoute,private productService: ProductService, private store: StorageHelperService, private authService: AuthService) { }
   
   ngOnInit() {
@@ -31,6 +33,7 @@ export class ProductDetailPageComponent implements OnInit {
     if(this.user){
       this.user = JSON.parse(this.user);
     }
+    
   }
 
   getProduct(){
@@ -47,7 +50,6 @@ export class ProductDetailPageComponent implements OnInit {
     this.productService.getReviewList(this.productId).subscribe( (response:any) =>{
       if(response.data && response.data.content){
         this.reviews = response.data.content;
-        console.log(this.reviews);
       }
     });
   }
@@ -88,6 +90,10 @@ export class ProductDetailPageComponent implements OnInit {
     this.reviewId = id;
     this.replyParentUser = user;
     this.replyParentText = text;
+  }
+
+  setActiveSlide(id: number){
+    this.activeSlideId = "ngb-slide-" + id;
   }
 
 }

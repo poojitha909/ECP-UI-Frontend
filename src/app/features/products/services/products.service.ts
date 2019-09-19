@@ -54,7 +54,7 @@ export class ProductService {
     }
 
     getCategoryList(): Observable<any[]> {
-        return this.http.get<any[]>(`${this.productUrl}/category/page`);
+        return this.http.get<any[]>(`${this.productUrl}/category/page?p=0&s=10000`);
     }
 
     addComment(productId: string, commentTxt: string, username: string , rating : number){

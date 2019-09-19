@@ -8,6 +8,8 @@ import { AllProductsComponent } from './components/all-products/all-products.com
 import { PopularSearchComponent } from './components/popular-search/popular-search.component';
 import { ProductDetailPageComponent } from './components/product-detail/product-detail-page.component';
 import { TimeAgoPipe } from '../../shared/timeago.pipe';
+import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [ProductsPageComponent, AllProductsComponent,  PopularSearchComponent, ProductDetailPageComponent, TimeAgoPipe],
@@ -15,7 +17,9 @@ import { TimeAgoPipe } from '../../shared/timeago.pipe';
     CoreModule,
     CommonModule,
     ProductsRoutingModule,
-    SharedModule
+    SharedModule,
+    NgbCarouselModule,
+    SlickCarouselModule
   ]
 })
 export class ProductsModule { }

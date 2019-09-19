@@ -21,7 +21,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   
   paramsSubs: any;
   totalRecords: number;
-
+  slideConfig = {"slidesToShow": 3, "slidesToScroll": 1};
   constructor(private route:ActivatedRoute, private router: Router, private productService: ProductService) { }
 
   ngOnInit() {

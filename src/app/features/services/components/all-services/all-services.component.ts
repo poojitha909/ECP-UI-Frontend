@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef, HostListener } from '@angular/core';
 
 import { EpcServiceService } from '../../epc-service.service';
 import { Service, PageParam } from 'src/app/core/interfaces';
@@ -37,6 +37,11 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     private router: Router,
     private activeRoute: ActivatedRoute
   ) { }
+
+  @HostListener('window:click', ['$event.target'])
+  clear() {
+    this.autocompleteFields = [];
+  }
 
   ngOnInit() {
     this.searchTextChanged.pipe(

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 import { PageParam } from 'src/app/core';
 import { HomeService } from '../../home.service';
@@ -40,6 +40,11 @@ export class SearchContainerComponent implements OnInit {
     ).subscribe(() => {
       this.onSearchChange(this.searchPageParam.term);
     })
+  }
+
+  @HostListener('window:click', ['$event.target'])
+  clear() {
+    this.autocompleteFields = [];
   }
 
   onSearchChange(value) {

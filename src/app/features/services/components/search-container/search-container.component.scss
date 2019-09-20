@@ -98,9 +98,24 @@
 .uk-search .uk-search-icon:not(a):not(button):not(input){
   pointer-events: all;
 }
+
 .uk-list{
   background-color: #ffffff;
   a{
     color: #000;
   }
+  & > li{
+    &:hover{
+      background-color: #1a73e8;
+      font-weight: 400;
+      color: #fff;
+    }
   }
+  }
+  
+  .uk-z-index{
+    z-index: 10000;
+  }
+  .search-list {
+    box-shadow: 2px 5px 17px 4px rgba(193, 191, 191, 0.5);
+   }

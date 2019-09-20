@@ -11,7 +11,7 @@
             </div>
           </div>
           <div class="uk-card-body uk-padding-small uk-text-center service-type">
-            <a href="javascript:void(0)" (click)="getCategoryServices('Patient Care Taker Services')"
+            <a [routerLink]="['/services/all']" [queryParams]="{ category: 'Patient Care Taker Services'}"
               class="font-regular">Caretakers &
               Nurses</a>
           </div>
@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="uk-card-body uk-padding-small uk-text-center service-type">
-            <a href="javascript:void(0)" (click)="getCategoryServices('Home Nursing Services')"
+            <a [routerLink]="['/services/all']" [queryParams]="{ category: 'Home Nursing Services'}"
               class="font-regular">Home for the
               Elders</a>
           </div>
@@ -40,7 +40,7 @@
             </div>
           </div>
           <div class="uk-card-body uk-padding-small uk-text-center service-type">
-            <a href="javascript:void(0)" (click)="getCategoryServices('Clinics')" class="font-regular">Doctor</a>
+            <a [routerLink]="['/services/all']" [queryParams]="{ category: 'Clinics'}" class="font-regular">Doctor</a>
           </div>
         </div>
       </div>

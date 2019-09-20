@@ -3,7 +3,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
-import { User } from '../../interfaces';
+import { User, DBReviews } from '../../interfaces';
 import { ApiConstants } from 'src/app/api.constants';
 
 import { AppConstants } from 'src/app/app.constants';
@@ -133,6 +133,18 @@ export class AuthService {
 
   get redirectUrl(): string {
     return this.storage.retrieve(AppConstants.REDIRECT_URL);
+  }
+
+  set serviceReviewForm(data: DBReviews) {
+    this.storage.store(AppConstants.REVIEW_SERVICE, JSON.stringify(data));
+  }
+
+  get serviceReviewForm(): DBReviews {
+    return this.storage.retrieve(AppConstants.REVIEW_SERVICE) ? JSON.parse(this.storage.retrieve(AppConstants.REVIEW_SERVICE)) : undefined;
+  }
+
+  removeServiceReviewForm() {
+    this.storage.clear(AppConstants.REVIEW_SERVICE);
   }
 
   removeRedirectUrl() {

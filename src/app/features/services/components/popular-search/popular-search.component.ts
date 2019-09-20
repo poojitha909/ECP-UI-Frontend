@@ -12,16 +12,11 @@ export class PopularSearchComponent implements OnInit {
 
   constructor(
     private ecpService: EpcServiceService,
-    private homeService:HomeService,
+    private homeService: HomeService,
     private router: Router
   ) { }
 
   ngOnInit() {
-  }
-
-  getCategoryServices(category) {
-    this.homeService.selectedCategory = category;
-    this.router.navigateByUrl('/services/all');
   }
 
 }

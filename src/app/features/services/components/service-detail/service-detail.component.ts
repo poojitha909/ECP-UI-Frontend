@@ -34,26 +34,35 @@ export class ServiceDetailComponent implements OnInit {
 
   ngOnInit() {
     this.service = this.route.snapshot.data.detail;
-
-    console.log(this.service);
     if (this.service.email) {
       this.service.email = this.service.email.replace(",", " ");
     }
 
     if (this.isDBService) {
-      this.ecpService.getDBserviceReview(this.service.id).subscribe(
-        response => {
-          if (response && response.content) {
-            this.dbReview = response.content;
-            console.log(this.dbReview, this.isDBService);
-          }
-        });
+      this.getDBserviceReview(this.service.id);
+    } else {
+      const docId: string = this.route.snapshot.params['docId'];
+      this.getDBserviceReview(docId);
     }
 
+    if (this.auth.serviceReviewForm) {
+      this.reviewForm.patchValue(this.auth.serviceReviewForm);
+      this.auth.removeServiceReviewForm();
+    }
   }
 
   get isDBService(): boolean {
     return this.service.hasOwnProperty('basicProfileInfo');
+  }
+
+  getDBserviceReview(serviceId) {
+    this.ecpService.getDBserviceReview(serviceId).subscribe(
+      response => {
+        if (response && response.content) {
+          this.dbReview = response.content;
+          console.log(this.dbReview, this.isDBService);
+        }
+      });
   }
 
 
@@ -74,24 +83,35 @@ export class ServiceDetailComponent implements OnInit {
 
   onReviewSubmit() {
     if (this.reviewForm.valid) {
-      this.reviewForm.controls.serviceId.setValue(this.service.id);
-      this.ecpService.addDBserviceReview(this.reviewForm.value).subscribe(
-        response => {
-          if (response) {
-            this.dbReview.push(response);
-            this.reviewForm.reset();
-          }
-        },
-        error => {
-          console.log(error);
-        });
-      console.log(this.reviewForm.value);
 
+      if (this.auth.isAuthenticate) {
+        if (this.isDBService) {
+          this.reviewForm.controls.serviceId.setValue(this.service.id);
+        } else {
+          const docId: string = this.route.snapshot.params['docId'];
+          this.reviewForm.controls.serviceId.setValue(docId);
+        }
+        this.ecpService.addDBserviceReview(this.reviewForm.value).subscribe(
+          response => {
+            if (response) {
+              this.dbReview.push(response);
+              this.reviewForm.reset();
+            }
+          },
+          error => {
+            console.log(error);
+          });
+        console.log(this.reviewForm.value);
+      } else {
+        this.login();
+      }
     }
   }
 
   login() {
     this.auth.redirectUrl = this.router.url;
+    this.auth.serviceReviewForm = this.reviewForm.value;
     this.router.navigateByUrl('/user/signin');
+
   }
 }

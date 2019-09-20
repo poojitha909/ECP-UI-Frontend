@@ -15,6 +15,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 export class SearchContainerComponent implements OnInit {
 
   showReset: boolean;
+  selectedValue: string;
   popullarService: Service[];
   searchTextChanged = new Subject<string>();
   searchPageParam: PageParam = {
@@ -53,12 +54,16 @@ export class SearchContainerComponent implements OnInit {
 
   onSearch() {
     if (this.searchPageParam.term && this.searchPageParam.term !== '') {
+      if (this.selectedValue) {
+        this.searchPageParam.term = this.selectedValue;
+      }
       this.autocompleteFields = [];
-      const param = this.searchPageParam.term;
+      // const param = this.searchPageParam.term;
       this.homeService.searchParam = this.searchPageParam;
       this.homeService.getServices().subscribe(response => {
         this.popullarService = response.data.slice(0, 5);
-        this.searchPageParam.term = param;
+        // this.searchPageParam.term = param;
+        this.selectedValue = "";
         // console.log(param);
       },
         error => {
@@ -76,11 +81,19 @@ export class SearchContainerComponent implements OnInit {
 
   onAutocompleteClick(field) {
     this.searchPageParam.term = field;
+    this.selectedValue = "";
     this.autocompleteFields = [];
   }
 
   searchEvent($event) {
-    this.searchTextChanged.next($event.target.value);
+    if ($event.keyCode !== 13) {
+      this.searchTextChanged.next($event.target.value);
+    }
+  }
+
+  onItemSelected(value) {
+    this.selectedValue = value;
+    // this.searchPageParam.term = value;
   }
 
 }

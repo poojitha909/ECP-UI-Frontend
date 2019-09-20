@@ -225,16 +225,10 @@
 
             </div>
 
-            <!-- Write Review Form -->
+            <!-- Write Review Form START-->
             <div class="m-t-30">
-                <div *ngIf="!auth.isAuthenticate" class="replay-link">
-                    <hr>
-                    <a (click)="login()" class="font-regular-24">
-                        Write a review
-                    </a>
-                    <hr>
-                </div>
-                <div *ngIf="auth.isAuthenticate" class="category-box">
+
+                <div class="category-box">
                     <h1 class="font-regular-24 font-weight-600">Write a Review</h1>
                     <hr />
                     <form [formGroup]="reviewForm" (ngSubmit)="onReviewSubmit()" class="uk-form-stacked review-form">
@@ -242,7 +236,7 @@
                         <div class="uk-child-width-expand " uk-grid>
                             <div>
                                 <div class="uk-margin">
-                                    <label class="uk-form-label" for="form-stacked-text">Username</label>
+                                    <label class="uk-form-label" for="form-stacked-text">Username*</label>
                                     <div class="uk-form-controls">
                                         <input class="uk-input" id="form-stacked-text" formControlName="userName"
                                             type="text" placeholder="Enter your name">
@@ -251,7 +245,7 @@
                             </div>
                             <div>
                                 <div class="uk-margin">
-                                    <label class="uk-form-label" for="form-stacked-select">Your Rating</label>
+                                    <label class="uk-form-label" for="form-stacked-select">Your Rating*</label>
                                     <div class="uk-form-controls">
                                         <select class="uk-select" formControlName="rating" id="form-stacked-select">
                                             <option value="0">-</option>
@@ -269,7 +263,7 @@
                         </div>
 
                         <div class="uk-margin">
-                            <label class="uk-form-label" for="form-stacked-text">Your Review</label>
+                            <label class="uk-form-label" for="form-stacked-text">Your Review*</label>
                             <div class="uk-form-controls">
                                 <textarea formControlName="review" class="uk-input min-h-200" id="form-stacked-text"
                                     placeholder="Enter your review here"></textarea>
@@ -278,19 +272,21 @@
 
                         <div class="uk-text-right">
                             <button class="uk-button uk-button-default" type="submit"
-                                [disabled]="reviewForm.invalid">Post Review</button>
+                                [disabled]="reviewForm.invalid">{{ auth.isAuthenticate ? 'Post Review': 'Signin to Review'}}</button>
                         </div>
                     </form>
                 </div>
             </div>
+            <!-- Write Review Form END-->
 
             <!-- Reviews Section-->
             <div *ngIf=" dbReview.length > 0 || (service.Reviews && service?.Reviews.length > 0)" class="m-t-30">
-                <h1 *ngIf="!isDBService" class="font-regular-24 font-weight-600"> Reviews ({{service.Reviews.length}})
+                <h1 *ngIf="!isDBService" class="font-regular-24 font-weight-600"> Reviews
+                    ({{service.Reviews.length + dbReview.length}})
                 </h1>
                 <h1 *ngIf="isDBService" class="font-regular-24 font-weight-600"> Reviews ({{dbReview.length}})</h1>
 
-                <!-- Reviews -->
+                <!--JD Reviews -->
                 <ng-container *ngIf="!isDBService && service.Reviews.length > 0">
                     <div *ngFor="let review of service.Reviews" class="m-t-30">
                         <div uk-grid>
@@ -337,11 +333,12 @@
                         </div>
                         <hr />
                     </div>
+
                 </ng-container>
 
-
-                <ng-container *ngIf="isDBService && dbReview.length > 0">
-                    <div *ngFor="let review of dbReview" class="m-t-30">
+                <!--DB Reviews -->
+                <ng-container *ngIf="dbReview.length > 0">
+                    <div *ngFor="let review of dbReview" [ngClass]="{'m-t-30':isDBService }">
                         <div uk-grid>
                             <div class="uk-width-expand">
                                 <div class="child-width-auto" uk-grid>

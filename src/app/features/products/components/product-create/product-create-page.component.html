@@ -1,0 +1,81 @@
+<div class="product-create">
+        <!-- Bread crumbs Start -->
+        <div class="breadcrumbs">
+            <ul class="uk-breadcrumb">
+                <li routerLink="/products" class="fa fa-angle-right">Products</li>
+            </ul>
+        </div>
+        <!-- Bread crumbs End -->
+        <div class="uk-container">
+            <h2 class="heading">Create a Product</h2>
+            <hr/>
+            <form class="uk-form">
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-text">Pick a Category</label>
+                    <div class="uk-form-controls" *ngIf="categoryList!=undefined">
+                        <select class="uk-select" name="productCategory" [(ngModel)]="productCategory" >
+                            <option *ngFor="let cat of categoryList" value="{{cat.id}}">{{cat.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label">Name</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" name="name" type="text" [(ngModel)]="name" placeholder="Product Name">
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label">Short Description</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" name="shortDescription" type="text" [(ngModel)]="shortDescription" placeholder="Product Short Description">
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label">Description</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" name="description" type="text" [(ngModel)]="description" placeholder="Product Description">
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label">Is Featured</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" name="Is Featured" type="number" [(ngModel)]="isFeatured" placeholder="mark featured as 0 or 1">
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label">Price</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" name="price" type="number" [(ngModel)]="price" placeholder="Price of Product">
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label">Status</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" name="status" type="number" [(ngModel)]="status" placeholder="Status: 0 for Active and 1 for In Active">
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label">Buy Link</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" name="buyLink" type="text" [(ngModel)]="buyLink" placeholder="Product Buy From Link (link of product on buyer site)">
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label">Buy From</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" name="buyFrom" type="text" [(ngModel)]="buyFrom" placeholder="Product Buy From Site Ex. Senerioty or Amazon">
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label">Images</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" name="images" type="text" [(ngModel)]="images" placeholder="Product Buy From Site Ex. Senerioty or Amazon">
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <button class="uk-button uk-button-default m-r-15" (click)="onReset()">Cancel & Go Back</button>
+                    <button class="uk-button uk-button-primary" (click)="onSubmit()">{{!!user ? 'Add Product' : 'Signin to create Product'}}</button>
+                </div>
+            </form>
+        </div>
+    </div>

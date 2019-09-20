@@ -44,13 +44,13 @@ export class ProductService {
         return this.http.get<any[]>(`${this.productUrl}/count?${queryParams}`);
     }
 
-    getProduct(eventId: string): Observable<any[]> {
-        let queryParams = "productId=" + eventId;
+    getProduct(productId: string): Observable<any[]> {
+        let queryParams = "productId=" + productId;
         return this.http.get<any[]>(`${this.productUrl}?${queryParams}`);
     }
 
-    addProducts(event: any): Observable<any[]> {
-        return this.http.post<any[]>(`${this.productUrl}`,{...event});
+    addProduct(product: any): Observable<any[]> {
+        return this.http.post<any[]>(`${this.productUrl}`,{...product});
     }
 
     getCategoryList(): Observable<any[]> {

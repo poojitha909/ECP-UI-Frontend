@@ -10,9 +10,10 @@ import { ServicesListComponent } from './services-list/services-list.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { ErrorComponent } from './error/error.component';
 import { FrontendPaginationComponent } from './frontend-pagination/frontend-pagination.component';
+import { KeyHandlerDirective } from './directives/key-handler.directive';
 
 @NgModule({
-  declarations: [ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, ServicesListComponent, PaginationComponent, ErrorComponent, FrontendPaginationComponent],
+  declarations: [ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, ServicesListComponent, PaginationComponent, ErrorComponent, FrontendPaginationComponent, KeyHandlerDirective],
   imports: [
     CommonModule,
     SharedRoutingModule,
@@ -20,7 +21,7 @@ import { FrontendPaginationComponent } from './frontend-pagination/frontend-pagi
     // NgxPaginationModule
   ],
   exports: [
-    ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, PaginationComponent, ServicesListComponent, FrontendPaginationComponent
+    ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, PaginationComponent, ServicesListComponent, FrontendPaginationComponent, KeyHandlerDirective
   ]
 })
 export class SharedModule { }

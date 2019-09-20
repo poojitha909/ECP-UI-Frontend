@@ -4,6 +4,8 @@ import { PageParam } from 'src/app/core';
 import { HomeService } from '../../home.service';
 import { JDCategory, Service } from 'src/app/core/interfaces';
 import { JdCategoryService } from 'src/app/core/services';
+import { Subject } from 'rxjs';
+import { debounce, debounceTime, distinctUntilChanged, mergeMap } from 'rxjs/operators';
 
 
 @Component({
@@ -14,7 +16,8 @@ import { JdCategoryService } from 'src/app/core/services';
 export class SearchContainerComponent implements OnInit {
 
   showReset: boolean;
-
+  searchTextChanged = new Subject<string>();
+  selectedValue: string;
   searchPageParam: PageParam = {
     p: 0,
     s: 5,
@@ -31,6 +34,12 @@ export class SearchContainerComponent implements OnInit {
   constructor(private homeService: HomeService) { }
 
   ngOnInit() {
+    this.searchTextChanged.pipe(
+      debounceTime(500),
+      distinctUntilChanged()
+    ).subscribe(() => {
+      this.onSearchChange(this.searchPageParam.term);
+    })
   }
 
   onSearchChange(value) {
@@ -48,6 +57,7 @@ export class SearchContainerComponent implements OnInit {
   }
 
   resetSearch() {
+    console.log("reset");
     this.searchPageParam.term = "";
     this.autocompleteFields = [];
     this.showReset = false;
@@ -55,12 +65,16 @@ export class SearchContainerComponent implements OnInit {
 
   onSearch() {
     if (this.searchPageParam.term && this.searchPageParam.term !== '') {
+      if (this.selectedValue) {
+        this.searchPageParam.term = this.selectedValue;
+      }
       this.autocompleteFields = [];
       const param = this.searchPageParam.term;
       this.homeService.searchParam = this.searchPageParam;
       this.homeService.getServices().subscribe(response => {
         this.searchData.services = response.data.slice(0, 5);
         this.searchPageParam.term = param;
+        this.selectedValue = "";
         // console.log(param);
       },
         error => {
@@ -72,6 +86,16 @@ export class SearchContainerComponent implements OnInit {
   onAutocompleteClick(field) {
     this.searchPageParam.term = field;
     this.autocompleteFields = [];
+  }
+
+  searchEvent($event) {
+    // console.log($event, "onSearch event");
+    this.searchTextChanged.next($event.target.value);
+  }
+
+  onItemSelected(value) {
+    this.selectedValue = value;
+    // this.searchPageParam.term = value;
   }
 
 }

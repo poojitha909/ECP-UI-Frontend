@@ -5,6 +5,8 @@ import { Service, PageParam } from 'src/app/core/interfaces';
 import { JdCategoryService } from 'src/app/core/services';
 import { HomeService } from 'src/app/features/home/home.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 
 @Component({
@@ -14,10 +16,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AllServicesComponent implements OnInit, AfterViewInit {
   services: Service[];
+  allService: Service[];
   pageServices: Service[];
   pageSize = 5;
   maxPages: number;
   isLoading: boolean;
+  searchTextChanged = new Subject<string>();
   searchPageParam: PageParam = {
     p: 0,
     s: 5,
@@ -34,6 +38,12 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
+    this.searchTextChanged.pipe(
+      debounceTime(500),
+      distinctUntilChanged()
+    ).subscribe(() => {
+      this.onSearchChange(this.searchPageParam.term);
+    });
 
   }
 
@@ -57,6 +67,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
       response => {
         if (response) {
           this.services = response;
+          this.allService = this.services;
           this.maxPages = Math.round(this.services.length / this.pageSize);
           this.isLoading = false;
           console.log(response);
@@ -78,6 +89,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
       response => {
         if (response && response.data) {
           this.services = response.data;
+          this.allService = this.services;
           this.maxPages = Math.round(this.services.length / this.pageSize);
           this.isLoading = false;
           this.searchPageParam.term = category;
@@ -112,4 +124,17 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     }
   }
 
+  searchEvent($event) {
+    this.searchTextChanged.next($event.target.value);
+  }
+
+  onCheckVerified(checked) {
+    if (checked) {
+      this.services = this.allService.filter(service => service.verified = checked);
+
+    } else {
+      this.services = this.allService;
+    }
+    console.log(this.services);
+  }
 }

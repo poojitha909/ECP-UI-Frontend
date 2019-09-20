@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ServiceDetail, Review } from 'src/app/core/interfaces';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ServiceDetail, DBReviews } from 'src/app/core/interfaces';
 import { EpcServiceService } from '../../epc-service.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/core';
 
 @Component({
   selector: 'app-service-detail',
@@ -11,9 +13,24 @@ import { EpcServiceService } from '../../epc-service.service';
 export class ServiceDetailComponent implements OnInit {
 
   service: ServiceDetail;
-  dbReview: Review[] = [];
+  dbReview: DBReviews[] = [];
+  reviewForm: FormGroup;
 
-  constructor(private route: ActivatedRoute, private ecpService: EpcServiceService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private ecpService: EpcServiceService,
+    private router: Router,
+    private fb: FormBuilder,
+    public auth: AuthService
+  ) {
+
+    this.reviewForm = this.fb.group({
+      serviceId: [""],
+      rating: [0, Validators.required],
+      review: ["", Validators.required],
+      userName: ["", Validators.required]
+    });
+  }
 
   ngOnInit() {
     this.service = this.route.snapshot.data.detail;
@@ -24,14 +41,15 @@ export class ServiceDetailComponent implements OnInit {
     }
 
     if (this.isDBService) {
-      this.ecpService.getDBserviceReview(this.service.id, 'false').subscribe(
+      this.ecpService.getDBserviceReview(this.service.id).subscribe(
         response => {
-          if (response && response.replies) {
-            this.dbReview = response.replies;
+          if (response && response.content) {
+            this.dbReview = response.content;
             console.log(this.dbReview, this.isDBService);
           }
         });
     }
+
   }
 
   get isDBService(): boolean {
@@ -52,5 +70,28 @@ export class ServiceDetailComponent implements OnInit {
     } else if (percent <= 100) {
       return 5;
     }
+  }
+
+  onReviewSubmit() {
+    if (this.reviewForm.valid) {
+      this.reviewForm.controls.serviceId.setValue(this.service.id);
+      this.ecpService.addDBserviceReview(this.reviewForm.value).subscribe(
+        response => {
+          if (response) {
+            this.dbReview.push(response);
+            this.reviewForm.reset();
+          }
+        },
+        error => {
+          console.log(error);
+        });
+      console.log(this.reviewForm.value);
+
+    }
+  }
+
+  login() {
+    this.auth.redirectUrl = this.router.url;
+    this.router.navigateByUrl('/user/signin');
   }
 }

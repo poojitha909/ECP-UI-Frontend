@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { HomeService } from 'src/app/features/home/home.service';
 import { PageParam } from 'src/app/core';
 import { Service } from 'src/app/core/interfaces';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-container',
@@ -14,7 +16,7 @@ export class SearchContainerComponent implements OnInit {
 
   showReset: boolean;
   popullarService: Service[];
-
+  searchTextChanged = new Subject<string>();
   searchPageParam: PageParam = {
     p: 0,
     s: 5,
@@ -27,6 +29,12 @@ export class SearchContainerComponent implements OnInit {
   constructor(private homeService: HomeService, private router: Router) { }
 
   ngOnInit() {
+    this.searchTextChanged.pipe(
+      debounceTime(500),
+      distinctUntilChanged()
+    ).subscribe(() => {
+      this.onSearchChange(this.searchPageParam.term);
+    });
   }
 
   onSearchChange(value) {
@@ -69,6 +77,10 @@ export class SearchContainerComponent implements OnInit {
   onAutocompleteClick(field) {
     this.searchPageParam.term = field;
     this.autocompleteFields = [];
+  }
+
+  searchEvent($event) {
+    this.searchTextChanged.next($event.target.value);
   }
 
 }

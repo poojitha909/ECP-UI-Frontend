@@ -71,6 +71,12 @@ h3{
           color: $primary-btn;
           background-color: #fff;
         }
+        &:disabled{
+            background-color: transparent;
+            color: #999;
+            border-color: #e5e5e5;
+            border: 1px solid;
+        }
     }
 
     .uk-button-transparent{

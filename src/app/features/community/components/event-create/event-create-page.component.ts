@@ -69,7 +69,7 @@ export class EventCreatePageComponent implements OnInit {
       this.entryFee = event.entryFee;
       this.languages = "";
       this.organiser = "";
-      this.store.clear("new-discuss");
+      this.store.clear("new-event");
     }
   }
 

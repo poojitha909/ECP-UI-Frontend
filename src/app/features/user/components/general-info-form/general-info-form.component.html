@@ -2,6 +2,17 @@
 <div class="category-box m-t-40">
     <h3>General Info</h3>
     <hr />
+    <!-- Error box START-->
+    <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
+        <p>{{ errorMessage }}</p>
+    </div>
+    <!-- Error box END-->
+    <!-- Success box START-->
+    <div *ngIf="!isLoading && successMessage" class="uk-alert-success" uk-alert>
+        <p>{{ successMessage }}</p>
+    </div>
+    <!-- Success box END-->
+
     <form class="uk-form-stacked" [formGroup]="generalInfoForm" (ngSubmit)="onSubmit()">
 
         <div class="uk-margin">
@@ -49,7 +60,7 @@
                     <div class="uk-form-controls">
                         <select class="uk-select" id="form-stacked-select" formControlName="day">
                             <option disabled selected hidden value="">Day</option>
-                            <option *ngFor="let n of dateOption">{{n}}</option>
+                            <option *ngFor="let n of dateOption" [value]="n">{{n}}</option>
                         </select>
                     </div>
                 </div>
@@ -65,7 +76,7 @@
                     <div class="uk-form-controls">
                         <select class="uk-select" id="form-stacked-select" formControlName="year">
                             <option disabled selected hidden value>Year</option>
-                            <option *ngFor="let year of yearOptions">{{year}}</option>
+                            <option *ngFor="let year of yearOptions" [value]="year">{{year}}</option>
                         </select>
                     </div>
                 </div>
@@ -75,7 +86,7 @@
 
         <hr class="m-t-75" />
         <p class="uk-text-right">
-            <button class="uk-button uk-button-transparent uk-modal-close">Cancel</button>
+            <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
             <button class="m-l-10 uk-button uk-button-default" type="submit">Submit</button>
         </p>
     </form>

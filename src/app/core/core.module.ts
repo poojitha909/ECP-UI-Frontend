@@ -8,6 +8,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -16,6 +18,7 @@ import { far } from '@fortawesome/free-regular-svg-icons';
     ReactiveFormsModule,
     NgbModule,
     FontAwesomeModule,
+    NgSelectModule
     // NgxPaginationModule
   ],
   exports: [
@@ -23,6 +26,7 @@ import { far } from '@fortawesome/free-regular-svg-icons';
     NgbModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    NgSelectModule
     // NgxPaginationModule
   ]
 })

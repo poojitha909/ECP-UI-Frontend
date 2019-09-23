@@ -53,7 +53,8 @@
                                             {{ service?.email || service?.basicProfileInfo?.primaryEmail || '-'}}</p>
 
                                         <p class="font-regular-15 m-b-10 lable">Organisation</p>
-                                        <p *ngIf="!isDBService" class="font-regular m-t-0">{{service.seo_dt.title}}</p>
+                                        <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.seo_dt?.title}}
+                                        </p>
                                         <p *ngIf="isDBService && service?.systemTags.length > 0"
                                             class="font-regular m-t-0">
                                             <ng-container *ngFor="let tag of service?.systemTags">
@@ -102,7 +103,7 @@
                         <!-- This is the modal -->
                         <div id="modal-example" uk-modal>
                             <div class="uk-modal-dialog uk-modal-body">
-                                <h2 class="uk-modal-title">Repot</h2>
+                                <h2 class="uk-modal-title">Report</h2>
                                 <form class="uk-form-stacked review-form">
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="form-stacked-select">Cause of
@@ -166,9 +167,9 @@
             <div>
                 <h1 class="font-regular-24 font-weight-600">About</h1>
                 <p *ngIf="!isDBService">
-                    {{service?.seo_dt.desc }}
+                    {{service?.seo_dt?.desc }}
                 </p>
-                <div *ngIf="isDBService" [innerHTML]="service?.basicProfileInfo.description"></div>
+                <div *ngIf="isDBService" [innerHTML]="service?.basicProfileInfo?.description"></div>
             </div>
             <hr />
 
@@ -183,7 +184,7 @@
                             {{ service?.email || service?.basicProfileInfo?.primaryEmail || '-'}}</p>
 
                         <p class="font-regular-15 m-b-10 lable">Organisation</p>
-                        <p *ngIf="!isDBService" class="font-regular m-t-0">{{service.seo_dt.title}}</p>
+                        <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.seo_dt?.title}}</p>
                         <p *ngIf="isDBService && service?.systemTags.length > 0" class="font-regular m-t-0">
                             <ng-container *ngFor="let tag of service?.systemTags">
                                 {{ tag.description}}

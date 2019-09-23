@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
 
   navigateUser() {
     if (this.auth.isAuthenticate) {
-      this.router.navigateByUrl("/");
+      this.router.navigateByUrl("/user");
     } else {
       this.router.navigateByUrl("/user/signin");
     }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
+import { UserProfile } from 'src/app/core/interfaces';
 
 @Component({
   selector: 'app-user-page',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserPageComponent implements OnInit {
 
-  constructor() { }
+  selectedTab: string = 'displayname';
+
+
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.getUserProfile();
   }
 
+
+  getUserProfile() {
+    this.userService.getUserProfile().subscribe(
+      response => {
+        this.userService.userProfile = response;
+        console.log(response);
+      });
+  }
 }

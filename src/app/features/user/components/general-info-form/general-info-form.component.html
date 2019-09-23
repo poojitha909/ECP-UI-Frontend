@@ -1,0 +1,83 @@
+<!-- General info form -->
+<div class="category-box m-t-40">
+    <h3>General Info</h3>
+    <hr />
+    <form class="uk-form-stacked" [formGroup]="generalInfoForm" (ngSubmit)="onSubmit()">
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-text">General Info</label>
+            <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                <label><input class="uk-radio" type="radio" formControlName="gender" [value]="1"> Male</label>
+                <label><input class="uk-radio" type="radio" formControlName="gender" [value]="0"> Female</label>
+                <label><input class="uk-radio" type="radio" formControlName="gender" [value]="2"> Trans</label>
+                <label><input class="uk-radio" type="radio" formControlName="gender" [value]="3"> Prefer not to
+                    say</label>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-text">General Info</label>
+            <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                <label><input class="uk-radio" type="radio" formControlName="maritalStatus" value="Married">
+                    Married</label>
+                <label><input class="uk-radio" type="radio" formControlName="maritalStatus" value="Unmarried">
+                    Unmarried</label>
+                <label><input class="uk-radio" type="radio" formControlName="maritalStatus" value="Widowed">
+                    Widowed</label>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-select">Occuption</label>
+            <div class="uk-form-controls">
+                <select class="uk-select" id="form-stacked-select" formControlName="occupation">
+                    <option disabled selected hidden value="">Occuption</option>
+                    <option>Working</option>
+                    <option>Not Working</option>
+                    <option>Retired</option>
+                    <option>Studying</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-select">Birthday</label>
+            <div class="uk-child-width-expand@s uk-grid-small" uk-grid>
+
+                <div>
+                    <div class="uk-form-controls">
+                        <select class="uk-select" id="form-stacked-select" formControlName="day">
+                            <option disabled selected hidden value="">Day</option>
+                            <option *ngFor="let n of dateOption">{{n}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="uk-form-controls">
+                        <select class="uk-select" id="form-stacked-select" formControlName="month">
+                            <option disabled selected hidden value="">Month</option>
+                            <option *ngFor="let month of monthOption" [value]="month.value">{{month.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="uk-form-controls">
+                        <select class="uk-select" id="form-stacked-select" formControlName="year">
+                            <option disabled selected hidden value>Year</option>
+                            <option *ngFor="let year of yearOptions">{{year}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="m-t-75" />
+        <p class="uk-text-right">
+            <button class="uk-button uk-button-transparent uk-modal-close">Cancel</button>
+            <button class="m-l-10 uk-button uk-button-default" type="submit">Submit</button>
+        </p>
+    </form>
+</div>
+<!-- General info form End -->

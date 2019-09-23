@@ -1,22 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-import { AskQuestionPageComponent } from './ask-question-page.component';
+import { AllAskQuestionComponent } from './all-ask-question.component';
 
-describe('AskQuestionPageComponent', () => {
-  let component: AskQuestionPageComponent;
-  let fixture: ComponentFixture<AskQuestionPageComponent>;
+describe('AllAskQuestionComponent', () => {
+  let component: AllAskQuestionComponent;
+  let fixture: ComponentFixture<AllAskQuestionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AskQuestionPageComponent],
+      declarations: [AllAskQuestionComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AskQuestionPageComponent);
+    fixture = TestBed.createComponent(AllAskQuestionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

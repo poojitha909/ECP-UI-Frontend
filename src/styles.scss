@@ -1,14 +1,102 @@
 /* You can add global styles to this file, and also import other style files */
 
 // 1. Your custom variables and variable overwrites.
-@import "assets/css/variables.scss";
 
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "assets/css/variables.scss";
 // 2. Import default variables and available mixins.
-@import "uikit/src/scss/variables-theme.scss";
-@import "uikit/src/scss/mixins-theme.scss";
+@import "~uikit/src/scss/variables-theme.scss";
+@import "~uikit/src/scss/mixins-theme.scss";
 
 // 3. Your custom mixin overwrites.
 // @mixin hook-card() { color: #000; }
 
 // 4. Import UIkit.
-@import "uikit/src/scss/uikit-theme.scss";
+@import "~uikit/src/scss/uikit-theme.scss";
+// 5. Import Font
+// @import url("https://fontlibrary.org/face/hk-grotesk");
+@import "assets/css/suedo.css";
+
+// =============================================================================
+// Font Face
+// =============================================================================
+@mixin font-face($name, $path, $weight: null, $style: null) {
+  $src: $path;
+  @font-face {
+    font-family: quote($name);
+    font-style: $style;
+    font-weight: $weight;
+    src: url($src) format("truetype");
+  }
+}
+
+@include font-face('HKGroteskRegular', 'assets/font/hk-grotesk/HKGrotesk-Regular.ttf',normal,normal);
+@include font-face('HKGroteskRegular', 'assets/font/hk-grotesk/HKGrotesk-SemiBold.ttf',bold,normal);
+
+.font-regular{
+    font-size: 18px;
+    font-family:"HKGroteskRegular"; 
+}
+
+.font-regular-15{
+  font-size: 15px;
+  font-family:"HKGroteskRegular"; 
+}
+
+.font-regular-24{
+  font-family:"HKGroteskRegular"; 
+  font-size: 24px;
+}
+
+.star {
+    font-size: 1.5rem;
+    color: #0000007a;
+  }
+  
+  .filled {
+    color: #E8B24A;
+  }
+  
+  ngb-rating{
+      :focus{
+          outline: unset;
+      }
+  }
+
+  .verified-icon{
+    background-image: url('/assets/images/certified.svg');
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    font-size: 18px;
+  }
+
+  .verified-icon-w{
+    background-image: url('/assets/images/certified-w.svg');
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    font-size: 15px;
+  }
+
+  .close-icon{
+    background-image: url('/assets/images/cancel.svg');
+    display: inline-block;
+    height: 3em;
+    width: 3em;
+    font-size: 12px;
+  }
+
+  .spinner-border{
+    width: 8rem;
+    height: 8rem;
+    border:0.50em solid #1A72E8;
+    border-right-color: transparent;
+    border-radius: 50%;
+}
+
+.knx-active{
+  background-color: #1a73e8;
+  font-weight: 400;
+  color: #fff;
+}

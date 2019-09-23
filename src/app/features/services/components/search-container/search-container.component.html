@@ -1,0 +1,69 @@
+<div class="uk-container search-container">
+  <div class="header-label">
+    <h3>Search for Services</h3>
+  </div>
+
+  <!-- Search Form START -->
+  <div class="search-form">
+    <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
+
+      <div class="uk-margin uk-width-1-1 uk-width-expand@s uk-position-relative">
+        <div class="uk-position-absolute uk-z-index  w-full pr-20">
+          <form class="uk-search uk-search-default">
+            <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
+              <button class="uk-button-link" style="visibility: hidden"></button>
+              <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
+                <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Search again
+              </button>
+            </span>
+            <input class="uk-search-input search-box font-regular" [(ngModel)]="searchPageParam.term"
+              (keyup)="searchEvent($event)" (keydown.enter)="onSearch()" required type="text" placeholder="Search here"
+              name="search" />
+          </form>
+          <ul *ngIf="autocompleteFields.length > 0"
+            class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto search-list" appKeyHandler
+            (onItemSelected)="onItemSelected($event)">
+            <li class="cursor-pointer" *ngFor="let field of autocompleteFields"
+              (click)="onAutocompleteClick(field.name || field.basicProfileInfo.firstName)">
+              {{field.name ||  field.basicProfileInfo.firstName }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">
+        <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
+      </div>
+    </div>
+  </div>
+  <!-- Search Form END -->
+
+
+  <!-- Popular search component  -->
+
+  <div class="m-t-20 p-40" *ngIf="popullarService && popullarService.length > 0">
+    <app-services-list [services]="popullarService"></app-services-list>
+    <div><button routerLink="/services/all" class="uk-button uk-button-default uk-width-1-1">View All</button></div>
+  </div>
+  <!-- Popular search component  -->
+
+  <!-- Popular search START -->
+  <app-popular-search></app-popular-search>
+
+  <!-- <div class="uk-container popular-search-list"></div> -->
+  <div class="quote-line uk-margin-remove" uk-grid>
+    <div class="uk-width-expand@s uk-padding-remove uk-flex uk-flex-middle">
+      <div class="uk-flex uk-flex-middle">
+        <span class="mr-3">
+          <span class="verified-icon"></span>
+        </span>All
+        Products
+        and Services are
+        100% verified. Buy with
+        Trust!
+      </div>
+    </div>
+    <div class="uk-width-auto@s uk-text-center">
+      <button routerLink="/services/all" class="uk-button uk-button-default">View All Services</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+@import "src/assets/css/variables.scss";
+
+.banner {
+  background: url("/assets/images/bg-ask2.png");
+  padding-top: 24px;
+  border-radius: 8px;
+  font-family: $regular-font;
+  margin-top: 24px;
+  margin-bottom: 48px;
+  .logo {
+    h3 {
+      padding: 12px 0 12px 40px;
+      font-weight: 600;
+      margin: 0;
+    }
+  }
+  .para-info {
+    margin: 24px 40px 0;
+    padding-bottom: 24px;
+    font-size: 18px;
+    color: rgba(22, 28, 45, 0.87);
+  }
+  .couple-img {
+    margin-right: 36px;
+    margin-top: -70px;
+    img {
+      height: 100%;
+      // width: 100%;
+    }
+    @media (min-width: 320px) and (max-width: 640px) {
+      margin: 0 !important;
+    }
+  }
+}
+
+.search-container {
+  background-color: #ecf4ff;
+  font-family: $regular-font;
+  border-radius: 8px;
+  margin-bottom: 48px;
+  .header-label {
+    font-size: 24px;
+    color: rgba(22, 28, 45, 0.87);
+    margin: 40px 40px 16px 40px;
+    select{
+      font-size: 18px;
+    }
+    h3 {
+      font-size: 24px;
+    }
+  }
+  
+  .quote-line {
+    background-color: #e4eefb;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding:12px 40px 12px 40px;
+    color: #161c2d;
+    font-size: 18px;
+    p {
+      margin: 0;
+    }
+  }
+  
+}
+.popular-search{
+  .uk-card-media-top{
+    border-radius: 4px;
+    background-color: #ecf4ff;
+    padding: 5px;
+    img{
+      display:block;
+      margin: auto;
+  
+    }
+  }
+  .uk-card{
+    border-radius: 4px;
+    .thumb-100{
+      height:100px;
+    }
+    .uk-card-body p{
+      margin: 0px;
+      font-size: 15px;
+      text-align:center;
+      b{
+        font-size: 18px;
+      }
+      .uk-button-default{
+        height: 36px;    
+        width:100%;
+        margin-top: 20px;
+        text-transform: capitalize;
+        font-size: 18px;
+        line-height: 18px;
+      }
+    }
+  }
+}
+.uk-button-default{
+  color:#1A73E8;
+  border: 1px solid #1A73E8;
+  border-radius: 4px;
+  height: 48px;
+}

@@ -1,0 +1,27 @@
+<div class="search-result"
+  *ngIf="searchData.services.length > 0 || searchData.products.length > 0  || searchData.Communitys.length > 0 ">
+  <ul uk-tab>
+    <li class="uk-active"><a href="#" class="font-regular">Product</a></li>
+    <li><a href="#" class="font-regular">Services</a></li>
+    <li><a href="#" class="font-regular">Community</a></li>
+    <!-- <li class="uk-disabled"><a>Disabled</a></li> -->
+  </ul>
+  <ul class="uk-switcher uk-margin">
+    <li>
+      <!-- <div class="m-t-40">
+        <p class="font-regular-24">Your search didn’t yield a results.> </p>
+      </div> -->
+      <!-- <app-product-detail-card> </app-product-detail-card> -->
+      Products List .....
+      <div><button routerLink="/products/all" class="uk-button uk-button-default uk-width-1-1">View All</button></div>
+    </li>
+    <li>
+      <app-services-list [services]="searchData.services"></app-services-list>
+      <div><button routerLink="/services/all" class="uk-button uk-button-default uk-width-1-1">View All</button></div>
+    </li>
+    <li>Community lists ......
+      <div><button class="uk-button uk-button-default uk-width-1-1">View All</button></div>
+    </li>
+  </ul>
+
+</div>

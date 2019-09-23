@@ -1,0 +1,58 @@
+.uk-input{
+    border-radius: 4px;
+    height: 48px;
+}
+
+.fb-btn{
+    background-color: #4267B2;
+    color: #ffffff;
+    border-radius: 4px;
+    text-transform: unset;
+    width: 100%;
+    &:focus{
+        background-color: #ffffff;
+        color: #4267B2;
+    }
+}
+
+.google-btn{
+    background-color: #EA4335;
+    color: #ffffff;
+    border-radius: 4px;
+    text-transform: unset;
+    width: 100%;
+    &:focus{
+        background-color: #ffffff;
+        color: #EA4335;
+    }
+}
+
+.otp-btn{
+    height: 48px;
+    background-color: #1a73e8;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 15px;
+    &:focus{
+        background-color: #ffffff;
+        color: #1a73e8;
+    }
+}
+
+.mobile-number{
+    width: 100%;
+    a{
+        width: 135px;
+        color: #1a73e8;
+    }
+}
+
+.resend-otp{
+    color: #1a73e8;
+    font-size: 14px;
+}
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

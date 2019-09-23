@@ -1,2 +1,2 @@
 export * from "./home.module";
-export * from "./home-page/home-page.component";
+export * from "./components/home-page/home-page.component";

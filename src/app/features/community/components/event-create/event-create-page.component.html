@@ -1,0 +1,190 @@
+<div class="event-create">
+        <!-- Bread crumbs Start -->
+        <div class="breadcrumbs">
+            <ul class="uk-breadcrumb">
+                <li routerLink="/community" class="fa fa-angle-right">Community</li>
+                <li routerLink="/community/events" class="fa fa-angle-right">Events</li>
+            </ul>
+        </div>
+        <!-- Bread crumbs End -->
+        <div class="uk-container">
+            <h2 class="heading">Create an Event</h2>
+            <hr/>
+            <form class="uk-form">
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-text">Pick a Category</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-select" name="category" [(ngModel)]="eventType" >
+                            <option value="0">Select Category</option>
+                            <option value="1">Outdoor</option>
+                            <option value="2">Indoor</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label">Title</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" name="title" type="text" [(ngModel)]="title" placeholder="What’s the title of your event?">
+                    </div>
+                </div>
+                <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
+                    <div>
+                        <label class="uk-form-label" >Date</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="date" name="date" [(ngModel)]="date" placeholder="yyyy-mm-dd" />
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-grid-small uk-child-width-1-2@m"  uk-grid>
+                            <div>
+                                <label class="uk-form-label">Start Time</label>
+                                <div class="uk-form-controls">
+                                    <select class="uk-select" name="startTime" [(ngModel)]="startTime">
+                                        <option value="00:00">12:00 am</option>
+                                        <option value="00:30">12:30 am</option>
+                                        <option value="01:00">01:00 am</option>
+                                        <option value="01:30">01:30 am</option>
+                                        <option value="02:00">02:00 am</option>
+                                        <option value="02:30">02:30 am</option>
+                                        <option value="03:00">03:00 am</option>
+                                        <option value="03:30">03:30 am</option>
+                                        <option value="04:00">04:00 am</option>
+                                        <option value="04:30">04:30 am</option>
+                                        <option value="05:00">05:00 am</option>
+                                        <option value="05:30">05:30 am</option>
+                                        <option value="06:00">06:00 am</option>
+                                        <option value="06:30">06:30 am</option>
+                                        <option value="07:00">07:00 am</option>
+                                        <option value="07:30">07:30 am</option>
+                                        <option value="08:00">08:00 am</option>
+                                        <option value="08:30">08:30 am</option>
+                                        <option value="09:00">09:00 am</option>
+                                        <option value="09:30">09:30 am</option>
+                                        <option value="10:00">10:00 am</option>
+                                        <option value="10:30">10:30 am</option>
+                                        <option value="11:00">11:00 am</option>
+                                        <option value="11:30">11:30 am</option>
+                                        <option value="12:00">12:00 pm</option>
+                                        <option value="12:30">12:30 pm</option>
+                                        <option value="13:00">01:00 pm</option>
+                                        <option value="13:30">01:30 pm</option>
+                                        <option value="14:00">02:00 pm</option>
+                                        <option value="14:30">02:30 pm</option>
+                                        <option value="15:00">03:00 pm</option>
+                                        <option value="15:30">03:30 pm</option>
+                                        <option value="16:00">04:00 pm</option>
+                                        <option value="16:30">04:30 pm</option>
+                                        <option value="17:00">05:00 pm</option>
+                                        <option value="17:30">05:30 pm</option>
+                                        <option value="18:00">06:00 pm</option>
+                                        <option value="18:30">06:30 pm</option>
+                                        <option value="19:00">07:00 pm</option>
+                                        <option value="19:30">07:30 pm</option>
+                                        <option value="20:00">08:00 pm</option>
+                                        <option value="20:30">08:30 pm</option>
+                                        <option value="21:00">09:00 pm</option>
+                                        <option value="21:30">09:30 pm</option>
+                                        <option value="22:00">10:00 pm</option>
+                                        <option value="22:30">10:30 pm</option>
+                                        <option value="23:00">11:00 pm</option>
+                                        <option value="23:30">11:30 pm</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="uk-form-label">Duration</label>
+                                <div class="uk-form-controls">
+                                    <select class="uk-select" name="duration" [(ngModel)]="duration">
+                                        <option value="30">30 minutes</option>
+                                        <option value="60">1 hour</option>
+                                        <option value="90">1.5 hours</option>
+                                        <option value="120">2 hours</option>
+                                        <option value="150">2.5 hours</option>
+                                        <option value="180">3 hours</option>
+                                        <option value="210">3.5 hours</option>
+                                        <option value="240">4 hours</option>
+                                        <option value="270">4.5 hours</option>
+                                        <option value="300">5 hours</option>
+                                        <option value="360">6 hours</option>
+                                        <option value="420">7 hours</option>
+                                        <option value="480">8 hours</option>
+                                        <option value="540">9 hours</option>
+                                        <option value="600">10 hours</option>
+                                        <option value="660">11 hours</option>
+                                        <option value="720">12 hours</option>
+                                        <option value="1440">Full Day</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label">Description</label>
+                    <div class="uk-form-controls">
+                        <textarea class="uk-textarea" name="description" rows="5" [(ngModel)]="description" placeholder="Type event description here"></textarea>
+                    </div>
+                </div>
+                <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
+                    <div>
+                        <label class="uk-form-label">Address</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" name="address" [(ngModel)]="address" placeholder="Eg.: HSR layout, sector 6" />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="uk-form-label">Landmark</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" name="landmark" [(ngModel)]="landmark" placeholder="Eg.: Infront of Bhagvati Hospital" />
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
+                        <div>
+                            <label class="uk-form-label">Organiser Name</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" name="organiser" [(ngModel)]="organiser" placeholder="Organiser Name" />
+                            </div>
+                        </div>
+                        <div>
+                            <label class="uk-form-label">Languages</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" name="languages" [(ngModel)]="languages" placeholder="Eg.: Hindi, Punjabi, Tamil" />
+                            </div>
+                        </div>
+                    </div>
+                <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
+                    <div>
+                        <label class="uk-form-label">Organiser Email address</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" name="orgEmail" [(ngModel)]="orgEmail" placeholder="abcd@xyz.com" />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="uk-form-label">Organiser Phone number</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" name="orgPhone" [(ngModel)]="orgPhone" placeholder="+91 99 9999 9999" />
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
+                    <div>
+                        <label class="uk-form-label" >Event Capacity</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" name="capacity" [(ngModel)]="capacity" placeholder="Eg. 75 People" />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="uk-form-label">Event Fees (in Rupees)</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="number" name="entryFee" [(ngModel)]="entryFee" placeholder="Entry Fees (just place 0 in case of free entries)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <button class="uk-button uk-button-default m-r-15" (click)="onReset()">Cancel & Go Back</button>
+                    <button class="uk-button uk-button-primary" (click)="onSubmit()">{{!!user ? 'Publish' : 'Signin to create Event'}}</button>
+                </div>
+            </form>
+        </div>
+    </div>

@@ -1,0 +1,50 @@
+@import "../../../assets/css/variables.scss";
+
+.center {
+  padding: 40px;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  >div {
+    background: #ecf4ff;
+    height: 100%;
+  }
+  }
+   h1{
+      font-size: 70px;
+      font-weight: 600;
+      font-family:"HKGroteskRegular"; 
+   }
+
+  a{
+    color: #1A73E8; 
+}
+
+.uk-button-default{
+    background-color: $primary-btn;
+    border-radius: 4px;
+    font-size: 18px;
+    border: none;
+    color: #fff;
+    text-transform: none;
+    padding: 0px 30px;
+    &:focus{
+      color: $primary-btn;
+      background-color: #fff;
+      border: 1px solid $primary-btn;
+    }
+}
+
+.uk-button-transparent{
+  background-color: transparent;
+  border-radius: 4px;
+  font-size: 18px;
+  border: 1px solid $primary-btn;
+  color:$primary-btn;
+  text-transform: none;
+  padding: 0px 30px;
+  &:focus{
+    color: $primary-btn;
+    background-color: #fff;
+  }
+}

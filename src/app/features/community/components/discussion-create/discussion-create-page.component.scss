@@ -1,0 +1,30 @@
+@import "src/assets/css/variables.scss";
+
+.discussion-create{
+    font-family: $regular-font;
+    color: $font-color-black;
+    margin-bottom: 48px;
+    .heading{ 
+      font-family: $regular-font;
+      font-size: 32px;
+      font-weight: bold;
+      color: $font-light-black;
+    }
+    .breadcrumbs {
+      margin-top: 20px;
+      .uk-breadcrumb > :nth-child(n+2):not(.uk-first-column)::before{
+        margin: 0 5px;
+        content: ">";
+      }
+      .uk-breadcrumb {
+        font-size: 18px;
+        color: $primary-txt-color;
+        margin-top: 20px;
+      }
+      .uk-breadcrumb b {
+        font-size: 18px;
+        color:#000;
+        font-weight: bold;
+      }
+    }
+}

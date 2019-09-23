@@ -1,0 +1,186 @@
+@import "../../../assets/css/variables.scss";
+
+.header {
+  background-color: $dark-blue-2;
+  padding: 0;
+  font-family: $regular-font;
+  padding-top: 16px;
+  .uk-grid {
+    .logo-tagline {
+      .logo {
+        button {
+          color: #000;
+          border-radius: 4px;
+          background: $default-font-color;
+          text-transform: capitalize;
+          border: none;
+          font-size: 18px;
+          max-width: 160px;
+          height: 48px;
+          width: 100%;
+        }
+      }
+      .tagline {
+        margin-top: 13px;
+        span {
+          color: $default-font-color;
+          font-size: 18px;
+        }
+      }
+    }
+  
+    .sign-in-button {
+      button {
+        background-color: $primary-btn;
+        border-radius: 4px;
+        font-size: 18px;
+        border: none;
+        color: #fff;
+        text-transform: none;
+        padding: 5px 30px;
+        &:focus{
+          color: $primary-btn;
+          background-color: #fff;
+        }
+        // max-width: 160px;
+        // width: 100%;
+        // height: 48px;
+      }
+      .uk-dropdown{
+        padding: 15px;
+        background-color:#bdc0c7;
+        color: #000;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .ecp-navbar {
+    margin-top: 40px;
+    background: none;
+    & > .uk-tab {
+      &:before {
+        content: unset;
+      }
+      & > li {
+        & > a {
+          min-height: 46px;
+          text-transform: none;
+          font-size: 18px;
+          background-color: $header-nav-button-background-color;
+          border-radius: 4px 4px 0px 0px;
+          border: 1px solid $header-nav-button-background-color;
+          padding: 4px 10px;
+          line-height: 46px;
+          transition: 0.3s all ease;
+          color: $header-nav-button-color;
+
+          &:hover,
+          &:focus {
+            color: $header-nav-button-hover-color;
+            background-color: $header-nav-button-hover-background-color;
+          }
+        }
+        &.uk-active {
+          & > a {
+            font-weight: 600;
+            color: $header-nav-button-active-color;
+            background-color: $header-nav-button-active-background-color;
+            border-color: $header-nav-button-active-background-color;
+          }
+        }
+      }
+    }
+  }
+  .mobile-menu {
+    ::-webkit-scrollbar {
+      width: auto;
+      height: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #2a415e;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: $dark-blue-2;
+    }
+    .mobile-ul {
+      margin: 0;
+      li {
+        a {
+          border-radius: 4px;
+          background-color: unset;
+          color: $default-font-color;
+          border: unset;
+          &:hover,
+          &:focus {
+            color: $header-nav-button-hover-color;
+            background-color: $header-nav-button-hover-background-color;
+          }
+        }
+        &.uk-active {
+          & > a {
+            color: $header-nav-button-active-color;
+            background-color: $header-nav-button-active-background-color;
+            border-color: $header-nav-button-active-background-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+.seperate-box {
+  border-bottom: 1px solid #d7e0ef;
+  margin-top: 24px;
+  .location {
+    color: $default-font-color;
+    font-size: 15px;
+    padding: 12px;
+    button {
+      border-radius: 4px;
+      border: 1px solid #d7e0ef;
+      color: $font-light-black;
+      word-wrap: none;
+      text-transform: capitalize;
+    }
+  }
+  .sign-in-button {
+    button {
+      background-color: $primary-btn;
+      border-radius: 4px;
+      font-size: 18px;
+      border: none;
+      color: #fff;
+      text-transform: none;
+      width: 160px;
+      margin: 12px 0;
+    }
+    .uk-dropdown{
+      padding: 12px;
+      background-color: #bdc0c7;
+      color: #000;
+      border-radius: 4px;
+    }
+  }
+}
+
+.helpline-note {
+  button {
+    span {
+      margin-right: 8px;
+    }
+    text-transform: none;
+    background-color: $dark-blue-1;
+    color: #ffffff;
+    border: unset;
+    border-radius: 4px;
+    padding:5px 30px;
+    &:hover,
+    &:focus {
+      background-color: #ffffff;
+      color: $primary-btn;
+    }
+  }
+}

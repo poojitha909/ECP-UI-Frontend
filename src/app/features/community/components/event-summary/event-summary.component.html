@@ -1,0 +1,32 @@
+<div class="event-summary" *ngIf="event?.isPast == isPast || isPast==0">
+    <div class="event-summary-head uk-grid uk-grid-collapse">
+        <div class="title uk-width-4-5@s">
+            {{event?.title}}
+        </div>
+        <div class="icon uk-width-1-5@s">
+            <a href="" *ngIf="event?.eventType==1" class="uk-margin-small-right outdoor-icon" title="Outdoor Event"></a>
+            <a href="" *ngIf="event?.eventType==2" class="uk-margin-small-right indoor-icon" title="Indoor Event"></a>
+        </div>
+    </div>
+    <div class="event-summary-body">
+        <div class="date">
+            <b>Date</b>: {{event?.datetime | date: 'dd-MMM-yyyy'}}
+        </div>
+        <div class="time">
+            <b>Time</b>: {{event?.datetime | date: 'h:mm a'}}
+        </div>
+        <hr>
+        <div class="detail">
+            {{event?.description}}
+        </div>
+    </div>
+    <div class="event-summary-footer uk-grid uk-grid-collapse">
+        <div class="left-text uk-width-1-2@s">
+            <span *ngIf="event?.entryFee <= 0">Free Entry</span>
+            <span *ngIf="event?.entryFee > 0">Paid Entry</span>
+        </div>
+        <div class="right-text uk-width-1-2@s">
+            <span [routerLink]="['/community/event', event?.id ]">Read More</span>
+        </div>
+    </div>
+</div>

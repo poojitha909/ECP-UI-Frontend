@@ -1,3 +1,110 @@
-<p>
-  header works!
-</p>
+<div class="header">
+  <div class="uk-container">
+    <div class="uk-grid-small uk-child-width-expand@s" uk-grid>
+      <div class="uk-width-auto">
+        <div class="logo-tagline uk-text-left@s uk-text-center">
+          <div class="logo">
+            <button class="uk-button uk-button-default" routerLink="/">ABCD Logo</button>
+          </div>
+          <div class="tagline">
+            <span>An Elder Spring Initiative by Tata Trusts</span>
+          </div>
+        </div>
+      </div>
+      <div class="uk-visible@s uk-width-expand">
+        <div class="uk-flex uk-flex-right" uk-grid>
+          <!-- <div>
+            <div class="location uk-text-right">
+              <span>Gowlipura, Hyderabad</span>
+            </div>
+          </div> -->
+          <div class="helpline-note">
+            <button class="uk-button uk-button-default">
+              <span uk-icon="receiver"></span>Elder Spring Response Center <b>14567</b>
+            </button>
+          </div>
+          <div>
+            <div class="sign-in-button">
+
+              <button *ngIf="!auth.isAuthenticate" routerLink="/user/signin"
+                class="uk-button uk-button-default">SignIn</button>
+              <div class="uk-inline" *ngIf="auth.isAuthenticate">
+                <button (click)="navigateUser()"
+                  class="uk-button uk-button-default">{{ auth.user.userName || auth.user.email || auth.user.phoneNumber }}</button>
+                <div uk-dropdown>
+                  <ul class="uk-nav uk-dropdown-nav">
+                    <li><a (click)="logout()" class="uk-padding-remove font-regular">Logout</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="uk-container ecp-navbar uk-visible@s">
+      <ul class="uk-child-width-expand" uk-tab>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/community">Community</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/services">Services</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/articles">Articles</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">Ask a
+            Question</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/products">Products</a></li>
+      </ul>
+    </nav>
+    <nav class="uk-container ecp-navbar uk-hidden@s mobile-menu uk-align-center">
+      <ul class="uk-flex-nowrap uk-overflow-auto mobile-ul uk-text-truncate" uk-tab>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/community">Community</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/services">Services</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/articles">Articles</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">Ask
+            a Question</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/products">Products</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div class="uk-container seperate-box uk-hidden@s uk-align-center">
+  <div class="uk-grid-small" uk-grid>
+    <div class="uk-align-center uk-margin-remove-bottom">
+      <div class="location uk-text-center">
+        <div class="uk-margin">
+          <div uk-form-custom="target: > * > span:first-child">
+            <select>
+              <option value="Gowlipura, Hyderabad">Gowlipura, Hyderabad</option>
+            </select>
+            <button class="uk-button uk-button-default" type="button" tabindex="-1">
+              <span></span>
+              <span uk-icon="icon: chevron-down"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="uk-align-center uk-margin-remove-top uk-margin-remove-bottom">
+      <div class="sign-in-button">
+        <button *ngIf="!auth.isAuthenticate" routerLink="/user/signin"
+          class="uk-button uk-button-default">Signin</button>
+        <div class="uk-inline" *ngIf="auth.isAuthenticate">
+          <button (click)="navigateUser()"
+            class="uk-button uk-button-default">{{  auth.user.userName || auth.user.email || auth.user.phoneNumber  }}</button>
+          <div uk-dropdown>
+            <ul class="uk-nav uk-dropdown-nav">
+              <li><a (click)="logout()" class="uk-padding-remove font-regular">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

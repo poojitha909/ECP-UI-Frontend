@@ -1,3 +1,17 @@
 export const environment = {
-  production: true
+  production: true,
+  apiBaseUrl: 'https://ec.code-alpha.org/BY/api',
+  encryptKey: 'SECRET',
+  facebook: {
+    clientId: '2776633365685417',
+    urlState: '"{st=fbState,ds=123456789}"',
+    redirectUrl: 'https://ec.code-alpha.org',
+    auth_uri: "https://www.facebook.com/v3.3/dialog/oauth"
+  },
+  google: {
+    client_id: "251496429893-3m1dqbmrlfuanl5ndaoak7mk05ul3a6m.apps.googleusercontent.com",
+    urlState: 'google-St-123456789-ds',
+    redirectUrl: 'https://ec.code-alpha.org',
+    auth_uri: "https://accounts.google.com/o/oauth2/auth"
+  }
 };

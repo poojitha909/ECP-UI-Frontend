@@ -1,0 +1,19 @@
+@import "src/assets/css/variables.scss";
+.offer-label{
+    position: absolute;
+    right: 0;
+}
+.thumb-200{
+    max-width: 100%!important;
+    height: 200px;
+    display: block;
+    margin: auto;
+}
+.f20px{
+    font-size: 20px;
+    margin-top: 5px;
+    color: $font-color-black;
+}
+.cursor{
+    cursor: pointer;
+}

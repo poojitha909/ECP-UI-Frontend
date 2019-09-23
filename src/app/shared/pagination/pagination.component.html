@@ -1,5 +1,5 @@
 <!-- Pagination start -->
-<div class="uk-container pagination">
+<div class="uk-container pagination" *ngIf="items.length > 1">
   <ul class="uk-pagination" uk-margin>
       <li>
         <div *ngIf="currentPage>0" (click)="callParent(currentPage-1)">

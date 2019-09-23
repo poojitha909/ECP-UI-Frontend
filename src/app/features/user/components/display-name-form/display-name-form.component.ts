@@ -10,8 +10,9 @@ import { UserService } from '../../services/user.service';
 })
 export class DisplayNameFormComponent implements OnInit {
   userForm: FormGroup;
-
-
+  errorMessage;
+  successMessage;
+  isLoading;
 
   constructor(
     private fb: FormBuilder,
@@ -30,15 +31,25 @@ export class DisplayNameFormComponent implements OnInit {
 
   onSubmit() {
     if (this.userForm.valid) {
+      this.isLoading = true;
+      this.resetAlertMessages();
       this.userService.changeUserName(this.userForm.value).subscribe(
         response => {
-          console.log(response);
+          this.isLoading = false;
+          this.successMessage = "User name updated successfully"
           // this.router.navigateByUrl("/");
         },
         error => {
+          this.isLoading = false;
+          this.errorMessage = "Some unknown internal server error occured";
           console.log(error);
         })
     }
+  }
+
+  resetAlertMessages() {
+    this.errorMessage = null;
+    this.successMessage = null;
   }
 
 }

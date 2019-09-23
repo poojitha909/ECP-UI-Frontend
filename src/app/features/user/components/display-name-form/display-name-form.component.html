@@ -2,6 +2,17 @@
 <div class="category-box">
     <h3>Change Display Name</h3>
     <hr />
+    <!-- Error box START-->
+    <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
+        <p>{{ errorMessage }}</p>
+    </div>
+    <!-- Error box END-->
+    <!-- Success box START-->
+    <div *ngIf="!isLoading && successMessage" class="uk-alert-success" uk-alert>
+        <p>{{ successMessage }}</p>
+    </div>
+    <!-- Success box END-->
+
     <form class="uk-form-stacked" [formGroup]="userForm" (ngSubmit)="onSubmit()">
 
         <div class="uk-margin">
@@ -14,7 +25,7 @@
 
         <hr class="m-t-75" />
         <p class="uk-text-right">
-            <button class="uk-button uk-button-transparent uk-modal-close">Cancel</button>
+            <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
             <button class="m-l-10 uk-button uk-button-default" type="submit"
                 [disabled]="userForm.invalid">Submit</button>
         </p>

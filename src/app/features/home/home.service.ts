@@ -18,8 +18,6 @@ export class HomeService {
     term: ''
   }
 
-  selectedCategory: string;
-
   constructor(private http: HttpClient) {
   }
 

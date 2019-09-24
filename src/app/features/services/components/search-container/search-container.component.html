@@ -1,4 +1,4 @@
-<div class="uk-container search-container" (click)="autocompleteFields=[]">
+<div class="uk-container search-container">
   <div class="header-label">
     <h3>Search for Services</h3>
   </div>
@@ -6,28 +6,30 @@
   <!-- Search Form START -->
   <div class="search-form">
     <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
-      <div class="uk-margin uk-width-1-1 uk-width-expand@s">
-        <form class="uk-search uk-search-default">
-          <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon><button *ngIf="showReset"
-              (click)="resetSearch()" class="reset-search">
-              <fa-icon [icon]="['fas', 'times-circle']"></fa-icon>
-            </button>
-            <button *ngIf="showReset" class="reset-link" (click)="resetSearch()">Search again
-            </button>
-          </span>
-          <input class="uk-search-input search-box font-regular" [(ngModel)]="searchPageParam.term"
-            (keyup)="searchEvent($event)" (keydown.enter)="onSearch()" required type="text" placeholder="Search here"
-            name="search" />
 
-        </form>
-        <ul *ngIf="autocompleteFields.length > 0" class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto">
-          <li class="cursor-pointer" *ngFor="let field of autocompleteFields">
-            <a href="javascript:void(0)"
-              (click)="onAutocompleteClick(field.name || field.basicProfileInfo.firstName)">{{field.name ||  field.basicProfileInfo.firstName }}</a>
-          </li>
-        </ul>
+      <div class="uk-margin uk-width-1-1 uk-width-expand@s uk-position-relative">
+        <div class="uk-position-absolute uk-z-index  w-full pr-20">
+          <form class="uk-search uk-search-default">
+            <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
+              <button class="uk-button-link" style="visibility: hidden"></button>
+              <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
+                <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Search again
+              </button>
+            </span>
+            <input class="uk-search-input search-box font-regular" [(ngModel)]="searchPageParam.term"
+              (keyup)="searchEvent($event)" (keydown.enter)="onSearch()" required type="text" placeholder="Search here"
+              name="search" />
+          </form>
+          <ul *ngIf="autocompleteFields.length > 0"
+            class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto search-list" appKeyHandler
+            (onItemSelected)="onItemSelected($event)">
+            <li class="cursor-pointer" *ngFor="let field of autocompleteFields"
+              (click)="onAutocompleteClick(field.name || field.basicProfileInfo.firstName)">
+              {{field.name ||  field.basicProfileInfo.firstName }}
+            </li>
+          </ul>
+        </div>
       </div>
-
       <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">
         <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
       </div>

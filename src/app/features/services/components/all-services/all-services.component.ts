@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef, HostListener } from '@angular/core';
 
 import { EpcServiceService } from '../../epc-service.service';
 import { Service, PageParam } from 'src/app/core/interfaces';
@@ -15,13 +15,14 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   styleUrls: ['./all-services.component.scss']
 })
 export class AllServicesComponent implements OnInit, AfterViewInit {
-  services: Service[];
-  allService: Service[];
-  pageServices: Service[];
+  services: Service[] = [];
+  allService: Service[] = [];
+  pageServices: Service[] = [];
   pageSize = 5;
   maxPages: number;
   isLoading: boolean;
   searchTextChanged = new Subject<string>();
+  selectedValue: string;
   searchPageParam: PageParam = {
     p: 0,
     s: 5,
@@ -37,6 +38,11 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     private activeRoute: ActivatedRoute
   ) { }
 
+  @HostListener('window:click', ['$event.target'])
+  clear() {
+    this.autocompleteFields = [];
+  }
+
   ngOnInit() {
     this.searchTextChanged.pipe(
       debounceTime(500),
@@ -50,11 +56,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
 
     const queryCategory = this.activeRoute.snapshot.queryParamMap.get("category");
-
-    if (this.homeService.selectedCategory) {
-      this.getCategoryServices(this.homeService.selectedCategory);
-      this.homeService.selectedCategory = undefined;
-    } else if (queryCategory) {
+    if (queryCategory) {
       this.getCategoryServices(queryCategory);
     } else {
       this.getAllService();
@@ -74,6 +76,10 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
         }
       },
       error => {
+        this.services = [];
+        this.allService = [];
+        this.pageServices = [];
+        this.isLoading = false;
         console.log(error);
       })
   }
@@ -94,6 +100,14 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
           this.isLoading = false;
           this.searchPageParam.term = category;
         }
+      },
+      error => {
+        this.services = [];
+        this.allService = [];
+        this.pageServices = [];
+        this.searchPageParam.term = category;
+        this.isLoading = false;
+        console.log(error);
       });
   }
 
@@ -118,23 +132,37 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   onSearch(field) {
     this.searchPageParam.term = field;
     if (this.searchPageParam.term) {
+      if (this.selectedValue) {
+        this.searchPageParam.term = this.selectedValue;
+      }
       this.getCategoryServices(this.searchPageParam.term);
-      this.searchPageParam.term = "";
+      // this.searchPageParam.term = "";
+      this.selectedValue = "";
       this.autocompleteFields = [];
     }
   }
 
   searchEvent($event) {
-    this.searchTextChanged.next($event.target.value);
+    if ($event.keyCode !== 13) {
+      this.searchTextChanged.next($event.target.value);
+    }
   }
 
   onCheckVerified(checked) {
-    if (checked) {
-      this.services = this.allService.filter(service => service.verified = checked);
+    if (this.services.length > 0) {
+      if (checked) {
+        this.services = this.allService.filter(service => service.verified === checked);
 
-    } else {
-      this.services = this.allService;
+      } else {
+        this.services = this.allService;
+      }
+      console.log(this.services);
     }
-    console.log(this.services);
+  }
+
+  onItemSelected(value) {
+    // this.onSearch(value);
+    this.selectedValue = value;
+    // this.searchPageParam.term = value;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 import { PageParam } from 'src/app/core';
 import { HomeService } from '../../home.service';
@@ -42,6 +42,11 @@ export class SearchContainerComponent implements OnInit {
     })
   }
 
+  @HostListener('window:click', ['$event.target'])
+  clear() {
+    this.autocompleteFields = [];
+  }
+
   onSearchChange(value) {
     if (value !== "") {
       this.showReset = true
@@ -69,11 +74,11 @@ export class SearchContainerComponent implements OnInit {
         this.searchPageParam.term = this.selectedValue;
       }
       this.autocompleteFields = [];
-      const param = this.searchPageParam.term;
+      // const param = this.searchPageParam.term;
       this.homeService.searchParam = this.searchPageParam;
       this.homeService.getServices().subscribe(response => {
         this.searchData.services = response.data.slice(0, 5);
-        this.searchPageParam.term = param;
+        // this.searchPageParam.term = param;
         this.selectedValue = "";
         // console.log(param);
       },
@@ -85,12 +90,15 @@ export class SearchContainerComponent implements OnInit {
 
   onAutocompleteClick(field) {
     this.searchPageParam.term = field;
+    this.selectedValue = "";
     this.autocompleteFields = [];
   }
 
   searchEvent($event) {
     // console.log($event, "onSearch event");
-    this.searchTextChanged.next($event.target.value);
+    if ($event.keyCode !== 13) {
+      this.searchTextChanged.next($event.target.value);
+    }
   }
 
   onItemSelected(value) {

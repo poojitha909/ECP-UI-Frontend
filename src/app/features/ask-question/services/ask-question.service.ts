@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class AskQuestionService {
     private askQuestionUrl = ApiConstants.ASK_QUESTION_SERVICES;
+    private userProfileUrl= ApiConstants.USER_PROFILE;
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
@@ -30,6 +31,10 @@ export class AskQuestionService {
 
     getCategoryList(): Observable<any[]> {
         return this.http.get<any[]>(`${this.askQuestionUrl}/category/page?p=0&s=10000`);
+    }
+
+    addQuestion(question: any): Observable<any[]> {
+        return this.http.post<any[]>(`${this.askQuestionUrl}`,{...question});
     }
 
     searchAskQuestion(searchPageParams: any): Observable<any[]> {
@@ -69,24 +74,24 @@ export class AskQuestionService {
         return this.http.get<any[]>(`${this.askQuestionUrl}?${queryParams}`);
     }
 
-    addProduct(product: any): Observable<any[]> {
-        return this.http.post<any[]>(`${this.askQuestionUrl}`,{...product});
+    getUserProfile(userId): Observable<any[]> {
+        return this.http.get<any[]>(`${this.userProfileUrl}/${userId}`);
     }
+
+    // addComment(productId: string, commentTxt: string, username: string , rating : number){
+    //     return this.http.post<any[]>(`${this.askQuestionUrl}/review`,{
+    //             productId: productId,
+    //             review: commentTxt,
+    //             userName: username,
+    //             likeCount: 0,
+    //             unlikeCount: 0,
+    //             status: 0
+    //         });        
+    // }
+
+    // getReviewList(productId): Observable<any[]> {
+    //     return this.http.get<any[]>(`${this.askQuestionUrl}/review/page?p=0&s=10000&dir=1&sort=createdAt&productId=${productId}&searchTxt=&category=`);
+    // }
 
     
-
-    addComment(productId: string, commentTxt: string, username: string , rating : number){
-        return this.http.post<any[]>(`${this.askQuestionUrl}/review`,{
-                productId: productId,
-                review: commentTxt,
-                userName: username,
-                likeCount: 0,
-                unlikeCount: 0,
-                status: 0
-            });        
-    }
-
-    getReviewList(productId): Observable<any[]> {
-        return this.http.get<any[]>(`${this.askQuestionUrl}/review/page?p=0&s=10000&dir=1&sort=createdAt&productId=${productId}&searchTxt=&category=`);
-    }
 }

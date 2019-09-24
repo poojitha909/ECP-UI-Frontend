@@ -20,6 +20,6 @@
   </div>
 
   <div class="uk-width-1-4@m askques">
-    <button class="uk-button uk-button-primary">Ask a Question</button>
+    <button class="uk-button uk-button-primary" [routerLink]="['/ask-question/add', {category: expert.experties[0].id, answeredBy: expert.userId}]" >Ask a Question</button>
   </div>
 </div>

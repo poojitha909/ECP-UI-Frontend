@@ -86,12 +86,12 @@ export class ProductCreatePageComponent implements OnInit {
     this.buyLink = "";
     this.buyFrom = "";
     this.images = "";
-    this.router.navigate(['/community/events']);
+    this.router.navigate(['/products']);
   }
   
   onSubmit(){
     if(!this.user){
-      this.store.store("new-event", JSON.stringify(
+      this.store.store("new-product", JSON.stringify(
         { 
           name: this.name,
           productCategory: this.productCategory,

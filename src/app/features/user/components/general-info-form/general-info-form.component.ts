@@ -56,11 +56,6 @@ export class GeneralInfoFormComponent implements OnInit {
     console.log(this.isDateValid);
     this.resetAlertMessages();
     if (this.isDateValid) {
-      // let userInfo: UserProfile = {
-      //   individualInfo: this.generalInfoForm.value
-      // };
-      // userInfo.individualInfo.dob = new Date(inputDate);
-      // console.log(userInfo);
       this.userService.userProfile.individualInfo.gender = this.formControl.gender.value;
       this.userService.userProfile.individualInfo.maritalStatus = this.formControl.maritalStatus.value;
       this.userService.userProfile.individualInfo.occupation = this.formControl.occupation.value;

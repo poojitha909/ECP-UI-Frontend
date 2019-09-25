@@ -101,6 +101,9 @@
         <app-product-detail-card *ngFor="let proudct of productsList" [product]="proudct"></app-product-detail-card>
       </div>
       <app-pagination *ngIf="(productsList && productsList.length > 0)" [totalRecords]="totalRecords" [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)"></app-pagination>
+      <div class="m-t-20" *ngIf="productsList==undefined || productsList.length == 0">
+          <app-product-no-record></app-product-no-record>
+      </div>
       <!-- <hr>
       <iframe style="width:120px;height:240px;margin-right:30px;" marginwidth="" marginheight="0" scrolling="no" frameborder="0" src="//ws-in.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=IN&source=ac&ref=tf_til&ad_type=product_link&tracking_id=ecplatform-21&marketplace=amazon&region=IN&placement=B07Q29BHXQ&asins=B07Q29BHXQ&linkId=edf19b589914e0aa9bf510c23cd13e6d&show_border=false&link_opens_in_new_window=false&price_color=333333&title_color=0066c0&bg_color=ffffff">
       </iframe>
@@ -109,11 +112,11 @@
       <iframe style="width:120px;height:240px;margin-right:30px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-in.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=IN&source=ac&ref=tf_til&ad_type=product_link&tracking_id=ecplatform-21&marketplace=amazon&region=IN&placement=B07V742NZ3&asins=B07V742NZ3&linkId=c32e3b0e95b5f06ef38ce149ebd1e3a2&show_border=false&link_opens_in_new_window=false&price_color=333333&title_color=0066c0&bg_color=ffffff">
       </iframe>
       <iframe style="width:120px;height:240px;margin-right:30px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-in.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=IN&source=ac&ref=tf_til&ad_type=product_link&tracking_id=ecplatform-21&marketplace=amazon&region=IN&placement=B07Q29BHXQ&asins=B07Q29BHXQ&linkId=3e9540df26d6f6595c150d7ed2e268ca&show_border=false&link_opens_in_new_window=false&price_color=333333&title_color=0066c0&bg_color=ffffff">
-      </iframe> -->
+      </iframe>
       <p><a target="_blank" href="https://www.amazon.in/SahiBUY-5X-Magnifying-Glass-Detector/dp/B00KQH7E7E/ref=sr_1_4_sspa?crid=DEY56FWD9F2O&keywords=magnifying+glass+10x&qid=1566205089&s=gateway&sprefix=magnying+%2Caps%2C307&sr=8-4-spons&psc=1&smid=AFAG8ZML2RKT8&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEyMkY0TFkyV1BOVFo0JmVuY3J5cHRlZElkPUEwNjc3NTI2SlZCV09GQkhCSjdaJmVuY3J5cHRlZEFkSWQ9QTA1NDM3MjIxT1k0NktJVTgwV0c2JndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ==" > Product 1</a></p>
       <p><a target="_blank" href="https://www.amazon.in/Discount4product-Cutter-Clipper-Magnifying-Pedicure/dp/B00SPYV6HE/ref=sr_1_10?crid=2VUM1SYCJ6HDK&keywords=nail+cutter+for+seniors&qid=1566205144&s=gateway&sprefix=nail+cutter+for+sen%2Caps%2C271&sr=8-10" > Product 2</a></p>
       <p><a target="_blank" href="https://www.amazon.in/Free-Burdens-Full-Vijaya-Venki/dp/1946983748/ref=sr_1_41?keywords=senior+care&qid=1566205201&s=gateway&sr=8-41" > Product 3</a></p>
-      <iframe src="/assets/banner.html" style="width:100%;height:400px"></iframe>
+      <iframe src="/assets/banner.html" style="width:100%;height:400px"></iframe> -->
     </div>
   </div>
 

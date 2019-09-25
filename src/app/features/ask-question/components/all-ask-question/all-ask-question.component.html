@@ -36,6 +36,9 @@
         <app-expert-detail-card *ngFor="let expert of experts" [expert]="expert"></app-expert-detail-card>
       </div>
       <app-pagination *ngIf="(experts && experts.length > 0)" [totalRecords]="totalRecords" [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)"></app-pagination>
+      <div class="m-t-20" *ngIf="experts==undefined || experts.length == 0">
+          <app-expert-no-record></app-expert-no-record>
+      </div>
     </div>
   </div>
 

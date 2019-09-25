@@ -183,6 +183,8 @@ export interface SeoDt {
 export interface JDCategory {
     category_name: string;
     national_catid: string;
+    class?: string[];
+    icon?: string[];
 }
 
 

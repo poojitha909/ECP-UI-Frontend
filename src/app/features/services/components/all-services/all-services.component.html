@@ -58,10 +58,10 @@
         <li *ngFor="let category of JDcategory.categories">
 
           <div class="uk-card uk-card-default">
-            <div class="uk-card-media-top bg-card-green">
+            <div class="uk-card-media-top" [ngClass]="category.class">
               <div class="p-40 uk-text-center">
-                <fa-icon icon="user-md" [style]="{'margin-right':'40px'}" size="3x"></fa-icon>
-                <fa-icon icon="user-nurse" size="3x"></fa-icon>
+                <!-- <fa-icon icon="user-md" [style]="{'margin-right':'40px'}" size="3x"></fa-icon> -->
+                <fa-icon [icon]="category.icon" size="3x"></fa-icon>
               </div>
             </div>
             <div class="uk-card-body uk-text-center service-type">

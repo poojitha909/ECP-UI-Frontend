@@ -7,8 +7,14 @@ import { AskQuestionRoutingModule } from './ask-question-routing.module';
 import { AllAskQuestionComponent } from './components/all-ask-question/all-ask-question.component';
 import { AskQuestionCreatePageComponent }  from './components/ask-question-create/ask-question-create-page.component';
 import { ExpertDetailCardComponent } from './components/expert-detail-card/expert-detail-card.component';
+import { ExpertNoRecordComponent } from './components/expert-no-record/expert-no-record.component';
 @NgModule({
-  declarations: [AskQuestionPageComponent, AllAskQuestionComponent, ExpertDetailCardComponent, AskQuestionCreatePageComponent],
+  declarations: [AskQuestionPageComponent,
+    AllAskQuestionComponent,
+    ExpertDetailCardComponent,
+    AskQuestionCreatePageComponent,
+    ExpertNoRecordComponent
+  ],
   imports: [
     CoreModule,
     CommonModule,

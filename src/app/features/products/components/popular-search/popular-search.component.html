@@ -32,6 +32,9 @@
         </div>
       </div>
     </div>
+    <div *ngIf="products==undefined || products.length == 0">
+      <h2 style="text-align: center"> We couldn't find any match for given criteria!</h2>
+    </div>
   </div>
   <!-- 
   <div class="p-40">

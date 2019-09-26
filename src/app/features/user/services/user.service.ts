@@ -3,9 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { ApiConstants } from 'src/app/api.constants';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { UserProfile, User } from 'src/app/core/interfaces';
 import { AuthService } from 'src/app/core';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -68,6 +69,22 @@ export class UserService {
         ((response) => {
           return response.data;
         })
+    );
+  }
+
+  uploadUserImage(userImage: FormData): Observable<any> {
+    // let headers = new HttpHeaders().append('Content-Type', 'multipart/form-data');
+    return this.http.post<any>(ApiConstants.IMAGE_UPLOAD, userImage).pipe(
+      map((response) => {
+        if (response && response.data) {
+          this.userProfile.basicProfileInfo.profileImage = {
+            thumbnailImage: environment.imageBaseUrl + response.data[0]
+          }
+          return response.data;
+        }
+
+      }),
+      mergeMap(val => this.updateUserProfile(this.userProfile))
     );
   }
 

@@ -2,7 +2,8 @@
 
 <div class="m-t-40" uk-grid>
     <div class="uk-width-1-3@m">
-        <img src="assets/images/default-thumbnail.png" />
+        <img
+            [src]="userService.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage || 'assets/images/default-thumbnail.png'" />
     </div>
     <div class="uk-width-expand@m">
         <p class="font-regular-15 m-b-10 lable">Name</p>

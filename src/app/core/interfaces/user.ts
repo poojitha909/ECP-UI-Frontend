@@ -113,50 +113,50 @@ interface PrimaryUserAddress {
 export const monthOptions: any[] = [
     {
         name: "January",
-        value: 0
-    },
-    {
-        name: "February",
         value: 1
     },
     {
-        name: "March",
+        name: "February",
         value: 2
     },
     {
-        name: "April",
+        name: "March",
         value: 3
     },
     {
-        name: "May",
+        name: "April",
         value: 4
     },
     {
-        name: "June",
+        name: "May",
         value: 5
     },
     {
-        name: "July",
+        name: "June",
         value: 6
     },
     {
-        name: "August",
+        name: "July",
         value: 7
     },
     {
-        name: "September",
+        name: "August",
         value: 8
     },
     {
-        name: "October",
+        name: "September",
         value: 9
     },
     {
-        name: "November",
+        name: "October",
         value: 10
     },
     {
-        name: "December",
+        name: "November",
         value: 11
+    },
+    {
+        name: "December",
+        value: 12
     }
 ]

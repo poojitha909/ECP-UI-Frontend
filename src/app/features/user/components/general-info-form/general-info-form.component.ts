@@ -34,7 +34,7 @@ export class GeneralInfoFormComponent implements OnInit {
       gender: [this.userService.userProfile.individualInfo.gender || 0],
       maritalStatus: [this.userService.userProfile.individualInfo.maritalStatus || 'Married'],
       day: [this.userService.userProfile.individualInfo.dob ? new Date(this.userService.userProfile.individualInfo.dob).getDate() : ''],
-      month: [this.userService.userProfile.individualInfo.dob ? new Date(this.userService.userProfile.individualInfo.dob).getMonth() : ''],
+      month: [this.userService.userProfile.individualInfo.dob ? new Date(this.userService.userProfile.individualInfo.dob).getMonth() + 1 : ''],
       year: [this.userService.userProfile.individualInfo.dob ? new Date(this.userService.userProfile.individualInfo.dob).getFullYear() : ''],
       occupation: [this.userService.userProfile.individualInfo.occupation || '']
     });

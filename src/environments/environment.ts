@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiBaseUrl: 'http://localhost:8080/BY/api',
-  imageBaseUrl: 'http://localhost:8080/BY',
+  imageBaseUrl: 'http://localhost:8080/project/images/',
   encryptKey: 'SECRET',
   facebook: {
     clientId: '2776633365685417',

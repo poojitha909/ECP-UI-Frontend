@@ -64,7 +64,8 @@ export class ProductService {
                 userName: username,
                 likeCount: 0,
                 unlikeCount: 0,
-                status: 0
+                status: 0,
+                rating: rating
             });        
     }
 

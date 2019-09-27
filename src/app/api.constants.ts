@@ -11,6 +11,7 @@ export class ApiConstants {
     public static USER_SIGNUP: string = `${environment.apiBaseUrl}/v1/users`;
     public static USER_LOGOUT: string = `${environment.apiBaseUrl}/v1/users/logout`;
     public static USER_PROFILE: string = `${environment.apiBaseUrl}/v1/userProfile`;
+    public static IMAGE_UPLOAD: string = `${environment.apiBaseUrl}/v1/fileupload`;
     public static GET_DB_SERVICE_DETAIL: string = `${environment.apiBaseUrl}/v1/userProfile/serviceProvider`;
     public static GET_DB_SERVICE_REVIEWS: string = `${environment.apiBaseUrl}/v1/reviewRate/service`;
     public static ADD_DB_SERVICE_REVIEWS: string = `${environment.apiBaseUrl}/v1/reviewRate/addServiceReview`;

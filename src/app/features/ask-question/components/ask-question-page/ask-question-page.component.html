@@ -1,6 +1,6 @@
 <div class="uk-container banner">
   <div class="logo">
-    <h3>Ask a Question</h3>
+    <h3>Ask an Expert</h3>
   </div>
   <div class="uk-child-width-expand@s uk-child-width-1-1" uk-grid>
     <div class="para-info uk-text-center uk-text-left@s">
@@ -16,7 +16,7 @@
   <div class="header-label">
     <div class="uk-grid">
         <div class="uk-margin uk-width-1-1 uk-width-expand@s">
-          <h3>Ask a Question</h3>
+          <h3>Ask an Expert</h3>
         </div>
         <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">
             <select class="uk-select" [ngModel]="selCategory" (change)="onTabChange($event.target.value)">
@@ -39,7 +39,7 @@
               <p>{{expert.workTitle}}</p>
               <p>{{expert.age}}</p>
               <p>
-                <button class="uk-button uk-button-default" [routerLink]="['/ask-question/add', {category: (selCategory ? selCategory : expert.experties[0].id), answeredBy: expert.userId}]">Ask a Question</button>
+                <button class="uk-button uk-button-default" [routerLink]="['/ask-question/add', {category: (selCategory ? selCategory : expert.experties[0].id), answeredBy: expert.userId}]">Ask an Expert</button>
               </p>
             </div>
           </div>

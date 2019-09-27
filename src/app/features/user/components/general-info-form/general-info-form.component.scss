@@ -1,0 +1,96 @@
+@import "../../../../../assets/css/variables.scss";
+
+.category-box{
+    border: 1px solid #D7E0EF;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 16px;    
+    .uk-badge{
+        background: #D9DADC;
+        color: #000;
+        border-radius:5px;
+    }
+
+    .uk-nav{
+        & >li{
+            padding: 8px;
+        }
+        .uk-active{
+            background-color: #D7E0EF;
+            border-radius: 4px;
+        }
+    }
+    
+    form{
+        input,textarea,select{
+            border-radius: 4px;
+        }
+        .uk-radio{
+            border-radius: 50%;
+        }
+    }
+}
+
+h3{
+    margin: 0px;
+    font-family:"HKGroteskRegular";
+    font-size: 32px;
+    font-weight: 600;
+    color: #151c2c;
+}
+
+.uk-button-transparent{
+    background-color: transparent;
+    border-radius: 4px;
+    font-size: 18px;
+    border: 1px solid $primary-btn;
+    color:$primary-btn;
+    text-transform: none;
+    padding: 0px 30px;
+    &:focus{
+      color: $primary-btn;
+      background-color: #fff;
+    }
+  }
+
+  .uk-button-default{
+        background-color: $primary-btn;
+        border-radius: 4px;
+        font-size: 18px;
+        border: none;
+        color: #fff;
+        text-transform: none;
+        padding: 2px 30px;
+        &:focus{
+          color: $primary-btn;
+          background-color: #fff;
+        }
+        &:disabled{
+            background-color: transparent;
+            color: #999;
+            border-color: #e5e5e5;
+            border: 1px solid;
+        }
+  }
+
+  .display-picture{
+     border-radius: 4px;
+     background-color: #ECF4FF;
+     img{
+         border-radius: 4px 4px 0 0;
+         height: 188px;
+         width: 208px;
+         object-fit: cover;
+     }
+     .p-12{
+         padding: 12px;
+     }
+  }
+
+  .lable{
+    color: #636363;
+}
+.uk-alert-success,.uk-alert-danger{
+    border: 1px solid;
+    border-radius: 4px;
+}

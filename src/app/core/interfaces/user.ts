@@ -32,6 +32,13 @@ export enum UserIdType {
     MOBILE = 1
 }
 
+export enum Gender {
+    MALE = 1,
+    FEMALE = 0,
+    TRANS = 2,
+    PREFER_NOT_TO_SAY = 3
+}
+
 export interface UserProfile {
     id?: string;
     userId?: string;
@@ -102,3 +109,54 @@ interface PrimaryUserAddress {
     locality?: any;
     country?: any;
 }
+
+export const monthOptions: any[] = [
+    {
+        name: "January",
+        value: 1
+    },
+    {
+        name: "February",
+        value: 2
+    },
+    {
+        name: "March",
+        value: 3
+    },
+    {
+        name: "April",
+        value: 4
+    },
+    {
+        name: "May",
+        value: 5
+    },
+    {
+        name: "June",
+        value: 6
+    },
+    {
+        name: "July",
+        value: 7
+    },
+    {
+        name: "August",
+        value: 8
+    },
+    {
+        name: "September",
+        value: 9
+    },
+    {
+        name: "October",
+        value: 10
+    },
+    {
+        name: "November",
+        value: 11
+    },
+    {
+        name: "December",
+        value: 12
+    }
+]

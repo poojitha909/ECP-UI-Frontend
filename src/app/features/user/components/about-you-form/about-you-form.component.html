@@ -1,0 +1,96 @@
+<!-- About You form START-->
+<div class="category-box m-t-40">
+    <h3>About you</h3>
+    <hr />
+    <!-- Error box START-->
+    <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
+        <p>{{ errorMessage }}</p>
+    </div>
+    <!-- Error box END-->
+    <!-- Success box START-->
+    <div *ngIf="!isLoading && successMessage" class="uk-alert-success" uk-alert>
+        <p>{{ successMessage }}</p>
+    </div>
+    <!-- Success box END-->
+
+    <form [formGroup]="aboutForm" (ngSubmit)="onSubmit()" class="uk-form-stacked">
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-text">Tell us something about yourself</label>
+            <div class="uk-form-controls">
+                <textarea class="uk-input min-h-300" formControlName="shortDescription" id="form-stacked-text"
+                    placeholder="Type here"></textarea>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-select">Emotional Challenges</label>
+            <div class="uk-form-controls">
+                <!-- <select class="uk-select" formControlName="emotionalIssues" id="form-stacked-select">
+                    <option>Option 01</option>
+                    <option>Option 02</option>
+                </select> -->
+                <ng-select [addTag]="addTagFn" [hideSelected]="true" multiple="true" formControlName="emotionalIssues">
+                </ng-select>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-select">Medical Issues</label>
+            <div class="uk-form-controls">
+                <ng-select [addTag]="addTagFn" [hideSelected]="true" multiple="true" formControlName="medicalIssues">
+                </ng-select>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-select">Other Difficulties</label>
+            <div class="uk-form-controls">
+                <ng-select [addTag]="addTagFn" placeholder="" [hideSelected]="true" multiple="true"
+                    formControlName="otherIssues">
+                </ng-select>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-select">Languages</label>
+            <div class="uk-form-controls">
+                <ng-select [addTag]="addLangFn" [items]="languages" placeholder="Add Languages" [hideSelected]="true"
+                    multiple="true" bindLabel="name" formControlName="language">
+                </ng-select>
+            </div>
+        </div>
+
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-select">My Hobbies</label>
+            <div class="uk-form-controls">
+                <ng-select [addTag]="addTagFn" placeholder="" [hideSelected]="true" multiple="true"
+                    formControlName="hobbies">
+                </ng-select>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-select">Topic of Interests</label>
+            <div class="uk-form-controls">
+                <ng-select [addTag]="addTagFn" placeholder="" [hideSelected]="true" multiple="true"
+                    formControlName="otherInterests">
+                </ng-select>
+            </div>
+        </div>
+
+        <hr class="m-t-75" />
+        <div uk-grid>
+            <div class="uk-width-expand@s">
+                <label><input class="uk-checkbox" type="checkbox" checked> This information is private</label>
+            </div>
+            <div>
+                <button class="m-l-10 uk-button uk-button-default" type="submit"
+                    [disabled]="this.aboutForm.invalid">Save Changes</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- About you form END -->

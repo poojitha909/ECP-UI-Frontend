@@ -42,7 +42,7 @@
 
   <div class="m-t-20 p-40" *ngIf="popullarService && popullarService.length > 0">
     <app-services-list [services]="popullarService"></app-services-list>
-    <div><button routerLink="/services/all" class="uk-button uk-button-default uk-width-1-1">View All</button></div>
+    <div><button routerLink="/services/all" [queryParams]="{ category:searchPageParam.term}" class="uk-button uk-button-default uk-width-1-1">View All</button></div>
   </div>
   <!-- Popular search component  -->
 

@@ -16,6 +16,8 @@ export class ServiceDetailComponent implements OnInit {
   dbReview: DBReviews[] = [];
   reviewForm: FormGroup;
   reportForm: FormGroup;
+  successMessage: string;
+  reviewSuccessMessage: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -98,11 +100,13 @@ export class ServiceDetailComponent implements OnInit {
           const docId: string = this.route.snapshot.params['docId'];
           this.reviewForm.controls.serviceId.setValue(docId);
         }
+        this.reviewSuccessMessage = null;
         this.ecpService.addDBserviceReview(this.reviewForm.value).subscribe(
           response => {
             if (response) {
               this.dbReview.push(response);
               this.reviewForm.reset();
+              this.reviewSuccessMessage = "Review successfully posted.";
             }
           },
           error => {
@@ -127,6 +131,7 @@ export class ServiceDetailComponent implements OnInit {
         response => {
           if (response) {
             this.reportForm.reset();
+            this.successMessage = "Service report was sent to site admin successfully."
           }
         },
         error => {

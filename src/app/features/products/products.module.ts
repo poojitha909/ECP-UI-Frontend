@@ -11,9 +11,15 @@ import { ProductCreatePageComponent } from './components/product-create/product-
 import { TimeAgoPipe } from '../../shared/timeago.pipe';
 import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-
+import { ProductNoRecordComponent } from './components/product-no-record/product-no-record.component'
 @NgModule({
-  declarations: [ProductsPageComponent, AllProductsComponent,  PopularSearchComponent, ProductDetailPageComponent, ProductCreatePageComponent, TimeAgoPipe],
+  declarations: [ ProductsPageComponent,
+          AllProductsComponent,
+          PopularSearchComponent,
+          ProductDetailPageComponent,
+          ProductCreatePageComponent,
+          TimeAgoPipe,
+          ProductNoRecordComponent ],
   imports: [
     CoreModule,
     CommonModule,

@@ -1,0 +1,19 @@
+<!-- Change picture form -->
+<div class="category-box">
+    <h3>Change your display picture</h3>
+    <hr />
+    <div class="uk-flex uk-flex-center">
+        <div class="display-picture">
+            <img
+                [src]="userService.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage || 'assets/images/default-thumbnail.png'" />
+            <div class="uk-text-center p-12">
+                <div uk-form-custom class="w-100">
+                    <input type="file" (change)="fileChange($event)" accept="image/*">
+                    <button class="uk-button uk-button-default w-100" type="button" tabindex="-1">Select a
+                        picture</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Change picture form END-->

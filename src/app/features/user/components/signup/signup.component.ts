@@ -159,7 +159,7 @@ export class SignupComponent implements OnInit {
 
   resendOtp(number) {
     if (number) {
-      this.isLoading = true;
+      // this.isLoading = true;
       this.auth.resendOtp(number).subscribe(response => {
         console.log(response);
         if (response.type === "success") {

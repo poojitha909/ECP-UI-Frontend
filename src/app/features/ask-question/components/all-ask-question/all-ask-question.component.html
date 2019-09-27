@@ -1,0 +1,45 @@
+<div class="uk-container products">
+  <div class="breadcrumbs">
+      <ul class="uk-breadcrumb">
+          <li routerLink="/products" class="fa fa-angle-right">Ask an Expert</li>
+      </ul>
+  </div>
+  <h2>All Experts</h2>
+  <hr/>
+  <div class="m-t-60" uk-grid>
+    <div class="uk-width-1-3@m">
+      <div class="m-t-20 category-box">
+        <h4>Categories</h4>
+        <ul class="uk-list uk-list-large p-2" *ngIf="catsList!==undefined">
+          <li *ngFor="let cat of catsList" (click)="onTabChange(cat.id)">{{cat.name}} <span class="uk-badge uk-float-right">{{cat.questionCount}}</span></li>
+        </ul>
+      </div>
+      <div class="m-t-40 category-box">
+        <div class="m-b-20">
+          <a href="" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a> <a> Share via
+            Whatsapp</a>
+        </div>
+
+        <div class="m-b-20">
+          <a href="" class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail"> </a> <a> Share via Email</a>
+        </div>
+
+        <div>
+          <a href="" class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a> Share via
+            Facebook</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="uk-width-expand@m">
+      <div class="m-t-20" *ngIf="experts!==undefined && experts.length > 0">
+        <app-expert-detail-card *ngFor="let expert of experts" [expert]="expert"></app-expert-detail-card>
+      </div>
+      <app-pagination *ngIf="(experts && experts.length > 0)" [totalRecords]="totalRecords" [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)"></app-pagination>
+      <div class="m-t-20" *ngIf="experts==undefined || experts.length == 0">
+          <app-expert-no-record></app-expert-no-record>
+      </div>
+    </div>
+  </div>
+
+</div>

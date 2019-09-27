@@ -96,7 +96,21 @@ export interface BasicProfileInfo {
 }
 
 export interface IndividualInfo {
-    gender: number;
+    salutation?: string;
+    lastName?: any;
+    gender?: number;
+    dob?: any;
+    otherDates?: any;
+    occupation?: string;
+    emotionalIssues?: any[];
+    medicalIssues?: any[];
+    otherIssues?: any[];
+    maritalStatus?: string;
+    hobbies?: any[];
+    otherHobbies?: any[];
+    interests?: any[];
+    otherInterests?: any[];
+    language?: any[];
 }
 
 export interface ServiceProviderInfo {
@@ -169,6 +183,8 @@ export interface SeoDt {
 export interface JDCategory {
     category_name: string;
     national_catid: string;
+    class?: string[];
+    icon?: string[];
 }
 
 

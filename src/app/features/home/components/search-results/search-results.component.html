@@ -17,7 +17,7 @@
     </li>
     <li>
       <app-services-list [services]="searchData.services"></app-services-list>
-      <div><button routerLink="/services/all" class="uk-button uk-button-default uk-width-1-1">View All</button></div>
+      <div><button routerLink="/services/all" [queryParams]="{ category:term}" class="uk-button uk-button-default uk-width-1-1">View All</button></div>
     </li>
     <li>Community lists ......
       <div><button class="uk-button uk-button-default uk-width-1-1">View All</button></div>

@@ -103,14 +103,15 @@
                         <div id="modal-example" uk-modal>
                             <div class="uk-modal-dialog uk-modal-body">
                                 <h2 class="uk-modal-title">Repot</h2>
-                                <form class="uk-form-stacked review-form">
+                                <form [formGroup]="reportForm" (ngSubmit)="onSubmitReport()"
+                                    class="uk-form-stacked review-form">
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="form-stacked-select">Cause of
                                             Reporting</label>
                                         <div class="uk-form-controls">
-                                            <select class="uk-select" id="form-stacked-select">
-                                                <option>Option 01</option>
-                                                <option>Option 02</option>
+                                            <select formControlName="cause" class="uk-select" id="form-stacked-select">
+                                                <option>test report</option>
+                                                <option>test report 02</option>
                                             </select>
                                         </div>
                                     </div>
@@ -118,14 +119,16 @@
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="form-stacked-text">Comment (optional)</label>
                                         <div class="uk-form-controls">
-                                            <textarea class="uk-input min-h-200" id="form-stacked-text"
-                                                placeholder="Enter your review here"></textarea>
+                                            <textarea formControlName="comment" class="uk-input min-h-200"
+                                                id="form-stacked-text" placeholder="Enter your comment here"></textarea>
                                         </div>
                                     </div>
 
                                     <p class="uk-text-right">
-                                        <button class="uk-button uk-button-transparent uk-modal-close">Cancel</button>
-                                        <button class="m-l-10 uk-button uk-button-default">Submit</button>
+                                        <button class="uk-button uk-button-transparent uk-modal-close"
+                                            type="button">Cancel</button>
+                                        <button class="m-l-10 uk-button uk-button-default" type="submit"
+                                            [disabled]="reportForm.invalid">Submit</button>
                                     </p>
                                 </form>
                             </div>

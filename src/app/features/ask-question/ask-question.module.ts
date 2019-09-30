@@ -8,12 +8,21 @@ import { AllAskQuestionComponent } from './components/all-ask-question/all-ask-q
 import { AskQuestionCreatePageComponent }  from './components/ask-question-create/ask-question-create-page.component';
 import { ExpertDetailCardComponent } from './components/expert-detail-card/expert-detail-card.component';
 import { ExpertNoRecordComponent } from './components/expert-no-record/expert-no-record.component';
+import { QuestionNoRecordComponent } from './components/question-no-record/question-no-record.component';
+import { QuestionDetailCardComponent } from './components/question-detail-card/question-detail-card.component';
+import { AskQuestionDetailPageComponent } from './components/ask-question-detail/ask-question-detail-page.component';
+import { TimeAgoPipe } from '../../shared/timeago.pipe';
+
 @NgModule({
   declarations: [AskQuestionPageComponent,
     AllAskQuestionComponent,
     ExpertDetailCardComponent,
     AskQuestionCreatePageComponent,
-    ExpertNoRecordComponent
+    ExpertNoRecordComponent,
+    QuestionNoRecordComponent,
+    QuestionDetailCardComponent,
+    AskQuestionDetailPageComponent,
+    TimeAgoPipe
   ],
   imports: [
     CoreModule,

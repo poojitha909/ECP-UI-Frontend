@@ -20,10 +20,6 @@ export class PaginationComponent implements OnChanges {
   }
 
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    // console.log(this.currentPage, this.totalRecords, this.perPage);
-    // for (let propName in changes) {
-    //   console.log(changes[propName].currentValue);
-    // }
     this.update();
   }
 
@@ -32,8 +28,6 @@ export class PaginationComponent implements OnChanges {
   }
 
   update(){
-    console.log(this.currentPage, this.totalRecords, this.perPage);
-    
     const pages = Math.ceil(this.totalRecords / this.perPage);
     this.items = [];
     for (let i = 0; i < pages; i++) {

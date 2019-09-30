@@ -83,4 +83,13 @@ export class EpcServiceService {
       }));
   }
 
+  addDBserviceReport(reportData: any): Observable<any> {
+    return this.http.post<any>(`${ApiConstants.ADD_DB_SERVICE_REPORT}`, reportData).pipe(
+      map(response => {
+        if (response) {
+          return response.data;
+        }
+      }));
+  }
+
 }

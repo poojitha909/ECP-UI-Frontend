@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SearchResultsComponent implements OnInit {
   @Input() searchData: any;
+  @Input() term: string;
 
   constructor() { }
 

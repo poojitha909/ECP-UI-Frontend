@@ -15,6 +15,9 @@ export class ServiceDetailComponent implements OnInit {
   service: ServiceDetail;
   dbReview: DBReviews[] = [];
   reviewForm: FormGroup;
+  reportForm: FormGroup;
+  successMessage: string;
+  reviewSuccessMessage: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +32,12 @@ export class ServiceDetailComponent implements OnInit {
       rating: [0, Validators.required],
       review: ["", Validators.required],
       userName: ["", Validators.required]
+    });
+
+    this.reportForm = this.fb.group({
+      serviceId: [""],
+      cause: [0, Validators.required],
+      comment: ["", Validators.required],
     });
   }
 
@@ -91,11 +100,13 @@ export class ServiceDetailComponent implements OnInit {
           const docId: string = this.route.snapshot.params['docId'];
           this.reviewForm.controls.serviceId.setValue(docId);
         }
+        this.reviewSuccessMessage = null;
         this.ecpService.addDBserviceReview(this.reviewForm.value).subscribe(
           response => {
             if (response) {
               this.dbReview.push(response);
               this.reviewForm.reset();
+              this.reviewSuccessMessage = "Review successfully posted.";
             }
           },
           error => {
@@ -105,6 +116,31 @@ export class ServiceDetailComponent implements OnInit {
       } else {
         this.login();
       }
+    }
+  }
+
+  onSubmitReport() {
+    if (this.auth.isAuthenticate) {
+      if (this.isDBService) {
+        this.reportForm.controls.serviceId.setValue(this.service.id);
+      } else {
+        const docId: string = this.route.snapshot.params['docId'];
+        this.reportForm.controls.serviceId.setValue(docId);
+      }
+      this.ecpService.addDBserviceReport(this.reportForm.value).subscribe(
+        response => {
+          if (response) {
+            this.reportForm.reset();
+            this.successMessage = "Service report was sent to site admin successfully."
+          }
+        },
+        error => {
+          console.log(error);
+        });
+      console.log(this.reportForm.value);
+    } else {
+      this.auth.redirectUrl = this.router.url;
+      this.router.navigateByUrl('/user/signin');
     }
   }
 

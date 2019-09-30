@@ -29,6 +29,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     term: ''
   };
   autocompleteFields: Service[] = [];
+  currentUrl: string;
 
   constructor(public ecpService: EpcServiceService,
     public JDcategory: JdCategoryService,
@@ -50,7 +51,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     ).subscribe(() => {
       this.onSearchChange(this.searchPageParam.term);
     });
-
+    this.currentUrl = window.location.href;
   }
 
   ngAfterViewInit() {

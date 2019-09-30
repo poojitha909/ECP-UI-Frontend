@@ -18,6 +18,7 @@ export class ServiceDetailComponent implements OnInit {
   reportForm: FormGroup;
   successMessage: string;
   reviewSuccessMessage: string;
+  currentUrl: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,7 +27,6 @@ export class ServiceDetailComponent implements OnInit {
     private fb: FormBuilder,
     public auth: AuthService
   ) {
-
     this.reviewForm = this.fb.group({
       serviceId: [""],
       rating: [0, Validators.required],
@@ -58,6 +58,7 @@ export class ServiceDetailComponent implements OnInit {
       this.reviewForm.patchValue(this.auth.serviceReviewForm);
       this.auth.removeServiceReviewForm();
     }
+    this.currentUrl = window.location.href;
   }
 
   get isDBService(): boolean {

@@ -7,6 +7,7 @@ import { HomeService } from 'src/app/features/home/home.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -30,13 +31,15 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   };
   autocompleteFields: Service[] = [];
   currentUrl: string;
+  whatsappUrl;
 
   constructor(public ecpService: EpcServiceService,
     public JDcategory: JdCategoryService,
     private homeService: HomeService,
     private cdr: ChangeDetectorRef,
     private router: Router,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    public sanitizer: DomSanitizer
   ) { }
 
   @HostListener('window:click', ['$event.target'])
@@ -52,6 +55,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
       this.onSearchChange(this.searchPageParam.term);
     });
     this.currentUrl = window.location.href;
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${this.currentUrl}`);
   }
 
   ngAfterViewInit() {

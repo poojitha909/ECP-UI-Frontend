@@ -147,9 +147,9 @@
             <!-- Socailmedia share box  -->
             <div class="m-t-30 category-box">
                 <div class="m-b-20">
-                    <a href="whatsapp://send?text={{currentUrl}}"
-                        class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
-                    <a class="social-link" href="whatsapp://send?text={{currentUrl}}">
+                    <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon"
+                        uk-icon="whatsapp"> </a>
+                    <a class="social-link" [href]="whatsappUrl">
                         Share via
                         Whatsapp</a>
                 </div>
@@ -306,10 +306,10 @@
 
             <!-- Reviews Section-->
             <div *ngIf=" dbReview.length > 0 || (service.Reviews && service?.Reviews.length > 0)" class="m-t-30">
-                <h1 *ngIf="!isDBService" class="font-regular-24 font-weight-600"> Reviews
-                    ({{service.Reviews.length + dbReview.length}})
+                <h1 class="font-regular-24 font-weight-600"> Reviews
+                    ({{ isDBService ? dbReview.length :  service.Reviews.length + dbReview.length}})
                 </h1>
-                <h1 *ngIf="isDBService" class="font-regular-24 font-weight-600"> Reviews ({{dbReview.length}})</h1>
+                <!-- <h1 *ngIf="isDBService" class="font-regular-24 font-weight-600"> Reviews ({{dbReview.length}})</h1> -->
 
                 <!--JD Reviews -->
                 <ng-container *ngIf="!isDBService && service.Reviews.length > 0">
@@ -462,6 +462,22 @@
                     <hr />
                 </div> -->
 
+            </div>
+
+            <div *ngIf=" (dbReview.length == 0  && !service?.Reviews) || (service?.Reviews && service?.Reviews.length == 0 && dbReview.length == 0)"
+                class="m-t-30">
+                <h1 class="font-regular-24 font-weight-600"> Reviews(0)</h1>
+                <hr />
+                <div class="uk-child-width-expand" uk-grid>
+
+                    <div class="info">
+                        <h1 class="font-regular-24 font-weight-600 m-0"> No review!</h1>
+                        <p class="lable font-regular m-0">No user has left reviwe on this service.</p>
+                    </div>
+                    <div>
+                        <img src="/assets/images/norecord.svg" />
+                    </div>
+                </div>
             </div>
             <!-- Reviews Section END-->
         </div>

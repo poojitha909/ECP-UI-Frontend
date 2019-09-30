@@ -131,9 +131,8 @@
       <!-- Socailmedia share box  -->
       <div class="m-t-30 category-box">
         <div class="m-b-20">
-          <a href="whatsapp://send?text={{currentUrl}}" class="uk-icon-button  uk-margin-small-right whatapp-icon"
-            uk-icon="whatsapp"> </a>
-          <a class="social-link" href="whatsapp://send?text={{currentUrl}}">
+          <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
+          <a class="social-link" [href]="whatsappUrl">
             Share via
             Whatsapp</a>
         </div>
@@ -149,12 +148,10 @@
         </div>
 
         <div>
-          <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services"
-            onclick="javascript:window.open(this.href,
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services" onclick="javascript:window.open(this.href,
                   '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
             class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a class="social-link"
-            href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services"
-            onclick="javascript:window.open(this.href,
+            href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services" onclick="javascript:window.open(this.href,
                   '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
             Share via
             Facebook</a>

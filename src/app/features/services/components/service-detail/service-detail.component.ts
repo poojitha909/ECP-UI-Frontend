@@ -4,6 +4,7 @@ import { ServiceDetail, DBReviews } from 'src/app/core/interfaces';
 import { EpcServiceService } from '../../epc-service.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-service-detail',
@@ -19,13 +20,14 @@ export class ServiceDetailComponent implements OnInit {
   successMessage: string;
   reviewSuccessMessage: string;
   currentUrl: string;
-
+  whatsappUrl;
   constructor(
     private route: ActivatedRoute,
     private ecpService: EpcServiceService,
     private router: Router,
     private fb: FormBuilder,
-    public auth: AuthService
+    public auth: AuthService,
+    public sanitizer: DomSanitizer
   ) {
     this.reviewForm = this.fb.group({
       serviceId: [""],
@@ -59,6 +61,7 @@ export class ServiceDetailComponent implements OnInit {
       this.auth.removeServiceReviewForm();
     }
     this.currentUrl = window.location.href;
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${this.currentUrl}`);
   }
 
   get isDBService(): boolean {

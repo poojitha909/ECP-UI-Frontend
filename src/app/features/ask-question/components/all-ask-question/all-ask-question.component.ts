@@ -1,6 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {AskQuestionService} from '../../services/ask-question.service';
+import { StorageHelperService } from "../../../../core/services/storage-helper.service";
+
+declare var UIkit;
 
 @Component({
   selector: 'app-all-products',
@@ -11,23 +14,42 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
 
   showReset: boolean;
   experts: any[];
+  questions: any[];
   catsList: any[];
+  user: any;
   searchParams: {
     p: number,
     s: number,
     experties: string
   };
-  
+  searchParamsQues: {
+    p: number,
+    s: number,
+    searchTxt: string,
+    askCategory: string,
+		askedBy: string,
+		answeredBy: string
+  };
   paramsSubs: any;
   totalRecords: number;
-  constructor(private route:ActivatedRoute, private router: Router, private askQuesService: AskQuestionService) { }
+  totalRecordsQues: number;
+  constructor(private route:ActivatedRoute, private router: Router, private store: StorageHelperService, private askQuesService: AskQuestionService) { }
 
   ngOnInit() {
     this.searchParams = {
       p: 0,
-      s: 2,
+      s: 10,
       experties: ""
     }
+    this.searchParamsQues = {
+      p: 0,
+      s: 10,
+      searchTxt: "",
+      askCategory: "",
+      askedBy: "",
+      answeredBy: ""
+    };
+
     this.paramsSubs = this.route.params.subscribe(params => {
       this.initiate();
     }); 
@@ -38,19 +60,33 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
   }
   
   initiate(){
+    this.user = this.store.retrieve("ECP-USER");
+    if(this.user){
+      this.user = JSON.parse(this.user);
+      this.searchParamsQues.askedBy = this.user.id;
+    }
     this.searchParams = {
       p: 0,
       s: 10000,
       experties: ""
     }
+
+    this.searchParamsQues = {
+      p: 0,
+      s: 1000,
+      searchTxt: "",
+      askCategory: "",
+      askedBy: "",
+      answeredBy: ""
+    };
     
     this.totalRecords = 0;
-    console.log(this.route.snapshot.params);
+    this.totalRecordsQues = 0;
     if(this.route.snapshot.params['category'] !== undefined){
       this.searchParams.experties = this.route.snapshot.params['category'];
+      this.searchParamsQues.askCategory = this.route.snapshot.params['category'];
     }
     
-    this.onSearch();
     this.askQuesService.getCategoryList().subscribe( (response:any) =>{
       const data = response.data;
       this.catsList = [];
@@ -58,6 +94,12 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
         this.catsList = data.content;
       }
     });
+    this.onSearch();
+    setTimeout( ()=> {
+      if(this.route.snapshot.params['tab']){
+        UIkit.tab("#questionstab").show(this.route.snapshot.params['tab']);
+      }
+    },500);
   }
 
   changePage(page: number) {
@@ -75,13 +117,27 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
       }
     });
   }
+  showQuestions(){
+    this.askQuesService.questions(this.searchParamsQues).subscribe( (response:any) =>{
+      const data = response.data;
+      this.questions = [];
+      if(data.content){
+        this.questions = data.content;
+        this.totalRecordsQues = data.total;
+      }
+    });
+  }
 
   onTabChange(value) {
     this.router.navigate(['/ask-question/all', {category: value}]);
   }
+
+  onTopTabChange(value) {
+    this.router.navigate(['/ask-question/all', {category: this.searchParamsQues.askCategory, tab: value}]);
+  }
   
   onSearch() {
     this.showExperts();
+    this.showQuestions();
   }
-
 }

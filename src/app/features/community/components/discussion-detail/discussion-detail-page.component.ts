@@ -38,6 +38,9 @@ export class DiscussionDetailPageComponent implements OnInit {
     this.replyParentText = "";
     this.replyParentUser = "";
     this.user = this.store.retrieve("ECP-USER");
+    if(this.user){
+      this.user = JSON.parse(this.user);
+    }
     let comment = this.store.retrieve("new-d-comment");
     if(comment){
       comment = JSON.parse(comment); 

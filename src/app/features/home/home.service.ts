@@ -57,4 +57,26 @@ export class HomeService {
     );
   }
 
+  getHomeSearchPages(): Observable<any> {
+    let queryParams: string = '';
+
+    Object.keys(this.searchParam)
+      .forEach((key, i) => {
+        if (i > 0) {
+          queryParams += `&${key}=${this.searchParam[key]}`;
+        } else {
+          queryParams += `${key}=${this.searchParam[key]}`;
+        }
+      });
+
+    return this.http.get<any>(`${ApiConstants.GET_HOME_SEARCH_PAGES}?${queryParams}`).pipe(
+      map(response => {
+        if (response && response.data) {
+          return response.data
+        }
+      })
+    );
+  }
+
+
 }

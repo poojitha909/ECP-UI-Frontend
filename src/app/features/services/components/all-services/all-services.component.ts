@@ -1,13 +1,14 @@
 import { Component, OnInit, AfterViewInit, ChangeDetectorRef, HostListener } from '@angular/core';
 
 import { EpcServiceService } from '../../epc-service.service';
-import { Service, PageParam } from 'src/app/core/interfaces';
+import { Service, PageParam, SEO } from 'src/app/core/interfaces';
 import { JdCategoryService } from 'src/app/core/services';
 import { HomeService } from 'src/app/features/home/home.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
+import { SeoService } from 'src/app/core/services/seo.service';
 
 
 @Component({
@@ -39,8 +40,22 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     private cdr: ChangeDetectorRef,
     private router: Router,
     private activeRoute: ActivatedRoute,
-    public sanitizer: DomSanitizer
-  ) { }
+    public sanitizer: DomSanitizer,
+    private seoService: SeoService
+  ) {
+
+    // Generate meta tag 
+    const config: SEO = {
+      title: `An Elder Spring Initiative by Tata Trusts All Service`,
+      keywords: 'products,services,events,,dscussions',
+      description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
+      author: `An Elder Spring Initiative by Tata Trusts`,
+      image: `${window.location.origin}/assets/imgaes/landing-img/service-bg.png`,
+    }
+
+    this.seoService.generateTags(config);
+
+  }
 
   @HostListener('window:click', ['$event.target'])
   clear() {

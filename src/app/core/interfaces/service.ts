@@ -161,6 +161,7 @@ export interface ServiceDetail {
     id?: string;
     facilities?: any[];
     reviewedByUser?: boolean;
+    aggrRatingPercentage?: number;
 }
 
 export interface Review {

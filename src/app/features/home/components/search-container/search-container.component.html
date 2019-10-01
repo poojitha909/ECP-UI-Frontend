@@ -44,7 +44,10 @@
   <!-- Search Result END -->
 
   <!-- Popular search component  -->
-  <app-popular-search></app-popular-search>
+  <div class="p-24-40"
+    *ngIf="searchData.services.length == 0 && searchData.products.length == 0  && searchData.discussions.length == 0 ">
+    <app-popular-search></app-popular-search>
+  </div>
   <!-- Popular search component  -->
 
   <!-- <div class="uk-container popular-search-list"></div> -->

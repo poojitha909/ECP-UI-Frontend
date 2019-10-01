@@ -15,7 +15,7 @@
 
         <div class="uk-width-1-3@m">
 
-            <!-- Conatact Service details -->
+            <!-- Conatact Service details START-->
             <div class="details-box">
 
                 <div class="verified">
@@ -103,7 +103,7 @@
                         <!-- This is the modal -->
                         <div id="modal-example" uk-modal>
                             <div class="uk-modal-dialog uk-modal-body">
-                                <h2 class="uk-modal-title">Repot</h2>
+                                <h2 class="uk-modal-title">Report</h2>
                                 <!-- Success box START-->
                                 <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
                                     <p>{{ successMessage }}</p>
@@ -116,8 +116,11 @@
                                             Reporting</label>
                                         <div class="uk-form-controls">
                                             <select formControlName="cause" class="uk-select" id="form-stacked-select">
-                                                <option>test report</option>
-                                                <option>test report 02</option>
+                                                <option disabled selected hidden value="">Select a Reason</option>
+                                                <option>Information provided is incorrect</option>
+                                                <option>Service Provider is unreachable</option>
+                                                <option>Service Provider no longer exists</option>
+                                                <option>Other reasons</option>
                                             </select>
                                         </div>
                                     </div>
@@ -143,8 +146,96 @@
                     </div>
                 </div>
             </div>
+            <!-- Conatact Service details END-->
 
-            <!-- Socailmedia share box  -->
+            <!-- Rating box START -->
+            <div class="m-t-30 rating-box">
+                <div class="rating">
+                    <div class="p-10 uk-flex uk-flex-center" uk-grid>
+                        <div>
+                            <h1>{{ detailReview.rating}}</h1>
+                        </div>
+                        <div>
+                            <ngb-rating [rate]="detailReview.rating" [readonly]="true" [max]="5">
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                                </ng-template>
+                            </ngb-rating>
+                            <p class="m-0">
+                                {{ detailReview.totalCount }} Reviews
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- rating count -->
+                <div class="m-t-20">
+                    <div uk-grid>
+                        <div>
+                            5 stars
+                        </div>
+                        <div class="uk-width-expand uk-flex uk-flex-middle">
+                            <progress class="uk-progress uk-progress-rating" [value]="detailReview.fiveStar.count"
+                                [max]="detailReview.totalCount"></progress>
+                        </div>
+                        <div>
+                            {{detailReview.fiveStar.count}}
+                        </div>
+                    </div>
+                    <div class="m-t-10" uk-grid>
+                        <div>
+                            4 stars
+                        </div>
+                        <div class="uk-width-expand uk-flex uk-flex-middle">
+                            <progress class="uk-progress uk-progress-rating" [value]="detailReview.fourStar.count"
+                                [max]="detailReview.totalCount"></progress>
+                        </div>
+                        <div>
+                            {{detailReview.fourStar.count}}
+                        </div>
+                    </div>
+                    <div class="m-t-10" uk-grid>
+                        <div>
+                            3 stars
+                        </div>
+                        <div class="uk-width-expand uk-flex uk-flex-middle">
+                            <progress class="uk-progress uk-progress-rating" [value]="detailReview.threeStar.count"
+                                [max]="detailReview.totalCount"></progress>
+                        </div>
+                        <div>
+                            {{detailReview.threeStar.count}}
+                        </div>
+                    </div>
+                    <div class="m-t-10" uk-grid>
+                        <div>
+                            2 stars
+                        </div>
+                        <div class="uk-width-expand uk-flex uk-flex-middle">
+                            <progress class="uk-progress uk-progress-rating" [value]="detailReview.twoStar.count"
+                                [max]="detailReview.totalCount"></progress>
+                        </div>
+                        <div>
+                            {{detailReview.twoStar.count}}
+                        </div>
+                    </div>
+                    <div class="m-t-10" uk-grid>
+                        <div>
+                            1 stars
+                        </div>
+                        <div class="uk-width-expand uk-flex uk-flex-middle">
+                            <progress class="uk-progress uk-progress-rating" [value]="detailReview.oneStar.count"
+                                [max]="detailReview.totalCount"></progress>
+                        </div>
+                        <div>
+                            {{detailReview.oneStar.count}}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- Rating box END -->
+
+            <!-- Socailmedia share box  START-->
             <div class="m-t-30 category-box">
                 <div class="m-b-20">
                     <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon"
@@ -177,7 +268,7 @@
                         Facebook</a>
                 </div>
             </div>
-
+            <!-- Socailmedia share box  END-->
 
         </div>
 

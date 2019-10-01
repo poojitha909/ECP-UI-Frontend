@@ -55,7 +55,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
       this.onSearchChange(this.searchPageParam.term);
     });
     this.currentUrl = window.location.href;
-    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${this.currentUrl}`);
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
   }
 
   ngAfterViewInit() {
@@ -154,15 +154,14 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   }
 
   onCheckVerified(checked) {
-    if (this.services.length > 0) {
-      if (checked) {
-        this.services = this.allService.filter(service => service.verified === checked);
+    if (checked) {
+      this.services = this.allService.filter(service => service.verified === checked);
 
-      } else {
-        this.services = this.allService;
-      }
-      console.log(this.services);
+    } else {
+      this.services = this.allService;
+      console.log(this.allService);
     }
+
   }
 
   onItemSelected(value) {

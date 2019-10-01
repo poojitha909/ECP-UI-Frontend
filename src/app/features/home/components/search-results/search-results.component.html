@@ -12,16 +12,23 @@
   </ul>
   <ul class="uk-switcher uk-margin">
     <li>
-      <!-- <div class="m-t-40">
-        <p class="font-regular-24">Your search didn’t yield a results.> </p>
-      </div> -->
-      <!-- <app-product-detail-card> </app-product-detail-card> -->
+
+      <!-- No search result START-->
+      <app-no-search-result *ngIf="searchData.products.length == 0"></app-no-search-result>
+      <!-- No search result END-->
+
       <!-- Products List ..... -->
-      <app-products-list [products]="searchData.products"></app-products-list>
+      <!-- <app-product-detail-card> </app-product-detail-card> -->
+      <app-products-list *ngIf="searchData.products.length > 0" [products]="searchData.products"></app-products-list>
       <div><button routerLink="/products/all" class="uk-button uk-button-default uk-width-1-1">View All</button></div>
     </li>
     <li>
-      <app-services-list [services]="searchData.services"></app-services-list>
+
+      <!-- No search result START-->
+      <app-no-search-result *ngIf="searchData.services.length == 0"></app-no-search-result>
+      <!-- No search result END-->
+
+      <app-services-list *ngIf="searchData.services.length > 0" [services]="searchData.services"></app-services-list>
       <div><button routerLink="/services/all" [queryParams]="{ category:term}"
           class="uk-button uk-button-default uk-width-1-1">View All</button></div>
     </li>

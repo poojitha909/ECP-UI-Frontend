@@ -105,8 +105,9 @@ h3{
     }
 }
 .cat-active{
-    font-weight: 600;
-    color: #1A73E8;
+    font-weight: 400;
+    background-color: #D7E0EF;
+    // color: #1A73E8;
 }
 .button-slidenav{
     width: 50px;
@@ -134,10 +135,10 @@ h3{
       color: #000;
     }
     & > li{
+        padding: 10px 5px;
       &:hover{
-        background-color: #1a73e8;
+        background-color: #D7E0EF;
         font-weight: 400;
-        color: #fff;
       }
     }
     }

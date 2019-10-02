@@ -22,6 +22,7 @@ export class AskQuestionDetailPageComponent implements OnInit {
   replyParentUser: string;
   replyParentText: string;
   askedByProfile: any;
+  isExpert: boolean;
 
   constructor(private router: Router,private route:ActivatedRoute,private askQuesService: AskQuestionService, private store: StorageHelperService, private authService: AuthService) { }
   
@@ -37,6 +38,10 @@ export class AskQuestionDetailPageComponent implements OnInit {
     this.user = this.store.retrieve("ECP-USER");
     if(this.user){
       this.user = JSON.parse(this.user);
+      this.isExpert = false;
+      if(this.user.userRoleId == "EXPERT"){
+        this.isExpert = true;
+      }
     }
     
     let comment = this.store.retrieve("new-ques-comment");

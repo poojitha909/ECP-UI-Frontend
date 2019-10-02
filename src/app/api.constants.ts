@@ -7,6 +7,7 @@ export class ApiConstants {
     public static GET_ALL_SERVICES: string = `${environment.apiBaseUrl}/v1/userProfile/allServiceList`;
     public static GET_JD_CATEGORIES: string = `${environment.apiBaseUrl}/v1/search/justdailCategories`;
     public static GET_JD_SERVICES_DETAIL: string = `${environment.apiBaseUrl}/v1/search/justdialServiceDetail`;
+    public static GET_HOME_SEARCH_PAGES: string = `${environment.apiBaseUrl}/v1/homesearch/page`;
     public static USER_LOGIN: string = `${environment.apiBaseUrl}/v1/users/login`;
     public static USER_SIGNUP: string = `${environment.apiBaseUrl}/v1/users`;
     public static USER_LOGOUT: string = `${environment.apiBaseUrl}/v1/users/logout`;

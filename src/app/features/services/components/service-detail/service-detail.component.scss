@@ -148,3 +148,37 @@ h3{
     }
 }
 
+.social-link{
+color: #000;
+}
+
+.rating-box{
+    border: 1px solid #D7E0EF;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 10px;
+.rating{
+    background-color: #E8B24A;
+    border-radius: 4px;
+    color: #000;
+        h1{
+            font-size: 48px;
+            font-family:"HKGroteskRegular";
+            font-weight: 700;
+        }
+    }
+    .uk-progress{
+        height: 6px;
+    }
+
+    .uk-progress-rating { // created class for customisation
+        &::-webkit-progress-value { background-color: #E8B24A; } // those are the overflowing colors
+        &::-ms-fill { background-color: #E8B24A; }
+      }
+      .filled{
+      color: #000;
+      }
+      .star{
+          font-size: 1.2em;
+      }
+}

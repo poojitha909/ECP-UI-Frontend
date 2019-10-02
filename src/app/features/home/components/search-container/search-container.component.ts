@@ -29,7 +29,8 @@ export class SearchContainerComponent implements OnInit {
   searchData: any = {
     services: [],
     products: [],
-    Communitys: []
+    discussions: [],
+    events: []
   };
   constructor(private homeService: HomeService) { }
 
@@ -74,13 +75,21 @@ export class SearchContainerComponent implements OnInit {
         this.searchPageParam.term = this.selectedValue;
       }
       this.autocompleteFields = [];
-      // const param = this.searchPageParam.term;
       this.homeService.searchParam = this.searchPageParam;
-      this.homeService.getServices().subscribe(response => {
-        this.searchData.services = response.data.slice(0, 5);
+      // Home search pages API
+      this.homeService.getHomeSearchPages().subscribe(response => {
+
+        if (response && response.servicePage) {
+          const servicePage = JSON.parse(response.servicePage);
+          this.searchData.services = servicePage.content.slice(0, 5);
+        }
+
+        this.searchData.products = response.productPage.content;
+        this.searchData.discussions = response.discussPage.content;
+        this.searchData.events = response.eventPage.content;
+
         // this.searchPageParam.term = param;
         this.selectedValue = "";
-        // console.log(param);
       },
         error => {
           console.log(error);

@@ -7,6 +7,7 @@ import { HomeService } from 'src/app/features/home/home.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -29,13 +30,16 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     term: ''
   };
   autocompleteFields: Service[] = [];
+  currentUrl: string;
+  whatsappUrl;
 
   constructor(public ecpService: EpcServiceService,
     public JDcategory: JdCategoryService,
     private homeService: HomeService,
     private cdr: ChangeDetectorRef,
     private router: Router,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    public sanitizer: DomSanitizer
   ) { }
 
   @HostListener('window:click', ['$event.target'])
@@ -50,7 +54,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     ).subscribe(() => {
       this.onSearchChange(this.searchPageParam.term);
     });
-
+    this.currentUrl = window.location.href;
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
   }
 
   ngAfterViewInit() {
@@ -149,15 +154,14 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   }
 
   onCheckVerified(checked) {
-    if (this.services.length > 0) {
-      if (checked) {
-        this.services = this.allService.filter(service => service.verified === checked);
+    if (checked) {
+      this.services = this.allService.filter(service => service.verified === checked);
 
-      } else {
-        this.services = this.allService;
-      }
-      console.log(this.services);
+    } else {
+      this.services = this.allService;
+      console.log(this.allService);
     }
+
   }
 
   onItemSelected(value) {

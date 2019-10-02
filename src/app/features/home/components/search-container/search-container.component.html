@@ -8,11 +8,11 @@
     <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
 
       <div class="uk-margin uk-width-1-1 uk-width-expand@s uk-position-relative">
-        <div class="uk-position-absolute uk-z-index  w-full pr-20">
+        <div class="position-absolute-sm uk-z-index  w-full sm-pr-20">
           <form class="uk-search uk-search-default">
             <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
               <button class="uk-button-link" style="visibility: hidden"></button>
-              <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
+              <button *ngIf="showReset" class="reset-link uk-visible@s" (click)="resetSearch($event)">
                 <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Search again
               </button>
 
@@ -44,7 +44,10 @@
   <!-- Search Result END -->
 
   <!-- Popular search component  -->
-  <app-popular-search></app-popular-search>
+  <div class="p-24-40"
+    *ngIf="searchData.services.length == 0 && searchData.products.length == 0  && searchData.discussions.length == 0 ">
+    <app-popular-search></app-popular-search>
+  </div>
   <!-- Popular search component  -->
 
   <!-- <div class="uk-container popular-search-list"></div> -->

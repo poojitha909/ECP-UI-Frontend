@@ -7,9 +7,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class QuestionDetailCardComponent implements OnInit {
   @Input() question: any;
+  @Input() viewby: string;
   constructor() { }
 
   ngOnInit() {
+    if(!this.viewby){
+      this.viewby="user";
+    }
   }
 
 }

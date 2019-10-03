@@ -203,3 +203,10 @@ export interface DBReviews {
     lastModifiedAt?: number;
 }
 
+export interface SEO {
+    title: string;
+    keywords: string;
+    description: string;
+    author: string;
+    image: string;
+}

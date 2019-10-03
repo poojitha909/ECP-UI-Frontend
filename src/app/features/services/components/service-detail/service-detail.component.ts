@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ServiceDetail, DBReviews } from 'src/app/core/interfaces';
+import { ServiceDetail, DBReviews, SEO } from 'src/app/core/interfaces';
 import { EpcServiceService } from '../../epc-service.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { SeoService } from 'src/app/core/services/seo.service';
 
 @Component({
   selector: 'app-service-detail',
@@ -48,8 +49,10 @@ export class ServiceDetailComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     public auth: AuthService,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    private seoService: SeoService
   ) {
+    this.service = this.route.snapshot.data.detail;
     this.reviewForm = this.fb.group({
       serviceId: [""],
       rating: [0, Validators.required],
@@ -59,13 +62,27 @@ export class ServiceDetailComponent implements OnInit {
 
     this.reportForm = this.fb.group({
       serviceId: [""],
-      cause: [0, Validators.required],
+      cause: ["", Validators.required],
       comment: ["", Validators.required],
     });
+
+    const config: SEO = {
+      title: `An Elder Spring Initiative by Tata Trusts Service${this.isDBService ? this.service.basicProfileInfo.firstName : this.service.name}`,
+      keywords: 'products,services,events,dscussions',
+      description: `${this.isDBService ? this.service.basicProfileInfo.description : 'Just Dail Service'}`,
+      author: `An Elder Spring Initiative by Tata Trusts`,
+      image: `${window.location.origin}/assets/imgaes/landing-img/service-bg.png`,
+    }
+    if (this.isDBService && this.service.basicProfileInfo.profileImage && this.service.basicProfileInfo.profileImage.original) {
+      config.image = this.service.basicProfileInfo.profileImage.original;
+    } else if (!this.isDBService && this.service.disp_pic) {
+      config.image = this.service.disp_pic;
+    }
+    this.seoService.generateTags(config);
+
   }
 
   ngOnInit() {
-    this.service = this.route.snapshot.data.detail;
     console.log("Service Details", this.service);
     if (this.service.email) {
       this.service.email = this.service.email.replace(",", " ");
@@ -85,6 +102,8 @@ export class ServiceDetailComponent implements OnInit {
 
     this.currentUrl = window.location.href;
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${this.currentUrl}`);
+
+
 
   }
 

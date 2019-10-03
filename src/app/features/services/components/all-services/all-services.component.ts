@@ -33,6 +33,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   autocompleteFields: Service[] = [];
   currentUrl: string;
   whatsappUrl;
+  verfiedCheck: boolean = true;
 
   constructor(public ecpService: EpcServiceService,
     public JDcategory: JdCategoryService,
@@ -91,6 +92,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
           this.services = response;
           this.allService = this.services;
           this.maxPages = Math.round(this.services.length / this.pageSize);
+          this.verfiedCheck = false;
           this.isLoading = false;
           console.log(response);
         }
@@ -117,6 +119,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
           this.services = response.data;
           this.allService = this.services;
           this.maxPages = Math.round(this.services.length / this.pageSize);
+          this.verfiedCheck = false;
           this.isLoading = false;
           this.searchPageParam.term = category;
         }
@@ -170,7 +173,10 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
 
   onCheckVerified(checked) {
     if (checked) {
-      this.services = this.allService.filter(service => service.verified === checked);
+      this.services = this.allService.filter(service => {
+        if (service.verified === '1' || service.verified === checked)
+          return service
+      });
 
     } else {
       this.services = this.allService;

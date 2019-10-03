@@ -62,7 +62,7 @@ export class ServiceDetailComponent implements OnInit {
 
     this.reportForm = this.fb.group({
       serviceId: [""],
-      cause: [0, Validators.required],
+      cause: ["", Validators.required],
       comment: ["", Validators.required],
     });
 

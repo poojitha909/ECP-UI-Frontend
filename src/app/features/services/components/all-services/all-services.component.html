@@ -118,7 +118,7 @@
           </div>
 
         </div>
-        <ul class="uk-list uk-list-large max-h-200 uk-overflow-auto">
+        <ul class="uk-list uk-list-large max-h-400 sroll-category">
           <li class="cursor-pointer" *ngFor="let category of JDcategory.categories"
             (click)="getCategoryServices(category.category_name)"
             [ngClass]="{'cat-active': category.category_name === searchPageParam.term}">
@@ -130,7 +130,7 @@
 
       <!-- Show only Verified Profiles -->
       <div class="m-t-40 category-box uk-flex-middle uk-flex">
-        <label class="m-0"><input class="uk-checkbox m-r-10" type="checkbox"
+        <label class="m-0"><input class="uk-checkbox m-r-10" type="checkbox" [(ngModel)]="verfiedCheck"
             (change)="onCheckVerified($event.target.checked)"> Show
           only
           Verified Profiles</label>

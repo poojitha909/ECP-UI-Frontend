@@ -37,4 +37,9 @@ export class UserPageComponent implements OnInit {
         console.log(response);
       });
   }
+
+  viewProfile() {
+    this.selectedTab = 'editprofile';
+    console.log(this.selectedTab);
+  }
 }

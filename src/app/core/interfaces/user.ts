@@ -36,7 +36,7 @@ export enum Gender {
     MALE = 1,
     FEMALE = 0,
     TRANS = 2,
-    PREFER_NOT_TO_SAY = 3
+    "PREFER NOT TO SAY" = 3
 }
 
 export interface UserProfile {

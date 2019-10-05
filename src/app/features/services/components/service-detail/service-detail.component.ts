@@ -101,7 +101,7 @@ export class ServiceDetailComponent implements OnInit {
     }
 
     this.currentUrl = window.location.href;
-    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${this.currentUrl}`);
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
 
 
 

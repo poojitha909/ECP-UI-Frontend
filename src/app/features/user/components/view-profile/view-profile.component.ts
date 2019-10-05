@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { AuthService } from 'src/app/core';
 import { Gender } from 'src/app/core/interfaces';
+
 
 @Component({
   selector: 'app-view-profile',
@@ -9,6 +10,9 @@ import { Gender } from 'src/app/core/interfaces';
   styleUrls: ['./view-profile.component.scss']
 })
 export class ViewProfileComponent implements OnInit {
+
+  @Output() editProfile = new EventEmitter();
+
   gender: string;
 
   constructor(
@@ -20,6 +24,10 @@ export class ViewProfileComponent implements OnInit {
 
     this.gender = Object.keys(Gender).find(key => Gender[key] === this.userService.userProfile.individualInfo.gender);
     console.log(this.gender);
+  }
+
+  edit() {
+    this.editProfile.emit();
   }
 
 }

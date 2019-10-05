@@ -21,10 +21,10 @@ export class ContactDetailFormComponent implements OnInit {
   ) {
 
     this.contactForm = this.fb.group({
-      primaryEmail: [this.userService.userProfile.basicProfileInfo.primaryEmail || '', Validators.required],
-      primaryPhoneNo: [this.userService.userProfile.basicProfileInfo.primaryPhoneNo || '', Validators.required],
+      // primaryEmail: [this.userService.userProfile.basicProfileInfo.primaryEmail || '', Validators.required],
+      // primaryPhoneNo: [this.userService.userProfile.basicProfileInfo.primaryPhoneNo || '', Validators.required],
       city: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.city || ''],
-      country: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.country || ''],
+      // country: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.country || 'India'],
       streetAddress: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.streetAddress || ''],
       zip: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.zip || '']
     });
@@ -43,10 +43,10 @@ export class ContactDetailFormComponent implements OnInit {
     if (this.contactForm.valid) {
       console.log(this.contactForm.value);
 
-      this.userService.userProfile.basicProfileInfo.primaryEmail = this.formControl.primaryEmail.value;
-      this.userService.userProfile.basicProfileInfo.primaryPhoneNo = this.formControl.primaryPhoneNo.value;
+      // this.userService.userProfile.basicProfileInfo.primaryEmail = this.formControl.primaryEmail.value;
+      // this.userService.userProfile.basicProfileInfo.primaryPhoneNo = this.formControl.primaryPhoneNo.value;
       this.userService.userProfile.basicProfileInfo.primaryUserAddress.city = this.formControl.city.value;
-      this.userService.userProfile.basicProfileInfo.primaryUserAddress.country = this.formControl.country.value;
+      this.userService.userProfile.basicProfileInfo.primaryUserAddress.country = 'India'
       this.userService.userProfile.basicProfileInfo.primaryUserAddress.streetAddress = this.formControl.streetAddress.value;
       this.userService.userProfile.basicProfileInfo.primaryUserAddress.zip = this.formControl.zip.value;
       this.isLoading = true;

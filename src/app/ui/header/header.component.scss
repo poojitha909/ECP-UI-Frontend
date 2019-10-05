@@ -48,9 +48,25 @@
       }
       .uk-dropdown{
         padding: 15px;
-        background-color:#bdc0c7;
         color: #000;
         border-radius: 4px;
+        .uk-dropdown-nav {
+          &::before{
+            border-bottom-style: solid;
+            content: '';
+            display: block;
+            height: 0;
+            position: absolute;
+            width: 0;
+            border: 6px solid;
+            border-color: transparent transparent #fff transparent;
+            z-index: 99;
+            left: 10px;
+            top: -12px;
+            left: auto;
+            right: 10px;
+          }
+        }
       }
     }
   }
@@ -159,9 +175,25 @@
     }
     .uk-dropdown{
       padding: 12px;
-      background-color: #bdc0c7;
       color: #000;
       border-radius: 4px;
+      .uk-dropdown-nav {
+        &::before{
+          border-bottom-style: solid;
+          content: '';
+          display: block;
+          height: 0;
+          position: absolute;
+          width: 0;
+          border: 6px solid;
+          border-color: transparent transparent #fff transparent;
+          z-index: 99;
+          left: 10px;
+          top: -12px;
+          left: auto;
+          // right: 10px;
+        }
+      }
     }
   }
 }

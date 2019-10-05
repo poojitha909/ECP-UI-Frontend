@@ -1,6 +1,6 @@
 <!-- Contact detail from -->
 <div class="category-box m-t-40">
-    <h3>Contact Details</h3>
+    <h3>Address Details</h3>
     <hr />
     <!-- Error box START-->
     <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
@@ -14,7 +14,7 @@
     <!-- Success box END-->
     <form [formGroup]="contactForm" class="uk-form-stacked" (ngSubmit)="onSubmit()">
 
-        <div class="uk-margin">
+        <!-- <div class="uk-margin">
             <label class="uk-form-label" for="form-stacked-text">Phone Number</label>
             <div class="uk-form-controls">
                 <input class="uk-input" id="form-stacked-text" formControlName="primaryPhoneNo" type="text"
@@ -28,15 +28,24 @@
                 <input class="uk-input" id="form-stacked-text" type="text" formControlName="primaryEmail"
                     placeholder="Enter emailId">
             </div>
-        </div>
+        </div> -->
 
-        <div class="uk-margin">
+        <!-- <div class="uk-margin">
             <label class="uk-form-label" for="form-stacked-select">Country</label>
             <div class="uk-form-controls">
                 <select class="uk-select" id="form-stacked-select" formControlName="country">
                     <option disabled selected hidden value="">Select Country</option>
                     <option>India</option>
                 </select>
+            </div>
+        </div> -->
+
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-text">Address in india</label>
+            <div class="uk-form-controls">
+                <textarea class="uk-input min-h-100" id="form-stacked-text" formControlName="streetAddress"
+                    placeholder="Enter your address"></textarea>
             </div>
         </div>
 
@@ -52,17 +61,9 @@
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-stacked-text">Address</label>
-            <div class="uk-form-controls">
-                <textarea class="uk-input min-h-100" id="form-stacked-text" formControlName="streetAddress"
-                    placeholder="Enter your address"></textarea>
-            </div>
-        </div>
-
-        <div class="uk-margin">
             <label class="uk-form-label" for="form-stacked-text">Zip</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="form-stacked-text" formControlName="zip" type="text"
+                <input class="uk-input" id="form-stacked-text" type="number" formControlName="zip" type="text"
                     placeholder="Enter zipcode">
             </div>
         </div>

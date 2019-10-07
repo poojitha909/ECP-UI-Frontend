@@ -26,6 +26,10 @@ export class DisplayNameFormComponent implements OnInit {
     });
   }
 
+  get formControl() {
+    return this.userForm.controls;
+  }
+
   ngOnInit() {
   }
 

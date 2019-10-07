@@ -1,6 +1,6 @@
 <!-- About You form START-->
 <div class="category-box m-t-40">
-    <h3>About you</h3>
+    <h3>Personal information</h3>
     <hr />
     <!-- Error box START-->
     <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
@@ -83,7 +83,8 @@
         <hr class="m-t-75" />
         <div uk-grid>
             <div class="uk-width-expand@s">
-                <label><input class="uk-checkbox" type="checkbox" checked> This information is private</label>
+                <label class="private-checkbox"><input class="uk-checkbox" type="checkbox" checked> This information is
+                    private</label>
             </div>
             <div>
                 <button class="m-l-10 uk-button uk-button-default" type="submit"

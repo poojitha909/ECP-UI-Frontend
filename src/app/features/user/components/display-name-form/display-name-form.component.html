@@ -16,7 +16,9 @@
     <form class="uk-form-stacked" [formGroup]="userForm" (ngSubmit)="onSubmit()">
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-stacked-text">Display Name</label>
+            <label class="uk-form-label"
+                [ngClass]="{'uk-text-danger' : formControl.userName.invalid && ( formControl.userName.dirty ||  formControl.userName.touched) }"
+                for="form-stacked-text">Display Name</label>
             <div class="uk-form-controls">
                 <input class="uk-input" id="form-stacked-text"
                     [ngClass]="{'uk-form-danger' : formControl.userName.invalid && ( formControl.userName.dirty ||  formControl.userName.touched) }"

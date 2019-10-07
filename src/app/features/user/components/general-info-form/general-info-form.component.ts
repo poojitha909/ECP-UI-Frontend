@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User, monthOptions, IndividualInfo, UserProfile } from 'src/app/core/interfaces';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { UserService } from '../../services/user.service';
@@ -9,6 +9,8 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./general-info-form.component.scss']
 })
 export class GeneralInfoFormComponent implements OnInit {
+
+  @Output() cancelForm = new EventEmitter();
 
   errorMessage;
   successMessage;
@@ -80,6 +82,11 @@ export class GeneralInfoFormComponent implements OnInit {
   resetAlertMessages() {
     this.errorMessage = null;
     this.successMessage = null;
+  }
+
+  onCancel() {
+    this.resetAlertMessages();
+    this.cancelForm.emit();
   }
 
 }

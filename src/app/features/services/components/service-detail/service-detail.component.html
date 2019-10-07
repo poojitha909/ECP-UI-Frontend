@@ -3,7 +3,7 @@
 
     <ul class="uk-breadcrumb">
         <li><a routerLink="/services">Home</a></li>
-        <li><a routerLink="/services/all">Services</a></li>
+        <li><a (click)="goBack()">Services</a></li>
         <li><span> {{ service?.name || service?.basicProfileInfo?.firstName  }}</span></li>
     </ul>
     <h3>

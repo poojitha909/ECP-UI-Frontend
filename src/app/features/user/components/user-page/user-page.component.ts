@@ -38,8 +38,11 @@ export class UserPageComponent implements OnInit {
       });
   }
 
-  viewProfile() {
+  viewEditProfile() {
     this.selectedTab = 'editprofile';
-    console.log(this.selectedTab);
+  }
+
+  viewUserProfile() {
+    this.selectedTab = 'viewprofile';
   }
 }

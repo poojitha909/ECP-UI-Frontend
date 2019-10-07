@@ -38,11 +38,11 @@
         </div>
 
         <div class="uk-animation-fade uk-animation-fast" *ngSwitchCase="'editprofile'">
-          <app-edit-profile-form></app-edit-profile-form>
+          <app-edit-profile-form (cancelForm)="viewUserProfile()"></app-edit-profile-form>
         </div>
 
         <div class="uk-animation-fade uk-animation-fast" *ngSwitchCase="'viewprofile'">
-          <app-view-profile (editProfile)="viewProfile()"></app-view-profile>
+          <app-view-profile (editProfile)="viewEditProfile()"></app-view-profile>
         </div>
       </ng-container>
 

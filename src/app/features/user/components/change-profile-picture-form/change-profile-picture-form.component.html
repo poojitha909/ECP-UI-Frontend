@@ -31,7 +31,9 @@
             <form class="uk-form-stacked" [formGroup]="basicProfile">
 
                 <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Name</label>
+                    <label class="uk-form-label"
+                        [ngClass]="{'uk-text-danger' : formControl.firstName.invalid && ( formControl.firstName.dirty ||  formControl.firstName.touched) }"
+                        for="form-stacked-text">Name</label>
                     <div class="uk-form-controls">
                         <input class="uk-input"
                             [ngClass]="{'uk-form-danger' : formControl.firstName.invalid && ( formControl.firstName.dirty ||  formControl.firstName.touched) }"
@@ -40,7 +42,9 @@
                 </div>
 
                 <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Email ID</label>
+                    <label class="uk-form-label"
+                        [ngClass]="{'uk-text-danger' : formControl.primaryEmail.invalid && ( formControl.primaryEmail.dirty ||  formControl.primaryEmail.touched) }"
+                        for="form-stacked-text">Email ID</label>
                     <div class="uk-form-controls">
                         <input class="uk-input"
                             [ngClass]="{'uk-form-danger' : formControl.primaryEmail.invalid && ( formControl.primaryEmail.dirty ||  formControl.primaryEmail.touched) }"
@@ -49,7 +53,9 @@
                 </div>
 
                 <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Phone number</label>
+                    <label class="uk-form-label"
+                        [ngClass]="{'uk-text-danger' : formControl.primaryPhoneNo.invalid && ( formControl.primaryPhoneNo.dirty ||  formControl.primaryPhoneNo.touched) }"
+                        for="form-stacked-text">Phone number</label>
                     <div class="uk-form-controls">
                         <input class="uk-input"
                             [ngClass]="{'uk-form-danger' : formControl.primaryPhoneNo.invalid && ( formControl.primaryPhoneNo.dirty ||  formControl.primaryPhoneNo.touched) }"
@@ -63,7 +69,8 @@
     </div>
     <hr />
     <p class="uk-text-right">
-        <button class="uk-button uk-button-transparent uk-modal-close">Cancel</button>
+        <button class="uk-button uk-button-transparent uk-modal-close" type="button"
+            (click)="onCancel()">Cancel</button>
         <button class="m-l-10 uk-button uk-button-default" (click)="onSubmit()"
             [disabled]="basicProfile.invalid">Submit</button>
     </p>

@@ -47,11 +47,14 @@
       </div>
       <div class="community-result-body">
         <ul>
-          <li *ngFor="let event of eventsList">
+          <li *ngFor="let event of eventsList" [routerLink]="['/community/event', event?.id ]">
             <h4>{{event.title}}</h4>
             <div>Date: {{event.datetime | date: 'dd-MM-yyyy'}} <span>{{ showTodayText(event.datetime) }}</span></div>
           </li>
         </ul>
+        <div class="uk-text-center uk-text-bold pt-norec" *ngIf="eventsList!==undefined && eventsList.length == 0" >
+            No Records found
+        </div>
       </div>
       <div class="community-result-footer" routerLink="/community/events">
         View All Events
@@ -73,11 +76,14 @@
       </div>
       <div class="community-result-body">
         <ul>
-          <li *ngFor="let discuss of discussionsList">
+          <li *ngFor="let discuss of discussionsList" [routerLink]="['/community/discussion', discuss.id ]" >
             <h4>{{discuss.title}}</h4>
             <div>{{discuss.aggrReplyCount}} comments &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by {{discuss.username}}</div>
           </li>
         </ul>
+        <div class="uk-text-center uk-text-bold pt-norec" *ngIf="discussionsList!==undefined && discussionsList.length == 0" >
+          No Records found
+        </div>
       </div>
       <div class="community-result-footer" routerLink="/community/discussions">
         View All Discussions

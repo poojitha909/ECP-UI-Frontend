@@ -6,28 +6,33 @@ import { StorageHelperService } from "../../../../core/services/storage-helper.s
 declare var UIkit;
 
 @Component({
-  selector: 'all-ask-question',
-  templateUrl: './all-ask-question.component.html',
-  styleUrls: ['./all-ask-question.component.scss']
+  selector: 'expert-all-question',
+  templateUrl: './expert-all-question.component.html',
+  styleUrls: ['./expert-all-question.component.scss']
 })
-export class AllAskQuestionComponent implements OnInit, OnDestroy {
+export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
 
   showReset: boolean;
-  experts: any[];
+  unanswered: any[];
   questions: any[];
   catsList: any[];
+  viewby: string;
   user: any;
   searchParams: {
     p: number,
     s: number,
-    experties: string
+    askCategory: string,
+    askedBy: string,
+    answered: number,
+		answeredBy: string
   };
   searchParamsQues: {
     p: number,
     s: number,
     searchTxt: string,
     askCategory: string,
-		askedBy: string,
+    askedBy: string,
+    answered: number,
 		answeredBy: string
   };
   paramsSubs: any;
@@ -39,7 +44,10 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
     this.searchParams = {
       p: 0,
       s: 10,
-      experties: ""
+      askCategory: "",
+      askedBy: "",
+      answered:0,
+      answeredBy: ""
     }
     this.searchParamsQues = {
       p: 0,
@@ -47,6 +55,7 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
       searchTxt: "",
       askCategory: "",
       askedBy: "",
+      answered:1,
       answeredBy: ""
     };
 
@@ -60,15 +69,20 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
   }
   
   initiate(){
+    this.viewby = "expert";
     this.user = this.store.retrieve("ECP-USER");
     if(this.user){
       this.user = JSON.parse(this.user);
-      this.searchParamsQues.askedBy = this.user.id;
+      this.searchParams.answeredBy = this.user.id;
+      this.searchParamsQues.answeredBy = this.user.id;
     }
     this.searchParams = {
       p: 0,
       s: 10000,
-      experties: ""
+      askCategory: "",
+      askedBy: "",
+      answered: 0,
+      answeredBy: ""
     }
 
     this.searchParamsQues = {
@@ -77,13 +91,14 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
       searchTxt: "",
       askCategory: "",
       askedBy: "",
+      answered: 1,
       answeredBy: ""
     };
     
     this.totalRecords = 0;
     this.totalRecordsQues = 0;
     if(this.route.snapshot.params['category'] !== undefined){
-      this.searchParams.experties = this.route.snapshot.params['category'];
+      this.searchParams.askCategory = this.route.snapshot.params['category'];
       this.searchParamsQues.askCategory = this.route.snapshot.params['category'];
     }
     
@@ -107,12 +122,17 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
     this.onSearch()
   }
 
-  showExperts(){
-    this.askQuesService.experts(this.searchParams).subscribe( (response:any) =>{
+  changePageQues(page: number) {
+    this.searchParamsQues.p = page;
+    this.onSearch()
+  }
+
+  showUnanswered(){
+    this.askQuesService.questions(this.searchParams).subscribe( (response:any) =>{
       const data = response.data;
-      this.experts = [];
+      this.unanswered = [];
       if(data.content){
-        this.experts = data.content;
+        this.unanswered = data.content;
         this.totalRecords = data.total;
       }
     });
@@ -128,16 +148,12 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
     });
   }
 
-  onTabChange(value) {
-    this.router.navigate(['/ask-question/all', {category: value}]);
-  }
-
   onTopTabChange(value) {
-    this.router.navigate(['/ask-question/all', {category: this.searchParamsQues.askCategory, tab: value}]);
+    this.router.navigate(['/ask-question/expert', {tab: value}]);
   }
   
   onSearch() {
-    this.showExperts();
+    this.showUnanswered();
     this.showQuestions();
   }
 }

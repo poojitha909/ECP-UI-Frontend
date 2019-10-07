@@ -12,6 +12,8 @@ import { QuestionNoRecordComponent } from './components/question-no-record/quest
 import { QuestionDetailCardComponent } from './components/question-detail-card/question-detail-card.component';
 import { AskQuestionDetailPageComponent } from './components/ask-question-detail/ask-question-detail-page.component';
 import { TimeAgoPipe } from '../../shared/timeago.pipe';
+import { ExpertAllQuestionComponent } from './components/expert-all-question/expert-all-question.component';
+import { QuestionExpertNoRecordComponent } from './components/question-expert-no-record/question-expert-no-record.component';
 
 @NgModule({
   declarations: [AskQuestionPageComponent,
@@ -22,6 +24,8 @@ import { TimeAgoPipe } from '../../shared/timeago.pipe';
     QuestionNoRecordComponent,
     QuestionDetailCardComponent,
     AskQuestionDetailPageComponent,
+    ExpertAllQuestionComponent,
+    QuestionExpertNoRecordComponent,
     TimeAgoPipe
   ],
   imports: [

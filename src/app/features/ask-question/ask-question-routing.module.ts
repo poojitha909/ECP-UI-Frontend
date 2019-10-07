@@ -6,6 +6,7 @@ import { AllAskQuestionComponent } from './components/all-ask-question/all-ask-q
 import { AskQuestionCreatePageComponent } from './components/ask-question-create/ask-question-create-page.component';
 import { AskQuestionDetailPageComponent } from './components/ask-question-detail/ask-question-detail-page.component';
 import { LayoutComponent } from 'src/app/ui';
+import { ExpertAllQuestionComponent } from './components/expert-all-question/expert-all-question.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
       {
         path: 'add',
         component: AskQuestionCreatePageComponent
+      },
+      {
+        path: 'expert',
+        component: ExpertAllQuestionComponent
       },
       {
         path: 'detail/:id',

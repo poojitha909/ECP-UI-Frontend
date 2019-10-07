@@ -38,7 +38,8 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="form-stacked-select">Medical Issues</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" [hideSelected]="true" multiple="true" formControlName="medicalIssues">
+                <ng-select [addTag]="addTagFn" [items]="medicalIssues" [hideSelected]="true" multiple="true"
+                    formControlName="medicalIssues">
                 </ng-select>
             </div>
         </div>
@@ -65,7 +66,7 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="form-stacked-select">My Hobbies</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" placeholder="" [hideSelected]="true" multiple="true"
+                <ng-select [addTag]="addTagFn" placeholder="" [items]="hobbies" [hideSelected]="true" multiple="true"
                     formControlName="hobbies">
                 </ng-select>
             </div>

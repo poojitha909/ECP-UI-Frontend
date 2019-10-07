@@ -10,6 +10,21 @@ import { UserService } from '../../services/user.service';
 export class AboutYouFormComponent implements OnInit {
 
   aboutForm: FormGroup;
+  medicalIssues: string[] = ["Diabetes", "Blood", "Pressure", "Dementia", "Arthiritis"];
+  hobbies: string[] = [
+    "Sports",
+    "Music",
+    "Playing",
+    "Listening",
+    "Traveling",
+    "Socializing",
+    "Community-work",
+    "Volunteer-Work",
+    "Painting",
+    "Dancing",
+    "Reading", "Writing"
+  ];
+
   languages: any[] = [
     {
       id: 1,
@@ -31,13 +46,13 @@ export class AboutYouFormComponent implements OnInit {
     private userService: UserService) {
 
     this.aboutForm = this.fb.group({
-      shortDescription: [this.userService.userProfile.basicProfileInfo.shortDescription || '', Validators.required],
-      emotionalIssues: [this.userService.userProfile.individualInfo.emotionalIssues || '', Validators.required],
+      shortDescription: [this.userService.userProfile.basicProfileInfo.shortDescription || ''],
+      emotionalIssues: [this.userService.userProfile.individualInfo.emotionalIssues || ''],
       medicalIssues: [this.userService.userProfile.individualInfo.medicalIssues || null],
-      otherIssues: [this.userService.userProfile.individualInfo.otherIssues || '', Validators.required],
+      otherIssues: [this.userService.userProfile.individualInfo.otherIssues || ''],
       language: [this.userService.userProfile.individualInfo.language || '', Validators.required],
       hobbies: [this.userService.userProfile.individualInfo.hobbies || null],
-      otherInterests: [this.userService.userProfile.individualInfo.otherInterests || '', Validators.required]
+      otherInterests: [this.userService.userProfile.individualInfo.otherInterests || '']
     });
   }
 

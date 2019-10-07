@@ -24,7 +24,7 @@ export class ContactDetailFormComponent implements OnInit {
     this.contactForm = this.fb.group({
       // primaryEmail: [this.userService.userProfile.basicProfileInfo.primaryEmail || '', Validators.required],
       // primaryPhoneNo: [this.userService.userProfile.basicProfileInfo.primaryPhoneNo || '', Validators.required],
-      city: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.city || ''],
+      city: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.city || 'Hyderabad'],
       // country: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.country || 'India'],
       streetAddress: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.streetAddress || ''],
       zip: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.zip || '']

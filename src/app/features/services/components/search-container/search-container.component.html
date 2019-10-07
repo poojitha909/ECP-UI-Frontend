@@ -12,11 +12,11 @@
           <form class="uk-search uk-search-default">
             <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
               <button class="uk-button-link" style="visibility: hidden"></button>
-              <button *ngIf="showReset" class="reset-link uk-visible@s" (click)="resetSearch($event)">
+              <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
                 <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Search again
               </button>
             </span>
-            <input class="uk-search-input search-box font-regular" [(ngModel)]="searchPageParam.term"
+            <input class="uk-search-input search-box font-regular pr-150" [(ngModel)]="searchPageParam.term"
               (keyup)="searchEvent($event)" (keydown.enter)="onSearch()" required type="text" placeholder="Search here"
               name="search" />
           </form>

@@ -51,7 +51,7 @@
         color: #000;
         border-radius: 4px;
         .uk-dropdown-nav {
-          &::before{
+          &::after{
             border-bottom-style: solid;
             content: '';
             display: block;
@@ -61,41 +61,49 @@
             border: 6px solid;
             border-color: transparent transparent #fff transparent;
             z-index: 99;
-            top: -12px;
+            // top: -12px;
             // right: 10px;
             // left: auto;
+            // content: " ";
+            // position: absolute;
+            bottom: 100%;  /* At the top of the tooltip */
+            left: 50%;
+            margin-left: -5px;
+            // border-width: 5px;
+            // border-style: solid;
+            // border-color: transparent transparent black transparent;
           }
         }
       }
     }
   }
 
-  @media (min-width: 1380px) {
-    .sign-in-button {
-      .uk-dropdown{
-        .uk-dropdown-nav {
-          &::before{
-            left: 10px;
-          }
+  // @media (min-width: 1380px) {
+  //   .sign-in-button {
+  //     .uk-dropdown{
+  //       .uk-dropdown-nav {
+  //         &::before{
+  //           left: 10px;
+  //         }
 
-        } 
-       }
-    }
-  }
+  //       } 
+  //      }
+  //   }
+  // }
 
 
-  @media (max-width: 1380px) {
-    .sign-in-button {
-      .uk-dropdown{
-        .uk-dropdown-nav {
-          &::before{
-            right: 10px;
-          }
+  // @media (max-width: 1380px) {
+  //   .sign-in-button {
+  //     .uk-dropdown{
+  //       .uk-dropdown-nav {
+  //         &::before{
+  //           right: 10px;
+  //         }
 
-        } 
-       }
-    }
-  }
+  //       } 
+  //      }
+  //   }
+  // }
 
   .ecp-navbar {
     margin-top: 40px;
@@ -214,9 +222,12 @@
           border: 6px solid;
           border-color: transparent transparent #fff transparent;
           z-index: 99;
-          left: 10px;
-          top: -12px;
-          left: auto;
+          bottom: 100%;  /* At the top of the tooltip */
+          left: 50%;
+          margin-left: -5px;
+          // left: 10px;
+          // top: -12px;
+          // left: auto;
           // right: 10px;
         }
       }

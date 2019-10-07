@@ -15,11 +15,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
-    console.log(this.router.url);
   }
 
   ngAfterViewInit() {
-    if (this.router.url == '/user') {
+    if (this.router.url == '/user' || this.router.url == '/about') {
       // this.homeLink.nativeElement.classList.remove('uk-active');
       setTimeout(() => {
         this.homeLink.forEach(

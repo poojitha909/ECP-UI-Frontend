@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ErrorComponent } from './shared';
+import { ErrorComponent, AboutUsComponent } from './shared';
+import { LayoutComponent } from './ui';
 
 const routes: Routes = [
   {
@@ -34,6 +35,16 @@ const routes: Routes = [
   {
     path: 'error',
     component: ErrorComponent
+  },
+  {
+    path: 'about',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        component: AboutUsComponent
+      }
+    ]
   },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];

@@ -11,9 +11,10 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { ErrorComponent } from './error/error.component';
 import { FrontendPaginationComponent } from './frontend-pagination/frontend-pagination.component';
 import { KeyHandlerDirective } from './directives/key-handler.directive';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
-  declarations: [ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, ServicesListComponent, PaginationComponent, ErrorComponent, FrontendPaginationComponent, KeyHandlerDirective],
+  declarations: [ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, ServicesListComponent, PaginationComponent, ErrorComponent, FrontendPaginationComponent, KeyHandlerDirective, AboutUsComponent],
   imports: [
     CommonModule,
     SharedRoutingModule,

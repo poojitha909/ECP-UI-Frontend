@@ -61,13 +61,39 @@
             border: 6px solid;
             border-color: transparent transparent #fff transparent;
             z-index: 99;
-            left: 10px;
             top: -12px;
-            left: auto;
-            right: 10px;
+            // right: 10px;
+            // left: auto;
           }
         }
       }
+    }
+  }
+
+  @media (min-width: 1380px) {
+    .sign-in-button {
+      .uk-dropdown{
+        .uk-dropdown-nav {
+          &::before{
+            left: 10px;
+          }
+
+        } 
+       }
+    }
+  }
+
+
+  @media (max-width: 1380px) {
+    .sign-in-button {
+      .uk-dropdown{
+        .uk-dropdown-nav {
+          &::before{
+            right: 10px;
+          }
+
+        } 
+       }
     }
   }
 

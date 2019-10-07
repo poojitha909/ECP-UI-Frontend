@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 
@@ -9,6 +9,7 @@ import { UserService } from '../../services/user.service';
 })
 export class ContactDetailFormComponent implements OnInit {
 
+  @Output() cancelForm = new EventEmitter();
   contactForm: FormGroup;
   errorMessage;
   successMessage;
@@ -69,6 +70,11 @@ export class ContactDetailFormComponent implements OnInit {
   resetAlertMessages() {
     this.errorMessage = null;
     this.successMessage = null;
+  }
+
+  onCancel() {
+    this.resetAlertMessages();
+    this.cancelForm.emit();
   }
 
 }

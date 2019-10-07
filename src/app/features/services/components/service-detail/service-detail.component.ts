@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-service-detail',
@@ -50,7 +51,8 @@ export class ServiceDetailComponent implements OnInit {
     private fb: FormBuilder,
     public auth: AuthService,
     public sanitizer: DomSanitizer,
-    private seoService: SeoService
+    private seoService: SeoService,
+    private _location:Location
   ) {
     this.service = this.route.snapshot.data.detail;
     this.reviewForm = this.fb.group({
@@ -228,5 +230,10 @@ export class ServiceDetailComponent implements OnInit {
     this.auth.serviceReviewForm = this.reviewForm.value;
     this.router.navigateByUrl('/user/signin');
   }
+
+  goBack() {
+    this._location.back();
+  }
+
 
 }

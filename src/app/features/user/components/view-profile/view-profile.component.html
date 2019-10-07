@@ -145,8 +145,13 @@
     <div class="m-t-30">
         <p class="font-regular-15 m-b-10 lable">Language</p>
         <p class="font-regular m-t-0">
-            <ng-conatiner *ngFor="let language of userService?.userProfile?.individualInfo?.language">
-                {{ language.name || '-'}}
+            <ng-conatiner *ngFor="let language of userService?.userProfile?.individualInfo?.language; let i = index">
+                <ng-conatiner *ngIf="i == 0">
+                    {{language.name||'-'}}
+                </ng-conatiner>
+                <ng-conatiner *ngIf="i > 0">
+                    {{','+language.name||'-'}}
+                </ng-conatiner>
             </ng-conatiner>
         </p>
     </div>

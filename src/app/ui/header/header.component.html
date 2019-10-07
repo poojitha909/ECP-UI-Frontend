@@ -31,7 +31,7 @@
               <div class="uk-inline" *ngIf="auth.isAuthenticate">
                 <button
                   class="uk-button uk-button-default">{{ auth.user.userName || auth.user.email || auth.user.phoneNumber }}</button>
-                <div uk-dropdown>
+                <div uk-dropdown="pos: bottom-left">
                   <ul class="uk-nav uk-dropdown-nav">
                     <li><a class="uk-padding-remove font-regular" (click)="navigateUser()">
                         <fa-icon icon="user" [style]="{'margin-right':'20px','color':'#1A73E8'}"></fa-icon>User Profile

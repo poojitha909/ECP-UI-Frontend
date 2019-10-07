@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/core';
 import { UserService } from '../../services/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./change-profile-picture-form.component.scss']
 })
 export class ChangeProfilePictureFormComponent implements OnInit {
+  @Output() cancelForm = new EventEmitter();
 
   basicProfile: FormGroup;
   errorMessage;
@@ -82,6 +83,11 @@ export class ChangeProfilePictureFormComponent implements OnInit {
   resetAlertMessages() {
     this.errorMessage = null;
     this.successMessage = null;
+  }
+
+  onCancel() {
+    this.resetAlertMessages();
+    this.cancelForm.emit();
   }
 
 }

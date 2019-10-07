@@ -33,7 +33,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   autocompleteFields: Service[] = [];
   currentUrl: string;
   whatsappUrl;
-  verfiedCheck: boolean = true;
+  verfiedCheck: boolean;
 
   constructor(public ecpService: EpcServiceService,
     public JDcategory: JdCategoryService,

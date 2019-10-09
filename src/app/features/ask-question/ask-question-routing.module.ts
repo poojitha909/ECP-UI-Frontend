@@ -9,31 +9,26 @@ import { LayoutComponent } from 'src/app/ui';
 import { ExpertAllQuestionComponent } from './components/expert-all-question/expert-all-question.component';
 
 const routes: Routes = [
+
   {
     path: '',
-    component: LayoutComponent,
-    children: [
-      {
-        path: '',
-        component: AskQuestionPageComponent
-      },
-      {
-        path: 'all',
-        component: AllAskQuestionComponent
-      },
-      {
-        path: 'add',
-        component: AskQuestionCreatePageComponent
-      },
-      {
-        path: 'expert',
-        component: ExpertAllQuestionComponent
-      },
-      {
-        path: 'detail/:id',
-        component: AskQuestionDetailPageComponent
-      }
-    ]
+    component: AskQuestionPageComponent
+  },
+  {
+    path: 'all',
+    component: AllAskQuestionComponent
+  },
+  {
+    path: 'add',
+    component: AskQuestionCreatePageComponent
+  },
+  {
+    path: 'expert',
+    component: ExpertAllQuestionComponent
+  },
+  {
+    path: 'detail/:id',
+    component: AskQuestionDetailPageComponent
   }
 ];
 

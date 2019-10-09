@@ -47,16 +47,13 @@
     font-weight: bold;
   }
   .description{
-    font-size:15px;
+    font-size: $font-small;
     margin-top: 5px;
   }
   .textblue{
     color:$primary-txt-color;
   }
-  hr{
-    margin:40px 0;
-  }
-
+ 
   .category-box{
     border: 1px solid #D7E0EF;
     box-sizing: border-box;
@@ -73,7 +70,7 @@
 
   .comment{
     span{
-      font-size: 15px;
+      font-size: $font-small;
       padding: 15px 0 0 0;
       display: block;
     }

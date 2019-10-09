@@ -3,13 +3,13 @@
 
     <ul class="uk-breadcrumb">
         <li><a routerLink="/services">Home</a></li>
-        <li><a (click)="goBack()">Services</a></li>
+        <li><a routerLink="/services/all">Services</a></li>
         <li><span> {{ service?.name || service?.basicProfileInfo?.firstName  }}</span></li>
     </ul>
     <h3>
         {{ service?.name || service?.basicProfileInfo?.firstName  }}
     </h3>
-    <hr />
+    <hr class="m-b-30" />
 
     <div uk-grid>
 
@@ -275,15 +275,16 @@
 
         <div class="uk-width-expand@m">
             <!-- About -->
-            <div>
-                <h1 class="font-regular-24 font-weight-600">About</h1>
-                <p *ngIf="!isDBService">
-                    {{service?.seo_dt?.desc }}
-                </p>
-                <div *ngIf="isDBService" [innerHTML]="service?.basicProfileInfo?.description"></div>
-            </div>
-            <hr />
-
+            <ng-container *ngIf="service?.seo_dt?.desc">
+                <div>
+                    <h1 class="font-regular-24 font-weight-600">About</h1>
+                    <p *ngIf="!isDBService">
+                        {{service?.seo_dt?.desc }}
+                    </p>
+                    <div *ngIf="isDBService" [innerHTML]="service?.basicProfileInfo?.description"></div>
+                </div>
+                <hr />
+            </ng-container>
             <!-- service informations -->
             <div class="info">
                 <h1 class="font-regular-24 font-weight-600">Details</h1>
@@ -353,7 +354,7 @@
                         <div class="uk-child-width-expand " uk-grid>
                             <div>
                                 <div class="uk-margin">
-                                    <label class="uk-form-label" for="form-stacked-text">Username*</label>
+                                    <label class="uk-form-label" for="form-stacked-text">Username<span class="required">*</span></label>
                                     <div class="uk-form-controls">
                                         <input class="uk-input" id="form-stacked-text" formControlName="userName"
                                             type="text" placeholder="Enter your name">
@@ -362,7 +363,7 @@
                             </div>
                             <div>
                                 <div class="uk-margin">
-                                    <label class="uk-form-label" for="form-stacked-select">Your Rating*</label>
+                                    <label class="uk-form-label" for="form-stacked-select">Your Rating<span class="required">*</span></label>
                                     <div class="uk-form-controls">
                                         <select class="uk-select" formControlName="rating" id="form-stacked-select">
                                             <option disabled selected hidden value="0">Select your rating</option>
@@ -380,7 +381,7 @@
                         </div>
 
                         <div class="uk-margin">
-                            <label class="uk-form-label" for="form-stacked-text">Your Review*</label>
+                            <label class="uk-form-label" for="form-stacked-text">Your Review<span class="required">*</span></label>
                             <div class="uk-form-controls">
                                 <textarea formControlName="review" class="uk-input min-h-200" id="form-stacked-text"
                                     placeholder="Enter your review here"></textarea>

@@ -11,21 +11,15 @@ import { ErrorComponent } from 'src/app/shared';
 const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent,
-    children: [
-      {
-        path: '',
-        component: ServicesPageComponent
-      }, {
-        path: 'all',
-        component: AllServicesComponent
-      },
-      {
-        path: ':name/:docId/:dbservice',
-        component: ServiceDetailComponent,
-        resolve: { detail: DetailResolverService }
-      }
-    ]
+    component: ServicesPageComponent
+  }, {
+    path: 'all',
+    component: AllServicesComponent
+  },
+  {
+    path: ':name/:docId/:dbservice',
+    component: ServiceDetailComponent,
+    resolve: { detail: DetailResolverService }
   }
 ];
 

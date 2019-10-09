@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <hr/>
+        <hr class="m-b-30" />
         <div *ngIf="selCategory!='' && discussionsList.length > 0" class="uk-grid uk-grid-large uk-flex-left uk-text-center uk-child-width-1-1@m">
             <app-discussion-summary-cat *ngFor="let discussion of discussionsList" [category]="selCategory" [discussion]="discussion"></app-discussion-summary-cat>
         </div>

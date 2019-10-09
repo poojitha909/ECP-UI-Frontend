@@ -76,12 +76,18 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
 
-    const queryCategory = this.activeRoute.snapshot.queryParamMap.get("category");
-    if (queryCategory) {
-      this.getCategoryServices(queryCategory);
-    } else {
-      this.getAllService();
-    }
+    this.activeRoute.queryParamMap.subscribe(
+      value => {
+        const queryCategory = value.get("category");
+        const catId = value.get("catid");
+        if (queryCategory) {
+          catId ? this.getCategoryServices(queryCategory, catId) : this.getCategoryServices(queryCategory, 0);
+        } else {
+          this.getAllService();
+        }
+        console.log(value);
+      });
+
   }
 
   getAllService() {
@@ -95,6 +101,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
           this.verfiedCheck = false;
           this.isLoading = false;
           console.log(response);
+          this.router.navigateByUrl('services/all');
         }
       },
       error => {
@@ -106,14 +113,18 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
       })
   }
 
-  getCategoryServices(category) {
-
-    this.router.navigate(['services/all'], { queryParams: { category: category } });
+  getCategoryServices(category, catId) {
     this.isLoading = true;
-    console.log(category);
-    this.homeService.searchParam.s = 50;
-    this.homeService.searchParam.term = category;
-    this.homeService.getServices().subscribe(
+    console.log(category, catId);
+    const param: PageParam = {
+      p: 0,
+      s: 50,
+      catid: catId,
+      term: category,
+    };
+    // this.homeService.searchParam.s = 50;
+    // this.homeService.searchParam.term = category;
+    this.homeService.getCategoryServices(param).subscribe(
       response => {
         if (response && response.data) {
           this.services = response.data;
@@ -134,6 +145,15 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
       });
   }
 
+  onCategoryChanged(category, catId) {
+    this.router.navigate(['services/all'], { queryParams: { category: category, catid: catId } });
+  }
+
+  clearSelection() {
+    this.searchPageParam.term = '';
+    this.router.navigateByUrl('services/all');
+  }
+
   onChangePage(services: any[]) {
     // update current page of items
     this.pageServices = services;
@@ -152,13 +172,38 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onSearch(field) {
-    this.searchPageParam.term = field;
-    if (this.searchPageParam.term) {
+  onSearch(field?: string) {
+    if (field || this.selectedValue) {
+      let service: Service;
       if (this.selectedValue) {
-        this.searchPageParam.term = this.selectedValue;
+        // this.searchPageParam.term = this.selectedValue;
+        service = this.autocompleteFields.find(service => {
+          if (service.name && service.name == this.selectedValue) {
+            return true
+          } else if (service.basicProfileInfo && service.basicProfileInfo.firstName == this.selectedValue) {
+            return true;
+          }
+        });
+      } else {
+        service = this.autocompleteFields.find(service => {
+          if (service.name && service.name == field) {
+            return true
+          } else if (service.basicProfileInfo && service.basicProfileInfo.firstName == field) {
+            return true;
+          }
+        });
       }
-      this.getCategoryServices(this.searchPageParam.term);
+
+      if (service.hasOwnProperty('basicProfileInfo')) {
+        this.router.navigate([`/services/${service.basicProfileInfo.firstName}/${service.id}/${true}`]);
+      } else {
+        this.router.navigate([`/services/${service.name}/${service.docid}/${false}`]);
+      }
+
+      // this.searchPageParam.term = field;
+
+
+      // this.onCategoryChanged(this.searchPageParam.term, 0);
       // this.searchPageParam.term = "";
       this.selectedValue = "";
       this.autocompleteFields = [];

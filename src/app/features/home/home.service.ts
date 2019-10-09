@@ -36,6 +36,21 @@ export class HomeService {
     return this.http.get(`${ApiConstants.GET_SERVICES}?${queryParams}`);
   }
 
+  getCategoryServices(param: PageParam): Observable<any> {
+    let queryParams: string = '';
+
+    Object.keys(param)
+      .forEach((key, i) => {
+        if (i > 0) {
+          queryParams += `&${key}=${param[key]}`;
+        } else {
+          queryParams += `${key}=${param[key]}`;
+        }
+      });
+
+    return this.http.get(`${ApiConstants.GET_SERVICES}?${queryParams}`);
+  }
+
   getAutoCompleteServices(): Observable<any> {
     let queryParams: string = '';
 

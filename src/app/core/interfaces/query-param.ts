@@ -2,7 +2,8 @@
 export interface PageParam {
     p: number,
     s: number,
-    term: string
+    term: string,
+    catid?: number
 }
 
 export interface JDserviceParam {

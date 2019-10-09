@@ -9,7 +9,7 @@
     <h3>
         {{ service?.name || service?.basicProfileInfo?.firstName  }}
     </h3>
-    <hr />
+    <hr class="m-b-30" />
 
     <div uk-grid>
 
@@ -275,15 +275,16 @@
 
         <div class="uk-width-expand@m">
             <!-- About -->
-            <div>
-                <h1 class="font-regular-24 font-weight-600">About</h1>
-                <p *ngIf="!isDBService">
-                    {{service?.seo_dt?.desc }}
-                </p>
-                <div *ngIf="isDBService" [innerHTML]="service?.basicProfileInfo?.description"></div>
-            </div>
-            <hr />
-
+            <ng-container *ngIf="service?.seo_dt?.desc">
+                <div>
+                    <h1 class="font-regular-24 font-weight-600">About</h1>
+                    <p *ngIf="!isDBService">
+                        {{service?.seo_dt?.desc }}
+                    </p>
+                    <div *ngIf="isDBService" [innerHTML]="service?.basicProfileInfo?.description"></div>
+                </div>
+                <hr />
+            </ng-container>
             <!-- service informations -->
             <div class="info">
                 <h1 class="font-regular-24 font-weight-600">Details</h1>

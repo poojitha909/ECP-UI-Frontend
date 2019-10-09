@@ -10,7 +10,6 @@ import { ProductDetailPageComponent } from './components/product-detail/product-
 import { ProductCreatePageComponent } from './components/product-create/product-create-page.component';
 import { TimeAgoPipe } from '../../shared/timeago.pipe';
 import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ProductNoRecordComponent } from './components/product-no-record/product-no-record.component'
 @NgModule({
   declarations: [ ProductsPageComponent,
@@ -25,8 +24,7 @@ import { ProductNoRecordComponent } from './components/product-no-record/product
     CommonModule,
     ProductsRoutingModule,
     SharedModule,
-    NgbCarouselModule,
-    SlickCarouselModule
+    NgbCarouselModule
   ]
 })
 export class ProductsModule { }

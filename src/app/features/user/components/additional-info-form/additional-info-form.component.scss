@@ -1,3 +1,4 @@
+@import "src/assets/css/variables.scss";
 .skip{
     background-color: #E4EEFB;
     border-radius: 4px;
@@ -17,7 +18,7 @@ a{
 .submit-btn{
     height: 48px;
     border-radius: 4px;
-    font-size: 15px;
+    font-size: $font-small;
     &:focus{
         border: 2px solid #1A72E8;
     }

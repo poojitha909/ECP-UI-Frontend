@@ -1,3 +1,4 @@
+@import "src/assets/css/variables.scss";
 a{
     color: #1A72E8;
 }
@@ -19,13 +20,13 @@ a{
     color: #423d27;
 }
 .category{
-    font-size: 15px;
+    font-size: $font-small;
     position: absolute;
     bottom: 18px;
 }
 .category span{
     color: #1A73E8;
-    font-size: 15px;
+    font-size: $font-small;
 }
 .cursor{
     cursor: pointer;

@@ -1,3 +1,4 @@
+@import "src/assets/css/variables.scss";
 a{
     color: #1A72E8;
 }
@@ -9,11 +10,11 @@ a{
     font-size:18px;
 }
 .expertdetial{
-    font-size:15px;
+    font-size: $font-small;
     color: rgba(22, 28, 45, 0.68);
 }
 .category{
-    font-size: 15px;
+    font-size: $font-small;
 }
 .askques{
     position: relative;
@@ -25,7 +26,7 @@ a{
     position: absolute;
 }
 .category span{
-    font-size: 15px;
+    font-size: $font-small;
 }
 .cursor{
     cursor: pointer;
@@ -45,7 +46,7 @@ a{
     height: 100%;
     .replycnt {
         font-family:"HKGroteskRegular"; 
-        font-size: 15px;
+        font-size: $font-small;
         color: rgba(22, 28, 45, 0.68);
         img {
             height: 22px;

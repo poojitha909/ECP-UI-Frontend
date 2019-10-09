@@ -47,7 +47,7 @@
     font-weight: bold;
   }
   .description{
-    font-size:15px;
+    font-size: $font-small;
     margin-top: 5px;
   }
   .textblue{
@@ -73,7 +73,7 @@
 
   .comment{
     span{
-      font-size: 15px;
+      font-size: $font-small;
       padding: 15px 0 0 0;
       display: block;
     }

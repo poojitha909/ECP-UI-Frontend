@@ -9,25 +9,19 @@ import { ProductCreatePageComponent } from './components/product-create/product-
 const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent,
-    children: [
-      {
-        path: '',
-        component: ProductsPageComponent
-      },
-      {
-        path: 'all',
-        component: AllProductsComponent
-      },
-      {
-        path: 'add',
-        component: ProductCreatePageComponent
-      },
-      {
-        path: ':id',
-        component: ProductDetailPageComponent
-      }
-    ]
+    component: ProductsPageComponent
+  },
+  {
+    path: 'all',
+    component: AllProductsComponent
+  },
+  {
+    path: 'add',
+    component: ProductCreatePageComponent
+  },
+  {
+    path: ':id',
+    component: ProductDetailPageComponent
   }
 ];
 

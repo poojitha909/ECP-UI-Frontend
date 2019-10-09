@@ -4,10 +4,10 @@
       <div class="uk-width-auto">
         <div class="logo-tagline uk-text-left@s uk-text-center">
           <div class="logo">
-            <button class="uk-button uk-button-default" routerLink="/">ABCD Logo</button>
+            <button class="uk-button uk-button-default" routerLink="/">'TBD' Logo</button>
           </div>
           <div class="tagline">
-            <span>An Elder Spring Initiative by Tata Trusts</span>
+            <span>Supported by Tata Trusts</span>
           </div>
         </div>
       </div>
@@ -20,14 +20,14 @@
           </div> -->
           <div class="helpline-note">
             <button class="uk-button uk-button-default">
-              <span uk-icon="receiver"></span>Elder Spring Response Center <b>14567</b>
+              <span uk-icon="receiver"></span>Elder Spring Connect Center <b>14567</b>
             </button>
           </div>
           <div>
             <div class="sign-in-button">
 
               <button *ngIf="!auth.isAuthenticate" routerLink="/user/signin"
-                class="uk-button uk-button-default">SignIn</button>
+                class="uk-button uk-button-default">Sign In</button>
               <div class="uk-inline" *ngIf="auth.isAuthenticate">
                 <button
                   class="uk-button uk-button-default">{{ auth.user.userName || auth.user.email || auth.user.phoneNumber }}</button>

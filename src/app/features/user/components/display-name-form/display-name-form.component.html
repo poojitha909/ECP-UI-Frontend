@@ -18,7 +18,7 @@
         <div class="uk-margin">
             <label class="uk-form-label"
                 [ngClass]="{'uk-text-danger' : formControl.userName.invalid && ( formControl.userName.dirty ||  formControl.userName.touched) }"
-                for="form-stacked-text">Display Name</label>
+                for="form-stacked-text">Display Name<span class="required">*</span></label>
             <div class="uk-form-controls">
                 <input class="uk-input" id="form-stacked-text"
                     [ngClass]="{'uk-form-danger' : formControl.userName.invalid && ( formControl.userName.dirty ||  formControl.userName.touched) }"

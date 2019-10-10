@@ -1,6 +1,7 @@
 <div class="uk-container products">
   <div class="breadcrumbs">
       <ul class="uk-breadcrumb">
+          <li routerLink="/" class="fa fa-angle-right">Home</li>
           <li routerLink="/products" class="fa fa-angle-right">Products</li>
       </ul>
   </div>
@@ -30,9 +31,16 @@
       </div> -->
 
       <div class="m-t-40 category-box">
-        <h4>Categories</h4>
+        <div uk-grid>
+          <div class="uk-width-expand">
+            <h4>Categories</h4>
+          </div>
+          <div *ngIf="searchParams.productCategory !== ''">
+            <a class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
+          </div>
+        </div>
         <ul class="uk-list uk-list-large p-2" *ngIf="catsList!==undefined">
-          <li *ngFor="let cat of catsList" (click)="onTabChange(cat.id)">{{cat.name}} <span class="uk-badge uk-float-right">{{cat.productCount}}</span></li>
+          <li *ngFor="let cat of catsList" (click)="onTabChange(cat.id)" class="cursor-pointer" [ngClass]="{'cat-active': cat.id === searchParams.productCategory}">{{cat.name}} <span class="uk-badge uk-float-right">{{cat.productCount}}</span></li>
         </ul>
       </div>
       <!-- <div class="m-t-40 category-box uk-flex-middle uk-flex">

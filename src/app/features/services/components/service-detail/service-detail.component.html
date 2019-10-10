@@ -1,516 +1,506 @@
 <div class="uk-section">
+  <ul class="uk-breadcrumb">
+    <li><a routerLink="/">Home</a></li>
+    <li><a routerLink="/services">Services</a></li>
+    <li><a routerLink="/services/all">All Services</a></li>
+    <!-- <li><span> {{ service?.name || service?.basicProfileInfo?.firstName  }}</span></li> -->
+  </ul>
+  <h3>
+    {{ service?.name || service?.basicProfileInfo?.firstName  }}
+  </h3>
+  <hr class="m-b-30" />
 
+  <div uk-grid>
 
-    <ul class="uk-breadcrumb">
-        <li><a routerLink="/services">Home</a></li>
-        <li><a routerLink="/services/all">Services</a></li>
-        <li><span> {{ service?.name || service?.basicProfileInfo?.firstName  }}</span></li>
-    </ul>
-    <h3>
-        {{ service?.name || service?.basicProfileInfo?.firstName  }}
-    </h3>
-    <hr class="m-b-30" />
+    <div class="uk-width-1-3@m">
 
-    <div uk-grid>
+      <!-- Conatact Service details START-->
+      <div class="details-box">
 
-        <div class="uk-width-1-3@m">
+        <div class="verified">
+          <img [imageHandler] *ngIf="!isDBService" [src]="service?.disp_pic" />
+          <img [imageHandler] *ngIf="isDBService" [src]="service?.basicProfileInfo?.profileImage?.original" />
+          <button *ngIf="service?.verified == '1'"><span class="verified-icon-w"></span></button>
+        </div>
+        <div class="uk-text-center">
+          <p class="m-t-20 m-b-0 uk-text-bold font-regular">
+            {{ service?.name || service?.basicProfileInfo?.firstName }}
+          </p>
+          <p class="m-t-0 m-b-10">Source: {{isDBService ? 'Elder spring' : 'Justdial' }}</p>
 
-            <!-- Conatact Service details START-->
-            <div class="details-box">
+          <p *ngIf="!isDBService" class="m-t-0">{{ service.tag_cname }}</p>
+          <p *ngIf="isDBService && service?.systemTags.length > 0" class="m-t-0">
+            {{service?.systemTags[0].name}}</p>
 
-                <div class="verified">
-                    <img *ngIf="!isDBService" [src]="service?.disp_pic || 'assets/images/default-thumbnail.png'" />
-                    <img *ngIf="isDBService"
-                        [src]="service?.basicProfileInfo?.profileImage?.original || 'assets/images/default-thumbnail.png'" />
-                    <button *ngIf="service?.verified == '1'"><span class="verified-icon-w"></span></button>
-                </div>
-                <div class="uk-text-center">
-                    <p class="m-t-20 m-b-0 uk-text-bold font-regular">
-                        {{ service?.name || service?.basicProfileInfo?.firstName }}
+          <button class="uk-button uk-button-default" uk-toggle="target: #modal-sections">Contact Service
+            Provider</button>
+
+          <!-- Contact Model START -->
+          <div id="modal-sections" class="uk-modal-container" uk-modal>
+            <div class="uk-modal-dialog">
+              <button class="uk-modal-close-default" type="button" uk-close></button>
+              <div class="uk-modal-header">
+                <h2 class="uk-modal-title">Contact Details</h2>
+              </div>
+              <div class="uk-modal-body">
+                <div class="uk-child-width-1-2@s uk-grid-small" uk-grid>
+                  <div>
+
+                    <p class="font-regular-15 m-b-10 lable">Email</p>
+                    <p class="font-regular m-t-0">
+                      {{ service?.email || service?.basicProfileInfo?.primaryEmail || '-'}}</p>
+
+                    <p class="font-regular-15 m-b-10 lable">Organisation</p>
+                    <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.seo_dt?.title}}
                     </p>
-                    <p class="m-t-0 m-b-10">Source: {{isDBService ? 'Elder spring' : 'Justdial' }}</p>
-
-                    <p *ngIf="!isDBService" class="m-t-0">{{ service.tag_cname }}</p>
-                    <p *ngIf="isDBService && service?.systemTags.length > 0" class="m-t-0">
-                        {{service?.systemTags[0].name}}</p>
-
-                    <button class="uk-button uk-button-default" uk-toggle="target: #modal-sections">Contact Service
-                        Provider</button>
-
-                    <!-- Contact Model START -->
-                    <div id="modal-sections" class="uk-modal-container" uk-modal>
-                        <div class="uk-modal-dialog">
-                            <button class="uk-modal-close-default" type="button" uk-close></button>
-                            <div class="uk-modal-header">
-                                <h2 class="uk-modal-title">Contact Details</h2>
-                            </div>
-                            <div class="uk-modal-body">
-                                <div class="uk-child-width-1-2@s uk-grid-small" uk-grid>
-                                    <div>
-
-                                        <p class="font-regular-15 m-b-10 lable">Email</p>
-                                        <p class="font-regular m-t-0">
-                                            {{ service?.email || service?.basicProfileInfo?.primaryEmail || '-'}}</p>
-
-                                        <p class="font-regular-15 m-b-10 lable">Organisation</p>
-                                        <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.seo_dt?.title}}
-                                        </p>
-                                        <p *ngIf="isDBService && service?.systemTags.length > 0"
-                                            class="font-regular m-t-0">
-                                            <ng-container *ngFor="let tag of service?.systemTags">
-                                                {{ tag.description}}
-                                            </ng-container>
-                                        </p>
+                    <p *ngIf="isDBService && service?.systemTags.length > 0" class="font-regular m-t-0">
+                      <ng-container *ngFor="let tag of service?.systemTags">
+                        {{ tag.description}}
+                      </ng-container>
+                    </p>
 
 
 
-                                    </div>
+                  </div>
 
-                                    <div>
-                                        <p class="font-regular-15 m-b-10 lable">Phone Number</p>
-                                        <p *ngIf="!isDBService" class="font-regular m-t-0">
-                                            {{service?.contact || service?.mobile }}</p>
-                                        <p *ngIf="isDBService" class="font-regular m-t-0">
-                                            {{ service?.basicProfileInfo?.primaryPhoneNo  }}
-                                        </p>
+                  <div>
+                    <p class="font-regular-15 m-b-10 lable">Phone Number</p>
+                    <p *ngIf="!isDBService" class="font-regular m-t-0">
+                      {{service?.contact || service?.mobile }}</p>
+                    <p *ngIf="isDBService" class="font-regular m-t-0">
+                      {{ service?.basicProfileInfo?.primaryPhoneNo  }}
+                    </p>
 
 
-                                        <p class="font-regular-15 m-b-10 lable">Location</p>
-                                        <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.address}}</p>
-                                        <p *ngIf="isDBService" class="font-regular m-t-0">
-                                            {{service?.basicProfileInfo?.primaryUserAddress.streetAddress}}
-                                            {{service?.basicProfileInfo?.primaryUserAddress.zip}}
-                                            {{service?.basicProfileInfo?.primaryUserAddress.country}}
-                                        </p>
-                                    </div>
+                    <p class="font-regular-15 m-b-10 lable">Location</p>
+                    <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.address}}</p>
+                    <p *ngIf="isDBService" class="font-regular m-t-0">
+                      {{service?.basicProfileInfo?.primaryUserAddress.streetAddress}}
+                      {{service?.basicProfileInfo?.primaryUserAddress.zip}}
+                      {{service?.basicProfileInfo?.primaryUserAddress.country}}
+                    </p>
+                  </div>
 
-                                </div>
-                            </div>
-                            <div class="uk-modal-footer uk-text-right review-form">
-                                <button class="uk-button uk-button-default uk-modal-close" type="button">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Contact Model END -->
-
-                    <div class="m-t-10 m-b-20">
-                        <a href="#modal-example" uk-toggle>
-                            <fa-icon [icon]="['far', 'flag']" class="m-r-5"></fa-icon>Report service provider
-                        </a>
-
-                        <!-- Report Form MOdel Start -->
-
-                        <!-- This is the modal -->
-                        <div id="modal-example" uk-modal>
-                            <div class="uk-modal-dialog uk-modal-body">
-                                <h2 class="uk-modal-title">Report</h2>
-                                <!-- Success box START-->
-                                <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
-                                    <p>{{ successMessage }}</p>
-                                </div>
-                                <!-- Success box END-->
-                                <form [formGroup]="reportForm" (ngSubmit)="onSubmitReport()"
-                                    class="uk-form-stacked review-form">
-                                    <div class="uk-margin">
-                                        <label class="uk-form-label" for="form-stacked-select">Cause of
-                                            Reporting</label>
-                                        <div class="uk-form-controls">
-                                            <select formControlName="cause" class="uk-select" id="form-stacked-select">
-                                                <option disabled selected hidden value="">Select your cause of reporting
-                                                </option>
-                                                <option>Information provided is incorrect</option>
-                                                <option>Service Provider is unreachable</option>
-                                                <option>Service Provider no longer exists</option>
-                                                <option>Other reasons</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="uk-margin">
-                                        <label class="uk-form-label" for="form-stacked-text">Comment (optional)</label>
-                                        <div class="uk-form-controls">
-                                            <textarea formControlName="comment" class="uk-input min-h-200"
-                                                id="form-stacked-text" placeholder="Enter your comment here"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <p class="uk-text-right">
-                                        <button class="uk-button uk-button-transparent uk-modal-close"
-                                            type="button">Cancel</button>
-                                        <button class="m-l-10 uk-button uk-button-default" type="submit"
-                                            [disabled]="reportForm.invalid">Submit</button>
-                                    </p>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- Report Form MOdel End -->
-                    </div>
                 </div>
+              </div>
+              <div class="uk-modal-footer uk-text-right review-form">
+                <button class="uk-button uk-button-default uk-modal-close" type="button">Close</button>
+              </div>
             </div>
-            <!-- Conatact Service details END-->
+          </div>
+          <!-- Contact Model END -->
 
-            <!-- Rating box START -->
-            <div class="m-t-30 rating-box">
-                <div class="rating">
-                    <div class="p-10 uk-flex uk-flex-center" uk-grid>
-                        <div>
-                            <h1>{{ detailReview.rating}}</h1>
-                        </div>
-                        <div>
-                            <ngb-rating [rate]="detailReview.rating" [readonly]="true" [max]="5">
-                                <ng-template let-fill="fill" let-index="index">
-                                    <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                                </ng-template>
-                            </ngb-rating>
-                            <p class="m-0">
-                                {{ detailReview.totalCount }} Reviews
-                            </p>
-                        </div>
-                    </div>
+          <div class="m-t-10 m-b-20">
+            <a href="#modal-example" uk-toggle>
+              <fa-icon [icon]="['far', 'flag']" class="m-r-5"></fa-icon>Report service provider
+            </a>
+
+            <!-- Report Form MOdel Start -->
+
+            <!-- This is the modal -->
+            <div id="modal-example" uk-modal>
+              <div class="uk-modal-dialog uk-modal-body">
+                <h2 class="uk-modal-title">Report</h2>
+                <!-- Success box START-->
+                <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
+                  <p>{{ successMessage }}</p>
                 </div>
-                <!-- rating count -->
-                <div class="m-t-20">
-                    <div uk-grid>
-                        <div>
-                            5 stars
-                        </div>
-                        <div class="uk-width-expand uk-flex uk-flex-middle">
-                            <progress class="uk-progress uk-progress-rating" [value]="detailReview.fiveStar.count"
-                                [max]="detailReview.totalCount"></progress>
-                        </div>
-                        <div>
-                            {{detailReview.fiveStar.count}}
-                        </div>
+                <!-- Success box END-->
+                <form [formGroup]="reportForm" (ngSubmit)="onSubmitReport()" class="uk-form-stacked review-form">
+                  <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-select">Cause of
+                      Reporting</label>
+                    <div class="uk-form-controls">
+                      <select formControlName="cause" class="uk-select" id="form-stacked-select">
+                        <option disabled selected hidden value="">Select your cause of reporting
+                        </option>
+                        <option>Information provided is incorrect</option>
+                        <option>Service Provider is unreachable</option>
+                        <option>Service Provider no longer exists</option>
+                        <option>Other reasons</option>
+                      </select>
                     </div>
-                    <div class="m-t-10" uk-grid>
-                        <div>
-                            4 stars
-                        </div>
-                        <div class="uk-width-expand uk-flex uk-flex-middle">
-                            <progress class="uk-progress uk-progress-rating" [value]="detailReview.fourStar.count"
-                                [max]="detailReview.totalCount"></progress>
-                        </div>
-                        <div>
-                            {{detailReview.fourStar.count}}
-                        </div>
-                    </div>
-                    <div class="m-t-10" uk-grid>
-                        <div>
-                            3 stars
-                        </div>
-                        <div class="uk-width-expand uk-flex uk-flex-middle">
-                            <progress class="uk-progress uk-progress-rating" [value]="detailReview.threeStar.count"
-                                [max]="detailReview.totalCount"></progress>
-                        </div>
-                        <div>
-                            {{detailReview.threeStar.count}}
-                        </div>
-                    </div>
-                    <div class="m-t-10" uk-grid>
-                        <div>
-                            2 stars
-                        </div>
-                        <div class="uk-width-expand uk-flex uk-flex-middle">
-                            <progress class="uk-progress uk-progress-rating" [value]="detailReview.twoStar.count"
-                                [max]="detailReview.totalCount"></progress>
-                        </div>
-                        <div>
-                            {{detailReview.twoStar.count}}
-                        </div>
-                    </div>
-                    <div class="m-t-10" uk-grid>
-                        <div>
-                            1 stars
-                        </div>
-                        <div class="uk-width-expand uk-flex uk-flex-middle">
-                            <progress class="uk-progress uk-progress-rating" [value]="detailReview.oneStar.count"
-                                [max]="detailReview.totalCount"></progress>
-                        </div>
-                        <div>
-                            {{detailReview.oneStar.count}}
-                        </div>
-                    </div>
+                  </div>
 
-                </div>
+                  <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-text">Comment (optional)</label>
+                    <div class="uk-form-controls">
+                      <textarea formControlName="comment" class="uk-input min-h-200" id="form-stacked-text"
+                        placeholder="Enter your comment here"></textarea>
+                    </div>
+                  </div>
 
+                  <p class="uk-text-right">
+                    <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
+                    <button class="m-l-10 uk-button uk-button-default" type="submit"
+                      [disabled]="reportForm.invalid">Submit</button>
+                  </p>
+                </form>
+              </div>
             </div>
-            <!-- Rating box END -->
+            <!-- Report Form MOdel End -->
+          </div>
+        </div>
+      </div>
+      <!-- Conatact Service details END-->
 
-            <!-- Socailmedia share box  START-->
-            <div class="m-t-30 category-box">
-                <div class="m-b-20">
-                    <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon"
-                        uk-icon="whatsapp"> </a>
-                    <a class="social-link" [href]="whatsappUrl">
-                        Share via
-                        Whatsapp</a>
-                </div>
-
-                <div class="m-b-20">
-
-                    <a href="mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=Service:%20{{ service?.name || service?.basicProfileInfo?.firstName}}%0AService%2DURL:%20{{currentUrl}}"
-                        class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail">
-                    </a> <a class="social-link"
-                        href="mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=Service:%20{{ service?.name || service?.basicProfileInfo?.firstName}}%0AService%2DURL:%20{{currentUrl}}">
-                        Share via
-                        Email</a>
-                </div>
-
-                <div>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{ service?.name || service?.basicProfileInfo?.firstName  }}"
-                        onclick="javascript:window.open(this.href,
-                    '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
-                        class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a
-                        class="social-link"
-                        href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{ service?.name || service?.basicProfileInfo?.firstName  }}"
-                        onclick="javascript:window.open(this.href,
-                    '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-                        Share via
-                        Facebook</a>
-                </div>
+      <!-- Rating box START -->
+      <div class="m-t-30 rating-box">
+        <div class="rating">
+          <div class="p-10 uk-flex uk-flex-center" uk-grid>
+            <div>
+              <h1>{{ detailReview.rating}}</h1>
             </div>
-            <!-- Socailmedia share box  END-->
+            <div>
+              <ngb-rating [rate]="detailReview.rating" [readonly]="true" [max]="5">
+                <ng-template let-fill="fill" let-index="index">
+                  <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                </ng-template>
+              </ngb-rating>
+              <p class="m-0">
+                {{ detailReview.totalCount }} Reviews
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- rating count -->
+        <div class="m-t-20">
+          <div uk-grid>
+            <div>
+              5 stars
+            </div>
+            <div class="uk-width-expand uk-flex uk-flex-middle">
+              <progress class="uk-progress uk-progress-rating" [value]="detailReview.fiveStar.count"
+                [max]="detailReview.totalCount"></progress>
+            </div>
+            <div>
+              {{detailReview.fiveStar.count}}
+            </div>
+          </div>
+          <div class="m-t-10" uk-grid>
+            <div>
+              4 stars
+            </div>
+            <div class="uk-width-expand uk-flex uk-flex-middle">
+              <progress class="uk-progress uk-progress-rating" [value]="detailReview.fourStar.count"
+                [max]="detailReview.totalCount"></progress>
+            </div>
+            <div>
+              {{detailReview.fourStar.count}}
+            </div>
+          </div>
+          <div class="m-t-10" uk-grid>
+            <div>
+              3 stars
+            </div>
+            <div class="uk-width-expand uk-flex uk-flex-middle">
+              <progress class="uk-progress uk-progress-rating" [value]="detailReview.threeStar.count"
+                [max]="detailReview.totalCount"></progress>
+            </div>
+            <div>
+              {{detailReview.threeStar.count}}
+            </div>
+          </div>
+          <div class="m-t-10" uk-grid>
+            <div>
+              2 stars
+            </div>
+            <div class="uk-width-expand uk-flex uk-flex-middle">
+              <progress class="uk-progress uk-progress-rating" [value]="detailReview.twoStar.count"
+                [max]="detailReview.totalCount"></progress>
+            </div>
+            <div>
+              {{detailReview.twoStar.count}}
+            </div>
+          </div>
+          <div class="m-t-10" uk-grid>
+            <div>
+              1 stars
+            </div>
+            <div class="uk-width-expand uk-flex uk-flex-middle">
+              <progress class="uk-progress uk-progress-rating" [value]="detailReview.oneStar.count"
+                [max]="detailReview.totalCount"></progress>
+            </div>
+            <div>
+              {{detailReview.oneStar.count}}
+            </div>
+          </div>
 
         </div>
 
-        <div class="uk-width-expand@m">
-            <!-- About -->
-            <ng-container *ngIf="service?.seo_dt?.desc">
-                <div>
-                    <h1 class="font-regular-24 font-weight-600">About</h1>
-                    <p *ngIf="!isDBService">
-                        {{service?.seo_dt?.desc }}
-                    </p>
-                    <div *ngIf="isDBService" [innerHTML]="service?.basicProfileInfo?.description"></div>
+      </div>
+      <!-- Rating box END -->
+
+      <!-- Socailmedia share box  START-->
+      <div class="m-t-30 category-box">
+        <div class="m-b-20">
+          <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
+          <a class="social-link" [href]="whatsappUrl">
+            Share via
+            Whatsapp</a>
+        </div>
+
+        <div class="m-b-20">
+
+          <a href="mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=Service:%20{{ service?.name || service?.basicProfileInfo?.firstName}}%0AService%2DURL:%20{{currentUrl}}"
+            class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail">
+          </a> <a class="social-link"
+            href="mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=Service:%20{{ service?.name || service?.basicProfileInfo?.firstName}}%0AService%2DURL:%20{{currentUrl}}">
+            Share via
+            Email</a>
+        </div>
+
+        <div>
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{ service?.name || service?.basicProfileInfo?.firstName  }}"
+            onclick="javascript:window.open(this.href,
+                    '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
+            class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a class="social-link"
+            href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{ service?.name || service?.basicProfileInfo?.firstName  }}"
+            onclick="javascript:window.open(this.href,
+                    '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+            Share via
+            Facebook</a>
+        </div>
+      </div>
+      <!-- Socailmedia share box  END-->
+
+    </div>
+
+    <div class="uk-width-expand@m">
+      <!-- About -->
+      <ng-container *ngIf="service?.seo_dt?.desc">
+        <div>
+          <h1 class="font-regular-24 font-weight-600">About</h1>
+          <p *ngIf="!isDBService">
+            {{service?.seo_dt?.desc }}
+          </p>
+          <div *ngIf="isDBService" [innerHTML]="service?.basicProfileInfo?.description"></div>
+        </div>
+        <hr />
+      </ng-container>
+      <!-- service informations -->
+      <div class="info">
+        <h1 class="font-regular-24 font-weight-600">Details</h1>
+        <div uk-grid>
+          <div class="uk-width-2-5@s">
+
+            <p class="font-regular-15 m-b-10 lable">Email</p>
+            <p class="font-regular m-t-0">
+              {{ service?.email || service?.basicProfileInfo?.primaryEmail || '-'}}</p>
+
+            <p class="font-regular-15 m-b-10 lable">Organisation</p>
+            <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.seo_dt?.title}}</p>
+            <p *ngIf="isDBService && service?.systemTags.length > 0" class="font-regular m-t-0">
+              <ng-container *ngFor="let tag of service?.systemTags">
+                {{ tag.description}}
+              </ng-container>
+            </p>
+
+            <p class="font-regular-15 m-b-10 lable">Location</p>
+            <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.address}}</p>
+            <p *ngIf="isDBService" class="font-regular m-t-0">
+              {{service?.basicProfileInfo?.primaryUserAddress.streetAddress}}
+              {{service?.basicProfileInfo?.primaryUserAddress.zip}}
+              {{service?.basicProfileInfo?.primaryUserAddress.country}}
+            </p>
+
+          </div>
+
+          <div>
+            <p class="font-regular-15 m-b-10 lable">City</p>
+            <p class="font-regular m-t-0">
+              {{service.city || service?.basicProfileInfo?.primaryUserAddress.city || '-'}}</p>
+
+            <p class="font-regular-15 m-b-10 lable">Phone Number</p>
+            <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.contact || service?.mobile }}</p>
+            <p *ngIf="isDBService" class="font-regular m-t-0">
+              {{ service?.basicProfileInfo?.primaryPhoneNo  }}
+            </p>
+
+            <p *ngIf="!isDBService" class="font-regular-15 m-b-10 lable">Hour of Operations</p>
+            <p *ngIf="!isDBService" class="font-regular m-t-0">{{ service.HoursOfOperation }}</p>
+
+            <p *ngIf="isDBService" class="font-regular-15 m-b-10 lable">Website</p>
+            <p *ngIf="isDBService" class="font-regular m-t-0">
+              {{ service?.serviceProviderInfo?.website ? service?.serviceProviderInfo?.website  : '-' }}
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Write Review Form START-->
+      <div class="m-t-30">
+
+        <div class="category-box">
+          <h1 class="font-regular-24 font-weight-600">Write a Review</h1>
+          <hr />
+          <!-- Success box START-->
+          <div *ngIf="reviewSuccessMessage" class="uk-alert-success" uk-alert>
+            <p>{{ reviewSuccessMessage }}</p>
+          </div>
+          <!-- Success box END-->
+          <form [formGroup]="reviewForm" (ngSubmit)="onReviewSubmit()" class="uk-form-stacked review-form">
+
+            <div class="uk-child-width-expand " uk-grid>
+              <div>
+                <div class="uk-margin">
+                  <label class="uk-form-label" for="form-stacked-text">Username<span class="required">*</span></label>
+                  <div class="uk-form-controls">
+                    <input class="uk-input" id="form-stacked-text" formControlName="userName" type="text"
+                      placeholder="Enter your name">
+                  </div>
                 </div>
-                <hr />
-            </ng-container>
-            <!-- service informations -->
-            <div class="info">
-                <h1 class="font-regular-24 font-weight-600">Details</h1>
-                <div uk-grid>
-                    <div class="uk-width-2-5@s">
+              </div>
+              <div>
+                <div class="uk-margin">
+                  <label class="uk-form-label" for="form-stacked-select">Your Rating<span
+                      class="required">*</span></label>
+                  <div class="uk-form-controls">
+                    <select class="uk-select" formControlName="rating" id="form-stacked-select">
+                      <option disabled selected hidden value="0">Select your rating</option>
+                      <option value="90">5 Star</option>
+                      <option value="80">4 Star</option>
+                      <option value="60">3 Star</option>
+                      <option value="40">2 Star</option>
+                      <option value="20">1 Star</option>
+                    </select>
+                  </div>
+                </div>
 
-                        <p class="font-regular-15 m-b-10 lable">Email</p>
-                        <p class="font-regular m-t-0">
-                            {{ service?.email || service?.basicProfileInfo?.primaryEmail || '-'}}</p>
+              </div>
 
-                        <p class="font-regular-15 m-b-10 lable">Organisation</p>
-                        <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.seo_dt?.title}}</p>
-                        <p *ngIf="isDBService && service?.systemTags.length > 0" class="font-regular m-t-0">
-                            <ng-container *ngFor="let tag of service?.systemTags">
-                                {{ tag.description}}
-                            </ng-container>
-                        </p>
+            </div>
 
-                        <p class="font-regular-15 m-b-10 lable">Location</p>
-                        <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.address}}</p>
-                        <p *ngIf="isDBService" class="font-regular m-t-0">
-                            {{service?.basicProfileInfo?.primaryUserAddress.streetAddress}}
-                            {{service?.basicProfileInfo?.primaryUserAddress.zip}}
-                            {{service?.basicProfileInfo?.primaryUserAddress.country}}
-                        </p>
+            <div class="uk-margin">
+              <label class="uk-form-label" for="form-stacked-text">Your Review<span class="required">*</span></label>
+              <div class="uk-form-controls">
+                <textarea formControlName="review" class="uk-input min-h-200" id="form-stacked-text"
+                  placeholder="Enter your review here"></textarea>
+              </div>
+            </div>
 
-                    </div>
+            <div class="uk-text-right">
+              <button class="uk-button uk-button-default" type="submit"
+                [disabled]="reviewForm.invalid">{{ auth.isAuthenticate ? 'Post Review': 'Signin to Review'}}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- Write Review Form END-->
 
+      <!-- Reviews Section-->
+      <div *ngIf=" dbReview.length > 0 || (service.Reviews && service?.Reviews.length > 0)" class="m-t-30">
+        <h1 class="font-regular-24 font-weight-600"> Reviews
+          ({{ isDBService ? dbReview.length :  service.Reviews.length + dbReview.length}})
+        </h1>
+        <!-- <h1 *ngIf="isDBService" class="font-regular-24 font-weight-600"> Reviews ({{dbReview.length}})</h1> -->
+
+        <!--JD Reviews -->
+        <ng-container *ngIf="!isDBService && service.Reviews.length > 0">
+          <div *ngFor="let review of service.Reviews" class="m-t-30">
+            <div uk-grid>
+              <div class="uk-width-expand">
+                <div class="child-width-auto" uk-grid>
+                  <div>
+                    <img class="review-avatar" [src]="review.reviewer_photo" />
+                  </div>
+                  <div class="p-l-20">
+                    <p class="font-regular m-0">{{ review.reviewer_name}}</p>
                     <div>
-                        <p class="font-regular-15 m-b-10 lable">City</p>
-                        <p class="font-regular m-t-0">
-                            {{service.city || service?.basicProfileInfo?.primaryUserAddress.city || '-'}}</p>
-
-                        <p class="font-regular-15 m-b-10 lable">Phone Number</p>
-                        <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.contact || service?.mobile }}</p>
-                        <p *ngIf="isDBService" class="font-regular m-t-0">
-                            {{ service?.basicProfileInfo?.primaryPhoneNo  }}
-                        </p>
-
-                        <p *ngIf="!isDBService" class="font-regular-15 m-b-10 lable">Hour of Operations</p>
-                        <p *ngIf="!isDBService" class="font-regular m-t-0">{{ service.HoursOfOperation }}</p>
-
-                        <p *ngIf="isDBService" class="font-regular-15 m-b-10 lable">Website</p>
-                        <p *ngIf="isDBService" class="font-regular m-t-0">
-                            {{ service?.serviceProviderInfo?.website ? service?.serviceProviderInfo?.website  : '-' }}
-                        </p>
-
+                      <ngb-rating [rate]="review.review_rate" [readonly]="true" [max]="5">
+                        <ng-template let-fill="fill" let-index="index">
+                          <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                        </ng-template>
+                      </ngb-rating>
                     </div>
-
+                  </div>
                 </div>
-
+              </div>
+              <div>
+                <p class="font-regular-15">{{review.act_time}}</p>
+              </div>
             </div>
-
-            <!-- Write Review Form START-->
             <div class="m-t-30">
-
-                <div class="category-box">
-                    <h1 class="font-regular-24 font-weight-600">Write a Review</h1>
-                    <hr />
-                    <!-- Success box START-->
-                    <div *ngIf="reviewSuccessMessage" class="uk-alert-success" uk-alert>
-                        <p>{{ reviewSuccessMessage }}</p>
-                    </div>
-                    <!-- Success box END-->
-                    <form [formGroup]="reviewForm" (ngSubmit)="onReviewSubmit()" class="uk-form-stacked review-form">
-
-                        <div class="uk-child-width-expand " uk-grid>
-                            <div>
-                                <div class="uk-margin">
-                                    <label class="uk-form-label" for="form-stacked-text">Username<span
-                                            class="required">*</span></label>
-                                    <div class="uk-form-controls">
-                                        <input class="uk-input" id="form-stacked-text" formControlName="userName"
-                                            type="text" placeholder="Enter your name">
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="uk-margin">
-                                    <label class="uk-form-label" for="form-stacked-select">Your Rating<span
-                                            class="required">*</span></label>
-                                    <div class="uk-form-controls">
-                                        <select class="uk-select" formControlName="rating" id="form-stacked-select">
-                                            <option disabled selected hidden value="0">Select your rating</option>
-                                            <option value="90">5 Star</option>
-                                            <option value="80">4 Star</option>
-                                            <option value="60">3 Star</option>
-                                            <option value="40">2 Star</option>
-                                            <option value="20">1 Star</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="uk-margin">
-                            <label class="uk-form-label" for="form-stacked-text">Your Review<span
-                                    class="required">*</span></label>
-                            <div class="uk-form-controls">
-                                <textarea formControlName="review" class="uk-input min-h-200" id="form-stacked-text"
-                                    placeholder="Enter your review here"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="uk-text-right">
-                            <button class="uk-button uk-button-default" type="submit"
-                                [disabled]="reviewForm.invalid">{{ auth.isAuthenticate ? 'Post Review': 'Signin to Review'}}</button>
-                        </div>
-                    </form>
-                </div>
+              <p class="font-regular">{{review.review_text }}</p>
             </div>
-            <!-- Write Review Form END-->
+            <div class="m-t-30 m-b-30">
+              <div uk-grid>
+                <div class="uk-width-expand">
+                  <a class="like-link">
+                    <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5 font-22"></fa-icon> 17
+                  </a>
+                  <a class="m-l-5 dislike-link">
+                    <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5 font-22"></fa-icon> 20
+                  </a>
+                </div>
+                <!-- <div class="replay-link">
+                  <a class="font-regular">
+                    <fa-icon [icon]="['far', 'comments']" class="m-r-5"></fa-icon> Reply
+                  </a>
+                </div> -->
+              </div>
+            </div>
+            <hr />
+          </div>
 
-            <!-- Reviews Section-->
-            <div *ngIf=" dbReview.length > 0 || (service.Reviews && service?.Reviews.length > 0)" class="m-t-30">
-                <h1 class="font-regular-24 font-weight-600"> Reviews
-                    ({{ isDBService ? dbReview.length :  service.Reviews.length + dbReview.length}})
-                </h1>
-                <!-- <h1 *ngIf="isDBService" class="font-regular-24 font-weight-600"> Reviews ({{dbReview.length}})</h1> -->
+        </ng-container>
 
-                <!--JD Reviews -->
-                <ng-container *ngIf="!isDBService && service.Reviews.length > 0">
-                    <div *ngFor="let review of service.Reviews" class="m-t-30">
-                        <div uk-grid>
-                            <div class="uk-width-expand">
-                                <div class="child-width-auto" uk-grid>
-                                    <div>
-                                        <img class="review-avatar" [src]="review.reviewer_photo" />
-                                    </div>
-                                    <div class="p-l-20">
-                                        <p class="font-regular m-0">{{ review.reviewer_name}}</p>
-                                        <div>
-                                            <ngb-rating [rate]="review.review_rate" [readonly]="true" [max]="5">
-                                                <ng-template let-fill="fill" let-index="index">
-                                                    <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                                                </ng-template>
-                                            </ngb-rating>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="font-regular-15">{{review.act_time}}</p>
-                            </div>
-                        </div>
-                        <div class="m-t-30">
-                            <p class="font-regular">{{review.review_text }}</p>
-                        </div>
-                        <div class="m-t-30 m-b-30">
-                            <div uk-grid>
-                                <div class="uk-width-expand like-link">
-                                    <a class="font-regular font-22">
-                                        <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5"></fa-icon>
-                                    </a> 17
-                                    <a class="m-l-5 font-regular font-22 dislike-link">
-                                        <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5"></fa-icon>
-                                    </a> 20
-                                </div>
-                                <!-- <div class="replay-link">
-                                    <a class="font-regular">
-                                        <fa-icon [icon]="['far', 'comments']" class="m-r-5"></fa-icon> Reply
-                                    </a>
-                                </div> -->
-                            </div>
-                        </div>
-                        <hr />
+        <!--DB Reviews -->
+        <ng-container *ngIf="dbReview.length > 0">
+          <div *ngFor="let review of dbReview" [ngClass]="{'m-t-30':isDBService }">
+            <div uk-grid>
+              <div class="uk-width-expand">
+                <div class="child-width-auto" uk-grid>
+                  <div>
+                    <img class="review-avatar" src="assets/images/default-thumbnail.png" />
+                  </div>
+                  <div class="p-l-20">
+                    <p class="font-regular m-0">
+                      {{ review.userName }}</p>
+                    <div>
+                      <ngb-rating [rate]="getDbServiceRating(review.rating)" [readonly]="true" [max]="5">
+                        <ng-template let-fill="fill" let-index="index">
+                          <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                        </ng-template>
+                      </ngb-rating>
                     </div>
-
-                </ng-container>
-
-                <!--DB Reviews -->
-                <ng-container *ngIf="dbReview.length > 0">
-                    <div *ngFor="let review of dbReview" [ngClass]="{'m-t-30':isDBService }">
-                        <div uk-grid>
-                            <div class="uk-width-expand">
-                                <div class="child-width-auto" uk-grid>
-                                    <div>
-                                        <img class="review-avatar" src="assets/images/default-thumbnail.png" />
-                                    </div>
-                                    <div class="p-l-20">
-                                        <p class="font-regular m-0">
-                                            {{ review.userName }}</p>
-                                        <div>
-                                            <ngb-rating [rate]="getDbServiceRating(review.rating)" [readonly]="true"
-                                                [max]="5">
-                                                <ng-template let-fill="fill" let-index="index">
-                                                    <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                                                </ng-template>
-                                            </ngb-rating>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="font-regular-15">{{review.createdAt | date:'mediumDate' }}</p>
-                            </div>
-                        </div>
-                        <div class="m-t-30">
-                            <div class="font-regular">
-                                <p>{{ review.review}}</p>
-                            </div>
-                        </div>
-                        <div class="m-t-30 m-b-30">
-                            <div uk-grid>
-                                <div class="uk-width-expand">
-                                    <a class="font-regular font-22 like-link">
-                                        <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5"></fa-icon>
-                                    </a> 17
-                                    <a class="m-l-5 font-regular font-22 dislike-link">
-                                        <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5"></fa-icon>
-                                    </a> 20
-                                </div>
-                                <!-- <div class="replay-link">
-                                        <a class="font-regular">
-                                            <fa-icon [icon]="['far', 'comments']" class="m-r-5"></fa-icon> Reply
-                                        </a>
-                                    </div> -->
-                            </div>
-                        </div>
-                        <hr />
-                    </div>
-                </ng-container>
-                <!-- Reviews -->
-                <!-- <div class="m-t-30">
+                  </div>
+                </div>
+              </div>
+              <div>
+                <p class="font-regular-15">{{review.createdAt | date:'mediumDate' }}</p>
+              </div>
+            </div>
+            <div class="m-t-30">
+              <div class="font-regular">
+                <p>{{ review.review}}</p>
+              </div>
+            </div>
+            <div class="m-t-30 m-b-30">
+              <div uk-grid>
+                <div class="uk-width-expand">
+                  <a class="like-link font-22">
+                    <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5 font-22"></fa-icon>
+                  </a> 17
+                  <a class="m-l-5 dislike-link font-22">
+                    <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5 font-22"></fa-icon>
+                  </a> 20
+                </div>
+                <!-- <div class="replay-link">
+                  <a class="font-regular">
+                    <fa-icon [icon]="['far', 'comments']" class="m-r-5"></fa-icon> Reply
+                  </a>
+                </div> -->
+              </div>
+            </div>
+            <hr />
+          </div>
+        </ng-container>
+        <!-- Reviews -->
+        <!-- <div class="m-t-30">
                     <div uk-grid>
                         <div class="uk-width-expand">
                             <div class="child-width-auto" uk-grid>
@@ -558,24 +548,25 @@
                     <hr />
                 </div> -->
 
-            </div>
+      </div>
 
-            <div *ngIf=" (dbReview.length == 0  && !service?.Reviews) || (service?.Reviews && service?.Reviews.length == 0 && dbReview.length == 0)"
-                class="m-t-30">
-                <h1 class="font-regular-24 font-weight-600"> Reviews(0)</h1>
-                <hr />
-                <div class="uk-child-width-expand" uk-grid>
+      <div
+        *ngIf=" (dbReview.length == 0  && !service?.Reviews) || (service?.Reviews && service?.Reviews.length == 0 && dbReview.length == 0)"
+        class="m-t-30">
+        <h1 class="font-regular-24 font-weight-600"> Reviews(0)</h1>
+        <hr />
+        <div class="uk-child-width-expand" uk-grid>
 
-                    <div class="info">
-                        <h1 class="font-regular-24 font-weight-600 m-0"> No review!</h1>
-                        <p class="lable font-regular m-0">No user has left reviwe on this service.</p>
-                    </div>
-                    <div>
-                        <img src="/assets/images/norecord.svg" />
-                    </div>
-                </div>
-            </div>
-            <!-- Reviews Section END-->
+          <div class="info">
+            <h1 class="font-regular-24 font-weight-600 m-0"> No review!</h1>
+            <p class="lable font-regular m-0">No user has left reviwe on this service.</p>
+          </div>
+          <div>
+            <img src="/assets/images/norecord.svg" />
+          </div>
         </div>
+      </div>
+      <!-- Reviews Section END-->
     </div>
+  </div>
 </div>

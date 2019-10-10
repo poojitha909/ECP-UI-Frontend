@@ -12,4 +12,11 @@ export class ExpertDetailCardComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * TODO: method to be removed
+   */
+  setDefaultPic(e) {
+    e.target.src = "assets/images/default-thumbnail.png";
+  }
+
 }

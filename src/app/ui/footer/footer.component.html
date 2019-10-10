@@ -57,10 +57,10 @@
     <div class="uk-grid-small uk-child-width-expand@s upper-grid" uk-grid>
       <div class="logo-tagline uk-text-center uk-text-left@s">
         <div class="logo">
-          <h1 class="uk-heading-small">ABCD</h1>
+          <h1 class="uk-heading-small">'TBD name'</h1>
         </div>
         <div class="tagline">
-          <span>An Elder Spring Initiative by Tata Trusts</span>
+          <span>Supported by Tata Trusts</span>
         </div>
       </div>
       <div>
@@ -78,6 +78,22 @@
   <div class="uk-container footer-lower uk-visible@s">
     <div class="uk-grid-small uk-child-width-expand@s column-grid uk-text-center uk-text-left@s" uk-grid>
       <div class="col-link">
+        <h4>Events</h4>
+        <ul>
+          <li><a routerLink="/community/events/0">All Events</a></li>
+          <li><a routerLink="/community/events/-1">Upcoming Events</a></li>
+          <li><a routerLink="/community/events/1">Past Events</a></li>
+        </ul>
+      </div>
+      <div class="col-link">
+        <h4>Discussions</h4>
+        <ul>
+          <li><a routerLink="/community">Popular Discussions</a></li>
+          <li><a routerLink="/community/discussions">All Discussions</a></li>
+          <li><a routerLink="/community/discussion/add">Start a Discussion</a></li>
+        </ul>
+      </div>
+       <div class="col-link">
         <h4>Products</h4>
         <ul>
           <li><a href="#">Mobility</a></li>
@@ -101,22 +117,6 @@
         </ul>
       </div>
       <div class="col-link">
-        <h4>Events</h4>
-        <ul>
-          <li><a routerLink="/community/events/0">All Events</a></li>
-          <li><a routerLink="/community/events/-1">Upcoming Events</a></li>
-          <li><a routerLink="/community/events/1">Past Events</a></li>
-        </ul>
-      </div>
-      <div class="col-link">
-        <h4>Discussions</h4>
-        <ul>
-          <li><a routerLink="/community">Popular Discussions</a></li>
-          <li><a routerLink="/community/discussions">All Discussions</a></li>
-          <li><a routerLink="/community/discussion/add">Start a Discussion</a></li>
-        </ul>
-      </div>
-      <div class="col-link">
         <h4>Miscellaneous</h4>
         <ul>
           <li><a routerLink="/about">About Us</a></li>
@@ -133,6 +133,22 @@
   <!-- Mobile View Footer Links START-->
   <div class="uk-width-1-1 p-t-20 uk-hidden@s">
     <ul class="uk-nav-default uk-nav-parent-icon uk-nav-center" uk-nav="multiple: true">
+      <li class="uk-parent">
+        <a href="#">Events</a>
+        <ul class="uk-nav-sub">
+          <li><a href="#">Outdoor Events</a></li>
+          <li><a href="#">Indoor Events</a></li>
+          <li><a href="#">Recreational Spaces</a></li>
+        </ul>
+      </li>
+      <li class="uk-parent">
+        <a href="#">Discussions</a>
+        <ul class="uk-nav-sub">
+          <li><a href="#">Popular Discussions</a></li>
+          <li><a href="#">All Discussions</a></li>
+          <li><a href="#">Start a Discussions</a></li>
+        </ul>
+      </li>
       <li class="uk-parent">
         <a href="#">Products</a>
         <ul class="uk-nav-sub">
@@ -156,23 +172,7 @@
           <li><a routerLink="/services/all" [queryParams]="{ category: 'senior living'}">Senior Living</a></li>
         </ul>
       </li>
-      <li class="uk-parent">
-        <a href="#">Products</a>
-        <ul class="uk-nav-sub">
-          <li><a href="#">Outdoor Events</a></li>
-          <li><a href="#">Indoor Events</a></li>
-          <li><a href="#">Recreational Spaces</a></li>
-        </ul>
-      </li>
-      <li class="uk-parent">
-        <a href="#">Discussions</a>
-        <ul class="uk-nav-sub">
-          <li><a href="#">Popular Discussions</a></li>
-          <li><a href="#">All Discussions</a></li>
-          <li><a href="#">Start a Discussions</a></li>
-        </ul>
-      </li>
-      <li class="uk-parent">
+       <li class="uk-parent">
         <a href="#">Miscellaneous</a>
         <ul class="uk-nav-sub">
           <li><a routerLink="/about">About Us</a></li>

@@ -88,7 +88,6 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
         } else {
           this.getAllService();
         }
-        console.log(value);
       });
 
   }
@@ -103,7 +102,6 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
           this.maxPages = Math.round(this.services.length / this.pageSize);
           this.verfiedCheck = false;
           this.isLoading = false;
-          console.log(response);
           this.router.navigateByUrl('services/all');
         }
       },
@@ -112,7 +110,6 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
         this.allService = [];
         this.pageServices = [];
         this.isLoading = false;
-        console.log(error);
       })
   }
 
@@ -143,7 +140,6 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
         this.pageServices = [];
         // this.searchPageParam.term = category;
         this.isLoading = false;
-        console.log(error);
       });
   }
 
@@ -236,12 +232,9 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
         if (service.verified === '1' || service.verified === checked)
           return service
       });
-
     } else {
       this.services = this.allService;
-      console.log(this.allService);
     }
-
   }
 
   onItemSelected(value) {

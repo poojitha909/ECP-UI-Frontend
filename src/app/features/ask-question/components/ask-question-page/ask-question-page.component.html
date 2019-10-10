@@ -4,10 +4,9 @@
     uk-img>
     <div class="uk-child-width-1-2@s uk-padding" uk-grid>
       <div class="uk-text-center uk-text-left@s">
-        <h1>Ask an Expert</h1>
+        <h1></h1>
         <p class="font-regular">
-          An online presence for elders to find reliable products and services.
-          And engage in Events and Discussions
+          Need experts?  Find a real world expert and start your conversation privately and with assured confidentiality.
         </p>
       </div>
     </div>
@@ -34,7 +33,7 @@
       <div *ngFor="let expert of experts">
         <div class="uk-card uk-card-default p-10 cursor">
           <div class="uk-card-media-top">
-            <img class="thumb-100" src="{{ expert.basicProfileInfo?.profileImage?.thumbnailImage }}"
+            <img class="thumb-100" [imageHandler] [src]="expert.basicProfileInfo?.profileImage?.thumbnailImage"
               alt="No Image Found">
           </div>
           <div class="uk-card-body p-10">
@@ -57,11 +56,11 @@
       <div class="uk-flex uk-flex-middle">
         <span class="mr-3">
           <span class="verified-icon"></span>
-        </span>Lorem ipsum is placeholder text commonly used.
+        </span>Private. Confidential. Assurance.  Real world experts you can trust.
       </div>
     </div>
     <div class="uk-width-auto@s uk-text-center">
-      <button routerLink="/ask-question/all" class="uk-button uk-button-default">View All Experts</button>
+      <button routerLink="/ask-question/all" class="uk-button uk-button-default">More experts</button>
     </div>
   </div>
 </div>

@@ -2,8 +2,9 @@
     <!-- Bread crumbs Start -->
     <div class="breadcrumbs">
         <ul class="uk-breadcrumb">
-            <li routerLink="/ask-question" class="fa fa-angle-right">Ask Question</li>
-            <li *ngIf="isExpert==false" [routerLink]="['/ask-question/all',{tab:1}]" class="fa fa-angle-right">Questions</li>
+            <li routerLink="/" class="fa fa-angle-right">Home</li>
+            <li routerLink="/ask-question" class="fa fa-angle-right">Ask an Expert</li>
+            <li *ngIf="isExpert==false" [routerLink]="['/ask-question/all',{tab:1}]" class="fa fa-angle-right">My Questions</li>
             <li *ngIf="isExpert==true" [routerLink]="['/ask-question/expert']" class="fa fa-angle-right">Unanswered Questions</li>
         </ul>
     </div>

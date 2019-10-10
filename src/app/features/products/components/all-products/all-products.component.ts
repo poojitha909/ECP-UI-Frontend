@@ -31,7 +31,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
       searchTxt: "",
       productCategory: ""
     }
-    this.paramsSubs = this.route.params.subscribe(params => {
+    this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     }); 
   }
@@ -48,12 +48,12 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     }
     
     this.totalRecords = 0;
-    console.log(this.route.snapshot.params);
-    if(this.route.snapshot.params['searchTxt'] !== undefined){
-      this.searchParams.searchTxt = this.route.snapshot.params['searchTxt'];
+    console.log(this.route.snapshot.queryParams);
+    if(this.route.snapshot.queryParams['searchTxt'] !== undefined){
+      this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
     }
-    if(this.route.snapshot.params['productCategory'] !== undefined){
-      this.searchParams.productCategory = this.route.snapshot.params['productCategory'];
+    if(this.route.snapshot.queryParams['productCategory'] !== undefined){
+      this.searchParams.productCategory = this.route.snapshot.queryParams['productCategory'];
     }
     this.onSearch();
     this.productService.getCategoryList().subscribe( (response:any) =>{
@@ -87,7 +87,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   }
 
   onTabChange(value) {
-    this.router.navigate(['/products/all', {productCategory: value, searchTxt:  this.searchParams.searchTxt}]);
+    this.router.navigate(['/products/all'], {queryParams: {productCategory: value, searchTxt:  this.searchParams.searchTxt}});
   }
 
   onSearchChange(event: any) {

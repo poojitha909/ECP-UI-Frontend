@@ -42,7 +42,7 @@
             <p>{{expert.age}}</p>
             <p>
               <button class="uk-button uk-button-default"
-                [routerLink]="['/ask-question/add', {category: (selCategory ? selCategory : expert.experties[0].id), answeredBy: expert.id}]">Ask
+                [routerLink]="['/ask-question/add']" [queryParams]="{category: (selCategory ? selCategory : expert.experties[0].id), answeredBy: expert.id}">Ask
                 an Expert</button>
             </p>
           </div>

@@ -59,7 +59,7 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
       answeredBy: ""
     };
 
-    this.paramsSubs = this.route.params.subscribe(params => {
+    this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     }); 
   }
@@ -97,9 +97,9 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
     
     this.totalRecords = 0;
     this.totalRecordsQues = 0;
-    if(this.route.snapshot.params['category'] !== undefined){
-      this.searchParams.askCategory = this.route.snapshot.params['category'];
-      this.searchParamsQues.askCategory = this.route.snapshot.params['category'];
+    if(this.route.snapshot.queryParams['category'] !== undefined){
+      this.searchParams.askCategory = this.route.snapshot.queryParams['category'];
+      this.searchParamsQues.askCategory = this.route.snapshot.queryParams['category'];
     }
     
     this.askQuesService.getCategoryList().subscribe( (response:any) =>{
@@ -111,8 +111,8 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
     });
     this.onSearch();
     setTimeout( ()=> {
-      if(this.route.snapshot.params['tab']){
-        UIkit.tab("#questionstab").show(this.route.snapshot.params['tab']);
+      if(this.route.snapshot.queryParams['tab']){
+        UIkit.tab("#questionstab").show(this.route.snapshot.queryParams['tab']);
       }
     },500);
   }
@@ -149,7 +149,7 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
   }
 
   onTopTabChange(value) {
-    this.router.navigate(['/ask-question/expert', {tab: value}]);
+    this.router.navigate(['/ask-question/expert'], {queryParams: {tab: value} });
   }
   
   onSearch() {

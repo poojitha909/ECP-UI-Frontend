@@ -34,7 +34,7 @@ export class DiscussionsListPageComponent implements OnInit,OnDestroy {
       searchTxt: "",
       tags: ""
     }
-    this.paramsSubs = this.route.params.subscribe(params => {
+    this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
   }
@@ -48,11 +48,11 @@ export class DiscussionsListPageComponent implements OnInit,OnDestroy {
     this.discussionsList = [];
     this.categoryList = null;
     this.selCategory = "";
-    if(this.route.snapshot.params['category']){
-      this.selCategory = this.route.snapshot.params['category'];
+    if(this.route.snapshot.queryParams['category']){
+      this.selCategory = this.route.snapshot.queryParams['category'];
     }
-    if(this.route.snapshot.params['searchTxt']){
-      this.searchParams.searchTxt = this.route.snapshot.params['searchTxt'];
+    if(this.route.snapshot.queryParams['searchTxt']){
+      this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
     }
     this.getAllCategories();
   }
@@ -76,12 +76,12 @@ export class DiscussionsListPageComponent implements OnInit,OnDestroy {
   }
 
   submitSearch(){
-    this.router.navigate(['/community/discussions', {category: this.selCategory, searchTxt:  this.searchParams.searchTxt}]);
+    this.router.navigate(['/community/discussions'], {queryParams: {category: this.selCategory, searchTxt:  this.searchParams.searchTxt}});
   }
 
   onTabChange(value) {
     this.selCategory = value;
-    this.router.navigate(['/community/discussions', {category: this.selCategory, searchTxt:  this.searchParams.searchTxt}]);
+    this.router.navigate(['/community/discussions'], {queryParams: {category: this.selCategory, searchTxt:  this.searchParams.searchTxt}});
   }
 
   resetSearch(event: any) {

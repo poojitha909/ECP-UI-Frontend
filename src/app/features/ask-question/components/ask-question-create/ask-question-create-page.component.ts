@@ -29,7 +29,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
     this.category = "";
     this.question =  "";
     this.description =  "";
-    this.paramsSubs = this.route.params.subscribe(params => {
+    this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
   }
@@ -43,11 +43,11 @@ export class AskQuestionCreatePageComponent implements OnInit {
       this.user = JSON.parse(this.user);
       this.askedBy = this.user.id;
     }
-    if(this.route.snapshot.params['category']){
-      this.category = this.route.snapshot.params['category'];
+    if(this.route.snapshot.queryParams['category']){
+      this.category = this.route.snapshot.queryParams['category'];
     }
-    if(this.route.snapshot.params['answeredBy']){
-      this.answeredBy = this.route.snapshot.params['answeredBy'];
+    if(this.route.snapshot.queryParams['answeredBy']){
+      this.answeredBy = this.route.snapshot.queryParams['answeredBy'];
     }
     
     let question = this.store.retrieve("new-question");

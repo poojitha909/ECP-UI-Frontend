@@ -35,7 +35,7 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
       eventType: 0,
       pastEvents: 0
     }
-    this.paramsSubs = this.route.params.subscribe(params => {
+    this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     }); 
   }
@@ -54,8 +54,8 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
     
     this.totalRecords = 0;
     
-    if(this.route.snapshot.params['past'] !== undefined){
-      this.searchParams.pastEvents = this.route.snapshot.params['past'];
+    if(this.route.snapshot.queryParams['past'] !== undefined){
+      this.searchParams.pastEvents = this.route.snapshot.queryParams['past'];
     }
     this.onSearch();
     setTimeout( ()=> {

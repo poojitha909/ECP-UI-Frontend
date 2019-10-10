@@ -38,7 +38,7 @@
       </ul>
       <ul class="uk-switcher uk-margin">
         <li>
-          <div  *ngIf="experts!==undefined && experts.length > 0">
+          <div *ngIf="experts && experts.length > 0">
             <app-expert-detail-card *ngFor="let expert of experts" [expert]="expert"></app-expert-detail-card>
           </div>
           <app-pagination *ngIf="(experts && experts.length > 0)" [totalRecords]="totalRecords" [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)"></app-pagination>
@@ -47,10 +47,10 @@
           </div>
         </li>
         <li>
-          <div  *ngIf="questions!==undefined && questions.length > 0">
+          <div  *ngIf="questions && questions.length > 0">
             <app-question-detail-card *ngFor="let question of questions" [question]="question"></app-question-detail-card>
           </div>
-          <div class="m-t-20" *ngIf="questions==undefined || questions.length == 0">
+          <div class="m-t-20" *ngIf="!questions || questions?.length == 0">
               <app-question-no-record></app-question-no-record>
           </div>
         </li>

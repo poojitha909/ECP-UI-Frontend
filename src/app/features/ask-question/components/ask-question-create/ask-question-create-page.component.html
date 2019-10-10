@@ -13,7 +13,7 @@
             <div class="uk-width-1-3@m">
                 <div class="category-box p-0" *ngIf="expert!==undefined">
                     <div class="uk-card-media-top">
-                        <img class="thumb-100" src="{{ expert.basicProfileInfo?.profileImage?.thumbnailImage }}" alt="No Image Found">
+                        <img class="thumb-100" [imageHandler] [src]="expert.basicProfileInfo?.profileImage?.thumbnailImage" alt="No Image Found">
                     </div>
                     <div class="body p-10">
                         <p><b>{{expert.basicProfileInfo.firstName}}</b></p>

@@ -12,9 +12,10 @@ import { ErrorComponent } from './error/error.component';
 import { FrontendPaginationComponent } from './frontend-pagination/frontend-pagination.component';
 import { KeyHandlerDirective } from './directives/key-handler.directive';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { DefaultImageDirective } from './directives/default-image.directive';
 
 @NgModule({
-  declarations: [ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, ServicesListComponent, PaginationComponent, ErrorComponent, FrontendPaginationComponent, KeyHandlerDirective, AboutUsComponent],
+  declarations: [ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, ServicesListComponent, PaginationComponent, ErrorComponent, FrontendPaginationComponent, KeyHandlerDirective, AboutUsComponent, DefaultImageDirective],
   imports: [
     CommonModule,
     SharedRoutingModule,
@@ -22,7 +23,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
     // NgxPaginationModule
   ],
   exports: [
-    ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, PaginationComponent, ServicesListComponent, FrontendPaginationComponent, KeyHandlerDirective
+    ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, PaginationComponent, ServicesListComponent, FrontendPaginationComponent, KeyHandlerDirective, DefaultImageDirective
   ]
 })
 export class SharedModule { }

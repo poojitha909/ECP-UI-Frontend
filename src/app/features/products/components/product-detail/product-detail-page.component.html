@@ -20,7 +20,7 @@
                         </div>
                         <ngb-carousel *ngIf="product && product.images" [activeId]="activeSlideId">
                             <ng-template *ngFor="let image of product.images" ngbSlide>
-                                <img [src]="image" alt="Random first slide">
+                                <img [imageHandler] [src]="image" alt="Random first slide">
                             </ng-template>
                         </ngb-carousel>
                         <ul class="carousel-thumbnail">

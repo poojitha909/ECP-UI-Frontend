@@ -354,7 +354,8 @@
                         <div class="uk-child-width-expand " uk-grid>
                             <div>
                                 <div class="uk-margin">
-                                    <label class="uk-form-label" for="form-stacked-text">Username<span class="required">*</span></label>
+                                    <label class="uk-form-label" for="form-stacked-text">Username<span
+                                            class="required">*</span></label>
                                     <div class="uk-form-controls">
                                         <input class="uk-input" id="form-stacked-text" formControlName="userName"
                                             type="text" placeholder="Enter your name">
@@ -363,7 +364,8 @@
                             </div>
                             <div>
                                 <div class="uk-margin">
-                                    <label class="uk-form-label" for="form-stacked-select">Your Rating<span class="required">*</span></label>
+                                    <label class="uk-form-label" for="form-stacked-select">Your Rating<span
+                                            class="required">*</span></label>
                                     <div class="uk-form-controls">
                                         <select class="uk-select" formControlName="rating" id="form-stacked-select">
                                             <option disabled selected hidden value="0">Select your rating</option>
@@ -381,7 +383,8 @@
                         </div>
 
                         <div class="uk-margin">
-                            <label class="uk-form-label" for="form-stacked-text">Your Review<span class="required">*</span></label>
+                            <label class="uk-form-label" for="form-stacked-text">Your Review<span
+                                    class="required">*</span></label>
                             <div class="uk-form-controls">
                                 <textarea formControlName="review" class="uk-input min-h-200" id="form-stacked-text"
                                     placeholder="Enter your review here"></textarea>
@@ -434,19 +437,19 @@
                         </div>
                         <div class="m-t-30 m-b-30">
                             <div uk-grid>
-                                <div class="uk-width-expand">
-                                    <span>
-                                        <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5"></fa-icon> 17
-                                    </span>
-                                    <span class="m-l-5">
-                                        <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5"></fa-icon> 20
-                                    </span>
+                                <div class="uk-width-expand like-link">
+                                    <a class="font-regular font-22">
+                                        <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5"></fa-icon>
+                                    </a> 17
+                                    <a class="m-l-5 font-regular font-22 dislike-link">
+                                        <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5"></fa-icon>
+                                    </a> 20
                                 </div>
-                                <div class="replay-link">
+                                <!-- <div class="replay-link">
                                     <a class="font-regular">
                                         <fa-icon [icon]="['far', 'comments']" class="m-r-5"></fa-icon> Reply
                                     </a>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <hr />
@@ -489,18 +492,18 @@
                         <div class="m-t-30 m-b-30">
                             <div uk-grid>
                                 <div class="uk-width-expand">
-                                    <span>
-                                        <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5"></fa-icon> 17
-                                    </span>
-                                    <span class="m-l-5">
-                                        <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5"></fa-icon> 20
-                                    </span>
+                                    <a class="font-regular font-22 like-link">
+                                        <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5"></fa-icon>
+                                    </a> 17
+                                    <a class="m-l-5 font-regular font-22 dislike-link">
+                                        <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5"></fa-icon>
+                                    </a> 20
                                 </div>
-                                <div class="replay-link">
-                                    <a class="font-regular">
-                                        <fa-icon [icon]="['far', 'comments']" class="m-r-5"></fa-icon> Reply
-                                    </a>
-                                </div>
+                                <!-- <div class="replay-link">
+                                        <a class="font-regular">
+                                            <fa-icon [icon]="['far', 'comments']" class="m-r-5"></fa-icon> Reply
+                                        </a>
+                                    </div> -->
                             </div>
                         </div>
                         <hr />

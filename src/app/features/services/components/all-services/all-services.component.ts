@@ -34,6 +34,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   currentUrl: string;
   whatsappUrl;
   verfiedCheck: boolean;
+  selectedCategory: string;
+
 
   constructor(public ecpService: EpcServiceService,
     public JDcategory: JdCategoryService,
@@ -61,6 +63,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   @HostListener('window:click', ['$event.target'])
   clear() {
     this.autocompleteFields = [];
+    this.selectedValue = "";
   }
 
   ngOnInit() {
@@ -115,7 +118,6 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
 
   getCategoryServices(category, catId) {
     this.isLoading = true;
-    console.log(category, catId);
     const param: PageParam = {
       p: 0,
       s: 50,
@@ -132,25 +134,28 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
           this.maxPages = Math.round(this.services.length / this.pageSize);
           this.verfiedCheck = false;
           this.isLoading = false;
-          this.searchPageParam.term = category;
+          // this.searchPageParam.term = category;
         }
       },
       error => {
         this.services = [];
         this.allService = [];
         this.pageServices = [];
-        this.searchPageParam.term = category;
+        // this.searchPageParam.term = category;
         this.isLoading = false;
         console.log(error);
       });
   }
 
   onCategoryChanged(category, catId) {
+    this.selectedCategory = category;
+    this.searchPageParam.term = '';
     this.router.navigate(['services/all'], { queryParams: { category: category, catid: catId } });
   }
 
   clearSelection() {
-    this.searchPageParam.term = '';
+    this.selectedCategory = '';
+    // this.searchPageParam.term = '';
     this.router.navigateByUrl('services/all');
   }
 
@@ -184,29 +189,38 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
             return true;
           }
         });
+
+        if (service.hasOwnProperty('basicProfileInfo')) {
+          this.router.navigate([`/services/${service.basicProfileInfo.firstName}/${service.id}/${true}`]);
+        } else {
+          this.router.navigate([`/services/${service.name}/${service.docid}/${false}`]);
+        }
+
       } else {
-        service = this.autocompleteFields.find(service => {
-          if (service.name && service.name == field) {
-            return true
-          } else if (service.basicProfileInfo && service.basicProfileInfo.firstName == field) {
-            return true;
-          }
-        });
+        this.selectedCategory = '';
+        this.getCategoryServices(field, 0);
       }
+      this.selectedValue = "";
+      this.autocompleteFields = [];
+    }
+  }
+
+  onSearchClick(service: Service) {
+    if (service) {
+      // let service: Service;
+      // service = this.autocompleteFields.find(service => {
+      //   if (service.name && service.name == field) {
+      //     return true
+      //   } else if (service.basicProfileInfo && service.basicProfileInfo.firstName == field) {
+      //     return true;
+      //   }
+      // });
 
       if (service.hasOwnProperty('basicProfileInfo')) {
         this.router.navigate([`/services/${service.basicProfileInfo.firstName}/${service.id}/${true}`]);
       } else {
         this.router.navigate([`/services/${service.name}/${service.docid}/${false}`]);
       }
-
-      // this.searchPageParam.term = field;
-
-
-      // this.onCategoryChanged(this.searchPageParam.term, 0);
-      // this.searchPageParam.term = "";
-      this.selectedValue = "";
-      this.autocompleteFields = [];
     }
   }
 

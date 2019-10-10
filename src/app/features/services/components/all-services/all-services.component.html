@@ -97,14 +97,14 @@
           <div class="uk-width-expand">
             <h4>Categories</h4>
           </div>
-          <div *ngIf="searchPageParam.term !== ''">
+          <div *ngIf="selectedCategory">
             <a class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
           </div>
         </div>
         <ul class="uk-list uk-list-large max-h-400 sroll-category">
           <li class="cursor-pointer" *ngFor="let category of JDcategory.categories"
             (click)="onCategoryChanged(category.category_name,category.national_catid)"
-            [ngClass]="{'cat-active': category.category_name === searchPageParam.term}">
+            [ngClass]="{'cat-active': category.category_name === selectedCategory}">
             {{category.category_name}}
           </li>
         </ul>
@@ -156,7 +156,12 @@
       <div class="uk-position-relative p-b-20">
         <div class="uk-position-absolute uk-z-index w-full">
           <div class="uk-inline w-100">
-            <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: search"></a>
+            <a class="uk-form-icon uk-form-icon-flip" (click)="onSearch(searchPageParam.term)"
+              uk-icon="icon: search"></a>
+            <a class="uk-form-icon uk-form-icon-flip reset-link" href="javascript:void(0)"
+              *ngIf="searchPageParam.term !== ''" (click)="searchPageParam.term = ''">
+              <fa-icon [icon]="['fas', 'times-circle']" class="m-r-5"></fa-icon> Search again
+            </a>
             <input class="uk-input" [(ngModel)]="searchPageParam.term" (keyup)="searchEvent($event)" required
               type="text" (keydown.enter)="onSearch($event.target.value)">
           </div>
@@ -164,8 +169,7 @@
           <ul *ngIf="autocompleteFields.length > 0"
             class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto regular-link search-list" appKeyHandler
             (onItemSelected)="onItemSelected($event)">
-            <li class="cursor-pointer" *ngFor="let field of autocompleteFields"
-              (click)="onSearch(field.name || field.basicProfileInfo.firstName)">
+            <li class="cursor-pointer" *ngFor="let field of autocompleteFields" (click)="onSearchClick(field)">
               {{field.name ||  field.basicProfileInfo.firstName }}
             </li>
           </ul>

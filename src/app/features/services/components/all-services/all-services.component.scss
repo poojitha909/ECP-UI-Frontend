@@ -162,6 +162,17 @@ h3{
                 overflow-y: scroll;
             }
         }
+
+.reset-link{
+    width: unset;
+    color: #C83F3F; 
+    margin-right: 35px;
+}
+.uk-form-icon-flip {
+    & ~ .uk-input{
+        padding-right: 150px !important;
+    }
+}
 // .uk-subnav > *{
 //     border: 1px solid #D7E0EF;
 //     box-sizing: border-box;

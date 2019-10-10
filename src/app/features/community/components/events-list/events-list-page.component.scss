@@ -26,6 +26,13 @@
       font-weight: bold;
     }
   }
+  .addevent{
+    border: 1px solid #1a73e8;
+    color: #1a73e8;
+    text-transform: capitalize;
+    float:right;
+    height: 38px;
+  }
   .uk-tab > .uk-active > a {
     font-weight: bold;
     color: $primary-txt-color;
@@ -58,12 +65,6 @@
   // .add-event{
   //   margin-bottom: 20px;
   // }
-  .addevent{
-    border: 1px solid #1a73e8;
-    color: #1a73e8;
-    text-transform: capitalize;
-    float:right;
-  }
   .search-form {
     margin-top: 16px;
     width:35%;

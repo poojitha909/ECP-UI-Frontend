@@ -181,7 +181,9 @@
   }
   
   .carousel-thumbnail__img {
-    width: 80px;
+    width: 60px;
     height: 60px;
+    object-fit: contain;
+    border: 1px solid #eae5e5;
   }
 }

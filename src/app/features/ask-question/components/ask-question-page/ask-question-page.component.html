@@ -33,7 +33,7 @@
       <div *ngFor="let expert of experts">
         <div class="uk-card uk-card-default p-10 cursor">
           <div class="uk-card-media-top">
-            <img class="thumb-100" src="{{ expert.basicProfileInfo?.profileImage?.thumbnailImage }}"
+            <img class="thumb-100" [imageHandler] [src]="expert.basicProfileInfo?.profileImage?.thumbnailImage"
               alt="No Image Found">
           </div>
           <div class="uk-card-body p-10">

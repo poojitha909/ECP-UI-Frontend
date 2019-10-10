@@ -68,7 +68,7 @@ export class ServiceDetailComponent implements OnInit {
     });
 
     const config: SEO = {
-      title: `An Elder Spring Initiative by Tata Trusts Service${this.isDBService ? this.service.basicProfileInfo.firstName : this.service.name}`,
+      title: `An Elder Spring Initiative by Tata Trusts Service ${this.isDBService ? this.service.basicProfileInfo.firstName : this.service.name}`,
       keywords: 'products,services,events,dscussions',
       description: `${this.isDBService ? this.service.basicProfileInfo.description : 'Just Dail Service'}`,
       author: `An Elder Spring Initiative by Tata Trusts`,
@@ -84,7 +84,6 @@ export class ServiceDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("Service Details", this.service);
     if (this.service.email) {
       this.service.email = this.service.email.replace(",", " ");
     }
@@ -103,9 +102,6 @@ export class ServiceDetailComponent implements OnInit {
 
     this.currentUrl = window.location.href;
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
-
-
-
   }
 
   get isDBService(): boolean {
@@ -229,10 +225,6 @@ export class ServiceDetailComponent implements OnInit {
     this.auth.serviceReviewForm = this.reviewForm.value;
     this.router.navigateByUrl('/user/signin');
   }
-
-  // goBack() {
-  //   this._location.back();
-  // }
 
 
 }

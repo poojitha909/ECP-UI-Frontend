@@ -1,4 +1,4 @@
-import { Component,Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-discussion-summary-cat',
@@ -11,6 +11,13 @@ export class DiscussionSummaryCatComponent implements OnInit {
   @Input() category: string;
 
   constructor() { }
-    ngOnInit() {
+
+  ngOnInit() { }
+
+  /**
+   * TODO: method to be removed
+   */
+  setDefaultPic(e) {
+    e.target.src = "assets/images/default-thumbnail.png";
   }
 }

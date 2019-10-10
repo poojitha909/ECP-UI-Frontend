@@ -1,8 +1,8 @@
 <div class="discussion-summary">
     <div class="uk-grid uk-grid-small" [routerLink]="['/community/discussion', discussion.id, category ]">
         <div class="uk-width-auto">
-            <img *ngIf="discussion.userProfile && discussion.userProfile.basicProfileInfo && discussion.userProfile.basicProfileInfo.profileImage && discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage" 
-                src="{{discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage}}" style="width:90px;" />
+            <!--TODO: apply imageHandler directive-->
+            <img [src]="discussion?.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage" (error)="setDefaultPic($event)" style="width:90px;" />
         </div>
         <div class="uk-width-expand">
             <h2 class="title">{{discussion.title | ellipsis:65}}</h2>

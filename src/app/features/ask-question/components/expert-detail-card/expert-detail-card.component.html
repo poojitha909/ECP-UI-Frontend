@@ -1,7 +1,8 @@
 <div class="cursor uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
 
   <div class="uk-card-media-left uk-width-1-4@m uk-width-1-3@s p-16">
-    <img src="{{ expert.basicProfileInfo?.profileImage?.titleImage }}" height="156" alt="">
+    <!--TODO: apply imageHandler directive-->
+    <img [src]="expert?.basicProfileInfo?.profileImage?.titleImage" (error)="setDefaultPic($event)" height="156" alt="" />
   </div>
 
   <div class="uk-card-body uk-width-expand p-16">

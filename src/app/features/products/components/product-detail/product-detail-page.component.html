@@ -68,12 +68,6 @@
                         <h3>Write a Review</h3>
                     </div>
                     <div class="uk-card-body">
-                        <!-- <div class="reply_reply" style="background-color: #FFF" *ngIf="replyParentText!=''">
-                            <div class="reply_reply_inner">
-                                <b>{{replyParentUser}}</b><br/>
-                                {{replyParentText}}
-                            </div>
-                        </div> -->
                         <div uk-grid>
                             <div class="uk-width-1-2@m">
                                 <span class="p-b-5">Username</span>
@@ -103,13 +97,10 @@
                 </div>
                 <div class="reviews" *ngIf="reviews!==undefined">
                     <h2 class="heading2">Reviews ({{reviews.length}})</h2>
+                    <hr />
                     <div class="uk-card uk-card-default" *ngFor="let reply of reviews">
                         <div class="uk-card-header">
                             <div class="uk-grid-small uk-flex-middle" uk-grid>
-                                <!-- <div class="uk-width-auto">
-                                    <img class="uk-border-circle" *ngIf="reply.userProfile && reply.userProfile.basicProfileInfo && reply.userProfile.basicProfileInfo.profileImage && reply.userProfile.basicProfileInfo.profileImage.thumbnailImage" 
-                                        width="40" height="40" src="{{reply.userProfile.basicProfileInfo.profileImage.thumbnailImage}}">
-                                </div> -->
                                 <div class="uk-width-expand">
                                     <h3 class="uk-card-title uk-margin-remove-bottom">{{reply.userName}} {{reply.rating}}</h3>
                                     <p class="uk-text-meta uk-margin-remove-top">
@@ -126,12 +117,6 @@
                             </div>
                         </div>
                         <div class="uk-card-body">
-                        <!-- <div class="reply_reply" *ngIf="reply.parentText!=''">
-                            <div class="reply_reply_inner">
-                                <b>{{reply.parentUser}}</b><br/>
-                                {{reply.parentText}}
-                            </div>
-                        </div> -->
                         <div [innerHTML]="reply.review">
                         </div>
                         </div>
@@ -147,51 +132,17 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="details">
-                    <h2 class="heading2">Details</h2>
-                    <div class="uk-grid">
-                            <div class="uk-width-1-2@s">
-                                <p class="label">
-                                    Event Category
-                                </p>
-                                <p class="description">
-                                    {{ (event.eventType==1 ? "Outdoor" : "Indoor") }}
-                                </p>
-                                <p class="label">
-                                    Email
-                                </p>
-                                <p class="description">
-                                    {{event.orgEmail}}
-                                </p>
-                                <p class="label">
-                                    Location
-                                </p>
-                                <p class="description">
-                                    {{event.address + " " + event.landmark}}
-                                </p>
-                            </div>
-                            <div class="uk-width-1-2@s description">
-                                <p class="label">
-                                    Event Entry
-                                </p>
-                                <p class="description">
-                                    {{ (event.entryFee >= 1 ? "Paid" : "Free") }}
-                                </p>
-                                <p class="label">
-                                    Languages
-                                </p>
-                                <p class="description">
-                                    {{event.languages}}
-                                </p>
-                                <p class="label">
-                                    Phone Number
-                                </p>
-                                <p class="description">
-                                    {{event.orgPhone}}
-                                </p>
-                            </div>
+                <div *ngIf="reviews.length == 0  && reviews!==undefined" class="m-t-30">
+                    <div class="uk-child-width-expand" uk-grid>
+                        <div class="info">
+                            <h1 class="font-regular-24 font-weight-600 m-0"> No review!</h1>
+                            <p class="lable font-regular m-0">No user has left review on this service.</p>
+                        </div>
+                        <div>
+                            <img src="/assets/images/norecord.svg" />
+                        </div>
                     </div>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>

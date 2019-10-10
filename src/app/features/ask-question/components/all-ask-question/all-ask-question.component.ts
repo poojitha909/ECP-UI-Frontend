@@ -106,6 +106,10 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
     this.searchParams.p = page;
     this.onSearch()
   }
+  clearSelection(){
+    this.searchParamsQues.askCategory = '';
+    this.router.navigateByUrl('ask-question/all');
+  }
 
   showExperts(){
     this.askQuesService.experts(this.searchParams).subscribe( (response:any) =>{

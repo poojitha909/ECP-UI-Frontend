@@ -1,8 +1,8 @@
 <div class="uk-section">
 
   <ul class="uk-breadcrumb">
-    <li><a routerLink="/services">Home</a></li>
-    <li><span>Services</span></li>
+    <li><a routerLink="/">Home</a></li>
+    <li><a routerLink="/services">Services</a></li>
   </ul>
   <h3>
     All Services
@@ -100,7 +100,6 @@
           <div *ngIf="searchPageParam.term !== ''">
             <a class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
           </div>
-
         </div>
         <ul class="uk-list uk-list-large max-h-400 sroll-category">
           <li class="cursor-pointer" *ngFor="let category of JDcategory.categories"

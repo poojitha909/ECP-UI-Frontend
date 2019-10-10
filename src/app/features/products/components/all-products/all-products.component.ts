@@ -81,6 +81,11 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     });
   }
 
+  clearSelection(){
+    this.searchParams.productCategory = '';
+    this.router.navigateByUrl('products/all');
+  }
+
   onTabChange(value) {
     this.router.navigate(['/products/all', {productCategory: value, searchTxt:  this.searchParams.searchTxt}]);
   }

@@ -6,6 +6,7 @@ import { JDCategory, Service } from 'src/app/core/interfaces';
 import { JdCategoryService } from 'src/app/core/services';
 import { Subject } from 'rxjs';
 import { debounce, debounceTime, distinctUntilChanged, mergeMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class SearchContainerComponent implements OnInit {
     discussions: [],
     events: []
   };
-  constructor(private homeService: HomeService) { }
+  constructor(private homeService: HomeService, private router: Router) { }
 
   ngOnInit() {
     this.searchTextChanged.pipe(
@@ -46,6 +47,7 @@ export class SearchContainerComponent implements OnInit {
   @HostListener('window:click', ['$event.target'])
   clear() {
     this.autocompleteFields = [];
+    this.selectedValue = "";
   }
 
   onSearchChange(value) {
@@ -69,38 +71,63 @@ export class SearchContainerComponent implements OnInit {
     this.showReset = false;
   }
 
-  onSearch() {
-    if (this.searchPageParam.term && this.searchPageParam.term !== '') {
-      if (this.selectedValue) {
-        this.searchPageParam.term = this.selectedValue;
-      }
-      this.autocompleteFields = [];
-      this.homeService.searchParam = this.searchPageParam;
-      // Home search pages API
-      this.homeService.getHomeSearchPages().subscribe(response => {
+  homeSearchPages() {
+    this.homeService.searchParam = this.searchPageParam;
+    // Home search pages API
+    this.homeService.getHomeSearchPages().subscribe(response => {
 
-        if (response && response.servicePage) {
-          const servicePage = JSON.parse(response.servicePage);
-          this.searchData.services = servicePage.content.slice(0, 5);
+      if (response && response.servicePage) {
+        const servicePage = JSON.parse(response.servicePage);
+        this.searchData.services = servicePage.content.slice(0, 5);
+      }
+      this.searchData.products = response.productPage.content;
+      this.searchData.discussions = response.discussPage.content;
+      this.searchData.events = response.eventPage.content;
+
+    },
+      error => {
+        console.log(error);
+      });
+  }
+
+  onSearch(field?: string) {
+    if (field || this.selectedValue) {
+      let service: Service;
+      if (this.selectedValue) {
+        // this.searchPageParam.term = this.selectedValue;
+        service = this.autocompleteFields.find(service => {
+          if (service.name && service.name == this.selectedValue) {
+            return true
+          } else if (service.basicProfileInfo && service.basicProfileInfo.firstName == this.selectedValue) {
+            return true;
+          }
+        });
+
+        if (service.hasOwnProperty('basicProfileInfo')) {
+          this.router.navigate([`/services/${service.basicProfileInfo.firstName}/${service.id}/${true}`]);
+        } else {
+          this.router.navigate([`/services/${service.name}/${service.docid}/${false}`]);
         }
 
-        this.searchData.products = response.productPage.content;
-        this.searchData.discussions = response.discussPage.content;
-        this.searchData.events = response.eventPage.content;
-
-        // this.searchPageParam.term = param;
-        this.selectedValue = "";
-      },
-        error => {
-          console.log(error);
-        });
+      } else {
+        this.homeSearchPages();
+      }
+      this.selectedValue = "";
+      this.autocompleteFields = [];
     }
   }
 
-  onAutocompleteClick(field) {
-    this.searchPageParam.term = field;
-    this.selectedValue = "";
-    this.autocompleteFields = [];
+  onAutocompleteClick(service: Service) {
+    // this.searchPageParam.term = field;
+    // this.selectedValue = "";
+    // this.autocompleteFields = [];
+    if (service) {
+      if (service.hasOwnProperty('basicProfileInfo')) {
+        this.router.navigate([`/services/${service.basicProfileInfo.firstName}/${service.id}/${true}`]);
+      } else {
+        this.router.navigate([`/services/${service.name}/${service.docid}/${false}`]);
+      }
+    }
   }
 
   searchEvent($event) {

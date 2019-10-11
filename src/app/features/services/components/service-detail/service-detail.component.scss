@@ -142,9 +142,15 @@ h3{
     border-radius: 50%;
 }
 
-.replay-link{
-    a{
-        color: #1A73E8; 
+.like-link{ 
+        :hover{
+            color: #1A73E8; 
+        }
+}
+
+.dislike-link{ 
+    :hover{
+        color: #C83F3F; 
     }
 }
 

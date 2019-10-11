@@ -4,7 +4,7 @@
         <ul class="uk-breadcrumb">
             <li routerLink="/" class="fa fa-angle-right">Home</li>
             <li routerLink="/community" class="fa fa-angle-right">Community</li>
-            <li *ngIf="selCategory!=''" class="fa fa-angle-right" routerLink="/community/discussions">All Discussions</li>
+            <li *ngIf="selCategory!=''" class="fa fa-angle-right" routerLink="/community/discussions">All Articles & Discussions</li>
         </ul>
     </div>
     <!-- Bread crumbs End -->
@@ -14,7 +14,7 @@
         <div class="uk-grid">
             <div class="uk-width-1-3@m">
                 <select class="uk-select" [ngModel]="selCategory" (change)="onTabChange($event.target.value)">
-                    <option value="">Select Category</option>
+                    <option value="">Choose a Category</option>
                     <option *ngFor="let cat of dropDownList | keyvalue" value="{{cat.key}}">{{cat.value.label}}</option>
                 </select>
             </div>
@@ -50,7 +50,7 @@
                         <rect width="40" height="40" fill="#1A73E8"/>
                         </g>
                     </svg>
-                    <div>Start a Discussion</div>
+                    <div>Submit an Article or Start a Discussion</div>
                 </div>
             </div>
             <app-discussion-summary *ngFor="let cat of categoryList | keyvalue" [category]="cat.value" (click)="onTabChange(cat.value.id)"></app-discussion-summary>

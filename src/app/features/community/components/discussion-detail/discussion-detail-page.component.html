@@ -4,7 +4,7 @@
         <ul class="uk-breadcrumb">
             <li routerLink="/" class="fa fa-angle-right">Home</li>
             <li routerLink="/community" class="fa fa-angle-right">Community</li>
-            <li routerLink="/community/discussions" class="fa fa-angle-right">All Discussions</li>
+            <li routerLink="/community/discussions" class="fa fa-angle-right">All Articles & Discussions</li>
             <li class="fa fa-angle-right" *ngIf="category" [routerLink]="['/community/discussions',category]">{{categoryName}}</li>
         </ul>
     </div>

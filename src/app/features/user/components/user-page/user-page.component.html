@@ -1,8 +1,7 @@
 <div class="uk-section">
 
   <h3>My Profile</h3>
-  <p>(Note to Content Writer: Add text here explaining how this information will be used)</p>
-  <hr class="m-b-30"/>
+  <hr class="m-b-30" />
   <div uk-grid>
     <div class="uk-width-1-3@m">
       <div class="category-box">
@@ -44,6 +43,10 @@
 
         <div class="uk-animation-fade uk-animation-fast" *ngSwitchCase="'viewprofile'">
           <app-view-profile (editProfile)="viewEditProfile()"></app-view-profile>
+        </div>
+
+        <div class="uk-animation-fade uk-animation-fast uk-text-center" *ngSwitchCase="'viewhistory'">
+          <h3>Coming soon ...</h3>
         </div>
       </ng-container>
 

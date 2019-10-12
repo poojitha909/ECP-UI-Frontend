@@ -15,6 +15,7 @@ export class ApiConstants {
     public static IMAGE_UPLOAD: string = `${environment.apiBaseUrl}/v1/fileupload`;
     public static GET_DB_SERVICE_DETAIL: string = `${environment.apiBaseUrl}/v1/userProfile/serviceProvider`;
     public static GET_DB_SERVICE_REVIEWS: string = `${environment.apiBaseUrl}/v1/reviewRate/service`;
+    public static ADD_LIKE_SERVICE_REVIEWS: string = `${environment.apiBaseUrl}/v1/reviewRate/service/likeUnlikeReview`;
     public static ADD_DB_SERVICE_REVIEWS: string = `${environment.apiBaseUrl}/v1/reviewRate/addServiceReview`;
     public static ADD_DB_SERVICE_REPORT: string = `${environment.apiBaseUrl}/v1/userProfile/reportService`;
     public static EVENTS_SERVICES: string = `${environment.apiBaseUrl}/v1/event`;

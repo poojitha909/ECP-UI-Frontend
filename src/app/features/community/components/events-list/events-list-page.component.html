@@ -1,48 +1,53 @@
 <div class="uk-container events" *ngIf="eventsList!==undefined">
     <!-- Bread crumbs Start -->
     <div class="breadcrumbs">
-        <ul class="uk-breadcrumb">
+        <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
+        <!-- <ul class="uk-breadcrumb">
             <li routerLink="/" class="fa fa-angle-right">Home</li>
             <li routerLink="/community" class="fa fa-angle-right">Community</li>
-        </ul>
+        </ul> -->
     </div>
     <div class="uk-grid uk-grid-large uk-flex-left">
         <div class="uk-width-2-3">
             <h2>All Events</h2>
         </div>
         <div class="uk-width-1-3">
-            <button routerLink="/community/event/add" class="uk-button uk-button-default addevent"> Create an Event +</button>
+            <button routerLink="/community/event/add" class="uk-button uk-button-default addevent"> Create an Event
+                +</button>
         </div>
     </div>
-    
+
     <!-- Bread crumbs End -->
     <!-- Tabs with list start -->
     <div class="uk-container uk-position-relative">
         <div class="search-form uk-position-top-right">
             <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
                 <div class="uk-margin uk-width-1-1 uk-width-expand@s">
-                <form class="uk-search uk-search-default">
-                    <span class="uk-search-icon-flip" [ngClass]="{ 'w-105':showReset}" uk-search-icon>
-                        <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)"><fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Reset&nbsp;&nbsp;</button>
-                    </span>
-                    <input class="uk-search-input search-box" [ngClass]="{ 'pr-105':showReset}" [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)"
-                    required type="text" placeholder="Search..." name="search" />
-                </form>
+                    <form class="uk-search uk-search-default">
+                        <span class="uk-search-icon-flip" [ngClass]="{ 'w-105':showReset}" uk-search-icon>
+                            <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
+                                <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Reset&nbsp;&nbsp;
+                            </button>
+                        </span>
+                        <input class="uk-search-input search-box" [ngClass]="{ 'pr-105':showReset}"
+                            [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required type="text"
+                            placeholder="Search..." name="search" />
+                    </form>
                 </div>
                 <div class="uk-width-1-s1 uk-width-auto@s uk-margin-bottom">
-                <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
+                    <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
                 </div>
             </div>
         </div>
         <ul id="eventtab" uk-tab>
-          <li (click)="onTabChange(0)" ><a href="#">All Events ({{countData.all}})</a></li>
-          <li (click)="onTabChange(-1)" ><a href="#">Upcoming Events ({{countData.upcoming}})</a></li>
-          <li (click)="onTabChange(1)" ><a href="#">Past Events({{countData.past}})</a></li>
+            <li (click)="onTabChange(0)"><a href="#">All Events ({{countData.all}})</a></li>
+            <li (click)="onTabChange(-1)"><a href="#">Upcoming Events ({{countData.upcoming}})</a></li>
+            <li (click)="onTabChange(1)"><a href="#">Past Events({{countData.past}})</a></li>
         </ul>
         <ul class="uk-switcher uk-margin">
-          <li>
-            <div class="uk-grid uk-grid-large uk-flex-left uk-text-center uk-child-width-1-3@m">
-                <!-- <div class="add-event" *ngIf="(eventsList && eventsList.length > 0)">
+            <li>
+                <div class="uk-grid uk-grid-large uk-flex-left uk-text-center uk-child-width-1-3@m">
+                    <!-- <div class="add-event" *ngIf="(eventsList && eventsList.length > 0)">
                     <div class="add-event-inner" routerLink="/community/event/add">
                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="6" y="6" width="28" height="28">
@@ -55,24 +60,29 @@
                         <div>Create an Event</div>
                     </div>
                 </div> -->
-                <!-- | paginate: { itemsPerPage: searchParams.s, currentPage: (searchParams.p + 1),  totalItems: totalRecords} -->
-                <app-event-summary *ngFor="let event of eventsList" [event]="event" [isPast]="0"></app-event-summary>
-            </div>
-          </li>
-          <li>
-            <div class="uk-grid uk-grid-large uk-flex-left uk-text-center uk-child-width-1-3@m">
-                <app-event-summary *ngFor="let event of eventsList" [event]="event" [isPast]="-1"></app-event-summary>
-            </div>
-          </li>
-          <li>
-            <div class="uk-grid uk-grid-large uk-flex-left uk-text-center uk-child-width-1-3@m">
-                <app-event-summary *ngFor="let event of eventsList" [event]="event" [isPast]="1"></app-event-summary>
-            </div>
-          </li>
+                    <!-- | paginate: { itemsPerPage: searchParams.s, currentPage: (searchParams.p + 1),  totalItems: totalRecords} -->
+                    <app-event-summary *ngFor="let event of eventsList" [event]="event" [isPast]="0">
+                    </app-event-summary>
+                </div>
+            </li>
+            <li>
+                <div class="uk-grid uk-grid-large uk-flex-left uk-text-center uk-child-width-1-3@m">
+                    <app-event-summary *ngFor="let event of eventsList" [event]="event" [isPast]="-1">
+                    </app-event-summary>
+                </div>
+            </li>
+            <li>
+                <div class="uk-grid uk-grid-large uk-flex-left uk-text-center uk-child-width-1-3@m">
+                    <app-event-summary *ngFor="let event of eventsList" [event]="event" [isPast]="1">
+                    </app-event-summary>
+                </div>
+            </li>
         </ul>
     </div>
     <div *ngIf="(eventsList && eventsList.length == 0)">
         <app-event-no-record></app-event-no-record>
     </div>
-    <app-pagination *ngIf="(eventsList && eventsList.length > 0)" [totalRecords]="totalRecords" [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)"></app-pagination>
+    <app-pagination *ngIf="(eventsList && eventsList.length > 0)" [totalRecords]="totalRecords"
+        [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">
+    </app-pagination>
 </div>

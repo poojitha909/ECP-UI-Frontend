@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ServiceDetail, DBReviews, SEO } from 'src/app/core/interfaces';
+import { ServiceDetail, DBReviews, SEO, Breadcrumb } from 'src/app/core/interfaces';
 import { EpcServiceService } from '../../epc-service.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core';
@@ -14,7 +14,20 @@ import { SeoService } from 'src/app/core/services/seo.service';
   styleUrls: ['./service-detail.component.scss']
 })
 export class ServiceDetailComponent implements OnInit {
-
+  breadcrumbLinks: Breadcrumb[] = [
+    {
+      text: 'Home',
+      link: '/'
+    },
+    {
+      text: 'Services',
+      link: '/services'
+    },
+    {
+      text: 'All Services',
+      link: '/services/all'
+    }
+  ];
   service: ServiceDetail;
   dbReview: DBReviews[] = [];
   reviewForm: FormGroup;
@@ -58,7 +71,7 @@ export class ServiceDetailComponent implements OnInit {
       serviceId: [""],
       rating: [0, Validators.required],
       review: ["", Validators.required],
-      userName: ["", Validators.required]
+      // userName: ["", Validators.required]
     });
 
     this.reportForm = this.fb.group({
@@ -226,5 +239,17 @@ export class ServiceDetailComponent implements OnInit {
     this.router.navigateByUrl('/user/signin');
   }
 
+
+  likeUnlikeReview(review: DBReviews, like: boolean) {
+    this.ecpService.likeUnlikeReview(review.id, like).subscribe(
+      response => {
+        if (response) {
+          review = response;
+        }
+      },
+      error => {
+        console.log(error);
+      });
+  }
 
 }

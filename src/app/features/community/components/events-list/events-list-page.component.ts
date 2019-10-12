@@ -1,6 +1,7 @@
-import { Component, OnInit,OnDestroy  } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {EventService} from '../../services/events.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { EventService } from '../../services/events.service';
+import { Breadcrumb } from 'src/app/core/interfaces';
 
 declare var UIkit;
 
@@ -9,11 +10,20 @@ declare var UIkit;
   templateUrl: './events-list-page.component.html',
   styleUrls: ['./events-list-page.component.scss']
 })
-export class EventsListPageComponent implements OnInit,OnDestroy {
-
+export class EventsListPageComponent implements OnInit, OnDestroy {
+  breadcrumbLinks: Breadcrumb[] = [
+    {
+      text: 'Home',
+      link: '/'
+    },
+    {
+      text: 'Community',
+      link: '/community'
+    }
+  ];
   showReset: boolean;
   eventsList: any[];
-  countData: {"all":0,"outdoor":0,"indoor":0};
+  countData: { "all": 0, "outdoor": 0, "indoor": 0 };
   searchParams: {
     p: number,
     s: number,
@@ -23,11 +33,11 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
   };
   paramsSubs: any;
   totalRecords: number;
-  
-  constructor(private route:ActivatedRoute,private eventService: EventService) { }
+
+  constructor(private route: ActivatedRoute, private eventService: EventService) { }
 
   ngOnInit() {
-    this.countData = {"all":0,"outdoor":0,"indoor":0};
+    this.countData = { "all": 0, "outdoor": 0, "indoor": 0 };
     this.searchParams = {
       p: 0,
       s: 18,
@@ -37,13 +47,13 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
     }
     this.paramsSubs = this.route.params.subscribe(params => {
       this.initiate();
-    }); 
+    });
   }
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.paramsSubs.unsubscribe();
   }
-  
-  initiate(){
+
+  initiate() {
     this.searchParams = {
       p: 0,
       s: 4,
@@ -51,24 +61,24 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
       eventType: 0,
       pastEvents: 0
     }
-    
+
     this.totalRecords = 0;
-    
-    if(this.route.snapshot.params['past'] !== undefined){
+
+    if (this.route.snapshot.params['past'] !== undefined) {
       this.searchParams.pastEvents = this.route.snapshot.params['past'];
     }
     this.onSearch();
-    setTimeout( ()=> {
-      if(this.searchParams.pastEvents == -1){
+    setTimeout(() => {
+      if (this.searchParams.pastEvents == -1) {
         UIkit.tab("#eventtab").show(1);
       }
-      else if(this.searchParams.pastEvents == 1){
+      else if (this.searchParams.pastEvents == 1) {
         UIkit.tab("#eventtab").show(2);
       }
-      else if(this.searchParams.pastEvents == 0){
+      else if (this.searchParams.pastEvents == 0) {
         UIkit.tab("#eventtab").show(0);
       }
-    },500);
+    }, 500);
   }
 
   changePage(page: number) {
@@ -76,35 +86,35 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
     this.onSearch()
   }
 
-  showEvents(){
-    this.eventService.searchEvents(this.searchParams).subscribe( (response:any) =>{
+  showEvents() {
+    this.eventService.searchEvents(this.searchParams).subscribe((response: any) => {
       const data = response.data;
       this.eventsList = [];
-      if(data.content){
+      if (data.content) {
         this.eventsList = data.content;
         this.totalRecords = data.total;
       }
     });
   }
 
-  showEventsCount(){
-    this.eventService.searchEventsCount({"searchTxt": this.searchParams.searchTxt,"eventType":0}).subscribe( (response:any) =>{
+  showEventsCount() {
+    this.eventService.searchEventsCount({ "searchTxt": this.searchParams.searchTxt, "eventType": 0 }).subscribe((response: any) => {
       this.countData = response.data;
     });
   }
 
-  showTodayText(timestamp: number){
+  showTodayText(timestamp: number) {
     const today = new Date();
     let checkDay = new Date(timestamp);
-    if(checkDay.getDate() == today.getDate() && 
-        checkDay.getMonth() == today.getMonth() && 
-        checkDay.getFullYear() == today.getFullYear()){
+    if (checkDay.getDate() == today.getDate() &&
+      checkDay.getMonth() == today.getMonth() &&
+      checkDay.getFullYear() == today.getFullYear()) {
       return "(Today)";
     }
     checkDay = new Date(timestamp - 86400000);
-    if(checkDay.getDate() == today.getDate() && 
-        checkDay.getMonth() == today.getMonth() && 
-        checkDay.getFullYear() == today.getFullYear()){
+    if (checkDay.getDate() == today.getDate() &&
+      checkDay.getMonth() == today.getMonth() &&
+      checkDay.getFullYear() == today.getFullYear()) {
       return "(Tomorrow)";
     }
   }
@@ -123,13 +133,13 @@ export class EventsListPageComponent implements OnInit,OnDestroy {
       this.showReset = false;
     }
     this.searchParams.searchTxt = value;
-    if(event.key === "Enter"){
-      this.onSearch();    
+    if (event.key === "Enter") {
+      this.onSearch();
     }
   }
 
   resetSearch(event: any) {
-    if(event.clientX!=0){ // this is to make sure it is an event not raise by hitting enter key
+    if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
       this.searchParams.searchTxt = "";
       this.showReset = false;
       this.onSearch()

@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ChangeDetectorRef, HostListener } from '@angular/core';
 
 import { EpcServiceService } from '../../epc-service.service';
-import { Service, PageParam, SEO } from 'src/app/core/interfaces';
+import { Service, PageParam, SEO, Breadcrumb } from 'src/app/core/interfaces';
 import { JdCategoryService } from 'src/app/core/services';
 import { HomeService } from 'src/app/features/home/home.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -17,6 +17,17 @@ import { SeoService } from 'src/app/core/services/seo.service';
   styleUrls: ['./all-services.component.scss']
 })
 export class AllServicesComponent implements OnInit, AfterViewInit {
+  breadcrumbLinks: Breadcrumb[] = [
+    {
+      text: 'Home',
+      link: '/'
+    },
+    {
+      text: 'Services',
+      link: '/services'
+    }
+  ];
+
   services: Service[] = [];
   allService: Service[] = [];
   pageServices: Service[] = [];
@@ -114,6 +125,9 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   }
 
   getCategoryServices(category, catId) {
+    if (catId) {
+      this.selectedCategory = category;
+    }
     this.isLoading = true;
     const param: PageParam = {
       p: 0,
@@ -144,7 +158,6 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   }
 
   onCategoryChanged(category, catId) {
-    this.selectedCategory = category;
     this.searchPageParam.term = '';
     this.router.navigate(['services/all'], { queryParams: { category: category, catid: catId } });
   }

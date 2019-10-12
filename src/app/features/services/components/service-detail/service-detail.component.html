@@ -1,10 +1,11 @@
 <div class="uk-section">
-  <ul class="uk-breadcrumb">
+  <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
+  <!-- <ul class="uk-breadcrumb">
     <li><a routerLink="/">Home</a></li>
     <li><a routerLink="/services">Services</a></li>
     <li><a routerLink="/services/all">All Services</a></li>
-    <!-- <li><span> {{ service?.name || service?.basicProfileInfo?.firstName  }}</span></li> -->
-  </ul>
+    <li><span> {{ service?.name || service?.basicProfileInfo?.firstName  }}</span></li>
+  </ul> -->
   <h3>
     {{ service?.name || service?.basicProfileInfo?.firstName  }}
   </h3>
@@ -344,8 +345,8 @@
           <!-- Success box END-->
           <form [formGroup]="reviewForm" (ngSubmit)="onReviewSubmit()" class="uk-form-stacked review-form">
 
-            <div class="uk-child-width-expand " uk-grid>
-              <div>
+            <div class="uk-child-width-1-2@s" uk-grid>
+              <!-- <div>
                 <div class="uk-margin">
                   <label class="uk-form-label" for="form-stacked-text">Username<span class="required">*</span></label>
                   <div class="uk-form-controls">
@@ -353,7 +354,7 @@
                       placeholder="Enter your name">
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div>
                 <div class="uk-margin">
                   <label class="uk-form-label" for="form-stacked-select">Your Rating<span
@@ -426,7 +427,7 @@
             <div class="m-t-30">
               <p class="font-regular">{{review.review_text }}</p>
             </div>
-            <div class="m-t-30 m-b-30">
+            <!-- <div class="m-t-30 m-b-30">
               <div uk-grid>
                 <div class="uk-width-expand">
                   <a class="like-link">
@@ -436,13 +437,8 @@
                     <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5 font-22"></fa-icon> 20
                   </a>
                 </div>
-                <!-- <div class="replay-link">
-                  <a class="font-regular">
-                    <fa-icon [icon]="['far', 'comments']" class="m-r-5"></fa-icon> Reply
-                  </a>
-                </div> -->
               </div>
-            </div>
+            </div> -->
             <hr />
           </div>
 
@@ -482,12 +478,12 @@
             <div class="m-t-30 m-b-30">
               <div uk-grid>
                 <div class="uk-width-expand">
-                  <a class="like-link font-22">
+                  <a class="like-link font-22" (click)="likeUnlikeReview(review,'true')">
                     <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5 font-22"></fa-icon>
-                  </a> 17
-                  <a class="m-l-5 dislike-link font-22">
+                  </a> {{ review.likeCount && review.likeCount.lenght > 0 ? review.likeCount.lenght : '0' }}
+                  <a class="m-l-5 dislike-link font-22" (click)="likeUnlikeReview(review,'false')">
                     <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5 font-22"></fa-icon>
-                  </a> 20
+                  </a> {{ review.unLikeCount && review.unLikeCount.lenght > 0 ? review.unLikeCount.lenght : '0' }}
                 </div>
                 <!-- <div class="replay-link">
                   <a class="font-regular">

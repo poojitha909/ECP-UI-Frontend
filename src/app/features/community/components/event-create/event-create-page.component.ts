@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {EventService} from '../../services/events.service';
-import {MenuService} from '../../services/menu.service';
-import {Router} from "@angular/router";
-import {StorageHelperService} from "../../../../core/services/storage-helper.service";
-import {AuthService} from "../../../../core/auth/services/auth.service";
+import { EventService } from '../../services/events.service';
+import { MenuService } from '../../services/menu.service';
+import { Router } from "@angular/router";
+import { StorageHelperService } from "../../../../core/services/storage-helper.service";
+import { AuthService } from "../../../../core/auth/services/auth.service";
+import { Breadcrumb } from 'src/app/core/interfaces';
 declare var UIKit;
 
 @Component({
@@ -12,7 +13,20 @@ declare var UIKit;
   styleUrls: ['./event-create-page.component.scss']
 })
 export class EventCreatePageComponent implements OnInit {
-
+  breadcrumbLinks: Breadcrumb[] = [
+    {
+      text: 'Home',
+      link: '/'
+    },
+    {
+      text: 'Community',
+      link: '/community'
+    },
+    {
+      text: 'All Events',
+      link: '/community/events'
+    }
+  ];
   categoryList: any[];
   title: string;
   date: string;
@@ -49,11 +63,11 @@ export class EventCreatePageComponent implements OnInit {
     this.languages = "";
     this.organiser = "";
     this.user = this.store.retrieve("ECP-USER");
-    if(this.user){
+    if (this.user) {
       this.user = JSON.parse(this.user);
     }
     let event = this.store.retrieve("new-event");
-    if(event){
+    if (event) {
       event = JSON.parse(event);
       this.title = event.title;
       this.date = event.date;
@@ -73,7 +87,7 @@ export class EventCreatePageComponent implements OnInit {
     }
   }
 
-  onReset(){
+  onReset() {
     this.title = "";
     this.date = "";
     this.startTime = "";
@@ -90,12 +104,13 @@ export class EventCreatePageComponent implements OnInit {
     this.organiser = "";
     this.router.navigate(['/community/events']);
   }
-  
-  onSubmit(){
-    if(!this.user){
-    
+
+  onSubmit() {
+    if (!this.user) {
+
       this.store.store("new-event", JSON.stringify(
-        { title: this.title,
+        {
+          title: this.title,
           date: this.date,
           startTime: this.startTime,
           duration: this.duration,
@@ -115,8 +130,8 @@ export class EventCreatePageComponent implements OnInit {
       this.router.navigate(['/user/signin']);
       return;
     }
-    
-    if(this.eventType != "" && this.title!= "" && this.description!= ""){
+
+    if (this.eventType != "" && this.title != "" && this.description != "") {
       this.eventService.addEvents({
         "title": this.title,
         "datetime": this.date + "T" + this.startTime + "+05:30",
@@ -132,16 +147,16 @@ export class EventCreatePageComponent implements OnInit {
         "organiser": this.organiser,
         "orgPhone": this.orgPhone,
         "orgEmail": this.orgEmail
-        }).subscribe( (response:any) => {
-        if(response.data.id != ""){
+      }).subscribe((response: any) => {
+        if (response.data.id != "") {
           this.router.navigate(['/community/events']);
         }
-        else{
-          alert("Oops! something wrong happen, please try again.");            
+        else {
+          alert("Oops! something wrong happen, please try again.");
         }
       });
     }
-    else{
+    else {
       alert("All fields are required, please fill all fields.");
     }
   }

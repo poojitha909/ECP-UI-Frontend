@@ -1,11 +1,13 @@
 <div class="product-detail" *ngIf="product!==undefined">
     <!-- Bread crumbs Start -->
     <div class="breadcrumbs">
-        <ul class="uk-breadcrumb">
+        <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
+
+        <!-- <ul class="uk-breadcrumb">
             <li routerLink="/" class="fa fa-angle-right">Home</li>
             <li routerLink="/products" class="fa fa-angle-right">Products</li>
             <li routerLink="/products/all" class="fa fa-angle-right">All Products</li>
-        </ul>
+        </ul> -->
     </div>
     <!-- Bread crumbs End -->
     <div class="uk-container">
@@ -16,53 +18,58 @@
         <div class="no-top-m uk-grid uk-grid-large">
             <div class="uk-width-1-3@m">
                 <div class="category-box">
-                        <div *ngFor="let slide of slides">
-                            {{slide}}
-                        </div>
-                        <ngb-carousel *ngIf="product && product.images" [activeId]="activeSlideId">
-                            <ng-template *ngFor="let image of product.images" ngbSlide>
-                                <img [imageHandler] [src]="image" alt="Random first slide">
-                            </ng-template>
-                        </ngb-carousel>
-                        <ul class="carousel-thumbnail">
-                            <li class="carousel-thumbnail__item list-inline-item" *ngFor="let image of product.images;  let i = index" (click)="setActiveSlide(i)">
-                                <a class="selected">
-                                    <img class="carousel-thumbnail__img" [src]="image">
-                                </a>
-                            </li>
-                        </ul>
+                    <div *ngFor="let slide of slides">
+                        {{slide}}
+                    </div>
+                    <ngb-carousel *ngIf="product && product.images" [activeId]="activeSlideId">
+                        <ng-template *ngFor="let image of product.images" ngbSlide>
+                            <img [imageHandler] [src]="image" alt="Random first slide">
+                        </ng-template>
+                    </ngb-carousel>
+                    <ul class="carousel-thumbnail">
+                        <li class="carousel-thumbnail__item list-inline-item"
+                            *ngFor="let image of product.images;  let i = index" (click)="setActiveSlide(i)">
+                            <a class="selected">
+                                <img class="carousel-thumbnail__img" [src]="image">
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <div class="m-t-40 category-box">
                     <div class="m-b-20">
-                        <a href="" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a> <a> Share via
-                        Whatsapp</a>
+                        <a href="" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
+                        <a> Share via
+                            Whatsapp</a>
                     </div>
-            
+
                     <div class="m-b-20">
-                        <a href="" class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail"> </a> <a> Share via Email</a>
+                        <a href="" class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail"> </a> <a> Share
+                            via Email</a>
                     </div>
-            
+
                     <div>
-                        <a href="" class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a> Share via
-                        Facebook</a>
+                        <a href="" class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a>
+                            Share via
+                            Facebook</a>
                     </div>
                 </div>
             </div>
             <div class="uk-width-2-3@m">
                 <h2 class="heading2">About</h2>
                 <div class="description">
-                        {{product?.description}}
+                    {{product?.description}}
                 </div>
-                <hr/>
+                <hr />
                 <div class="buynow">
                     <table>
                         <tr>
-                            <td><a href="{{product?.buyLink}}" target="_blank" class="uk-button uk-button-primary">Buy On {{product?.buyFrom }}</a></td>
+                            <td><a href="{{product?.buyLink}}" target="_blank" class="uk-button uk-button-primary">Buy
+                                    On {{product?.buyFrom }}</a></td>
                             <td><span class="price"> Rs. {{product?.price}}</span></td>
                         </tr>
-                    </table>                        
+                    </table>
                 </div>
-                <hr/>
+                <hr />
                 <div class="uk-card uk-card-default comment">
                     <div class="uk-card-header">
                         <h3>Write a Review</h3>
@@ -71,11 +78,13 @@
                         <div uk-grid>
                             <div class="uk-width-1-2@m">
                                 <span class="p-b-5">Username</span>
-                                <input type="text" class="review-input" id="prod_username" name="prod_username" [(ngModel)]="username" placeholder="Enter your name" />
+                                <input type="text" class="review-input" id="prod_username" name="prod_username"
+                                    [(ngModel)]="username" placeholder="Enter your name" />
                             </div>
                             <div class="uk-width-1-2@m">
                                 <span class="p-b-5">Your Rating</span>
-                                <select class="review-input" id="prod_rating" name="prod_rating" [(ngModel)]="rating" placeholder="Enter your name">
+                                <select class="review-input" id="prod_rating" name="prod_rating" [(ngModel)]="rating"
+                                    placeholder="Enter your name">
                                     <option value="5">5 Star</option>
                                     <option value="4">4 Star</option>
                                     <option value="3">3 Star</option>
@@ -83,15 +92,17 @@
                                     <option value="1">1 Star</option>
                                 </select>
                             </div>
-                        </div>                        
+                        </div>
                         <div>
                             <span class="p-b-5">Your Review</span>
-                            <textarea id="commentarea" name="commentarea" [(ngModel)]="commentTxt" placeholder="Enter your review here"></textarea>
+                            <textarea id="commentarea" name="commentarea" [(ngModel)]="commentTxt"
+                                placeholder="Enter your review here"></textarea>
                         </div>
                     </div>
                     <div class="uk-card-footer">
                         <div class="uk-flex uk-flex-right">
-                            <button class="uk-button uk-button-primary" (click)="addComment()">{{ !!user ? 'Submit Review' : 'Signin to Review'}}</button>
+                            <button class="uk-button uk-button-primary"
+                                (click)="addComment()">{{ !!user ? 'Submit Review' : 'Signin to Review'}}</button>
                         </div>
                     </div>
                 </div>
@@ -102,7 +113,8 @@
                         <div class="uk-card-header">
                             <div class="uk-grid-small uk-flex-middle" uk-grid>
                                 <div class="uk-width-expand">
-                                    <h3 class="uk-card-title uk-margin-remove-bottom">{{reply.userName}} {{reply.rating}}</h3>
+                                    <h3 class="uk-card-title uk-margin-remove-bottom">{{reply.userName}}
+                                        {{reply.rating}}</h3>
                                     <p class="uk-text-meta uk-margin-remove-top">
                                         <ngb-rating [(rate)]="reply.rating" [readonly]="true" [max]="5">
                                             <ng-template let-fill="fill" let-index="index">
@@ -117,13 +129,14 @@
                             </div>
                         </div>
                         <div class="uk-card-body">
-                        <div [innerHTML]="reply.review">
-                        </div>
+                            <div [innerHTML]="reply.review">
+                            </div>
                         </div>
                         <div class="uk-card-footer">
                             <div class="uk-grid-collapse uk-child-width-expand@s" uk-grid>
                                 <div class="like-container">
-                                    <img src="/assets/images/like-outline.svg" (click)="likeReply(reply)"> <span class="like" (click)="likeReply(reply)">{{reply.likeCount}}</span>
+                                    <img src="/assets/images/like-outline.svg" (click)="likeReply(reply)"> <span
+                                        class="like" (click)="likeReply(reply)">{{reply.likeCount}}</span>
                                 </div>
                                 <div class="reply-container" (click)="setReplyId(reply.id,reply.userName,reply.review)">
                                     <img src="/assets/images/reply.svg"> <label class="reply"> Reply</label>

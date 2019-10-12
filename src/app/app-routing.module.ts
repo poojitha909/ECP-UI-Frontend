@@ -35,12 +35,12 @@ const routes: Routes = [
       {
         path: 'about',
         component: AboutUsComponent
+      },
+      {
+        path: 'user',
+        loadChildren: () => import('src/app/features/user/user.module').then((mod) => mod.UserModule)
       }
     ]
-  },
-  {
-    path: 'user',
-    loadChildren: () => import('src/app/features/user/user.module').then((mod) => mod.UserModule)
   },
   {
     path: 'error',

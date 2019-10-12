@@ -180,6 +180,7 @@ color: #000;
     .uk-progress-rating { // created class for customisation
         &::-webkit-progress-value { background-color: #E8B24A; } // those are the overflowing colors
         &::-ms-fill { background-color: #E8B24A; }
+        &::-moz-progress-bar {background-color: #E8B24A;}
       }
       .filled{
       color: #000;

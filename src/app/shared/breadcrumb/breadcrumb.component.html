@@ -1,0 +1,5 @@
+<ul *ngIf="breadcrumbLinks.length > 0" class="uk-breadcrumb">
+    <li *ngFor="let breadcrumb of breadcrumbLinks">
+        <a [routerLink]="breadcrumb.link">{{ breadcrumb.text }}</a>
+    </li>
+</ul>

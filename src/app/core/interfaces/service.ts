@@ -214,4 +214,5 @@ export interface SEO {
 export interface Breadcrumb {
     text: string;
     link: string | any[];
+    queryParams?: any;
 }

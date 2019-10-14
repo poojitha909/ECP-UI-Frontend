@@ -1,12 +1,7 @@
 <div class="discussion-detail" *ngIf="question!=undefined">
     <!-- Bread crumbs Start -->
     <div class="breadcrumbs">
-        <ul class="uk-breadcrumb">
-            <li routerLink="/" class="fa fa-angle-right">Home</li>
-            <li routerLink="/ask-question" class="fa fa-angle-right">Ask an Expert</li>
-            <li *ngIf="isExpert==false" routerLink="/ask-question/all" [queryParams]="{tab:1}" class="fa fa-angle-right">My Questions</li>
-            <li *ngIf="isExpert==true" routerLink="/ask-question/expert" class="fa fa-angle-right">Unanswered Questions</li>
-        </ul>
+        <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
     </div>
     <!-- Bread crumbs End -->
     <div class="uk-container">
@@ -16,7 +11,8 @@
             <div class="uk-width-1-3@m">
                 <div class="category-box top">
                     <div class="img-container">
-                        <img class="user" src="{{question?.answeredBy?.basicProfileInfo?.profileImage?.thumbnailImage}}">
+                        <img class="user"
+                            src="{{question?.answeredBy?.basicProfileInfo?.profileImage?.thumbnailImage}}">
                     </div>
                     <div class="heading2">
                         {{question?.answeredBy?.basicProfileInfo?.firstName}}
@@ -33,15 +29,16 @@
                 </div>
             </div>
             <div class="uk-width-2-3@m">
-                <div *ngIf="question!==undefined && question.description!==undefined && question.description!==null && question.description!==''">
-                  <h2 class="heading1">
-                    Description
-                  </h2>
-                  <p>
-                      {{question.description}}
-                  </p>
+                <div
+                    *ngIf="question!==undefined && question.description!==undefined && question.description!==null && question.description!==''">
+                    <h2 class="heading1">
+                        Description
+                    </h2>
+                    <p>
+                        {{question.description}}
+                    </p>
                 </div>
-                <hr/>
+                <hr />
                 <h2 class="heading1">
                     Replies
                 </h2>
@@ -49,25 +46,27 @@
                     <div class="uk-card-body">
                         <div class="reply_reply" style="background-color: #FFF" *ngIf="replyParentText!=''">
                             <div class="reply_reply_inner">
-                                <b>{{replyParentUser}}</b><br/>
+                                <b>{{replyParentUser}}</b><br />
                                 {{replyParentText}}
                             </div>
                         </div>
-                        <textarea id="commentarea" name="commentarea" placeholder="Enter your message here" [(ngModel)]="commentTxt"></textarea>
+                        <textarea id="commentarea" name="commentarea" placeholder="Enter your message here"
+                            [(ngModel)]="commentTxt"></textarea>
                     </div>
                     <div class="uk-card-footer">
                         <div class="uk-flex uk-flex-right">
-                            <button class="uk-button uk-button-primary" (click)="addComment()">{{!!user ? 'Post Reply' : 'Signin to Comment'}}</button>
+                            <button class="uk-button uk-button-primary"
+                                (click)="addComment()">{{!!user ? 'Post Reply' : 'Signin to Comment'}}</button>
                         </div>
                     </div>
                 </div>
                 <div class="uk-card uk-card-default" *ngFor="let reply of replies">
                     <div class="uk-card-header">
-                        
+
                         <div *ngIf="reply.user.id === question.askedBy.id" class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-auto">
-                                <img class="uk-border-circle"
-                                    width="40" height="40" src="{{askedByProfile?.basicProfileInfo?.profileImage?.thumbnailImage}}">
+                                <img class="uk-border-circle" width="40" height="40"
+                                    src="{{askedByProfile?.basicProfileInfo?.profileImage?.thumbnailImage}}">
                             </div>
                             <div class="uk-width-expand">
                                 <h3 class="uk-card-title uk-margin-remove-bottom">{{reply.user.userName}}</h3>
@@ -76,13 +75,15 @@
                                 <p class="uk-text-meta">{{ reply.createdAt | timeago }}</p>
                             </div>
                         </div>
-                        <div *ngIf="reply.user.id === question.answeredBy.userId" class="uk-grid-small uk-flex-middle" uk-grid>
+                        <div *ngIf="reply.user.id === question.answeredBy.userId" class="uk-grid-small uk-flex-middle"
+                            uk-grid>
                             <div class="uk-width-auto">
-                                <img class="uk-border-circle"
-                                    width="40" height="40" src="{{question.answeredBy.basicProfileInfo.profileImage.thumbnailImage}}">
+                                <img class="uk-border-circle" width="40" height="40"
+                                    src="{{question.answeredBy.basicProfileInfo.profileImage.thumbnailImage}}">
                             </div>
                             <div class="uk-width-expand">
-                                <h3 class="uk-card-title uk-margin-remove-bottom">{{question?.answeredBy?.basicProfileInfo?.firstName}}</h3>
+                                <h3 class="uk-card-title uk-margin-remove-bottom">
+                                    {{question?.answeredBy?.basicProfileInfo?.firstName}}</h3>
                             </div>
                             <div class="uk-width-auto">
                                 <p class="uk-text-meta">{{ reply.createdAt | timeago }}</p>
@@ -90,14 +91,14 @@
                         </div>
                     </div>
                     <div class="uk-card-body">
-                    <div class="reply_reply" *ngIf="reply.parentText!=''">
-                        <div class="reply_reply_inner">
-                            <b>{{reply.parentUser}}</b><br/>
-                            {{reply.parentText}}
+                        <div class="reply_reply" *ngIf="reply.parentText!=''">
+                            <div class="reply_reply_inner">
+                                <b>{{reply.parentUser}}</b><br />
+                                {{reply.parentText}}
+                            </div>
                         </div>
-                    </div>
-                    <div [innerHTML]="reply.reply">
-                    </div>
+                        <div [innerHTML]="reply.reply">
+                        </div>
                     </div>
                     <!-- <div class="uk-card-footer">
                         <div class="uk-grid-collapse uk-child-width-expand@s" uk-grid>

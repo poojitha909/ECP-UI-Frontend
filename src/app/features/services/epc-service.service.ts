@@ -92,4 +92,13 @@ export class EpcServiceService {
       }));
   }
 
+  likeUnlikeReview(reviewId: string, like: boolean): Observable<any> {
+    return this.http.put<any>(`${ApiConstants.ADD_LIKE_SERVICE_REVIEWS}?reviewId=${reviewId}&like=${like}`, {}).pipe(
+      map(response => {
+        if (response) {
+          return response.data;
+        }
+      }));
+  }
+
 }

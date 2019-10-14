@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {AskQuestionService} from '../../services/ask-question.service';
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
+import { Breadcrumb } from 'src/app/core/interfaces';
 
 declare var UIkit;
 
@@ -11,7 +12,16 @@ declare var UIkit;
   styleUrls: ['./all-ask-question.component.scss']
 })
 export class AllAskQuestionComponent implements OnInit, OnDestroy {
-
+  breadcrumbLinks: Breadcrumb[] = [
+    {
+      text: 'Home',
+      link: '/'
+    },
+    {
+      text: 'Ask an Expert',
+      link: '/ask-question'
+    }
+  ];
   showReset: boolean;
   experts: any[];
   questions: any[];

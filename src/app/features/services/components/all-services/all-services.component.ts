@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ChangeDetectorRef, HostListener } from '@angular/core';
 
 import { EpcServiceService } from '../../epc-service.service';
-import { Service, PageParam, SEO } from 'src/app/core/interfaces';
+import { Service, PageParam, SEO, Breadcrumb } from 'src/app/core/interfaces';
 import { JdCategoryService } from 'src/app/core/services';
 import { HomeService } from 'src/app/features/home/home.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -17,6 +17,17 @@ import { SeoService } from 'src/app/core/services/seo.service';
   styleUrls: ['./all-services.component.scss']
 })
 export class AllServicesComponent implements OnInit, AfterViewInit {
+  breadcrumbLinks: Breadcrumb[] = [
+    {
+      text: 'Home',
+      link: '/'
+    },
+    {
+      text: 'Services',
+      link: '/services'
+    }
+  ];
+
   services: Service[] = [];
   allService: Service[] = [];
   pageServices: Service[] = [];
@@ -34,6 +45,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   currentUrl: string;
   whatsappUrl;
   verfiedCheck: boolean;
+  selectedCategory: string;
+
 
   constructor(public ecpService: EpcServiceService,
     public JDcategory: JdCategoryService,
@@ -61,6 +74,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   @HostListener('window:click', ['$event.target'])
   clear() {
     this.autocompleteFields = [];
+    this.selectedValue = "";
   }
 
   ngOnInit() {
@@ -111,6 +125,9 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   }
 
   getCategoryServices(category, catId) {
+    if (catId) {
+      this.selectedCategory = category;
+    }
     this.isLoading = true;
     const param: PageParam = {
       p: 0,
@@ -128,24 +145,26 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
           this.maxPages = Math.round(this.services.length / this.pageSize);
           this.verfiedCheck = false;
           this.isLoading = false;
-          this.searchPageParam.term = category;
+          // this.searchPageParam.term = category;
         }
       },
       error => {
         this.services = [];
         this.allService = [];
         this.pageServices = [];
-        this.searchPageParam.term = category;
+        // this.searchPageParam.term = category;
         this.isLoading = false;
       });
   }
 
   onCategoryChanged(category, catId) {
+    this.searchPageParam.term = '';
     this.router.navigate(['services/all'], { queryParams: { category: category, catid: catId } });
   }
 
   clearSelection() {
-    this.searchPageParam.term = '';
+    this.selectedCategory = '';
+    // this.searchPageParam.term = '';
     this.router.navigateByUrl('services/all');
   }
 
@@ -179,29 +198,38 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
             return true;
           }
         });
+
+        if (service.hasOwnProperty('basicProfileInfo')) {
+          this.router.navigate([`/services/${service.basicProfileInfo.firstName}/${service.id}/${true}`]);
+        } else {
+          this.router.navigate([`/services/${service.name}/${service.docid}/${false}`]);
+        }
+
       } else {
-        service = this.autocompleteFields.find(service => {
-          if (service.name && service.name == field) {
-            return true
-          } else if (service.basicProfileInfo && service.basicProfileInfo.firstName == field) {
-            return true;
-          }
-        });
+        this.selectedCategory = '';
+        this.getCategoryServices(field, 0);
       }
+      this.selectedValue = "";
+      this.autocompleteFields = [];
+    }
+  }
+
+  onSearchClick(service: Service) {
+    if (service) {
+      // let service: Service;
+      // service = this.autocompleteFields.find(service => {
+      //   if (service.name && service.name == field) {
+      //     return true
+      //   } else if (service.basicProfileInfo && service.basicProfileInfo.firstName == field) {
+      //     return true;
+      //   }
+      // });
 
       if (service.hasOwnProperty('basicProfileInfo')) {
         this.router.navigate([`/services/${service.basicProfileInfo.firstName}/${service.id}/${true}`]);
       } else {
         this.router.navigate([`/services/${service.name}/${service.docid}/${false}`]);
       }
-
-      // this.searchPageParam.term = field;
-
-
-      // this.onCategoryChanged(this.searchPageParam.term, 0);
-      // this.searchPageParam.term = "";
-      this.selectedValue = "";
-      this.autocompleteFields = [];
     }
   }
 

@@ -1,0 +1,15 @@
+.uk-breadcrumb 
+{
+    font-family:"HKGroteskRegular";
+    & > :nth-child(n+2):not(.uk-first-column)::before{
+        content: ">";
+        margin: 0 5px;
+        color:#999;
+    } 
+    
+    & > * > *{
+        
+        font-size: 18px;
+        color: #1A73E8;
+    }
+}

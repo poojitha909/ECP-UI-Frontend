@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
-import {ProductService} from '../../services/products.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ProductService } from '../../services/products.service';
+import { Breadcrumb } from 'src/app/core/interfaces';
 
 @Component({
   selector: 'app-all-products',
@@ -8,6 +9,17 @@ import {ProductService} from '../../services/products.service';
   styleUrls: ['./all-products.component.scss']
 })
 export class AllProductsComponent implements OnInit, OnDestroy {
+
+  breadcrumbLinks: Breadcrumb[] = [
+    {
+      text: 'Home',
+      link: '/'
+    },
+    {
+      text: 'Products',
+      link: '/products'
+    }
+  ];
 
   showReset: boolean;
   productsList: any[];
@@ -18,11 +30,11 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     searchTxt: string,
     productCategory: string
   };
-  
+
   paramsSubs: any;
   totalRecords: number;
-  slideConfig = {"slidesToShow": 3, "slidesToScroll": 1};
-  constructor(private route:ActivatedRoute, private router: Router, private productService: ProductService) { }
+  slideConfig = { "slidesToShow": 3, "slidesToScroll": 1 };
+  constructor(private route: ActivatedRoute, private router: Router, private productService: ProductService) { }
 
   ngOnInit() {
     this.searchParams = {
@@ -33,22 +45,21 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     }
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
-    }); 
+    });
   }
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.paramsSubs.unsubscribe();
   }
-  
-  initiate(){
+
+  initiate() {
     this.searchParams = {
       p: 0,
       s: 10,
       searchTxt: "",
       productCategory: ""
     }
-    
+
     this.totalRecords = 0;
-    console.log(this.route.snapshot.queryParams);
     if(this.route.snapshot.queryParams['searchTxt'] !== undefined){
       this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
     }
@@ -56,10 +67,10 @@ export class AllProductsComponent implements OnInit, OnDestroy {
       this.searchParams.productCategory = this.route.snapshot.queryParams['productCategory'];
     }
     this.onSearch();
-    this.productService.getCategoryList().subscribe( (response:any) =>{
+    this.productService.getCategoryList().subscribe((response: any) => {
       const data = response.data;
       this.catsList = [];
-      if(data.content){
+      if (data.content) {
         this.catsList = data.content;
       }
     });
@@ -70,18 +81,18 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     this.onSearch()
   }
 
-  showProducts(){
-    this.productService.searchProducts(this.searchParams).subscribe( (response:any) =>{
+  showProducts() {
+    this.productService.searchProducts(this.searchParams).subscribe((response: any) => {
       const data = response.data;
       this.productsList = [];
-      if(data.content){
+      if (data.content) {
         this.productsList = data.content;
         this.totalRecords = data.total;
       }
     });
   }
 
-  clearSelection(){
+  clearSelection() {
     this.searchParams.productCategory = '';
     this.router.navigateByUrl('products/all');
   }
@@ -98,20 +109,20 @@ export class AllProductsComponent implements OnInit, OnDestroy {
       this.showReset = false;
     }
     this.searchParams.searchTxt = value;
-    if(event.key === "Enter"){
-      this.onSearch();    
+    if (event.key === "Enter") {
+      this.onSearch();
     }
   }
 
   resetSearch(event: any) {
-    if(event.clientX!=0){ // this is to make sure it is an event not raise by hitting enter key
+    if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
       this.searchParams.searchTxt = "";
       this.showReset = false;
       this.onSearch()
     }
   }
 
-  
+
   onSearch() {
     this.showProducts();
   }

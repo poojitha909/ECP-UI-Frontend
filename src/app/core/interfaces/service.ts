@@ -194,8 +194,8 @@ export interface DBReviews {
     serviceId?: string;
     rating?: number;
     review?: string;
-    likeCount?: any;
-    unLikeCount?: any;
+    likeCount?: string[];
+    unLikeCount?: string[];
     status?: number;
     userName?: string;
     parentReviewId?: any;
@@ -209,4 +209,9 @@ export interface SEO {
     description: string;
     author: string;
     image: string;
+}
+
+export interface Breadcrumb {
+    text: string;
+    link: string | any[];
 }

@@ -1,12 +1,13 @@
 <div class="discussion-detail" *ngIf="discussion!=undefined && discussion.id != ''">
     <!-- Bread crumbs Start -->
     <div class="breadcrumbs">
-        <ul class="uk-breadcrumb">
+        <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
+        <!-- <ul class="uk-breadcrumb">
             <li routerLink="/" class="fa fa-angle-right">Home</li>
             <li routerLink="/community" class="fa fa-angle-right">Community</li>
-            <li routerLink="/community/discussions" class="fa fa-angle-right">All Discussions</li>
+            <li routerLink="/community/discussions" class="fa fa-angle-right">All Articles & Discussions</li>
             <li class="fa fa-angle-right" *ngIf="category" [routerLink]="['/community/discussions',category]">{{categoryName}}</li>
-        </ul>
+        </ul> -->
     </div>
     <!-- Bread crumbs End -->
     <div class="uk-container">
@@ -15,7 +16,8 @@
         <div class="uk-grid uk-grid-large">
             <div class="uk-width-1-3@m">
                 <div class="category-box top">
-                    <div class="img-container" *ngIf="discussion.userProfile && discussion.userProfile.basicProfileInfo && discussion.userProfile.basicProfileInfo.profileImage && discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage">
+                    <div class="img-container"
+                        *ngIf="discussion.userProfile && discussion.userProfile.basicProfileInfo && discussion.userProfile.basicProfileInfo.profileImage && discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage">
                         <img class="user" src="{{discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage}}">
                     </div>
                     <div class="heading2">
@@ -24,17 +26,20 @@
                 </div>
                 <div class="m-t-40 category-box">
                     <div class="m-b-20">
-                        <a href="" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a> <a> Share via
-                        Whatsapp</a>
+                        <a href="" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
+                        <a> Share via
+                            Whatsapp</a>
                     </div>
-            
+
                     <div class="m-b-20">
-                        <a href="" class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail"> </a> <a> Share via Email</a>
+                        <a href="" class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail"> </a> <a> Share
+                            via Email</a>
                     </div>
-            
+
                     <div>
-                        <a href="" class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a> Share via
-                        Facebook</a>
+                        <a href="" class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a>
+                            Share via
+                            Facebook</a>
                     </div>
                 </div>
             </div>
@@ -43,7 +48,7 @@
                     <div class="uk-card-body">
                         <div class="reply_reply" style="background-color: #FFF" *ngIf="replyParentText!=''">
                             <div class="reply_reply_inner">
-                                <b>{{replyParentUser}}</b><br/>
+                                <b>{{replyParentUser}}</b><br />
                                 {{replyParentText}}
                             </div>
                         </div>
@@ -52,7 +57,8 @@
                     </div>
                     <div class="uk-card-footer">
                         <div class="uk-flex uk-flex-right">
-                            <button class="uk-button uk-button-primary" (click)="addComment()">{{!!user ? 'Submit Comment' : 'Signin to Comment'}}</button>
+                            <button class="uk-button uk-button-primary"
+                                (click)="addComment()">{{!!user ? 'Submit Comment' : 'Signin to Comment'}}</button>
                         </div>
                     </div>
                 </div>
@@ -60,12 +66,15 @@
                     <div class="uk-card-header">
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-auto">
-                                <img class="uk-border-circle" *ngIf="discussion.userProfile && discussion.userProfile.basicProfileInfo && discussion.userProfile.basicProfileInfo.profileImage && discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage" 
-                                    width="40" height="40" src="{{discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage}}">
+                                <img class="uk-border-circle"
+                                    *ngIf="discussion.userProfile && discussion.userProfile.basicProfileInfo && discussion.userProfile.basicProfileInfo.profileImage && discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage"
+                                    width="40" height="40"
+                                    src="{{discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage}}">
                             </div>
                             <div class="uk-width-expand">
                                 <h3 class="uk-card-title uk-margin-remove-bottom">{{discussion.username}}</h3>
-                                <p class="uk-text-meta uk-margin-remove-top" *ngIf="discussion.userProfile"> Joined: {{ discussion.userProfile.createdAt | date:"MMM yyyy" }}</p>
+                                <p class="uk-text-meta uk-margin-remove-top" *ngIf="discussion.userProfile"> Joined:
+                                    {{ discussion.userProfile.createdAt | date:"MMM yyyy" }}</p>
                             </div>
                             <div class="uk-width-auto">
                                 <p class="uk-text-meta">{{ discussion.createdAt | timeago }}</p>
@@ -77,10 +86,12 @@
                     <div class="uk-card-footer">
                         <div class="uk-grid-collapse uk-child-width-expand@s" uk-grid>
                             <div class="like-container">
-                                <img src="/assets/images/like-outline.svg" (click)="likeDiscussion()"> <span class="like" (click)="likeDiscussion()">{{discussion.aggrLikeCount}}</span>
+                                <img src="/assets/images/like-outline.svg" (click)="likeDiscussion()"> <span
+                                    class="like" (click)="likeDiscussion()">{{discussion.aggrLikeCount}}</span>
                             </div>
                             <div class="reply-container" (click)="setReplyId('','','')">
-                                <img src="/assets/images/reply.svg"> <label class="reply" for="commentarea"> Reply</label>
+                                <img src="/assets/images/reply.svg"> <label class="reply" for="commentarea">
+                                    Reply</label>
                             </div>
                         </div>
                     </div>
@@ -89,12 +100,15 @@
                     <div class="uk-card-header">
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-auto">
-                                <img class="uk-border-circle" *ngIf="reply.userProfile && reply.userProfile.basicProfileInfo && reply.userProfile.basicProfileInfo.profileImage && reply.userProfile.basicProfileInfo.profileImage.thumbnailImage" 
-                                    width="40" height="40" src="{{reply.userProfile.basicProfileInfo.profileImage.thumbnailImage}}">
+                                <img class="uk-border-circle"
+                                    *ngIf="reply.userProfile && reply.userProfile.basicProfileInfo && reply.userProfile.basicProfileInfo.profileImage && reply.userProfile.basicProfileInfo.profileImage.thumbnailImage"
+                                    width="40" height="40"
+                                    src="{{reply.userProfile.basicProfileInfo.profileImage.thumbnailImage}}">
                             </div>
                             <div class="uk-width-expand">
                                 <h3 class="uk-card-title uk-margin-remove-bottom">{{reply.userName}}</h3>
-                                <p class="uk-text-meta uk-margin-remove-top" *ngIf="reply.userProfile"> Joined: {{ reply.userProfile.createdAt | date:"MMM yyyy" }}</p>
+                                <p class="uk-text-meta uk-margin-remove-top" *ngIf="reply.userProfile"> Joined:
+                                    {{ reply.userProfile.createdAt | date:"MMM yyyy" }}</p>
                             </div>
                             <div class="uk-width-auto">
                                 <p class="uk-text-meta">{{ reply.createdAt | timeago }}</p>
@@ -102,22 +116,24 @@
                         </div>
                     </div>
                     <div class="uk-card-body">
-                    <div class="reply_reply" *ngIf="reply.parentText!=''">
-                        <div class="reply_reply_inner">
-                            <b>{{reply.parentUser}}</b><br/>
-                            {{reply.parentText}}
+                        <div class="reply_reply" *ngIf="reply.parentText!=''">
+                            <div class="reply_reply_inner">
+                                <b>{{reply.parentUser}}</b><br />
+                                {{reply.parentText}}
+                            </div>
                         </div>
-                    </div>
-                    <div [innerHTML]="reply.text">
-                    </div>
+                        <div [innerHTML]="reply.text">
+                        </div>
                     </div>
                     <div class="uk-card-footer">
                         <div class="uk-grid-collapse uk-child-width-expand@s" uk-grid>
                             <div class="like-container">
-                                <img src="/assets/images/like-outline.svg" (click)="likeReply(reply)"> <span class="like" (click)="likeReply(reply)">{{reply.likeCount}}</span>
+                                <img src="/assets/images/like-outline.svg" (click)="likeReply(reply)"> <span
+                                    class="like" (click)="likeReply(reply)">{{reply.likeCount}}</span>
                             </div>
                             <div class="reply-container" (click)="setReplyId(reply.id,reply.userName,reply.text)">
-                                <img src="/assets/images/reply.svg"> <label class="reply" for="commentarea"> Reply</label>
+                                <img src="/assets/images/reply.svg"> <label class="reply" for="commentarea">
+                                    Reply</label>
                             </div>
                         </div>
                     </div>

@@ -245,6 +245,7 @@ export class ServiceDetailComponent implements OnInit {
       response => {
         if (response) {
           review = response;
+          console.log(this.dbReview)
         }
       },
       error => {

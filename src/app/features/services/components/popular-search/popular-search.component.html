@@ -3,7 +3,7 @@
     <p>Popular Services Categories</p>
     <div class="uk-child-width-1-3@s uk-grid-match" uk-grid>
       <div>
-        <div class="uk-card uk-card-default card-border">
+        <div class="uk-card uk-card-default card-border cursor" [routerLink]="['/services/all']" [queryParams]="{ category: 'Patient Care Taker Services', catid:'12087781'}">
           <div class="uk-card-media-top bg-card-blue card-border">
             <div class="p-40 uk-text-center">
               <fa-icon icon="user-alt" [style]="{'margin-right':'40px'}" size="3x"></fa-icon>
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div>
-        <div class="uk-card uk-card-default card-border">
+        <div class="uk-card uk-card-default card-border cursor" [routerLink]="['/services/all']" [queryParams]="{ category: 'Home Nursing Services',catid:'11275078'}">
           <div class="uk-card-media-top bg-card-blue card-border">
             <div class="p-40 uk-text-center">
               <fa-icon icon="hand-holding-heart" size="3x"></fa-icon>
@@ -32,7 +32,7 @@
         </div>
       </div>
       <div>
-        <div class="uk-card uk-card-default card-border">
+        <div class="uk-card uk-card-default card-border cursor" [routerLink]="['/services/all']" [queryParams]="{ category: 'Clinics',catid:'10101647'}">
           <div class="uk-card-media-top bg-card-blue card-border">
             <div class="p-40 uk-text-center">
               <fa-icon icon="user-md" [style]="{'margin-right':'40px'}" size="3x"></fa-icon>

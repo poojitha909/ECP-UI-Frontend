@@ -17,3 +17,9 @@
 .cursor{
     cursor: pointer;
 }
+.uk-card-body .uk-grid{
+    margin-left: -20px;
+  }
+  .uk-card-body .uk-grid > * {
+    padding-left: 20px;
+  }

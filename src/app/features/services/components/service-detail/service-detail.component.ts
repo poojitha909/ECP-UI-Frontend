@@ -66,6 +66,14 @@ export class ServiceDetailComponent implements OnInit {
     public sanitizer: DomSanitizer,
     private seoService: SeoService
   ) {
+
+    if (this.ecpService.searchedService && this.ecpService.searchCatID) {
+
+      this.breadcrumbLinks[2].queryParams = { category: this.ecpService.searchedService, catid: this.ecpService.searchCatID };
+    } else if (this.ecpService.searchedService) {
+      this.breadcrumbLinks[2].queryParams = { category: this.ecpService.searchedService };
+    }
+
     this.service = this.route.snapshot.data.detail;
     this.reviewForm = this.fb.group({
       serviceId: [""],

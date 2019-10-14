@@ -95,7 +95,14 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
         const queryCategory = value.get("category");
         const catId = value.get("catid");
         if (queryCategory) {
-          catId ? this.getCategoryServices(queryCategory, catId) : this.getCategoryServices(queryCategory, 0);
+          this.ecpService.searchedService = queryCategory;
+          if (catId) {
+            this.ecpService.searchCatID = catId;
+            this.getCategoryServices(queryCategory, catId);
+          } else {
+            this.ecpService.searchCatID = null;
+            this.getCategoryServices(queryCategory, 0);
+          }
         } else {
           this.getAllService();
         }
@@ -105,6 +112,9 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
 
   getAllService() {
     this.isLoading = true;
+    this.ecpService.searchedService = null;
+    this.ecpService.searchCatID = null;
+
     this.ecpService.getAllServices().subscribe(
       response => {
         if (response) {
@@ -113,7 +123,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
           this.maxPages = Math.round(this.services.length / this.pageSize);
           this.verfiedCheck = false;
           this.isLoading = false;
-          this.router.navigateByUrl('services/all');
+          // this.router.navigateByUrl('services/all');
         }
       },
       error => {
@@ -127,6 +137,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   getCategoryServices(category, catId) {
     if (catId) {
       this.selectedCategory = category;
+    } else {
+      this.selectedCategory = '';
     }
     this.isLoading = true;
     const param: PageParam = {
@@ -206,8 +218,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
         }
 
       } else {
-        this.selectedCategory = '';
-        this.getCategoryServices(field, 0);
+        this.router.navigate(['services/all'], { queryParams: { category: field } });
+        // this.getCategoryServices(field, 0);
       }
       this.selectedValue = "";
       this.autocompleteFields = [];

@@ -11,6 +11,9 @@ import { UserProfile, DBReviews } from 'src/app/core/interfaces';
 })
 export class EpcServiceService {
 
+  searchedService: string;
+  searchCatID: string;
+  
   serviceParam: JDserviceParam = {
     max: 50,
     pageNo: 1

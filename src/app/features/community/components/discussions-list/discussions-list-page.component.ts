@@ -58,9 +58,8 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
     this.discussionsList = [];
     this.categoryList = null;
     this.selCategory = "";
-
     this.breadcrumbLinks = this.breadcrumbLinks.filter(val => val.link !== '/community/discussions');
-    if(this.route.snapshot.queryParams['category']){
+    if (this.route.snapshot.queryParams['category']) {
       this.breadcrumbLinks.push({
         text: 'All Articles & Discussions',
         link: '/community/discussions'

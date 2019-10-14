@@ -1,19 +1,11 @@
 @import "../../../../../assets/css/variables.scss";
 
-.uk-breadcrumb 
-{
-    font-family:"HKGroteskRegular";
-    & > :nth-child(n+2):not(.uk-first-column)::before{
-        content: ">";
-        margin: 0 5px;
-        color: #000;
-    } 
-    
-    & > * > *{
-        
-        font-size: 18px;
-        color: #1A73E8;
-    }
+.m-t-b-0 {
+    margin: 0;
+    padding: 0;
+}
+.breadcrumbs{
+    margin-top:20px;
 }
 h3{
     margin: 0px;

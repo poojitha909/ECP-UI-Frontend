@@ -244,8 +244,8 @@ export class ServiceDetailComponent implements OnInit {
     this.ecpService.likeUnlikeReview(review.id, like).subscribe(
       response => {
         if (response) {
-          review = response;
-          console.log(this.dbReview)
+          const index = this.dbReview.findIndex(val => val.id === review.id);
+          this.dbReview[index] = response;
         }
       },
       error => {

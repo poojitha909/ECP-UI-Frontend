@@ -127,7 +127,8 @@ export class DiscussionDetailPageComponent implements OnInit {
           this.categoryName = response[0].displayMenuName;
           this.breadcrumbLinks.push({
             text: this.categoryName,
-            link: ['/community/discussions', { category: this.category }]
+            link: ['/community/discussions'],
+            queryParams: { category: this.category }
           });
         }
       });

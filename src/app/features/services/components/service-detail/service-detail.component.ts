@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
+import { faLeaf } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -259,6 +260,17 @@ export class ServiceDetailComponent implements OnInit {
       error => {
         console.log(error);
       });
+  }
+
+  userUpvoted(likeCount): boolean {
+    if (likeCount && this.auth.user) {
+      const userId = this.auth.user.id;
+      const index = likeCount.findIndex(val => val === userId);
+      if (index !== -1) {
+        return true;
+      }
+    }
+    return false;
   }
 
 }

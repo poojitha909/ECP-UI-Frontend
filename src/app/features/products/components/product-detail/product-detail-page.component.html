@@ -77,12 +77,12 @@
                     <div class="uk-card-body">
                         <div uk-grid>
                             <div class="uk-width-1-2@m">
-                                <span class="p-b-5">Username</span>
+                                <span class="p-b-5">Username<span class="required">*</span></span>
                                 <input type="text" class="review-input" id="prod_username" name="prod_username"
                                     [(ngModel)]="username" placeholder="Enter your name" />
                             </div>
                             <div class="uk-width-1-2@m">
-                                <span class="p-b-5">Your Rating</span>
+                                <span class="p-b-5">Your Rating<span class="required">*</span></span>
                                 <select class="review-input" id="prod_rating" name="prod_rating" [(ngModel)]="rating"
                                     placeholder="Enter your name">
                                     <option value="5">5 Star</option>
@@ -94,7 +94,7 @@
                             </div>
                         </div>
                         <div>
-                            <span class="p-b-5">Your Review</span>
+                            <span class="p-b-5">Your Review<span class="required">*</span></span>
                             <textarea id="commentarea" name="commentarea" [(ngModel)]="commentTxt"
                                 placeholder="Enter your review here"></textarea>
                         </div>

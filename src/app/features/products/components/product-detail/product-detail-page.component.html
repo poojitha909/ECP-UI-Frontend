@@ -70,21 +70,32 @@
                     </table>
                 </div>
                 <hr />
+                <form [formGroup]="reviewForm" class="uk-form">
                 <div class="uk-card uk-card-default comment">
                     <div class="uk-card-header">
                         <h3>Write a Review</h3>
                     </div>
                     <div class="uk-card-body">
+                        <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
+                            <p>{{ successMessage }}</p>
+                        </div>
                         <div uk-grid>
                             <div class="uk-width-1-2@m">
-                                <span class="p-b-5">Username<span class="required">*</span></span>
-                                <input type="text" class="review-input" id="prod_username" name="prod_username"
-                                    [(ngModel)]="username" placeholder="Enter your name" />
+                                <span 
+                                    [ngClass]="{'uk-text-danger' : formControl.username.invalid && ( formControl.username.dirty ||  formControl.username.touched) }"
+                                    class="p-b-5">Username<span class="required">*</span></span>
+                                <input type="text" class="review-input" formControlName="username"
+                                    [ngClass]="{'uk-form-danger' : formControl.username.invalid && ( formControl.username.dirty ||  formControl.username.touched) }"
+                                    class="uk-input"
+                                    placeholder="Enter your name" />
                             </div>
                             <div class="uk-width-1-2@m">
-                                <span class="p-b-5">Your Rating<span class="required">*</span></span>
-                                <select class="review-input" id="prod_rating" name="prod_rating" [(ngModel)]="rating"
-                                    placeholder="Enter your name">
+                                <span 
+                                    [ngClass]="{'uk-text-danger' : formControl.rating.invalid && ( formControl.rating.dirty ||  formControl.rating.touched) }"
+                                    class="p-b-5">Your Rating<span class="required">*</span></span>
+                                <select formControlName="rating"
+                                    [ngClass]="{'uk-form-danger' : formControl.rating.invalid && ( formControl.rating.dirty ||  formControl.rating.touched) }"
+                                    class="uk-select" placeholder="Enter your rating">
                                     <option value="5">5 Star</option>
                                     <option value="4">4 Star</option>
                                     <option value="3">3 Star</option>
@@ -94,8 +105,12 @@
                             </div>
                         </div>
                         <div>
-                            <span class="p-b-5">Your Review<span class="required">*</span></span>
-                            <textarea id="commentarea" name="commentarea" [(ngModel)]="commentTxt"
+                            <span 
+                                [ngClass]="{'uk-text-danger' : formControl.commentTxt.invalid && ( formControl.commentTxt.dirty ||  formControl.commentTxt.touched) }"
+                                class="p-b-5">Your Review<span class="required">*</span></span>
+                            <textarea formControlName="commentTxt"
+                                class="uk-textarea"
+                                [ngClass]="{'uk-form-danger' : formControl.commentTxt.invalid && ( formControl.commentTxt.dirty ||  formControl.commentTxt.touched) }"
                                 placeholder="Enter your review here"></textarea>
                         </div>
                     </div>
@@ -106,6 +121,7 @@
                         </div>
                     </div>
                 </div>
+                </form>
                 <div class="reviews" *ngIf="reviews!==undefined">
                     <h2 class="heading2">Reviews ({{reviews.length}})</h2>
                     <hr />

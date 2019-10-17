@@ -5,6 +5,7 @@ import { ProductService } from '../../services/products.service';
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
 import { AuthService } from "../../../../core/auth/services/auth.service";
 import { Breadcrumb } from 'src/app/core/interfaces';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-product-detail',
@@ -31,25 +32,31 @@ export class ProductDetailPageComponent implements OnInit {
   productId: string;
   product: any;
   user: any;
-  commentTxt: string;
-  rating: number;
-  username: string;
   reviews: any[];
   reviewId: string;
   replyParentUser: string;
   replyParentText: string;
   activeSlideId: string;
+  reviewForm: FormGroup;
+  successMessage: String;
 
-  constructor(private router: Router, private route: ActivatedRoute, private productService: ProductService, private store: StorageHelperService, private authService: AuthService) { }
+  constructor(private router: Router, private route: ActivatedRoute, 
+    private productService: ProductService, private store: StorageHelperService,
+    private fb: FormBuilder, private authService: AuthService) { }
 
   ngOnInit() {
     this.productId = this.route.snapshot.params['id'];
+    this.successMessage = "";
     this.getProduct()
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
     }
-
+    this.reviewForm = this.fb.group({
+      commentTxt: ["",Validators.required],
+      rating: ["",Validators.required],
+      username: ["",Validators.required]
+    });
   }
 
   getProduct() {
@@ -71,23 +78,27 @@ export class ProductDetailPageComponent implements OnInit {
   }
 
   addComment() {
+    Object.keys(this.reviewForm.controls).forEach(field => {
+      const control = this.reviewForm.get(field);
+      control.markAsTouched({ onlySelf: true });
+    });
+    let review = {...this.reviewForm.value};
+    if (!this.reviewForm.valid) {
+      return;
+    }
     if (!this.user) {
-      this.store.store("new-p-comment", JSON.stringify({ productId: this.productId, commentTxt: this.commentTxt, username: this.username, rating: this.rating }));
+      this.store.store("new-p-comment", JSON.stringify({ productId: this.productId, commentTxt: review.commentTxt, username: review.username, rating: review.rating }));
       this.authService.redirectUrl = "product/" + this.productId;
       this.router.navigate(['/user/signin']);
       return;
     }
-    if (this.commentTxt != "") {
-      this.productService.addComment(this.productId, this.commentTxt, this.username, this.rating).subscribe((response: any) => {
-        if (response.data) {
-          this.commentTxt = "";
-          this.getReviews();
-        }
-      });
-    }
-    else {
-      alert("Please write comment first!");
-    }
+    this.productService.addComment(this.productId, review.commentTxt, review.username, review.rating).subscribe((response: any) => {
+      if (response.data) {
+        this.successMessage = "Review Submitted successfully.";
+        this.reviewForm.reset();
+        this.getReviews();
+      }
+    });
   }
 
   likeReply(reply) {
@@ -110,6 +121,9 @@ export class ProductDetailPageComponent implements OnInit {
 
   setActiveSlide(id: number) {
     this.activeSlideId = "ngb-slide-" + id;
+  }
+  get formControl() {
+    return this.reviewForm.controls;
   }
 
 }

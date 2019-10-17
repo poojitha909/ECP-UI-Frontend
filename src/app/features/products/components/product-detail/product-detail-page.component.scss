@@ -72,7 +72,7 @@
     span{
       font-size: $font-small;
       padding: 15px 0 0 0;
-      display: block;
+      display: inline-block;
     }
     .uk-card-body{
       padding-top: 20px;
@@ -80,8 +80,6 @@
     textarea{
       width: 100%;
       height: 100px;
-      border-radius: 5px;
-      border:1px solid #D7E0EF; 
       margin-top: 10px;
     }
     button{
@@ -139,6 +137,7 @@
     padding: 3px 5px;
     background: #fff;
   }
+  
   
   .comment.uk-card-default{
     margin-bottom: 20px;

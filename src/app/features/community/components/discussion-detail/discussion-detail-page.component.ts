@@ -6,6 +6,7 @@ import { MenuService } from '../../services/menu.service';
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
 import { AuthService } from "../../../../core/auth/services/auth.service";
 import { Breadcrumb } from 'src/app/core/interfaces';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-discussion-detail',
@@ -17,7 +18,6 @@ export class DiscussionDetailPageComponent implements OnInit {
   breadcrumbLinks: Breadcrumb[];
 
   discussionId: string;
-  commentTxt: string;
   category: string;
   categoryName: string;
   discussion: any;
@@ -27,11 +27,17 @@ export class DiscussionDetailPageComponent implements OnInit {
   replyId: string;
   replyParentUser: string;
   replyParentText: string;
+  replyForm: FormGroup;
+  successMessage: String;
 
-  constructor(private router: Router, private route: ActivatedRoute, private discussionService: DiscussionService, private menuService: MenuService, private store: StorageHelperService, private authService: AuthService) { }
+  constructor(private router: Router, private route: ActivatedRoute, 
+    private discussionService: DiscussionService, private menuService: MenuService, 
+    private fb: FormBuilder, private store: StorageHelperService,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.discussionId = this.route.snapshot.params['id'];
+    this.successMessage = "";
     this.breadcrumbLinks = [
       {
         text: 'Home',
@@ -50,7 +56,6 @@ export class DiscussionDetailPageComponent implements OnInit {
     if (this.route.snapshot.params['category']) {
       this.category = this.route.snapshot.params['category'];
     }
-    this.commentTxt = "";
     this.replyId = "";
     this.replyParentText = "";
     this.replyParentUser = "";
@@ -62,32 +67,49 @@ export class DiscussionDetailPageComponent implements OnInit {
     if (comment) {
       comment = JSON.parse(comment);
       this.discussionId = comment.discussionId;
-      this.commentTxt = comment.commentTxt;
       this.category = comment.category;
+      this.replyId = comment.replyId;
+      this.replyParentText = comment.replyParentText;
+      this.replyParentUser = comment.replyParentUser;
       this.store.clear("new-d-comment");
     }
+    this.replyForm =  this.fb.group({
+      commentTxt: [ comment ? comment.commentTxt : "" ,Validators.required]
+    });
     this.getDiscussion();
   }
 
   addComment() {
+    Object.keys(this.replyForm.controls).forEach(field => {
+      const control = this.replyForm.get(field);
+      control.markAsTouched({ onlySelf: true });
+    });
+    let comment = {...this.replyForm.value};
+    if (!this.replyForm.valid) {
+      return;
+    }
     if (!this.user) {
-      this.store.store("new-d-comment", JSON.stringify({ discussionId: this.discussionId, commentTxt: this.commentTxt, category: this.category }));
+      this.store.store("new-d-comment", 
+      JSON.stringify({ 
+          discussionId: this.discussionId, 
+          category: this.category,
+          replyId: this.replyId,
+          replyParentText: this.replyParentText,
+          replyParentUser: this.replyParentUser,
+          commentTxt: comment.commentTxt
+         }));
       this.authService.redirectUrl = "community/discussion/" + this.discussionId + (this.category ? "/" + this.category : "");
       this.router.navigate(['/user/signin']);
       return;
     }
-    if (this.commentTxt != "") {
-      this.discussionService.addComment({ type: 0 }, this.discussionId, this.replyId, this.commentTxt).subscribe((response: any) => {
-        if (response.data.replies) {
-          this.commentTxt = "";
-          let replies = response.data.replies;
-          this.setReplies(replies);
-        }
-      });
-    }
-    else {
-      alert("Please write comment first!");
-    }
+    this.discussionService.addComment({ type: 0 }, this.discussionId, this.replyId, comment.commentTxt).subscribe((response: any) => {
+      if (response.data.replies) {
+        this.replyForm.reset();
+        this.successMessage = "Reply Submitted successfully.";
+        let replies = response.data.replies;
+        this.setReplies(replies);
+      }
+    });
   }
 
   recursiveReplies(reply, parentText, parentUser) {
@@ -162,5 +184,8 @@ export class DiscussionDetailPageComponent implements OnInit {
     this.replyId = id;
     this.replyParentUser = user;
     this.replyParentText = text;
+  }
+  get formControl() {
+    return this.replyForm.controls;
   }
 }

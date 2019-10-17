@@ -44,16 +44,24 @@
                 </div>
             </div>
             <div class="uk-width-2-3@m">
+                <form [formGroup]="replyForm" class="uk-form">
                 <div class="uk-card uk-card-default comment">
                     <div class="uk-card-body">
+                        <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
+                            <p>{{ successMessage }}</p>
+                        </div>
                         <div class="reply_reply" style="background-color: #FFF" *ngIf="replyParentText!=''">
                             <div class="reply_reply_inner">
                                 <b>{{replyParentUser}}</b><br />
                                 {{replyParentText}}
                             </div>
                         </div>
-                        <span class="p-b-5">Comment</span>
-                        <textarea id="commentarea" name="commentarea" [(ngModel)]="commentTxt"></textarea>
+                        <span 
+                            [ngClass]="{'uk-text-danger' : formControl.commentTxt.invalid && ( formControl.commentTxt.dirty ||  formControl.commentTxt.touched) }"
+                            class="p-b-5">Comment<span class="required">*</span></span>
+                        <textarea 
+                            [ngClass]="{'uk-form-danger' : formControl.commentTxt.invalid && ( formControl.commentTxt.dirty ||  formControl.commentTxt.touched) }"
+                            class="uk-textarea" formControlName="commentTxt"></textarea>
                     </div>
                     <div class="uk-card-footer">
                         <div class="uk-flex uk-flex-right">
@@ -62,6 +70,7 @@
                         </div>
                     </div>
                 </div>
+                </form>
                 <div class="uk-card uk-card-default">
                     <div class="uk-card-header">
                         <div class="uk-grid-small uk-flex-middle" uk-grid>

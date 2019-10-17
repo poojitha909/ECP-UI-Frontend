@@ -79,99 +79,116 @@
                 </div>
                 <hr />
                 <!-- OLD review Form -->
-                <!-- <div class="uk-card uk-card-default comment">
-                    <div class="uk-card-header">
-                        <h3>Write a Review</h3>
-                    </div>
-                    <div class="uk-card-body">
-                        <div uk-grid>
-                            <div class="uk-width-1-2@m">
-                                <span class="p-b-5">Username</span>
-                                <input type="text" class="review-input" id="prod_username" name="prod_username"
-                                    [(ngModel)]="username" placeholder="Enter your name" />
+<!-- 
+                <form [formGroup]="reviewForm" class="uk-form">
+                    <div class="uk-card uk-card-default comment">
+                        <div class="uk-card-header">
+                            <h3>Write a Review</h3>
+                        </div>
+                        <div class="uk-card-body">
+                            <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
+                                <p>{{ successMessage }}</p>
                             </div>
-                            <div class="uk-width-1-2@m">
-                                <span class="p-b-5">Your Rating</span>
-                                <select class="review-input" id="prod_rating" name="prod_rating" [(ngModel)]="rating"
-                                    placeholder="Enter your name">
-                                    <option value="5">5 Star</option>
-                                    <option value="4">4 Star</option>
-                                    <option value="3">3 Star</option>
-                                    <option value="2">2 Star</option>
-                                    <option value="1">1 Star</option>
-                                </select>
+                            <div uk-grid>
+                                <div class="uk-width-1-2@m">
+                                    <span
+                                        [ngClass]="{'uk-text-danger' : formControl.username.invalid && ( formControl.username.dirty ||  formControl.username.touched) }"
+                                        class="p-b-5">Username<span class="required">*</span></span>
+                                    <input type="text" class="review-input" formControlName="username"
+                                        [ngClass]="{'uk-form-danger' : formControl.username.invalid && ( formControl.username.dirty ||  formControl.username.touched) }"
+                                        class="uk-input" placeholder="Enter your name" />
+                                </div>
+                                <div class="uk-width-1-2@m">
+                                    <span
+                                        [ngClass]="{'uk-text-danger' : formControl.rating.invalid && ( formControl.rating.dirty ||  formControl.rating.touched) }"
+                                        class="p-b-5">Your Rating<span class="required">*</span></span>
+                                    <select formControlName="rating"
+                                        [ngClass]="{'uk-form-danger' : formControl.rating.invalid && ( formControl.rating.dirty ||  formControl.rating.touched) }"
+                                        class="uk-select" placeholder="Enter your rating">
+                                        <option value="5">5 Star</option>
+                                        <option value="4">4 Star</option>
+                                        <option value="3">3 Star</option>
+                                        <option value="2">2 Star</option>
+                                        <option value="1">1 Star</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <span
+                                    [ngClass]="{'uk-text-danger' : formControl.commentTxt.invalid && ( formControl.commentTxt.dirty ||  formControl.commentTxt.touched) }"
+                                    class="p-b-5">Your Review<span class="required">*</span></span>
+                                <textarea formControlName="commentTxt" class="uk-textarea"
+                                    [ngClass]="{'uk-form-danger' : formControl.commentTxt.invalid && ( formControl.commentTxt.dirty ||  formControl.commentTxt.touched) }"
+                                    placeholder="Enter your review here"></textarea>
                             </div>
                         </div>
-                        <div>
-                            <span class="p-b-5">Your Review</span>
-                            <textarea id="commentarea" name="commentarea" [(ngModel)]="commentTxt"
-                                placeholder="Enter your review here"></textarea>
+                        <div class="uk-card-footer">
+                            <div class="uk-flex uk-flex-right">
+                                <button class="uk-button uk-button-primary"
+                                    (click)="addComment()">{{ !!user ? 'Submit Review' : 'Signin to Review'}}</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="uk-card-footer">
-                        <div class="uk-flex uk-flex-right">
-                            <button class="uk-button uk-button-primary"
-                                (click)="addComment()">{{ !!user ? 'Submit Review' : 'Signin to Review'}}</button>
-                        </div>
-                    </div>
-                </div> -->
+                </form> -->
 
                 <!-- Write Review Form START-->
                 <div class="m-t-30">
 
                     <div class="category-box">
-                        <h1 class="font-regular-24 font-weight-600">Write a Review</h1>
-                        <hr />
-                        <form class="uk-form-stacked review-form">
-
-                            <div class="uk-child-width-1-2@s" uk-grid>
-                                <div>
-                                    <div class="uk-margin">
-                                        <label class="uk-form-label" for="form-stacked-text">Username<span
-                                                class="required">*</span></label>
-                                        <div class="uk-form-controls">
-                                            <input class="uk-input" id="form-stacked-text" name="prod_username"
-                                                [(ngModel)]="username" type="text" placeholder="Enter your name" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="uk-margin">
-                                        <label class="uk-form-label" for="form-stacked-select">Your Rating<span
-                                                class="required">*</span></label>
-                                        <div class="uk-form-controls">
-                                            <select class="uk-select" name="prod_rating" [(ngModel)]="rating"
-                                                id="form-stacked-select">
-                                                <option disabled selected hidden value="0">Select your rating</option>
-                                                <option value="90">5 Star</option>
-                                                <option value="80">4 Star</option>
-                                                <option value="60">3 Star</option>
-                                                <option value="40">2 Star</option>
-                                                <option value="20">1 Star</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
+                      <h1 class="font-regular-24 font-weight-600">Write a Review</h1>
+                      <hr />
+                      <!-- Success box START-->
+                      <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
+                        <p>{{ successMessage }}</p>
+                      </div>
+                      <!-- Success box END-->
+                      <form [formGroup]="reviewForm" (ngSubmit)="addComment()" class="uk-form-stacked review-form">
+            
+                        <div class="uk-child-width-1-2@s" uk-grid>
+                          <div>
                             <div class="uk-margin">
-                                <label class="uk-form-label" for="commentarea">Your Review<span
-                                        class="required">*</span></label>
-                                <div class="uk-form-controls">
-                                    <textarea name="commentarea" class="uk-input min-h-200" id="commentarea"
-                                        placeholder="Enter your review here" [(ngModel)]="commentTxt"></textarea>
-                                </div>
+                              <label class="uk-form-label" for="form-stacked-text">Username<span class="required">*</span></label>
+                              <div class="uk-form-controls">
+                                <input class="uk-input" id="form-stacked-text" formControlName="username" type="text"
+                                  placeholder="Enter your name">
+                              </div>
                             </div>
-
-                            <div class="uk-text-right">
-                                <button class="uk-button uk-button-default" type="button"
-                                    (click)="addComment()">{{ !!user ? 'Submit Review' : 'Signin to Review'}}</button>
+                          </div>
+                          <div>
+                            <div class="uk-margin">
+                              <label class="uk-form-label" for="form-stacked-select">Your Rating<span
+                                  class="required">*</span></label>
+                              <div class="uk-form-controls">
+                                <select class="uk-select" formControlName="rating" id="form-stacked-select">
+                                  <option disabled selected hidden value="0">Select your rating</option>
+                                  <option value="90">5 Star</option>
+                                  <option value="80">4 Star</option>
+                                  <option value="60">3 Star</option>
+                                  <option value="40">2 Star</option>
+                                  <option value="20">1 Star</option>
+                                </select>
+                              </div>
                             </div>
-                        </form>
+            
+                          </div>
+            
+                        </div>
+            
+                        <div class="uk-margin">
+                          <label class="uk-form-label" for="form-stacked-text">Your Review<span class="required">*</span></label>
+                          <div class="uk-form-controls">
+                            <textarea formControlName="commentTxt" class="uk-input min-h-200" id="form-stacked-text"
+                              placeholder="Enter your review here"></textarea>
+                          </div>
+                        </div>
+            
+                        <div class="uk-text-right">
+                          <button class="uk-button uk-button-default" type="submit"
+                            [disabled]="reviewForm.invalid">{{ !!user ? 'Submit Review' : 'Signin to Review'}}</button>
+                        </div>
+                      </form>
                     </div>
-                </div>
+                  </div>
                 <!-- Write Review Form END-->
 
                 <div class="reviews m-t-30" *ngIf="reviews!==undefined">

@@ -7,6 +7,7 @@ import { AuthService } from "../../../../core/auth/services/auth.service";
 import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-product-detail',
@@ -33,9 +34,6 @@ export class ProductDetailPageComponent implements OnInit {
   productId: string;
   product: any;
   user: any;
-  commentTxt: string;
-  rating: number;
-  username: string;
   reviews: any[];
   reviewId: string;
   replyParentUser: string;
@@ -52,10 +50,15 @@ export class ProductDetailPageComponent implements OnInit {
     private authService: AuthService,
     private seoService: SeoService,
     public sanitizer: DomSanitizer,
+    private fb: FormBuilder
   ) { }
+  reviewForm: FormGroup;
+  successMessage: String;
+
 
   ngOnInit() {
     this.productId = this.route.snapshot.params['id'];
+    this.successMessage = "";
     this.getProduct()
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
@@ -63,6 +66,11 @@ export class ProductDetailPageComponent implements OnInit {
     }
     this.currentUrl = window.location.href;
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
+    this.reviewForm = this.fb.group({
+      commentTxt: ["",Validators.required],
+      rating: ["",Validators.required],
+      username: ["",Validators.required]
+    });
   }
 
   getProduct() {
@@ -97,23 +105,27 @@ export class ProductDetailPageComponent implements OnInit {
   }
 
   addComment() {
+    Object.keys(this.reviewForm.controls).forEach(field => {
+      const control = this.reviewForm.get(field);
+      control.markAsTouched({ onlySelf: true });
+    });
+    let review = {...this.reviewForm.value};
+    if (!this.reviewForm.valid) {
+      return;
+    }
     if (!this.user) {
-      this.store.store("new-p-comment", JSON.stringify({ productId: this.productId, commentTxt: this.commentTxt, username: this.username, rating: this.rating }));
+      this.store.store("new-p-comment", JSON.stringify({ productId: this.productId, commentTxt: review.commentTxt, username: review.username, rating: review.rating }));
       this.authService.redirectUrl = "product/" + this.productId;
       this.router.navigate(['/user/signin']);
       return;
     }
-    if (this.commentTxt != "") {
-      this.productService.addComment(this.productId, this.commentTxt, this.username, this.rating).subscribe((response: any) => {
-        if (response.data) {
-          this.commentTxt = "";
-          this.getReviews();
-        }
-      });
-    }
-    else {
-      alert("Please write comment first!");
-    }
+    this.productService.addComment(this.productId, review.commentTxt, review.username, review.rating).subscribe((response: any) => {
+      if (response.data) {
+        this.successMessage = "Review Submitted successfully.";
+        this.reviewForm.reset();
+        this.getReviews();
+      }
+    });
   }
 
   likeReply(reply) {
@@ -136,6 +148,9 @@ export class ProductDetailPageComponent implements OnInit {
 
   setActiveSlide(id: number) {
     this.activeSlideId = "ngb-slide-" + id;
+  }
+  get formControl() {
+    return this.reviewForm.controls;
   }
 
 }

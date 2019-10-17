@@ -5,6 +5,8 @@ import { Router } from "@angular/router";
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
 import { AuthService } from "../../../../core/auth/services/auth.service";
 import { Breadcrumb } from 'src/app/core/interfaces';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+
 declare var UIKit;
 
 @Component({
@@ -28,40 +30,17 @@ export class EventCreatePageComponent implements OnInit {
     }
   ];
   categoryList: any[];
-  title: string;
-  date: string;
-  startTime: string;
-  duration: string;
-  description: string;
-  address: string;
-  landmark: string;
-  orgEmail: string;
-  orgPhone: string;
-  capacity: string;
-  entryFee: string;
-  eventType: string;
-  languages: string;
-  organiser: string;
+  eventForm: FormGroup;
+  successMessage: string;
   user: any;
 
-  constructor(private router: Router, private eventService: EventService, private menuService: MenuService, private store: StorageHelperService, private authService: AuthService) { }
+  constructor(private router: Router, private eventService: EventService, 
+    private menuService: MenuService, private store: StorageHelperService, 
+    private fb: FormBuilder, private authService: AuthService) { }
 
   ngOnInit() {
     this.categoryList = [];
-    this.title = "";
-    this.description = "";
-    this.date = "";
-    this.startTime = "";
-    this.duration = "";
-    this.address = "";
-    this.landmark = "";
-    this.orgEmail = "";
-    this.orgPhone = "";
-    this.capacity = "";
-    this.eventType = "";
-    this.entryFee = "";
-    this.languages = "";
-    this.organiser = "";
+    this.successMessage = "";
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
@@ -69,95 +48,66 @@ export class EventCreatePageComponent implements OnInit {
     let event = this.store.retrieve("new-event");
     if (event) {
       event = JSON.parse(event);
-      this.title = event.title;
-      this.date = event.date;
-      this.startTime = event.startTime;
-      this.duration = event.duration;
-      this.description = event.description;
-      this.address = event.address;
-      this.landmark = event.landmark;
-      this.orgEmail = event.orgEmail;
-      this.orgPhone = event.orgPhone;
-      this.capacity = event.capacity;
-      this.eventType = event.entryType;
-      this.entryFee = event.entryFee;
-      this.languages = "";
-      this.organiser = "";
       this.store.clear("new-event");
     }
+    this.eventForm = this.fb.group({
+      title:  [event ? event.title : "", Validators.required],
+      date:  [event ? event.date : "", Validators.required],
+      startTime:  [event ? event.startTime : "", Validators.required],
+      duration:  [event ? event.duration : "", Validators.required],
+      description:  [event ? event.description : "", Validators.required],
+      address:  [event ? event.address : "", Validators.required],
+      landmark:  [event ? event.landmark : "", Validators.required],
+      orgEmail:  [event ? event.orgEmail : "", [Validators.required,Validators.email]],
+      orgPhone:  [event ? event.orgPhone : "", [Validators.required,Validators.pattern(/^\+?\d{1,2}[- ]?\d{2}[- ]?\d{4}[- ]?\d{4}$/)] ],
+      capacity:  [event ? event.capacity : "", Validators.required],
+      eventType:  [event ? event.eventType : "", Validators.required],
+      entryFee:  [event ? event.entryFee : "", Validators.required],
+      languages:  [event ? event.languages : "", Validators.required],
+      organiser:  [event ? event.organiser : "", Validators.required]
+    });
+  }
+  
+  get formControl() {
+    return this.eventForm.controls;
   }
 
   onReset() {
-    this.title = "";
-    this.date = "";
-    this.startTime = "";
-    this.duration = "";
-    this.description = "";
-    this.address = "";
-    this.landmark = "";
-    this.orgEmail = "";
-    this.orgPhone = "";
-    this.capacity = "";
-    this.eventType = "";
-    this.entryFee = "";
-    this.languages = "";
-    this.organiser = "";
+    this.successMessage = "";
+    this.eventForm.reset();
     this.router.navigate(['/community/events']);
   }
 
   onSubmit() {
+    this.successMessage = "";
+    Object.keys(this.eventForm.controls).forEach(field => {
+      const control = this.eventForm.get(field);
+      control.markAsTouched({ onlySelf: true });
+    });
+    if (!this.eventForm.valid) {
+      return;
+    }
     if (!this.user) {
-
-      this.store.store("new-event", JSON.stringify(
-        {
-          title: this.title,
-          date: this.date,
-          startTime: this.startTime,
-          duration: this.duration,
-          description: this.description,
-          address: this.address,
-          landmark: this.landmark,
-          orgEmail: this.orgEmail,
-          orgPhone: this.orgPhone,
-          capacity: this.capacity,
-          entryType: this.eventType,
-          entryFee: this.entryFee,
-          languages: this.languages,
-          organiser: this.organiser,
-        }
-      ));
+      this.store.store("new-event", JSON.stringify( this.eventForm.value ));
       this.authService.redirectUrl = "/community/event/add";
       this.router.navigate(['/user/signin']);
       return;
     }
+    
+    let event = { ...this.eventForm.value };
+    event.datetime = event.date + "T" + event.startTime + "+05:30";
+    delete event.date;
+    delete event.startTime;
 
-    if (this.eventType != "" && this.title != "" && this.description != "") {
-      this.eventService.addEvents({
-        "title": this.title,
-        "datetime": this.date + "T" + this.startTime + "+05:30",
-        "duration": this.duration,
-        "description": this.description,
-        "capacity": this.capacity,
-        "entryFee": this.entryFee,
-        "eventType": this.eventType,
-        "status": 1,
-        "address": this.address,
-        "landmark": this.landmark,
-        "languages": this.languages,
-        "organiser": this.organiser,
-        "orgPhone": this.orgPhone,
-        "orgEmail": this.orgEmail
-      }).subscribe((response: any) => {
-        if (response.data.id != "") {
-          this.router.navigate(['/community/events']);
-        }
-        else {
-          alert("Oops! something wrong happen, please try again.");
-        }
-      });
-    }
-    else {
-      alert("All fields are required, please fill all fields.");
-    }
+    this.eventService.addEvents( event ).subscribe((response: any) => {
+      if (response.data.id != "") {
+        //this.router.navigate(['/community/events']);
+        this.eventForm.reset();
+        this.successMessage = "Event submittted successfully for review, once reviewed it will start appearing on site."
+      }
+      else {
+        alert("Oops! something wrong happen, please try again.");
+      }
+    });
   }
 }

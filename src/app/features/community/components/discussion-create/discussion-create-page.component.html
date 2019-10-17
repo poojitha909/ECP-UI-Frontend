@@ -11,26 +11,38 @@
     <div class="uk-container">
         <h2 class="heading">Submit an Article or Start a Discussion</h2>
         <hr/>
-        <form class="uk-form">
+        <form [formGroup]="discussForm" class="uk-form">
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Pick a Category</label>
+                <label 
+                    [ngClass]="{'uk-text-danger' : formControl.category.invalid && ( formControl.category.dirty ||  formControl.category.touched) }"
+                    class="uk-form-label" for="form-stacked-text">Pick a Category<span class="required">*</span></label>
                 <div class="uk-form-controls">
-                    <select class="uk-select" name="category" id="form-stacked-select" [ngModel]="selCategory" (change)="onCategorySelect($event.target.value)" >
+                    <select 
+                        [ngClass]="{'uk-form-danger' : formControl.category.invalid && ( formControl.category.dirty ||  formControl.category.touched) }"
+                        class="uk-select" formControlName="category" id="form-stacked-select">
                         <option value="">Select Category</option>
                         <option *ngFor="let cat of categoryList | keyvalue" value="{{cat.key}}">{{cat.value.label}}</option>
                     </select>
                 </div>
             </div>
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Title</label>
+                <label 
+                    [ngClass]="{'uk-text-danger' : formControl.title.invalid && ( formControl.title.dirty ||  formControl.title.touched) }"
+                    class="uk-form-label" for="form-stacked-text">Title<span class="required">*</span></label>
                 <div class="uk-form-controls">
-                    <input class="uk-input" name="title" id="form-stacked-text" type="text" [(ngModel)]="title" placeholder="Add an interesting title here!">
+                    <input 
+                        [ngClass]="{'uk-form-danger' : formControl.title.invalid && ( formControl.title.dirty ||  formControl.title.touched) }"
+                        class="uk-input" formControlName="title" id="form-stacked-text" type="text" placeholder="Add an interesting title here!">
                 </div>
             </div>
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Content</label>
+                <label 
+                    [ngClass]="{'uk-text-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
+                    class="uk-form-label" for="form-stacked-text">Content<span class="required">*</span></label>
                 <div class="uk-form-controls">
-                    <textarea class="uk-textarea" name="description" rows="5" [(ngModel)]="description" placeholder="Add your content here!"></textarea>
+                    <textarea 
+                        [ngClass]="{'uk-form-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
+                        class="uk-textarea" formControlName="description" rows="5" placeholder="Add your content here!"></textarea>
                 </div>
             </div>
             <div class="uk-margin">

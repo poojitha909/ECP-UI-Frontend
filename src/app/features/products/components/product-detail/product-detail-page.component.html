@@ -37,18 +37,26 @@
                 </div>
                 <div class="m-t-40 category-box">
                     <div class="m-b-20">
-                        <a href="" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
-                        <a> Share via
+                        <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon"
+                            uk-icon="whatsapp"> </a>
+                        <a [href]="whatsappUrl" class="social-link"> Share via
                             Whatsapp</a>
                     </div>
 
                     <div class="m-b-20">
-                        <a href="" class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail"> </a> <a> Share
+                        <a href="mailto:?subject=%0AThis%20is%20Product%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=Product:%20{{product.name}}%0AProduct%2DURL:%20{{currentUrl}}"
+                            class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail"> </a>
+                        <a class="social-link"
+                            href="mailto:?subject=%0AThis%20is%20Product%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=Product:%20{{product.name}}%0AProduct%2DURL:%20{{currentUrl}}">
+                            Share
                             via Email</a>
                     </div>
 
                     <div>
-                        <a href="" class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{product.name}}"
+                            class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a>
+                        <a class="social-link"
+                            href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{product.name}}">
                             Share via
                             Facebook</a>
                     </div>
@@ -70,7 +78,8 @@
                     </table>
                 </div>
                 <hr />
-                <div class="uk-card uk-card-default comment">
+                <!-- OLD review Form -->
+                <!-- <div class="uk-card uk-card-default comment">
                     <div class="uk-card-header">
                         <h3>Write a Review</h3>
                     </div>
@@ -105,11 +114,71 @@
                                 (click)="addComment()">{{ !!user ? 'Submit Review' : 'Signin to Review'}}</button>
                         </div>
                     </div>
+                </div> -->
+
+                <!-- Write Review Form START-->
+                <div class="m-t-30">
+
+                    <div class="category-box">
+                        <h1 class="font-regular-24 font-weight-600">Write a Review</h1>
+                        <hr />
+                        <form class="uk-form-stacked review-form">
+
+                            <div class="uk-child-width-1-2@s" uk-grid>
+                                <div>
+                                    <div class="uk-margin">
+                                        <label class="uk-form-label" for="form-stacked-text">Username<span
+                                                class="required">*</span></label>
+                                        <div class="uk-form-controls">
+                                            <input class="uk-input" id="form-stacked-text" name="prod_username"
+                                                [(ngModel)]="username" type="text" placeholder="Enter your name" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="uk-margin">
+                                        <label class="uk-form-label" for="form-stacked-select">Your Rating<span
+                                                class="required">*</span></label>
+                                        <div class="uk-form-controls">
+                                            <select class="uk-select" name="prod_rating" [(ngModel)]="rating"
+                                                id="form-stacked-select">
+                                                <option disabled selected hidden value="0">Select your rating</option>
+                                                <option value="90">5 Star</option>
+                                                <option value="80">4 Star</option>
+                                                <option value="60">3 Star</option>
+                                                <option value="40">2 Star</option>
+                                                <option value="20">1 Star</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="commentarea">Your Review<span
+                                        class="required">*</span></label>
+                                <div class="uk-form-controls">
+                                    <textarea name="commentarea" class="uk-input min-h-200" id="commentarea"
+                                        placeholder="Enter your review here" [(ngModel)]="commentTxt"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="uk-text-right">
+                                <button class="uk-button uk-button-default" type="button"
+                                    (click)="addComment()">{{ !!user ? 'Submit Review' : 'Signin to Review'}}</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="reviews" *ngIf="reviews!==undefined">
+                <!-- Write Review Form END-->
+
+                <div class="reviews m-t-30" *ngIf="reviews!==undefined">
                     <h2 class="heading2">Reviews ({{reviews.length}})</h2>
-                    <hr />
-                    <div class="uk-card uk-card-default" *ngFor="let reply of reviews">
+                    <!-- <hr /> -->
+
+                    <!-- <div class="uk-card uk-card-default" *ngFor="let reply of reviews">
                         <div class="uk-card-header">
                             <div class="uk-grid-small uk-flex-middle" uk-grid>
                                 <div class="uk-width-expand">
@@ -143,9 +212,60 @@
                                 </div>
                             </div>
                         </div>
+                    </div> -->
+
+                    <!-- Review Card  START -->
+                    <div class="m-t-30" *ngFor="let reply of reviews">
+                        <div uk-grid>
+                            <div class="uk-width-expand">
+                                <div class="child-width-auto" uk-grid>
+                                    <div>
+                                        <img class="review-avatar" src="assets/images/default-thumbnail.png" />
+                                    </div>
+                                    <div class="p-l-20">
+                                        <p class="font-regular m-0">{{reply.userName}}</p>
+                                        <div>
+                                            <ngb-rating [(rate)]="reply.rating" [readonly]="true" [max]="5">
+                                                <ng-template let-fill="fill" let-index="index">
+                                                    <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                                                </ng-template>
+                                            </ngb-rating>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="font-regular-15">{{ reply.createdAt | timeago }}</p>
+                            </div>
+                        </div>
+                        <div class="m-t-30">
+                            <p class="font-regular">{{reply.review}}</p>
+                        </div>
+                        <div class="m-t-30 m-b-30">
+                            <div uk-grid>
+                                <div class="uk-width-expand">
+
+                                    <a class="like-link" (click)="likeReply(reply)">
+                                        <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5 font-22"></fa-icon>
+                                    </a> {{reply.likeCount}}
+
+                                    <!-- <span class="m-l-5">
+                                        <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5"></fa-icon> 20
+                                    </span> -->
+                                </div>
+                                <div class="replay-link">
+                                    <a class="font-regular" (click)="setReplyId(reply.id,reply.userName,reply.review)">
+                                        <fa-icon [icon]="['far', 'comments']" class="m-r-5"></fa-icon> Reply
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
                     </div>
+
+
                 </div>
-                <div *ngIf="reviews.length == 0  && reviews!==undefined" class="m-t-30">
+                <div *ngIf="reviews && reviews.length == 0" class="m-t-30">
                     <div class="uk-child-width-expand" uk-grid>
                         <div class="info">
                             <h1 class="font-regular-24 font-weight-600 m-0"> No review!</h1>

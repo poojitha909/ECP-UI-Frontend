@@ -100,7 +100,7 @@
             <a class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
           </div>
         </div>
-        <ul class="uk-list uk-list-large max-h-400 sroll-category">
+        <ul class="uk-list uk-list-small m-b-0  sroll-category">
           <li class="cursor-pointer" *ngFor="let category of JDcategory.categories"
             (click)="onCategoryChanged(category.category_name,category.national_catid)"
             [ngClass]="{'cat-active': category.category_name === selectedCategory}">

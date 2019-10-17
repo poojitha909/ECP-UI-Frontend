@@ -163,6 +163,7 @@ h3{
         }
 
         .sroll-category{
+            max-height: 358px;
             overflow: hidden;
             &:hover{
                 overflow-y: scroll;

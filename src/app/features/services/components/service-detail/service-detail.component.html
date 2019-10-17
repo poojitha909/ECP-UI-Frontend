@@ -481,13 +481,13 @@
               <div uk-grid>
                 <div class="uk-width-expand">
                   <ng-container *ngIf="userUpvoted(review.likeCount)">
-                    <a class="like-link font-22">
+                    <a class="like-link">
                       <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5 font-22 upvoted"></fa-icon>
                     </a> {{ review.likeCount ? review.likeCount.length : '0' }}
                   </ng-container>
 
                   <ng-container *ngIf="!userUpvoted(review.likeCount)">
-                    <a class="like-link font-22" (click)="likeUnlikeReview(review,'true')">
+                    <a class="like-link" (click)="likeUnlikeReview(review,'true')">
                       <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5 font-22"></fa-icon>
                     </a> {{ review.likeCount ? review.likeCount.length : '0' }}
                   </ng-container>

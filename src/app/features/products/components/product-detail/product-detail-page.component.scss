@@ -63,9 +63,9 @@
     h3, p{
       text-align: center;
     }
-    a{
-      color: $font-light-black;
-    }
+    // a{
+    //   color: $font-light-black;
+    // }
   }
 
   .comment{
@@ -124,6 +124,19 @@
       }
     }
   }
+  .review-input{
+    display:block;
+    margin: 10px 0px;
+    width: 100%;
+    height: 36px;
+    border: 1px solid #D7E0EF;
+    border-radius: 4px;
+    padding: 3px 5px;
+  }
+  select.review-input,#commentarea{
+    padding: 3px 5px;
+    background: #fff;
+  }
   
   
   .comment.uk-card-default{
@@ -139,6 +152,22 @@
     border-bottom: 1px solid #D7E0EF;
     margin-bottom: 20px;
   }
+
+  .like-link{
+    .upvoted{
+        color: #1A73E8; 
+    } 
+    :hover{
+        color: #1A73E8; 
+    }
+}
+
+  .review-avatar{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
   .whatapp-icon{
     background:#009487;
     color:#fff;
@@ -174,3 +203,44 @@
     border: 1px solid #eae5e5;
   }
 }
+.review-form{
+  input,textarea,select{
+      border-radius: 4px;
+  }
+  button{
+      background-color: $primary-btn;
+      border-radius: 4px;
+      font-size: 18px;
+      border: none;
+      color: #fff;
+      text-transform: none;
+      padding: 2px 30px;
+      &:focus{
+        color: $primary-btn;
+        background-color: #fff;
+      }
+      &:disabled{
+          background-color: transparent;
+          color: #999;
+          border-color: #e5e5e5;
+          border: 1px solid;
+      }
+  }
+
+  .uk-button-transparent{
+      background-color: transparent;
+      border-radius: 4px;
+      font-size: 18px;
+      border: 1px solid $primary-btn;
+      color:$primary-btn;
+      text-transform: none;
+      padding: 0px 30px;
+      &:focus{
+        color: $primary-btn;
+        background-color: #fff;
+      }
+    }
+}
+.social-link{
+  color: #000;
+  }

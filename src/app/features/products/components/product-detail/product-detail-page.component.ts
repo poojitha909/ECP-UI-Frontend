@@ -4,7 +4,9 @@ import { Router } from "@angular/router";
 import { ProductService } from '../../services/products.service';
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
 import { AuthService } from "../../../../core/auth/services/auth.service";
-import { Breadcrumb } from 'src/app/core/interfaces';
+import { Breadcrumb, SEO } from 'src/app/core/interfaces';
+import { SeoService } from 'src/app/core/services/seo.service';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -37,12 +39,22 @@ export class ProductDetailPageComponent implements OnInit {
   replyParentUser: string;
   replyParentText: string;
   activeSlideId: string;
+  currentUrl: string;
+  whatsappUrl;
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private productService: ProductService,
+    private store: StorageHelperService,
+    private authService: AuthService,
+    private seoService: SeoService,
+    public sanitizer: DomSanitizer,
+    private fb: FormBuilder
+  ) { }
   reviewForm: FormGroup;
   successMessage: String;
 
-  constructor(private router: Router, private route: ActivatedRoute, 
-    private productService: ProductService, private store: StorageHelperService,
-    private fb: FormBuilder, private authService: AuthService) { }
 
   ngOnInit() {
     this.productId = this.route.snapshot.params['id'];
@@ -52,6 +64,8 @@ export class ProductDetailPageComponent implements OnInit {
     if (this.user) {
       this.user = JSON.parse(this.user);
     }
+    this.currentUrl = window.location.href;
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
     this.reviewForm = this.fb.group({
       commentTxt: ["",Validators.required],
       rating: ["",Validators.required],
@@ -65,8 +79,21 @@ export class ProductDetailPageComponent implements OnInit {
       if (data) {
         this.product = data;
         this.getReviews();
+        this.setSeoTags(this.product);
       }
     });
+  }
+
+  setSeoTags(product: any) {
+    const config: SEO = {
+      title: `An Elder Spring Initiative by Tata Trusts Product ${product.name}`,
+      keywords: 'products,services,events,dscussions',
+      description: `${product.description}`,
+      author: `An Elder Spring Initiative by Tata Trusts`,
+      image: `${product.images ? product.images[0] : window.location.origin + '/assets/imgaes/landing-img/product-bg.png'}`,
+    }
+
+    this.seoService.generateTags(config);
   }
 
   getReviews() {

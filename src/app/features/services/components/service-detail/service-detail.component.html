@@ -152,16 +152,16 @@
         <div class="rating">
           <div class="p-10 uk-flex uk-flex-center" uk-grid>
             <div>
-              <h1>{{ detailReview.rating}}</h1>
+              <h1>{{ detailReview?.rating}}</h1>
             </div>
             <div>
-              <ngb-rating [rate]="detailReview.rating" [readonly]="true" [max]="5">
+              <ngb-rating [rate]="detailReview?.rating" [readonly]="true" [max]="5">
                 <ng-template let-fill="fill" let-index="index">
                   <span class="star" [class.filled]="fill === 100">&#9733;</span>
                 </ng-template>
               </ngb-rating>
               <p class="m-0">
-                {{ detailReview.totalCount }} Reviews
+                {{ detailReview?.totalCount }} Reviews
               </p>
             </div>
           </div>
@@ -173,11 +173,11 @@
               5 stars
             </div>
             <div class="uk-width-expand uk-flex uk-flex-middle">
-              <progress class="uk-progress uk-progress-rating" [value]="detailReview.fiveStar.count"
-                [max]="detailReview.totalCount"></progress>
+              <progress class="uk-progress uk-progress-rating" [value]="detailReview?.fiveStar.count"
+                [max]="detailReview?.totalCount"></progress>
             </div>
             <div>
-              {{detailReview.fiveStar.count}}
+              {{detailReview?.fiveStar.count}}
             </div>
           </div>
           <div class="m-t-10" uk-grid>
@@ -185,11 +185,11 @@
               4 stars
             </div>
             <div class="uk-width-expand uk-flex uk-flex-middle">
-              <progress class="uk-progress uk-progress-rating" [value]="detailReview.fourStar.count"
-                [max]="detailReview.totalCount"></progress>
+              <progress class="uk-progress uk-progress-rating" [value]="detailReview?.fourStar.count"
+                [max]="detailReview?.totalCount"></progress>
             </div>
             <div>
-              {{detailReview.fourStar.count}}
+              {{detailReview?.fourStar.count}}
             </div>
           </div>
           <div class="m-t-10" uk-grid>
@@ -197,11 +197,11 @@
               3 stars
             </div>
             <div class="uk-width-expand uk-flex uk-flex-middle">
-              <progress class="uk-progress uk-progress-rating" [value]="detailReview.threeStar.count"
-                [max]="detailReview.totalCount"></progress>
+              <progress class="uk-progress uk-progress-rating" [value]="detailReview?.threeStar.count"
+                [max]="detailReview?.totalCount"></progress>
             </div>
             <div>
-              {{detailReview.threeStar.count}}
+              {{detailReview?.threeStar.count}}
             </div>
           </div>
           <div class="m-t-10" uk-grid>
@@ -209,11 +209,11 @@
               2 stars
             </div>
             <div class="uk-width-expand uk-flex uk-flex-middle">
-              <progress class="uk-progress uk-progress-rating" [value]="detailReview.twoStar.count"
-                [max]="detailReview.totalCount"></progress>
+              <progress class="uk-progress uk-progress-rating" [value]="detailReview?.twoStar.count"
+                [max]="detailReview?.totalCount"></progress>
             </div>
             <div>
-              {{detailReview.twoStar.count}}
+              {{detailReview?.twoStar.count}}
             </div>
           </div>
           <div class="m-t-10" uk-grid>
@@ -221,11 +221,11 @@
               1 stars
             </div>
             <div class="uk-width-expand uk-flex uk-flex-middle">
-              <progress class="uk-progress uk-progress-rating" [value]="detailReview.oneStar.count"
-                [max]="detailReview.totalCount"></progress>
+              <progress class="uk-progress uk-progress-rating" [value]="detailReview?.oneStar.count"
+                [max]="detailReview?.totalCount"></progress>
             </div>
             <div>
-              {{detailReview.oneStar.count}}
+              {{detailReview?.oneStar.count}}
             </div>
           </div>
 
@@ -453,7 +453,7 @@
               <div class="uk-width-expand">
                 <div class="child-width-auto" uk-grid>
                   <div>
-                    <img class="review-avatar" src="assets/images/default-thumbnail.png" />
+                    <img class="review-avatar" [imageHandler] [src]="review.userImage?.thumbnailImage" />
                   </div>
                   <div class="p-l-20">
                     <p class="font-regular m-0">
@@ -469,7 +469,7 @@
                 </div>
               </div>
               <div>
-                <p class="font-regular-15">{{review.createdAt | date:'mediumDate' }}</p>
+                <p class="font-regular-15">{{review.createdAt | timeago }}</p>
               </div>
             </div>
             <div class="m-t-30">

@@ -37,26 +37,9 @@ export class ServiceDetailComponent implements OnInit {
   reviewSuccessMessage: string;
   currentUrl: string;
   whatsappUrl;
+  docId: string;
 
-  detailReview = {
-    totalCount: 0,
-    rating: 0,
-    fiveStar: {
-      count: 0
-    },
-    fourStar: {
-      count: 0
-    },
-    threeStar: {
-      count: 0
-    },
-    twoStar: {
-      count: 0
-    },
-    oneStar: {
-      count: 0
-    }
-  };
+  detailReview: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -110,12 +93,9 @@ export class ServiceDetailComponent implements OnInit {
       this.service.email = this.service.email.replace(",", " ");
     }
 
-    if (this.isDBService) {
-      this.getDBserviceReview(this.service.id);
-    } else {
-      const docId: string = this.route.snapshot.params['docId'];
-      this.getDBserviceReview(docId);
-    }
+    this.docId = this.route.snapshot.params['docId'];
+    this.getDBserviceReview(this.docId);
+
 
     if (this.auth.serviceReviewForm) {
       this.reviewForm.patchValue(this.auth.serviceReviewForm);
@@ -140,8 +120,6 @@ export class ServiceDetailComponent implements OnInit {
         if (response && response.content) {
           this.dbReview = response.content;
           this.getDetailReview();
-          console.log(this.detailReview);
-          console.log(this.dbReview, this.isDBService);
         }
       });
   }
@@ -163,21 +141,24 @@ export class ServiceDetailComponent implements OnInit {
     }
   }
 
+  /**
+   * Add review
+   */
   onReviewSubmit() {
     if (this.reviewForm.valid) {
 
       if (this.auth.isAuthenticate) {
-        if (this.isDBService) {
-          this.reviewForm.controls.serviceId.setValue(this.service.id);
-        } else {
-          const docId: string = this.route.snapshot.params['docId'];
-          this.reviewForm.controls.serviceId.setValue(docId);
-        }
+
+        this.reviewForm.controls.serviceId.setValue(this.docId);
+
         this.reviewSuccessMessage = null;
         this.ecpService.addDBserviceReview(this.reviewForm.value).subscribe(
           response => {
             if (response) {
-              this.dbReview.push(response);
+              if (this.isDBService) {
+                this.service.aggrRatingPercentage = (this.service.aggrRatingPercentage + response.rating) / (this.dbReview.length + 1);
+              }
+              this.getDBserviceReview(this.docId);
               this.reviewForm.reset();
               this.reviewSuccessMessage = "Review successfully posted.";
             }
@@ -194,12 +175,9 @@ export class ServiceDetailComponent implements OnInit {
 
   onSubmitReport() {
     if (this.auth.isAuthenticate) {
-      if (this.isDBService) {
-        this.reportForm.controls.serviceId.setValue(this.service.id);
-      } else {
-        const docId: string = this.route.snapshot.params['docId'];
-        this.reportForm.controls.serviceId.setValue(docId);
-      }
+
+      this.reportForm.controls.serviceId.setValue(this.docId);
+
       this.ecpService.addDBserviceReport(this.reportForm.value).subscribe(
         response => {
           if (response) {
@@ -218,6 +196,27 @@ export class ServiceDetailComponent implements OnInit {
   }
 
   getDetailReview() {
+
+    this.detailReview = {
+      totalCount: 0,
+      rating: 0,
+      fiveStar: {
+        count: 0
+      },
+      fourStar: {
+        count: 0
+      },
+      threeStar: {
+        count: 0
+      },
+      twoStar: {
+        count: 0
+      },
+      oneStar: {
+        count: 0
+      }
+    };
+
     this.isDBService ? this.detailReview.totalCount = this.dbReview.length : this.detailReview.totalCount = this.service.Reviews.length + this.dbReview.length;
     this.isDBService ? this.detailReview.rating = this.getDbServiceRating(this.service.aggrRatingPercentage) : this.detailReview.rating = parseFloat(this.service.rating);
 

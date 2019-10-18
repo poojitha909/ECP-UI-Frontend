@@ -26,8 +26,8 @@
           <div>
             <div class="sign-in-button">
 
-              <button *ngIf="!auth.isAuthenticate" routerLink="/user/signin"
-                class="uk-button uk-button-default">Sign In</button>
+              <button *ngIf="!auth.isAuthenticate" routerLink="/user/signin" class="uk-button uk-button-default">Sign
+                In</button>
               <div class="uk-inline" *ngIf="auth.isAuthenticate">
                 <button
                   class="uk-button uk-button-default">{{ auth.user.userName || auth.user.email || auth.user.phoneNumber }}</button>
@@ -56,11 +56,11 @@
         </li>
         <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
             routerLink="/community">Community</a></li>
-            <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">Ask an
-              Expert</a></li>
-              <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
-              routerLink="/products">Products</a></li>
-          <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">Ask an
+            Expert</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/products">Products</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
             routerLink="/services">Services</a></li>
         <!-- <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
             routerLink="/articles">Articles</a></li> -->
@@ -72,11 +72,11 @@
         </li>
         <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
             routerLink="/community">Community</a></li>
-            <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">Ask
-              an Expert</a></li>
-              <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
-              routerLink="/products">Products</a></li>
-          <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">Ask
+            an Expert</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/products">Products</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
             routerLink="/services">Services</a></li>
         <!-- <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
             routerLink="/articles">Articles</a></li> -->

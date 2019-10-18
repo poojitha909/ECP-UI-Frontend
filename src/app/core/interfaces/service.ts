@@ -201,6 +201,7 @@ export interface DBReviews {
     parentReviewId?: any;
     createdAt?: number;
     lastModifiedAt?: number;
+    userImage?:any;
 }
 
 export interface SEO {

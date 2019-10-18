@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 import { AuthService } from 'src/app/core';
-import { Router } from '@angular/router';
+import { Router, Event, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,14 +11,16 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   @ViewChildren('homeLink') private homeLink: QueryList<ElementRef>;
 
-  constructor(public auth: AuthService, private router: Router) { }
+  constructor(public auth: AuthService, private router: Router) {
+
+  }
 
   ngOnInit() {
 
   }
 
   ngAfterViewInit() {
-    if (this.router.url == '/user' || this.router.url == '/about') {
+    if (this.router.url.startsWith('/user') || this.router.url == '/about') {
       // this.homeLink.nativeElement.classList.remove('uk-active');
       setTimeout(() => {
         this.homeLink.forEach(

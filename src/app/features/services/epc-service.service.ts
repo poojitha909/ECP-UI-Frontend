@@ -13,7 +13,7 @@ export class EpcServiceService {
 
   searchedService: string;
   searchCatID: string;
-  
+
   serviceParam: JDserviceParam = {
     max: 50,
     pageNo: 1
@@ -80,7 +80,7 @@ export class EpcServiceService {
   addDBserviceReview(review: DBReviews): Observable<any> {
     return this.http.post<any>(`${ApiConstants.ADD_DB_SERVICE_REVIEWS}`, review).pipe(
       map(response => {
-        if (response) {
+        if (response && response.data) {
           return response.data;
         }
       }));

@@ -156,7 +156,14 @@ export class ServiceDetailComponent implements OnInit {
           response => {
             if (response) {
               if (this.isDBService) {
-                this.service.aggrRatingPercentage = (this.service.aggrRatingPercentage + response.rating) / (this.dbReview.length + 1);
+                let totalrating = 0;
+                if (this.dbReview.length > 0) {
+                  this.dbReview.forEach(review => {
+                    totalrating += review.rating;
+                  })
+                }
+                totalrating += response.rating;
+                this.service.aggrRatingPercentage = totalrating / (this.dbReview.length + 1);
               }
               this.getDBserviceReview(this.docId);
               this.reviewForm.reset();

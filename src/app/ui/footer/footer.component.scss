@@ -35,9 +35,15 @@
     align-items: center;
   }
 
-  ul{
-    a{
+  ul {
+    a {
       color: #fff;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .p-l-md-100 {
+      padding-left: 100px;
     }
   }
   // .footer-upper {

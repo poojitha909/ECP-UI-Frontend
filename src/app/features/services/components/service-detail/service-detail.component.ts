@@ -40,6 +40,7 @@ export class ServiceDetailComponent implements OnInit {
   docId: string;
 
   detailReview: any;
+  jdDetailReview: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -104,6 +105,10 @@ export class ServiceDetailComponent implements OnInit {
 
     this.currentUrl = window.location.href;
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
+
+    if (!this.isDBService) {
+      this.getJdDetailReview();
+    }
   }
 
   get isDBService(): boolean {
@@ -224,8 +229,19 @@ export class ServiceDetailComponent implements OnInit {
       }
     };
 
-    this.isDBService ? this.detailReview.totalCount = this.dbReview.length : this.detailReview.totalCount = this.service.Reviews.length + this.dbReview.length;
-    this.isDBService ? this.detailReview.rating = this.getDbServiceRating(this.service.aggrRatingPercentage) : this.detailReview.rating = parseFloat(this.service.rating);
+    this.detailReview.totalCount = this.dbReview.length;
+    if (this.isDBService) {
+      this.detailReview.rating = this.getDbServiceRating(this.service.aggrRatingPercentage);
+    } else {
+      let totalrating = 0;
+      if (this.dbReview.length > 0) {
+        this.dbReview.forEach(review => {
+          totalrating += review.rating;
+        })
+      }
+      totalrating = totalrating / this.dbReview.length;
+      this.detailReview.rating = this.getDbServiceRating(totalrating);
+    }
 
     if (this.dbReview.length > 0) {
       this.detailReview.fiveStar.count += this.dbReview.filter(val => this.getDbServiceRating(val.rating) === 5).length;
@@ -236,14 +252,39 @@ export class ServiceDetailComponent implements OnInit {
 
     }
 
+  }
+
+  getJdDetailReview() {
+
+    this.jdDetailReview = {
+      totalCount: 0,
+      rating: 0,
+      fiveStar: {
+        count: 0
+      },
+      fourStar: {
+        count: 0
+      },
+      threeStar: {
+        count: 0
+      },
+      twoStar: {
+        count: 0
+      },
+      oneStar: {
+        count: 0
+      }
+    };
+
+    this.jdDetailReview.totalCount = this.service.Reviews.length;
+    this.jdDetailReview.rating = parseFloat(this.service.rating);
+
     if (!this.isDBService && this.service.Reviews.length > 0) {
-
-      this.detailReview.fiveStar.count += this.service.Reviews.filter(val => Math.round(parseInt(val.review_rate)) === 5).length;
-      this.detailReview.fourStar.count += this.service.Reviews.filter(val => Math.round(parseInt(val.review_rate)) === 4).length;
-      this.detailReview.threeStar.count += this.service.Reviews.filter(val => Math.round(parseInt(val.review_rate)) === 3).length;
-      this.detailReview.twoStar.count += this.service.Reviews.filter(val => Math.round(parseInt(val.review_rate)) === 2).length;
-      this.detailReview.oneStar.count += this.service.Reviews.filter(val => Math.round(parseInt(val.review_rate)) === 1).length;
-
+      this.jdDetailReview.fiveStar.count += this.service.Reviews.filter(val => Math.round(parseInt(val.review_rate)) === 5).length;
+      this.jdDetailReview.fourStar.count += this.service.Reviews.filter(val => Math.round(parseInt(val.review_rate)) === 4).length;
+      this.jdDetailReview.threeStar.count += this.service.Reviews.filter(val => Math.round(parseInt(val.review_rate)) === 3).length;
+      this.jdDetailReview.twoStar.count += this.service.Reviews.filter(val => Math.round(parseInt(val.review_rate)) === 2).length;
+      this.jdDetailReview.oneStar.count += this.service.Reviews.filter(val => Math.round(parseInt(val.review_rate)) === 1).length;
     }
 
   }

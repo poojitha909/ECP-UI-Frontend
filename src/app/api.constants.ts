@@ -18,6 +18,8 @@ export class ApiConstants {
     public static ADD_LIKE_SERVICE_REVIEWS: string = `${environment.apiBaseUrl}/v1/reviewRate/service/likeUnlikeReview`;
     public static ADD_DB_SERVICE_REVIEWS: string = `${environment.apiBaseUrl}/v1/reviewRate/addServiceReview`;
     public static ADD_DB_SERVICE_REPORT: string = `${environment.apiBaseUrl}/v1/userProfile/reportService`;
+    public static ADD_SERVICE_RATEING: string = `${environment.apiBaseUrl}/v1/reviewRate/addServiceRating`;
+    public static GET_SERVICE_RATEINGS: string = `${environment.apiBaseUrl}/v1/reviewRate/serviceRatings`;
     public static EVENTS_SERVICES: string = `${environment.apiBaseUrl}/v1/event`;
     public static SEND_OTP: string = `${environment.apiBaseUrl}/v1/users/sendOtp`;
     public static RESEND_OTP: string = `${environment.apiBaseUrl}/v1/users/resendOtp`;

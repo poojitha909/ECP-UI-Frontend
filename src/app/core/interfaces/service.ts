@@ -190,8 +190,9 @@ export interface JDCategory {
 
 
 export interface DBReviews {
-    id?: any;
+    id?: string;
     serviceId?: string;
+    userId?: string;
     rating?: number;
     review?: string;
     likeCount?: string[];
@@ -201,7 +202,16 @@ export interface DBReviews {
     parentReviewId?: any;
     createdAt?: number;
     lastModifiedAt?: number;
-    userImage?:any;
+    userImage?: any;
+}
+
+export interface DBRating {
+    id?: string;
+    serviceId?: string;
+    userId?: string;
+    rating?: number;
+    createdAt?: number;
+    lastModifiedAt?: number;
 }
 
 export interface SEO {

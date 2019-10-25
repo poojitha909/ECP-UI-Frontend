@@ -18,7 +18,7 @@
     <div class="uk-width-1-3@m">
 
       <!-- Conatact Service details START-->
-      <div class="details-box">
+      <div class="details-box bg-white">
 
         <div class="verified">
           <img [imageHandler] *ngIf="!isDBService" [src]="service?.disp_pic" />
@@ -148,15 +148,14 @@
       <!-- Conatact Service details END-->
 
       <!-- Rating box START -->
-      <ul class="uk-child-width-expand uk-flex-bottom"
-        uk-tab="connect: .switcher-container; animation: uk-animation-fade">
+      <ul class="uk-child-width-expand" uk-tab="connect: .switcher-container; animation: uk-animation-fade">
         <li><a class="db" [ngClass]="{'hidden':isDBService }" href="#">Sage Garden</a></li>
         <li *ngIf="!isDBService"><a class="jd" href="#">JustDial</a></li>
       </ul>
-      <div class="rating-box">
+      <div class="rating-box bg-white">
         <ul class="uk-switcher switcher-container">
           <li>
-            <!-- DB service ratings -->
+            <!-- DB service ratings view-->
             <div class="rating">
               <div class="p-10 uk-flex uk-flex-center" uk-grid>
                 <div>
@@ -169,14 +168,14 @@
                     </ng-template>
                   </ngb-rating>
                   <p class="m-0">
-                    {{ detailReview?.totalCount }} Reviews
+                    {{ dbReview?.length }} Reviews
                   </p>
                 </div>
               </div>
             </div>
           </li>
           <li>
-            <!-- JD service ratings -->
+            <!-- JD service ratings view-->
             <div class="jd-rating">
               <div class="p-10 uk-flex uk-flex-center" uk-grid>
                 <div>
@@ -201,7 +200,7 @@
 
           <ul class="uk-switcher switcher-container">
             <li>
-              <!-- DB service ratings -->
+              <!-- DB service ratings counts-->
               <div uk-grid>
                 <div>
                   5 stars
@@ -264,7 +263,7 @@
               </div>
             </li>
             <li>
-              <!-- JD service ratings -->
+              <!-- JD service ratings counts-->
               <div uk-grid>
                 <div>
                   5 stars
@@ -332,8 +331,38 @@
       </div>
       <!-- Rating box END -->
 
+      <!-- Submit Rating START-->
+      <div class="rating-box m-t-20 bg-white">
+        <div class="add-rating p-20">
+          <div class="p-10 uk-flex uk-flex-center">
+            {{userRating ? 'Your Ratings':'Rate this service'}}
+          </div>
+        </div>
+        <form class="review-form" [formGroup]="ratingForm" (ngSubmit)="onRatingSubmit()">
+          <div class="uk-flex uk-flex-center p-25">
+            <ngb-rating *ngIf="!userRating" formControlName="rating" [max]="5">
+              <ng-template let-fill="fill" let-index="index">
+                <span class="add-star" [class.add-filled]="fill === 100">&#9733;</span>
+              </ng-template>
+            </ngb-rating>
+
+            <ngb-rating *ngIf="userRating" [readonly]="true" [rate]="getDbServiceRating(userRating.rating)"
+              [max]="getDbServiceRating(userRating.rating)">
+              <ng-template let-fill="fill" let-index="index">
+                <span class="add-star" [class.add-filled]="fill === 100">&#9733;</span>
+              </ng-template>
+            </ngb-rating>
+          </div>
+          <div>
+            <button class="uk-button  w-100" [ngClass]="userRating ? 'uk-button-transparent' :'uk-button-default'"
+              type="submit">{{userRating ? 'Edit Rating':'Submit'}}</button>
+          </div>
+        </form>
+      </div>
+      <!-- Submit Rating END-->
+
       <!-- Socailmedia share box  START-->
-      <div class="m-t-30 category-box">
+      <div class="m-t-30 bg-white category-box">
         <div class="m-b-20">
           <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
           <a class="social-link" [href]="whatsappUrl">
@@ -368,19 +397,20 @@
     </div>
 
     <div class="uk-width-expand@m">
-      <!-- About -->
-      <ng-container *ngIf="service?.seo_dt?.desc">
-        <div>
-          <h1 class="font-regular-24 font-weight-600">About</h1>
-          <p *ngIf="!isDBService">
-            {{service?.seo_dt?.desc }}
-          </p>
-          <div *ngIf="isDBService" [innerHTML]="service?.basicProfileInfo?.description"></div>
-        </div>
-        <hr />
-      </ng-container>
       <!-- service informations -->
-      <div class="info">
+      <div class="info category-box bg-white">
+        <!-- About -->
+        <ng-container *ngIf="service?.seo_dt?.desc || service?.basicProfileInfo?.description">
+          <div>
+            <h1 class="font-regular-24 font-weight-600">About</h1>
+            <p *ngIf="!isDBService && service?.seo_dt?.desc">
+              {{service?.seo_dt?.desc }}
+            </p>
+            <div *ngIf="isDBService" [innerHTML]="service?.basicProfileInfo?.description"></div>
+          </div>
+          <hr />
+        </ng-container>
+
         <h1 class="font-regular-24 font-weight-600">Details</h1>
         <div uk-grid>
           <div class="uk-width-2-5@s">
@@ -435,7 +465,7 @@
       <!-- Write Review Form START-->
       <div class="m-t-30">
 
-        <div class="category-box">
+        <div class="category-box bg-white">
           <h1 class="font-regular-24 font-weight-600">Write a Review</h1>
           <hr />
           <!-- Success box START-->

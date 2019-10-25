@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ServiceDetail, DBReviews, SEO, Breadcrumb } from 'src/app/core/interfaces';
+import { ServiceDetail, DBReviews, SEO, Breadcrumb, DBRating } from 'src/app/core/interfaces';
 import { EpcServiceService } from '../../epc-service.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core';
@@ -33,6 +33,7 @@ export class ServiceDetailComponent implements OnInit {
   dbReview: DBReviews[] = [];
   reviewForm: FormGroup;
   reportForm: FormGroup;
+  ratingForm: FormGroup;
   successMessage: string;
   reviewSuccessMessage: string;
   currentUrl: string;
@@ -41,6 +42,8 @@ export class ServiceDetailComponent implements OnInit {
 
   detailReview: any;
   jdDetailReview: any;
+  userRating: DBRating;
+  dbRating: DBRating[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -52,6 +55,8 @@ export class ServiceDetailComponent implements OnInit {
     private seoService: SeoService
   ) {
 
+    this.docId = this.route.snapshot.params['docId'];
+
     if (this.ecpService.searchedService && this.ecpService.searchCatID) {
 
       this.breadcrumbLinks[2].queryParams = { category: this.ecpService.searchedService, catid: this.ecpService.searchCatID };
@@ -61,17 +66,22 @@ export class ServiceDetailComponent implements OnInit {
 
     this.service = this.route.snapshot.data.detail;
     this.reviewForm = this.fb.group({
-      serviceId: [""],
+      serviceId: [this.docId],
       rating: [0, Validators.required],
       review: ["", Validators.required],
       // userName: ["", Validators.required]
     });
 
     this.reportForm = this.fb.group({
-      serviceId: [""],
+      serviceId: [this.docId],
       cause: ["", Validators.required],
       comment: ["", Validators.required],
     });
+
+    this.ratingForm = this.fb.group({
+      serviceId: [this.docId],
+      rating: ["", Validators.required]
+    })
 
     const config: SEO = {
       title: `An Elder Spring Initiative by Tata Trusts Service ${this.isDBService ? this.service.basicProfileInfo.firstName : this.service.name}`,
@@ -94,9 +104,8 @@ export class ServiceDetailComponent implements OnInit {
       this.service.email = this.service.email.replace(",", " ");
     }
 
-    this.docId = this.route.snapshot.params['docId'];
     this.getDBserviceReview(this.docId);
-
+    this.getServiceRating(this.docId);
 
     if (this.auth.serviceReviewForm) {
       this.reviewForm.patchValue(this.auth.serviceReviewForm);
@@ -107,7 +116,7 @@ export class ServiceDetailComponent implements OnInit {
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
 
     if (!this.isDBService) {
-      this.getJdDetailReview();
+      this.getJdDetailRating();
     }
   }
 
@@ -124,7 +133,26 @@ export class ServiceDetailComponent implements OnInit {
       response => {
         if (response && response.content) {
           this.dbReview = response.content;
-          this.getDetailReview();
+          // this.getDetailReview();
+        }
+      });
+  }
+
+  /**
+   * Get Service Rating from DB
+   * @param serviceId 
+   */
+  getServiceRating(serviceId) {
+    this.ecpService.getServiceRatings(serviceId).subscribe(
+      response => {
+        if (response) {
+          this.dbRating = response;
+          console.log(this.dbRating);
+          if (this.auth.user) {
+            const userId = this.auth.user.id;
+            this.userRating = this.dbRating.find(val => val.userId == userId);
+          }
+          this.getDetailRating();
         }
       });
   }
@@ -146,6 +174,50 @@ export class ServiceDetailComponent implements OnInit {
     }
   }
 
+  getRatingValue(rating: number): number {
+    switch (rating) {
+      case 1:
+        return 20
+      case 2:
+        return 40
+      case 3:
+        return 60
+      case 4:
+        return 80
+      case 5:
+        return 90
+    }
+  }
+
+  /**
+   * Add rating 
+   */
+  onRatingSubmit() {
+    if (this.auth.isAuthenticate) {
+      if (this.userRating) {
+        this.dbRating = this.dbRating.filter(val => val.userId !== this.userRating.userId);
+        this.userRating = null;
+      } else {
+        if (this.ratingForm.valid && this.auth.user) {
+          this.ratingForm.value.rating = this.getRatingValue(this.ratingForm.controls.rating.value);
+          this.ecpService.addServiceRating(this.ratingForm.value).subscribe(
+            response => {
+              console.log(response);
+              this.userRating = response;
+              this.dbRating.push(response);
+              this.getDetailRating()
+            },
+            error => {
+              console.log(error);
+            });
+        }
+      }
+    } else {
+      this.auth.redirectUrl = this.router.url;
+      this.router.navigateByUrl('/user/signin');
+    }
+  }
+
   /**
    * Add review
    */
@@ -153,24 +225,21 @@ export class ServiceDetailComponent implements OnInit {
     if (this.reviewForm.valid) {
 
       if (this.auth.isAuthenticate) {
-
-        this.reviewForm.controls.serviceId.setValue(this.docId);
-
         this.reviewSuccessMessage = null;
         this.ecpService.addDBserviceReview(this.reviewForm.value).subscribe(
           response => {
             if (response) {
-              if (this.isDBService) {
-                let totalrating = 0;
-                if (this.dbReview.length > 0) {
-                  this.dbReview.forEach(review => {
-                    totalrating += review.rating;
-                  })
-                }
-                totalrating += response.rating;
-                this.service.aggrRatingPercentage = totalrating / (this.dbReview.length + 1);
-              }
-              this.getDBserviceReview(this.docId);
+              // if (this.isDBService) {
+              //   let totalrating = 0;
+              //   if (this.dbReview.length > 0) {
+              //     this.dbReview.forEach(review => {
+              //       totalrating += review.rating;
+              //     })
+              //   }
+              //   totalrating += response.rating;
+              //   this.service.aggrRatingPercentage = totalrating / (this.dbReview.length + 1);
+              // }
+              // this.getDBserviceReview(this.docId);
               this.reviewForm.reset();
               this.reviewSuccessMessage = "Review successfully posted.";
             }
@@ -187,9 +256,6 @@ export class ServiceDetailComponent implements OnInit {
 
   onSubmitReport() {
     if (this.auth.isAuthenticate) {
-
-      this.reportForm.controls.serviceId.setValue(this.docId);
-
       this.ecpService.addDBserviceReport(this.reportForm.value).subscribe(
         response => {
           if (response) {
@@ -207,7 +273,7 @@ export class ServiceDetailComponent implements OnInit {
     }
   }
 
-  getDetailReview() {
+  getDetailRating() {
 
     this.detailReview = {
       totalCount: 0,
@@ -229,32 +295,33 @@ export class ServiceDetailComponent implements OnInit {
       }
     };
 
-    this.detailReview.totalCount = this.dbReview.length;
-    if (this.isDBService) {
-      this.detailReview.rating = this.getDbServiceRating(this.service.aggrRatingPercentage);
-    } else {
+    this.detailReview.totalCount = this.dbRating.length;
+    // if (this.isDBService) {
+    //   this.detailReview.rating = this.getDbServiceRating(this.service.aggrRatingPercentage);
+    // } else {
+    // }
+    if (this.dbRating.length > 0) {
       let totalrating = 0;
-      if (this.dbReview.length > 0) {
-        this.dbReview.forEach(review => {
-          totalrating += review.rating;
-        })
-      }
-      totalrating = totalrating / this.dbReview.length;
+      this.dbRating.forEach(rate => {
+        totalrating += rate.rating;
+      })
+
+      totalrating = totalrating / this.dbRating.length;
       this.detailReview.rating = this.getDbServiceRating(totalrating);
     }
 
-    if (this.dbReview.length > 0) {
-      this.detailReview.fiveStar.count += this.dbReview.filter(val => this.getDbServiceRating(val.rating) === 5).length;
-      this.detailReview.fourStar.count += this.dbReview.filter(val => this.getDbServiceRating(val.rating) === 4).length;
-      this.detailReview.threeStar.count += this.dbReview.filter(val => this.getDbServiceRating(val.rating) === 3).length;
-      this.detailReview.twoStar.count += this.dbReview.filter(val => this.getDbServiceRating(val.rating) === 2).length;
-      this.detailReview.oneStar.count += this.dbReview.filter(val => this.getDbServiceRating(val.rating) === 1).length;
+    if (this.dbRating.length > 0) {
+      this.detailReview.fiveStar.count += this.dbRating.filter(val => this.getDbServiceRating(val.rating) === 5).length;
+      this.detailReview.fourStar.count += this.dbRating.filter(val => this.getDbServiceRating(val.rating) === 4).length;
+      this.detailReview.threeStar.count += this.dbRating.filter(val => this.getDbServiceRating(val.rating) === 3).length;
+      this.detailReview.twoStar.count += this.dbRating.filter(val => this.getDbServiceRating(val.rating) === 2).length;
+      this.detailReview.oneStar.count += this.dbRating.filter(val => this.getDbServiceRating(val.rating) === 1).length;
 
     }
 
   }
 
-  getJdDetailReview() {
+  getJdDetailRating() {
 
     this.jdDetailReview = {
       totalCount: 0,

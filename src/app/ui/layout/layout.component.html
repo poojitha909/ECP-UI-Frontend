@@ -3,7 +3,7 @@
 <!-- Header ends -->
 
 <!-- App content starts -->
-<div class="content">
+<div class="content" [ngClass]="{'content-bg':isDetailPage}">
   <div class="uk-container">
     <!-- Router content starts -->
     <router-outlet></router-outlet>

@@ -104,4 +104,22 @@ export class EpcServiceService {
       }));
   }
 
+  addServiceRating(rating: any): Observable<any> {
+    return this.http.post<any>(`${ApiConstants.ADD_SERVICE_RATEING}`, rating).pipe(
+      map(response => {
+        if (response) {
+          return response.data;
+        }
+      }));
+  }
+
+  getServiceRatings(serviceId: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_SERVICE_RATEINGS}?serviceId=${serviceId}`).pipe(
+      map(response => {
+        if (response) {
+          return response.data;
+        }
+      }));
+  }
+
 }

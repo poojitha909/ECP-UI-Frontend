@@ -162,17 +162,38 @@ h3 {
     font-size: 48px;
     font-family: "HKGroteskRegular";
     font-weight: 700;
+    color: #fff;
   }
   .rating {
-    background-color: #e8b24a;
+    background-color: #1a73e8;
     border-radius: 4px;
-    color: #000;
+    color: #fff;
+    .star {
+      font-size: 1.2em;
+      color: #1a73e8;
+    }
+    .filled {
+      color: #fff;
+    }
   }
 
   .jd-rating {
-    background-color: #62B3FF;
+    background-color: #a0a2a9;
     border-radius: 4px;
-    color: #000;
+    color: #fff;
+    .star {
+      font-size: 1.2em;
+      color: #a0a2a9;
+    }
+    .filled {
+      color: #fff;
+    }
+  }
+
+  .add-rating {
+    background-color: #e4eefb;
+    border-radius: 4px;
+    color: #161c2d;
   }
   .uk-progress {
     height: 6px;
@@ -181,34 +202,27 @@ h3 {
   .uk-progress-rating {
     // created class for customisation
     &::-webkit-progress-value {
-      background-color: #e8b24a;
+      background-color: #1a73e8;
     } // those are the overflowing colors
     &::-ms-fill {
-      background-color: #e8b24a;
+      background-color: #1a73e8;
     }
     &::-moz-progress-bar {
-      background-color: #e8b24a;
+      background-color: #1a73e8;
     }
   }
 
   .uk-progress-JDrating {
     // created class for customisation
     &::-webkit-progress-value {
-      background-color: #62B3FF;
+      background-color: #a0a2a9;
     } // those are the overflowing colors
     &::-ms-fill {
-      background-color: #62B3FF;
+      background-color: #a0a2a9;
     }
     &::-moz-progress-bar {
-      background-color: #62B3FF;
+      background-color: #a0a2a9;
     }
-  }
-
-  .filled {
-    color: #000;
-  }
-  .star {
-    font-size: 1.2em;
   }
 }
 
@@ -217,50 +231,61 @@ h3 {
   &:before {
     content: unset;
   }
-  & > li:not(:first-child){
-      padding-left: 0px;
+  & > li:not(:first-child) {
+    padding-left: 5px;
   }
   & > li {
-      &> a{
-        padding: 5px;
-      }
+    & > a {
+      padding: 8px;
+    }
     & > .db {
       text-transform: none;
       font-size: 18px;
-      background-color: #ffe1a8;
+      background-color: #e4eefb;
       border-radius: 4px 4px 0px 0px;
       border: 1px solid #e4eefb;
       transition: 0.3s all ease;
       &:hover,
       &:focus {
-        background-color: #E8B24A;
+        background-color: #1a73e8;
+        color: #fff;
       }
     }
     & > .jd {
-        text-transform: none;
-        font-size: 18px;
-        background-color: #E4EEFB;
-        border-radius: 4px 4px 0px 0px;
-        border: 1px solid #e4eefb;
-        transition: 0.3s all ease; 
-        &:hover,
-        &:focus {
-          background-color: #62B3FF;
-        }
+      text-transform: none;
+      font-size: 18px;
+      background-color: #e4eefb;
+      border-radius: 4px 4px 0px 0px;
+      border: 1px solid #e4eefb;
+      transition: 0.3s all ease;
+      &:hover,
+      &:focus {
+        background-color: #a0a2a9;
+        color: #fff;
       }
+    }
     &.uk-active {
-      & > .db{
+      & > .db {
         font-weight: 600;
-        padding: 10px;
-        background-color: #E8B24A;
-        border-color: #e4eefb;    
-      }
-      & > .jd{
-        font-weight: 600;
-        padding: 10px;
-        background-color: #62B3FF;
+        background-color: #1a73e8;
         border-color: #e4eefb;
+        color: #fff;
+      }
+      & > .jd {
+        font-weight: 600;
+        background-color: #a0a2a9;
+        border-color: #e4eefb;
+        color: #fff;
       }
     }
   }
+}
+
+.add-star {
+  color: #cecece;
+  font-size: 32px;
+}
+
+.add-filled {
+  color: #e8b24a;
 }

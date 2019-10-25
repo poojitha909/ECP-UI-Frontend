@@ -5,6 +5,10 @@ import { Observable, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
+    
+    selectedCatId: string;
+    selectedCatname: string;
+
     private productUrl = ApiConstants.PRODUCTS_SERVICES;
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -50,23 +54,23 @@ export class ProductService {
     }
 
     addProduct(product: any): Observable<any[]> {
-        return this.http.post<any[]>(`${this.productUrl}`,{...product});
+        return this.http.post<any[]>(`${this.productUrl}`, { ...product });
     }
 
     getCategoryList(): Observable<any[]> {
         return this.http.get<any[]>(`${this.productUrl}/category/page?p=0&s=10000`);
     }
 
-    addComment(productId: string, commentTxt: string, username: string , rating : number){
-        return this.http.post<any[]>(`${this.productUrl}/review`,{
-                productId: productId,
-                review: commentTxt,
-                userName: username,
-                likeCount: 0,
-                unlikeCount: 0,
-                status: 0,
-                rating: rating
-            });        
+    addComment(productId: string, commentTxt: string, username: string, rating: number) {
+        return this.http.post<any[]>(`${this.productUrl}/review`, {
+            productId: productId,
+            review: commentTxt,
+            userName: username,
+            likeCount: 0,
+            unlikeCount: 0,
+            status: 0,
+            rating: rating
+        });
     }
 
     getReviewList(productId): Observable<any[]> {

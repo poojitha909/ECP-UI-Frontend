@@ -44,7 +44,7 @@
           </div>
         </div>
         <ul class="uk-list uk-list-large p-2" *ngIf="catsList!==undefined">
-          <li *ngFor="let cat of catsList" (click)="onTabChange(cat.id)" class="cursor-pointer"
+          <li *ngFor="let cat of catsList" (click)="onTabChange(cat.id,cat.name)" class="cursor-pointer"
             [ngClass]="{'cat-active': cat.id === searchParams.productCategory}">{{cat.name}} <span
               class="uk-badge uk-float-right">{{cat.productCount}}</span></li>
         </ul>

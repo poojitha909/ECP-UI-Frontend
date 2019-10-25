@@ -14,11 +14,14 @@ export class ProductsPageComponent implements OnInit {
     p: number,
     s: number,
     searchTxt: string,
-    category: {id: string}
+    category: { id: string }
   };
-  
 
-  constructor(private productService: ProductService) { }
+
+  constructor(private productService: ProductService) {
+    this.productService.selectedCatId = null;
+    this.productService.selectedCatname = null;
+  }
 
   ngOnInit() {
     this.searchParams = {

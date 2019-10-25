@@ -51,7 +51,13 @@ export class ProductDetailPageComponent implements OnInit {
     private seoService: SeoService,
     public sanitizer: DomSanitizer,
     private fb: FormBuilder
-  ) { }
+  ) {
+
+    if (this.productService.selectedCatId && this.productService.selectedCatname) {
+      this.breadcrumbLinks[2].text = this.productService.selectedCatname;
+      this.breadcrumbLinks[2].queryParams = { productCategory: this.productService.selectedCatId };
+    }
+  }
   reviewForm: FormGroup;
   successMessage: String;
 
@@ -67,9 +73,9 @@ export class ProductDetailPageComponent implements OnInit {
     this.currentUrl = window.location.href;
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
     this.reviewForm = this.fb.group({
-      commentTxt: ["",Validators.required],
-      rating: ["",Validators.required],
-      username: ["",Validators.required]
+      commentTxt: ["", Validators.required],
+      rating: ["", Validators.required],
+      username: ["", Validators.required]
     });
   }
 
@@ -109,7 +115,7 @@ export class ProductDetailPageComponent implements OnInit {
       const control = this.reviewForm.get(field);
       control.markAsTouched({ onlySelf: true });
     });
-    let review = {...this.reviewForm.value};
+    let review = { ...this.reviewForm.value };
     if (!this.reviewForm.valid) {
       return;
     }

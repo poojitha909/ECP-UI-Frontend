@@ -60,10 +60,10 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     }
 
     this.totalRecords = 0;
-    if(this.route.snapshot.queryParams['searchTxt'] !== undefined){
+    if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
     }
-    if(this.route.snapshot.queryParams['productCategory'] !== undefined){
+    if (this.route.snapshot.queryParams['productCategory'] !== undefined) {
       this.searchParams.productCategory = this.route.snapshot.queryParams['productCategory'];
     }
     this.onSearch();
@@ -93,12 +93,16 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   }
 
   clearSelection() {
+    this.productService.selectedCatId = null;
+    this.productService.selectedCatname = null;
     this.searchParams.productCategory = '';
     this.router.navigateByUrl('products/all');
   }
 
-  onTabChange(value) {
-    this.router.navigate(['/products/all'], {queryParams: {productCategory: value, searchTxt:  this.searchParams.searchTxt}});
+  onTabChange(value, catName) {
+    this.productService.selectedCatId = value;
+    this.productService.selectedCatname = catName;
+    this.router.navigate(['/products/all'], { queryParams: { productCategory: value, searchTxt: this.searchParams.searchTxt } });
   }
 
   onSearchChange(event: any) {

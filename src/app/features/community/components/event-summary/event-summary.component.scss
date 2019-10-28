@@ -28,20 +28,14 @@
     }
     .event-summary-footer{
         padding: 0 15px 10px;
-        font-size: 18px;
+        font-size: 15px;
         align-items: center;
         span{
             cursor: pointer;
         }
-        .right-text{
-            color: #1A73E8;
-            text-align: right;
-            span{
-                border-bottom: 1px solid #b7d6ff
-            }
-        }
-        .left-text{
-            color: #C83F3F;
+        .green{
+            color: #187700;
+            font-weight: bold;
         }
     }
     .outdoor-icon{
@@ -64,4 +58,5 @@
         top: -20px;
         right: -25px;
     }
+    
 }

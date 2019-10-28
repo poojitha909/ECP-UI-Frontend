@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/products.service';
 import { Breadcrumb } from 'src/app/core/interfaces';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-all-products',
@@ -30,13 +31,19 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     searchTxt: string,
     productCategory: string
   };
+  currentUrl: string;
+  whatsappUrl;
+    
 
   paramsSubs: any;
   totalRecords: number;
   slideConfig = { "slidesToShow": 3, "slidesToScroll": 1 };
-  constructor(private route: ActivatedRoute, private router: Router, private productService: ProductService) { }
+  constructor(private route: ActivatedRoute, private router: Router, 
+    private productService: ProductService, public sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.currentUrl = window.location.href;
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
     this.searchParams = {
       p: 0,
       s: 2,

@@ -3,6 +3,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {AskQuestionService} from '../../services/ask-question.service';
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
 import { Breadcrumb } from 'src/app/core/interfaces';
+import { DomSanitizer } from '@angular/platform-browser';
 
 declare var UIkit;
 
@@ -43,9 +44,17 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
   paramsSubs: any;
   totalRecords: number;
   totalRecordsQues: number;
-  constructor(private route:ActivatedRoute, private router: Router, private store: StorageHelperService, private askQuesService: AskQuestionService) { }
+  currentUrl: string;
+  whatsappUrl; 
+
+  constructor(private route:ActivatedRoute, private router: Router, 
+    private store: StorageHelperService, private askQuesService: AskQuestionService, 
+    public sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.currentUrl = window.location.href;
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
+    
     this.searchParams = {
       p: 0,
       s: 10,

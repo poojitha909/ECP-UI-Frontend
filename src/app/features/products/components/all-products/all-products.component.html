@@ -53,20 +53,30 @@
         <label class="m-0"><input class="uk-checkbox m-r-10" type="checkbox" checked> Show only
           Verified Profiles</label>
       </div> -->
-      <div class="m-t-40 category-box">
-        <div class="m-b-20">
-          <a href="" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a> <a> Share via
-            Whatsapp</a>
-        </div>
-
-        <div class="m-b-20">
-          <a href="" class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail"> </a> <a> Share via Email</a>
-        </div>
-
-        <div>
-          <a href="" class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a> Share via
-            Facebook</a>
-        </div>
+      <div class="m-t-30 bg-white category-box">
+          <div class="m-b-20">
+              <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
+              <a class="social-link" [href]="whatsappUrl">
+              Share via
+              Whatsapp</a>
+          </div>
+          <div class="m-b-20">
+              <a href="mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20{{currentUrl}}"
+              class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail">
+              </a> <a class="social-link"
+              href="mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20{{currentUrl}}">
+              Share via
+              Email</a>
+          </div>
+          <div>
+              <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services" onclick="javascript:window.open(this.href,
+                      '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
+              class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a class="social-link"
+              href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services" onclick="javascript:window.open(this.href,
+                      '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+              Share via
+              Facebook</a>
+          </div>
       </div>
     </div>
     <div class="uk-width-expand@m">

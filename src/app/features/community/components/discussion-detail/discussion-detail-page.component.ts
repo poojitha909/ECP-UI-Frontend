@@ -7,6 +7,7 @@ import { StorageHelperService } from "../../../../core/services/storage-helper.s
 import { AuthService } from "../../../../core/auth/services/auth.service";
 import { Breadcrumb } from 'src/app/core/interfaces';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-discussion-detail',
@@ -29,13 +30,17 @@ export class DiscussionDetailPageComponent implements OnInit {
   replyParentText: string;
   replyForm: FormGroup;
   successMessage: String;
+  currentUrl: string;
+  whatsappUrl; 
 
   constructor(private router: Router, private route: ActivatedRoute, 
     private discussionService: DiscussionService, private menuService: MenuService, 
     private fb: FormBuilder, private store: StorageHelperService,
-    private authService: AuthService) { }
+    private authService: AuthService, public sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.currentUrl = window.location.href;
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
     this.discussionId = this.route.snapshot.params['id'];
     this.successMessage = "";
     this.breadcrumbLinks = [

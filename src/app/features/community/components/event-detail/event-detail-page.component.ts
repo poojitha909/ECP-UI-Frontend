@@ -5,6 +5,7 @@ import { EventService } from '../../services/events.service';
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
 import { AuthService } from "../../../../core/auth/services/auth.service";
 import { Breadcrumb } from 'src/app/core/interfaces';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-event-detail',
@@ -33,9 +34,16 @@ export class EventDetailPageComponent implements OnInit {
   showOrg: boolean;
   user: any;
   markIt: boolean;
-  constructor(private router: Router, private route: ActivatedRoute, private eventService: EventService, private store: StorageHelperService, private authService: AuthService) { }
+  currentUrl: string;
+  whatsappUrl;
+
+  constructor(private router: Router, private route: ActivatedRoute, 
+    private eventService: EventService, private store: StorageHelperService, 
+    private authService: AuthService, public sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.currentUrl = window.location.href;
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
     this.eventId = this.route.snapshot.params['id'];
     this.getEvent()
     this.reportEmail = "admin@socialpha.com";

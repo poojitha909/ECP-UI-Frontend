@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../services/events.service';
 import { Breadcrumb } from 'src/app/core/interfaces';
+import { DomSanitizer } from '@angular/platform-browser';
 
 declare var UIkit;
 
@@ -33,10 +34,15 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
   };
   paramsSubs: any;
   totalRecords: number;
+  currentUrl: string;
+  whatsappUrl;
 
-  constructor(private route: ActivatedRoute, private eventService: EventService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private eventService: EventService
+    , public sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.currentUrl = window.location.href;
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
     this.countData = { "all": 0, "outdoor": 0, "indoor": 0 };
     this.searchParams = {
       p: 0,
@@ -122,6 +128,11 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
     this.searchParams.pastEvents = value;
     this.searchParams.p = 0;
     this.showEvents();
+  }
+
+  clearSelection() {
+    this.searchParams.pastEvents = 0;
+    this.router.navigateByUrl('events/all');
   }
 
   onSearchChange(event: any) {

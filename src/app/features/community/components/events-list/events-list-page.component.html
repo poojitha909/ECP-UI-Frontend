@@ -24,15 +24,15 @@
             </div>
             </div>
             <ul class="uk-list uk-list-large p-2">
-            <li (click)="onTabChange(0)" [ngClass]="{'cat-active': 0 === searchParams.pastEvents}">
+            <li (click)="onTabChange(0)" [ngClass]="{'cat-active': 0 == searchParams.pastEvents}">
                 All Events <span
                     class="uk-badge uk-float-right">{{countData.all}}</span>
             </li>
-            <li (click)="onTabChange(-1)" [ngClass]="{'cat-active': -1 === searchParams.pastEvents}">
+            <li (click)="onTabChange(-1)" [ngClass]="{'cat-active': -1 == searchParams.pastEvents}">
                 Upcoming Events <span
                     class="uk-badge uk-float-right">{{countData.upcoming}}</span>
             </li>
-            <li (click)="onTabChange(1)" [ngClass]="{'cat-active': 1 === searchParams.pastEvents}">
+            <li (click)="onTabChange(1)" [ngClass]="{'cat-active': 1 == searchParams.pastEvents}">
                 Past Events <span
                     class="uk-badge uk-float-right">{{countData.past}}</span>
             </li>

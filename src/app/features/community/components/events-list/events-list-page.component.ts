@@ -72,18 +72,10 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
     if(this.route.snapshot.queryParams['past'] !== undefined){
       this.searchParams.pastEvents = this.route.snapshot.queryParams['past'];
     }
+    if(this.route.snapshot.queryParams['searchTxt'] !== undefined){
+      this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
+    }
     this.onSearch();
-    setTimeout(() => {
-      if (this.searchParams.pastEvents == -1) {
-        UIkit.tab("#eventtab").show(1);
-      }
-      else if (this.searchParams.pastEvents == 1) {
-        UIkit.tab("#eventtab").show(2);
-      }
-      else if (this.searchParams.pastEvents == 0) {
-        UIkit.tab("#eventtab").show(0);
-      }
-    }, 500);
   }
 
   changePage(page: number) {
@@ -125,14 +117,12 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
   }
 
   onTabChange(value) {
-    this.searchParams.pastEvents = value;
-    this.searchParams.p = 0;
-    this.showEvents();
+    this.router.navigate(['/community/events'], { queryParams: { past: value, searchTxt: this.searchParams.searchTxt } });
   }
 
   clearSelection() {
     this.searchParams.pastEvents = 0;
-    this.router.navigateByUrl('events/all');
+    this.router.navigateByUrl('/community/events');
   }
 
   onSearchChange(event: any) {

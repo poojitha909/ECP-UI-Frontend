@@ -24,6 +24,8 @@
         font-size: 18px;
         .detail{
             font-size: $font-small;
+            height: 108px;
+            overflow: hidden;
         }
     }
     .event-summary-footer{

@@ -17,7 +17,7 @@
         </div>
         <hr>
         <div class="detail">
-            {{event?.description | ellipsis: 145}}
+            {{event?.description | striphtml | ellipsis: 145}}
         </div>
     </div>
     <div class="event-summary-footer uk-grid uk-grid-collapse">

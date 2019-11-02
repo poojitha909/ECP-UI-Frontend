@@ -147,9 +147,9 @@
                         [ngClass]="{'uk-text-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }" 
                         class="uk-form-label">Description<span class="required">*</span></label>
                     <div class="uk-form-controls">
-                        <textarea 
-                            [ngClass]="{'uk-form-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }" 
-                            class="uk-textarea" formControlName="description" rows="5" placeholder="Type event description here"></textarea>
+                        <editor [ngClass]="{'uk-form-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
+                            formControlName="description" 
+                            [init]="{menubar:false, statusbar: false, base_url: '/tinymce', plugins: 'lists advlist'}"></editor>
                     </div>
                 </div>
                 <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>

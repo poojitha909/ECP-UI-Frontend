@@ -16,11 +16,15 @@ import { DiscussionNoRecordComponent } from './components/discussion-no-record/d
 import { EventNoRecordComponent } from './components/event-no-record/event-no-record.component';
 import { EllipsisPipe } from '../../shared/ellipsis.pipe';
 import { TimeAgoPipe } from '../../shared/timeago.pipe';
+import { StripHtmlPipe } from '../../shared/striphtml.pipe';
 import { SharedModule } from '../../shared';
+import { EditorModule } from '@tinymce/tinymce-angular';
+
 @NgModule({
   declarations: [
     EllipsisPipe,
     TimeAgoPipe,
+    StripHtmlPipe,
     CommunityPageComponent,
     DiscussionNoRecordComponent,
     EventsListPageComponent,
@@ -38,7 +42,8 @@ import { SharedModule } from '../../shared';
     CommonModule,
     CommunityRoutingModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    EditorModule
   ]
 })
 export class CommunityModule { }

@@ -13,7 +13,7 @@ export class LayoutComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    if (this.router.url.startsWith('/services/')) {
+    if (this.router.url.startsWith('/services/') || this.router.url.startsWith('/community/') || this.router.url.startsWith('/products/')) {
       console.log(this.router.url)
       this.isDetailPage = true;
     } else {
@@ -23,8 +23,7 @@ export class LayoutComponent implements OnInit {
     this.router.events.pipe(
       filter((event: any) => event instanceof NavigationEnd)
     ).subscribe(event => {
-      if (event.url.startsWith('/services/')) {
-        console.log(event);
+      if (event.url.startsWith('/services/') || event.url.startsWith('/community/') || event.url.startsWith('/products/')) {
         this.isDetailPage = true;
       } else {
         this.isDetailPage = false;

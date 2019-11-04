@@ -3,15 +3,16 @@
 .event-summary{
     border: solid 1px #D7E0EF;
     margin-bottom:20px;
-    border-radius: 4px 4px 4px 4px;
+    border-radius: 4px;
     text-align: start;
     color: $font-color-black;
     .event-summary-head{
         align-items: center;
         background-color: #D7E0EF;
-        border-radius: 4px 4px 0px 0px;
-        min-height: 100px;
+        border-radius: 4px;
+        min-height: 70px;
         padding: 0 15px;
+        margin: 7px;
         .title{
             font-weight: bold;
             font-size: 18px;
@@ -24,7 +25,7 @@
         font-size: 18px;
         .detail{
             font-size: $font-small;
-            height: 108px;
+            height: 55px;;
             overflow: hidden;
         }
     }
@@ -47,8 +48,8 @@
         width: 35px;
         height: 35px;
         position: relative;
-        top: -20px;
-        right: -25px;
+        top: -10px;
+        right: -35px;
     }
     .indoor-icon{
         background-image: url(/assets/images/indoor.svg);
@@ -57,8 +58,8 @@
         width: 35px;
         height: 35px;
         position: relative;
-        top: -20px;
-        right: -25px;
+        top: -10px;
+        right: -35px;
     }
     
 }

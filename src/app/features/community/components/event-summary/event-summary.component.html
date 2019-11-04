@@ -1,12 +1,15 @@
-<div class="event-summary" *ngIf="event?.isPast == isPast || isPast==0" [routerLink]="['/community/event', event?.id ]">
+<div class="event-summary bg-white" *ngIf="event?.isPast == isPast || isPast==0" [routerLink]="['/community/event', event?.id ]">
     <div class="event-summary-head uk-grid uk-grid-collapse">
-        <div class="title uk-width-4-5@s">
+        <div class="title uk-width-1-1@s">
+            {{event?.title}}
+        </div>
+        <!-- <div class="title uk-width-4-5@s">
             {{event?.title}}
         </div>
         <div class="icon uk-width-1-5@s">
             <a href="" *ngIf="event?.eventType==1" class="uk-margin-small-right outdoor-icon" title="Outdoor Event"></a>
             <a href="" *ngIf="event?.eventType==2" class="uk-margin-small-right indoor-icon" title="Indoor Event"></a>
-        </div>
+        </div> -->
     </div>
     <div class="event-summary-body">
         <div class="date">
@@ -17,7 +20,7 @@
         </div>
         <hr>
         <div class="detail">
-            {{event?.description | striphtml | ellipsis: 145}}
+            {{event?.description | striphtml | ellipsis: 75}}
         </div>
     </div>
     <div class="event-summary-footer uk-grid uk-grid-collapse">

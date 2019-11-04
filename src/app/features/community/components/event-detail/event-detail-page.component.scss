@@ -4,6 +4,11 @@
     font-family: $regular-font;
     color: $font-color-black;
     margin-bottom: 48px;
+    .publish-on{
+      font-size: 15px;
+      color: rgba(22, 28, 45, 0.68);
+      opacity: 0.5;
+    }
     .breadcrumbs {
       margin-top: 20px;
       .uk-breadcrumb > :nth-child(n+2):not(.uk-first-column)::before{
@@ -26,10 +31,15 @@
       font-size: 32px;
       font-weight: bold;
       color: $font-light-black;
+      margin: 0;
+    }
+
+    .details .heading{
+      margin-top:20px;
     }
     .heading2{
       font-family: $regular-font;
-      font-size: 24px;
+      font-size: 18px;
       font-weight: bold;
       color: $font-light-black;      
     }
@@ -69,15 +79,9 @@
   h3{
     font-size:18px;
   }
-  .description{
-    font-size: $font-small;
-    margin-top: 5px;
-  }
-  .textblue{
-    color:$primary-txt-color;
-  }
   hr{
-    margin:40px 0;
+    margin:25px 0;
+    border-top: 1px solid #D7E0EF;
   }
 
   .category-box{

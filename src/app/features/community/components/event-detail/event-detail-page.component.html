@@ -67,21 +67,21 @@
             </div>
             <div class="uk-width-2-3@m">
                 <div class="bg-white category-box">
-                    <h4>Published On: {{event.createdAt | date:'dd MMM, yyyy' }} at {{event?.datetime | date:'shortTime' }}</h4>
+                    <h4 class="publish-on">Published On: {{event.createdAt | date:'dd MMM yyyy' }} at {{event?.datetime | date:'shortTime' }}</h4>
                     <h2 class="heading">{{event.title}}</h2>
                     <hr/>
                     <div class="uk-grid uk-child-width-1-2@m">
                         <div>
-                                {{event?.datetime | date:'dd MMM, yyyy' }}<!-- date only -->
+                              <img src="/assets/images/date.png" class="icons-ev">{{event?.datetime | date:'EEEE, dd MMM yyyy' }}<!-- date only -->
                         </div>
                         <div>
-                                {{event?.address}}
+                            <img src="/assets/images/location.png" class="icons-ev">{{event?.address}}
                         </div>
                         <div>
-                                {{event?.datetime | date:'shortTime' }}<!-- time only -->
+                            <img src="/assets/images/time.png" class="icons-ev">{{event?.datetime | date:'shortTime' }}<!-- time only -->
                         </div>
                         <div>
-                                {{event?.orgPhone}}<!-- time only -->
+                            <img src="/assets/images/phone.png" class="icons-ev">{{event?.orgPhone}}<!-- time only -->
                         </div>
                         <!-- <div class="uk-width-1-4@m">
                             <a href="" *ngIf="event?.eventType==1" class="uk-margin-small-right outdoor-icon" title="Outdoor Event">
@@ -94,52 +94,41 @@
                     </div>    
                 </div>
                 <div class="m-t-30 bg-white category-box">
-                    <h2 class="heading2">About</h2>
+                    <h4 class="heading2">Description</h4>
                     <div class="description" [innerHTML]="event.description">
                     </div>
                     <hr />
                     <div class="details">
-                        <h2 class="heading2">Details</h2>
-                        <div class="uk-grid">
-                            <div class="uk-width-1-2@s">
-                                <p class="label">
-                                    Event Category
-                                </p>
-                                <p class="description">
-                                    {{ (event.eventType==1 ? "Outdoor" : "Indoor") }}
-                                </p>
-                                <p class="label">
-                                    Email
-                                </p>
-                                <p class="description">
-                                    {{event.orgEmail}}
-                                </p>
-                                <p class="label">
-                                    Location
-                                </p>
-                                <p class="description">
-                                    {{event.address + " " + event.landmark}}
-                                </p>
+                        <div class="uk-grid uk-child-width-1-2@m">
+                            <div>
+                                <h4 class="heading2">Address</h4>
+                                {{event.address}}
                             </div>
-                            <div class="uk-width-1-2@s description">
-                                <p class="label">
-                                    Event Entry
-                                </p>
-                                <p class="description">
-                                    {{ (event.entryFee >= 1 ? "Paid" : "Free") }}
-                                </p>
-                                <p class="label">
-                                    Languages
-                                </p>
-                                <p class="description">
-                                    {{event.languages}}
-                                </p>
-                                <p class="label">
-                                    Phone Number
-                                </p>
-                                <p class="description">
-                                    {{event.orgPhone}}
-                                </p>
+                            <div>
+                                <h4 class="heading2">Landmark</h4>
+                                {{event.landmark}}
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="uk-grid uk-child-width-1-2@m">
+                            <div>
+                                <h4 class="heading2">Email ID</h4>
+                                {{event.orgEmail}}
+                            </div>
+                            <div>
+                                <h4 class="heading2">Contact Number</h4>
+                                {{event.orgPhone}}
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="uk-grid uk-child-width-1-2@m">
+                            <div>
+                                <h4 class="heading2">Event Capacity</h4>
+                                {{event.capacity}}
+                            </div>
+                            <div>
+                                <h4 class="heading2">Entry Fee</h4>
+                                {{ (event.entryFee >= 1 ? "Rs. " + event.entryFee : "Free Entry") }}
                             </div>
                         </div>
                     </div>

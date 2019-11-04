@@ -96,6 +96,7 @@ export class EventCreatePageComponent implements OnInit {
     
     let event = { ...this.eventForm.value };
     event.datetime = event.date + "T" + event.startTime + "+05:30";
+    event.status = 1;
     delete event.date;
     delete event.startTime;
 

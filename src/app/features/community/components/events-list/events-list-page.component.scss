@@ -45,11 +45,11 @@
     font-size: 18px;
     color: $font-light-black;
   }
-  .w-105{
-    width: 105px;
+  .w-135{
+    width: 135px;
   }
-  .pr-105{
-    padding-right:105px !important;
+  .pr-135{
+    padding-right:135px !important;
   }
   .cat-active{
     font-weight: 400;
@@ -113,8 +113,6 @@
   // }
   .search-form {
     margin-top: 16px;
-    width:35%;
-    z-index: 100;
     .search-field {
       form {
         width: 100%;

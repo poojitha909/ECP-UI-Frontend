@@ -65,19 +65,38 @@
         </div>
         </div>
         <div class="uk-width-expand@m">
-        <!-- Products list  -->
-        <div *ngIf="eventsList!==undefined && eventsList.length > 0">
-            <div class="uk-grid uk-grid-large uk-flex-left uk-text-center uk-child-width-1-2@m">
-                <app-event-summary *ngFor="let event of eventsList" [event]="event" [isPast]="searchParams.pastEvents">
-                </app-event-summary>
+            <div class="search-form">
+                <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
+                    <div class="uk-margin uk-width-1-1 uk-width-expand@s">
+                        <form class="uk-search uk-search-default">
+                            <span class="uk-search-icon-flip" [ngClass]="{ 'w-135':showReset}" uk-search-icon>
+                                <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
+                                    <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Reset
+                                </button>
+                            </span>
+                            <input class="uk-search-input search-box" [ngClass]="{ 'pr-135':showReset}"
+                                [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required type="text"
+                                placeholder="Search..." name="search" />
+                        </form>
+                    </div>
+                    <div class="uk-width-1-s1 uk-width-auto@s uk-margin-bottom">
+                        <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
+                    </div>
+                </div>
             </div>
-        </div>
-        <app-pagination *ngIf="(eventsList && eventsList.length > 0)" [totalRecords]="totalRecords"
-            [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">
-        </app-pagination>
-        <div class="m-t-20" *ngIf="(eventsList && eventsList.length == 0)">
-            <app-event-no-record></app-event-no-record>
-        </div>
+            <!-- Products list  -->
+            <div *ngIf="eventsList!==undefined && eventsList.length > 0">
+                <div class="uk-grid uk-grid-large uk-flex-left uk-text-center uk-child-width-1-2@m">
+                    <app-event-summary *ngFor="let event of eventsList" [event]="event" [isPast]="searchParams.pastEvents">
+                    </app-event-summary>
+                </div>
+            </div>
+            <app-pagination *ngIf="(eventsList && eventsList.length > 0)" [totalRecords]="totalRecords"
+                [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">
+            </app-pagination>
+            <div class="m-t-20" *ngIf="(eventsList && eventsList.length == 0)">
+                <app-event-no-record></app-event-no-record>
+            </div>
         </div>
     </div>
 </div>

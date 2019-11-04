@@ -2,28 +2,53 @@
 
 .discussion-summary{
     border: solid 1px #D7E0EF;
-    padding:10px;
     margin-bottom: 20px;
-    border-radius: 4px 4px 4px 4px;
+    border-radius: 4px;
     text-align: start;
     color: $font-color-black;
     font-family: $regular-font;
-    .title{
-        font-size: 18px;
-        color: #161C2D;
-    }
-    .author{
-        font-size: 18px;
-        span{
+    .discussion-summary-head{
+        align-items: center;
+        background-color: #D7E0EF;
+        border-radius: 4px;
+        min-height: 70px;
+        padding: 0 15px;
+        margin: 7px;
+        .title{
             font-weight: bold;
+            font-size: 18px;
+            line-height: 27px;
+            color: $primary-txt-color;
         }
     }
+    .discussion-summary-body{
+        padding: 20px 7px;
+        font-size: 18px;
+        .author{
+            font-size: 18px;
+            span{
+                font-weight: bold;
+            }
+        }
+    }
+    .discussion-summary-footer{
+        padding: 0px 7px 10px;
+        font-size: 15px;
+        align-items: center;
+    }
+    
     .comments{
         text-align: center;
         background-color: #E4EEFB; 
         display:block;
         border-radius: 4px 4px 4px 4px;
-        padding:5px 20px;
+        padding: 5px 10px;
+    }
+    .comments.left{
+        margin: 0px 3px 0px 0px ;
+    }
+    .comments.right{
+        margin: 0px 0px 0px 3px ;
     }
     p{
         margin-bottom:0px;

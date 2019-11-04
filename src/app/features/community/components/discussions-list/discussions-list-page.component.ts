@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DiscussionService } from '../../services/discussion.service';
 import { MenuService } from '../../services/menu.service';
 import { Breadcrumb } from 'src/app/core/interfaces';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-discussions-list-page',
@@ -34,10 +35,16 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
   };
   paramsSubs: any;
   totalRecords: number;
+  currentUrl: string;
+  whatsappUrl;
 
-  constructor(private route: ActivatedRoute, private router: Router, private discussionService: DiscussionService, private menuService: MenuService) { }
+  constructor(private route: ActivatedRoute, private router: Router, 
+    private discussionService: DiscussionService, private menuService: MenuService, 
+    public sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.currentUrl = window.location.href;
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
     this.searchParams = {
       p: 0,
       s: 17,
@@ -130,38 +137,50 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
 
 
   search() {
-    if (this.selCategory == "") {
-      this.menuService.getMenus("564071623e60f5b66f62df27", this.searchParams.searchTxt).subscribe((response: any) => {
-        const data = response;
-        let tags = [];
-        this.categoryList = {};
-        if (data.length > 0) {
-          for (let i in data) {
-            this.categoryList[data[i].id] = { id: data[i].id, label: data[i].displayMenuName, tagIds: [], totalCount: 0, discussionLatest: null };
-            if (data[i].tags) {
-              for (let j in data[i].tags) {
-                this.categoryList[data[i].id].tagIds[j] = data[i].tags[j].id;
-              }
-              tags[i] = data[i].id + "_" + this.categoryList[data[i].id].tagIds.join("_"); // this si just to pass extrs key in tags which is menu item id
-            }
-          }
+    // if (this.selCategory == "") {
+    //   this.menuService.getMenus("564071623e60f5b66f62df27", this.searchParams.searchTxt).subscribe((response: any) => {
+    //     const data = response;
+    //     let tags = [];
+    //     this.categoryList = {};
+    //     if (data.length > 0) {
+    //       for (let i in data) {
+    //         this.categoryList[data[i].id] = { id: data[i].id, label: data[i].displayMenuName, tagIds: [], totalCount: 0, discussionLatest: null };
+    //         if (data[i].tags) {
+    //           for (let j in data[i].tags) {
+    //             this.categoryList[data[i].id].tagIds[j] = data[i].tags[j].id;
+    //           }
+    //           tags[i] = data[i].id + "_" + this.categoryList[data[i].id].tagIds.join("_"); // this si just to pass extrs key in tags which is menu item id
+    //         }
+    //       }
 
-          this.discussionService.summary(tags.join(",")).subscribe((response: any) => {
-            for (let i in data) {
-              this.categoryList[data[i].id].totalCount = response.data[data[i].id].totalCount;
-              if (response.data[data[i].id].discussPage && response.data[data[i].id].discussPage.content && response.data[data[i].id].discussPage.content[0]) {
-                this.categoryList[data[i].id].discussionLatest = response.data[data[i].id].discussPage.content[0];
-              }
-            }
-          });
-        }
-      });
-    }
-    else {
+    //       this.discussionService.summary(tags.join(",")).subscribe((response: any) => {
+    //         for (let i in data) {
+    //           this.categoryList[data[i].id].totalCount = response.data[data[i].id].totalCount;
+    //           if (response.data[data[i].id].discussPage && response.data[data[i].id].discussPage.content && response.data[data[i].id].discussPage.content[0]) {
+    //             this.categoryList[data[i].id].discussionLatest = response.data[data[i].id].discussPage.content[0];
+    //           }
+    //         }
+    //       });
+    //     }
+    //   });
+    // }
+    // else {
+    //   this.searchParams.tags = this.dropDownList[this.selCategory].tagIds.join(",");
+    //   this.showDiscussions();
+    //   this.showDiscussionsCount();
+    // }
+    this.searchParams.tags = "";
+    if(this.selCategory!=""){
       this.searchParams.tags = this.dropDownList[this.selCategory].tagIds.join(",");
+    }
+    
       this.showDiscussions();
       this.showDiscussionsCount();
-    }
+  }
+
+  clearSelection() {
+    this.searchParams.tags = "";
+    this.router.navigateByUrl('/community/discussions');
   }
 
   showDiscussions() {

@@ -58,7 +58,7 @@ h3 {
     border: none;
     color: #fff;
     text-transform: none;
-    padding: 2px 30px;
+    padding: 0px 30px;
     &:focus {
       color: $primary-btn;
       background-color: #fff;
@@ -288,4 +288,32 @@ h3 {
 
 .add-filled {
   color: #e8b24a;
+}
+
+.review-btn{
+    background-color: $primary-btn;
+    border-radius: 4px;
+    font-size: 18px;
+    border: none;
+    color: #fff;
+    text-transform: none;
+    padding: 1px 30px;
+    &:focus {
+      color: $primary-btn;
+      background-color: #fff;
+    }
+}
+
+.review-btn-transparent {
+  background-color: transparent;
+  border-radius: 4px;
+  font-size: 18px;
+  border: 1px solid $primary-btn;
+  color: $primary-btn;
+  text-transform: none;
+  padding: 0px 30px;
+  &:focus {
+    color: $primary-btn;
+    background-color: #fff;
+  }
 }

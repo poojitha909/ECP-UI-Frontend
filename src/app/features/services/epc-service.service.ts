@@ -68,8 +68,8 @@ export class EpcServiceService {
     return this.http.get<any>(`${ApiConstants.GET_DB_SERVICE_DETAIL}/${id}`);
   }
 
-  getDBserviceReview(id: string): Observable<any> {
-    return this.http.get<any>(`${ApiConstants.GET_DB_SERVICE_REVIEWS}?serviceId=${id}&p=0&s=1000`).pipe(
+  getDBserviceReview(id: string, reviwePaginate: any): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_DB_SERVICE_REVIEWS}?serviceId=${id}&p=${reviwePaginate.p}&s=${reviwePaginate.s}`).pipe(
       map(response => {
         if (response) {
           return response.data;
@@ -86,6 +86,15 @@ export class EpcServiceService {
       }));
   }
 
+  deleteDBserviceReview(reviewId: string): Observable<any> {
+    return this.http.delete<any>(`${ApiConstants.DELETE_DB_SERVICE_REVIEWS}/${reviewId}`).pipe(
+      map(response => {
+        if (response && response.data) {
+          return response.data;
+        }
+      }));
+  }
+
   addDBserviceReport(reportData: any): Observable<any> {
     return this.http.post<any>(`${ApiConstants.ADD_DB_SERVICE_REPORT}`, reportData).pipe(
       map(response => {
@@ -95,8 +104,8 @@ export class EpcServiceService {
       }));
   }
 
-  likeUnlikeReview(reviewId: string, like: boolean): Observable<any> {
-    return this.http.put<any>(`${ApiConstants.ADD_LIKE_SERVICE_REVIEWS}?reviewId=${reviewId}&like=${like}`, {}).pipe(
+  likeUnlikeReview(reviewId: string): Observable<any> {
+    return this.http.put<any>(`${ApiConstants.ADD_LIKE_SERVICE_REVIEWS}?reviewId=${reviewId}`, {}).pipe(
       map(response => {
         if (response) {
           return response.data;

@@ -17,6 +17,7 @@ export class ApiConstants {
     public static GET_DB_SERVICE_REVIEWS: string = `${environment.apiBaseUrl}/v1/reviewRate/service`;
     public static ADD_LIKE_SERVICE_REVIEWS: string = `${environment.apiBaseUrl}/v1/reviewRate/service/likeUnlikeReview`;
     public static ADD_DB_SERVICE_REVIEWS: string = `${environment.apiBaseUrl}/v1/reviewRate/addServiceReview`;
+    public static DELETE_DB_SERVICE_REVIEWS: string = `${environment.apiBaseUrl}/v1/reviewRate/deleteServiceReview`;
     public static ADD_DB_SERVICE_REPORT: string = `${environment.apiBaseUrl}/v1/userProfile/reportService`;
     public static ADD_SERVICE_RATEING: string = `${environment.apiBaseUrl}/v1/reviewRate/addServiceRating`;
     public static GET_SERVICE_RATEINGS: string = `${environment.apiBaseUrl}/v1/reviewRate/serviceRatings`;

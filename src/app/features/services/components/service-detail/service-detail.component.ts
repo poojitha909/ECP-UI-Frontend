@@ -39,11 +39,18 @@ export class ServiceDetailComponent implements OnInit {
   currentUrl: string;
   whatsappUrl;
   docId: string;
+  userId: string;
 
+  deleteReviewId: string;
   detailReview: any;
   jdDetailReview: any;
   userRating: DBRating;
   dbRating: DBRating[] = [];
+  reviwePaginate: {
+    p: number,
+    s: number
+  };
+  totalReviewRecords: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -55,6 +62,15 @@ export class ServiceDetailComponent implements OnInit {
     private seoService: SeoService
   ) {
 
+    this.reviwePaginate = {
+      p: 0,
+      s: 2
+    }
+
+    if (this.auth.isAuthenticate && this.auth.user) {
+      this.userId = this.auth.user.id;
+    }
+
     this.docId = this.route.snapshot.params['docId'];
 
     if (this.ecpService.searchedService && this.ecpService.searchCatID) {
@@ -65,10 +81,12 @@ export class ServiceDetailComponent implements OnInit {
     }
 
     this.service = this.route.snapshot.data.detail;
+
     this.reviewForm = this.fb.group({
       serviceId: [this.docId],
-      rating: [0, Validators.required],
       review: ["", Validators.required],
+      title: ["", Validators.required],
+      id: [""]
       // userName: ["", Validators.required]
     });
 
@@ -129,10 +147,11 @@ export class ServiceDetailComponent implements OnInit {
    *Get Service Review from DB
    */
   getDBserviceReview(serviceId) {
-    this.ecpService.getDBserviceReview(serviceId).subscribe(
+    this.ecpService.getDBserviceReview(serviceId, this.reviwePaginate).subscribe(
       response => {
         if (response && response.content) {
           this.dbReview = response.content;
+          this.totalReviewRecords = response.total;
           // this.getDetailReview();
         }
       });
@@ -226,6 +245,7 @@ export class ServiceDetailComponent implements OnInit {
 
       if (this.auth.isAuthenticate) {
         this.reviewSuccessMessage = null;
+        this.reviewForm.controls.serviceId.setValue(this.docId);
         this.ecpService.addDBserviceReview(this.reviewForm.value).subscribe(
           response => {
             if (response) {
@@ -239,7 +259,7 @@ export class ServiceDetailComponent implements OnInit {
               //   totalrating += response.rating;
               //   this.service.aggrRatingPercentage = totalrating / (this.dbReview.length + 1);
               // }
-              // this.getDBserviceReview(this.docId);
+              this.getDBserviceReview(this.docId);
               this.reviewForm.reset();
               this.reviewSuccessMessage = "Review successfully posted.";
             }
@@ -363,12 +383,12 @@ export class ServiceDetailComponent implements OnInit {
   }
 
 
-  likeUnlikeReview(review: DBReviews, like: boolean) {
-    this.ecpService.likeUnlikeReview(review.id, like).subscribe(
+  likeUnlikeReview(reviewId: string) {
+    this.ecpService.likeUnlikeReview(reviewId).subscribe(
       response => {
         if (response) {
-          const index = this.dbReview.findIndex(val => val.id === review.id);
-          this.dbReview[index] = response;
+          const index = this.dbReview.findIndex(val => val.id === reviewId);
+          this.dbReview[index].likeCount = response.likeCount;
         }
       },
       error => {
@@ -378,13 +398,36 @@ export class ServiceDetailComponent implements OnInit {
 
   userUpvoted(likeCount): boolean {
     if (likeCount && this.auth.user) {
-      const userId = this.auth.user.id;
-      const index = likeCount.findIndex(val => val === userId);
+      const index = likeCount.findIndex(val => val === this.userId);
       if (index !== -1) {
         return true;
       }
     }
     return false;
+  }
+
+  editReview(review: DBReviews) {
+    this.reviewSuccessMessage = null;
+    this.reviewForm.patchValue(review);
+  }
+
+  deleteReview() {
+    this.ecpService.deleteDBserviceReview(this.deleteReviewId).subscribe(
+      response => {
+        if (response) {
+          this.getDBserviceReview(this.docId);
+        }
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
+  changeReviewPage(page: number) {
+    this.reviwePaginate.p = page;
+    this.getDBserviceReview(this.docId);
+    // this.onSearch()
+    console.log(this.reviwePaginate);
   }
 
 }

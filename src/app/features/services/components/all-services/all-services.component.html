@@ -119,7 +119,7 @@
       </div>
 
       <!-- Socailmedia share box  -->
-      <div class="m-t-30 bg-white category-box">
+      <div class="m-t-30 m-b-30 bg-white category-box">
         <div class="m-b-20">
           <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
           <a class="social-link" [href]="whatsappUrl">
@@ -204,7 +204,8 @@
       </div>
 
       <div *ngIf="services && services.length == 0 && !isLoading" class="m-t-40">
-        <img src="assets/images/no-result.png" />
+        <!-- <img src="assets/images/no-result.png" /> -->
+        <app-no-records></app-no-records>
       </div>
       <!-- Service list  -->
       <div class="m-t-40" *ngIf="services  && pageServices && pageServices.length > 0 && !isLoading">

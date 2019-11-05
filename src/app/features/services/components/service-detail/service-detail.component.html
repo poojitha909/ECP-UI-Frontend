@@ -15,7 +15,7 @@
 
   <div uk-grid>
 
-    <div class="uk-width-1-3@m">
+    <div class="uk-width-1-3@m m-b-30">
 
       <!-- Conatact Service details START-->
       <div class="details-box bg-white">
@@ -397,7 +397,7 @@
     </div>
 
     <div class="uk-width-expand@m">
-      <!-- service informations -->
+      <!-- service informations START-->
       <div class="info category-box bg-white">
         <!-- About -->
         <ng-container *ngIf="service?.seo_dt?.desc || service?.basicProfileInfo?.description">
@@ -461,11 +461,12 @@
         </div>
 
       </div>
+      <!-- service informations END-->
 
       <!-- Write Review Form START-->
-      <div class="m-t-30">
-
-        <div class="category-box bg-white">
+      <!-- This is review modal -->
+      <div id="review-modal" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
           <h1 class="font-regular-24 font-weight-600">Write a Review</h1>
           <hr />
           <!-- Success box START-->
@@ -475,17 +476,17 @@
           <!-- Success box END-->
           <form [formGroup]="reviewForm" (ngSubmit)="onReviewSubmit()" class="uk-form-stacked review-form">
 
-            <div class="uk-child-width-1-2@s" uk-grid>
-              <!-- <div>
-                <div class="uk-margin">
-                  <label class="uk-form-label" for="form-stacked-text">Username<span class="required">*</span></label>
-                  <div class="uk-form-controls">
-                    <input class="uk-input" id="form-stacked-text" formControlName="userName" type="text"
-                      placeholder="Enter your name">
-                  </div>
-                </div>
-              </div> -->
-              <div>
+
+            <div class="uk-margin">
+              <label class="uk-form-label" for="form-stacked-text">Title<span class="required">*</span></label>
+              <div class="uk-form-controls">
+                <input class="uk-input" id="form-stacked-text" formControlName="title" type="text"
+                  placeholder="Enter your name">
+              </div>
+            </div>
+
+            <!-- <div class="uk-child-width-1-2@s" uk-grid> -->
+            <!-- <div>
                 <div class="uk-margin">
                   <label class="uk-form-label" for="form-stacked-select">Your Rating<span
                       class="required">*</span></label>
@@ -501,9 +502,9 @@
                   </div>
                 </div>
 
-              </div>
+              </div> -->
 
-            </div>
+            <!-- </div> -->
 
             <div class="uk-margin">
               <label class="uk-form-label" for="form-stacked-text">Your Review<span class="required">*</span></label>
@@ -514,7 +515,8 @@
             </div>
 
             <div class="uk-text-right">
-              <button class="uk-button uk-button-default" type="submit"
+              <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
+              <button class="uk-button uk-button-default m-l-5" type="submit"
                 [disabled]="reviewForm.invalid">{{ auth.isAuthenticate ? 'Post Review': 'Signin to Review'}}</button>
             </div>
           </form>
@@ -522,184 +524,290 @@
       </div>
       <!-- Write Review Form END-->
 
-      <!-- Reviews Section-->
-      <div *ngIf=" dbReview.length > 0 || (service.Reviews && service?.Reviews.length > 0)" class="m-t-30">
-        <h1 class="font-regular-24 font-weight-600"> Reviews
-          ({{ isDBService ? dbReview.length :  service.Reviews.length + dbReview.length}})
-        </h1>
-        <!-- <h1 *ngIf="isDBService" class="font-regular-24 font-weight-600"> Reviews ({{dbReview.length}})</h1> -->
-
-        <!--JD Reviews -->
-        <ng-container *ngIf="!isDBService && service.Reviews.length > 0">
-          <div *ngFor="let review of service.Reviews" class="m-t-30">
-            <div uk-grid>
-              <div class="uk-width-expand">
-                <div class="child-width-auto" uk-grid>
-                  <div>
-                    <img class="review-avatar" [src]="review.reviewer_photo" />
-                  </div>
-                  <div class="p-l-20">
-                    <p class="font-regular m-0">{{ review.reviewer_name}}</p>
-                    <div>
-                      <ngb-rating [rate]="review.review_rate" [readonly]="true" [max]="5">
-                        <ng-template let-fill="fill" let-index="index">
-                          <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                        </ng-template>
-                      </ngb-rating>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <p class="font-regular-15">{{review.act_time}}</p>
-              </div>
-            </div>
-            <div class="m-t-30">
-              <p class="font-regular">{{review.review_text }}</p>
-            </div>
-            <!-- <div class="m-t-30 m-b-30">
-              <div uk-grid>
-                <div class="uk-width-expand">
-                  <a class="like-link">
-                    <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5 font-22"></fa-icon> 17
-                  </a>
-                  <a class="m-l-5 dislike-link">
-                    <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5 font-22"></fa-icon> 20
-                  </a>
-                </div>
-              </div>
-            </div> -->
-            <hr />
-          </div>
-
-        </ng-container>
-
-        <!--DB Reviews -->
-        <ng-container *ngIf="dbReview.length > 0">
-          <div *ngFor="let review of dbReview" [ngClass]="{'m-t-30':isDBService }">
-            <div uk-grid>
-              <div class="uk-width-expand">
-                <div class="child-width-auto" uk-grid>
-                  <div>
-                    <img class="review-avatar" [imageHandler] [src]="review.userImage?.thumbnailImage" />
-                  </div>
-                  <div class="p-l-20">
-                    <p class="font-regular m-0">
-                      {{ review.userName }}</p>
-                    <div>
-                      <ngb-rating [rate]="getDbServiceRating(review.rating)" [readonly]="true" [max]="5">
-                        <ng-template let-fill="fill" let-index="index">
-                          <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                        </ng-template>
-                      </ngb-rating>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <p class="font-regular-15">{{review.createdAt | timeago }}</p>
-              </div>
-            </div>
-            <div class="m-t-30">
-              <div class="font-regular">
-                <p>{{ review.review}}</p>
-              </div>
-            </div>
-            <div class="m-t-30 m-b-30">
-              <div uk-grid>
-                <div class="uk-width-expand">
-                  <ng-container *ngIf="userUpvoted(review.likeCount)">
-                    <a class="like-link">
-                      <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5 font-22 upvoted"></fa-icon>
-                    </a> {{ review.likeCount ? review.likeCount.length : '0' }}
-                  </ng-container>
-
-                  <ng-container *ngIf="!userUpvoted(review.likeCount)">
-                    <a class="like-link" (click)="likeUnlikeReview(review,'true')">
-                      <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5 font-22"></fa-icon>
-                    </a> {{ review.likeCount ? review.likeCount.length : '0' }}
-                  </ng-container>
-                  <!-- <a class="m-l-5 dislike-link font-22" (click)="likeUnlikeReview(review,'false')">
-                    <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5 font-22"></fa-icon>
-                  </a> {{ review.unLikeCount ? review.unLikeCount.length : '0' }} -->
-                </div>
-                <!-- <div class="replay-link">
-                  <a class="font-regular">
-                    <fa-icon [icon]="['far', 'comments']" class="m-r-5"></fa-icon> Reply
-                  </a>
-                </div> -->
-              </div>
-            </div>
-            <hr />
-          </div>
-        </ng-container>
-        <!-- Reviews -->
-        <!-- <div class="m-t-30">
-                    <div uk-grid>
-                        <div class="uk-width-expand">
-                            <div class="child-width-auto" uk-grid>
-                                <div>
-                                    <img class="review-avatar" src="assets/images/discussion-user.png" />
-                                </div>
-                                <div class="p-l-20">
-                                    <p class="font-regular m-0">Dubbal Singh</p>
-                                    <div>
-                                        <ngb-rating rate="4" [readonly]="true" [max]="5">
-                                            <ng-template let-fill="fill" let-index="index">
-                                                <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                                            </ng-template>
-                                        </ngb-rating>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <p class="font-regular-15">3 hours ago</p>
-                        </div>
-                    </div>
-                    <div class="m-t-30">
-                        <p class="font-regular">I need to tell this to the world that this is the best and right place
-                            for people who are
-                            suffering with any type of physical pain</p>
-                    </div>
-                    <div class="m-t-30 m-b-30">
-                        <div uk-grid>
-                            <div class="uk-width-expand">
-                                <span>
-                                    <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5"></fa-icon> 17
-                                </span>
-                                <span class="m-l-5">
-                                    <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5"></fa-icon> 20
-                                </span>
-                            </div>
-                            <div class="replay-link">
-                                <a class="font-regular">
-                                    <fa-icon [icon]="['far', 'comments']" class="m-r-5"></fa-icon> Reply
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <hr />
-                </div> -->
-
-      </div>
-
-      <div
-        *ngIf=" (dbReview.length == 0  && !service?.Reviews) || (service?.Reviews && service?.Reviews.length == 0 && dbReview.length == 0)"
-        class="m-t-30">
-        <h1 class="font-regular-24 font-weight-600"> Reviews(0)</h1>
-        <hr />
-        <div class="uk-child-width-expand" uk-grid>
-
-          <div class="info">
-            <h1 class="font-regular-24 font-weight-600 m-0"> No review!</h1>
-            <p class="lable font-regular m-0">No user has left reviwe on this service.</p>
-          </div>
-          <div>
-            <img src="/assets/images/norecord.svg" />
+      <!-- Delete review confirmation modal -->
+      <div id="delete-modal" class="uk-flex-top" uk-modal>
+        <div class="uk-modal-dialog uk-margin-auto-vertical uk-modal-body">
+          <p class="font-regular font-weight-600">Are you sure want to delete this Comment?</p>
+          <p class="lable font-regular m-0">By deleting this comment, you will also delete all the replies posted for
+            this perticular comment.</p>
+          <div class="uk-text-right">
+            <button class="uk-button uk-button-default review-btn-transparent uk-modal-close"
+              type="button">Cancel</button>
+            <button class="uk-button uk-button-default review-btn uk-modal-close m-l-5"
+              (click)="deleteReview()">Delete</button>
           </div>
         </div>
       </div>
+
+
+      <!-- Reviews Section-->
+      <div class="m-t-30">
+
+        <!-- <h1 *ngIf="isDBService" class="font-regular-24 font-weight-600"> Reviews ({{dbReview.length}})</h1> -->
+        <ul class="uk-switcher switcher-container">
+          <li>
+            <!--DB Reviews START-->
+
+            <ng-container *ngIf="dbReview.length == 0">
+              <h1 class="font-regular-24 font-weight-600"> Reviews(0)</h1>
+              <div class="uk-child-width-expand m-t-50 m-b-50" uk-grid>
+                <div class="info">
+                  <h1 class="font-regular-24 font-weight-600 m-0"> No review!</h1>
+                  <p class="lable font-regular m-0"> No user has left review for this service.</p>
+                  <p> <button class="uk-button uk-button-default review-btn" uk-toggle="target: #review-modal">Write
+                      Review</button></p>
+                </div>
+                <div class="uk-text-right">
+                  <img src="/assets/images/norecord.svg" />
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="dbReview.length > 0">
+              <div class="m-t-50 m-b-20" uk-grid>
+                <div class="uk-width-expand uk-flex uk-flex-middle">
+                  <h1 class="font-regular-24 font-weight-600"> Reviews
+                    ({{dbReview.length}})
+                  </h1>
+                </div>
+                <div class="uk-width-auto">
+                  <button class="uk-button uk-button-default review-btn-transparent" uk-toggle="target: #review-modal"
+                    (click)="reviewForm.reset();reviewSuccessMessage = null;">Write Review</button>
+                </div>
+              </div>
+
+              <!-- Review Box START-->
+              <div *ngFor="let review of dbReview" class="category-box m-b-30 bg-white">
+                <div uk-grid>
+                  <div class="uk-width-expand">
+                    <div class="child-width-auto" uk-grid>
+                      <div>
+                        <img class="review-avatar" [imageHandler] [src]="review.userImage?.thumbnailImage" />
+                      </div>
+                      <div class="p-l-20">
+                        <p class="font-regular m-0">
+                          {{ review.userName }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="uk-flex uk-flex-middle">
+                    <p class="font-regular-15">{{review.createdAt | timeago }}</p>
+                  </div>
+                </div>
+                <hr />
+
+                <div uk-grid>
+                  <div class="uk-width-expand uk-flex uk-flex-middle">
+                    <p class="font-regular font-weight-600">{{review.title}}</p>
+                  </div>
+                  <div>
+                    <ngb-rating [rate]="getDbServiceRating(review.rating)" [readonly]="true" [max]="5">
+                      <ng-template let-fill="fill" let-index="index">
+                        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                      </ng-template>
+                    </ngb-rating>
+                  </div>
+                </div>
+
+                <div class="m-t-30">
+                  <div class="font-regular">
+                    <p>{{ review.review}}</p>
+                  </div>
+                </div>
+
+                <div class="m-t-30">
+                  <div uk-grid>
+                    <div class="uk-width-expand">
+                      <ng-container *ngIf="userId !== review.userId">
+
+                        <a class="like-link" (click)="likeUnlikeReview(review.id)">
+                          <ng-container *ngIf="userUpvoted(review.likeCount)">
+                            <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5 font-22 upvoted"></fa-icon>
+                          </ng-container>
+                          <ng-container *ngIf="!userUpvoted(review.likeCount)">
+                            <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5 font-22"></fa-icon>
+                          </ng-container>
+                        </a> {{ review.likeCount ? review.likeCount.length : '0' }}
+                      </ng-container>
+                      <!-- <a class="m-l-5 dislike-link font-22" (click)="likeUnlikeReview(review,'false')">
+                      <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5 font-22"></fa-icon>
+                    </a> {{ review.unLikeCount ? review.unLikeCount.length : '0' }} -->
+                      <ng-container *ngIf="userId == review.userId">
+                        <a class="font-regular uk-text-primary" href="#review-modal" uk-toggle
+                          (click)="editReview(review)">
+                          Edit
+                        </a>
+                        <a class="font-regular uk-text-danger m-l-5" href="#delete-modal"
+                          (click)="deleteReviewId = review.id;" uk-toggle>
+                          Delete
+                        </a>
+                      </ng-container>
+                    </div>
+                    <div class="replay-link">
+                      <a class="font-regular uk-text-primary">
+                        <fa-icon [icon]="['far', 'comments']" class="m-r-5"></fa-icon> Reply
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <!-- Review Box END-->
+
+              <app-pagination *ngIf="(dbReview && dbReview.length > 0)" [totalRecords]="totalReviewRecords"
+                [currentPage]="reviwePaginate.p" [perPage]="reviwePaginate.s"
+                (pageChangeCall)="changeReviewPage($event)">
+              </app-pagination>
+
+            </ng-container>
+            <!-- DB Reviews END -->
+          </li>
+          <li>
+            <!--JD Reviews START-->
+            <ng-container *ngIf="!isDBService && service.Reviews.length == 0">
+              <h1 class="font-regular-24 font-weight-600"> Reviews(0)</h1>
+
+              <div class="uk-child-width-expand m-t-50 m-b-50" uk-grid>
+                <div class="info">
+                  <h1 class="font-regular-24 font-weight-600 m-0"> No review!</h1>
+                  <p class="lable font-regular m-0"> No user has left review for this service.</p>
+                </div>
+                <div class="uk-text-right">
+                  <img src="/assets/images/norecord.svg" />
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="!isDBService && service.Reviews.length > 0">
+              <h1 class="font-regular-24 font-weight-600 m-t-50 m-b-20"> Reviews
+                ({{service.Reviews.length}})
+              </h1>
+              <!-- Demo box -->
+              <!-- <div class="category-box m-t-30 bg-white">
+                <div uk-grid>
+                  <div class="uk-width-expand">
+                    <div class="child-width-auto" uk-grid>
+                      <div>
+                        <img class="review-avatar" src="assets/images/discussion-user.png" />
+                      </div>
+                      <div class="p-l-20">
+                        <p class="font-regular m-0">Dubbal Singh</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="uk-flex uk-flex-middle">
+                    <p class="font-regular-15">3 hours ago</p>
+                  </div>
+                </div>
+                <hr />
+                <div uk-grid>
+                  <div class="uk-width-expand uk-flex uk-flex-middle">
+                    <p class="font-regular font-weight-600">Excellent Service!! </p>
+                  </div>
+                  <div>
+                    <ngb-rating rate="4" [readonly]="true" [max]="5">
+                      <ng-template let-fill="fill" let-index="index">
+                        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                      </ng-template>
+                    </ngb-rating>
+                  </div>
+                </div>
+                <div class="m-t-30">
+                  <p class="font-regular">I need to tell this to the world that this is the best and right place
+                    for people who are
+                    suffering with any type of physical pain</p>
+                </div>
+                <div class="m-t-30">
+                  <div uk-grid>
+                    <div class="uk-width-expand">
+                      <span>
+                        <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5"></fa-icon> 17
+                      </span>
+                      <span class="m-l-5">
+                        <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5"></fa-icon> 20
+                      </span>
+                      <ng-container>
+                        <a class="font-regular uk-text-primary">
+                          Edit
+                        </a>
+                        <a class="font-regular uk-text-danger m-l-5">
+                          Delete
+                        </a>
+                      </ng-container>
+                    </div>
+                    <div class="replay-link">
+                      <a class="font-regular">
+                        <fa-icon [icon]="['far', 'comments']" class="m-r-5"></fa-icon> Reply
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+              </div> -->
+              <!-- Demo box -->
+
+
+              <div *ngFor=" let review of service.Reviews" class="category-box m-b-30 bg-white">
+                <div uk-grid>
+                  <div class="uk-width-expand">
+                    <div class="child-width-auto" uk-grid>
+                      <div>
+                        <img class="review-avatar" [src]="review.reviewer_photo" />
+                      </div>
+                      <div class="p-l-20">
+                        <p class="font-regular m-0">{{ review.reviewer_name}}</p>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="uk-flex uk-flex-middle">
+                    <p class="font-regular-15">{{review.act_time}}</p>
+                  </div>
+                </div>
+
+                <hr />
+                <div uk-grid>
+                  <div class="uk-width-expand uk-flex uk-flex-middle">
+                    <p class="font-regular font-weight-600">Reviewed by justdail user</p>
+                  </div>
+                  <div>
+                    <ngb-rating [rate]="review.review_rate" [readonly]="true" [max]="5">
+                      <ng-template let-fill="fill" let-index="index">
+                        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                      </ng-template>
+                    </ngb-rating>
+                  </div>
+                </div>
+
+                <div class="m-t-30">
+                  <p class="font-regular">{{review.review_text }}</p>
+                </div>
+                <!-- <div class="m-t-30 m-b-30">
+                  <div uk-grid>
+                    <div class="uk-width-expand">
+                      <a class="like-link">
+                        <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5 font-22"></fa-icon> 17
+                      </a>
+                      <a class="m-l-5 dislike-link">
+                        <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5 font-22"></fa-icon> 20
+                      </a>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+
+            </ng-container>
+            <!--JD Reviews END-->
+          </li>
+        </ul>
+        <!-- Reviews -->
+      </div>
+
+      <!-- <div
+        *ngIf=" (dbReview.length == 0  && !service?.Reviews) || (service?.Reviews && service?.Reviews.length == 0 && dbReview.length == 0)"
+        class="m-t-30">
+    
+      </div> -->
       <!-- Reviews Section END-->
     </div>
   </div>

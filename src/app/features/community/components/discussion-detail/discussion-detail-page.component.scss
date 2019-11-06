@@ -42,13 +42,13 @@
       font-family: $regular-font;
       border-bottom: none;
     }
+    .borderleft{
+      border-left: 2px solid #D7E0EF;
+    }
     .uk-card-body{
       padding: 0px 20px 0px 20px;
       font-size: 18px;
-    }
-    .uk-card-footer{
-      border-top: none;
-      img{
+      .img{
         height: 35px;
       }
       .like, .reply{
@@ -63,12 +63,19 @@
         }
       }
     }
+    .uk-card-footer{
+      border-top: none;
+      
+    }
     .uk-card-default{
       margin-bottom: 20px;
       box-shadow: none;
       border: 1px solid #D7E0EF;
       border-radius: 4px;
     }
+    .uk-card-default.noborder{
+      border: none;
+    } 
     .publish-on{
       font-size: 15px;
       color: rgba(22, 28, 45, 0.68);

@@ -24,6 +24,7 @@ export class DiscussionDetailPageComponent implements OnInit {
   discussion: any;
   urltxt: string;
   replies: any[];
+  sortedReplies: any[];
   user: any;
   replyId: string;
   replyParentUser: string;
@@ -165,7 +166,8 @@ export class DiscussionDetailPageComponent implements OnInit {
       if (response.data.discuss) {
         this.discussion = response.data.discuss;
         let replies = response.data.replies;
-        this.setReplies(replies);
+        this.sortedReplies = response.data.sortedReplies;
+        //this.setReplies(replies);
       }
     });
   }

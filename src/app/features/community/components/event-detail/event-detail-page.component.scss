@@ -4,27 +4,13 @@
     font-family: $regular-font;
     color: $font-color-black;
     margin-bottom: 48px;
+    .uk-container{
+      margin-top: 40px;
+    }
     .publish-on{
       font-size: 15px;
       color: rgba(22, 28, 45, 0.68);
       opacity: 0.5;
-    }
-    .breadcrumbs {
-      margin-top: 20px;
-      .uk-breadcrumb > :nth-child(n+2):not(.uk-first-column)::before{
-        margin: 0 5px;
-        content: ">";
-      }
-      .uk-breadcrumb {
-        font-size: 18px;
-        color: $primary-txt-color;
-        margin-top: 20px;
-      }
-      .uk-breadcrumb b {
-        font-size: 18px;
-        color:#000;
-        font-weight: bold;
-      }
     }
     .heading{ 
       font-family: $regular-font;

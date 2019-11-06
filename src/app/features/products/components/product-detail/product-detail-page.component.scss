@@ -4,23 +4,6 @@
   font-family: $regular-font;
   color: $font-color-black;
   margin-bottom: 48px;
-  .breadcrumbs {
-    margin-top: 20px;
-    .uk-breadcrumb > :nth-child(n+2):not(.uk-first-column)::before{
-      margin: 0 5px;
-      content: ">";
-    }
-    .uk-breadcrumb {
-      font-size: 18px;
-      color: $primary-txt-color;
-      margin-top: 20px;
-    }
-    .uk-breadcrumb b {
-      font-size: 18px;
-      color:#000;
-      font-weight: bold;
-    }
-  }
   .heading{
     font-family: $regular-font;
     font-size: 32px;

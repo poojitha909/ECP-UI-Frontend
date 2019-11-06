@@ -116,3 +116,21 @@
 .required{
   color: #ee0202;
 }
+
+.breadcrumbs {
+  margin-top: 48px;
+  .uk-breadcrumb > :nth-child(n+2):not(.uk-first-column)::before{
+      margin: 0 5px;
+      content: ">";
+  }
+  .uk-breadcrumb {
+      font-size: 18px; 
+      color: $primary-txt-color;
+      margin-top: 20px;
+  }
+  .uk-breadcrumb b {
+      font-size: 18px;
+      color:#000;
+      font-weight: bold;
+  }
+}

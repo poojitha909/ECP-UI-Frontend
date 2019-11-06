@@ -9,23 +9,6 @@
     margin-top:0px;
     margin-bottom:0px;
   }
-  .breadcrumbs {
-    margin-top: 20px;
-    .uk-breadcrumb > :nth-child(n+2):not(.uk-first-column)::before{
-      margin: 0 5px;
-      content: ">";
-    }
-    .uk-breadcrumb {
-      font-size: 18px; 
-      color: $primary-txt-color;
-      margin-top: 20px;
-    }
-    .uk-breadcrumb b {
-      font-size: 18px;
-      color:#000;
-      font-weight: bold;
-    }
-  }
   .addevent{
     border: 1px solid #1a73e8;
     color: #1a73e8;

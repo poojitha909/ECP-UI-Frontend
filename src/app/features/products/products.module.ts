@@ -8,7 +8,6 @@ import { AllProductsComponent } from './components/all-products/all-products.com
 import { PopularSearchComponent } from './components/popular-search/popular-search.component';
 import { ProductDetailPageComponent } from './components/product-detail/product-detail-page.component';
 import { ProductCreatePageComponent } from './components/product-create/product-create-page.component';
-import { TimeAgoPipe } from '../../shared/timeago.pipe';
 import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
 import { ProductNoRecordComponent } from './components/product-no-record/product-no-record.component'
 @NgModule({
@@ -17,7 +16,6 @@ import { ProductNoRecordComponent } from './components/product-no-record/product
           PopularSearchComponent,
           ProductDetailPageComponent,
           ProductCreatePageComponent,
-          TimeAgoPipe,
           ProductNoRecordComponent ],
   imports: [
     CoreModule,

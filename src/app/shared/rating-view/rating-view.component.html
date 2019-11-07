@@ -21,7 +21,7 @@
     </li>
     <li>
         <!-- JD service ratings view-->
-        <div class="jd-rating">
+        <div class="jd-rating" *ngIf="jdDetailReview">
             <div class="p-10 uk-flex uk-flex-center" uk-grid>
                 <div>
                     <h1>{{ jdDetailReview?.rating}}</h1>
@@ -108,7 +108,7 @@
                 </div>
             </div>
         </li>
-        <li>
+        <li *ngIf="jdDetailReview">
             <!-- JD service ratings counts-->
             <div uk-grid>
                 <div>

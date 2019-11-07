@@ -15,7 +15,6 @@ import { DiscussionDetailPageComponent } from './components/discussion-detail/di
 import { DiscussionNoRecordComponent } from './components/discussion-no-record/discussion-no-record.component';
 import { EventNoRecordComponent } from './components/event-no-record/event-no-record.component';
 import { EllipsisPipe } from '../../shared/ellipsis.pipe';
-import { TimeAgoPipe } from '../../shared/timeago.pipe';
 import { StripHtmlPipe } from '../../shared/striphtml.pipe';
 import { SharedModule } from '../../shared';
 import { EditorModule } from '@tinymce/tinymce-angular';
@@ -23,7 +22,6 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 @NgModule({
   declarations: [
     EllipsisPipe,
-    TimeAgoPipe,
     StripHtmlPipe,
     CommunityPageComponent,
     DiscussionNoRecordComponent,

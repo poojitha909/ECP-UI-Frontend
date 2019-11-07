@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiConstants } from 'src/app/api.constants';
 import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
-    
+
     selectedCatId: string;
     selectedCatname: string;
 
@@ -61,19 +62,40 @@ export class ProductService {
         return this.http.get<any[]>(`${this.productUrl}/category/page?p=0&s=10000`);
     }
 
-    addComment(productId: string, commentTxt: string, username: string, rating: number) {
-        return this.http.post<any[]>(`${this.productUrl}/review`, {
-            productId: productId,
-            review: commentTxt,
-            userName: username,
-            likeCount: 0,
-            unlikeCount: 0,
-            status: 0,
-            rating: rating
-        });
+    addReview(review: any) {
+        return this.http.post<any[]>(`${this.productUrl}/review`, review);
     }
 
-    getReviewList(productId): Observable<any[]> {
-        return this.http.get<any[]>(`${this.productUrl}/review/page?p=0&s=10000&dir=1&sort=createdAt&productId=${productId}&searchTxt=&category=`);
+    getReviewList(productId, reviwePaginate: any): Observable<any[]> {
+        return this.http.get<any[]>(`${this.productUrl}/review/page?productId=${productId}&p=${reviwePaginate.p}&s=${reviwePaginate.s}`);
     }
+
+
+  likeUnlikeReview(reviewId: string): Observable<any> {
+    return this.http.put<any>(`${this.productUrl}/likeReview?reviewId=${reviewId}`, {}).pipe(
+      map(response => {
+        if (response) {
+          return response.data;
+        }
+      }));
+  }
+
+  addRating(rating: any): Observable<any> {
+    return this.http.post<any>(`${this.productUrl}/addRating`, rating).pipe(
+      map(response => {
+        if (response) {
+          return response.data;
+        }
+      }));
+  }
+
+  getRatings(productId: string): Observable<any> {
+    return this.http.get<any>(`${this.productUrl}/ratings?productId=${productId}`).pipe(
+      map(response => {
+        if (response) {
+          return response.data;
+        }
+      }));
+  }
+
 }

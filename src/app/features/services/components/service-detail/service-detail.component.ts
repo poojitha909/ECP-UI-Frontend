@@ -165,8 +165,8 @@ export class ServiceDetailComponent implements OnInit {
           this.dbRating = response;
           console.log(this.dbRating);
           if (this.auth.user) {
-            const userId = this.auth.user.id;
-            this.userRating = this.dbRating.find(val => val.userId == userId);
+            // const userId = this.auth.user.id;
+            this.userRating = this.dbRating.find(val => val.userId == this.userId);
           }
           this.getDetailRating();
         }
@@ -417,8 +417,6 @@ export class ServiceDetailComponent implements OnInit {
   changeReviewPage(page: number) {
     this.reviwePaginate.p = page;
     this.getDBserviceReview(this.docId);
-    // this.onSearch()
-    console.log(this.reviwePaginate);
   }
 
 }

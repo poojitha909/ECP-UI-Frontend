@@ -1,0 +1,76 @@
+<div *ngFor="let review of dbReview" class="category-box m-b-30 bg-white">
+    <div uk-grid>
+      <div class="uk-width-expand">
+        <div class="child-width-auto" uk-grid>
+          <div>
+            <img class="review-avatar" [imageHandler] [src]="review.userImage?.thumbnailImage" />
+          </div>
+          <div class="p-l-20 info">
+            <p class="font-regular m-0">
+              {{ review.userName }}</p>
+            <p class="font-regular-15 m-0 lable">{{review.contributors}} Contributions</p>
+          </div>
+        </div>
+      </div>
+      <div class="uk-flex uk-flex-middle">
+        <p class="font-regular-15">{{review.createdAt | timeago }}</p>
+      </div>
+    </div>
+    <hr />
+
+    <div uk-grid>
+      <div class="uk-width-expand uk-flex uk-flex-middle">
+        <p class="font-regular font-weight-600">{{review.title}}</p>
+      </div>
+      <div>
+        <ngb-rating [rate]="getDbServiceRating(review.rating)" [readonly]="true" [max]="5">
+          <ng-template let-fill="fill" let-index="index">
+            <span class="star" [class.filled]="fill === 100">&#9733;</span>
+          </ng-template>
+        </ngb-rating>
+      </div>
+    </div>
+
+    <div class="m-t-30">
+      <div class="font-regular">
+        <p>{{ review.review}}</p>
+      </div>
+    </div>
+
+    <div class="m-t-30">
+      <div uk-grid>
+        <div class="uk-width-expand">
+          <ng-container *ngIf="userId !== review.userId">
+
+            <a class="like-link" (click)="likeUnlikeReview(review.id)">
+              <ng-container *ngIf="userUpvoted(review.likeCount)">
+                <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5 font-22 upvoted"></fa-icon>
+              </ng-container>
+              <ng-container *ngIf="!userUpvoted(review.likeCount)">
+                <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5 font-22"></fa-icon>
+              </ng-container>
+            </a> {{ review.likeCount ? review.likeCount.length : '0' }}
+          </ng-container>
+          <!-- <a class="m-l-5 dislike-link font-22" (click)="likeUnlikeReview(review,'false')">
+          <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5 font-22"></fa-icon>
+        </a> {{ review.unLikeCount ? review.unLikeCount.length : '0' }} -->
+          <ng-container *ngIf="userId == review.userId">
+            <a class="font-regular uk-text-primary" href="#review-modal" uk-toggle
+              (click)="editReview(review)">
+              Edit
+            </a>
+            <!-- <a class="font-regular uk-text-danger m-l-5" href="#delete-modal"
+              (click)="deleteReviewId = review.id;" uk-toggle>
+              Delete
+            </a> -->
+          </ng-container>
+        </div>
+        <!-- <div class="replay-link">
+          <a class="font-regular uk-text-primary">
+            <fa-icon [icon]="['far', 'comments']" class="m-r-5"></fa-icon> Reply
+          </a>
+        </div> -->
+      </div>
+    </div>
+
+  </div>

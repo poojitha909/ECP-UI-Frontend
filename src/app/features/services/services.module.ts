@@ -11,10 +11,13 @@ import { PopularSearchComponent } from './components/popular-search/popular-sear
 import { ServiceDetailComponent } from './components/service-detail/service-detail.component';
 import { TimeAgoPipe } from 'src/app/shared/timeago.pipe';
 import { NoRecordsComponent } from './components/no-records/no-records.component';
+import { AddRatingComponent } from './components/add-rating/add-rating.component';
+import { RatingViewComponent } from './components/rating-view/rating-view.component';
+import { ReviewsListComponent } from './components/reviews-list/reviews-list.component';
 
 
 @NgModule({
-  declarations: [ServicesPageComponent, AllServicesComponent, SearchContainerComponent, PopularSearchComponent, ServiceDetailComponent,TimeAgoPipe, NoRecordsComponent],
+  declarations: [ServicesPageComponent, AllServicesComponent, SearchContainerComponent, PopularSearchComponent, ServiceDetailComponent,TimeAgoPipe, NoRecordsComponent, AddRatingComponent, RatingViewComponent, ReviewsListComponent],
   imports: [CommonModule, ServicesRoutingModule, SharedModule, CoreModule]
 })
 export class ServicesModule { }

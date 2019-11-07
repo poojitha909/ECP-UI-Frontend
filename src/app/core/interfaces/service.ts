@@ -199,6 +199,7 @@ export interface DBReviews {
     unLikeCount?: string[];
     status?: number;
     title?: string;
+    contributors?: string;
     userName?: string;
     parentReviewId?: any;
     createdAt?: number;

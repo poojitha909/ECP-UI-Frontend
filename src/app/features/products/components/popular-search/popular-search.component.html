@@ -13,7 +13,7 @@
               <div class="uk-width-expand">
                 <a>{{prod.name}}</a>
                 <div>
-                  <ngb-rating [readonly]="true" [(rate)]="prod.rating" [max]="5">
+                  <ngb-rating [readonly]="true" [rate]="getDbServiceRating(prod.rating)" [max]="5">
                     <ng-template let-fill="fill" let-index="index">
                       <span class="star" [class.filled]="fill === 100">&#9733;</span>
                     </ng-template>

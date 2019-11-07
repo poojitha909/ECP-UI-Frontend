@@ -354,25 +354,14 @@
             <!--DB Reviews START-->
 
             <ng-container *ngIf="dbReview.length == 0">
-              <h1 class="font-regular-24 font-weight-600"> Reviews(0)</h1>
-              <div class="uk-child-width-expand m-t-50 m-b-50" uk-grid>
-                <div class="info">
-                  <h1 class="font-regular-24 font-weight-600 m-0"> No review!</h1>
-                  <p class="lable font-regular m-0"> No user has left review for this service.</p>
-                  <p> <button class="uk-button uk-button-default review-btn" uk-toggle="target: #review-modal">Write
-                      Review</button></p>
-                </div>
-                <div class="uk-text-right">
-                  <img src="/assets/images/norecord.svg" />
-                </div>
-              </div>
+              <app-no-review></app-no-review>
             </ng-container>
 
             <ng-container *ngIf="dbReview.length > 0">
               <div class="m-t-50 m-b-20" uk-grid>
                 <div class="uk-width-expand uk-flex uk-flex-middle">
                   <h1 class="font-regular-24 font-weight-600"> Reviews
-                    ({{dbReview.length}})
+                    ({{totalReviewRecords}})
                   </h1>
                 </div>
                 <div class="uk-width-auto">

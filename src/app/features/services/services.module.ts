@@ -9,15 +9,12 @@ import { AllServicesComponent } from './components/all-services/all-services.com
 import { SearchContainerComponent } from './components/search-container/search-container.component';
 import { PopularSearchComponent } from './components/popular-search/popular-search.component';
 import { ServiceDetailComponent } from './components/service-detail/service-detail.component';
-import { TimeAgoPipe } from 'src/app/shared/timeago.pipe';
 import { NoRecordsComponent } from './components/no-records/no-records.component';
-import { AddRatingComponent } from './components/add-rating/add-rating.component';
-import { RatingViewComponent } from './components/rating-view/rating-view.component';
-import { ReviewsListComponent } from './components/reviews-list/reviews-list.component';
+
 
 
 @NgModule({
-  declarations: [ServicesPageComponent, AllServicesComponent, SearchContainerComponent, PopularSearchComponent, ServiceDetailComponent,TimeAgoPipe, NoRecordsComponent, AddRatingComponent, RatingViewComponent, ReviewsListComponent],
+  declarations: [ServicesPageComponent, AllServicesComponent, SearchContainerComponent, PopularSearchComponent, ServiceDetailComponent, NoRecordsComponent],
   imports: [CommonModule, ServicesRoutingModule, SharedModule, CoreModule]
 })
 export class ServicesModule { }

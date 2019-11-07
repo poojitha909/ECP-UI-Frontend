@@ -1,0 +1,25 @@
+<div class="add-rating p-20">
+    <div class="p-10 uk-flex uk-flex-center">
+      {{userRating ? 'Your Ratings':'Rate this service'}}
+    </div>
+  </div>
+  <form class="review-form" [formGroup]="ratingForm" (ngSubmit)="onRatingSubmit()">
+    <div class="uk-flex uk-flex-center p-25">
+      <ngb-rating *ngIf="!userRating" formControlName="rating" [max]="5">
+        <ng-template let-fill="fill" let-index="index">
+          <span class="add-star" [class.add-filled]="fill === 100">&#9733;</span>
+        </ng-template>
+      </ngb-rating>
+
+      <ngb-rating *ngIf="userRating" [readonly]="true" [rate]="getDbServiceRating(userRating.rating)"
+        [max]="getDbServiceRating(userRating.rating)">
+        <ng-template let-fill="fill" let-index="index">
+          <span class="add-star" [class.add-filled]="fill === 100">&#9733;</span>
+        </ng-template>
+      </ngb-rating>
+    </div>
+    <div>
+      <button class="uk-button  w-100" [ngClass]="userRating ? 'uk-button-transparent' :'uk-button-default'"
+        type="submit">{{userRating ? 'Edit Rating':'Submit'}}</button>
+    </div>
+  </form>

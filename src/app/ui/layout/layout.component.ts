@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-layout',
@@ -9,26 +8,26 @@ import { filter } from 'rxjs/operators';
 })
 export class LayoutComponent implements OnInit {
 
-  isDetailPage: boolean;
-  constructor(private router: Router) { }
+  // isDetailPage: boolean;
+  constructor() { }
 
   ngOnInit() {
-    if (this.router.url.startsWith('/services/') || this.router.url.startsWith('/community/') || this.router.url.startsWith('/products/')) {
-      console.log(this.router.url)
-      this.isDetailPage = true;
-    } else {
-      this.isDetailPage = false;
-    }
+    // if (this.router.url.startsWith('/services/') || this.router.url.startsWith('/community/') || this.router.url.startsWith('/products/')) {
+    //   console.log(this.router.url)
+    //   this.isDetailPage = true;
+    // } else {
+    //   this.isDetailPage = false;
+    // }
 
-    this.router.events.pipe(
-      filter((event: any) => event instanceof NavigationEnd)
-    ).subscribe(event => {
-      if (event.url.startsWith('/services/') || event.url.startsWith('/community/') || event.url.startsWith('/products/')) {
-        this.isDetailPage = true;
-      } else {
-        this.isDetailPage = false;
-      }
-    });
+    // this.router.events.pipe(
+    //   filter((event: any) => event instanceof NavigationEnd)
+    // ).subscribe(event => {
+    //   if (event.url.startsWith('/services/') || event.url.startsWith('/community/') || event.url.startsWith('/products/')) {
+    //     this.isDetailPage = true;
+    //   } else {
+    //     this.isDetailPage = false;
+    //   }
+    // });
 
   }
 }

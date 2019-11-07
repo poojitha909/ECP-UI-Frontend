@@ -1,0 +1,26 @@
+.category-box {
+    border: 1px solid #d7e0ef;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 16px;
+    .uk-badge {
+      background: #d9dadc;
+      color: #000;
+      border-radius: 5px;
+    }
+  }
+
+  .review-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+  }
+
+  .like-link {
+    .upvoted {
+      color: #1a73e8;
+    }
+    :hover {
+      color: #1a73e8;
+    }
+  }

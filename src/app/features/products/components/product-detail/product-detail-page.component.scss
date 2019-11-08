@@ -51,6 +51,12 @@
     // }
   }
 
+  .carousel-box{
+    border: 1px solid #D7E0EF;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+
   .comment{
     span{
       font-size: $font-small;
@@ -173,6 +179,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
   }
   
   .carousel-thumbnail__item {

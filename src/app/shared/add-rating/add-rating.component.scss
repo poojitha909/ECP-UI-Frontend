@@ -1,0 +1,58 @@
+@import "../../../assets/css/variables.scss";
+
+.add-rating {
+    background-color: #e4eefb;
+    border-radius: 4px;
+    color: #161c2d;
+  }
+
+  .review-form {
+    input,
+    textarea,
+    select {
+      border-radius: 4px;
+    }
+    button {
+      background-color: $primary-btn;
+      border-radius: 4px;
+      font-size: 18px;
+      border: none;
+      color: #fff;
+      text-transform: none;
+      padding: 0px 30px;
+      &:focus {
+        color: $primary-btn;
+        background-color: #fff;
+      }
+      &:disabled {
+        background-color: transparent;
+        color: #999;
+        border-color: #e5e5e5;
+        border: 1px solid;
+      }
+    }
+  
+    .uk-button-transparent {
+      background-color: transparent;
+      border-radius: 4px;
+      font-size: 18px;
+      border: 1px solid $primary-btn;
+      color: $primary-btn;
+      text-transform: none;
+      padding: 0px 30px;
+      &:focus {
+        color: $primary-btn;
+        background-color: #fff;
+      }
+    }
+  }
+
+  .add-star {
+    color: #cecece;
+    font-size: 32px;
+  }
+  
+  .add-filled {
+    color: #e8b24a;
+  }
+  

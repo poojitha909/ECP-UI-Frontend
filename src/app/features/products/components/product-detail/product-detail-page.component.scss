@@ -51,6 +51,12 @@
     // }
   }
 
+  .carousel-box{
+    border: 1px solid #D7E0EF;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+
   .comment{
     span{
       font-size: $font-small;
@@ -173,6 +179,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
   }
   
   .carousel-thumbnail__item {
@@ -227,3 +234,38 @@
 .social-link{
   color: #000;
   }
+
+  .review-btn{
+    background-color: $primary-btn;
+    border-radius: 4px;
+    font-size: 18px;
+    border: none;
+    color: #fff;
+    text-transform: none;
+    padding: 1px 30px;
+    &:focus {
+      color: $primary-btn;
+      background-color: #fff;
+    }
+}
+
+.review-btn-transparent {
+  background-color: transparent;
+  border-radius: 4px;
+  font-size: 18px;
+  border: 1px solid $primary-btn;
+  color: $primary-btn;
+  text-transform: none;
+  padding: 0px 30px;
+  &:focus {
+    color: $primary-btn;
+    background-color: #fff;
+  }
+}
+
+.rating-box {
+  border: 1px solid #d7e0ef;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 10px;
+}

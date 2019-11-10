@@ -11,7 +11,6 @@ import { ExpertNoRecordComponent } from './components/expert-no-record/expert-no
 import { QuestionNoRecordComponent } from './components/question-no-record/question-no-record.component';
 import { QuestionDetailCardComponent } from './components/question-detail-card/question-detail-card.component';
 import { AskQuestionDetailPageComponent } from './components/ask-question-detail/ask-question-detail-page.component';
-import { TimeAgoPipe } from '../../shared/timeago.pipe';
 import { ExpertAllQuestionComponent } from './components/expert-all-question/expert-all-question.component';
 import { QuestionExpertNoRecordComponent } from './components/question-expert-no-record/question-expert-no-record.component';
 
@@ -25,8 +24,7 @@ import { QuestionExpertNoRecordComponent } from './components/question-expert-no
     QuestionDetailCardComponent,
     AskQuestionDetailPageComponent,
     ExpertAllQuestionComponent,
-    QuestionExpertNoRecordComponent,
-    TimeAgoPipe
+    QuestionExpertNoRecordComponent
   ],
   imports: [
     CoreModule,

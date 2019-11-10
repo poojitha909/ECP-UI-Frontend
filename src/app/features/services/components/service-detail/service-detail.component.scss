@@ -131,14 +131,7 @@ h3 {
   border-radius: 50%;
 }
 
-.like-link {
-  .upvoted {
-    color: #1a73e8;
-  }
-  :hover {
-    color: #1a73e8;
-  }
-}
+
 
 .dislike-link {
   :hover {
@@ -155,72 +148,6 @@ h3 {
   box-sizing: border-box;
   border-radius: 4px;
   padding: 10px;
-  h1 {
-    font-size: 48px;
-    font-family: "HKGroteskRegular";
-    font-weight: 700;
-    color: #fff;
-  }
-  .rating {
-    background-color: #1a73e8;
-    border-radius: 4px;
-    color: #fff;
-    .star {
-      font-size: 1.2em;
-      color: #1a73e8;
-    }
-    .filled {
-      color: #fff;
-    }
-  }
-
-  .jd-rating {
-    background-color: #a0a2a9;
-    border-radius: 4px;
-    color: #fff;
-    .star {
-      font-size: 1.2em;
-      color: #a0a2a9;
-    }
-    .filled {
-      color: #fff;
-    }
-  }
-
-  .add-rating {
-    background-color: #e4eefb;
-    border-radius: 4px;
-    color: #161c2d;
-  }
-  .uk-progress {
-    height: 6px;
-  }
-
-  .uk-progress-rating {
-    // created class for customisation
-    &::-webkit-progress-value {
-      background-color: #1a73e8;
-    } // those are the overflowing colors
-    &::-ms-fill {
-      background-color: #1a73e8;
-    }
-    &::-moz-progress-bar {
-      background-color: #1a73e8;
-    }
-  }
-
-  .uk-progress-JDrating {
-    // created class for customisation
-    &::-webkit-progress-value {
-      background-color: #a0a2a9;
-    } // those are the overflowing colors
-    &::-ms-fill {
-      background-color: #a0a2a9;
-    }
-    &::-moz-progress-bar {
-      background-color: #a0a2a9;
-    }
-  }
 }
 
 .uk-tab {
@@ -278,14 +205,6 @@ h3 {
   }
 }
 
-.add-star {
-  color: #cecece;
-  font-size: 32px;
-}
-
-.add-filled {
-  color: #e8b24a;
-}
 
 .reply-btn{
     background-color: $primary-btn;

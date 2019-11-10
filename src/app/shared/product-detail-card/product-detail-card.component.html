@@ -7,7 +7,7 @@
   <div class="uk-card-body uk-width-expand p-16">
     <a href="javascript:void(0)" class="font-regular">{{product.name}}</a>
     <div>
-      <ngb-rating [(rate)]="product.rating" [readonly]="true" [max]="5">
+      <ngb-rating [rate]="getDbServiceRating(product.rating)" [readonly]="true" [max]="5">
         <ng-template let-fill="fill" let-index="index">
           <span class="star" [class.filled]="fill === 100">&#9733;</span>
         </ng-template>
@@ -15,7 +15,7 @@
       <span class="ml-15">{{product.rating}} Ratings</span>
     </div>
     <div class="category">
-      In: <span>{{product.productCategory.name}}</span>
+      In: <span>{{product?.productCategory?.name}}</span>
     </div>
     <!-- <div>
       <div class="uk-label d-inline-flex uk-flex-middle p-verified">

@@ -33,15 +33,15 @@ export class ServiceDetailComponent implements OnInit {
   dbReview: DBReviews[] = [];
   reviewForm: FormGroup;
   reportForm: FormGroup;
-  ratingForm: FormGroup;
+  // ratingForm: FormGroup;
   successMessage: string;
   reviewSuccessMessage: string;
   currentUrl: string;
   whatsappUrl;
   docId: string;
   userId: string;
-
-  deleteReviewId: string;
+  reviewTitle: string = "Add";
+  // deleteReviewId: string;
   detailReview: any;
   jdDetailReview: any;
   userRating: DBRating;
@@ -96,10 +96,7 @@ export class ServiceDetailComponent implements OnInit {
       comment: ["", Validators.required],
     });
 
-    this.ratingForm = this.fb.group({
-      serviceId: [this.docId],
-      rating: ["", Validators.required]
-    })
+
 
     const config: SEO = {
       title: `An Elder Spring Initiative by Tata Trusts Service ${this.isDBService ? this.service.basicProfileInfo.firstName : this.service.name}`,
@@ -168,8 +165,8 @@ export class ServiceDetailComponent implements OnInit {
           this.dbRating = response;
           console.log(this.dbRating);
           if (this.auth.user) {
-            const userId = this.auth.user.id;
-            this.userRating = this.dbRating.find(val => val.userId == userId);
+            // const userId = this.auth.user.id;
+            this.userRating = this.dbRating.find(val => val.userId == this.userId);
           }
           this.getDetailRating();
         }
@@ -211,15 +208,16 @@ export class ServiceDetailComponent implements OnInit {
   /**
    * Add rating 
    */
-  onRatingSubmit() {
+  onRatingSubmit(ratingData: any) {
+    ratingData.serviceId = this.docId;
     if (this.auth.isAuthenticate) {
       if (this.userRating) {
         this.dbRating = this.dbRating.filter(val => val.userId !== this.userRating.userId);
         this.userRating = null;
       } else {
-        if (this.ratingForm.valid && this.auth.user) {
-          this.ratingForm.value.rating = this.getRatingValue(this.ratingForm.controls.rating.value);
-          this.ecpService.addServiceRating(this.ratingForm.value).subscribe(
+        if (ratingData.rating && this.auth.user) {
+          ratingData.rating = this.getRatingValue(ratingData.rating);
+          this.ecpService.addServiceRating(ratingData).subscribe(
             response => {
               console.log(response);
               this.userRating = response;
@@ -396,38 +394,29 @@ export class ServiceDetailComponent implements OnInit {
       });
   }
 
-  userUpvoted(likeCount): boolean {
-    if (likeCount && this.auth.user) {
-      const index = likeCount.findIndex(val => val === this.userId);
-      if (index !== -1) {
-        return true;
-      }
-    }
-    return false;
-  }
+  
 
   editReview(review: DBReviews) {
     this.reviewSuccessMessage = null;
     this.reviewForm.patchValue(review);
+    this.reviewTitle = "Edit";
   }
 
-  deleteReview() {
-    this.ecpService.deleteDBserviceReview(this.deleteReviewId).subscribe(
-      response => {
-        if (response) {
-          this.getDBserviceReview(this.docId);
-        }
-      },
-      error => {
-        console.log(error);
-      });
-  }
+  // deleteReview() {
+  //   this.ecpService.deleteDBserviceReview(this.deleteReviewId).subscribe(
+  //     response => {
+  //       if (response) {
+  //         this.getDBserviceReview(this.docId);
+  //       }
+  //     },
+  //     error => {
+  //       console.log(error);
+  //     });
+  // }
 
   changeReviewPage(page: number) {
     this.reviwePaginate.p = page;
     this.getDBserviceReview(this.docId);
-    // this.onSearch()
-    console.log(this.reviwePaginate);
   }
 
 }

@@ -7,8 +7,27 @@
     .uk-container{
       margin-top: 40px;
     }
+    .comments-head{
+      margin:64px 0 24px 0;
+    }
+    .comments-count{
+      h4{
+        font-family: $regular-font;
+        font-size: 24px;
+      }
+    }
+    .adddiscuss{
+      border: 1px solid #1a73e8;
+      color: #1a73e8;
+      text-transform: capitalize;
+      float:right;
+      height: 38px;
+    }
     .textblue{
       color:$primary-txt-color;
+    }
+    .p-bottom-24{
+      padding-bottom:24px;
     }
     .reply_reply{
       padding: 10px 0px 10px 15px;
@@ -41,15 +60,18 @@
     .uk-card-header{
       font-family: $regular-font;
       border-bottom: none;
+      .uk-first-column{
+        padding-left:0px;
+      }
     }
     .borderleft{
       border-left: 2px solid #D7E0EF;
     }
     .uk-card-body{
-      padding: 0px 20px 0px 20px;
+      padding: 0px 20px;
       font-size: 18px;
       .img{
-        height: 35px;
+        height: 24px;
       }
       .like, .reply{
         font-size: 18px;
@@ -64,8 +86,29 @@
       }
     }
     .uk-card-footer{
+      padding: 0px 20px;
       border-top: none;
-      
+      hr{
+        margin:16px 0 24px 0;
+      }
+      .uk-accordion-title {
+        font-size: 18px;
+        font-weight: bold;
+        line-height: normal;
+      }
+      .uk-accordion-title::before{
+        background-image: url("/assets/images/arrow-down.svg");
+      }
+      .uk-open > .uk-accordion-title::before{
+        background-image: url("/assets/images/arrow-up.svg");
+      }
+      .uk-accordion-content .uk-card-header{
+        padding:0px;
+        margin: 0px 0px 16px -18px;
+      }
+      .uk-accordion-content .uk-card-default{
+        margin-left: 18px
+      }
     }
     .uk-card-default{
       margin-bottom: 20px;
@@ -99,9 +142,10 @@
       padding-top:16px;
     }
     hr{
-      margin:25px 0;
+      margin:24px 0;
       border-top: 1px solid #D7E0EF;
     }
+    
     .category-box.top{
       margin-top: 0px !important;
       text-align: center;
@@ -145,4 +189,22 @@
     .social-link{
       color: #000;
     }
+}
+.uk-button-transparent {
+  background-color: transparent;
+  border-radius: 4px;
+  font-size: 18px;
+  border: 1px solid $primary-btn;
+  color: $primary-btn;
+  text-transform: none;
+  padding: 0px 30px;
+  &:focus {
+    color: $primary-btn;
+    background-color: #fff;
+  }
+}
+input,
+textarea,
+select {
+  border-radius: 4px;
 }

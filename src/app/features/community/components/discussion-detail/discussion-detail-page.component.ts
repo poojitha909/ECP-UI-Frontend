@@ -17,18 +17,16 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class DiscussionDetailPageComponent implements OnInit {
 
   breadcrumbLinks: Breadcrumb[];
-
   discussionId: string;
   category: string;
   categoryName: string;
   discussion: any;
   urltxt: string;
-  replies: any[];
   sortedReplies: any[];
+  commentsCount: number;
   user: any;
+  parentReplyId: string;
   replyId: string;
-  replyParentUser: string;
-  replyParentText: string;
   replyForm: FormGroup;
   successMessage: String;
   currentUrl: string;
@@ -62,9 +60,8 @@ export class DiscussionDetailPageComponent implements OnInit {
     if (this.route.snapshot.params['category']) {
       this.category = this.route.snapshot.params['category'];
     }
+    this.parentReplyId = "";
     this.replyId = "";
-    this.replyParentText = "";
-    this.replyParentUser = "";
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
@@ -74,9 +71,7 @@ export class DiscussionDetailPageComponent implements OnInit {
       comment = JSON.parse(comment);
       this.discussionId = comment.discussionId;
       this.category = comment.category;
-      this.replyId = comment.replyId;
-      this.replyParentText = comment.replyParentText;
-      this.replyParentUser = comment.replyParentUser;
+      this.parentReplyId = comment.parentReplyId;
       this.store.clear("new-d-comment");
     }
     this.replyForm =  this.fb.group({
@@ -99,57 +94,64 @@ export class DiscussionDetailPageComponent implements OnInit {
       JSON.stringify({ 
           discussionId: this.discussionId, 
           category: this.category,
+          parentReplyId: this.parentReplyId,
           replyId: this.replyId,
-          replyParentText: this.replyParentText,
-          replyParentUser: this.replyParentUser,
           commentTxt: comment.commentTxt
          }));
       this.authService.redirectUrl = "community/discussion/" + this.discussionId + (this.category ? "/" + this.category : "");
       this.router.navigate(['/user/signin']);
       return;
     }
-    this.discussionService.addComment({ type: 0 }, this.discussionId, this.replyId, comment.commentTxt).subscribe((response: any) => {
-      if (response.data.replies) {
-        this.replyForm.reset();
-        this.successMessage = "Reply Submitted successfully.";
-        let replies = response.data.replies;
-        this.setReplies(replies);
-      }
-    });
+    if(this.replyId){
+      this.discussionService.editComment(this.replyId, comment.commentTxt).subscribe((response: any) => {
+        if (response.data.replies) {
+          this.replyForm.reset();
+          this.getDiscussion();
+          this.successMessage = "Reply Submitted successfully.";
+        }
+      });
+    }
+    else{
+      this.discussionService.addComment({ type: 0 }, this.discussionId, this.parentReplyId, comment.commentTxt).subscribe((response: any) => {
+        if (response.data.replies) {
+          this.replyForm.reset();
+          this.getDiscussion();
+          this.successMessage = "Reply Submitted successfully.";
+        }
+      });
+    }
+    
   }
 
-  recursiveReplies(reply, parentText, parentUser) {
-    reply.parentText = parentText;
-    reply.parentUser = parentUser;
-    this.replies[this.replies.length] = reply;
+  // likeDiscussion() {
+  //   this.discussionService.likeDiscussionReply(this.discussionId).subscribe((response: any) => {
+  //     if (response.data.id) {
+  //       this.discussion.aggrLikeCount = response.data.aggrLikeCount;
+  //     }
+  //   });
+  // }
 
-    if (reply.replies && reply.replies.length > 0) {
-      for (let rep of reply.replies) {
-        this.recursiveReplies(rep, reply.text, reply.userName);
-      }
+  likeReply(reply) {
+    if(reply.likedByUser){
+      this.discussionService.unlikeReply(this.discussionId, reply.id).subscribe((response: any) => {
+        if (response.data.id) {
+          reply.likeCount = reply.likeCount - 1;
+          reply.likedByUser = false;
+        }
+      });  
+    }
+    else{
+      this.discussionService.likeReply(this.discussionId, reply.id).subscribe((response: any) => {
+        if (response.data.id) {
+          reply.likeCount = reply.likeCount + 1;
+          reply.likedByUser = true;
+        }
+      });
     }
   }
 
-  likeDiscussion() {
-    this.discussionService.likeDiscussionReply(this.discussionId).subscribe((response: any) => {
-      if (response.data.id) {
-        this.discussion.aggrLikeCount = response.data.aggrLikeCount;
-      }
-    });
-  }
-  likeReply(reply) {
-    this.discussionService.likeReply(this.discussionId, reply.id).subscribe((response: any) => {
-      if (response.data.id) {
-        for (let idx in this.replies) {
-          if (this.replies[idx].id === response.data.id) {
-            this.replies[idx] = response.data;
-          }
-        }
-      }
-    });
-  }
   getDiscussion() {
-    if (this.category != "") {
+    if (this.category) {
       this.menuService.getMenuItem(this.category).subscribe((response: any) => {
         if (response[0]) {
           this.categoryName = response[0].displayMenuName;
@@ -165,34 +167,42 @@ export class DiscussionDetailPageComponent implements OnInit {
     this.discussionService.getDiscussion(this.discussionId).subscribe((response: any) => {
       if (response.data.discuss) {
         this.discussion = response.data.discuss;
-        let replies = response.data.replies;
         this.sortedReplies = response.data.sortedReplies;
-        //this.setReplies(replies);
+        this.commentsCount = 0;
+        if(this.sortedReplies){
+          this.commentsCount = Object.keys(this.sortedReplies).length;
+        }
       }
     });
   }
 
-  setReplies(replies) {
-    this.replies = [];
-    for (let ri in replies) {
-      this.recursiveReplies(replies[ri], "", "");
-    }
-    this.replies.sort((a, b) => {
-      if (a['createdAt'] < b['createdAt']) {
-        return 1;
-      } else if (a['createdAt'] > b['createdAt']) {
-        return -1;
-      }
-      return 0;
-    });
+  setParentReplyId(id) {
+    this.parentReplyId = id;
+    this.replyId = "";
+    this.successMessage = "";
   }
 
-  setReplyId(id, user, text) {
+  editReply(parentReplyId, reply) {
+    this.parentReplyId = parentReplyId;
+    this.replyId = reply.id;
+    this.replyForm.patchValue({commentTxt: reply.text});
+    this.successMessage = "";
+  }
+  
+  deleteReply(id:string) {
+    this.parentReplyId = "";
     this.replyId = id;
-    this.replyParentUser = user;
-    this.replyParentText = text;
+    this.successMessage = "";
   }
+  
   get formControl() {
     return this.replyForm.controls;
+  }
+
+  /**
+   * TODO: method to be removed
+   */
+  setDefaultPic(e) {
+    e.target.src = "/assets/images/default-thumbnail.png";
   }
 }

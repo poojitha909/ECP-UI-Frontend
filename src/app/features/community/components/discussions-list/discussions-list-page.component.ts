@@ -103,6 +103,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
 
   onTabChange(value) {
     this.selCategory = value;
+    this.searchParams.p = 0;
     this.router.navigate(['/community/discussions'], {queryParams: {category: this.selCategory, searchTxt:  this.searchParams.searchTxt}});
   }
 
@@ -129,8 +130,16 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
             tags[i] = data[i].id + "_" + this.categoryList[data[i].id].tagIds.join("_"); // this si just to pass extrs key in tags which is menu item id
           }
         }
-        this.dropDownList = JSON.parse(JSON.stringify(this.categoryList));
-        this.search();
+        this.discussionService.summary(tags.join(",")).subscribe((response: any) => {
+          for (let i in data) {
+            this.categoryList[data[i].id].totalCount = response.data[data[i].id].totalCount;
+            // if (response.data[data[i].id].discussPage && response.data[data[i].id].discussPage.content && response.data[data[i].id].discussPage.content[0]) {
+            //   this.categoryList[data[i].id].discussionLatest = response.data[data[i].id].discussPage.content[0];
+            // }
+          }
+          this.dropDownList = JSON.parse(JSON.stringify(this.categoryList));
+          this.search();
+        });
       }
     });
   }
@@ -173,9 +182,8 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
     if(this.selCategory!=""){
       this.searchParams.tags = this.dropDownList[this.selCategory].tagIds.join(",");
     }
-    
-      this.showDiscussions();
-      this.showDiscussionsCount();
+    this.showDiscussions();
+    this.showDiscussionsCount();
   }
 
   clearSelection() {

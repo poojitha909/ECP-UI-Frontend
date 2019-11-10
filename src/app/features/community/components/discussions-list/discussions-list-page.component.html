@@ -83,7 +83,7 @@
                         [discussion]="discussion"></app-discussion-summary-cat>
                 </div>
             </div>
-            <app-pagination *ngIf="(selCategory!='' && discussionsList.length > 0)" [totalRecords]="totalRecords"
+            <app-pagination *ngIf="(discussionsList.length > 0)" [totalRecords]="totalRecords"
                     [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">
             </app-pagination>
             <div *ngIf="(selCategory!='' && discussionsList.length == 0) || (selCategory=='' && categoryList==null)">

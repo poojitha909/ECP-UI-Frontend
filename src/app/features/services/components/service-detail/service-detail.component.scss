@@ -42,7 +42,7 @@ h3 {
     color: #636363;
   }
 }
-.review-form {
+.reply-form {
   input,
   textarea,
   select {
@@ -125,7 +125,7 @@ h3 {
   }
 }
 
-.review-avatar {
+.reply-avatar {
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -287,7 +287,7 @@ h3 {
   color: #e8b24a;
 }
 
-.review-btn{
+.reply-btn{
     background-color: $primary-btn;
     border-radius: 4px;
     font-size: 18px;
@@ -301,7 +301,7 @@ h3 {
     }
 }
 
-.review-btn-transparent {
+.reply-btn-transparent {
   background-color: transparent;
   border-radius: 4px;
   font-size: 18px;

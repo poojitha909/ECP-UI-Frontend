@@ -50,7 +50,13 @@
                     <h4 class="heading2">Description</h4>
                     <div class="description" [innerHTML]="discussion.text">
                     </div>
+                    <div *ngIf="discussionId == 'preview'">
+                        <hr/>
+                        <button class="uk-button uk-button-default m-r-15" (click)="onCancelPublish()">Go Back & Edit</button>
+                        <button class="uk-button uk-button-primary" (click)="onPublish()">{{!!user ? 'Publish' : 'Signin to create this Discussion'}}</button>
+                    </div>
                 </div>
+                <div *ngIf="discussionId != 'preview'">
                 <div class="comments-head">
                     <div class="uk-grid-collapse" uk-grid>
                         <div class="comments-count uk-width-2-3@s">
@@ -155,6 +161,7 @@
                             </li>
                         </ul>
                     </div>
+                </div>
                 </div>
 
                 <div id="reply-modal" uk-modal>

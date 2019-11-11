@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router"
 import { DiscussionService } from '../../services/discussion.service';
@@ -14,7 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './discussion-detail-page.component.html',
   styleUrls: ['./discussion-detail-page.component.scss']
 })
-export class DiscussionDetailPageComponent implements OnInit {
+export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
 
   breadcrumbLinks: Breadcrumb[];
   discussionId: string;
@@ -29,6 +29,7 @@ export class DiscussionDetailPageComponent implements OnInit {
   replyId: string;
   replyForm: FormGroup;
   successMessage: String;
+  paramsSubs: any;
   currentUrl: string;
   whatsappUrl; 
 
@@ -40,7 +41,18 @@ export class DiscussionDetailPageComponent implements OnInit {
   ngOnInit() {
     this.currentUrl = window.location.href;
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
+    this.paramsSubs = this.route.params.subscribe(params => {
+      this.initiate();
+    });
+  }
+
+  ngOnDestroy() {
+    this.paramsSubs.unsubscribe();
+  }
+
+  initiate(){
     this.discussionId = this.route.snapshot.params['id'];
+    alert(this.discussionId);
     this.successMessage = "";
     this.breadcrumbLinks = [
       {
@@ -72,6 +84,7 @@ export class DiscussionDetailPageComponent implements OnInit {
       this.discussionId = comment.discussionId;
       this.category = comment.category;
       this.parentReplyId = comment.parentReplyId;
+      this.replyId = comment.replyId;
       this.store.clear("new-d-comment");
     }
     this.replyForm =  this.fb.group({
@@ -164,16 +177,26 @@ export class DiscussionDetailPageComponent implements OnInit {
       });
     }
 
-    this.discussionService.getDiscussion(this.discussionId).subscribe((response: any) => {
-      if (response.data.discuss) {
-        this.discussion = response.data.discuss;
-        this.sortedReplies = response.data.sortedReplies;
-        this.commentsCount = 0;
-        if(this.sortedReplies){
-          this.commentsCount = Object.keys(this.sortedReplies).length;
+    if(this.discussionId == "preview"){
+      this.discussion = this.store.retrieve("new-discuss-preview");
+      this.discussion = JSON.parse(this.discussion);
+      this.discussion.createdAt = new Date();
+      this.discussion.username = this.discussion.userName;
+      this.discussion.text = this.discussion.description;
+      this.discussion.userProfile = {basicProfileInfo : { profileImage: { thumbnailImage: ""}}};
+    }
+    else{
+      this.discussionService.getDiscussion(this.discussionId).subscribe((response: any) => {
+        if (response.data.discuss) {
+          this.discussion = response.data.discuss;
+          this.sortedReplies = response.data.sortedReplies;
+          this.commentsCount = 0;
+          if(this.sortedReplies){
+            this.commentsCount = Object.keys(this.sortedReplies).length;
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   setParentReplyId(id) {
@@ -189,11 +212,35 @@ export class DiscussionDetailPageComponent implements OnInit {
     this.successMessage = "";
   }
   
-  deleteReply(id:string) {
-    this.parentReplyId = "";
-    this.replyId = id;
-    this.successMessage = "";
+  onCancelPublish(){
+    this.router.navigate(["community/discussion/add"]);
   }
+
+  onPublish(){
+    if(!this.user) {
+      this.authService.redirectUrl = "community/discussion/preview";
+      this.router.navigate(['/user/signin']);
+      return;
+    }
+    this.discussionService.addDiscussion("P", this.discussion.description, this.discussion.title, 
+    this.discussion.userId, 
+    this.user.userName,
+    this.discussion.tags,
+    this.discussion.categories,
+    this.discussion.contentType)
+    .subscribe((response: any) => {
+      if (response.data.id != "") {
+        this.store.clear("new-discuss");
+        this.store.clear("new-discuss-preview");
+        this.router.navigate(['/community/discussion', response.data.id]);
+      }
+      else {
+        alert("Oops! something wrong happen, please try again.");
+      }
+    });
+  }
+
+
   
   get formControl() {
     return this.replyForm.controls;

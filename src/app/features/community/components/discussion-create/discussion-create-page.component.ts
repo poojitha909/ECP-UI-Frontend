@@ -87,28 +87,23 @@ export class DiscussionCreatePageComponent implements OnInit {
     if (!this.discussForm.valid) {
       return;
     }
-    if (!this.user) {
-      discuss = { ...this.discussForm.value };
-      discuss.discussId = this.discussId;
-      this.store.store("new-discuss", JSON.stringify(discuss));
+    
+    discuss = { ...this.discussForm.value };
+    discuss.discussId = this.discussId;
+    this.store.store("new-discuss", JSON.stringify(discuss));
+    if(!this.user) {
       this.authService.redirectUrl = "community/discussion/add";
       this.router.navigate(['/user/signin']);
       return;
     }
-
-    discuss = { ...this.discussForm.value };
-    discuss.discussId = this.discussId;
-    this.discussionService.addDiscussion("P", discuss.description, discuss.title, this.user.id, this.user.userName,
-    this.categoryList[discuss.category].tags
-    , [this.categoryList[discuss.category].id],
-    0)
-    .subscribe((response: any) => {
-      if (response.data.id != "") {
-        this.router.navigate(['/community/discussion', response.data.id]);
-      }
-      else {
-        alert("Oops! something wrong happen, please try again.");
-      }
-    });
+    this.store.store("new-discuss-preview", JSON.stringify({
+      description: discuss.description,
+      title: discuss.title,
+      userId: this.user.id,
+      userName: this.user.userName,
+      tags: this.categoryList[discuss.category].tags,
+      categories: [this.categoryList[discuss.category].id],
+      contentType: 0}));
+    this.router.navigate(['/community/discussion/preview']);
   }
 }

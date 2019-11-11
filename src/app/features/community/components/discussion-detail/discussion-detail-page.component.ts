@@ -52,7 +52,6 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
 
   initiate(){
     this.discussionId = this.route.snapshot.params['id'];
-    alert(this.discussionId);
     this.successMessage = "";
     this.breadcrumbLinks = [
       {

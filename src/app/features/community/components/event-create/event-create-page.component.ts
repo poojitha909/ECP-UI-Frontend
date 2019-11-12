@@ -87,8 +87,8 @@ export class EventCreatePageComponent implements OnInit {
     if (!this.eventForm.valid) {
       return;
     }
+    this.store.store("new-event", JSON.stringify( this.eventForm.value ));
     if (!this.user) {
-      this.store.store("new-event", JSON.stringify( this.eventForm.value ));
       this.authService.redirectUrl = "/community/event/add";
       this.router.navigate(['/user/signin']);
       return;
@@ -100,15 +100,17 @@ export class EventCreatePageComponent implements OnInit {
     delete event.date;
     delete event.startTime;
 
-    this.eventService.addEvents( event ).subscribe((response: any) => {
-      if (response.data.id != "") {
-        //this.router.navigate(['/community/events']);
-        this.eventForm.reset();
-        this.successMessage = "Event submittted successfully for review, once reviewed it will start appearing on site."
-      }
-      else {
-        alert("Oops! something wrong happen, please try again.");
-      }
-    });
+    this.store.store("new-event-preview", JSON.stringify( event ));
+    this.router.navigate(['/community/event/preview']);
+    // this.eventService.addEvents( event ).subscribe((response: any) => {
+    //   if (response.data.id != "") {
+    //     //this.router.navigate(['/community/events']);
+    //     this.eventForm.reset();
+    //     this.successMessage = "Event submittted successfully for review, once reviewed it will start appearing on site."
+    //   }
+    //   else {
+    //     alert("Oops! something wrong happen, please try again.");
+    //   }
+    // });
   }
 }

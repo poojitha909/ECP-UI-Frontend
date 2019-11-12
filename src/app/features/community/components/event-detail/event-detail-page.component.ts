@@ -34,6 +34,7 @@ export class EventDetailPageComponent implements OnInit {
   showOrg: boolean;
   user: any;
   markIt: boolean;
+  paramsSubs: any;
   currentUrl: string;
   whatsappUrl;
 
@@ -42,6 +43,15 @@ export class EventDetailPageComponent implements OnInit {
     private authService: AuthService, public sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.paramsSubs = this.route.params.subscribe(params => {
+      this.initiate();
+    });
+  }
+  ngOnDestroy() {
+    this.paramsSubs.unsubscribe();
+  }
+
+  initiate(){
     this.currentUrl = window.location.href;
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
     this.eventId = this.route.snapshot.params['id'];
@@ -56,19 +66,25 @@ export class EventDetailPageComponent implements OnInit {
   }
 
   getEvent() {
-    this.eventService.getEvent(this.eventId).subscribe((response: any) => {
-      const data = response.data;
-      if (data) {
-        this.event = data;
-        const fav = this.user.favEvents.filter(elem => elem == this.event.id);
-        if (fav) {
-          this.markIt = true;
+    if(this.eventId == "preview"){
+      this.event = this.store.retrieve("new-event-preview");
+      this.event = JSON.parse(this.event);
+    }
+    else{
+      this.eventService.getEvent(this.eventId).subscribe((response: any) => {
+        const data = response.data;
+        if (data) {
+          this.event = data;
+          const fav = this.user.favEvents.filter(elem => elem == this.event.id);
+          if (fav) {
+            this.markIt = true;
+          }
+          else {
+            this.markIt = false;
+          }
         }
-        else {
-          this.markIt = false;
-        }
-      }
-    });
+      });  
+    }
   }
 
   showOrganiserDetails() {
@@ -92,5 +108,28 @@ export class EventDetailPageComponent implements OnInit {
       this.authService.redirectUrl = "community/event/" + this.eventId;
       this.router.navigate(['/user/signin']);
     }
+  }
+
+  onCancelPublish(){
+    this.router.navigate(["community/event/add"]);
+  }
+
+  onPublish(){
+    if(!this.user) {
+      this.authService.redirectUrl = "community/event/preview";
+      this.router.navigate(['/user/signin']);
+      return;
+    }
+    this.eventService.addEvents( this.event ).subscribe((response: any) => {
+      if (response.data.id != "") {
+        this.store.clear("new-event");
+        this.store.clear("new-event-preview");
+        this.router.navigate(['/community/events']);
+        //this.successMessage = "Event submittted successfully for review, once reviewed it will start appearing on site."
+      }
+      else {
+        alert("Oops! something wrong happen, please try again.");
+      }
+    });
   }
 }

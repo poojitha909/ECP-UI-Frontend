@@ -10,6 +10,14 @@
       font-weight: bold;
       color: $font-light-black;
     }
+    .inner-container{
+      border-radius: 4px;
+      padding: 24px;
+      border: 1px solid #D7E0EF;
+    }
+    .uk-align-right{
+      margin-bottom: 0px;
+    }
 }
 .submit{
     border-radius: 4px;

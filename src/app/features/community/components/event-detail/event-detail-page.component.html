@@ -131,6 +131,11 @@
                                 {{ (event.entryFee >= 1 ? "Rs. " + event.entryFee : "Free Entry") }}
                             </div>
                         </div>
+                        <div *ngIf="eventId == 'preview'">
+                            <hr/>
+                            <button class="uk-button uk-button-default m-r-15" (click)="onCancelPublish()">Go Back & Edit</button>
+                            <button class="uk-button uk-button-primary" (click)="onPublish()">{{!!user ? 'Publish' : 'Signin to create this Event'}}</button>
+                        </div>
                     </div>
                 </div>
             </div>

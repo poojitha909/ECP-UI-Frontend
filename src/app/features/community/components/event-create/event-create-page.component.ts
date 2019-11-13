@@ -7,8 +7,6 @@ import { AuthService } from "../../../../core/auth/services/auth.service";
 import { Breadcrumb } from 'src/app/core/interfaces';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
-declare var UIKit;
-
 @Component({
   selector: 'app-event-create',
   templateUrl: './event-create-page.component.html',

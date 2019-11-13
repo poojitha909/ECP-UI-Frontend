@@ -9,6 +9,8 @@ import { Breadcrumb } from 'src/app/core/interfaces';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 
+declare var UIkit;
+
 @Component({
   selector: 'app-discussion-detail',
   templateUrl: './discussion-detail-page.component.html',
@@ -119,7 +121,7 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
         if (response.data.replies) {
           this.replyForm.reset();
           this.getDiscussion();
-          this.successMessage = "Reply Submitted successfully.";
+          UIkit.modal("#reply-modal").hide();
         }
       });
     }
@@ -128,7 +130,8 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
         if (response.data.replies) {
           this.replyForm.reset();
           this.getDiscussion();
-          this.successMessage = "Reply Submitted successfully.";
+          //this.successMessage = "Reply Submitted successfully.";
+          UIkit.modal("#reply-modal").hide();
         }
       });
     }

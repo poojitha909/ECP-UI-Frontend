@@ -10,4 +10,13 @@
       font-weight: bold;
       color: $font-light-black;
     }
+    .inner-container{
+      border-radius: 4px;
+      padding: 24px;
+      border: 1px solid #D7E0EF;
+    }
+    .uk-input, .uk-select{
+      border: 1px solid #D7E0EF;
+      border-radius: 4px;
+    }
 }

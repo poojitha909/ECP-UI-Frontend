@@ -11,20 +11,7 @@
     <div class="uk-container">
         <h2 class="heading">Submit an Article or Start a Discussion</h2>
         <hr/>
-        <form [formGroup]="discussForm" class="uk-form">
-            <div class="uk-margin">
-                <label 
-                    [ngClass]="{'uk-text-danger' : formControl.category.invalid && ( formControl.category.dirty ||  formControl.category.touched) }"
-                    class="uk-form-label" for="form-stacked-text">Pick a Category<span class="required">*</span></label>
-                <div class="uk-form-controls">
-                    <select 
-                        [ngClass]="{'uk-form-danger' : formControl.category.invalid && ( formControl.category.dirty ||  formControl.category.touched) }"
-                        class="uk-select" formControlName="category" id="form-stacked-select">
-                        <option value="">Select Category</option>
-                        <option *ngFor="let cat of categoryList | keyvalue" value="{{cat.key}}">{{cat.value.label}}</option>
-                    </select>
-                </div>
-            </div>
+        <form [formGroup]="discussForm" class="uk-form inner-container bg-white">
             <div class="uk-margin">
                 <label 
                     [ngClass]="{'uk-text-danger' : formControl.title.invalid && ( formControl.title.dirty ||  formControl.title.touched) }"
@@ -46,6 +33,19 @@
                         <editor [ngClass]="{'uk-form-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
                             formControlName="description" 
                             [init]="{menubar:false, statusbar: false, base_url: '/tinymce', plugins: 'lists advlist'}"></editor>
+                </div>
+            </div>
+            <div class="uk-margin">
+                <label 
+                    [ngClass]="{'uk-text-danger' : formControl.category.invalid && ( formControl.category.dirty ||  formControl.category.touched) }"
+                    class="uk-form-label" for="form-stacked-text">Pick a Category</label>
+                <div class="uk-form-controls">
+                    <select 
+                        [ngClass]="{'uk-form-danger' : formControl.category.invalid && ( formControl.category.dirty ||  formControl.category.touched) }"
+                        class="uk-select" formControlName="category" id="form-stacked-select">
+                        <option value="">Select Category</option>
+                        <option *ngFor="let cat of categoryList | keyvalue" value="{{cat.key}}">{{cat.value.label}}</option>
+                    </select>
                 </div>
             </div>
             <div class="uk-margin">

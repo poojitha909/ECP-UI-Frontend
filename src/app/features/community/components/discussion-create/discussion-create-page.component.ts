@@ -53,7 +53,7 @@ export class DiscussionCreatePageComponent implements OnInit {
     this.discussForm = this.fb.group({
       title:  [discuss ? discuss.title : "", Validators.required],
       description:  [discuss ? discuss.description : "", Validators.required],
-      category: [discuss ? discuss.category : "", Validators.required]
+      category: [discuss && discuss.category ? discuss.category : ""]
     });
     this.menuService.getMenus("564071623e60f5b66f62df27", "").subscribe((response: any) => {
       const data = response;
@@ -101,8 +101,8 @@ export class DiscussionCreatePageComponent implements OnInit {
       title: discuss.title,
       userId: this.user.id,
       userName: this.user.userName,
-      tags: this.categoryList[discuss.category].tags,
-      categories: [this.categoryList[discuss.category].id],
+      tags: discuss.category ? this.categoryList[discuss.category].tags : [],
+      categories: discuss.category ? [this.categoryList[discuss.category].id] : [],
       contentType: 0}));
     this.router.navigate(['/community/discussion/preview']);
   }

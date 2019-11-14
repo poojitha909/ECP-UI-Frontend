@@ -31,14 +31,14 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   services: Service[] = [];
   allService: Service[] = [];
   pageServices: Service[] = [];
-  pageSize = 5;
+  pageSize = 10;
   maxPages: number;
   isLoading: boolean;
   searchTextChanged = new Subject<string>();
   selectedValue: string;
   searchPageParam: PageParam = {
     p: 0,
-    s: 5,
+    s: 10,
     term: ''
   };
   autocompleteFields: Service[] = [];

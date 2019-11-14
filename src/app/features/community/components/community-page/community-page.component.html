@@ -1,24 +1,6 @@
-<div class="uk-container">
-  <div class="uk-background-cover community-banner" data-src="assets/images/landing-img/Community-1024.png"
-    data-srcset="assets/images/landing-img/Community-320.png 320w,assets/images/landing-img/Community-768.png 768w,assets/images/landing-img/Community-1024.png 1024w,assets/images/landing-img/Community-1440.png 1440w"
-    uk-img>
-    <div class="uk-child-width-1-2@s uk-padding" uk-grid>
-      <div class="uk-text-center uk-text-left@s">
-        <h1></h1>
-        <p class="font-regular">
-          Interested in member contributed articles and discussions or community based events & activities?  Find one or start one!  
-          And share what you like with your loved ones.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
+<div class="community-page">
 <!-- Search Container starts -->
-<div class="uk-container search-container">
-  <div class="header-label">
-    <h3>Search for Articles & Discussions, Events & Activities</h3>
-  </div>
-
+<div class="uk-container search-container m-t-main-screen">
   <!-- Search Form START -->
   <div class="search-form">
     <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
@@ -40,72 +22,82 @@
     </div>
   </div>
   <!-- Search Form END -->
-
   <!-- Search Result START -->
-  <div class="search-result uk-grid">
-    <div class="uk-width-1-2@m">
-      <div class="community-result-head">
-        <h3>Popular Articles & Discussions</h3>
-      </div>
-      <div class="community-result-body">
-        <ul>
-          <li *ngFor="let discuss of discussionsList" [routerLink]="['/community/discussion', discuss.id ]" >
-            <h4>{{discuss.title}}</h4>
-            <div>{{discuss.aggrReplyCount}} comments &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by {{discuss.username}}</div>
-          </li>
-        </ul>
+  <div class="search-result">
+    <ul class="uk-subnav uk-subnav-pill" uk-switcher>
+        <li><a href="#">Discussion ({{discussionsList.length}})</a></li>
+        <li><a href="#">Event ({{eventsList.length}})</a></li>
+    </ul>
+    <ul class="uk-switcher uk-margin">
+      <li>
+        <div uk-slider  class="uk-position-relative" *ngIf="discussionsList!==undefined && discussionsList.length > 0">
+            <div class="uk-visible-toggle" tabindex="-1">
+                <ul class="uk-slider-items uk-child-width-1-1@s uk-child-width-1-3@m uk-grid">
+                    <li *ngFor="let discussion of discussionsList">
+                        <app-discussion-summary-cat  [category]="selCategory" [discussion]="discussion">
+                        </app-discussion-summary-cat>
+                    </li>
+                </ul>
+            </div>
+            <div class="uk-hidden@s">
+                <a class="uk-position-center-left uk-position-small" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+                <a class="uk-position-center-right uk-position-small" href="#" uk-slidenav-next uk-slider-item="next"></a>
+            </div>
+            <div class="uk-visible">
+              <a class="uk-position-center-left-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+              <a class="uk-position-center-right-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+            </div>
+        </div>
         <div class="uk-text-center uk-text-bold pt-norec" *ngIf="discussionsList!==undefined && discussionsList.length == 0" >
           No Records found
         </div>
-      </div>
-      <div class="community-result-footer" routerLink="/community/discussions">
-        More articles & discussions
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="3" width="9" height="18">
-            <path
-              d="M16.0009 12.0006C16.0009 12.2673 15.9006 12.518 15.7193 12.7066L8.82585 19.8542C8.78113 19.9009 8.72793 19.9379 8.66931 19.9631C8.61069 19.9883 8.54784 20.0011 8.48439 20.0009C8.35578 20.0009 8.23425 19.9489 8.14358 19.8542C8.09839 19.8081 8.06251 19.7531 8.03802 19.6924C8.01353 19.6318 8.00092 19.5667 8.00092 19.5009C8.00092 19.4351 8.01353 19.37 8.03802 19.3094C8.06251 19.2487 8.09839 19.1937 8.14358 19.1475L15.0363 12.0006L8.14358 4.85366C8.09839 4.80751 8.06251 4.7525 8.03802 4.69184C8.01353 4.63118 8.00091 4.56607 8.00091 4.50031C8.00091 4.43455 8.01353 4.36945 8.03802 4.30878C8.06251 4.24812 8.09839 4.19312 8.14358 4.14697C8.18809 4.10012 8.24115 4.06292 8.29966 4.03753C8.35817 4.01213 8.42096 3.99906 8.48439 3.99906C8.54782 3.99906 8.61061 4.01213 8.66912 4.03753C8.72763 4.06292 8.78069 4.10012 8.8252 4.14696L15.7186 11.2939C15.8085 11.3865 15.8797 11.4966 15.9281 11.6179C15.9766 11.7392 16.0013 11.8693 16.0009 12.0006Z"
-              fill="black" />
-          </mask>
-          <g mask="url(#mask0)">
-            <rect width="24" height="24" fill="white" />
-          </g>
-        </svg>
-      </div>
-    </div>
+      </li>
+      <li>
+          <div uk-slider  class="uk-position-relative" *ngIf="eventsList!==undefined && eventsList.length > 0">
+              <div class="uk-visible-toggle" tabindex="-1">
+                  <ul class="uk-slider-items uk-child-width-1-1@s uk-child-width-1-3@m uk-grid">
+                      <li *ngFor="let event of eventsList">
+                          <app-event-summary [event]="event" [isPast]="0"></app-event-summary>
+                      </li>
+                  </ul>
+              </div>
+              <div class="uk-hidden@s">
+                  <a class="uk-position-center-left uk-position-small" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+                  <a class="uk-position-center-right uk-position-small" href="#" uk-slidenav-next uk-slider-item="next"></a>
+              </div>
+              <div class="uk-visible">
+                <a class="uk-position-center-left-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+                <a class="uk-position-center-right-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+              </div>
+          </div>
+          <div class="uk-text-center uk-text-bold pt-norec" *ngIf="eventsList!==undefined && eventsList.length == 0" >
+            No Records found
+          </div>
+        </li>
+      
+    </ul>
+  </div>
+  <!-- Search Result END -->
+</div>
 
-    <div class="uk-width-1-2@m">
-      <div class="community-result-head">
-        <h3>Upcoming Events & Activities</h3>
-      </div>
-      <div class="community-result-body">
-        <ul>
-          <li *ngFor="let event of eventsList" [routerLink]="['/community/event', event?.id ]">
-            <h4>{{event.title}}</h4>
-            <div>Date: {{event.datetime | date: 'dd-MM-yyyy'}} <span>{{ showTodayText(event.datetime) }}</span></div>
-          </li>
-        </ul>
-        <div class="uk-text-center uk-text-bold pt-norec" *ngIf="eventsList!==undefined && eventsList.length == 0">
-          No Records found
-        </div>
-      </div>
-      <div class="community-result-footer" routerLink="/community/events">
-        More events & activities
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="3" width="9" height="18">
-            <path
-              d="M16.0009 12.0006C16.0009 12.2673 15.9006 12.518 15.7193 12.7066L8.82585 19.8542C8.78113 19.9009 8.72793 19.9379 8.66931 19.9631C8.61069 19.9883 8.54784 20.0011 8.48439 20.0009C8.35578 20.0009 8.23425 19.9489 8.14358 19.8542C8.09839 19.8081 8.06251 19.7531 8.03802 19.6924C8.01353 19.6318 8.00092 19.5667 8.00092 19.5009C8.00092 19.4351 8.01353 19.37 8.03802 19.3094C8.06251 19.2487 8.09839 19.1937 8.14358 19.1475L15.0363 12.0006L8.14358 4.85366C8.09839 4.80751 8.06251 4.7525 8.03802 4.69184C8.01353 4.63118 8.00091 4.56607 8.00091 4.50031C8.00091 4.43455 8.01353 4.36945 8.03802 4.30878C8.06251 4.24812 8.09839 4.19312 8.14358 4.14697C8.18809 4.10012 8.24115 4.06292 8.29966 4.03753C8.35817 4.01213 8.42096 3.99906 8.48439 3.99906C8.54782 3.99906 8.61061 4.01213 8.66912 4.03753C8.72763 4.06292 8.78069 4.10012 8.8252 4.14696L15.7186 11.2939C15.8085 11.3865 15.8797 11.4966 15.9281 11.6179C15.9766 11.7392 16.0013 11.8693 16.0009 12.0006Z"
-              fill="black" />
-          </mask>
-          <g mask="url(#mask0)">
-            <rect width="24" height="24" fill="white" />
-          </g>
-        </svg>
+<div class="uk-container">
+  <div class="uk-background-cover community-banner" data-src="assets/images/landing-img/Community-1024.png"
+    data-srcset="assets/images/landing-img/Community-320.png 320w,assets/images/landing-img/Community-768.png 768w,assets/images/landing-img/Community-1024.png 1024w,assets/images/landing-img/Community-1440.png 1440w"
+    uk-img>
+    <div class="uk-child-width-1-2@s uk-padding" uk-grid>
+      <div class="uk-text-center uk-text-left@s">
+        <h1></h1>
+        <p class="font-regular">
+          Interested in member contributed articles and discussions or community based events & activities?  Find one or start one!  
+          And share what you like with your loved ones.
+        </p>
       </div>
     </div>
   </div>
-  <!-- Search Result END -->
-  <!-- <div class="uk-container popular-search-list"></div> -->
-  <div class="quote-line uk-margin-remove" uk-grid>
+</div>
+<!-- Search Container ends -->
+<div class="uk-container">
+<div class="quote-line uk-margin-remove" uk-grid>
     <div class="uk-width-expand@s uk-padding-remove uk-flex uk-flex-middle">
       <div class="uk-flex uk-flex-middle">
         <span class="mr-3">
@@ -115,4 +107,4 @@
     </div>
   </div>
 </div>
-<!-- Search Container ends -->
+</div>

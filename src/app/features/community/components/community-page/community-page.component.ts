@@ -33,14 +33,14 @@ export class CommunityPageComponent implements OnInit {
   ngOnInit(): void {
     this.searchParams = {
       p: 0,
-      s: 3,
+      s: 10,
       searchTxt: "",
       eventType: 0,
       startDatetime: (new Date()).getTime()
     }
     this.searchParamsDiscussions = {
       p: 0,
-      s: 3,
+      s: 10,
       searchTxt: "",
       isFeatured: true
     }
@@ -109,5 +109,9 @@ export class CommunityPageComponent implements OnInit {
   onSearch() {
     this.showEvents();
     this.showDiscussions();
+  }
+
+  onTabChange(tab: number){
+
   }
 }

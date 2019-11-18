@@ -46,6 +46,9 @@
     .height-fix-slider{
       min-height: 287px;
     }
+    .height-fix-slider1{
+      min-height: 352px;
+    }
   }
   background-color: #ecf4ff;
   font-family: $regular-font;
@@ -129,7 +132,10 @@
   height: 48px;
   background-color: #1A73E8
 }
-
+.m-seprator{
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
 .w-105{
   width: 105px;
 }

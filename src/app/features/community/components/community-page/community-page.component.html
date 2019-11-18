@@ -103,6 +103,7 @@
 </div>
 <!-- Search Container ends -->
 
+<!-- Discussion Section Start -->
 <div class="uk-container search-container dark">
   <div class="quote-line uk-margin-remove" uk-grid>
     <div class="uk-width-1-1@s uk-width-2-3@m uk-padding-remove uk-flex uk-flex-middle">
@@ -162,4 +163,67 @@
     </div>
   </div>
 </div>
+<!-- Discussion Section End -->
+
+<!-- Event Section Start -->
+<div class="uk-container search-container dark m-seprator">
+    <div class="quote-line uk-margin-remove" uk-grid>
+      <div class="uk-width-1-1@s uk-width-2-3@m uk-padding-remove uk-flex uk-flex-middle">
+        <div class="uk-flex uk-flex-middle">
+            <h4 class="title">
+              <span class="mr-3">
+                <img src="assets/images/event-icon.png" />
+              </span>
+              Events
+            </h4>
+        </div>
+      </div>
+      <div class="uk-width-1-1@s uk-width-1-3@m uk-padding-remove uk-flex uk-flex-middle uk-divider-vertical">
+          <label class="uk-form-label">Showing:</label>
+          <div class="uk-form-controls">
+              <select class="uk-select" [(ngModel)]="searchParams.pastEvents" (change)="showEvents2()">
+                <option value="-1">Upcoming Events</option>
+                <option value="1">Past Events</option>
+                <option value="0">All Events</option>
+              </select>    
+          </div>
+      </div>
+    </div>
+    <div class="search-result">
+      <div uk-slider  class="uk-position-relative height-fix-slider1" *ngIf="eventsList2!==undefined && eventsList2?.length > 0">
+          <div class="uk-visible-toggle" tabindex="-1">
+              <ul class="uk-slider-items uk-child-width-1-1@s uk-child-width-1-3@m uk-grid">
+                  <li *ngFor="let event of eventsList2">
+                      <app-event-summary [event]="event" [isPast]="searchParams.pastEvents"></app-event-summary>
+                  </li>
+              </ul>
+          </div>
+          <div class="uk-hidden@s">
+              <a class="uk-position-center-left uk-position-small" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+              <a class="uk-position-center-right uk-position-small" href="#" uk-slidenav-next uk-slider-item="next"></a>
+          </div>
+          <div class="uk-visible">
+            <a class="uk-position-center-left-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+            <a class="uk-position-center-right-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+          </div>
+      </div>
+      <div class="uk-text-center uk-text-bold pt-norec height-fix-slider" *ngIf="eventsList2!==undefined && eventsList2?.length == 0" >
+        No Records found
+      </div>
+    </div>
+    <!-- Search Result END -->
+    <div class="quote-line uk-margin-remove" uk-grid>
+      <div class="uk-width-1-1@s uk-width-2-3@m uk-padding-remove uk-flex uk-flex-middle">
+        <div class="uk-flex uk-flex-middle">
+          <span class="mr-3">
+            <span class="verified-icon"></span>
+          </span>More than 15 Events every Month.
+        </div>
+      </div>
+      <div class="uk-width-1-1@s uk-width-1-3@m uk-padding-remove uk-flex uk-flex-middle">
+          <button class="uk-width-1-1 uk-button-default" (click)="showAllEvents()"> See  All Events </button>
+      </div>
+    </div>
+  </div>
+  <!-- Event Section End -->
 </div>

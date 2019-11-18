@@ -17,19 +17,20 @@ export class CommunityPageComponent implements OnInit {
   discussCategoryList: any;
   selDiscussCategory: string;
   discussionsList2: any;
+  selEventCategory: string;
+  eventsList2: any;
   searchParams: {
     p: number,
     s: number,
     searchTxt: string,
     eventType: number,
-    startDatetime: number
+    pastEvents: number
   };
   searchParamsDiscussions: {
     p: number,
     s: number,
     tags: string,
-    searchTxt: string,
-    isFeatured: boolean
+    searchTxt: string
   }
 
   constructor(private eventService: EventService, private discussionService: DiscussionService,
@@ -43,18 +44,19 @@ export class CommunityPageComponent implements OnInit {
       s: 10,
       searchTxt: "",
       eventType: 0,
-      startDatetime: (new Date()).getTime()
+      pastEvents: -1
     }
     this.searchParamsDiscussions = {
       p: 0,
       s: 10,
       searchTxt: "",
-      tags: "",
-      isFeatured: true
+      tags: ""
     }
     this.selDiscussCategory="";
+    this.selEventCategory="";
     this.getAllDiscussCategories();
     this.showEvents();
+    this.showEvents2();
   }
 
   getAllDiscussCategories() {
@@ -100,20 +102,28 @@ export class CommunityPageComponent implements OnInit {
     this.router.navigate(['/community/discussions'], {queryParams: {category: this.selDiscussCategory, searchTxt:  this.searchParamsDiscussions.searchTxt}});
   }
   showAllEvents(){
-    this.router.navigate(['/community/events'], {queryParams: {searchTxt:  this.searchParams.searchTxt}});
+    this.router.navigate(['/community/events'], {queryParams: {past: this.searchParams.pastEvents ,searchTxt:  this.searchParams.searchTxt}});
   }
 
   showDiscussions2(){
     this.searchParamsDiscussions.tags = "";
-    this.discussionsList2 = [];
     if(this.selDiscussCategory!=""){
       this.searchParamsDiscussions.tags = this.discussCategoryList[this.selDiscussCategory].tagIds.join(",");
     }
     this.discussionService.searchDiscussions(this.searchParamsDiscussions).subscribe((response: any) => {
       const data = response.data;
-      this.discussionsList = [];
+      this.discussionsList2 = [];
       if (data.content) {
         this.discussionsList2 = data.content;
+      }
+    });
+  }
+  showEvents2() {
+    this.eventService.searchEvents(this.searchParams).subscribe((response: any) => {
+      const data = response.data;
+      this.eventsList2 = [];
+      if (data.content) {
+        this.eventsList2 = data.content;
       }
     });
   }

@@ -1,13 +1,13 @@
-<div class="uk-container search-container">
-  <div class="header-label">
+<div class="search-container m-t-40">
+  <!-- <div class="header-label">
     <h3>Search for Events, Articles, Experts, Products & Services</h3>
-  </div>
+  </div> -->
 
   <!-- Search Form START -->
   <div class="search-form">
     <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
 
-      <div class="uk-margin uk-width-1-1 uk-width-expand@s uk-position-relative">
+      <div class="uk-width-1-1 uk-width-expand@s uk-position-relative">
         <div class="position-absolute-sm uk-z-index  w-full sm-pr-20">
           <form class="uk-search uk-search-default">
             <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
@@ -18,8 +18,8 @@
 
             </span>
             <input class="uk-search-input search-box font-regular pr-150" [(ngModel)]="searchPageParam.term"
-              (keyup)="searchEvent($event)" (keydown.enter)="onSearch($event.target.value)" required type="text" placeholder="Search here"
-              name="search" />
+              (keyup)="searchEvent($event)" (keydown.enter)="onSearch($event.target.value)" required type="text"
+              placeholder="Search here" name="search" />
           </form>
           <ul *ngIf="autocompleteFields.length > 0"
             class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto search-list" appKeyHandler
@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">
+      <div class="uk-width-1-1 uk-width-auto@s">
         <button class="uk-button uk-button-default search-btn" (click)="onSearch(searchPageParam.term)">Search</button>
       </div>
     </div>
@@ -43,14 +43,14 @@
   <!-- Search Result END -->
 
   <!-- Popular search component  -->
-  <div class="p-24-40"
+  <!-- <div class="p-24-40"
     *ngIf="searchData.services.length == 0 && searchData.products.length == 0  && searchData.discussions.length == 0 ">
     <app-popular-search></app-popular-search>
-  </div>
+  </div> -->
   <!-- Popular search component  -->
 
   <!-- <div class="uk-container popular-search-list"></div> -->
-  <div class="quote-line uk-margin-remove" uk-grid>
+  <!-- <div class="quote-line uk-margin-remove" uk-grid>
     <div class="uk-width-expand@s uk-padding-remove uk-flex uk-flex-middle">
       <div class="uk-flex uk-flex-middle">
         <span class="mr-3">
@@ -59,8 +59,8 @@
         Engage to empower this community! 
       </div>
     </div>
-    <!-- <div class="uk-width-auto@s uk-text-center">
-      <button class="uk-button uk-button-default">View All Products</button>
-    </div> -->
-  </div>
+  </div> -->
+  <!-- <div class="uk-width-auto@s uk-text-center">
+        <button class="uk-button uk-button-default">View All Products</button>
+      </div> -->
 </div>

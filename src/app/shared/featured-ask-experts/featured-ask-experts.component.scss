@@ -1,0 +1,101 @@
+.featured-tab {
+  .title {
+    background: #ecf4ff;
+    padding: 24px 40px;
+    border-radius: 8px 8px 0px 0px;
+  }
+  .block-footer {
+    background: #ecf4ff;
+    padding: 24px 40px;
+    border-radius: 0px 0px 8px 8px;
+  }
+  .content {
+    background: #e4eefb;
+    padding: 40px;
+  }
+
+  .all-button {
+    background-color: #1a73e8;
+    border-radius: 4px;
+    font-size: 18px;
+    border: none;
+    color: #fff;
+    text-transform: none;
+    padding: 1px 30px;
+    line-height: 38px;
+    &:focus {
+      color: #1a73e8;
+      background-color: #fff;
+    }
+  }
+}
+
+
+.button-slidenav {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 50%;
+  padding: 0;
+  text-align: center;
+  margin: 0 5px;
+  background-color: #ffffff;
+  color: #777;
+  font-size: 18px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  &:hover {
+    color: #000;
+  }
+  &:focus {
+    color: #000;
+  }
+}
+
+.slidenav-pervious {
+  right: 97% !important;
+}
+
+.slidenav-next {
+  left: 97% !important;
+}
+
+.popular-search {
+  .uk-card-media-top {
+    border-radius: 4px;
+    background-color: #ecf4ff;
+    padding: 5px;
+    img {
+      display: block;
+      margin: auto;
+    }
+  }
+  .uk-card {
+    border-radius: 4px;
+    .thumb-100 {
+      height: 100px;
+    }
+    .uk-card-body p {
+      margin: 0px;
+      font-size: 18px;
+      text-align: center;
+      b {
+        font-size: 18px;
+      }
+      .uk-button-default {
+        height: 36px;
+        width: 100%;
+        margin-top: 20px;
+        text-transform: capitalize;
+        font-size: 18px;
+        line-height: 18px;
+      }
+    }
+  }
+}
+
+.uk-button-default{
+    color:#1A73E8;
+    border: 1px solid #1A73E8;
+    border-radius: 4px;
+    height: 48px;
+  }

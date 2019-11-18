@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../../services/events.service';
 import { DiscussionService } from '../../services/discussion.service';
+import { Router } from '@angular/router';
+import { MenuService } from '../../services/menu.service';
 
 @Component({
   selector: 'app-community-page',
@@ -12,6 +14,9 @@ export class CommunityPageComponent implements OnInit {
   showReset: boolean;
   eventsList: any[];
   discussionsList: any[];
+  discussCategoryList: any;
+  selDiscussCategory: string;
+  discussionsList2: any;
   searchParams: {
     p: number,
     s: number,
@@ -22,11 +27,13 @@ export class CommunityPageComponent implements OnInit {
   searchParamsDiscussions: {
     p: number,
     s: number,
+    tags: string,
     searchTxt: string,
     isFeatured: boolean
   }
 
-  constructor(private eventService: EventService, private discussionService: DiscussionService) {
+  constructor(private eventService: EventService, private discussionService: DiscussionService,
+    private menuService: MenuService, private router: Router ) {
   }
 
 
@@ -42,10 +49,32 @@ export class CommunityPageComponent implements OnInit {
       p: 0,
       s: 10,
       searchTxt: "",
+      tags: "",
       isFeatured: true
     }
+    this.selDiscussCategory="";
+    this.getAllDiscussCategories();
     this.showEvents();
-    this.showDiscussions();
+  }
+
+  getAllDiscussCategories() {
+    this.menuService.getMenus("564071623e60f5b66f62df27", "").subscribe((response: any) => {
+      const data = response;
+      let tags = [];
+      this.discussCategoryList = {};
+      if (data.length > 0) {
+        for (let i in data) {
+          this.discussCategoryList[data[i].id] = { id: data[i].id, label: data[i].displayMenuName, tagIds: [] };
+          if (data[i].tags) {
+            for (let j in data[i].tags) {
+              this.discussCategoryList[data[i].id].tagIds[j] = data[i].tags[j].id;
+            }
+            tags[i] = data[i].id + "_" + this.discussCategoryList[data[i].id].tagIds.join("_"); // this si just to pass extrs key in tags which is menu item id
+          }
+        }
+      }
+      this.showDiscussions2();
+    });
   }
 
   showEvents() {
@@ -63,6 +92,28 @@ export class CommunityPageComponent implements OnInit {
       this.discussionsList = [];
       if (data.content) {
         this.discussionsList = data.content;
+      }
+    });
+  }
+
+  showAllDiscussions(){
+    this.router.navigate(['/community/discussions'], {queryParams: {category: this.selDiscussCategory, searchTxt:  this.searchParamsDiscussions.searchTxt}});
+  }
+  showAllEvents(){
+    this.router.navigate(['/community/events'], {queryParams: {searchTxt:  this.searchParams.searchTxt}});
+  }
+
+  showDiscussions2(){
+    this.searchParamsDiscussions.tags = "";
+    this.discussionsList2 = [];
+    if(this.selDiscussCategory!=""){
+      this.searchParamsDiscussions.tags = this.discussCategoryList[this.selDiscussCategory].tagIds.join(",");
+    }
+    this.discussionService.searchDiscussions(this.searchParamsDiscussions).subscribe((response: any) => {
+      const data = response.data;
+      this.discussionsList = [];
+      if (data.content) {
+        this.discussionsList2 = data.content;
       }
     });
   }

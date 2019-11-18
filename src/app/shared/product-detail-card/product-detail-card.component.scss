@@ -1,49 +1,53 @@
 @import "src/assets/css/variables.scss";
-a{
-    color: #1A72E8;
+a {
+  color: #1a72e8;
 }
 
-.p-verified{
-    padding: 3px 10px;
+.p-verified {
+  padding: 3px 10px;
 }
 
-.p-16{
-    padding: 16px;
+.p-16 {
+  padding: 16px;
 }
 
-.uk-label-danger{
-    background-color: #C83F3F;
+.uk-label-danger {
+  background-color: #c83f3f;
 }
 
-.uk-label-warning{
-    background-color: #E8B24A;
-    color: #423d27;
+.uk-label-warning {
+  background-color: #e8b24a;
+  color: #423d27;
 }
-.category{
-    font-size: $font-small;
-    position: absolute;
-    bottom: 18px;
+.category {
+  font-size: $font-small;
+  position: absolute;
+  bottom: 18px;
 }
-.category span{
-    color: #1A73E8;
-    font-size: $font-small;
+.category span {
+  color: #1a73e8;
+  font-size: $font-small;
 }
-.cursor{
-    cursor: pointer;
+.cursor {
+  cursor: pointer;
 }
-.prize-card{
-    text-align: center;
-    padding:  52px 0;
-    background-color:  #ECF4FF;
-    border-radius: 4px;
-    .price {
-        font-family:"HKGroteskRegular"; 
-        font-size: 32px;
-        color: #2F7F4A;
-    }
+.prize-card {
+  text-align: center;
+  padding: 52px 0;
+  background-color: #ecf4ff;
+  border-radius: 4px;
+  .price {
+    font-family: "HKGroteskRegular";
+    font-size: 32px;
+    color: #2f7f4a;
+  }
 }
 
-.price-border{
-    padding: 8px 16px;
-    border-left: 1px solid #D7E0EF;
+.price-border {
+  padding: 8px 16px;
+  border-left: 1px solid #d7e0ef;
+}
+
+.product-img {
+  height: 156px;
 }

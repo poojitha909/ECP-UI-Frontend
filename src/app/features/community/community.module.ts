@@ -14,15 +14,11 @@ import { EventCreatePageComponent } from './components/event-create/event-create
 import { DiscussionDetailPageComponent } from './components/discussion-detail/discussion-detail-page.component';
 import { DiscussionNoRecordComponent } from './components/discussion-no-record/discussion-no-record.component';
 import { EventNoRecordComponent } from './components/event-no-record/event-no-record.component';
-import { EllipsisPipe } from '../../shared/ellipsis.pipe';
-import { StripHtmlPipe } from '../../shared/striphtml.pipe';
 import { SharedModule } from '../../shared';
 import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [
-    EllipsisPipe,
-    StripHtmlPipe,
     CommunityPageComponent,
     DiscussionNoRecordComponent,
     EventsListPageComponent,

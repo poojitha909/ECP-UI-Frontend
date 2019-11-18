@@ -18,22 +18,75 @@
     </div>
   </div>
 </div> -->
-<div class="uk-container">
-  <div class="uk-background-cover home-banner" data-src="assets/images/landing-img/Landing-1024.png"
-    data-srcset="assets/images/landing-img/Landing-320.png 320w,assets/images/landing-img/Landing-768.png 768w,assets/images/landing-img/Landing-1024.png 1024w,assets/images/landing-img/Landing-1440.png 1440w"
-    uk-img>
-    <div class="uk-child-width-1-2@s uk-padding" uk-grid>
-      <div class="uk-text-center uk-text-left@s">
-        <h1></h1>
-        <p class="font-regular">
-            An unique trusted community that shares articles & discussions, 
-            has access to real world experts, helps discover events, products & services 
-            for elders.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
+
 <!-- Search Container starts -->
 <app-search-container></app-search-container>
 <!-- Search Container ends -->
+
+
+<div class="uk-background-cover home-banner" data-src="assets/images/landing-img/Landing-1024.png"
+  data-srcset="assets/images/landing-img/Landing-320.png 320w,assets/images/landing-img/Landing-768.png 768w,assets/images/landing-img/Landing-1024.png 1024w,assets/images/landing-img/Landing-1440.png 1440w"
+  uk-img>
+  <div class="uk-child-width-1-2@s uk-padding" uk-grid>
+    <div class="uk-text-center uk-text-left@s">
+      <h1>TBD</h1>
+      <p class="font-regular">
+        An unique trusted community that shares articles & discussions,
+        has access to real world experts, helps discover events, products & services
+        for elders.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="uk-child-width-1-4@m m-b-30" uk-grid>
+  <div class="uk-text-center">
+    <div class="options-card">
+      <img src="assets/images/community.png" />
+    </div>
+    <div routerLink="/community" class="quote-line cursor-pointer">
+      Community
+      <span class="uk-float-right" uk-icon="chevron-right"></span>
+    </div>
+  </div>
+
+  <div class="uk-text-center">
+    <div class="options-card">
+      <img src="assets/images/experts.png" />
+    </div>
+    <div routerLink="/ask-question" class="quote-line cursor-pointer">
+      Experts
+      <span class="uk-float-right" uk-icon="chevron-right"></span>
+    </div>
+  </div>
+
+  <div class="uk-text-center">
+    <div class="options-card">
+      <img src="assets/images/products.png" />
+    </div>
+    <div routerLink="/products" class="quote-line cursor-pointer">
+      Products
+      <span class="uk-float-right" uk-icon="chevron-right"></span>
+    </div>
+  </div>
+
+  <div class="uk-text-center">
+    <div class="options-card">
+      <img src="assets/images/services.png" />
+    </div>
+    <div routerLink="/services" class="quote-line cursor-pointer">
+      Services
+      <span class="uk-float-right" uk-icon="chevron-right"></span>
+    </div>
+  </div>
+</div>
+
+<app-featured-events></app-featured-events>
+
+<app-featured-discussions></app-featured-discussions>
+
+<app-featured-ask-experts></app-featured-ask-experts>
+
+<app-featured-products></app-featured-products>
+
+<app-featured-services></app-featured-services>

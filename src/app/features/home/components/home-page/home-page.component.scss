@@ -33,14 +33,31 @@
     }
   }
 }
-.home-banner{
+.home-banner {
   min-height: 224px;
-  margin: 24px 0 48px 0;
+  margin: 32px 0 48px 0;
   border-radius: 8px;
   font-family: $regular-font;
-  h1{
+  h1 {
     font-family: $regular-font;
     font-size: 32px;
     font-weight: 600;
   }
 }
+
+.quote-line {
+  background-color: #e4eefb;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  padding: 8px;
+}
+
+.options-card {
+  background-color: #ecf4ff;
+  border-radius: 4px 4px 0px 0px;
+  img {
+    margin: 16px 0px;
+  }
+  // padding: 16px 94px;
+}
+

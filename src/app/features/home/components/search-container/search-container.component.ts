@@ -31,7 +31,11 @@ export class SearchContainerComponent implements OnInit {
     services: [],
     products: [],
     discussions: [],
-    events: []
+    events: [],
+    totalServices: 0,
+    totalProducts: 0,
+    totaldiscussions: 0,
+    totalEvents: 0
   };
   constructor(private homeService: HomeService, private router: Router) { }
 
@@ -79,10 +83,14 @@ export class SearchContainerComponent implements OnInit {
       if (response && response.servicePage) {
         const servicePage = JSON.parse(response.servicePage);
         this.searchData.services = servicePage.content.slice(0, 5);
+        this.searchData.totalServices = servicePage.total
       }
       this.searchData.products = response.productPage.content;
+      this.searchData.totalProducts = response.productPage.total;
       this.searchData.discussions = response.discussPage.content;
+      this.searchData.totaldiscussions = response.discussPage.total;
       this.searchData.events = response.eventPage.content;
+      this.searchData.totalEvents = response.eventPage.total;
 
     },
       error => {

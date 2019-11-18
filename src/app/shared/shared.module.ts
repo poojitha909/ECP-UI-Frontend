@@ -19,9 +19,40 @@ import { RatingViewComponent } from './rating-view/rating-view.component';
 import { AddRatingComponent } from './add-rating/add-rating.component';
 import { TimeAgoPipe } from './timeago.pipe';
 import { NoReviewComponent } from './no-review/no-review.component';
+import { FeaturedProductsComponent } from './featured-products/featured-products.component';
+import { FeaturedServicesComponent } from './featured-services/featured-services.component';
+import { FeaturedAskExpertsComponent } from './featured-ask-experts/featured-ask-experts.component';
+import { FeaturedDiscussionsComponent } from './featured-discussions/featured-discussions.component';
+import { FeaturedEventsComponent } from './featured-events/featured-events.component';
+import { EllipsisPipe } from './ellipsis.pipe';
+import { StripHtmlPipe } from './striphtml.pipe';
 
 @NgModule({
-  declarations: [ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, ServicesListComponent, PaginationComponent, ErrorComponent, FrontendPaginationComponent, KeyHandlerDirective, AboutUsComponent, DefaultImageDirective, BreadcrumbComponent, AddRatingComponent, RatingViewComponent, ReviewsListComponent, TimeAgoPipe, NoReviewComponent],
+  declarations: [
+    ProductsListComponent,
+    ProductDetailCardComponent,
+    ServiceDetailCardComponent,
+    ServicesListComponent,
+    PaginationComponent,
+    ErrorComponent,
+    FrontendPaginationComponent,
+    KeyHandlerDirective,
+    AboutUsComponent,
+    DefaultImageDirective,
+    BreadcrumbComponent,
+    AddRatingComponent,
+    RatingViewComponent,
+    ReviewsListComponent,
+    TimeAgoPipe,
+    EllipsisPipe,
+    StripHtmlPipe,
+    NoReviewComponent,
+    FeaturedProductsComponent,
+    FeaturedServicesComponent,
+    FeaturedAskExpertsComponent,
+    FeaturedDiscussionsComponent,
+    FeaturedEventsComponent
+  ],
   imports: [
     CommonModule,
     SharedRoutingModule,
@@ -29,7 +60,28 @@ import { NoReviewComponent } from './no-review/no-review.component';
     // NgxPaginationModule
   ],
   exports: [
-    ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, PaginationComponent, ServicesListComponent, FrontendPaginationComponent, KeyHandlerDirective, DefaultImageDirective, BreadcrumbComponent, AddRatingComponent, RatingViewComponent, ReviewsListComponent, TimeAgoPipe, NoReviewComponent
+    ProductsListComponent,
+    ProductDetailCardComponent,
+    ServiceDetailCardComponent,
+    PaginationComponent,
+    ServicesListComponent,
+    FrontendPaginationComponent,
+    KeyHandlerDirective,
+    DefaultImageDirective,
+    BreadcrumbComponent,
+    AddRatingComponent,
+    RatingViewComponent,
+    ReviewsListComponent,
+    TimeAgoPipe,
+    EllipsisPipe,
+    StripHtmlPipe,
+    NoReviewComponent,
+    FeaturedProductsComponent,
+    FeaturedServicesComponent,
+    FeaturedAskExpertsComponent,
+    FeaturedDiscussionsComponent,
+    FeaturedEventsComponent
+
   ]
 })
 export class SharedModule { }

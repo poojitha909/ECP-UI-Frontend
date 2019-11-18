@@ -2,10 +2,10 @@
   *ngIf="searchData.services.length > 0 || searchData.products.length > 0  || searchData.discussions.length > 0 ">
   <ul uk-tab>
     <li class="uk-active"><a href="#" class="font-regular">Product
-        ({{  searchData.products.length > 0 ? searchData.products.length : '0' }})</a></li>
+        ({{  searchData.totalProducts  }})</a></li>
 
     <li><a href="#" class="font-regular">Services
-        ({{  searchData.services.length > 0 ? searchData.services.length : '0' }})</a></li>
+        ({{  searchData.totalServices }})</a></li>
 
     <li><a href="#" class="font-regular">Community</a></li>
     <!-- <li class="uk-disabled"><a>Disabled</a></li> -->

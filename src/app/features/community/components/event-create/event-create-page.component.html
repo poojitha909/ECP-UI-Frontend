@@ -2,12 +2,6 @@
         <!-- Bread crumbs Start -->
         <div class="breadcrumbs">
         <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
-<!-- 
-            <ul class="uk-breadcrumb">
-                <li routerLink="/" class="fa fa-angle-right">Home</li>
-                <li routerLink="/community" class="fa fa-angle-right">Community</li>
-                <li routerLink="/community/events" class="fa fa-angle-right">All Events</li>
-            </ul> -->
         </div>
         <!-- Bread crumbs End -->
         <div class="uk-container">
@@ -18,6 +12,14 @@
                 <p>{{ successMessage }}</p>
             </div>
             <form [formGroup]="eventForm" class="uk-form">
+                <div class="uk-margin">
+                    <label [ngClass]="{'uk-text-danger' : formControl.title.invalid && ( formControl.title.dirty ||  formControl.title.touched) }"
+                        class="uk-form-label">Title<span class="required">*</span></label>
+                    <div class="uk-form-controls">
+                        <input [ngClass]="{'uk-form-danger' : formControl.title.invalid && ( formControl.title.dirty ||  formControl.title.touched) }"
+                            class="uk-input" formControlName="title" type="text"  placeholder="What’s the title of your event?">
+                    </div>
+                </div>
                 <div class="uk-margin">
                     <label
                         [ngClass]="{'uk-text-danger' : formControl.eventType.invalid && ( formControl.eventType.dirty ||  formControl.eventType.touched) }"
@@ -30,14 +32,6 @@
                                 <option value="1">Outdoor</option>
                                 <option value="2">Indoor</option>
                         </select>
-                    </div>
-                </div>
-                <div class="uk-margin">
-                    <label [ngClass]="{'uk-text-danger' : formControl.title.invalid && ( formControl.title.dirty ||  formControl.title.touched) }"
-                        class="uk-form-label">Title<span class="required">*</span></label>
-                    <div class="uk-form-controls">
-                        <input [ngClass]="{'uk-form-danger' : formControl.title.invalid && ( formControl.title.dirty ||  formControl.title.touched) }"
-                            class="uk-input" formControlName="title" type="text"  placeholder="What’s the title of your event?">
                     </div>
                 </div>
                 <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>

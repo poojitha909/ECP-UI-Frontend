@@ -37,64 +37,64 @@
   background-color: #ecf4ff;
   font-family: $regular-font;
   border-radius: 8px;
+  border: solid 1px #d7e0ef;
   margin-bottom: 48px;
   .header-label {
     font-size: 24px;
     color: rgba(22, 28, 45, 0.87);
     margin: 40px 40px 16px 40px;
-    h3{
+    h3 {
       font-weight: 600;
     }
-    select{
+    select {
       font-size: 18px;
     }
     h3 {
       font-size: 24px;
     }
   }
-  
+
   .quote-line {
     background-color: #e4eefb;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
-    padding:12px 40px 12px 40px;
+    padding: 12px 40px 12px 40px;
     color: #161c2d;
     font-size: 18px;
     p {
       margin: 0;
     }
   }
-  
 }
-.cursor{
+.cursor {
   cursor: pointer;
 }
-.popular-search{
-  .uk-card-media-top{
+.popular-search {
+  .uk-card-media-top {
     border-radius: 4px;
     background-color: #ecf4ff;
     padding: 5px;
-    img{
-      display:block;
+    img {
+      display: block;
       margin: auto;
-  
     }
   }
-  .uk-card{
+  .uk-card {
     border-radius: 4px;
-    .thumb-100{
-      height:100px;
+    border: solid 1px #d7e0ef;
+    .thumb-100 {
+      height: 100px;
     }
-    .uk-card-body p{
+    .uk-card-body p {
       margin: 0px;
       font-size: $font-small;
-      text-align:center;
-      b{
+      text-align: center;
+      b {
         font-size: 18px;
       }
-      .uk-button-default{
-        height: 36px;    
-        width:100%;
+      .uk-button-default {
+        height: 36px;
+        width: 100%;
         margin-top: 20px;
         text-transform: capitalize;
         font-size: 18px;
@@ -103,21 +103,9 @@
     }
   }
 }
-.uk-button-default{
-  color:#1A73E8;
-  border: 1px solid #1A73E8;
+.uk-button-default {
+  color: #1a73e8;
+  border: 1px solid #1a73e8;
   border-radius: 4px;
   height: 48px;
-}
-
-.ask-question-banner{
-  min-height: 224px;
-  margin: 24px 0 48px 0;
-  border-radius: 8px;
-  font-family: $regular-font;
-  h1{
-    font-family: $regular-font;
-    font-size: 32px;
-    font-weight: 600;
-  }
 }

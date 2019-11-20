@@ -1,35 +1,8 @@
-.featured-tab {
-    .title {
-      background: #ecf4ff;
-      padding: 24px 40px;
-      border-radius: 8px 8px 0px 0px;
-    }
-    .block-footer {
-      background: #ecf4ff;
-      padding: 24px 40px;
-      border-radius: 0px 0px 8px 8px;
-    }
-    .content {
-      background: #e4eefb;
-      padding: 40px;
-    }
-  
-    button {
-      background-color: #1a73e8;
-      border-radius: 4px;
-      font-size: 18px;
-      border: none;
-      color: #fff;
-      text-transform: none;
-      padding: 1px 30px;
-      &:focus {
-        color: #1a73e8;
-        background-color: #fff;
-      }
-    }
-  }
+
   
   .service-content {
+    border: 1px solid #d7e0ef;
+    border-radius: 4px;
     text-align: center;
     .p-8 {
       padding: 8px;

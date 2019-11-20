@@ -1,0 +1,22 @@
+<div [routerLink]="['/products', product.id]"
+    class="uk-card uk-card-default product-content cursor-pointer uk-height-1-1">
+    <div class="p-8">
+        <div class="verified">
+            <img class="h-150 w-100" [src]="product.images[0]" alt="" />
+            <!-- <button class="perOff">35% OFF</button> -->
+        </div>
+        <p class="font-regular font-weight-600 m-b-5">{{product?.name}} </p>
+
+        <ngb-rating [rate]="getDbServiceRating(product.rating)" [readonly]="true" [max]="5">
+            <ng-template let-fill="fill" let-index="index">
+                <span class="star" [class.filled]="fill === 100">&#9733;</span>
+            </ng-template>
+        </ngb-rating>
+
+        <div class="font-regular-15">{{product?.rating}} Ratings</div>
+        <div class="m-t-10">
+            <span class="price-text">Rs. {{product?.price}}</span>
+            <!-- <span class="m-l-5 mrp">Rs 8000</span> -->
+        </div>
+    </div>
+</div>

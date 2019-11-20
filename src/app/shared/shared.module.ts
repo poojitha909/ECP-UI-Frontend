@@ -26,6 +26,10 @@ import { FeaturedDiscussionsComponent } from './featured-discussions/featured-di
 import { FeaturedEventsComponent } from './featured-events/featured-events.component';
 import { EllipsisPipe } from './ellipsis.pipe';
 import { StripHtmlPipe } from './striphtml.pipe';
+import { ServiceSearchCardComponent } from './service-search-card/service-search-card.component';
+import { ProductSearchCardComponent } from './product-search-card/product-search-card.component';
+import { DicussionSummaryCardComponent } from './dicussion-summary-card/dicussion-summary-card.component';
+import { EventSummaryCardComponent } from './event-summary-card/event-summary-card.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,11 @@ import { StripHtmlPipe } from './striphtml.pipe';
     FeaturedServicesComponent,
     FeaturedAskExpertsComponent,
     FeaturedDiscussionsComponent,
-    FeaturedEventsComponent
+    FeaturedEventsComponent,
+    ServiceSearchCardComponent,
+    ProductSearchCardComponent,
+    DicussionSummaryCardComponent,
+    EventSummaryCardComponent
   ],
   imports: [
     CommonModule,
@@ -80,8 +88,11 @@ import { StripHtmlPipe } from './striphtml.pipe';
     FeaturedServicesComponent,
     FeaturedAskExpertsComponent,
     FeaturedDiscussionsComponent,
-    FeaturedEventsComponent
-
+    FeaturedEventsComponent,
+    ServiceSearchCardComponent,
+    ProductSearchCardComponent,
+    DicussionSummaryCardComponent,
+    EventSummaryCardComponent
   ]
 })
 export class SharedModule { }

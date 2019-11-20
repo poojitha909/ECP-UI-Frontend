@@ -1,4 +1,8 @@
-<div class="uk-container search-container m-t-main-screen">
+<div class="search-container m-t-40">
+  <!-- <div class="header-label">
+    <h3>Search from a specially curated list of products</h3>
+  </div> -->
+
   <!-- Search Form START -->
   <div class="search-form">
     <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
@@ -20,53 +24,20 @@
     </div>
   </div>
   <!-- Search Form END -->
-</div>
 
-<div class="uk-container">
-  <div class="uk-background-cover product-banner" data-src="assets/images/landing-img/Product-1024.png"
-    data-srcset="assets/images/landing-img/Product-320.png 320w,assets/images/landing-img/Product-768.png 768w,assets/images/landing-img/Product-1024.png 1024w,assets/images/landing-img/Product-1440.png 1440w"
-    uk-img>
-    <div class="uk-child-width-1-2@s uk-padding" uk-grid>
-      <div class="uk-text-center uk-text-left@s">
-        <h1></h1>
-        <p class="font-regular">
-          Find and learn about products specially curated for elders.  Share your views about these products.
-          Purchase and get these products delivered from reputed online market places.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- Product Section Start -->
-<div class="uk-container search-container dark">
-  <div class="quote-line uk-margin-remove" uk-grid>
-    <div class="uk-width-1-1@s uk-width-2-3@m uk-padding-remove uk-flex uk-flex-middle">
-      <div class="uk-flex uk-flex-middle">
-          <h4 class="title">
-            <span class="mr-3">
-              <img src="assets/images/product-icon.png" />
-            </span>
-            Products
-          </h4>
-      </div>
-    </div>
-    <div class="uk-width-1-1@s uk-width-1-3@m uk-padding-remove uk-flex uk-flex-middle uk-divider-vertical">
-        <label class="uk-form-label">Showing:</label>
-        <div class="uk-form-controls">
-            <select class="uk-select" [(ngModel)]="searchParams.productCategory" (change)="showProducts()">
-              <option value="">Popular Products</option>
-              <option *ngFor="let cat of catsList" value="{{cat.id}}">{{cat.name}}</option>
-            </select>    
-        </div>
+  <!-- Popular search START -->
+  <div *ngIf="productsList && productsList.length > 0" class="p-40">
+    <app-popular-search [products]="productsList"></app-popular-search>
+    <div class="m-t-30">
+      <button routerLink="/products/all" [queryParams]="{ searchTxt:searchParams.searchTxt}"
+        class="uk-button uk-button-default uk-width-1-1">See All Products</button>
     </div>
   </div>
-  <div class="search-result">
-      <app-popular-search [products]="productsList"></app-popular-search>
-  </div>
-  <!-- Search Result END -->
-  <div class="quote-line uk-margin-remove" uk-grid>
-    <div class="uk-width-1-1@s uk-width-2-3@m uk-padding-remove uk-flex uk-flex-middle">
+
+  <!-- <div class="uk-container popular-search-list"></div> -->
+  <!-- <div class="quote-line uk-margin-remove" uk-grid>
+    <div class="uk-width-expand@s uk-padding-remove uk-flex uk-flex-middle">
       <div class="uk-flex uk-flex-middle">
         <span class="mr-3">
           <span class="verified-icon"></span>
@@ -76,7 +47,21 @@
     <div class="uk-width-1-1@s uk-width-1-3@m uk-padding-remove uk-flex uk-flex-middle">
         <button class="uk-width-1-1 uk-button-default" (click)="showAllProducts()"> See  All Products </button>
     </div>
+  </div> -->
+</div>
+
+<div class="uk-background-cover product-banner" data-src="assets/images/landing-img/Product-1024.png"
+  data-srcset="assets/images/landing-img/Product-320.png 320w,assets/images/landing-img/Product-768.png 768w,assets/images/landing-img/Product-1024.png 1024w,assets/images/landing-img/Product-1440.png 1440w"
+  uk-img>
+  <div class="uk-child-width-1-2@s uk-padding" uk-grid>
+    <div class="uk-text-center uk-text-left@s">
+      <h1></h1>
+      <p class="font-regular">
+        Find and learn about products specially curated for elders. Share your views about these products.
+        Purchase and get these products delivered from reputed online market places.
+      </p>
+    </div>
   </div>
 </div>
-<!-- Product Section End -->
 
+<app-featured-products></app-featured-products>

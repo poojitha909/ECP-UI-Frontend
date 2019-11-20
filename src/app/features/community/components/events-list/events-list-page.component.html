@@ -87,8 +87,8 @@
             <!-- Products list  -->
             <div *ngIf="eventsList!==undefined && eventsList.length > 0">
                 <div class="uk-grid uk-grid-large uk-flex-left uk-text-center uk-child-width-1-2@m">
-                    <app-event-summary *ngFor="let event of eventsList" [event]="event" [isPast]="searchParams.pastEvents">
-                    </app-event-summary>
+                    <app-event-summary-card *ngFor="let event of eventsList" [event]="event" [isPast]="searchParams.pastEvents">
+                    </app-event-summary-card>
                 </div>
             </div>
             <app-pagination *ngIf="(eventsList && eventsList.length > 0)" [totalRecords]="totalRecords"

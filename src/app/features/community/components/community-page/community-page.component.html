@@ -34,8 +34,8 @@
             <div class="uk-visible-toggle" tabindex="-1">
                 <ul class="uk-slider-items uk-child-width-1-1@s uk-child-width-1-3@m uk-grid">
                     <li *ngFor="let discussion of discussionsList">
-                        <app-discussion-summary-cat  [category]="selCategory" [discussion]="discussion">
-                        </app-discussion-summary-cat>
+                        <app-dicussion-summary-card  [category]="selCategory" [discussion]="discussion">
+                        </app-dicussion-summary-card>
                     </li>
                 </ul>
             </div>
@@ -60,7 +60,7 @@
               <div class="uk-visible-toggle" tabindex="-1">
                   <ul class="uk-slider-items uk-child-width-1-1@s uk-child-width-1-3@m uk-grid">
                       <li *ngFor="let event of eventsList">
-                          <app-event-summary [event]="event" [isPast]="0"></app-event-summary>
+                          <app-event-summary-card [event]="event" [isPast]="0"></app-event-summary-card>
                       </li>
                   </ul>
               </div>
@@ -131,8 +131,8 @@
         <div class="uk-visible-toggle" tabindex="-1">
             <ul class="uk-slider-items uk-child-width-1-1@s uk-child-width-1-3@m uk-grid">
                 <li *ngFor="let discussion of discussionsList2">
-                    <app-discussion-summary-cat  [category]="selDiscussCategory" [discussion]="discussion">
-                    </app-discussion-summary-cat>
+                    <app-dicussion-summary-card  [category]="selDiscussCategory" [discussion]="discussion">
+                    </app-dicussion-summary-card>
                 </li>
             </ul>
         </div>
@@ -194,7 +194,7 @@
           <div class="uk-visible-toggle" tabindex="-1">
               <ul class="uk-slider-items uk-child-width-1-1@s uk-child-width-1-3@m uk-grid">
                   <li *ngFor="let event of eventsList2">
-                      <app-event-summary [event]="event" [isPast]="searchParams.pastEvents"></app-event-summary>
+                      <app-event-summary-card [event]="event" [isPast]="searchParams.pastEvents"></app-event-summary-card>
                   </li>
               </ul>
           </div>

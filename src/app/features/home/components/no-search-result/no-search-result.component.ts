@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-no-search-result',
@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./no-search-result.component.scss']
 })
 export class NoSearchResultComponent implements OnInit {
-
+  @Input() tabName: string;
+  @Input() viewLink: string;
   constructor() { }
 
   ngOnInit() {

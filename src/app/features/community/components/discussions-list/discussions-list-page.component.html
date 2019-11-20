@@ -79,8 +79,8 @@
             </div>
             <div *ngIf="discussionsList!==undefined && discussionsList.length > 0">
                 <div class="uk-grid uk-grid-large uk-flex-left uk-text-center uk-child-width-1-2@m">
-                        <app-discussion-summary-cat *ngFor="let discussion of discussionsList" [category]="selCategory"
-                        [discussion]="discussion"></app-discussion-summary-cat>
+                        <app-dicussion-summary-card *ngFor="let discussion of discussionsList" [category]="selCategory"
+                        [discussion]="discussion"></app-dicussion-summary-card>
                 </div>
             </div>
             <app-pagination *ngIf="(discussionsList.length > 0)" [totalRecords]="totalRecords"

@@ -35,10 +35,23 @@
 }
 
 .search-container {
+  &.dark{
+    background-color: #e4eefb;
+    h4.title{
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0;
+    }
+    .height-fix-slider{
+      min-height: 287px;
+    }
+    .height-fix-slider1{
+      min-height: 352px;
+    }
+  }
   background-color: #ecf4ff;
   font-family: $regular-font;
   border-radius: 8px;
-  margin-bottom: 48px;
   .header-label {
     font-size: 24px;
     color: rgba(22, 28, 45, 0.87);
@@ -75,18 +88,32 @@
       }
     }
   }
-  .quote-line {
-    background-color: #e4eefb;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    padding:12px 40px 12px 40px;
-    color: #161c2d;
-    font-size: 18px;
-    p {
-      margin: 0;
-    }
+}
+.search-result{
+  padding: 24px 40px 0;
+}
+.quote-line {
+  background-color: #ecf4ff;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 21px 40px 21px 40px;
+  color: #161c2d;
+  font-size: 18px;
+  p {
+    margin: 0;
   }
-  
+  .uk-divider-vertical{
+    height: auto;
+  }
+  .uk-form-label{
+    margin-bottom: 0px;
+    margin-left: 24px;
+  }
+  select{
+    margin-left: 24px;
+    border: 0px;
+    border-radius: 4px;
+  }
 }
 .uk-button-default{
   color:#1A73E8;
@@ -94,7 +121,10 @@
   border-radius: 4px;
   height: 48px;
 }
-
+.m-seprator{
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
 .w-105{
   width: 105px;
 }

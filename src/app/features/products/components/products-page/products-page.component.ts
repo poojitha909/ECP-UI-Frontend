@@ -10,11 +10,12 @@ export class ProductsPageComponent implements OnInit {
 
   showReset: boolean;
   productsList: any[];
+  catsList: any[];
   searchParams: {
     p: number,
     s: number,
     searchTxt: string,
-    category: { id: string }
+    productCategory: string
   };
 
 
@@ -28,8 +29,17 @@ export class ProductsPageComponent implements OnInit {
       p: 0,
       s: 3,
       searchTxt: "",
-      category: null
+      productCategory: ""
     }
+
+    this.productService.getCategoryList().subscribe((response: any) => {
+      const data = response.data;
+      this.catsList = [];
+      if (data.content) {
+        this.catsList = data.content;
+      }
+    });
+
     this.showProducts();
   }
 
@@ -39,7 +49,6 @@ export class ProductsPageComponent implements OnInit {
       this.productsList = [];
       if (data.content) {
         this.productsList = data.content;
-        console.log(this.productsList);
       }
     });
   }

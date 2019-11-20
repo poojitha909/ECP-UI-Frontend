@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/products.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products-page',
@@ -10,15 +11,16 @@ export class ProductsPageComponent implements OnInit {
 
   showReset: boolean;
   productsList: any[];
+  catsList: any[];
   searchParams: {
     p: number,
     s: number,
     searchTxt: string,
-    category: { id: string }
+    productCategory: string
   };
 
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private router: Router) {
     this.productService.selectedCatId = null;
     this.productService.selectedCatname = null;
   }
@@ -28,7 +30,7 @@ export class ProductsPageComponent implements OnInit {
       p: 0,
       s: 3,
       searchTxt: "",
-      category: null
+      productCategory: ""
     }
     // this.showProducts();
   }
@@ -39,9 +41,12 @@ export class ProductsPageComponent implements OnInit {
       this.productsList = [];
       if (data.content) {
         this.productsList = data.content;
-        console.log(this.productsList);
       }
     });
+  }
+
+  showAllProducts(){
+    this.router.navigate(['/products/all'], {queryParams: {productCategory: this.searchParams.productCategory, searchTxt:  this.searchParams.searchTxt}});
   }
 
   onSearchChange(event: any) {

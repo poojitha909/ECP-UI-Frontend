@@ -24,15 +24,15 @@
                 <div>
                   <span>&nbsp;</span>
                 </div>
-                <div class="font-regular f20px">Rs. {{prod.price | number: '1.0'}}</div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </div>  
+        </li>
+      </ul>
     </div>
-    <div *ngIf="products==undefined || products.length == 0">
-      <h2 style="text-align: center"> We couldn't find any match for given criteria!</h2>
+    <div class="uk-hidden@s">
+        <a class="uk-position-center-left uk-position-small" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+        <a class="uk-position-center-right uk-position-small" href="#" uk-slidenav-next uk-slider-item="next"></a>
     </div>
   </div>
 </div> -->

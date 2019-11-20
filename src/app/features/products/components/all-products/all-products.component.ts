@@ -73,7 +73,6 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     if (this.route.snapshot.queryParams['productCategory'] !== undefined) {
       this.searchParams.productCategory = this.route.snapshot.queryParams['productCategory'];
     }
-    this.onSearch();
     this.productService.getCategoryList().subscribe((response: any) => {
       const data = response.data;
       this.catsList = [];
@@ -81,6 +80,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
         this.catsList = data.content;
       }
     });
+    this.showProducts();
   }
 
   changePage(page: number) {
@@ -135,7 +135,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
 
 
   onSearch() {
-    this.showProducts();
+    this.router.navigate(['/products/all'], { queryParams: { productCategory: this.searchParams.productCategory, searchTxt: this.searchParams.searchTxt } });
   }
 
 }

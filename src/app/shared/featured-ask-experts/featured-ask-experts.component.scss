@@ -27,6 +27,7 @@
 }
 
 .popular-search {
+  border: 1px solid #d7e0ef;
   .uk-card-media-top {
     border-radius: 4px;
     background-color: #ecf4ff;
@@ -49,15 +50,17 @@
         font-size: 18px;
       }
       .uk-button-default {
-        height: 36px;
-        width: 100%;
-        margin-top: 20px;
-        text-transform: capitalize;
-        font-size: 18px;
-        line-height: 18px;
-        color: #1a73e8;
-        border: 1px solid #1a73e8;
+        background-color: #1a73e8;
         border-radius: 4px;
+        font-size: 18px;
+        border: none;
+        color: #fff;
+        text-transform: none;
+        padding: 1px 30px;
+        &:focus {
+          color: #1a73e8;
+          background-color: #fff;
+        }
       }
     }
   }

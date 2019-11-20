@@ -1,31 +1,12 @@
-<div class="uk-container">
-
-  <div class="uk-background-cover product-banner" data-src="assets/images/landing-img/Product-1024.png"
-    data-srcset="assets/images/landing-img/Product-320.png 320w,assets/images/landing-img/Product-768.png 768w,assets/images/landing-img/Product-1024.png 1024w,assets/images/landing-img/Product-1440.png 1440w"
-    uk-img>
-    <div class="uk-child-width-1-2@s uk-padding" uk-grid>
-      <div class="uk-text-center uk-text-left@s">
-        <h1></h1>
-        <p class="font-regular">
-          Find and learn about products specially curated for elders.  Share your views about these products.
-          Purchase and get these products delivered from reputed online market places.
-        </p>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-<div class="uk-container search-container">
-  <div class="header-label">
+<div class="search-container m-t-40">
+  <!-- <div class="header-label">
     <h3>Search from a specially curated list of products</h3>
-  </div>
+  </div> -->
 
   <!-- Search Form START -->
   <div class="search-form">
     <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
-      <div class="uk-margin uk-width-1-1 uk-width-expand@s">
+      <div class="uk-width-1-1 uk-width-expand@s">
         <form class="uk-search uk-search-default">
           <span class="uk-search-icon-flip" [ngClass]="{ 'w-105':showReset}" uk-search-icon>
             <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
@@ -37,7 +18,7 @@
             placeholder="Search..." name="search" />
         </form>
       </div>
-      <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">
+      <div class="uk-width-1-1 uk-width-auto@s">
         <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
       </div>
     </div>
@@ -45,10 +26,16 @@
   <!-- Search Form END -->
 
   <!-- Popular search START -->
-  <app-popular-search [products]="productsList"></app-popular-search>
+  <div *ngIf="productsList && productsList.length > 0" class="p-40">
+    <app-popular-search [products]="productsList"></app-popular-search>
+    <div class="m-t-30">
+      <button routerLink="/products/all" [queryParams]="{ searchTxt:searchParams.searchTxt}"
+        class="uk-button uk-button-default uk-width-1-1">See All Products</button>
+    </div>
+  </div>
 
   <!-- <div class="uk-container popular-search-list"></div> -->
-  <div class="quote-line uk-margin-remove" uk-grid>
+  <!-- <div class="quote-line uk-margin-remove" uk-grid>
     <div class="uk-width-expand@s uk-padding-remove uk-flex uk-flex-middle">
       <div class="uk-flex uk-flex-middle">
         <span class="mr-3">
@@ -59,5 +46,21 @@
     <div class="uk-width-auto@s uk-text-center">
       <button routerLink="/products/all" class="uk-button uk-button-default">More products</button>
     </div>
+  </div> -->
+</div>
+
+<div class="uk-background-cover product-banner" data-src="assets/images/landing-img/Product-1024.png"
+  data-srcset="assets/images/landing-img/Product-320.png 320w,assets/images/landing-img/Product-768.png 768w,assets/images/landing-img/Product-1024.png 1024w,assets/images/landing-img/Product-1440.png 1440w"
+  uk-img>
+  <div class="uk-child-width-1-2@s uk-padding" uk-grid>
+    <div class="uk-text-center uk-text-left@s">
+      <h1></h1>
+      <p class="font-regular">
+        Find and learn about products specially curated for elders. Share your views about these products.
+        Purchase and get these products delivered from reputed online market places.
+      </p>
+    </div>
   </div>
 </div>
+
+<app-featured-products></app-featured-products>

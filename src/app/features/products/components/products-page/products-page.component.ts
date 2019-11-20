@@ -30,7 +30,7 @@ export class ProductsPageComponent implements OnInit {
       searchTxt: "",
       category: null
     }
-    this.showProducts();
+    // this.showProducts();
   }
 
   showProducts() {
@@ -51,7 +51,7 @@ export class ProductsPageComponent implements OnInit {
     } else {
       this.showReset = false;
     }
-    this.searchParams.searchTxt = value;
+    // this.searchParams.searchTxt = value;
     if (event.key == "Enter") {
       this.onSearch();
     }
@@ -61,7 +61,7 @@ export class ProductsPageComponent implements OnInit {
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
       this.searchParams.searchTxt = "";
       this.showReset = false;
-      this.onSearch()
+      // this.onSearch()
     }
   }
 

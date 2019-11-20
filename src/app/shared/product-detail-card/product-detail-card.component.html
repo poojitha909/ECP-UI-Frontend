@@ -6,14 +6,14 @@
   </div>
 
   <div class="uk-card-body uk-width-expand p-16">
-    <a href="javascript:void(0)" class="font-regular">{{product.name}}</a>
+    <a href="javascript:void(0)" class="font-regular">{{product?.name}}</a>
     <div>
       <ngb-rating [rate]="getDbServiceRating(product.rating)" [readonly]="true" [max]="5">
         <ng-template let-fill="fill" let-index="index">
           <span class="star" [class.filled]="fill === 100">&#9733;</span>
         </ng-template>
       </ngb-rating>
-      <span class="ml-15">{{product.rating}} Ratings</span>
+      <span class="ml-15">{{product?.rating}} Ratings</span>
     </div>
     <div class="category">
       In: <span>{{product?.productCategory?.name}}</span>
@@ -36,8 +36,8 @@
       <!-- <div>
         <strike>Rs. {{product.price}}</strike>
       </div> -->
-      <div class="m-0 price">Rs. {{product.price}}</div>
-      <div class="font-regular">On {{product.buyFrom | titlecase }}</div>
+      <div class="m-0 price">Rs. {{product?.price}}</div>
+      <div class="font-regular">On {{product?.buyFrom | titlecase }}</div>
     </div>
   </div>
 </div>

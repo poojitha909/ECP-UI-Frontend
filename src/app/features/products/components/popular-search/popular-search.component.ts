@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./popular-search.component.scss']
 })
 export class PopularSearchComponent implements OnInit {
-  currentRate = 4;
+  // currentRate = 4;
   @Input() products: any[];
 
   constructor() { }
@@ -14,20 +14,20 @@ export class PopularSearchComponent implements OnInit {
   ngOnInit() {
   }
 
-  getDbServiceRating(percent): number {
-    if (percent == 0) {
-      return 0;
-    } else if (percent <= 20) {
-      return 1;
-    } else if (percent <= 40) {
-      return 2;
-    } else if (percent <= 60) {
-      return 3;
-    } else if (percent <= 80) {
-      return 4;
-    } else if (percent <= 100) {
-      return 5;
-    }
-  }
+  // getDbServiceRating(percent): number {
+  //   if (percent == 0) {
+  //     return 0;
+  //   } else if (percent <= 20) {
+  //     return 1;
+  //   } else if (percent <= 40) {
+  //     return 2;
+  //   } else if (percent <= 60) {
+  //     return 3;
+  //   } else if (percent <= 80) {
+  //     return 4;
+  //   } else if (percent <= 100) {
+  //     return 5;
+  //   }
+  // }
 
 }

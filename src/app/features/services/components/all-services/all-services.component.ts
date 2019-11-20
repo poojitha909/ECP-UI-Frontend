@@ -100,6 +100,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
             this.ecpService.searchCatID = catId;
             this.getCategoryServices(queryCategory, catId);
           } else {
+            this.searchPageParam.term = queryCategory;
             this.ecpService.searchCatID = null;
             this.getCategoryServices(queryCategory, 0);
           }

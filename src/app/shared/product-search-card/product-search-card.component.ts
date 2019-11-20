@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-product-detail-card',
-  templateUrl: './product-detail-card.component.html',
-  styleUrls: ['./product-detail-card.component.scss']
+  selector: 'app-product-search-card',
+  templateUrl: './product-search-card.component.html',
+  styleUrls: ['./product-search-card.component.scss']
 })
-export class ProductDetailCardComponent implements OnInit {
+export class ProductSearchCardComponent implements OnInit {
+
   @Input() product: any;
   constructor() { }
 
@@ -28,5 +29,4 @@ export class ProductDetailCardComponent implements OnInit {
       return 5;
     }
   }
-
 }

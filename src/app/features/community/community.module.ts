@@ -7,8 +7,6 @@ import { EventsListPageComponent } from './components/events-list/events-list-pa
 import { DiscussionsListPageComponent } from './components/discussions-list/discussions-list-page.component';
 import { DiscussionCreatePageComponent } from './components/discussion-create/discussion-create-page.component';
 import { DiscussionSummaryComponent } from './components/discussion-summary/discussion-summary.component';
-import { DiscussionSummaryCatComponent } from './components/discussion-summary-cat/discussion-summary-cat.component';
-import { EventSummaryComponent } from './components/event-summary/event-summary.component';
 import { EventDetailPageComponent } from './components/event-detail/event-detail-page.component';
 import { EventCreatePageComponent } from './components/event-create/event-create-page.component';
 import { DiscussionDetailPageComponent } from './components/discussion-detail/discussion-detail-page.component';
@@ -26,9 +24,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     DiscussionDetailPageComponent,
     DiscussionCreatePageComponent,
     DiscussionSummaryComponent,
-    DiscussionSummaryCatComponent,
     EventNoRecordComponent,
-    EventSummaryComponent,
     EventDetailPageComponent,
     DiscussionsListPageComponent
   ],

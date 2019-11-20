@@ -1,4 +1,4 @@
-<div class="popular-search">
+<!-- <div class="popular-search">
   <div class="p-40">
     <p>Popular Products</p>
     <div *ngIf="products!==undefined && products.length  > 0" class="uk-child-width-1-3@m uk-grid-match" uk-grid>
@@ -22,7 +22,6 @@
               </div>
               <div class="uk-width-auto uk-text-right">
                 <div>
-                  <!-- <strike>Rs. {{prod.price}}</strike> -->
                   <span>&nbsp;</span>
                 </div>
                 <div class="font-regular f20px">Rs. {{prod.price | number: '1.0'}}</div>
@@ -36,7 +35,8 @@
       <h2 style="text-align: center"> We couldn't find any match for given criteria!</h2>
     </div>
   </div>
-  <!-- 
+</div> -->
+<!-- 
   <div class="p-40">
     <p>Popular Products Categories</p>
     <div class="uk-child-width-1-3@m uk-grid-match" uk-grid>
@@ -80,4 +80,8 @@
       </div>
     </div>
   </div> -->
+<div class="uk-child-width-1-3@m uk-grid-match" uk-grid>
+  <div *ngFor="let product of products">
+    <app-product-search-card [product]="product"></app-product-search-card>
+  </div>
 </div>

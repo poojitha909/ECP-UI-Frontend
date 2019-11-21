@@ -11,12 +11,15 @@ import { StorageHelperService } from 'src/app/core/services/storage-helper.servi
 export class AskQuestionPageComponent implements OnInit {
 
   showReset: boolean;
+  showResult: boolean;
   experts: any[];
+  experts2: any[];
+  expertsTotal: number;
   catsList: any[];
-  selCategory: string;
   searchParams: {
     p: number,
     s: number,
+    searchTxt: string,
     experties: string
   };
   user: any;
@@ -35,12 +38,13 @@ export class AskQuestionPageComponent implements OnInit {
     this.searchParams = {
       p: 0,
       s: 3,
+      searchTxt: "",
       experties: ""
     }
-    this.showExperts();
-    this.selCategory = "";
+    this.expertsTotal = 0;
+    this.showResult = false;
     if(this.route.snapshot.params['category']){
-      this.selCategory = this.route.snapshot.params['category'];
+      this.searchParams.experties = this.route.snapshot.params['category'];
     }
     this.askQuestionService.getCategoryList().subscribe( (response:any) =>{
       const data = response.data;
@@ -49,26 +53,67 @@ export class AskQuestionPageComponent implements OnInit {
         this.catsList = data.content;
       }
     });
+    this.showExperts();
+    this.showExperts2();
   }
 
   showExperts() {
-    this.askQuestionService.experts(this.searchParams).subscribe((response: any) => {
+    let searchParams = JSON.parse(JSON.stringify(this.searchParams));
+    searchParams.experties = "";
+    this.askQuestionService.experts(searchParams).subscribe((response: any) => {
       const data = response.data;
       this.experts = [];
       if (data.content) {
         this.experts = data.content;
+        this.expertsTotal = data.total;
+      }
+    });
+  }
+
+  showExperts2() {
+    let searchParams = JSON.parse(JSON.stringify(this.searchParams));
+    searchParams.searchTxt = "";
+    this.askQuestionService.experts(searchParams).subscribe((response: any) => {
+      const data = response.data;
+      this.experts2 = [];
+      if (data.content) {
+        this.experts2 = data.content;
         console.log(this.experts);
       }
     });
   }
 
-  onTabChange(value: string) {
-    this.selCategory = value;
-    this.searchParams.experties = this.selCategory;
-    this.onSearch();
+  showAllExperts(){
+    this.router.navigate(['/ask-question/all'], {queryParams: {category: this.searchParams.experties, searchTxt:  this.searchParams.searchTxt}});
+  }
+
+  onSearchChange(event: any) {
+    const value = event.target.value;
+    if (value !== "") {
+      this.showReset = true
+    } else {
+      this.showReset = false;
+      this.showResult = false;
+    }
+    this.searchParams.searchTxt = value;
+    if (event.key == "Enter") {
+      this.onSearch();
+    }
+  }
+
+  resetSearch(event: any) {
+    if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
+      this.searchParams.searchTxt = "";
+      this.showReset = false;
+      this.onSearch()
+    }
   }
 
   onSearch() {
+    this.showResult = false;
+    if(this.searchParams.searchTxt != ""){
+      this.showResult = true;
+    }
     this.showExperts();
   }
 }

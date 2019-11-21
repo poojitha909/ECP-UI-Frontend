@@ -49,6 +49,7 @@
       min-height: 352px;
     }
   }
+  border: 1px solid #d7e0ef;
   background-color: #ecf4ff;
   font-family: $regular-font;
   border-radius: 8px;
@@ -197,7 +198,8 @@
 }
 .product-banner{
   min-height: 224px;
-  margin: 24px 0 32px 0;
+  margin: 24px 0 0px 0;
+  border: 1px solid #d7e0ef;
   border-radius: 8px;
   font-family: $regular-font;
   h1{

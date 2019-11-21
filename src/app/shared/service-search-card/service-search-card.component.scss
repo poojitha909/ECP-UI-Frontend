@@ -1,21 +1,18 @@
-a{
-    color: #1A72E8;
-}
-
-.p-verified{
-    padding: 3px 10px;
-}
-
-.p-16{
-    padding: 16px;
-}
-
-.uk-card-default{
-    border: 1px solid #D7E0EF;
-    border-radius: 4px;
-}
-
-.verified {
+.service-content {
+  text-align: center;
+  border: 1px solid #D7E0EF;
+  border-radius: 4px;
+  .p-8 {
+    padding: 8px;
+  }
+  img {
+    border-radius: 8px;
+    object-fit: contain;
+  }
+  a {
+    color: #1a72e8;
+  }
+  .verified {
     position: relative;
     button {
       right: 10px;
@@ -32,3 +29,4 @@ a{
       }
     }
   }
+}

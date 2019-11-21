@@ -6,7 +6,6 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./popular-search.component.scss']
 })
 export class PopularSearchComponent implements OnInit {
-  currentRate = 4;
   @Input() products: any[];
 
   constructor() { }
@@ -29,5 +28,4 @@ export class PopularSearchComponent implements OnInit {
       return 5;
     }
   }
-
 }

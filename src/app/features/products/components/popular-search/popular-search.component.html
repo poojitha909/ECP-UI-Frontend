@@ -7,11 +7,11 @@
             <div class="uk-card-media-top">
               <img class="thumb-200" src="{{ prod.images[0] }}" alt="">
             </div>
-            <div class="uk-card-body p-10">
-              <div uk-grid>
-                <div class="uk-width-expand">
-                  <a>{{prod.name  | ellipsis:50}}</a>
-                  <div>
+            <div class="uk-card-body p-10 no-grid-margin">
+              <div uk-grid class="uk-child-width-1-1@m">
+                <div>
+                  <a class="title-height">{{prod.name  | ellipsis:70}}</a>
+                  <div class="uk-text-center">
                     <ngb-rating [readonly]="true" [rate]="getDbServiceRating(prod.rating)" [max]="5">
                       <ng-template let-fill="fill" let-index="index">
                         <span class="star" [class.filled]="fill === 100">&#9733;</span>
@@ -19,12 +19,15 @@
                     </ngb-rating>
                   </div>
                 </div>
-                <div class="uk-width-auto uk-text-right">
-                  <div>
-                    <!-- <strike>Rs. {{prod.price}}</strike> -->
-                    <span>&nbsp;</span>
+                <div>
+                  <div class="uk-text-center">
+                    <div class="font-regular f15px">{{prod.reviews}} Reviews</div>
                   </div>
-                  <div class="font-regular f20px">Rs. {{prod.price | number: '1.0'}}</div>
+                </div>
+                <div>
+                  <div class="uk-text-center">
+                    <div class="font-regular green f15px">Rs. {{prod.price | number: '1.0'}}</div>
+                  </div>  
                 </div>
               </div>
             </div>

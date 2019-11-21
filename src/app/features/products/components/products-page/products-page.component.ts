@@ -10,7 +10,11 @@ import { Router } from '@angular/router';
 export class ProductsPageComponent implements OnInit {
 
   showReset: boolean;
+  showResult: boolean;
   productsList: any[];
+  productsTotal: number;
+  productsList2: any[];
+  productsTotal2: number;
   catsList: any[];
   searchParams: {
     p: number,
@@ -28,7 +32,7 @@ export class ProductsPageComponent implements OnInit {
   ngOnInit() {
     this.searchParams = {
       p: 0,
-      s: 3,
+      s: 6,
       searchTxt: "",
       productCategory: ""
     }
@@ -41,21 +45,39 @@ export class ProductsPageComponent implements OnInit {
       }
     });
 
+    this.showResult = false;
     this.showProducts();
+    this.showProducts2();
   }
 
   showProducts() {
-    this.productService.searchProducts(this.searchParams).subscribe((response: any) => {
+    let searchParams = JSON.parse(JSON.stringify(this.searchParams));
+    searchParams.productCategory = "";
+    this.productService.searchProducts(searchParams).subscribe((response: any) => {
       const data = response.data;
       this.productsList = [];
       if (data.content) {
         this.productsList = data.content;
       }
+      this.productsTotal = data.total;
     });
   }
 
   showAllProducts(){
     this.router.navigate(['/products/all'], {queryParams: {productCategory: this.searchParams.productCategory, searchTxt:  this.searchParams.searchTxt}});
+  }
+
+  showProducts2() {
+    let searchParams = JSON.parse(JSON.stringify(this.searchParams));
+    searchParams.searchTxt = "";
+    this.productService.searchProducts(searchParams).subscribe((response: any) => {
+      const data = response.data;
+      this.productsList2 = [];
+      if (data.content) {
+        this.productsList2 = data.content;
+      }
+      this.productsTotal2 = data.total;
+    });
   }
 
   onSearchChange(event: any) {
@@ -64,10 +86,26 @@ export class ProductsPageComponent implements OnInit {
       this.showReset = true
     } else {
       this.showReset = false;
+      this.showResult = false;
     }
     this.searchParams.searchTxt = value;
     if (event.key == "Enter") {
       this.onSearch();
+    }
+  }
+  getDbServiceRating(percent): number {
+    if (percent == 0) {
+      return 0;
+    } else if (percent <= 20) {
+      return 1;
+    } else if (percent <= 40) {
+      return 2;
+    } else if (percent <= 60) {
+      return 3;
+    } else if (percent <= 80) {
+      return 4;
+    } else if (percent <= 100) {
+      return 5;
     }
   }
 
@@ -80,6 +118,10 @@ export class ProductsPageComponent implements OnInit {
   }
 
   onSearch() {
+    this.showResult = false;
+    if(this.searchParams.searchTxt != ""){
+      this.showResult = true;
+    }
     this.showProducts();
   }
 }

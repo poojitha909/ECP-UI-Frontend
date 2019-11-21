@@ -84,7 +84,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Products list  -->
+            <!-- Events list  -->
             <div *ngIf="eventsList!==undefined && eventsList.length > 0">
                 <div class="uk-grid uk-grid-large uk-flex-left uk-text-center uk-child-width-1-2@m">
                     <app-event-summary *ngFor="let event of eventsList" [event]="event" [isPast]="searchParams.pastEvents">

@@ -115,11 +115,27 @@
     border-radius: 4px;
   }
 }
+.f15px{
+  font-size:15px;
+  margin-top: 5px;
+  color: $font-color-black;
+}
 .uk-button-default{
-  color:#1A73E8;
+  color:#FFFFFF;
   border: 1px solid #1A73E8;
   border-radius: 4px;
   height: 48px;
+  background-color: #1A73E8
+}
+.uk-card-body .uk-grid{
+  margin-left: -10px;
+}
+.uk-card-body .uk-grid > * {
+  padding-left: 10px;
+}
+.green{
+  color: #187700;
+  font-weight: bold;
 }
 .m-seprator{
   margin-top: 32px;
@@ -165,7 +181,19 @@
 .uk-search .uk-search-icon:not(a):not(button):not(input){
   pointer-events: all;
 }
-
+.thumb-200{
+  max-width: 100%!important;
+  height: 160px;
+  display: block;
+  margin: auto;
+}
+.title-height{
+  min-height: 3rem;
+  display: block;
+}
+.no-grid-margin .uk-grid-margin{
+  margin: 0px;
+}
 .product-banner{
   min-height: 224px;
   margin: 24px 0 32px 0;

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EpcServiceService } from 'src/app/features/services/epc-service.service';
+import { Service } from 'src/app/core/interfaces';
 
 @Component({
   selector: 'app-featured-services',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeaturedServicesComponent implements OnInit {
 
-  constructor() { }
+  services: Service[] = [];
+  constructor(private ecpService: EpcServiceService) { }
 
   ngOnInit() {
+    this.getFeatureServices();
+  }
+
+  getFeatureServices() {
+    this.ecpService.serviceParam.isFeatured = true;
+    this.ecpService.getAllServices().subscribe(
+      response => {
+        if (response) {
+          this.ecpService.serviceParam.isFeatured = false;
+          this.services = response;
+        }
+      });
   }
 
 }

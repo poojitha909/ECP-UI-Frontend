@@ -13,7 +13,7 @@
                     <div>
                         <select class="uk-select">
                             <option>Popular products</option>
-                            <option>Past event</option>
+                            <!-- <option>Past event</option> -->
                         </select>
                     </div>
                 </div>
@@ -22,148 +22,14 @@
     </div>
     <div class="content">
         <!-- Featured Service card  -->
-        <div uk-slider>
+        <div uk-slider *ngIf="products.length > 0">
             <div class="uk-position-relative">
-                <div class="uk-slider-container uk-light">
+                <div class="uk-slider-container">
                     <!-- Product Card -->
                     <ul class="uk-slider-items uk-grid-match uk-child-width-1-3@m uk-grid">
-                        <li>
-                            <div class="uk-card uk-card-default service-content">
-                                <div class="p-8">
-                                    <div class="verified">
-                                        <img class="h-150 w-100" src="assets/images/product-test2.png" />
-                                        <button class="perOff">35% OFF</button>
-                                    </div>
-                                    <p class="font-regular font-weight-600 m-b-5">Wheel chair </p>
-
-                                    <ngb-rating [rate]="4" [readonly]="true" [max]="5">
-                                        <ng-template let-fill="fill" let-index="index">
-                                            <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                                        </ng-template>
-                                    </ngb-rating>
-
-                                    <div class="font-regular-15">Reviews</div>
-                                    <div class="m-t-10">
-                                        <span class="price-text">Rs 1699</span> <span class="m-l-5 mrp">Rs 8000</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <li *ngFor="let product of products">
+                            <app-product-search-card [product]="product"></app-product-search-card>
                         </li>
-                        <li>
-                            <div class="uk-card uk-card-default service-content">
-                                <div class="p-8">
-                                    <div class="verified">
-                                        <img class="h-150 w-100" src="assets/images/product-test2.png" />
-                                        <button class="perOff">35% OFF</button>
-                                    </div>
-                                    <p class="font-regular font-weight-600 m-b-5">Wheel chair </p>
-
-                                    <ngb-rating [rate]="4" [readonly]="true" [max]="5">
-                                        <ng-template let-fill="fill" let-index="index">
-                                            <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                                        </ng-template>
-                                    </ngb-rating>
-
-                                    <div class="font-regular-15">Reviews</div>
-                                    <div class="m-t-10">
-                                        <span class="price-text">Rs 1699</span> <span class="m-l-5 mrp">Rs 8000</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="uk-card uk-card-default service-content">
-                                <div class="p-8">
-                                    <div class="verified">
-                                        <img class="h-150 w-100" src="assets/images/product-test2.png" />
-                                        <button class="perOff">35% OFF</button>
-                                    </div>
-                                    <p class="font-regular font-weight-600 m-b-5">Wheel chair </p>
-
-                                    <ngb-rating [rate]="4" [readonly]="true" [max]="5">
-                                        <ng-template let-fill="fill" let-index="index">
-                                            <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                                        </ng-template>
-                                    </ngb-rating>
-
-                                    <div class="font-regular-15">Reviews</div>
-                                    <div class="m-t-10">
-                                        <span class="price-text">Rs 1699</span> <span class="m-l-5 mrp">Rs 8000</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="uk-card uk-card-default service-content">
-                                <div class="p-8">
-                                    <div class="verified">
-                                        <img class="h-150 w-100" src="assets/images/product-test2.png" />
-                                        <button class="perOff">35% OFF</button>
-                                    </div>
-                                    <p class="font-regular font-weight-600 m-b-5">Wheel chair </p>
-
-                                    <ngb-rating [rate]="4" [readonly]="true" [max]="5">
-                                        <ng-template let-fill="fill" let-index="index">
-                                            <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                                        </ng-template>
-                                    </ngb-rating>
-
-                                    <div class="font-regular-15">Reviews</div>
-                                    <div class="m-t-10">
-                                        <span class="price-text">Rs 1699</span> <span class="m-l-5 mrp">Rs 8000</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="uk-card uk-card-default service-content">
-                                <div class="p-8">
-                                    <div class="verified">
-                                        <img class="h-150 w-100" src="assets/images/product-test2.png" />
-                                        <button class="perOff">35% OFF</button>
-                                    </div>
-                                    <p class="font-regular font-weight-600 m-b-5">Wheel chair </p>
-
-                                    <ngb-rating [rate]="4" [readonly]="true" [max]="5">
-                                        <ng-template let-fill="fill" let-index="index">
-                                            <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                                        </ng-template>
-                                    </ngb-rating>
-
-                                    <div class="font-regular-15">Reviews</div>
-                                    <div class="m-t-10">
-                                        <span class="price-text">Rs 1699</span> <span class="m-l-5 mrp">Rs 8000</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="uk-card uk-card-default service-content">
-                                <div class="p-8">
-                                    <div class="verified">
-                                        <img class="h-150 w-100" src="assets/images/product-test2.png" />
-                                        <button class="perOff">35% OFF</button>
-                                    </div>
-                                    <p class="font-regular font-weight-600 m-b-5">Wheel chair </p>
-
-                                    <ngb-rating [rate]="4" [readonly]="true" [max]="5">
-                                        <ng-template let-fill="fill" let-index="index">
-                                            <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                                        </ng-template>
-                                    </ngb-rating>
-
-                                    <div class="font-regular-15">Reviews</div>
-                                    <div class="m-t-10">
-                                        <span class="price-text">Rs 1699</span> <span class="m-l-5 mrp">Rs 8000</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
                     </ul>
                     <!-- <a class="uk-position-center-left-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
                 uk-slider-item="previous"></a>

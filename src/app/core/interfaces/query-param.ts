@@ -11,4 +11,6 @@ export interface JDserviceParam {
     catID?: string;
     max?: number;
     pageNo?: number;
+    isFeatured?: boolean;
+    dir?: number;
 }

@@ -13,7 +13,7 @@
                     <div>
                         <select class="uk-select">
                             <option>Upcoming event</option>
-                            <option>Past event</option>
+                            <!-- <option>Past event</option> -->
                         </select>
                     </div>
                 </div>
@@ -22,42 +22,14 @@
     </div>
     <div class="content">
         <!-- Featured Service card  -->
-        <div uk-slider>
+        <div uk-slider *ngIf="events.length > 0">
             <div class="uk-position-relative">
-                <div class="uk-slider-container uk-light">
+                <div class="uk-slider-container">
 
                     <ul class="uk-slider-items uk-grid-match uk-child-width-1-3@m uk-grid">
-                        <li>
-                            <!-- Discussion card -->
-                            <div class="event-summary bg-white" *ngIf="event?.isPast == isPast || isPast==0"
-                                [routerLink]="['/community/event', event?.id ]">
-                                <div class="event-summary-head uk-grid uk-grid-collapse">
-                                    <div class="event-title uk-width-1-1@s">
-                                        {{event?.title}}
-                                    </div>
-                                </div>
-                                <div class="event-summary-body">
-                                    <div class="date">
-                                        <b>Date</b>: {{event?.datetime | date: 'dd-MMM-yyyy'}}
-                                    </div>
-                                    <div class="time">
-                                        <b>Time</b>: {{event?.datetime | date: 'h:mm a'}}
-                                    </div>
-                                    <hr>
-                                    <div class="detail">
-                                        {{event?.description | striphtml | ellipsis: 75}}
-                                    </div>
-                                </div>
-                                <div class="event-summary-footer uk-grid uk-grid-collapse">
-                                    <div class="left-text uk-width-1-1@s">
-                                        <hr />
-                                        <span *ngIf="event?.entryFee <= 0" class="green">Free Entry</span>
-                                        <span *ngIf="event?.entryFee > 0">Entry Fees: <span class="green"> Rs.
-                                                {{event?.entryFee}}</span> </span>
-                                    </div>
-                                </div>
-                            </div>
-
+                        <li *ngFor="let event of events">
+                            <app-event-summary-card [event]="event" [isPast]="searchParams.pastEvents">
+                            </app-event-summary-card>
                         </li>
                     </ul>
                     <!-- <a class="uk-position-center-left-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
@@ -94,7 +66,10 @@
                 <img src="assets/images/verified.png" /> <span class="m-l-5">More than 15 events every month</span>
             </div>
             <div>
-                <button class="uk-button uk-button-default">See All Events</button>
+                <button routerLink="/community/events" [queryParams]="{past:searchParams.pastEvents}"
+                    class="uk-button uk-button-default">See
+                    All
+                    Events</button>
             </div>
         </div>
     </div>

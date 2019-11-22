@@ -30,6 +30,7 @@ import { ServiceSearchCardComponent } from './service-search-card/service-search
 import { ProductSearchCardComponent } from './product-search-card/product-search-card.component';
 import { DicussionSummaryCardComponent } from './dicussion-summary-card/dicussion-summary-card.component';
 import { EventSummaryCardComponent } from './event-summary-card/event-summary-card.component';
+import { AskExpertSummaryCardComponent } from './ask-expert-summary-card/ask-expert-summary-card.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { EventSummaryCardComponent } from './event-summary-card/event-summary-ca
     ServiceSearchCardComponent,
     ProductSearchCardComponent,
     DicussionSummaryCardComponent,
-    EventSummaryCardComponent
+    EventSummaryCardComponent,
+    AskExpertSummaryCardComponent
   ],
   imports: [
     CommonModule,

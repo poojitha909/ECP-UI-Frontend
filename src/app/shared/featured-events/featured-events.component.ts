@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventService } from 'src/app/features/community/services/events.service';
 
 @Component({
   selector: 'app-featured-events',
@@ -6,32 +7,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./featured-events.component.scss']
 })
 export class FeaturedEventsComponent implements OnInit {
-  event: any;
-  isPast = -1;
-  constructor() {
-    // Test variable
-    this.event = {
-      "id": "5da6e67c0cf21304b1d4c399",
-      "title": "Grandparents Singing Competition ",
-      "datetime": 1671304600000,
-      "description": "Grandparents Singing Competition going to happen soon!!!",
-      "capacity": 30,
-      "entryFee": 200,
-      "eventType": 2,
-      "status": 0,
-      "address": "Koramangla",
-      "landmark": "Forum Mall",
-      "languages": "Hindi, Tamil, Telgu",
-      "organiser": "Pulkit Sharma",
-      "orgPhone": "+91 12 1234 1234",
-      "orgEmail": "abc@socialalpha.org",
-      "isPast": -1,
-      "editableByUser": false
-    };
 
-  }
+  searchParams = {
+    p: 0,
+    s: 25,
+    searchTxt: "",
+    eventType: 0,
+    pastEvents: -1
+  };
+
+  events: any[] = [];
+
+  constructor(private eventService: EventService) { }
 
   ngOnInit() {
+    this.showEvents();
+  }
+
+  showEvents() {
+    this.eventService.searchEvents(this.searchParams).subscribe((response: any) => {
+      const data = response.data;
+      if (data.content) {
+        this.events = data.content;
+      }
+    });
   }
 
 }

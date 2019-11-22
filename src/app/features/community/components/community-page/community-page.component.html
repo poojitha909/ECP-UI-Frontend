@@ -95,20 +95,20 @@
   </div>
 
 
-    <div class="uk-background-cover home-banner" data-src="assets/images/landing-img/Community-1024.png"
-      data-srcset="assets/images/landing-img/Community-320.png 320w,assets/images/landing-img/Community-768.png 768w,assets/images/landing-img/Community-1024.png 1024w,assets/images/landing-img/Community-1440.png 1440w"
-      uk-img>
-      <div class="uk-child-width-1-2@s uk-padding" uk-grid>
-        <div class="uk-text-center uk-text-left@s">
-          <h1>Our Community</h1>
-          <p class="font-regular">
-            Interested in member contributed articles and discussions or community based events & activities? Find one
-            or start one!
-            And share what you like with your loved ones.
-          </p>
-        </div>
+  <div class="uk-background-cover home-banner" data-src="assets/images/landing-img/Community-1024.png"
+    data-srcset="assets/images/landing-img/Community-320.png 320w,assets/images/landing-img/Community-768.png 768w,assets/images/landing-img/Community-1024.png 1024w,assets/images/landing-img/Community-1440.png 1440w"
+    uk-img>
+    <div class="uk-child-width-1-2@s uk-padding" uk-grid>
+      <div class="uk-text-center uk-text-left@s">
+        <h1>Our Community</h1>
+        <p class="font-regular">
+          Interested in member contributed articles and discussions or community based events & activities? Find one
+          or start one!
+          And share what you like with your loved ones.
+        </p>
       </div>
     </div>
+  </div>
 
   <!-- Search Container ends -->
 
@@ -136,26 +136,28 @@
       </div>
     </div>
     <div class="search-result">
-      <div uk-slider class="uk-position-relative height-fix-slider"
-        *ngIf="discussionsList2!==undefined && discussionsList2?.length > 0">
-        <div class="uk-visible-toggle" tabindex="-1">
-          <ul class="uk-slider-items uk-child-width-1-1@s uk-child-width-1-3@m uk-grid">
-            <li *ngFor="let discussion of discussionsList2">
-              <app-dicussion-summary-card [category]="selDiscussCategory" [discussion]="discussion">
-              </app-dicussion-summary-card>
-            </li>
-          </ul>
-        </div>
-        <div class="uk-hidden@s">
-          <a class="uk-position-center-left uk-position-small" href="#" uk-slidenav-previous
-            uk-slider-item="previous"></a>
-          <a class="uk-position-center-right uk-position-small" href="#" uk-slidenav-next uk-slider-item="next"></a>
-        </div>
-        <div class="uk-visible">
-          <a class="uk-position-center-left-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
-            uk-slider-item="previous"></a>
-          <a class="uk-position-center-right-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
-            uk-slider-item="next"></a>
+      <div uk-slider *ngIf="discussionsList2!==undefined && discussionsList2?.length > 0">
+        <div class="uk-position-relative">
+          <div class="uk-slider-container uk-light height-fix-slider">
+            <ul class="uk-slider-items uk-grid-match uk-child-width-1-3@m uk-grid">
+              <li *ngFor="let discussion of discussionsList2">
+                <app-dicussion-summary-card [category]="selDiscussCategory" [discussion]="discussion">
+                </app-dicussion-summary-card>
+              </li>
+            </ul>
+          </div>
+          <div class="uk-hidden@s uk-light">
+            <a class="uk-position-center-left uk-position-small button-slidenav" href="#" uk-slidenav-previous
+              uk-slider-item="previous"></a>
+            <a class="uk-position-center-right uk-position-small button-slidenav" href="#" uk-slidenav-next
+              uk-slider-item="next"></a>
+          </div>
+          <div class="uk-visible@s">
+            <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
+              uk-slidenav-previous uk-slider-item="previous"></a>
+            <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
+              uk-slidenav-next uk-slider-item="next"></a>
+          </div>
         </div>
       </div>
       <div class="uk-text-center uk-text-bold pt-norec height-fix-slider"
@@ -204,25 +206,27 @@
       </div>
     </div>
     <div class="search-result">
-      <div uk-slider class="uk-position-relative height-fix-slider1"
-        *ngIf="eventsList2!==undefined && eventsList2?.length > 0">
-        <div class="uk-visible-toggle" tabindex="-1">
-          <ul class="uk-slider-items uk-child-width-1-1@s uk-child-width-1-3@m uk-grid">
-            <li *ngFor="let event of eventsList2">
-              <app-event-summary-card [event]="event" [isPast]="searchParams.pastEvents"></app-event-summary-card>
-            </li>
-          </ul>
-        </div>
-        <div class="uk-hidden@s">
-          <a class="uk-position-center-left uk-position-small" href="#" uk-slidenav-previous
-            uk-slider-item="previous"></a>
-          <a class="uk-position-center-right uk-position-small" href="#" uk-slidenav-next uk-slider-item="next"></a>
-        </div>
-        <div class="uk-visible">
-          <a class="uk-position-center-left-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
-            uk-slider-item="previous"></a>
-          <a class="uk-position-center-right-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
-            uk-slider-item="next"></a>
+      <div uk-slider *ngIf="eventsList2!==undefined && eventsList2?.length > 0">
+        <div class="uk-position-relative">
+          <div class="uk-slider-container uk-light height-fix-slider">
+            <ul class="uk-slider-items uk-grid-match uk-child-width-1-3@m uk-grid">
+              <li *ngFor="let event of eventsList2">
+                <app-event-summary-card [event]="event" [isPast]="searchParams.pastEvents"></app-event-summary-card>
+              </li>
+            </ul>
+          </div>
+          <div class="uk-hidden@s uk-light">
+            <a class="uk-position-center-left uk-position-small button-slidenav" href="#" uk-slidenav-previous
+              uk-slider-item="previous"></a>
+            <a class="uk-position-center-right uk-position-small button-slidenav" href="#" uk-slidenav-next
+              uk-slider-item="next"></a>
+          </div>
+          <div class="uk-visible@s">
+            <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
+              uk-slidenav-previous uk-slider-item="previous"></a>
+            <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
+              uk-slidenav-next uk-slider-item="next"></a>
+          </div>
         </div>
       </div>
       <div class="uk-text-center uk-text-bold pt-norec height-fix-slider"

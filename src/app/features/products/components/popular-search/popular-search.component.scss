@@ -38,3 +38,29 @@
 .height-fix-slider {
     min-height: 375px;
 }
+.button-slidenav {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    padding: 0;
+    text-align: center;
+    margin: 0 5px;
+    background-color: #ffffff;
+    color: #777;
+    font-size: 18px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    &:hover {
+        color: #000;
+    }
+    &:focus {
+        color: #000;
+    }
+}
+.slidenav-pervious {
+    right: 98% !important;
+}
+
+.slidenav-next {
+    left: 98% !important;
+}

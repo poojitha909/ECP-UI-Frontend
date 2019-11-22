@@ -3,7 +3,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { PageParam } from 'src/app/core';
 import { HomeService } from '../../home.service';
 import { JDCategory, Service } from 'src/app/core/interfaces';
-import { JdCategoryService } from 'src/app/core/services';
+import { JdCategoryService, StorageHelperService } from 'src/app/core/services';
 import { Subject } from 'rxjs';
 import { debounce, debounceTime, distinctUntilChanged, mergeMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -37,7 +37,7 @@ export class SearchContainerComponent implements OnInit {
     totalDiscussions: 0,
     totalEvents: 0
   };
-  constructor(private homeService: HomeService, private router: Router) { }
+  constructor(private homeService: HomeService, private router: Router, private storageHelper: StorageHelperService) { }
 
   ngOnInit() {
     this.searchTextChanged.pipe(
@@ -73,6 +73,7 @@ export class SearchContainerComponent implements OnInit {
     this.searchPageParam.term = "";
     this.autocompleteFields = [];
     this.showReset = false;
+    this.storageHelper.clearSession('homeSearchText');
   }
 
   homeSearchPages() {
@@ -118,6 +119,7 @@ export class SearchContainerComponent implements OnInit {
         }
 
       } else {
+        this.storageHelper.storeSession('homeSearchText', field);
         this.homeSearchPages();
       }
       this.selectedValue = "";

@@ -3,6 +3,7 @@ import { EventService } from '../../services/events.service';
 import { DiscussionService } from '../../services/discussion.service';
 import { Router } from '@angular/router';
 import { MenuService } from '../../services/menu.service';
+import { StorageHelperService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-community-page',
@@ -34,7 +35,7 @@ export class CommunityPageComponent implements OnInit {
   }
 
   constructor(private eventService: EventService, private discussionService: DiscussionService,
-    private menuService: MenuService, private router: Router ) {
+    private menuService: MenuService, private router: Router, private storageHelper: StorageHelperService) {
   }
 
 
@@ -52,11 +53,15 @@ export class CommunityPageComponent implements OnInit {
       searchTxt: "",
       tags: ""
     }
-    this.selDiscussCategory="";
-    this.selEventCategory="";
+    this.selDiscussCategory = "";
+    this.selEventCategory = "";
     this.getAllDiscussCategories();
     this.showEvents();
     this.showEvents2();
+    const homeSearchtxt = this.storageHelper.retrieveSession('homeSearchText');
+    if (homeSearchtxt) {
+      this.searchParams.searchTxt = homeSearchtxt;
+    }
   }
 
   getAllDiscussCategories() {
@@ -98,16 +103,16 @@ export class CommunityPageComponent implements OnInit {
     });
   }
 
-  showAllDiscussions(){
-    this.router.navigate(['/community/discussions'], {queryParams: {category: this.selDiscussCategory, searchTxt:  this.searchParamsDiscussions.searchTxt}});
+  showAllDiscussions() {
+    this.router.navigate(['/community/discussions'], { queryParams: { category: this.selDiscussCategory, searchTxt: this.searchParamsDiscussions.searchTxt } });
   }
-  showAllEvents(){
-    this.router.navigate(['/community/events'], {queryParams: {past: this.searchParams.pastEvents ,searchTxt:  this.searchParams.searchTxt}});
+  showAllEvents() {
+    this.router.navigate(['/community/events'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt } });
   }
 
-  showDiscussions2(){
+  showDiscussions2() {
     this.searchParamsDiscussions.tags = "";
-    if(this.selDiscussCategory!=""){
+    if (this.selDiscussCategory != "") {
       this.searchParamsDiscussions.tags = this.discussCategoryList[this.selDiscussCategory].tagIds.join(",");
     }
     this.discussionService.searchDiscussions(this.searchParamsDiscussions).subscribe((response: any) => {
@@ -170,9 +175,10 @@ export class CommunityPageComponent implements OnInit {
   onSearch() {
     this.showEvents();
     this.showDiscussions();
+    this.storageHelper.clearSession('homeSearchText');
   }
 
-  onTabChange(tab: number){
+  onTabChange(tab: number) {
 
   }
 }

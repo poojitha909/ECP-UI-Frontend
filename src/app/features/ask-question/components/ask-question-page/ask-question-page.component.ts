@@ -23,15 +23,21 @@ export class AskQuestionPageComponent implements OnInit {
     experties: string
   };
   user: any;
-  
 
-  constructor(private route:ActivatedRoute, private router: Router, private store: StorageHelperService, private askQuestionService: AskQuestionService) { }
+
+  constructor
+    (private route: ActivatedRoute,
+      private router: Router,
+      private store: StorageHelperService,
+      private askQuestionService: AskQuestionService,
+      private storageHelper: StorageHelperService
+    ) { }
 
   ngOnInit() {
     this.user = this.store.retrieve("ECP-USER");
-    if(this.user){
+    if (this.user) {
       this.user = JSON.parse(this.user);
-      if(this.user.userRoleId == "EXPERT"){
+      if (this.user.userRoleId == "EXPERT") {
         this.router.navigate(['/ask-question/expert']);
       }
     }
@@ -43,18 +49,22 @@ export class AskQuestionPageComponent implements OnInit {
     }
     this.expertsTotal = 0;
     this.showResult = false;
-    if(this.route.snapshot.params['category']){
+    if (this.route.snapshot.params['category']) {
       this.searchParams.experties = this.route.snapshot.params['category'];
     }
-    this.askQuestionService.getCategoryList().subscribe( (response:any) =>{
+    this.askQuestionService.getCategoryList().subscribe((response: any) => {
       const data = response.data;
       this.catsList = [];
-      if(data.content){
+      if (data.content) {
         this.catsList = data.content;
       }
     });
     this.showExperts();
     this.showExperts2();
+    const homeSearchtxt = this.storageHelper.retrieveSession('homeSearchText');
+    if (homeSearchtxt) {
+      this.searchParams.searchTxt = homeSearchtxt;
+    }
   }
 
   showExperts() {
@@ -83,8 +93,8 @@ export class AskQuestionPageComponent implements OnInit {
     });
   }
 
-  showAllExperts(){
-    this.router.navigate(['/ask-question/all'], {queryParams: {category: this.searchParams.experties, searchTxt:  this.searchParams.searchTxt}});
+  showAllExperts() {
+    this.router.navigate(['/ask-question/all'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt } });
   }
 
   onSearchChange(event: any) {
@@ -111,9 +121,10 @@ export class AskQuestionPageComponent implements OnInit {
 
   onSearch() {
     this.showResult = false;
-    if(this.searchParams.searchTxt != ""){
+    if (this.searchParams.searchTxt != "") {
       this.showResult = true;
     }
     this.showExperts();
+    this.storageHelper.clearSession('homeSearchText');
   }
 }

@@ -9,9 +9,9 @@
               <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Reset
             </button>
           </span>
-          <input class="uk-search-input search-box" [ngClass]="{ 'pr-105':showReset}"
+          <input class="uk-search-input font-regular search-box" [ngClass]="{ 'pr-105':showReset}"
             [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required type="text"
-            placeholder="Search..." name="search" />
+            placeholder="Search here" name="search" />
         </form>
       </div>
       <div class="uk-width-1-1 uk-width-auto@s">

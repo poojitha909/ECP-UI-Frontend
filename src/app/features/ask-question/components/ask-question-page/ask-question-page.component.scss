@@ -3,6 +3,11 @@
 .search-container {
   &.dark{
     background-color: #e4eefb;
+    h4.title{
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0;
+    }
   }
   border: 1px solid #d7e0ef;
   background-color: #ecf4ff;

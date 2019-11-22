@@ -1,38 +1,5 @@
 @import "src/assets/css/variables.scss";
 
-.banner {
-  background-image: url("/assets/images/bg-ask2.png");
-  min-height: 224px;
-  border-radius: 8px;
-  font-family: $regular-font;
-  margin-top: 24px;
-  margin-bottom: 48px;
-  .logo {
-    h3 {
-      padding: 12px 0 12px 40px;
-      font-weight: 600;
-      margin: 0;
-    }
-  }
-  .para-info {
-    margin: 24px 40px 0;
-    padding-bottom: 24px;
-    font-size: 18px;
-    color: rgba(22, 28, 45, 0.87);
-  }
-  .couple-img {
-    margin-right: 36px;
-    margin-top: -70px;
-    img {
-      height: 100%;
-      // width: 100%;
-    }
-    @media (min-width: 320px) and (max-width: 640px) {
-      margin: 0 !important;
-    }
-  }
-}
-
 .search-container {
   &.dark{
     background-color: #e4eefb;
@@ -112,6 +79,11 @@
   
   }
 }
+
+.uk-search .uk-search-icon:not(a):not(button):not(input){
+  pointer-events: all;
+}
+
 .search-result{
   padding: 24px 40px 0;
 }
@@ -177,6 +149,13 @@
       }
     }
   }
+}
+.home-banner {
+  margin: 32px 0 0px 0;
+}
+.m-seprator{
+  margin-top: 32px;
+  margin-bottom: 32px;
 }
 .uk-button-default{
   color:#FFFFFF;

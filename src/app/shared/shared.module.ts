@@ -94,7 +94,8 @@ import { AskExpertSummaryCardComponent } from './ask-expert-summary-card/ask-exp
     ServiceSearchCardComponent,
     ProductSearchCardComponent,
     DicussionSummaryCardComponent,
-    EventSummaryCardComponent
+    EventSummaryCardComponent,
+    AskExpertSummaryCardComponent
   ]
 })
 export class SharedModule { }

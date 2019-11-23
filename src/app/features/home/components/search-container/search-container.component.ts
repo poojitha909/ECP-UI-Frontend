@@ -31,11 +31,13 @@ export class SearchContainerComponent implements OnInit {
     services: [],
     products: [],
     discussions: [],
+    experts: [],
     events: [],
     totalServices: 0,
     totalProducts: 0,
     totalDiscussions: 0,
-    totalEvents: 0
+    totalEvents: 0,
+    totalExperts: 0
   };
   constructor(private homeService: HomeService, private router: Router, private storageHelper: StorageHelperService) { }
 
@@ -91,7 +93,10 @@ export class SearchContainerComponent implements OnInit {
       this.searchData.discussions = response.discussPage.content;
       this.searchData.totalDiscussions = response.discussPage.total;
       this.searchData.events = response.eventPage.content;
+      this.searchData.experts = response.expertPage.content;
       this.searchData.totalEvents = response.eventPage.total;
+      this.searchData.totalExperts = response.expertPage.total;
+
 
     },
       error => {

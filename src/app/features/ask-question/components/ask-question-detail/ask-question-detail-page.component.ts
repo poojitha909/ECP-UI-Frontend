@@ -58,6 +58,12 @@ export class AskQuestionDetailPageComponent implements OnInit {
       }
     }
 
+    if(this.questionId == "preview"){
+      this.question = this.store.retrieve("new-question-preview");
+      this.question = JSON.parse(this.question);
+      console.log(this.question);
+    }
+
     let comment = this.store.retrieve("new-ques-comment");
     if (comment) {
       comment = JSON.parse(comment);
@@ -105,23 +111,30 @@ export class AskQuestionDetailPageComponent implements OnInit {
 
 
   getQuestion() {
-    this.askQuesService.getAskQuestion(this.questionId).subscribe((response: any) => {
-      if (response.data) {
-        this.question = response.data;
-      }
-
-      this.askQuesService.getAskQuesReplies(this.question.id).subscribe((response: any) => {
+    if(this.questionId == "preview"){
+      this.askQuesService.getUserProfile(this.question.answeredBy.id).subscribe((response: any) => {
         if (response.data) {
-          this.setReplies(response.data.content);
+          this.question.answeredBy = response.data;
         }
       });
-      this.askQuesService.getUserProfileById(this.question.askedBy.id).subscribe((response: any) => {
+    }
+    else{
+      this.askQuesService.getAskQuestion(this.questionId).subscribe((response: any) => {
         if (response.data) {
-          this.askedByProfile = response.data;
+          this.question = response.data;
         }
+        this.askQuesService.getAskQuesReplies(this.question.id).subscribe((response: any) => {
+          if (response.data) {
+            this.setReplies(response.data.content);
+          }
+        });
+        this.askQuesService.getUserProfileById(this.question.askedBy.id).subscribe((response: any) => {
+          if (response.data) {
+            this.askedByProfile = response.data;
+          }
+        });
       });
-    });
-
+    }
   }
 
   setReplies(replies) {
@@ -143,5 +156,33 @@ export class AskQuestionDetailPageComponent implements OnInit {
     this.replyId = id;
     this.replyParentUser = user;
     this.replyParentText = text;
+  }
+
+  onCancelPublish(){
+    this.router.navigate(["ask-question/add"],{ queryParams: { category: this.question.category, answeredBy: this.question.answeredBy.id } });
+  }
+
+  onPublish(){
+    if(!this.user) {
+      this.authService.redirectUrl = "ask-question/details/preview";
+      this.router.navigate(['/user/signin']);
+      return;
+    }
+    this.askQuesService.addQuestion({
+        question: this.question.question,
+        description: this.question.description,
+        askCategory: { id: this.question.askCategory.id },
+        answeredBy: { id: this.question.answeredBy.id },
+        askedBy: { id: this.question.askedBy.id }
+      }).subscribe((response: any) => {
+        if (response.data.id != "") {
+          this.store.clear("new-question");
+          this.store.clear("new-question-preview");
+          this.router.navigate(['/ask-question']);
+        }
+        else {
+          alert("Oops! something wrong happen, please try again.");
+        }
+      });
   }
 }

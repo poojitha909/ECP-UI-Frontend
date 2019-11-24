@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
 import { AuthService } from "../../../../core/auth/services/auth.service";
 import { Breadcrumb } from 'src/app/core/interfaces';
-
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-ask-question-create',
@@ -27,24 +27,18 @@ export class AskQuestionCreatePageComponent implements OnInit {
       link: '/ask-question/all'
     }
   ];
-
   category: string;
-  askedBy: string;
-  answeredBy: string
-  question: string;
-  description: string;
+  answeredBy: string;
   user: any;
   paramsSubs: any;
   expert: any;
+  quesForm: FormGroup;
 
-  constructor(private route: ActivatedRoute, private router: Router, private askQuesService: AskQuestionService, private store: StorageHelperService, private authService: AuthService) { }
+  constructor(private route: ActivatedRoute, private router: Router, 
+    private askQuesService: AskQuestionService, private store: StorageHelperService, 
+    private authService: AuthService, private fb: FormBuilder ) { }
 
   ngOnInit() {
-    this.askedBy = "";
-    this.answeredBy = "";
-    this.category = "";
-    this.question =  "";
-    this.description =  "";
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
@@ -57,7 +51,6 @@ export class AskQuestionCreatePageComponent implements OnInit {
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
-      this.askedBy = this.user.id;
     }
     if(this.route.snapshot.queryParams['category']){
       this.category = this.route.snapshot.queryParams['category'];
@@ -68,12 +61,14 @@ export class AskQuestionCreatePageComponent implements OnInit {
 
     let question = this.store.retrieve("new-question");
     if (question) {
-      this.question = question.question;
-      this.description = question.description;
-      this.category = question.category;
-      this.answeredBy = question.answeredBy;
+      question = JSON.parse(question);
       this.store.clear("new-question");
     }
+
+    this.quesForm = this.fb.group({
+      question:  [question ? question.question : "", Validators.required],
+      description:  [question ? question.description : "", Validators.required],
+    });
 
     this.askQuesService.getUserProfile(this.answeredBy).subscribe((response: any) => {
       console.log(response);
@@ -86,50 +81,57 @@ export class AskQuestionCreatePageComponent implements OnInit {
     });
   }
 
-  changeDescription(value) {
-    this.description = value;
+  get formControl() {
+    return this.quesForm.controls;
   }
 
   onReset() {
-    this.question = "";
-    this.description = "";
+    this.quesForm.reset();
     this.router.navigate(['/ask-question']);
   }
 
   onSubmit() {
+    Object.keys(this.quesForm.controls).forEach(field => {
+      const control = this.quesForm.get(field);
+      control.markAsTouched({ onlySelf: true });
+    });
+    if (!this.quesForm.valid) {
+      return;
+    }
+    this.store.store("new-question", JSON.stringify(this.quesForm.value));
+
     if (!this.user) {
-      this.store.store("new-question", JSON.stringify(
-        {
-          question: this.question,
-          description: this.description,
-          category: this.category,
-          answeredBy: this.answeredBy
-        }
-      ));
       this.authService.redirectUrl = "/ask-question/add";
       this.router.navigate(['/user/signin']);
       return;
     }
 
-    if (this.category != "" && this.question != "" && this.description != "") {
-      this.askQuesService.addQuestion({
-        question: this.question,
-        description: this.description,
-        askCategory: { id: this.category },
-        answeredBy: { id: this.answeredBy },
-        askedBy: { id: this.askedBy }
-      }).subscribe((response: any) => {
-        if (response.data.id != "") {
-          this.router.navigate(['/ask-question']);
-        }
-        else {
-          alert("Oops! something wrong happen, please try again.");
-        }
-      });
-    }
-    else {
-      alert("All fields are required, please fill all fields.");
-    }
-    return;
+    let que = { ...this.quesForm.value };
+    que.askCategory = { id: this.category };
+    que.answeredBy = { id: this.answeredBy };
+    que.askedBy = { id: this.user.id };
+    
+    this.store.store("new-question-preview", JSON.stringify( que ));
+    this.router.navigate(['/ask-question/detail/preview']);
+    // if (que.category != "" && que.question != "" && que.description != "") {
+      // this.askQuesService.addQuestion({
+      //   question: this.question,
+      //   description: this.description,
+      //   askCategory: { id: this.category },
+      //   answeredBy: { id: this.answeredBy },
+      //   askedBy: { id: this.askedBy }
+      // }).subscribe((response: any) => {
+      //   if (response.data.id != "") {
+      //     this.router.navigate(['/ask-question']);
+      //   }
+      //   else {
+      //     alert("Oops! something wrong happen, please try again.");
+      //   }
+      // });
+    // }
+    // else {
+    //   alert("All fields are required, please fill all fields.");
+    // }
+    // return;
   }
 }

@@ -13,6 +13,7 @@ import { QuestionDetailCardComponent } from './components/question-detail-card/q
 import { AskQuestionDetailPageComponent } from './components/ask-question-detail/ask-question-detail-page.component';
 import { ExpertAllQuestionComponent } from './components/expert-all-question/expert-all-question.component';
 import { QuestionExpertNoRecordComponent } from './components/question-expert-no-record/question-expert-no-record.component';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [AskQuestionPageComponent,
@@ -30,7 +31,8 @@ import { QuestionExpertNoRecordComponent } from './components/question-expert-no
     CoreModule,
     CommonModule,
     SharedModule,
-    AskQuestionRoutingModule
+    AskQuestionRoutingModule,
+    EditorModule
   ]
 })
 export class AskQuestionModule { }

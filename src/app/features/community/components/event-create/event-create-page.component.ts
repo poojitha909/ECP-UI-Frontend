@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { EventService } from '../../services/events.service';
-import { MenuService } from '../../services/menu.service';
 import { Router } from "@angular/router";
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
 import { AuthService } from "../../../../core/auth/services/auth.service";
@@ -32,8 +30,7 @@ export class EventCreatePageComponent implements OnInit {
   successMessage: string;
   user: any;
 
-  constructor(private router: Router, private eventService: EventService, 
-    private menuService: MenuService, private store: StorageHelperService, 
+  constructor(private router: Router, private store: StorageHelperService, 
     private fb: FormBuilder, private authService: AuthService) { }
 
   ngOnInit() {

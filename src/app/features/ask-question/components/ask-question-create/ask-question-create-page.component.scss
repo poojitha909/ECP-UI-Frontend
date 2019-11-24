@@ -20,7 +20,20 @@
 textarea{
   height: 200px;
 }
+.inner-container{
+  border-radius: 4px;
+  padding: 24px;
+  border: 1px solid #D7E0EF;
+}
+.uk-input, .uk-select{
+  border: 1px solid #D7E0EF;
+  border-radius: 4px;
+}
 .category-box{
+  &.info {
+    background-color: #D7E0EF;
+    margin: 16px 0px 0px 0px;
+  }
   border: 1px solid #D7E0EF;
   box-sizing: border-box;
   border-radius: 4px;

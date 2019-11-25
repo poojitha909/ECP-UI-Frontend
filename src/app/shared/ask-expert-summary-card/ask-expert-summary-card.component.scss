@@ -1,39 +1,52 @@
 .popular-search {
-    border: 1px solid #d7e0ef;
-    .uk-card-media-top {
-      border-radius: 4px;
-      background-color: #ecf4ff;
-      padding: 5px;
-      img {
-        display: block;
-        margin: auto;
-      }
+  .uk-card-media-top {
+    border-radius: 4px;
+    background-color: #ecf4ff;
+    padding: 5px;
+    img {
+      display: block;
+      margin: auto;
     }
-    .uk-card {
-      border-radius: 4px;
-      .thumb-100 {
-        height: 100px;
-      }
-      .uk-card-body p {
-        margin: 0px;
+  }
+  .uk-card {
+    border-radius: 4px;
+    border: solid 1px #d7e0ef;
+    .thumb-100 {
+      height: 100px;
+    }
+    .uk-card-body p {
+      margin: 0px;
+      font-size: 15px;
+      text-align: center;
+      b {
         font-size: 18px;
-        text-align: center;
-        b {
-          font-size: 18px;
-        }
-        .uk-button-default {
-          background-color: #1a73e8;
-          border-radius: 4px;
-          font-size: 18px;
-          border: none;
-          color: #fff;
-          text-transform: none;
-          padding: 1px 30px;
-          &:focus {
-            color: #1a73e8;
-            background-color: #fff;
-          }
-        }
+      }
+      .uk-button-default {
+        height: 36px;
+        width: 100%;
+        margin-top: 20px;
+        text-transform: capitalize;
+        font-size: 18px;
+        line-height: 18px;
+      }
+      .experties{
+        color: #1A73E8;
       }
     }
   }
+}
+
+.uk-button-default{
+  background-color: #1a73e8;
+border-radius: 4px;
+font-size: 18px;
+border: none;
+color: #fff;
+text-transform: none;
+padding: 1px 30px;
+&:focus {
+  border: 1px solid #1a73e8;
+  color: #1a73e8;
+  background-color: #fff;
+}
+}

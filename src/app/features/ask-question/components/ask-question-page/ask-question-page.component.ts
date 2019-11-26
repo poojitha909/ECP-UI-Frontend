@@ -59,7 +59,7 @@ export class AskQuestionPageComponent implements OnInit {
         this.catsList = data.content;
       }
     });
-    this.showExperts();
+    // this.showExperts();
     this.showExperts2();
     const homeSearchtxt = this.storageHelper.retrieveSession('homeSearchText');
     if (homeSearchtxt) {
@@ -116,7 +116,7 @@ export class AskQuestionPageComponent implements OnInit {
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
       this.searchParams.searchTxt = "";
       this.showReset = false;
-      this.onSearch()
+      // this.onSearch()
     }
   }
 

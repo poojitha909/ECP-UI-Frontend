@@ -17,9 +17,10 @@ export class FeaturedServicesComponent implements OnInit {
   }
 
   getFeatureServices() {
-    this.ecpService.serviceParam.isFeatured = true;
+    this.ecpService.serviceParam.max = 5;
     this.ecpService.getAllServices().subscribe(
       response => {
+        this.ecpService.serviceParam.max = 50;
         if (response) {
           this.ecpService.serviceParam.isFeatured = false;
           this.services = response;

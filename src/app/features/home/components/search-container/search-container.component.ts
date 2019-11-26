@@ -48,6 +48,11 @@ export class SearchContainerComponent implements OnInit {
     ).subscribe(() => {
       this.onSearchChange(this.searchPageParam.term);
     })
+
+    const homeSearchtxt = this.storageHelper.retrieveSession('homeSearchText');
+    if (homeSearchtxt) {
+      this.searchPageParam.term = homeSearchtxt;
+    }
   }
 
   @HostListener('window:click', ['$event.target'])

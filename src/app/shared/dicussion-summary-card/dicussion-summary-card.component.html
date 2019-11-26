@@ -1,4 +1,5 @@
-<div class="discussion-summary bg-white uk-height-1-1" [routerLink]="['/community/discussion', discussion.id, category ]">
+<div class="discussion-summary bg-white uk-height-1-1 cursor-pointer"
+    [routerLink]="['/community/discussion', discussion.id, category ]">
     <div class="discussion-summary-head uk-grid uk-grid-collapse">
         <div class="discussion-title uk-width-1-1@s">
             {{discussion.title | ellipsis:65}}

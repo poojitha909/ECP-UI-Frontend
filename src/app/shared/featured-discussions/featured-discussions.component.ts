@@ -12,7 +12,7 @@ export class FeaturedDiscussionsComponent implements OnInit {
   selCategory = "";
   searchParamsDiscussions = {
     p: 0,
-    s: 25,
+    s: 9,
     searchTxt: "",
     tags: ""
   }

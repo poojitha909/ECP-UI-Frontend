@@ -41,6 +41,7 @@ export class SearchContainerComponent implements OnInit {
     const homeSearchtxt = this.storageHelper.retrieveSession('homeSearchText');
     if (homeSearchtxt) {
       this.searchPageParam.term = homeSearchtxt;
+      this.showReset = true;
     }
 
   }
@@ -53,7 +54,7 @@ export class SearchContainerComponent implements OnInit {
 
   onSearchChange(value) {
     if (value !== "") {
-      this.showReset = true
+      this.showReset = true;
       this.homeService.searchParam = this.searchPageParam;
       this.homeService.getAutoCompleteServices().subscribe(
         response => {

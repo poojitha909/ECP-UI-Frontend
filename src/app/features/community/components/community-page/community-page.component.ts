@@ -61,6 +61,7 @@ export class CommunityPageComponent implements OnInit {
     const homeSearchtxt = this.storageHelper.retrieveSession('homeSearchText');
     if (homeSearchtxt) {
       this.searchParams.searchTxt = homeSearchtxt;
+      this.showReset = true;
     }
   }
 

@@ -13,8 +13,8 @@ import { StorageHelperService } from 'src/app/core/services';
 export class CommunityPageComponent implements OnInit {
 
   showReset: boolean;
-  eventsList: any[];
-  discussionsList: any[];
+  eventsList: any[] = [];
+  discussionsList: any[] = [];
   discussCategoryList: any;
   selDiscussCategory: string;
   discussionsList2: any;
@@ -56,7 +56,7 @@ export class CommunityPageComponent implements OnInit {
     this.selDiscussCategory = "";
     this.selEventCategory = "";
     this.getAllDiscussCategories();
-    this.showEvents();
+    // this.showEvents();
     this.showEvents2();
     const homeSearchtxt = this.storageHelper.retrieveSession('homeSearchText');
     if (homeSearchtxt) {
@@ -169,7 +169,7 @@ export class CommunityPageComponent implements OnInit {
       this.searchParams.searchTxt = "";
       this.searchParamsDiscussions.searchTxt = "";
       this.showReset = false;
-      this.onSearch()
+      // this.onSearch()
     }
   }
 

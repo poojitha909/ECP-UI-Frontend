@@ -79,11 +79,6 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
   }
   
   initiate(){
-    this.user = this.store.retrieve("ECP-USER");
-    if(this.user){
-      this.user = JSON.parse(this.user);
-      this.searchParamsQues.askedBy = this.user.id;
-    }
     this.searchParams = {
       p: 0,
       s: 10000,
@@ -98,6 +93,11 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
       askedBy: "",
       answeredBy: ""
     };
+    this.user = this.store.retrieve("ECP-USER");
+    if(this.user){
+      this.user = JSON.parse(this.user);
+      this.searchParamsQues.askedBy = this.user.id;
+    }
     
     this.totalRecords = 0;
     this.totalRecordsQues = 0;

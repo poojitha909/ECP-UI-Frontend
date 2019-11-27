@@ -1,4 +1,4 @@
-<div class="discussion-detail" *ngIf="question!=undefined">
+<div class="ask-detail" *ngIf="question!=undefined">
     <!-- Bread crumbs Start -->
     <div class="breadcrumbs">
         <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
@@ -48,27 +48,22 @@
                         <button class="uk-button uk-button-primary" (click)="onPublish()">{{!!user ? 'Publish' : 'Signin to Post'}}</button>
                     </div>
                 </div>
-                <h2 class="heading1">
-                    Replies
-                </h2>
-                <!-- <div class="uk-card uk-card-default comment">
-                    <div class="uk-card-body">
-                        <div class="reply_reply" style="background-color: #FFF" *ngIf="replyParentText!=''">
-                            <div class="reply_reply_inner">
-                                <b>{{replyParentUser}}</b><br />
-                                {{replyParentText}}
-                            </div>
+                <div class="comments-head">
+                    <div class="uk-grid-collapse" uk-grid>
+                        <div class="comments-count uk-width-2-3@s">
+                            <h4>
+                                Replies 
+                            </h4>
                         </div>
-                        <textarea id="commentarea" name="commentarea" placeholder="Enter your message here"
-                            [(ngModel)]="commentTxt"></textarea>
-                    </div>
-                    <div class="uk-card-footer">
-                        <div class="uk-flex uk-flex-right">
-                            <button class="uk-button uk-button-primary"
-                                (click)="addComment()">{{!!user ? 'Post Reply' : 'Signin to Comment'}}</button>
+                        <div class="comments-add uk-width-1-3@s">
+                            <button class="uk-button uk-button-default add-reply"
+                            (click)="addComment()"
+                            uk-toggle="target: #reply-modal"
+                            > Add a Reply </button>
                         </div>
                     </div>
-                </div> -->
+                </div>
+                
                 <div class="uk-card uk-card-default" *ngFor="let reply of replies">
                     <div class="uk-card-header">
 
@@ -111,6 +106,34 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div id="reply-modal" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+        <h1 class="font-regular-24 font-weight-600">Add a Reply</h1>
+        <hr />
+        <!-- Success box START-->
+        <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
+            <p>{{ successMessage }}</p>
+        </div>
+        <!-- Success box END-->
+        <form [formGroup]="replyForm" (ngSubmit)="addComment()" class="uk-form-stacked reply-form">
+            <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-text">Description<span class="required">*</span></label>
+            <div class="uk-form-controls">
+                <textarea formControlName="commentTxt" class="uk-input min-h-200" id="form-stacked-text"
+                placeholder="Enter your comment here"></textarea>
+            </div>
+            </div>
+
+            <div class="uk-text-right">
+                <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
+                <button class="uk-button uk-button-primary m-l-5" type="submit">
+                    {{!!user ? 'Post' : 'Signin to Comment'}}
+                </button>
+            </div>
+        </form>
         </div>
     </div>
 </div>

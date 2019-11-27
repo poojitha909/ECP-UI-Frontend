@@ -1,4 +1,4 @@
-<div class="discussion-summary bg-white uk-height-1-1 cursor-pointer"
+<div class="discussion-summary bg-white uk-height-1-1 cursor-pointer uk-flex uk-flex uk-flex-column uk-flex-between"
     [routerLink]="['/community/discussion', discussion.id, category ]">
     <div class="discussion-summary-head uk-grid uk-grid-collapse">
         <div class="discussion-title uk-width-1-1@s">
@@ -18,12 +18,12 @@
             <p class="author">at <span>{{discussion.createdAt | date: 'hh:ss a'}}</span></p>
         </div>
     </div>
-    <div class="discussion-summary-footer uk-grid uk-grid-collapse">
-        <div class="uk-width-1-2@s">
+    <div class="discussion-summary-footer uk-child-width-1-2@s uk-grid-small" uk-grid>
+        <div>
             <p class="comments left"><img src="/assets/images/comments.svg"
                     style="height:30px;display:inline-block;" />{{discussion.aggrReplyCount}} Replies</p>
         </div>
-        <div class="uk-width-1-2@s">
+        <div>
             <p class="comments right"><img src="/assets/images/view.svg"
                     style="height:30px;display:inline-block;" />{{ discussion.viewCount ? discussion.viewCount : 0 }}
                 Views</p>

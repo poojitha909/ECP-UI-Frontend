@@ -1,6 +1,6 @@
 @import "src/assets/css/variables.scss";
 
-.discussion-detail{
+.ask-detail{
     font-family: $regular-font;
     color: $font-color-black;
     margin-bottom: 48px;
@@ -46,7 +46,7 @@
       border-bottom: none;
     }
     .uk-card-body{
-      padding: 0px 20px 0px 20px;
+      padding: 0px 20px 24px 20px;
       font-size: 18px;
     }
     .uk-card-footer{
@@ -84,12 +84,21 @@
       font-weight: bold;
       color: $font-light-black;
     }
-    .heading2{
-      font-family: $regular-font;
-      font-size: 18px;
-      font-weight: bold;
-      color: $font-color-black;
-      margin-top: 15px;
+    .comments-head {
+      margin: 64px 0 24px 0;
+    }
+    .comments-count {
+      h4 {
+        font-family: $regular-font;
+        font-size: 24px;
+      }
+    }
+    .add-reply {
+      border: 1px solid #1a73e8;
+      color: #1a73e8;
+      text-transform: capitalize;
+      float: right;
+      height: 38px;
     }
     .category-box.top{
       margin-top: 0px !important;

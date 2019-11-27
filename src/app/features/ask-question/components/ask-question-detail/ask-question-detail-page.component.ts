@@ -4,7 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
 import { AuthService } from "../../../../core/auth/services/auth.service";
 import { Breadcrumb } from 'src/app/core/interfaces';
-
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+declare var UIkit;
 @Component({
   selector: 'app-ask-question-detail-page',
   templateUrl: './ask-question-detail-page.component.html',
@@ -33,12 +34,17 @@ export class AskQuestionDetailPageComponent implements OnInit {
   replies: any[];
   user: any;
   replyId: string;
+  replyForm: FormGroup;
   replyParentUser: string;
   replyParentText: string;
   askedByProfile: any;
   isExpert: boolean;
 
-  constructor(private router: Router, private route: ActivatedRoute, private askQuesService: AskQuestionService, private store: StorageHelperService, private authService: AuthService) { }
+  constructor(private router: Router, private route: ActivatedRoute, 
+    private askQuesService: AskQuestionService, 
+    private store: StorageHelperService, 
+    private fb: FormBuilder, 
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.questionId = this.route.snapshot.params['id'];
@@ -72,22 +78,42 @@ export class AskQuestionDetailPageComponent implements OnInit {
       this.category = comment.category;
       this.store.clear("new-ques-comment");
     }
+
+    this.replyForm =  this.fb.group({
+      commentTxt: [ comment ? comment.commentTxt : "" ,Validators.required]
+    });
+
     this.getQuestion();
   }
 
   addComment() {
+    Object.keys(this.replyForm.controls).forEach(field => {
+      const control = this.replyForm.get(field);
+      control.markAsTouched({ onlySelf: true });
+    });
+    let comment = {...this.replyForm.value};
+    if (!this.replyForm.valid) {
+      return;
+    }
     if (!this.user) {
-      this.store.store("new-ques-comment", JSON.stringify({ questionId: this.questionId, commentTxt: this.commentTxt, category: this.category }));
+      this.store.store("new-ques-comment", JSON.stringify({ questionId: this.questionId, commentTxt: comment.commentTxt, category: this.category }));
       this.authService.redirectUrl = "ask-question/detail/" + this.questionId;
+      UIkit.modal("#reply-modal").hide();
+      this.replyForm.reset();
       this.router.navigate(['/user/signin']);
       return;
     }
-    else if (this.commentTxt != "") {
-      this.askQuesService.addComment(this.questionId, this.commentTxt, this.user).subscribe((response: any) => {
-        if (response.data.replies) {
+    else if (comment.commentTxt != "") {
+      this.askQuesService.addComment(this.questionId, comment.commentTxt, this.user).subscribe((response: any) => {
+        if (response.data.reply) {
           this.commentTxt = "";
-          let replies = response.data.replies;
-          this.setReplies(replies);
+          UIkit.modal("#reply-modal").hide();
+          this.askQuesService.getAskQuesReplies(this.question.id).subscribe((response: any) => {
+            if (response.data) {
+              this.replyForm.reset();
+              this.setReplies(response.data.content);
+            }
+          });
         }
       });
     }

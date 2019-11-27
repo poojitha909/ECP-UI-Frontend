@@ -152,26 +152,36 @@
     <div class="uk-width-expand@m">
 
       <!-- Search textbox -->
-      <div class="uk-position-relative p-b-20">
-        <div class="uk-position-absolute uk-z-index w-full">
-          <div class="uk-inline w-100">
-            <a class="uk-form-icon uk-form-icon-flip" (click)="onSearch(searchPageParam.term)"
-              uk-icon="icon: search"></a>
-            <a class="uk-form-icon uk-form-icon-flip reset-link" href="javascript:void(0)"
-              *ngIf="searchPageParam.term !== ''" (click)="searchPageParam.term = ''">
-              <fa-icon [icon]="['fas', 'times-circle']" class="m-r-5"></fa-icon> Search again
-            </a>
-            <input class="uk-input" [(ngModel)]="searchPageParam.term" (keyup)="searchEvent($event)" required
-              type="text" (keydown.enter)="onSearch($event.target.value)">
+
+      <div class="uk-grid-small" uk-grid>
+        <div class="uk-width-expand@s uk-width-1-1">
+
+          <div class="uk-position-relative">
+            <div class="position-absolute-sm uk-z-index w-full">
+              <div class="uk-inline w-full">
+                <a class="uk-form-icon uk-form-icon-flip" (click)="onSearch(searchPageParam.term)"
+                  uk-icon="icon: search"></a>
+                <a class="uk-form-icon uk-form-icon-flip reset-link" href="javascript:void(0)"
+                  *ngIf="searchPageParam.term !== ''" (click)="searchPageParam.term = ''">
+                  <fa-icon [icon]="['fas', 'times-circle']" class="m-r-5"></fa-icon> Search again
+                </a>
+                <input class="uk-input" placeholder="Search for Service here" [(ngModel)]="searchPageParam.term"
+                  (keyup)="searchEvent($event)" required type="text" (keydown.enter)="onSearch($event.target.value)">
+              </div>
+              <!-- Auto complete list -->
+              <ul *ngIf="autocompleteFields.length > 0"
+                class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto regular-link search-list" appKeyHandler
+                (onItemSelected)="onItemSelected($event)">
+                <li class="cursor-pointer" *ngFor="let field of autocompleteFields" (click)="onSearchClick(field)">
+                  {{field.name ||  field.basicProfileInfo.firstName }}
+                </li>
+              </ul>
+            </div>
           </div>
-          <!-- Auto complete list -->
-          <ul *ngIf="autocompleteFields.length > 0"
-            class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto regular-link search-list" appKeyHandler
-            (onItemSelected)="onItemSelected($event)">
-            <li class="cursor-pointer" *ngFor="let field of autocompleteFields" (click)="onSearchClick(field)">
-              {{field.name ||  field.basicProfileInfo.firstName }}
-            </li>
-          </ul>
+        </div>
+
+        <div class="uk-width-1-1 uk-width-auto@s">
+          <button class="uk-button uk-button-default w-full" (click)="onSearch(searchPageParam.term)">Search</button>
         </div>
       </div>
       <!-- <div uk-grid>

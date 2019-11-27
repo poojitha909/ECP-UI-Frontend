@@ -177,6 +177,28 @@ h3{
         padding-right: 150px !important;
     }
 }
+
+.uk-button-default {
+    background-color: #1a73e8;
+    border-radius: 4px;
+    font-size: 18px;
+    border: none;
+    color: #fff;
+    min-width: 150px;
+    text-transform: none;
+    padding: 1px 30px;
+    &:focus {
+      color: #1a73e8;
+      border: 1px solid #1a73e8;
+      background-color: #fff;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .position-absolute-sm {
+      position: absolute;
+    }
+}
 // .uk-subnav > *{
 //     border: 1px solid #D7E0EF;
 //     box-sizing: border-box;

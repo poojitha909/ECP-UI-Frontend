@@ -64,7 +64,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
       keywords: 'products,services,events,,dscussions',
       description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
       author: `An Elder Spring Initiative by Tata Trusts`,
-      image: `${window.location.origin}/assets/imgaes/landing-img/service-bg.png`,
+      image: `${window.location.origin}/assets/imgaes/landing-img/Services-320.png`,
     }
 
     this.seoService.generateTags(config);

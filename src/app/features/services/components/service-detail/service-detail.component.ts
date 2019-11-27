@@ -103,7 +103,7 @@ export class ServiceDetailComponent implements OnInit {
       keywords: 'products,services,events,dscussions',
       description: `${this.isDBService ? this.service.basicProfileInfo.description : 'Just Dail Service'}`,
       author: `An Elder Spring Initiative by Tata Trusts`,
-      image: `${window.location.origin}/assets/imgaes/landing-img/service-bg.png`,
+      image: `${window.location.origin}/assets/imgaes/landing-img/Services-320.png`,
     }
     if (this.isDBService && this.service.basicProfileInfo.profileImage && this.service.basicProfileInfo.profileImage.original) {
       config.image = this.service.basicProfileInfo.profileImage.original;

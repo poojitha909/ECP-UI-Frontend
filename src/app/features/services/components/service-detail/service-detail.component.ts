@@ -98,7 +98,7 @@ export class ServiceDetailComponent implements OnInit {
 
 
 
-    const config: SEO = {
+    let config: SEO = {
       title: `An Elder Spring Initiative by Tata Trusts Service ${this.isDBService ? this.service.basicProfileInfo.firstName : this.service.name}`,
       keywords: 'products,services,events,dscussions',
       description: `${this.isDBService ? this.service.basicProfileInfo.description : 'Just Dail Service'}`,
@@ -394,7 +394,7 @@ export class ServiceDetailComponent implements OnInit {
       });
   }
 
-  
+
 
   editReview(review: DBReviews) {
     this.reviewSuccessMessage = null;

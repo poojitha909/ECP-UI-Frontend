@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
-import {AskQuestionService} from '../../services/ask-question.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AskQuestionService } from '../../services/ask-question.service';
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
-import { Breadcrumb } from 'src/app/core/interfaces';
+import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
+import { SeoService } from 'src/app/core/services/seo.service';
 
 declare var UIkit;
 
@@ -38,23 +39,36 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
     s: number,
     searchTxt: string,
     askCategory: string,
-		askedBy: string,
-		answeredBy: string
+    askedBy: string,
+    answeredBy: string
   };
   paramsSubs: any;
   totalRecords: number;
   totalRecordsQues: number;
   currentUrl: string;
-  whatsappUrl; 
+  whatsappUrl;
 
-  constructor(private route:ActivatedRoute, private router: Router, 
-    private store: StorageHelperService, private askQuesService: AskQuestionService, 
-    public sanitizer: DomSanitizer) { }
+  constructor(private route: ActivatedRoute, private router: Router,
+    private store: StorageHelperService, private askQuesService: AskQuestionService,
+    public sanitizer: DomSanitizer, private seoService: SeoService) {
+
+    // Generate meta tag 
+    const config: SEO = {
+      title: `An Elder Spring Initiative by Tata Trusts All Experts`,
+      keywords: 'products,services,events,dscussions',
+      description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
+      author: `An Elder Spring Initiative by Tata Trusts`,
+      image: `${window.location.origin}/assets/imgaes/landing-img/Ask-320.png`,
+    }
+
+    this.seoService.generateTags(config);
+
+  }
 
   ngOnInit() {
     this.currentUrl = window.location.href;
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
-    
+
     this.searchParams = {
       p: 0,
       s: 10,
@@ -71,14 +85,14 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
 
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
-    }); 
+    });
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.paramsSubs.unsubscribe();
   }
-  
-  initiate(){
+
+  initiate() {
     this.searchParams = {
       p: 0,
       s: 10000,
@@ -94,57 +108,57 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
       answeredBy: ""
     };
     this.user = this.store.retrieve("ECP-USER");
-    if(this.user){
+    if (this.user) {
       this.user = JSON.parse(this.user);
       this.searchParamsQues.askedBy = this.user.id;
     }
-    
+
     this.totalRecords = 0;
     this.totalRecordsQues = 0;
-    if(this.route.snapshot.queryParams['category'] !== undefined){
+    if (this.route.snapshot.queryParams['category'] !== undefined) {
       this.searchParams.experties = this.route.snapshot.queryParams['category'];
       this.searchParamsQues.askCategory = this.route.snapshot.queryParams['category'];
     }
-    
-    this.askQuesService.getCategoryList().subscribe( (response:any) =>{
+
+    this.askQuesService.getCategoryList().subscribe((response: any) => {
       const data = response.data;
       this.catsList = [];
-      if(data.content){
+      if (data.content) {
         this.catsList = data.content;
       }
     });
     this.onSearch();
-    setTimeout( ()=> {
-      if(this.route.snapshot.queryParams['tab']){
+    setTimeout(() => {
+      if (this.route.snapshot.queryParams['tab']) {
         UIkit.tab("#questionstab").show(this.route.snapshot.queryParams['tab']);
       }
-    },500);
+    }, 500);
   }
 
   changePage(page: number) {
     this.searchParams.p = page;
     this.onSearch()
   }
-  clearSelection(){
+  clearSelection() {
     this.searchParamsQues.askCategory = '';
     this.router.navigateByUrl('ask-question/all');
   }
 
-  showExperts(){
-    this.askQuesService.experts(this.searchParams).subscribe( (response:any) =>{
+  showExperts() {
+    this.askQuesService.experts(this.searchParams).subscribe((response: any) => {
       const data = response.data;
       this.experts = [];
-      if(data.content){
+      if (data.content) {
         this.experts = data.content;
         this.totalRecords = data.total;
       }
     });
   }
-  showQuestions(){
-    this.askQuesService.questions(this.searchParamsQues).subscribe( (response:any) =>{
+  showQuestions() {
+    this.askQuesService.questions(this.searchParamsQues).subscribe((response: any) => {
       const data = response.data;
       this.questions = [];
-      if(data.content){
+      if (data.content) {
         this.questions = data.content;
         this.totalRecordsQues = data.total;
       }
@@ -152,13 +166,13 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
   }
 
   onTabChange(value) {
-    this.router.navigate(['/ask-question/all'], {queryParams: {category: value} } );
+    this.router.navigate(['/ask-question/all'], { queryParams: { category: value } });
   }
 
   onTopTabChange(value) {
-    this.router.navigate(['/ask-question/all'], {queryParams:{category: this.searchParamsQues.askCategory, tab: value} } );
+    this.router.navigate(['/ask-question/all'], { queryParams: { category: this.searchParamsQues.askCategory, tab: value } });
   }
-  
+
   onSearch() {
     this.showExperts();
     this.showQuestions();

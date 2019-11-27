@@ -3,8 +3,9 @@ import { AskQuestionService } from '../../services/ask-question.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
 import { AuthService } from "../../../../core/auth/services/auth.service";
-import { Breadcrumb } from 'src/app/core/interfaces';
+import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { SeoService } from 'src/app/core/services/seo.service';
 declare var UIkit;
 @Component({
   selector: 'app-ask-question-detail-page',
@@ -40,11 +41,13 @@ export class AskQuestionDetailPageComponent implements OnInit {
   askedByProfile: any;
   isExpert: boolean;
 
-  constructor(private router: Router, private route: ActivatedRoute, 
-    private askQuesService: AskQuestionService, 
-    private store: StorageHelperService, 
-    private fb: FormBuilder, 
-    private authService: AuthService) { }
+  constructor(private router: Router, private route: ActivatedRoute,
+    private askQuesService: AskQuestionService,
+    private store: StorageHelperService,
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private seoService: SeoService
+  ) { }
 
   ngOnInit() {
     this.questionId = this.route.snapshot.params['id'];
@@ -64,7 +67,7 @@ export class AskQuestionDetailPageComponent implements OnInit {
       }
     }
 
-    if(this.questionId == "preview"){
+    if (this.questionId == "preview") {
       this.question = this.store.retrieve("new-question-preview");
       this.question = JSON.parse(this.question);
       console.log(this.question);
@@ -79,8 +82,8 @@ export class AskQuestionDetailPageComponent implements OnInit {
       this.store.clear("new-ques-comment");
     }
 
-    this.replyForm =  this.fb.group({
-      commentTxt: [ comment ? comment.commentTxt : "" ,Validators.required]
+    this.replyForm = this.fb.group({
+      commentTxt: [comment ? comment.commentTxt : "", Validators.required]
     });
 
     this.getQuestion();
@@ -91,7 +94,7 @@ export class AskQuestionDetailPageComponent implements OnInit {
       const control = this.replyForm.get(field);
       control.markAsTouched({ onlySelf: true });
     });
-    let comment = {...this.replyForm.value};
+    let comment = { ...this.replyForm.value };
     if (!this.replyForm.valid) {
       return;
     }
@@ -137,17 +140,18 @@ export class AskQuestionDetailPageComponent implements OnInit {
 
 
   getQuestion() {
-    if(this.questionId == "preview"){
+    if (this.questionId == "preview") {
       this.askQuesService.getUserProfile(this.question.answeredBy.id).subscribe((response: any) => {
         if (response.data) {
           this.question.answeredBy = response.data;
         }
       });
     }
-    else{
+    else {
       this.askQuesService.getAskQuestion(this.questionId).subscribe((response: any) => {
         if (response.data) {
           this.question = response.data;
+          this.setSeoTags(this.question);
         }
         this.askQuesService.getAskQuesReplies(this.question.id).subscribe((response: any) => {
           if (response.data) {
@@ -161,6 +165,21 @@ export class AskQuestionDetailPageComponent implements OnInit {
         });
       });
     }
+  }
+
+  setSeoTags(question: any) {
+    let config: SEO = {
+      title: `An Elder Spring Initiative by Tata Trusts Question ${question.question}`,
+      keywords: 'products,services,events,dscussions',
+      description: `${question.description}`,
+      author: `An Elder Spring Initiative by Tata Trusts`,
+      image: `${window.location.origin}/assets/imgaes/landing-img/Ask-320.png`,
+    }
+    if (question.answeredBy.basicProfileInfo.profileImage && question.answeredBy.basicProfileInfo.profileImage.thumbnailImage) {
+      config.image = question.answeredBy.basicProfileInfo.profileImage.thumbnailImage;
+    }
+
+    this.seoService.generateTags(config);
   }
 
   setReplies(replies) {
@@ -184,31 +203,31 @@ export class AskQuestionDetailPageComponent implements OnInit {
     this.replyParentText = text;
   }
 
-  onCancelPublish(){
-    this.router.navigate(["ask-question/add"],{ queryParams: { category: this.question.category, answeredBy: this.question.answeredBy.id } });
+  onCancelPublish() {
+    this.router.navigate(["ask-question/add"], { queryParams: { category: this.question.category, answeredBy: this.question.answeredBy.id } });
   }
 
-  onPublish(){
-    if(!this.user) {
+  onPublish() {
+    if (!this.user) {
       this.authService.redirectUrl = "ask-question/details/preview";
       this.router.navigate(['/user/signin']);
       return;
     }
     this.askQuesService.addQuestion({
-        question: this.question.question,
-        description: this.question.description,
-        askCategory: { id: this.question.askCategory.id },
-        answeredBy: { id: this.question.answeredBy.id },
-        askedBy: { id: this.question.askedBy.id }
-      }).subscribe((response: any) => {
-        if (response.data.id != "") {
-          this.store.clear("new-question");
-          this.store.clear("new-question-preview");
-          this.router.navigate(['/ask-question']);
-        }
-        else {
-          alert("Oops! something wrong happen, please try again.");
-        }
-      });
+      question: this.question.question,
+      description: this.question.description,
+      askCategory: { id: this.question.askCategory.id },
+      answeredBy: { id: this.question.answeredBy.id },
+      askedBy: { id: this.question.askedBy.id }
+    }).subscribe((response: any) => {
+      if (response.data.id != "") {
+        this.store.clear("new-question");
+        this.store.clear("new-question-preview");
+        this.router.navigate(['/ask-question']);
+      }
+      else {
+        alert("Oops! something wrong happen, please try again.");
+      }
+    });
   }
 }

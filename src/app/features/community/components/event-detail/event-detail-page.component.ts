@@ -4,8 +4,9 @@ import { Router } from "@angular/router";
 import { EventService } from '../../services/events.service';
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
 import { AuthService } from "../../../../core/auth/services/auth.service";
-import { Breadcrumb } from 'src/app/core/interfaces';
+import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
+import { SeoService } from 'src/app/core/services/seo.service';
 
 @Component({
   selector: 'app-event-detail',
@@ -38,9 +39,10 @@ export class EventDetailPageComponent implements OnInit {
   currentUrl: string;
   whatsappUrl;
 
-  constructor(private router: Router, private route: ActivatedRoute, 
-    private eventService: EventService, private store: StorageHelperService, 
-    private authService: AuthService, public sanitizer: DomSanitizer) { }
+  constructor(private router: Router, private route: ActivatedRoute,
+    private eventService: EventService, private store: StorageHelperService,
+    private authService: AuthService, public sanitizer: DomSanitizer,
+    private seoService: SeoService) { }
 
   ngOnInit() {
     this.paramsSubs = this.route.params.subscribe(params => {
@@ -51,7 +53,7 @@ export class EventDetailPageComponent implements OnInit {
     this.paramsSubs.unsubscribe();
   }
 
-  initiate(){
+  initiate() {
     this.currentUrl = window.location.href;
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
     this.eventId = this.route.snapshot.params['id'];
@@ -66,14 +68,15 @@ export class EventDetailPageComponent implements OnInit {
   }
 
   getEvent() {
-    if(this.eventId == "preview"){
+    if (this.eventId == "preview") {
       this.event = this.store.retrieve("new-event-preview");
       this.event = JSON.parse(this.event);
     }
-    else{
+    else {
       this.eventService.getEvent(this.eventId).subscribe((response: any) => {
         const data = response.data;
         if (data) {
+          this.setSeoTags(data);
           this.event = data;
           const fav = this.user.favEvents.filter(elem => elem == this.event.id);
           if (fav) {
@@ -83,9 +86,22 @@ export class EventDetailPageComponent implements OnInit {
             this.markIt = false;
           }
         }
-      });  
+      });
     }
   }
+
+  setSeoTags(event: any) {
+    const config: SEO = {
+      title: `An Elder Spring Initiative by Tata Trusts Event ${event.title}`,
+      keywords: 'products,services,events,dscussions',
+      description: `${event.description}`,
+      author: `An Elder Spring Initiative by Tata Trusts`,
+      image: `${window.location.origin}/assets/imgaes/landing-img/Community-320.png`,
+    }
+
+    this.seoService.generateTags(config);
+  }
+
 
   showOrganiserDetails() {
     this.showOrg = !this.showOrg;
@@ -110,17 +126,17 @@ export class EventDetailPageComponent implements OnInit {
     }
   }
 
-  onCancelPublish(){
+  onCancelPublish() {
     this.router.navigate(["community/event/add"]);
   }
 
-  onPublish(){
-    if(!this.user) {
+  onPublish() {
+    if (!this.user) {
       this.authService.redirectUrl = "community/event/preview";
       this.router.navigate(['/user/signin']);
       return;
     }
-    this.eventService.addEvents( this.event ).subscribe((response: any) => {
+    this.eventService.addEvents(this.event).subscribe((response: any) => {
       if (response.data.id != "") {
         this.store.clear("new-event");
         this.store.clear("new-event-preview");

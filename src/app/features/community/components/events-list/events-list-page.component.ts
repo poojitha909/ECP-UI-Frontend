@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../services/events.service';
-import { Breadcrumb } from 'src/app/core/interfaces';
+import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
+import { SeoService } from 'src/app/core/services/seo.service';
 
 declare var UIkit;
 
@@ -37,8 +38,25 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
   currentUrl: string;
   whatsappUrl;
 
-  constructor(private route: ActivatedRoute, private router: Router, private eventService: EventService
-    , public sanitizer: DomSanitizer) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private eventService: EventService,
+    public sanitizer: DomSanitizer,
+    private seoService: SeoService) {
+
+    // Generate meta tag 
+    const config: SEO = {
+      title: `An Elder Spring Initiative by Tata Trusts All Events`,
+      keywords: 'products,services,events,dscussions',
+      description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
+      author: `An Elder Spring Initiative by Tata Trusts`,
+      image: `${window.location.origin}/assets/imgaes/landing-img/Community-320.png`,
+    }
+
+    this.seoService.generateTags(config);
+
+  }
 
   ngOnInit() {
     this.currentUrl = window.location.href;
@@ -69,10 +87,10 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
     }
 
     this.totalRecords = 0;
-    if(this.route.snapshot.queryParams['past'] !== undefined){
+    if (this.route.snapshot.queryParams['past'] !== undefined) {
       this.searchParams.pastEvents = this.route.snapshot.queryParams['past'];
     }
-    if(this.route.snapshot.queryParams['searchTxt'] !== undefined){
+    if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
     }
     this.onSearch();

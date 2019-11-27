@@ -119,7 +119,7 @@ export class ProductDetailPageComponent implements OnInit {
       keywords: 'products,services,events,dscussions',
       description: `${product.description}`,
       author: `An Elder Spring Initiative by Tata Trusts`,
-      image: `${product.images ? product.images[0] : window.location.origin + '/assets/imgaes/landing-img/product-bg.png'}`,
+      image: `${product.images ? product.images[0] : window.location.origin + '/assets/imgaes/landing-img/Product-320.png'}`,
     }
 
     this.seoService.generateTags(config);

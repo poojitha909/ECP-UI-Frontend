@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/products.service';
 import { Router } from '@angular/router';
 import { StorageHelperService } from 'src/app/core/services';
+import { SeoService } from 'src/app/core/services/seo.service';
+import { SEO } from 'src/app/core/interfaces';
 
 @Component({
   selector: 'app-products-page',
@@ -25,9 +27,23 @@ export class ProductsPageComponent implements OnInit {
   };
 
 
-  constructor(private productService: ProductService, private router: Router, private storageHelper: StorageHelperService) {
+  constructor(
+    private productService: ProductService, private router: Router,
+    private storageHelper: StorageHelperService, private seoService: SeoService
+  ) {
     this.productService.selectedCatId = null;
     this.productService.selectedCatname = null;
+
+    // Generate meta tag 
+    const config: SEO = {
+      title: `An Elder Spring Initiative by Tata Trusts Products`,
+      keywords: 'products,services,events,dscussions',
+      description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
+      author: `An Elder Spring Initiative by Tata Trusts`,
+      image: `${window.location.origin}/assets/imgaes/landing-img/Product-320.png`,
+    }
+
+    this.seoService.generateTags(config);
   }
 
   ngOnInit() {

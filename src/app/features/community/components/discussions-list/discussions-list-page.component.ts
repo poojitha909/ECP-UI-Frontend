@@ -2,8 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DiscussionService } from '../../services/discussion.service';
 import { MenuService } from '../../services/menu.service';
-import { Breadcrumb } from 'src/app/core/interfaces';
+import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
+import { SeoService } from 'src/app/core/services/seo.service';
 
 @Component({
   selector: 'app-discussions-list-page',
@@ -38,9 +39,24 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
   currentUrl: string;
   whatsappUrl;
 
-  constructor(private route: ActivatedRoute, private router: Router, 
-    private discussionService: DiscussionService, private menuService: MenuService, 
-    public sanitizer: DomSanitizer) { }
+  constructor(private route: ActivatedRoute, private router: Router,
+    private discussionService: DiscussionService, private menuService: MenuService,
+    public sanitizer: DomSanitizer,
+    private seoService: SeoService
+  ) {
+
+    // Generate meta tag 
+    const config: SEO = {
+      title: `An Elder Spring Initiative by Tata Trusts All Discussions`,
+      keywords: 'products,services,events,dscussions',
+      description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
+      author: `An Elder Spring Initiative by Tata Trusts`,
+      image: `${window.location.origin}/assets/imgaes/landing-img/Community-320.png`,
+    }
+
+    this.seoService.generateTags(config);
+
+  }
 
   ngOnInit() {
     this.currentUrl = window.location.href;
@@ -73,7 +89,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
       });
       this.selCategory = this.route.snapshot.queryParams['category'];
     }
-    if(this.route.snapshot.queryParams['searchTxt']){
+    if (this.route.snapshot.queryParams['searchTxt']) {
       this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
     }
     this.getAllCategories();
@@ -97,14 +113,14 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
     this.search();
   }
 
-  submitSearch(){
-    this.router.navigate(['/community/discussions'], {queryParams: {category: this.selCategory, searchTxt:  this.searchParams.searchTxt}});
+  submitSearch() {
+    this.router.navigate(['/community/discussions'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt } });
   }
 
   onTabChange(value) {
     this.selCategory = value;
     this.searchParams.p = 0;
-    this.router.navigate(['/community/discussions'], {queryParams: {category: this.selCategory, searchTxt:  this.searchParams.searchTxt}});
+    this.router.navigate(['/community/discussions'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt } });
   }
 
   resetSearch(event: any) {
@@ -179,7 +195,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
     //   this.showDiscussionsCount();
     // }
     this.searchParams.tags = "";
-    if(this.selCategory!=""){
+    if (this.selCategory != "") {
       this.searchParams.tags = this.dropDownList[this.selCategory].tagIds.join(",");
     }
     this.showDiscussions();

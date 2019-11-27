@@ -5,9 +5,10 @@ import { DiscussionService } from '../../services/discussion.service';
 import { MenuService } from '../../services/menu.service';
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
 import { AuthService } from "../../../../core/auth/services/auth.service";
-import { Breadcrumb } from 'src/app/core/interfaces';
+import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
+import { SeoService } from 'src/app/core/services/seo.service';
 
 declare var UIkit;
 
@@ -33,12 +34,13 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
   successMessage: String;
   paramsSubs: any;
   currentUrl: string;
-  whatsappUrl; 
+  whatsappUrl;
 
-  constructor(private router: Router, private route: ActivatedRoute, 
-    private discussionService: DiscussionService, private menuService: MenuService, 
+  constructor(private router: Router, private route: ActivatedRoute,
+    private discussionService: DiscussionService, private menuService: MenuService,
     private fb: FormBuilder, private store: StorageHelperService,
-    private authService: AuthService, public sanitizer: DomSanitizer) { }
+    private authService: AuthService, public sanitizer: DomSanitizer,
+    private seoService: SeoService) { }
 
   ngOnInit() {
     this.currentUrl = window.location.href;
@@ -52,7 +54,7 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
     this.paramsSubs.unsubscribe();
   }
 
-  initiate(){
+  initiate() {
     this.discussionId = this.route.snapshot.params['id'];
     this.successMessage = "";
     this.breadcrumbLinks = [
@@ -88,8 +90,8 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
       this.replyId = comment.replyId;
       this.store.clear("new-d-comment");
     }
-    this.replyForm =  this.fb.group({
-      commentTxt: [ comment ? comment.commentTxt : "" ,Validators.required]
+    this.replyForm = this.fb.group({
+      commentTxt: [comment ? comment.commentTxt : "", Validators.required]
     });
     this.getDiscussion();
   }
@@ -99,24 +101,24 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
       const control = this.replyForm.get(field);
       control.markAsTouched({ onlySelf: true });
     });
-    let comment = {...this.replyForm.value};
+    let comment = { ...this.replyForm.value };
     if (!this.replyForm.valid) {
       return;
     }
     if (!this.user) {
-      this.store.store("new-d-comment", 
-      JSON.stringify({ 
-          discussionId: this.discussionId, 
+      this.store.store("new-d-comment",
+        JSON.stringify({
+          discussionId: this.discussionId,
           category: this.category,
           parentReplyId: this.parentReplyId,
           replyId: this.replyId,
           commentTxt: comment.commentTxt
-         }));
+        }));
       this.authService.redirectUrl = "community/discussion/" + this.discussionId + (this.category ? "/" + this.category : "");
       this.router.navigate(['/user/signin']);
       return;
     }
-    if(this.replyId){
+    if (this.replyId) {
       this.discussionService.editComment(this.replyId, comment.commentTxt).subscribe((response: any) => {
         if (response.data.replies) {
           this.replyForm.reset();
@@ -125,7 +127,7 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
         }
       });
     }
-    else{
+    else {
       this.discussionService.addComment({ type: 0 }, this.discussionId, this.parentReplyId, comment.commentTxt).subscribe((response: any) => {
         if (response.data.replies) {
           this.replyForm.reset();
@@ -135,7 +137,7 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
         }
       });
     }
-    
+
   }
 
   // likeDiscussion() {
@@ -147,15 +149,15 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
   // }
 
   likeReply(reply) {
-    if(reply.likedByUser){
+    if (reply.likedByUser) {
       this.discussionService.unlikeReply(this.discussionId, reply.id).subscribe((response: any) => {
         if (response.data.id) {
           reply.likeCount = reply.likeCount - 1;
           reply.likedByUser = false;
         }
-      });  
+      });
     }
-    else{
+    else {
       this.discussionService.likeReply(this.discussionId, reply.id).subscribe((response: any) => {
         if (response.data.id) {
           reply.likeCount = reply.likeCount + 1;
@@ -179,26 +181,43 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
       });
     }
 
-    if(this.discussionId == "preview"){
+    if (this.discussionId == "preview") {
       this.discussion = this.store.retrieve("new-discuss-preview");
       this.discussion = JSON.parse(this.discussion);
       this.discussion.createdAt = new Date();
       this.discussion.username = this.discussion.userName;
       this.discussion.text = this.discussion.description;
-      this.discussion.userProfile = {basicProfileInfo : { profileImage: { thumbnailImage: ""}}};
+      this.discussion.userProfile = { basicProfileInfo: { profileImage: { thumbnailImage: "" } } };
     }
-    else{
+    else {
       this.discussionService.getDiscussion(this.discussionId).subscribe((response: any) => {
         if (response.data.discuss) {
           this.discussion = response.data.discuss;
+          this.setSeoTags(this.discussion);
           this.sortedReplies = response.data.sortedReplies;
           this.commentsCount = 0;
-          if(this.sortedReplies){
+          if (this.sortedReplies) {
             this.commentsCount = Object.keys(this.sortedReplies).length;
           }
         }
       });
     }
+  }
+
+  setSeoTags(discussion: any) {
+    let config: SEO = {
+      title: `An Elder Spring Initiative by Tata Trusts Dscussions on ${discussion.title}`,
+      keywords: 'products,services,events,dscussions',
+      description: `${discussion.shortSynopsis}`,
+      author: `An Elder Spring Initiative by Tata Trusts`,
+      image: `${window.location.origin}/assets/imgaes/landing-img/Community-320.png`,
+    }
+
+    if (discussion.userProfile.basicProfileInfo.profileImage && discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage) {
+      config.image = discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage;
+    }
+
+    this.seoService.generateTags(config);
   }
 
   setParentReplyId(id) {
@@ -210,40 +229,40 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
   editReply(parentReplyId, reply) {
     this.parentReplyId = parentReplyId;
     this.replyId = reply.id;
-    this.replyForm.patchValue({commentTxt: reply.text});
+    this.replyForm.patchValue({ commentTxt: reply.text });
     this.successMessage = "";
   }
-  
-  onCancelPublish(){
+
+  onCancelPublish() {
     this.router.navigate(["community/discussion/add"]);
   }
 
-  onPublish(){
-    if(!this.user) {
+  onPublish() {
+    if (!this.user) {
       this.authService.redirectUrl = "community/discussion/preview";
       this.router.navigate(['/user/signin']);
       return;
     }
-    this.discussionService.addDiscussion("P", this.discussion.description, this.discussion.title, 
-    this.discussion.userId, 
-    this.user.userName,
-    this.discussion.tags,
-    this.discussion.categories,
-    this.discussion.contentType)
-    .subscribe((response: any) => {
-      if (response.data.id != "") {
-        this.store.clear("new-discuss");
-        this.store.clear("new-discuss-preview");
-        this.router.navigate(['/community/discussion', response.data.id]);
-      }
-      else {
-        alert("Oops! something wrong happen, please try again.");
-      }
-    });
+    this.discussionService.addDiscussion("P", this.discussion.description, this.discussion.title,
+      this.discussion.userId,
+      this.user.userName,
+      this.discussion.tags,
+      this.discussion.categories,
+      this.discussion.contentType)
+      .subscribe((response: any) => {
+        if (response.data.id != "") {
+          this.store.clear("new-discuss");
+          this.store.clear("new-discuss-preview");
+          this.router.navigate(['/community/discussion', response.data.id]);
+        }
+        else {
+          alert("Oops! something wrong happen, please try again.");
+        }
+      });
   }
 
 
-  
+
   get formControl() {
     return this.replyForm.controls;
   }

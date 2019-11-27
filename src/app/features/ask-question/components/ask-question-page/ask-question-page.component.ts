@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AskQuestionService } from '../../services/ask-question.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageHelperService } from 'src/app/core/services/storage-helper.service';
+import { SEO } from 'src/app/core/interfaces';
+import { SeoService } from 'src/app/core/services/seo.service';
 
 @Component({
   selector: 'app-ask-question-page',
@@ -30,8 +32,21 @@ export class AskQuestionPageComponent implements OnInit {
       private router: Router,
       private store: StorageHelperService,
       private askQuestionService: AskQuestionService,
-      private storageHelper: StorageHelperService
-    ) { }
+      private storageHelper: StorageHelperService,
+      private seoService: SeoService
+    ) {
+    // Generate meta tag 
+    const config: SEO = {
+      title: `An Elder Spring Initiative by Tata Trusts Experts`,
+      keywords: 'products,services,events,dscussions',
+      description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
+      author: `An Elder Spring Initiative by Tata Trusts`,
+      image: `${window.location.origin}/assets/imgaes/landing-img/Ask-320.png`,
+    }
+
+    this.seoService.generateTags(config);
+
+  }
 
   ngOnInit() {
     this.user = this.store.retrieve("ECP-USER");

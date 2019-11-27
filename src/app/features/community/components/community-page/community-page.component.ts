@@ -4,6 +4,8 @@ import { DiscussionService } from '../../services/discussion.service';
 import { Router } from '@angular/router';
 import { MenuService } from '../../services/menu.service';
 import { StorageHelperService } from 'src/app/core/services';
+import { SeoService } from 'src/app/core/services/seo.service';
+import { SEO } from 'src/app/core/interfaces';
 
 @Component({
   selector: 'app-community-page',
@@ -35,7 +37,20 @@ export class CommunityPageComponent implements OnInit {
   }
 
   constructor(private eventService: EventService, private discussionService: DiscussionService,
-    private menuService: MenuService, private router: Router, private storageHelper: StorageHelperService) {
+    private menuService: MenuService, private router: Router, private storageHelper: StorageHelperService,
+    private seoService: SeoService
+  ) {
+
+    // Generate meta tag 
+    const config: SEO = {
+      title: `An Elder Spring Initiative by Tata Trusts Community`,
+      keywords: 'products,services,events,dscussions',
+      description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
+      author: `An Elder Spring Initiative by Tata Trusts`,
+      image: `${window.location.origin}/assets/imgaes/landing-img/Community-320.png`,
+    }
+
+    this.seoService.generateTags(config);
   }
 
 

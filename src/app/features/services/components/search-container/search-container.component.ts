@@ -6,7 +6,6 @@ import { PageParam } from 'src/app/core';
 import { Service } from 'src/app/core/interfaces';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { StorageHelperService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-search-container',
@@ -28,7 +27,7 @@ export class SearchContainerComponent implements OnInit {
 
   autocompleteFields: Service[] = [];
 
-  constructor(private homeService: HomeService, private router: Router, private storageHelper: StorageHelperService) { }
+  constructor(private homeService: HomeService, private router: Router) { }
 
   ngOnInit() {
     this.searchTextChanged.pipe(
@@ -38,9 +37,12 @@ export class SearchContainerComponent implements OnInit {
       this.onSearchChange(this.searchPageParam.term);
     });
 
-    const homeSearchtxt = this.storageHelper.retrieveSession('homeSearchText');
-    if (homeSearchtxt) {
-      this.searchPageParam.term = homeSearchtxt;
+    if (this.homeService.homeSearchtxt) {
+      this.searchPageParam.term = this.homeService.homeSearchtxt;
+      if (this.homeService.storageSearchResult) {
+        const searchData: any = this.homeService.storageSearchResult;
+        this.popullarService = searchData.services;
+      }
       this.showReset = true;
     }
 
@@ -102,7 +104,7 @@ export class SearchContainerComponent implements OnInit {
       }
       this.selectedValue = "";
       this.autocompleteFields = [];
-      this.storageHelper.clearSession('homeSearchText');
+      this.homeService.clearHomepageSearch();
     }
   }
 

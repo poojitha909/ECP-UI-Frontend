@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StorageHelperService } from 'src/app/core/services/storage-helper.service';
 import { SEO } from 'src/app/core/interfaces';
 import { SeoService } from 'src/app/core/services/seo.service';
+import { HomeService } from 'src/app/features/home/home.service';
 
 @Component({
   selector: 'app-ask-question-page',
@@ -32,7 +33,7 @@ export class AskQuestionPageComponent implements OnInit {
       private router: Router,
       private store: StorageHelperService,
       private askQuestionService: AskQuestionService,
-      private storageHelper: StorageHelperService,
+      private homeService: HomeService,
       private seoService: SeoService
     ) {
     // Generate meta tag 
@@ -76,9 +77,13 @@ export class AskQuestionPageComponent implements OnInit {
     });
     // this.showExperts();
     this.showExperts2();
-    const homeSearchtxt = this.storageHelper.retrieveSession('homeSearchText');
-    if (homeSearchtxt) {
-      this.searchParams.searchTxt = homeSearchtxt;
+    if (this.homeService.homeSearchtxt) {
+      this.searchParams.searchTxt = this.homeService.homeSearchtxt;
+      if (this.homeService.storageSearchResult) {
+        const searchData: any = this.homeService.storageSearchResult;
+        this.experts = searchData.experts;
+        this.showResult = true;
+      }
       this.showReset = true;
     }
   }
@@ -141,6 +146,6 @@ export class AskQuestionPageComponent implements OnInit {
       this.showResult = true;
     }
     this.showExperts();
-    this.storageHelper.clearSession('homeSearchText');
+    this.homeService.clearHomepageSearch();
   }
 }

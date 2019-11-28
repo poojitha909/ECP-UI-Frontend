@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/products.service';
 import { Router } from '@angular/router';
-import { StorageHelperService } from 'src/app/core/services';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { SEO } from 'src/app/core/interfaces';
+import { HomeService } from 'src/app/features/home/home.service';
 
 @Component({
   selector: 'app-products-page',
@@ -29,7 +29,7 @@ export class ProductsPageComponent implements OnInit {
 
   constructor(
     private productService: ProductService, private router: Router,
-    private storageHelper: StorageHelperService, private seoService: SeoService
+    private homeService: HomeService, private seoService: SeoService
   ) {
     this.productService.selectedCatId = null;
     this.productService.selectedCatname = null;
@@ -63,11 +63,14 @@ export class ProductsPageComponent implements OnInit {
     });
 
     this.showResult = false;
-    // this.showProducts();
     this.showProducts2();
-    const homeSearchtxt = this.storageHelper.retrieveSession('homeSearchText');
-    if (homeSearchtxt) {
-      this.searchParams.searchTxt = homeSearchtxt;
+    if (this.homeService.homeSearchtxt) {
+      this.searchParams.searchTxt = this.homeService.homeSearchtxt;
+      if (this.homeService.storageSearchResult) {
+        const searchData: any = this.homeService.storageSearchResult;
+        this.productsList = searchData.products;
+        this.showResult = true;
+      }
       this.showReset = true;
     }
   }
@@ -144,7 +147,7 @@ export class ProductsPageComponent implements OnInit {
     if (this.searchParams.searchTxt != "") {
       this.showResult = true;
     }
-    this.storageHelper.clearSession('homeSearchText');
+    this.homeService.clearHomepageSearch();
     this.showProducts();
   }
 }

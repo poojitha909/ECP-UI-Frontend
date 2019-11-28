@@ -2,10 +2,9 @@ import { Component, OnInit, HostListener } from '@angular/core';
 
 import { PageParam } from 'src/app/core';
 import { HomeService } from '../../home.service';
-import { JDCategory, Service } from 'src/app/core/interfaces';
-import { JdCategoryService, StorageHelperService } from 'src/app/core/services';
+import { Service } from 'src/app/core/interfaces';
 import { Subject } from 'rxjs';
-import { debounce, debounceTime, distinctUntilChanged, mergeMap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 
@@ -39,7 +38,7 @@ export class SearchContainerComponent implements OnInit {
     totalEvents: 0,
     totalExperts: 0
   };
-  constructor(private homeService: HomeService, private router: Router, private storageHelper: StorageHelperService) { }
+  constructor(private homeService: HomeService, private router: Router) { }
 
   ngOnInit() {
     this.searchTextChanged.pipe(
@@ -49,9 +48,12 @@ export class SearchContainerComponent implements OnInit {
       this.onSearchChange(this.searchPageParam.term);
     })
 
-    const homeSearchtxt = this.storageHelper.retrieveSession('homeSearchText');
-    if (homeSearchtxt) {
-      this.searchPageParam.term = homeSearchtxt;
+
+    if (this.homeService.homeSearchtxt) {
+      this.searchPageParam.term = this.homeService.homeSearchtxt;
+      if (this.homeService.storageSearchResult) {
+        this.searchData = this.homeService.storageSearchResult;
+      }
       this.showReset = true;
     }
   }
@@ -81,7 +83,7 @@ export class SearchContainerComponent implements OnInit {
     this.searchPageParam.term = "";
     this.autocompleteFields = [];
     this.showReset = false;
-    this.storageHelper.clearSession('homeSearchText');
+    this.homeService.clearHomepageSearch();
   }
 
   homeSearchPages() {
@@ -102,8 +104,7 @@ export class SearchContainerComponent implements OnInit {
       this.searchData.experts = response.expertPage.content;
       this.searchData.totalEvents = response.eventPage.total;
       this.searchData.totalExperts = response.expertPage.total;
-
-
+      this.homeService.storageSearchResult = this.searchData;
     },
       error => {
         console.log(error);
@@ -130,7 +131,7 @@ export class SearchContainerComponent implements OnInit {
         }
 
       } else {
-        this.storageHelper.storeSession('homeSearchText', field);
+        this.homeService.homeSearchtxt = field;
         this.homeSearchPages();
       }
       this.selectedValue = "";

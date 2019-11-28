@@ -34,7 +34,7 @@
 
       <div *ngIf="searchData.totalDiscussions > 6">
         <button routerLink="/community/discussions" [queryParams]="{ searchTxt:term}"
-          class="uk-button uk-button-default uk-width-1-1 m-t-30" (click)="clearSearchSession()">View All
+          class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
           Results</button>
       </div>
 
@@ -55,7 +55,7 @@
 
       <div *ngIf="searchData.totalEvents > 6">
         <button routerLink="/community/events" [queryParams]="{ searchTxt:term}"
-          class="uk-button uk-button-default uk-width-1-1 m-t-30" (click)="clearSearchSession()">View All
+          class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
           Results</button>
       </div>
 
@@ -78,7 +78,7 @@
 
       <div *ngIf="searchData.totalExperts > 6">
         <button routerLink="/ask-question/all" [queryParams]="{ searchTxt:term}"
-          class="uk-button uk-button-default uk-width-1-1 m-t-30" (click)="clearSearchSession()">View All
+          class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
           Results</button>
       </div>
     </li>
@@ -99,7 +99,7 @@
 
       <div *ngIf="searchData.totalProducts > 6">
         <button routerLink="/products/all" [queryParams]="{ searchTxt:term}"
-          class="uk-button uk-button-default uk-width-1-1 m-t-30" (click)="clearSearchSession()">View All
+          class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
           Results</button>
       </div>
     </li>
@@ -118,7 +118,7 @@
       </div>
 
       <div *ngIf="searchData.totalServices > 6"><button routerLink="/services/all" [queryParams]="{ category:term}"
-          class="uk-button uk-button-default uk-width-1-1 m-t-30" (click)="clearSearchSession()">View All
+          class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
           Results</button>
       </div>
     </li>

@@ -35,22 +35,22 @@
         <button class="uk-button uk-button-default search-btn" (click)="onSearch(searchPageParam.term)">Search</button>
       </div>
     </div>
-  </div>
-  <!-- Search Form END -->
 
-  <!-- Search Result START -->
-  <app-search-results [searchData]="searchData" [term]="searchPageParam.term"></app-search-results>
-  <!-- Search Result END -->
+    <!-- Search Form END -->
 
-  <!-- Popular search component  -->
-  <!-- <div class="p-24-40"
+    <!-- Search Result START -->
+    <app-search-results [searchData]="searchData" [term]="searchPageParam.term"></app-search-results>
+    <!-- Search Result END -->
+
+    <!-- Popular search component  -->
+    <!-- <div class="p-24-40"
     *ngIf="searchData.services.length == 0 && searchData.products.length == 0  && searchData.discussions.length == 0 ">
     <app-popular-search></app-popular-search>
   </div> -->
-  <!-- Popular search component  -->
+    <!-- Popular search component  -->
 
-  <!-- <div class="uk-container popular-search-list"></div> -->
-  <!-- <div class="quote-line uk-margin-remove" uk-grid>
+    <!-- <div class="uk-container popular-search-list"></div> -->
+    <!-- <div class="quote-line uk-margin-remove" uk-grid>
     <div class="uk-width-expand@s uk-padding-remove uk-flex uk-flex-middle">
       <div class="uk-flex uk-flex-middle">
         <span class="mr-3">
@@ -60,7 +60,8 @@
       </div>
     </div>
   </div> -->
-  <!-- <div class="uk-width-auto@s uk-text-center">
+    <!-- <div class="uk-width-auto@s uk-text-center">
         <button class="uk-button uk-button-default">View All Products</button>
       </div> -->
+  </div>
 </div>

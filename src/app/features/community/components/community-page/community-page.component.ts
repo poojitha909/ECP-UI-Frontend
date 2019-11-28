@@ -3,9 +3,9 @@ import { EventService } from '../../services/events.service';
 import { DiscussionService } from '../../services/discussion.service';
 import { Router } from '@angular/router';
 import { MenuService } from '../../services/menu.service';
-import { StorageHelperService } from 'src/app/core/services';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { SEO } from 'src/app/core/interfaces';
+import { HomeService } from 'src/app/features/home/home.service';
 
 @Component({
   selector: 'app-community-page',
@@ -37,7 +37,7 @@ export class CommunityPageComponent implements OnInit {
   }
 
   constructor(private eventService: EventService, private discussionService: DiscussionService,
-    private menuService: MenuService, private router: Router, private storageHelper: StorageHelperService,
+    private menuService: MenuService, private router: Router, private homeService: HomeService,
     private seoService: SeoService
   ) {
 
@@ -57,14 +57,14 @@ export class CommunityPageComponent implements OnInit {
   ngOnInit(): void {
     this.searchParams = {
       p: 0,
-      s: 10,
+      s: 6,
       searchTxt: "",
       eventType: 0,
       pastEvents: -1
     }
     this.searchParamsDiscussions = {
       p: 0,
-      s: 10,
+      s: 6,
       searchTxt: "",
       tags: ""
     }
@@ -73,9 +73,14 @@ export class CommunityPageComponent implements OnInit {
     this.getAllDiscussCategories();
     // this.showEvents();
     this.showEvents2();
-    const homeSearchtxt = this.storageHelper.retrieveSession('homeSearchText');
-    if (homeSearchtxt) {
-      this.searchParams.searchTxt = homeSearchtxt;
+    console.log(this.homeService.homeSearchtxt);
+    if (this.homeService.homeSearchtxt) {
+      this.searchParams.searchTxt = this.homeService.homeSearchtxt;
+      if (this.homeService.storageSearchResult) {
+        const searchData: any = this.homeService.storageSearchResult;
+        this.eventsList = searchData.events;
+        this.discussionsList = searchData.discussions;
+      }
       this.showReset = true;
     }
   }
@@ -191,7 +196,7 @@ export class CommunityPageComponent implements OnInit {
   onSearch() {
     this.showEvents();
     this.showDiscussions();
-    this.storageHelper.clearSession('homeSearchText');
+    this.homeService.clearHomepageSearch();
   }
 
   onTabChange(tab: number) {

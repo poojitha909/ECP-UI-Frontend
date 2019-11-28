@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { environment } from 'src/environments/environment';
 import { ApiConstants } from 'src/app/api.constants';
 import { PageParam } from 'src/app/core';
-import { map, debounceTime } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { StorageHelperService } from 'src/app/core/services';
+import { AppConstants } from 'src/app/app.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class HomeService {
     term: ''
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private storageHelper: StorageHelperService) {
   }
 
   getServices(): Observable<any> {
@@ -93,5 +94,29 @@ export class HomeService {
     );
   }
 
+  /**
+* Return user details
+*/
+  get storageSearchResult(): any {
+    return this.storageHelper.retrieveSession(AppConstants.HOME_SEARCH_RESULT) ? JSON.parse(this.storageHelper.retrieveSession(AppConstants.HOME_SEARCH_RESULT)) : undefined;
+  }
+
+  set storageSearchResult(searchResult) {
+    this.storageHelper.storeSession(AppConstants.HOME_SEARCH_RESULT, JSON.stringify(searchResult));
+  }
+
+  get homeSearchtxt(): string {
+    return this.storageHelper.retrieveSession(AppConstants.HOME_SEARCH) ? this.storageHelper.retrieveSession(AppConstants.HOME_SEARCH) : undefined;
+  }
+
+  set homeSearchtxt(searchParam: string) {
+    this.storageHelper.storeSession(AppConstants.HOME_SEARCH, searchParam);
+
+  }
+
+  clearHomepageSearch() {
+    this.storageHelper.clearSession(AppConstants.HOME_SEARCH);
+    this.storageHelper.clearSession(AppConstants.HOME_SEARCH_RESULT);
+  }
 
 }

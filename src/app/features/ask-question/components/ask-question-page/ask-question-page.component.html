@@ -133,7 +133,7 @@
       </div>
     </div>
     <div class="uk-width-auto@s uk-text-center">
-      <button routerLink="/ask-question/all" class="uk-button uk-button-default">More experts</button>
+      <button [routerLink]="['/ask-question/all']" [queryParams]="{ category: '', tab:0}" class="uk-button uk-button-default">More experts</button>
     </div>
   </div>
 </div>

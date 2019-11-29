@@ -25,7 +25,8 @@ export class AskQuestionCreatePageComponent implements OnInit {
     },
     {
       text: 'All Experts',
-      link: '/ask-question/all'
+      link: '/ask-question/all',
+      queryParams: { category: '', tab:0}
     }
   ];
   category: string;

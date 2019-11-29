@@ -32,7 +32,8 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
   searchParams: {
     p: number,
     s: number,
-    experties: string
+    experties: string,
+    searchTxt: string
   };
   searchParamsQues: {
     p: number,
@@ -68,21 +69,6 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.currentUrl = window.location.href;
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
-
-    this.searchParams = {
-      p: 0,
-      s: 10,
-      experties: ""
-    }
-    this.searchParamsQues = {
-      p: 0,
-      s: 10,
-      searchTxt: "",
-      askCategory: "",
-      askedBy: "",
-      answeredBy: ""
-    };
-
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
@@ -95,13 +81,14 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
   initiate() {
     this.searchParams = {
       p: 0,
-      s: 10000,
-      experties: ""
+      s: 1,
+      experties: "",
+      searchTxt: ""
     }
 
     this.searchParamsQues = {
       p: 0,
-      s: 1000,
+      s: 1,
       searchTxt: "",
       askCategory: "",
       askedBy: "",
@@ -176,5 +163,26 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
   onSearch() {
     this.showExperts();
     this.showQuestions();
+  }
+
+  onSearchChange(event: any) {
+    const value = event.target.value;
+    if (value !== "") {
+      this.showReset = true
+    } else {
+      this.showReset = false;
+    }
+    this.searchParams.searchTxt = value;
+    if (event.key === "Enter") {
+      this.showExperts();
+    }
+  }
+
+  resetSearch(event: any) {
+    if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
+      this.searchParams.searchTxt = "";
+      this.showReset = false;
+      this.showExperts();
+    }
   }
 }

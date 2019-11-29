@@ -55,6 +55,25 @@
       </ul>
       <ul class="uk-switcher uk-margin">
         <li>
+          <div class="search-form">
+            <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
+              <div class="uk-margin uk-width-1-1 uk-width-expand@s">
+                <form class="uk-search uk-search-default">
+                  <span class="uk-search-icon-flip" [ngClass]="{ 'w-105':showReset}" uk-search-icon>
+                    <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
+                      <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Reset&nbsp;&nbsp;
+                    </button>
+                  </span>
+                  <input class="uk-input" [ngClass]="{ 'pr-105':showReset}" [(ngModel)]="searchParams.searchTxt"
+                    (keyup)="onSearchChange($event)" required type="text" placeholder="Search for product here"
+                    name="search" />
+                </form>
+              </div>
+              <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">
+                <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
+              </div>
+            </div>
+          </div>
           <div *ngIf="experts && experts.length > 0">
             <app-expert-detail-card *ngFor="let expert of experts" [expert]="expert"></app-expert-detail-card>
           </div>

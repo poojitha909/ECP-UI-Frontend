@@ -29,6 +29,22 @@ textarea{
   border: 1px solid #D7E0EF;
   border-radius: 4px;
 }
+.comments-head {
+  margin: 64px 0 24px 0;
+}
+.comments-count {
+  h4 {
+    font-family: $regular-font;
+    font-size: 24px;
+  }
+}
+.add-reply {
+  border: 1px solid #1a73e8;
+  color: #1a73e8;
+  text-transform: capitalize;
+  float: right;
+  height: 38px;
+}
 .category-box{
   &.info {
     background-color: #D7E0EF;

@@ -34,6 +34,14 @@ export class AskQuestionCreatePageComponent implements OnInit {
   paramsSubs: any;
   expert: any;
   quesForm: FormGroup;
+  searchParams: {
+    p: number,
+    s: number,
+    askedBy: string,
+		answeredBy: string
+  };
+  questions: any[];
+  totalRecords: number;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private askQuesService: AskQuestionService, private store: StorageHelperService,
@@ -49,15 +57,27 @@ export class AskQuestionCreatePageComponent implements OnInit {
   }
 
   initiate() {
+    this.searchParams = {
+      p: 0,
+      s: 10,
+      askedBy: "",
+      answeredBy: ""
+    }
+
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
+      this.searchParams.askedBy = this.user.id;
     }
     if (this.route.snapshot.queryParams['category']) {
       this.category = this.route.snapshot.queryParams['category'];
     }
     if (this.route.snapshot.queryParams['answeredBy']) {
       this.answeredBy = this.route.snapshot.queryParams['answeredBy'];
+      this.searchParams.answeredBy = this.route.snapshot.queryParams['answeredBy'];
+    }
+    if(this.searchParams.askedBy && this.searchParams.answeredBy){
+      this.showQuestions();
     }
 
     let question = this.store.retrieve("new-question");
@@ -72,13 +92,26 @@ export class AskQuestionCreatePageComponent implements OnInit {
     });
 
     this.askQuesService.getUserProfile(this.answeredBy).subscribe((response: any) => {
-      console.log(response);
       if (response.data.id != "") {
         this.expert = response.data;
         this.setSeoTags(this.expert);
       }
       else {
         alert("Oops! something wrong happen, please try again.");
+      }
+    });
+    
+  }
+
+  showQuestions(){
+
+    this.askQuesService.questions(this.searchParams).subscribe( (response:any) =>{
+      this.totalRecords = 0;
+      const data = response.data;
+      this.questions = [];
+      if(data.content){
+        this.questions = data.content;
+        this.totalRecords = data.total;
       }
     });
   }
@@ -131,28 +164,9 @@ export class AskQuestionCreatePageComponent implements OnInit {
     que.askCategory = { id: this.category };
     que.answeredBy = { id: this.answeredBy };
     que.askedBy = { id: this.user.id };
+    que.answered = false;
 
     this.store.store("new-question-preview", JSON.stringify(que));
     this.router.navigate(['/ask-question/detail/preview']);
-    // if (que.category != "" && que.question != "" && que.description != "") {
-    // this.askQuesService.addQuestion({
-    //   question: this.question,
-    //   description: this.description,
-    //   askCategory: { id: this.category },
-    //   answeredBy: { id: this.answeredBy },
-    //   askedBy: { id: this.askedBy }
-    // }).subscribe((response: any) => {
-    //   if (response.data.id != "") {
-    //     this.router.navigate(['/ask-question']);
-    //   }
-    //   else {
-    //     alert("Oops! something wrong happen, please try again.");
-    //   }
-    // });
-    // }
-    // else {
-    //   alert("All fields are required, please fill all fields.");
-    // }
-    // return;
   }
 }

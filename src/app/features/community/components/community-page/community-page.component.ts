@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EventService } from '../../services/events.service';
 import { DiscussionService } from '../../services/discussion.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MenuService } from '../../services/menu.service';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { SEO } from 'src/app/core/interfaces';
@@ -12,9 +12,10 @@ import { HomeService } from 'src/app/features/home/home.service';
   templateUrl: './community-page.component.html',
   styleUrls: ['./community-page.component.scss']
 })
-export class CommunityPageComponent implements OnInit {
+export class CommunityPageComponent implements OnInit, OnDestroy {
 
   showReset: boolean;
+  showResult: boolean;
   eventsList: any[] = [];
   discussionsList: any[] = [];
   discussCategoryList: any;
@@ -22,6 +23,9 @@ export class CommunityPageComponent implements OnInit {
   discussionsList2: any;
   selEventCategory: string;
   eventsList2: any;
+  paramsSubs: any;
+  totalRecordsEvents: number;
+  totalRecordsDiscussions: number;
   searchParams: {
     p: number,
     s: number,
@@ -38,7 +42,7 @@ export class CommunityPageComponent implements OnInit {
 
   constructor(private eventService: EventService, private discussionService: DiscussionService,
     private menuService: MenuService, private router: Router, private homeService: HomeService,
-    private seoService: SeoService
+    private seoService: SeoService, private route: ActivatedRoute
   ) {
 
     // Generate meta tag 
@@ -54,7 +58,17 @@ export class CommunityPageComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.paramsSubs = this.route.queryParams.subscribe(params => {
+      this.initiate();
+    });
+  }
+  
+  ngOnDestroy() {
+    this.paramsSubs.unsubscribe();
+  }
+
+  initiate(){
     this.searchParams = {
       p: 0,
       s: 6,
@@ -68,21 +82,25 @@ export class CommunityPageComponent implements OnInit {
       searchTxt: "",
       tags: ""
     }
+    this.totalRecordsEvents = 0;
+    this.totalRecordsDiscussions =0;
     this.selDiscussCategory = "";
     this.selEventCategory = "";
     this.getAllDiscussCategories();
-    // this.showEvents();
-    this.showEvents2();
-    console.log(this.homeService.homeSearchtxt);
-    if (this.homeService.homeSearchtxt) {
-      this.searchParams.searchTxt = this.homeService.homeSearchtxt;
-      if (this.homeService.storageSearchResult) {
-        const searchData: any = this.homeService.storageSearchResult;
-        this.eventsList = searchData.events;
-        this.discussionsList = searchData.discussions;
-      }
+    
+    if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
+      this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
+      this.showReset = this.searchParams.searchTxt ? true : false;
+    }
+    
+    if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
+      this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
     }
+    
+    this.showEvents();
+    this.showEvents2();
+    this.showDiscussions();
   }
 
   getAllDiscussCategories() {
@@ -106,22 +124,35 @@ export class CommunityPageComponent implements OnInit {
   }
 
   showEvents() {
-    this.eventService.searchEvents(this.searchParams).subscribe((response: any) => {
-      const data = response.data;
-      this.eventsList = [];
-      if (data.content) {
-        this.eventsList = data.content;
-      }
-    });
+    this.showResult = false;
+    if (this.searchParams.searchTxt != "") {
+      this.showResult = true;
+      this.totalRecordsEvents = 0;
+      this.eventService.searchEvents(this.searchParams).subscribe((response: any) => {
+        const data = response.data;
+        this.eventsList = [];
+        if (data.content) {
+          this.eventsList = data.content;
+          this.totalRecordsEvents = data.total;
+        }
+      });
+    }
   }
+
   showDiscussions() {
-    this.discussionService.searchDiscussions(this.searchParamsDiscussions).subscribe((response: any) => {
-      const data = response.data;
-      this.discussionsList = [];
-      if (data.content) {
-        this.discussionsList = data.content;
-      }
-    });
+    this.showResult = false;
+    if (this.searchParamsDiscussions.searchTxt != "") {
+      this.showResult = true;
+      this.totalRecordsDiscussions = 0;
+      this.discussionService.searchDiscussions(this.searchParamsDiscussions).subscribe((response: any) => {
+        const data = response.data;
+        this.discussionsList = [];
+        if (data.content) {
+          this.discussionsList = data.content;
+          this.totalRecordsDiscussions = data.total;
+        }
+      });
+    }
   }
 
   showAllDiscussions() {
@@ -132,11 +163,13 @@ export class CommunityPageComponent implements OnInit {
   }
 
   showDiscussions2() {
-    this.searchParamsDiscussions.tags = "";
+    let searchParams = JSON.parse(JSON.stringify(this.searchParamsDiscussions));
+    searchParams.tags = "";
+    searchParams.searchTxt = "";
     if (this.selDiscussCategory != "") {
-      this.searchParamsDiscussions.tags = this.discussCategoryList[this.selDiscussCategory].tagIds.join(",");
+      searchParams.tags = this.discussCategoryList[this.selDiscussCategory].tagIds.join(",");
     }
-    this.discussionService.searchDiscussions(this.searchParamsDiscussions).subscribe((response: any) => {
+    this.discussionService.searchDiscussions(searchParams).subscribe((response: any) => {
       const data = response.data;
       this.discussionsList2 = [];
       if (data.content) {
@@ -145,7 +178,9 @@ export class CommunityPageComponent implements OnInit {
     });
   }
   showEvents2() {
-    this.eventService.searchEvents(this.searchParams).subscribe((response: any) => {
+    let searchParams = JSON.parse(JSON.stringify(this.searchParams));
+    searchParams.searchTxt = "";
+    this.eventService.searchEvents(searchParams).subscribe((response: any) => {
       const data = response.data;
       this.eventsList2 = [];
       if (data.content) {
@@ -176,9 +211,10 @@ export class CommunityPageComponent implements OnInit {
       this.showReset = true
     } else {
       this.showReset = false;
+      this.showResult = false;
     }
-    this.searchParams.searchTxt = value;
-    this.searchParamsDiscussions.searchTxt = value;
+    this.setSearchTxt(value);
+    
     if (event.key == "Enter") {
       this.onSearch();
     }
@@ -186,20 +222,24 @@ export class CommunityPageComponent implements OnInit {
 
   resetSearch(event: any) {
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
-      this.searchParams.searchTxt = "";
-      this.searchParamsDiscussions.searchTxt = "";
+      this.setSearchTxt("");
       this.showReset = false;
-      // this.onSearch()
+      this.onSearch()
     }
   }
 
   onSearch() {
     this.showEvents();
     this.showDiscussions();
-    this.homeService.clearHomepageSearch();
   }
 
   onTabChange(tab: number) {
 
+  }
+
+  setSearchTxt(value: string){
+    this.searchParams.searchTxt = value;
+    this.searchParamsDiscussions.searchTxt = value;
+    this.homeService.homeSearchtxt = value;
   }
 }

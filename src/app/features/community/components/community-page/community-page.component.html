@@ -11,7 +11,7 @@
                 <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Search again
               </button>
             </span>
-            <input class="uk-search-input font-regular search-box" [ngClass]="{ 'pr-105':showReset}"
+            <input class="uk-search-input font-regular search-box" [ngClass]="{ 'pr-150':showReset}"
               [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required type="text"
               placeholder="Search here" name="search" />
           </form>
@@ -23,10 +23,10 @@
     </div>
     <!-- Search Form END -->
     <!-- Search Result START -->
-    <div class="search-result" *ngIf="eventsList.length > 0 || discussionsList.length > 0">
+    <div class="search-result" *ngIf="showResult">
       <ul uk-tab>
-        <li class="uk-active"><a href="#">Discussion ({{discussionsList?.length}})</a></li>
-        <li><a href="#">Event ({{eventsList?.length}})</a></li>
+        <li class="uk-active"><a href="#">Discussion ({{totalRecordsDiscussions}})</a></li>
+        <li><a href="#">Event ({{totalRecordsEvents}})</a></li>
       </ul>
       <ul class="uk-switcher uk-margin">
         <li class="uk-active">
@@ -37,23 +37,6 @@
               </app-dicussion-summary-card>
             </div>
           </div>
-          <!-- <div uk-slider class="uk-position-relative"
-            *ngIf="discussionsList!==undefined && discussionsList?.length > 0">
-            <div class="uk-visible-toggle" tabindex="-1">
-            
-            </div>
-            <div class="uk-hidden@s">
-              <a class="uk-position-center-left uk-position-small" href="#" uk-slidenav-previous
-                uk-slider-item="previous"></a>
-              <a class="uk-position-center-right uk-position-small" href="#" uk-slidenav-next uk-slider-item="next"></a>
-            </div>
-            <div class="uk-visible">
-              <a class="uk-position-center-left-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
-                uk-slider-item="previous"></a>
-              <a class="uk-position-center-right-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
-                uk-slider-item="next"></a>
-            </div>
-          </div> -->
           <div class="uk-text-center uk-text-bold pt-norec"
             *ngIf="discussionsList!==undefined && discussionsList?.length == 0">
             No Records found
@@ -68,22 +51,6 @@
               <app-event-summary-card [event]="event" [isPast]="0"></app-event-summary-card>
             </div>
           </div>
-          <!-- <div uk-slider class="uk-position-relative" *ngIf="eventsList!==undefined && eventsList?.length > 0">
-            <div class="uk-visible-toggle" tabindex="-1">
-           
-            </div>
-            <div class="uk-hidden@s">
-              <a class="uk-position-center-left uk-position-small" href="#" uk-slidenav-previous
-                uk-slider-item="previous"></a>
-              <a class="uk-position-center-right uk-position-small" href="#" uk-slidenav-next uk-slider-item="next"></a>
-            </div>
-            <div class="uk-visible">
-              <a class="uk-position-center-left-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
-                uk-slider-item="previous"></a>
-              <a class="uk-position-center-right-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
-                uk-slider-item="next"></a>
-            </div>
-          </div> -->
           <div class="uk-text-center uk-text-bold pt-norec" *ngIf="eventsList!==undefined && eventsList?.length == 0">
             No Records found
           </div>

@@ -4,6 +4,7 @@ import { EventService } from '../../services/events.service';
 import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
+import { HomeService } from 'src/app/features/home/home.service';
 
 declare var UIkit;
 
@@ -43,6 +44,7 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
     private router: Router,
     private eventService: EventService,
     public sanitizer: DomSanitizer,
+    private homeService: HomeService,
     private seoService: SeoService) {
 
     // Generate meta tag 
@@ -91,7 +93,12 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
       this.searchParams.pastEvents = this.route.snapshot.queryParams['past'];
     }
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
-      this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
+      this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
+      this.showReset = this.searchParams.searchTxt ? true : false;
+    }
+    if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
+      this.setSearchTxt(this.homeService.homeSearchtxt);
+      this.showReset = true;
     }
     this.onSearch();
   }
@@ -150,7 +157,7 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
     } else {
       this.showReset = false;
     }
-    this.searchParams.searchTxt = value;
+    this.setSearchTxt(value);
     if (event.key === "Enter") {
       this.onSearch();
     }
@@ -158,7 +165,7 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
 
   resetSearch(event: any) {
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
-      this.searchParams.searchTxt = "";
+      this.setSearchTxt("");
       this.showReset = false;
       this.onSearch()
     }
@@ -167,6 +174,11 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
   onSearch() {
     this.showEvents();
     this.showEventsCount();
+  }
+
+  setSearchTxt(value: string){
+    this.searchParams.searchTxt = value;
+    this.homeService.homeSearchtxt = value;
   }
 
 }

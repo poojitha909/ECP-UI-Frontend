@@ -5,6 +5,7 @@ import { MenuService } from '../../services/menu.service';
 import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
+import { HomeService } from 'src/app/features/home/home.service';
 
 @Component({
   selector: 'app-discussions-list-page',
@@ -41,7 +42,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private router: Router,
     private discussionService: DiscussionService, private menuService: MenuService,
-    public sanitizer: DomSanitizer,
+    public sanitizer: DomSanitizer, private homeService: HomeService,
     private seoService: SeoService
   ) {
 
@@ -59,14 +60,6 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.currentUrl = window.location.href;
-    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
-    this.searchParams = {
-      p: 0,
-      s: 10,
-      searchTxt: "",
-      tags: ""
-    }
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
@@ -76,6 +69,14 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
   }
 
   initiate() {
+    this.currentUrl = window.location.href;
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
+    this.searchParams = {
+      p: 0,
+      s: 10,
+      searchTxt: "",
+      tags: ""
+    }
     this.countData = 0;
     this.totalRecords = 0;
     this.discussionsList = [];
@@ -89,8 +90,13 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
       });
       this.selCategory = this.route.snapshot.queryParams['category'];
     }
-    if (this.route.snapshot.queryParams['searchTxt']) {
-      this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
+    if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
+      this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
+      this.showReset = this.searchParams.searchTxt ? true : false;
+    }
+    if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
+      this.setSearchTxt(this.homeService.homeSearchtxt);
+      this.showReset = true;
     }
     this.getAllCategories();
   }
@@ -102,7 +108,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
     } else {
       this.showReset = false;
     }
-    this.searchParams.searchTxt = value;
+    this.setSearchTxt(value);
     if (event.key === "Enter") {
       this.submitSearch();
     }
@@ -125,7 +131,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
 
   resetSearch(event: any) {
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
-      this.searchParams.searchTxt = "";
+      this.setSearchTxt("");
       this.showReset = false;
       this.search();
     }
@@ -143,15 +149,12 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
             for (let j in data[i].tags) {
               this.categoryList[data[i].id].tagIds[j] = data[i].tags[j].id;
             }
-            tags[i] = data[i].id + "_" + this.categoryList[data[i].id].tagIds.join("_"); // this si just to pass extrs key in tags which is menu item id
+            tags[i] = data[i].id + "_" + this.categoryList[data[i].id].tagIds.join("_"); // this is just to pass extras key in tags which is menu item id
           }
         }
         this.discussionService.summary(tags.join(",")).subscribe((response: any) => {
           for (let i in data) {
             this.categoryList[data[i].id].totalCount = response.data[data[i].id].totalCount;
-            // if (response.data[data[i].id].discussPage && response.data[data[i].id].discussPage.content && response.data[data[i].id].discussPage.content[0]) {
-            //   this.categoryList[data[i].id].discussionLatest = response.data[data[i].id].discussPage.content[0];
-            // }
           }
           this.dropDownList = JSON.parse(JSON.stringify(this.categoryList));
           this.search();
@@ -162,38 +165,6 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
 
 
   search() {
-    // if (this.selCategory == "") {
-    //   this.menuService.getMenus("564071623e60f5b66f62df27", this.searchParams.searchTxt).subscribe((response: any) => {
-    //     const data = response;
-    //     let tags = [];
-    //     this.categoryList = {};
-    //     if (data.length > 0) {
-    //       for (let i in data) {
-    //         this.categoryList[data[i].id] = { id: data[i].id, label: data[i].displayMenuName, tagIds: [], totalCount: 0, discussionLatest: null };
-    //         if (data[i].tags) {
-    //           for (let j in data[i].tags) {
-    //             this.categoryList[data[i].id].tagIds[j] = data[i].tags[j].id;
-    //           }
-    //           tags[i] = data[i].id + "_" + this.categoryList[data[i].id].tagIds.join("_"); // this si just to pass extrs key in tags which is menu item id
-    //         }
-    //       }
-
-    //       this.discussionService.summary(tags.join(",")).subscribe((response: any) => {
-    //         for (let i in data) {
-    //           this.categoryList[data[i].id].totalCount = response.data[data[i].id].totalCount;
-    //           if (response.data[data[i].id].discussPage && response.data[data[i].id].discussPage.content && response.data[data[i].id].discussPage.content[0]) {
-    //             this.categoryList[data[i].id].discussionLatest = response.data[data[i].id].discussPage.content[0];
-    //           }
-    //         }
-    //       });
-    //     }
-    //   });
-    // }
-    // else {
-    //   this.searchParams.tags = this.dropDownList[this.selCategory].tagIds.join(",");
-    //   this.showDiscussions();
-    //   this.showDiscussionsCount();
-    // }
     this.searchParams.tags = "";
     if (this.selCategory != "") {
       this.searchParams.tags = this.dropDownList[this.selCategory].tagIds.join(",");
@@ -222,5 +193,10 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
     this.discussionService.searchDiscussionsCount({ "searchTxt": this.searchParams.searchTxt, "contentTypes": "total" }).subscribe((response: any) => {
       this.countData = response.data.z;
     });
+  }
+
+  setSearchTxt(value: string){
+    this.searchParams.searchTxt = value;
+    this.homeService.homeSearchtxt = value;
   }
 }

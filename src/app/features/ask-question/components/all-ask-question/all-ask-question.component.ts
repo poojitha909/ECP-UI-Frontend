@@ -5,6 +5,7 @@ import { StorageHelperService } from "../../../../core/services/storage-helper.s
 import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
+import { HomeService } from 'src/app/features/home/home.service';
 
 declare var UIkit;
 
@@ -51,7 +52,8 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private router: Router,
     private store: StorageHelperService, private askQuesService: AskQuestionService,
-    public sanitizer: DomSanitizer, private seoService: SeoService) {
+    public sanitizer: DomSanitizer, private seoService: SeoService,
+    private homeService: HomeService) {
 
     // Generate meta tag 
     const config: SEO = {
@@ -105,6 +107,14 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
     if (this.route.snapshot.queryParams['category'] !== undefined) {
       this.searchParams.experties = this.route.snapshot.queryParams['category'];
       this.searchParamsQues.askCategory = this.route.snapshot.queryParams['category'];
+    }
+    if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
+      this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
+      this.showReset = this.searchParams.searchTxt ? true : false;
+    }
+    if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
+      this.setSearchTxt(this.homeService.homeSearchtxt);
+      this.showReset = true;
     }
 
     this.askQuesService.getCategoryList().subscribe((response: any) => {
@@ -172,7 +182,7 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
     } else {
       this.showReset = false;
     }
-    this.searchParams.searchTxt = value;
+    this.setSearchTxt(value);
     if (event.key === "Enter") {
       this.showExperts();
     }
@@ -180,9 +190,14 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
 
   resetSearch(event: any) {
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
-      this.searchParams.searchTxt = "";
+      this.setSearchTxt("");
       this.showReset = false;
       this.showExperts();
     }
+  }
+
+  setSearchTxt(value: string){
+    this.searchParams.searchTxt = value;
+    this.homeService.homeSearchtxt = value;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AskQuestionService } from '../../services/ask-question.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageHelperService } from 'src/app/core/services/storage-helper.service';
@@ -11,7 +11,7 @@ import { HomeService } from 'src/app/features/home/home.service';
   templateUrl: './ask-question-page.component.html',
   styleUrls: ['./ask-question-page.component.scss']
 })
-export class AskQuestionPageComponent implements OnInit {
+export class AskQuestionPageComponent implements OnInit, OnDestroy {
 
   showReset: boolean;
   showResult: boolean;
@@ -26,7 +26,7 @@ export class AskQuestionPageComponent implements OnInit {
     experties: string
   };
   user: any;
-
+  paramsSubs: any;
 
   constructor
     (private route: ActivatedRoute,
@@ -50,6 +50,16 @@ export class AskQuestionPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.paramsSubs = this.route.queryParams.subscribe(params => {
+      this.initiate();
+    });
+  }
+  
+  ngOnDestroy() {
+    this.paramsSubs.unsubscribe();
+  }
+  
+  initiate(){
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
@@ -75,30 +85,34 @@ export class AskQuestionPageComponent implements OnInit {
         this.catsList = data.content;
       }
     });
-    // this.showExperts();
-    this.showExperts2();
-    if (this.homeService.homeSearchtxt) {
-      this.searchParams.searchTxt = this.homeService.homeSearchtxt;
-      if (this.homeService.storageSearchResult) {
-        const searchData: any = this.homeService.storageSearchResult;
-        this.experts = searchData.experts;
-        this.showResult = true;
-      }
+
+    if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
+      this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
+      this.showReset = this.searchParams.searchTxt ? true : false;
+    }
+    if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
+      this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
     }
+    this.showExperts();
+    this.showExperts2();
   }
 
   showExperts() {
-    let searchParams = JSON.parse(JSON.stringify(this.searchParams));
-    searchParams.experties = "";
-    this.askQuestionService.experts(searchParams).subscribe((response: any) => {
-      const data = response.data;
-      this.experts = [];
-      if (data.content) {
-        this.experts = data.content;
-        this.expertsTotal = data.total;
-      }
-    });
+    this.showResult = false;
+    if (this.searchParams.searchTxt != "") {
+      this.showResult = true;
+      let searchParams = JSON.parse(JSON.stringify(this.searchParams));
+      searchParams.experties = "";
+      this.askQuestionService.experts(searchParams).subscribe((response: any) => {
+        const data = response.data;
+        this.experts = [];
+        if (data.content) {
+          this.experts = data.content;
+          this.expertsTotal = data.total;
+        }
+      });  
+    }
   }
 
   showExperts2() {
@@ -115,7 +129,7 @@ export class AskQuestionPageComponent implements OnInit {
   }
 
   showAllExperts() {
-    this.router.navigate(['/ask-question/all'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt } });
+    this.router.navigate(['/ask-question/all'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt, tab: 0 } });
   }
 
   onSearchChange(event: any) {
@@ -126,7 +140,7 @@ export class AskQuestionPageComponent implements OnInit {
       this.showReset = false;
       this.showResult = false;
     }
-    this.searchParams.searchTxt = value;
+    this.setSearchTxt(value);
     if (event.key == "Enter") {
       this.onSearch();
     }
@@ -134,18 +148,18 @@ export class AskQuestionPageComponent implements OnInit {
 
   resetSearch(event: any) {
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
-      this.searchParams.searchTxt = "";
+      this.setSearchTxt("");
       this.showReset = false;
-      // this.onSearch()
+      this.onSearch()
     }
   }
 
   onSearch() {
-    this.showResult = false;
-    if (this.searchParams.searchTxt != "") {
-      this.showResult = true;
-    }
     this.showExperts();
-    this.homeService.clearHomepageSearch();
+  }
+
+  setSearchTxt(value: string){
+    this.searchParams.searchTxt = value;
+    this.homeService.homeSearchtxt = value;
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/products.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { SEO } from 'src/app/core/interfaces';
 import { HomeService } from 'src/app/features/home/home.service';
@@ -26,8 +26,11 @@ export class ProductsPageComponent implements OnInit {
     productCategory: string
   };
 
+  paramsSubs: any;
+
 
   constructor(
+    private route: ActivatedRoute,
     private productService: ProductService, private router: Router,
     private homeService: HomeService, private seoService: SeoService
   ) {
@@ -47,6 +50,16 @@ export class ProductsPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.paramsSubs = this.route.queryParams.subscribe(params => {
+      this.initiate();
+    });
+  }
+
+  ngOnDestroy() {
+    this.paramsSubs.unsubscribe();
+  }
+
+  initiate() {
     this.searchParams = {
       p: 0,
       s: 6,
@@ -62,30 +75,33 @@ export class ProductsPageComponent implements OnInit {
       }
     });
 
-    this.showResult = false;
-    this.showProducts2();
-    if (this.homeService.homeSearchtxt) {
-      this.searchParams.searchTxt = this.homeService.homeSearchtxt;
-      if (this.homeService.storageSearchResult) {
-        const searchData: any = this.homeService.storageSearchResult;
-        this.productsList = searchData.products;
-        this.showResult = true;
-      }
+    if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
+      this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
+      this.showReset = this.searchParams.searchTxt ? true : false;
+    }
+    if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
+      this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
     }
+    this.showProducts();
+    this.showProducts2();
   }
 
   showProducts() {
-    let searchParams = JSON.parse(JSON.stringify(this.searchParams));
-    searchParams.productCategory = "";
-    this.productService.searchProducts(searchParams).subscribe((response: any) => {
-      const data = response.data;
-      this.productsList = [];
-      if (data.content) {
-        this.productsList = data.content;
-      }
-      this.productsTotal = data.total;
-    });
+    this.showResult = false;
+    if (this.searchParams.searchTxt != "") {
+      this.showResult = true;
+      let searchParams = JSON.parse(JSON.stringify(this.searchParams));
+      searchParams.productCategory = "";
+      this.productService.searchProducts(searchParams).subscribe((response: any) => {
+        const data = response.data;
+        this.productsList = [];
+        if (data.content) {
+          this.productsList = data.content;
+        }
+        this.productsTotal = data.total;
+      });
+    }
   }
 
   showAllProducts() {
@@ -113,11 +129,12 @@ export class ProductsPageComponent implements OnInit {
       this.showReset = false;
       this.showResult = false;
     }
-    this.searchParams.searchTxt = value;
+    this.setSearchTxt(value);
     if (event.key == "Enter") {
       this.onSearch();
     }
   }
+  
   getDbServiceRating(percent): number {
     if (percent == 0) {
       return 0;
@@ -136,18 +153,18 @@ export class ProductsPageComponent implements OnInit {
 
   resetSearch(event: any) {
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
-      this.searchParams.searchTxt = "";
+      this.setSearchTxt("");
       this.showReset = false;
-      // this.onSearch()
+      this.onSearch()
     }
   }
 
+  setSearchTxt(value: string){
+    this.searchParams.searchTxt = value;
+    this.homeService.homeSearchtxt = value;
+  }
+
   onSearch() {
-    this.showResult = false;
-    if (this.searchParams.searchTxt != "") {
-      this.showResult = true;
-    }
-    this.homeService.clearHomepageSearch();
-    this.showProducts();
+      this.showProducts();
   }
 }

@@ -9,7 +9,7 @@
               <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Search again
             </button>
           </span>
-          <input class="uk-search-input font-regular search-box" [ngClass]="{ 'pr-105':showReset}"
+          <input class="uk-search-input font-regular search-box" [ngClass]="{ 'pr-150':showReset}"
             [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required type="text"
             placeholder="Search here" name="search" />
         </form>

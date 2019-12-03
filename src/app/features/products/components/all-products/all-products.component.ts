@@ -4,6 +4,7 @@ import { ProductService } from '../../services/products.service';
 import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
+import { HomeService } from 'src/app/features/home/home.service';
 
 @Component({
   selector: 'app-all-products',
@@ -40,7 +41,8 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   totalRecords: number;
   slideConfig = { "slidesToShow": 3, "slidesToScroll": 1 };
   constructor(private route: ActivatedRoute, private router: Router,
-    private productService: ProductService, public sanitizer: DomSanitizer, public seoService: SeoService) {
+    private productService: ProductService, public sanitizer: DomSanitizer, 
+    private homeService: HomeService, public seoService: SeoService) {
     // Generate meta tag 
     const config: SEO = {
       title: `An Elder Spring Initiative by Tata Trusts All Products`,
@@ -55,23 +57,18 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.currentUrl = window.location.href;
-    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
-    this.searchParams = {
-      p: 0,
-      s: 10,
-      searchTxt: "",
-      productCategory: ""
-    }
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
   }
+  
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
   }
 
   initiate() {
+    this.currentUrl = window.location.href;
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
     this.searchParams = {
       p: 0,
       s: 10,
@@ -81,7 +78,12 @@ export class AllProductsComponent implements OnInit, OnDestroy {
 
     this.totalRecords = 0;
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
-      this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
+      this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
+      this.showReset = this.searchParams.searchTxt ? true : false;
+    }
+    if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
+      this.setSearchTxt(this.homeService.homeSearchtxt);
+      this.showReset = true;
     }
     if (this.route.snapshot.queryParams['productCategory'] !== undefined) {
       this.searchParams.productCategory = this.route.snapshot.queryParams['productCategory'];
@@ -132,7 +134,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     } else {
       this.showReset = false;
     }
-    this.searchParams.searchTxt = value;
+    this.setSearchTxt(value);
     if (event.key === "Enter") {
       this.onSearch();
     }
@@ -140,10 +142,15 @@ export class AllProductsComponent implements OnInit, OnDestroy {
 
   resetSearch(event: any) {
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
-      this.searchParams.searchTxt = "";
+      this.setSearchTxt("");
       this.showReset = false;
       this.onSearch()
     }
+  }
+
+  setSearchTxt(value: string){
+    this.searchParams.searchTxt = value;
+    this.homeService.homeSearchtxt = value;
   }
 
 

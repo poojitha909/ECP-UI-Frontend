@@ -54,12 +54,12 @@
         <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
           <div class="uk-margin uk-width-1-1 uk-width-expand@s">
             <form class="uk-search uk-search-default">
-              <span class="uk-search-icon-flip" [ngClass]="{ 'w-105':showReset}" uk-search-icon>
+              <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
                 <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
-                  <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Reset&nbsp;&nbsp;
+                  <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Search again
                 </button>
               </span>
-              <input class="uk-input" [ngClass]="{ 'pr-105':showReset}" [(ngModel)]="searchParams.searchTxt"
+              <input class="uk-input" [ngClass]="{ 'pr-150':showReset}" [(ngModel)]="searchParams.searchTxt"
                 (keyup)="onSearchChange($event)" required type="text" placeholder="Search for product here"
                 name="search" />
             </form>

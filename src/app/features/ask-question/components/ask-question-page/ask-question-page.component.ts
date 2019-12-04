@@ -69,7 +69,7 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
     }
     this.searchParams = {
       p: 0,
-      s: 3,
+      s: 6,
       searchTxt: "",
       experties: ""
     }

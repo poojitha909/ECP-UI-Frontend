@@ -8,16 +8,22 @@
         ({{  searchData.totalServices }})</a></li> -->
 
     <!-- <li><a href="#" class="font-regular">Community</a></li> -->
-    <li class="uk-active"><a href="#" class="font-regular">Discussion ({{searchData.totalDiscussions}})</a></li>
-    <li><a href="#" class="font-regular">Events ({{searchData.totalEvents}})</a></li>
-    <li><a href="#" class="font-regular">Experts({{ searchData.totalExperts }})</a></li>
-    <li><a href="#" class="font-regular">Products ({{  searchData.totalProducts  }})</a></li>
-    <li><a href="#" class="font-regular">Services ({{  searchData.totalServices }})</a></li>
+    <li activeMax [max]="searchData.maxResult == searchData.totalDiscussions"><a href="#"
+        class="font-regular">Discussion
+        ({{searchData.totalDiscussions}})</a></li>
+    <li activeMax [max]="searchData.maxResult == searchData.totalEvents"><a href="#" class="font-regular">Events
+        ({{searchData.totalEvents}})</a></li>
+    <li activeMax [max]="searchData.maxResult == searchData.totalExperts"><a href="#"
+        class="font-regular">Experts({{ searchData.totalExperts }})</a></li>
+    <li activeMax [max]="searchData.maxResult == searchData.totalProducts"><a href="#" class="font-regular">Products
+        ({{  searchData.totalProducts  }})</a></li>
+    <li activeMax [max]="searchData.maxResult == searchData.totalServices"><a href="#" class="font-regular">Services
+        ({{  searchData.totalServices }})</a></li>
     <!-- <li class="uk-disabled"><a>Disabled</a></li> -->
   </ul>
   <ul class="uk-switcher uk-margin">
 
-    <li class="uk-active">
+    <li activeMax [max]="searchData.maxResult == searchData.totalDiscussions">
       <!-- Discussions List ..... -->
       <!-- No search result START-->
       <app-no-search-result *ngIf="searchData.discussions.length == 0" [viewLink]="'/community/discussions'"
@@ -39,7 +45,7 @@
       </div>
 
     </li>
-    <li>
+    <li activeMax [max]="searchData.maxResult  == searchData.totalEvents">
       <!-- Events List ..... -->
       <!-- No search result START-->
       <app-no-search-result *ngIf="searchData.events.length == 0" [viewLink]="'/community/events'" [tabName]="'Events'">
@@ -61,7 +67,7 @@
 
 
     </li>
-    <li>
+    <li activeMax [max]="searchData.maxResult == searchData.totalExperts">
       <!-- Experts lists ...... -->
       <!-- No search result START-->
       <app-no-search-result *ngIf="searchData.experts.length == 0" [viewLink]="'/ask-question/all'"
@@ -82,7 +88,7 @@
           Results</button>
       </div>
     </li>
-    <li>
+    <li activeMax [max]="searchData.maxResult == searchData.totalProducts">
 
       <!-- Products List ..... -->
       <!-- No search result START-->
@@ -103,7 +109,7 @@
           Results</button>
       </div>
     </li>
-    <li>
+    <li activeMax [max]="searchData.maxResult == searchData.totalServices">
 
       <!-- Services List -->
       <!-- No search result START-->

@@ -39,11 +39,8 @@ export class SearchContainerComponent implements OnInit {
 
     if (this.homeService.homeSearchtxt) {
       this.searchPageParam.term = this.homeService.homeSearchtxt;
-      if (this.homeService.storageSearchResult) {
-        const searchData: any = this.homeService.storageSearchResult;
-        this.popullarService = searchData.services;
-      }
       this.showReset = true;
+      this.searchService();
     }
 
   }
@@ -70,6 +67,7 @@ export class SearchContainerComponent implements OnInit {
 
   searchService() {
     // const param = this.searchPageParam.term;
+    this.homeService.homeSearchtxt = this.searchPageParam.term;
     this.homeService.searchParam = this.searchPageParam;
     this.homeService.getServices().subscribe(response => {
       this.popullarService = response.data.slice(0, 6);
@@ -104,7 +102,6 @@ export class SearchContainerComponent implements OnInit {
       }
       this.selectedValue = "";
       this.autocompleteFields = [];
-      this.homeService.clearHomepageSearch();
     }
   }
 
@@ -112,6 +109,7 @@ export class SearchContainerComponent implements OnInit {
     this.searchPageParam.term = "";
     this.autocompleteFields = [];
     this.showReset = false;
+    this.homeService.homeSearchtxt = "";
   }
 
 

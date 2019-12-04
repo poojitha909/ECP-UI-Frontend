@@ -97,13 +97,13 @@ export class HomeService {
   /**
 * Return user details
 */
-  get storageSearchResult(): any {
-    return this.storageHelper.retrieveSession(AppConstants.HOME_SEARCH_RESULT) ? JSON.parse(this.storageHelper.retrieveSession(AppConstants.HOME_SEARCH_RESULT)) : undefined;
-  }
+  // get storageSearchResult(): any {
+  //   return this.storageHelper.retrieveSession(AppConstants.HOME_SEARCH_RESULT) ? JSON.parse(this.storageHelper.retrieveSession(AppConstants.HOME_SEARCH_RESULT)) : undefined;
+  // }
 
-  set storageSearchResult(searchResult) {
-    this.storageHelper.storeSession(AppConstants.HOME_SEARCH_RESULT, JSON.stringify(searchResult));
-  }
+  // set storageSearchResult(searchResult) {
+  //   this.storageHelper.storeSession(AppConstants.HOME_SEARCH_RESULT, JSON.stringify(searchResult));
+  // }
 
   get homeSearchtxt(): string {
     return this.storageHelper.retrieveSession(AppConstants.HOME_SEARCH) ? this.storageHelper.retrieveSession(AppConstants.HOME_SEARCH) : undefined;
@@ -114,9 +114,9 @@ export class HomeService {
 
   }
 
-  clearHomepageSearch() {
-    this.storageHelper.clearSession(AppConstants.HOME_SEARCH);
-    this.storageHelper.clearSession(AppConstants.HOME_SEARCH_RESULT);
-  }
+  // clearHomepageSearch() {
+  //   this.storageHelper.clearSession(AppConstants.HOME_SEARCH);
+  //   this.storageHelper.clearSession(AppConstants.HOME_SEARCH_RESULT);
+  // }
 
 }

@@ -32,6 +32,7 @@ export class SearchContainerComponent implements OnInit {
     discussions: [],
     experts: [],
     events: [],
+    maxResult: 0,
     totalServices: 0,
     totalProducts: 0,
     totalDiscussions: 0,
@@ -51,9 +52,7 @@ export class SearchContainerComponent implements OnInit {
 
     if (this.homeService.homeSearchtxt) {
       this.searchPageParam.term = this.homeService.homeSearchtxt;
-      if (this.homeService.storageSearchResult) {
-        this.searchData = this.homeService.storageSearchResult;
-      }
+      this.homeSearchPages();
       this.showReset = true;
     }
   }
@@ -83,7 +82,7 @@ export class SearchContainerComponent implements OnInit {
     this.searchPageParam.term = "";
     this.autocompleteFields = [];
     this.showReset = false;
-    this.homeService.clearHomepageSearch();
+    this.homeService.homeSearchtxt = "";
   }
 
   homeSearchPages() {
@@ -104,7 +103,12 @@ export class SearchContainerComponent implements OnInit {
       this.searchData.experts = response.expertPage.content;
       this.searchData.totalEvents = response.eventPage.total;
       this.searchData.totalExperts = response.expertPage.total;
-      this.homeService.storageSearchResult = this.searchData;
+      this.searchData.maxResult = Math.max(
+        this.searchData.totalServices,
+        this.searchData.totalProducts,
+        this.searchData.totalDiscussions,
+        this.searchData.totalEvents,
+        this.searchData.totalExperts);
     },
       error => {
         console.log(error);

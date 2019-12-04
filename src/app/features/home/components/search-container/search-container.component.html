@@ -39,9 +39,12 @@
     <!-- Search Form END -->
 
     <!-- Search Result START -->
-    <app-search-results [searchData]="searchData" [term]="searchPageParam.term"></app-search-results>
+    <app-search-results *ngIf="!noRecords && !isLoading" [searchData]="searchData" [term]="searchPageParam.term">
+    </app-search-results>
     <!-- Search Result END -->
-
+    <div class="uk-text-center uk-text-bold m-t-20" *ngIf="noRecords">
+      No Records found
+    </div>
     <!-- Popular search component  -->
     <!-- <div class="p-24-40"
     *ngIf="searchData.services.length == 0 && searchData.products.length == 0  && searchData.discussions.length == 0 ">

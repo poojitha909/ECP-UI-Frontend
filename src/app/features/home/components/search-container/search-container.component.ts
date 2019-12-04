@@ -18,6 +18,8 @@ export class SearchContainerComponent implements OnInit {
   showReset: boolean;
   searchTextChanged = new Subject<string>();
   selectedValue: string;
+  noRecords: boolean;
+  isLoading: boolean;
   searchPageParam: PageParam = {
     p: 0,
     s: 6,
@@ -86,10 +88,11 @@ export class SearchContainerComponent implements OnInit {
   }
 
   homeSearchPages() {
+    this.isLoading = true;
     this.homeService.searchParam = this.searchPageParam;
     // Home search pages API
     this.homeService.getHomeSearchPages().subscribe(response => {
-
+      this.isLoading = false;
       if (response && response.servicePage) {
         const servicePage = JSON.parse(response.servicePage);
         this.searchData.services = servicePage.content.slice(0, 6);
@@ -109,8 +112,14 @@ export class SearchContainerComponent implements OnInit {
         this.searchData.totalDiscussions,
         this.searchData.totalEvents,
         this.searchData.totalExperts);
+      if (this.searchData.maxResult == 0) {
+        this.noRecords = true;
+      } else {
+        this.noRecords = false;
+      }
     },
       error => {
+        this.isLoading = false;
         console.log(error);
       });
   }

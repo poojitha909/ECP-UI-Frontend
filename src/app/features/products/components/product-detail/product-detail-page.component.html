@@ -84,7 +84,6 @@
             </div>
             <div class="uk-width-2-3@m">
                 <div class="category-box bg-white">
-
                     <h2 class="heading2">About</h2>
                     <div class="description">
                         {{product?.description}}
@@ -93,68 +92,16 @@
                     <div class="buynow">
                         <table>
                             <tr>
-                                <td><a href="{{product?.buyLink}}" target="_blank"
-                                        class="uk-button uk-button-primary">Buy
-                                        On {{product?.buyFrom }}</a></td>
+                                <td><button type="button" (click)="redirectToSite()"
+                                        class="uk-button uk-button-primary">{{ auth.isAuthenticate ? 'Buy
+                                        On ' + product?.buyFrom : 'Signin to get details'}}</button></td>
                                 <td><span class="price"> Rs. {{product?.price}}</span></td>
                             </tr>
                         </table>
                     </div>
                     <hr />
                 </div>
-                <!-- OLD review Form -->
-                <!-- 
-                <form [formGroup]="reviewForm" class="uk-form">
-                    <div class="uk-card uk-card-default comment">
-                        <div class="uk-card-header">
-                            <h3>Write a Review</h3>
-                        </div>
-                        <div class="uk-card-body">
-                            <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
-                                <p>{{ successMessage }}</p>
-                            </div>
-                            <div uk-grid>
-                                <div class="uk-width-1-2@m">
-                                    <span
-                                        [ngClass]="{'uk-text-danger' : formControl.username.invalid && ( formControl.username.dirty ||  formControl.username.touched) }"
-                                        class="p-b-5">Username<span class="required">*</span></span>
-                                    <input type="text" class="review-input" formControlName="username"
-                                        [ngClass]="{'uk-form-danger' : formControl.username.invalid && ( formControl.username.dirty ||  formControl.username.touched) }"
-                                        class="uk-input" placeholder="Enter your name" />
-                                </div>
-                                <div class="uk-width-1-2@m">
-                                    <span
-                                        [ngClass]="{'uk-text-danger' : formControl.rating.invalid && ( formControl.rating.dirty ||  formControl.rating.touched) }"
-                                        class="p-b-5">Your Rating<span class="required">*</span></span>
-                                    <select formControlName="rating"
-                                        [ngClass]="{'uk-form-danger' : formControl.rating.invalid && ( formControl.rating.dirty ||  formControl.rating.touched) }"
-                                        class="uk-select" placeholder="Enter your rating">
-                                        <option value="5">5 Star</option>
-                                        <option value="4">4 Star</option>
-                                        <option value="3">3 Star</option>
-                                        <option value="2">2 Star</option>
-                                        <option value="1">1 Star</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div>
-                                <span
-                                    [ngClass]="{'uk-text-danger' : formControl.commentTxt.invalid && ( formControl.commentTxt.dirty ||  formControl.commentTxt.touched) }"
-                                    class="p-b-5">Your Review<span class="required">*</span></span>
-                                <textarea formControlName="commentTxt" class="uk-textarea"
-                                    [ngClass]="{'uk-form-danger' : formControl.commentTxt.invalid && ( formControl.commentTxt.dirty ||  formControl.commentTxt.touched) }"
-                                    placeholder="Enter your review here"></textarea>
-                            </div>
-                        </div>
-                        <div class="uk-card-footer">
-                            <div class="uk-flex uk-flex-right">
-                                <button class="uk-button uk-button-primary"
-                                    (click)="addComment()">{{ !!user ? 'Submit Review' : 'Signin to Review'}}</button>
-                            </div>
-                        </div>
-                    </div>
-                </form> -->
-
+                
                 <!-- Write Review Form START-->
                 <!-- This is review modal -->
                 <div id="review-modal" uk-modal>

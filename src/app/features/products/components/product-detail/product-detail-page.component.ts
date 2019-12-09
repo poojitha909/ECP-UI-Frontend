@@ -125,6 +125,16 @@ export class ProductDetailPageComponent implements OnInit {
     this.seoService.generateTags(config);
   }
 
+  redirectToSite(){
+    if(this.user){
+      window.open(this.product.buyLink);
+    }
+    else{
+      this.authService.redirectUrl = "/products/" + this.product.id;
+      this.router.navigate(['/user/signin']);
+    }
+  }
+
   getReviews() {
     this.productService.getReviewList(this.productId, this.reviwePaginate).subscribe((response: any) => {
       if (response.data && response.data.content) {

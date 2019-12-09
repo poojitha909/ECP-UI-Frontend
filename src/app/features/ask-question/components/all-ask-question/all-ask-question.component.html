@@ -61,7 +61,7 @@
                 <form class="uk-search uk-search-default">
                   <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
                     <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
-                      <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Search again
+                      <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Clear Search
                     </button>
                   </span>
                   <input class="uk-input" [ngClass]="{ 'pr-150':showReset}" [(ngModel)]="searchParams.searchTxt"

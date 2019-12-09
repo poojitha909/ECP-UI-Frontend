@@ -163,7 +163,7 @@
                   uk-icon="icon: search"></a>
                 <a class="uk-form-icon uk-form-icon-flip reset-link" href="javascript:void(0)"
                   *ngIf="searchPageParam.term !== ''" (click)="searchPageParam.term = ''">
-                  <fa-icon [icon]="['fas', 'times-circle']" class="m-r-5"></fa-icon> Search again
+                  <fa-icon [icon]="['fas', 'times-circle']" class="m-r-5"></fa-icon> Clear Search
                 </a>
                 <input class="uk-input" placeholder="Search for Service here" [(ngModel)]="searchPageParam.term"
                   (keyup)="searchEvent($event)" required type="text" (keydown.enter)="onSearch($event.target.value)">

@@ -221,3 +221,13 @@ ngb-rating {
 .slidenav-next {
   left: 97% !important;
 }
+
+.uk-search .uk-search-icon:not(a):not(button):not(input) {
+  pointer-events: all;
+}
+@media screen and (max-device-width : 400px) {
+  .m-t-main-screen.search-container {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+}

@@ -26,9 +26,7 @@
         font: inherit;
         cursor: pointer;
     }
-    .uk-search .uk-search-icon:not(a):not(button):not(input){
-        pointer-events: all;
-    }
+    
     .uk-list{
         background-color: #ffffff;
         & > li{

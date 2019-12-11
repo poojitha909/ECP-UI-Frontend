@@ -1,5 +1,4 @@
 @import "src/assets/css/variables.scss";
-$break-small: 400px;
 
 .banner {
   background: url("/assets/images/bg-community.png");
@@ -167,10 +166,6 @@ $break-small: 400px;
     outline: none;
   }
 }
-
-.uk-search .uk-search-icon:not(a):not(button):not(input) {
-  pointer-events: all;
-}
 .search-result {
   padding: 24px 40px 0;
 }
@@ -234,4 +229,23 @@ $break-small: 400px;
 
 .slidenav-next {
   left: 98% !important;
+}
+@media screen and (max-device-width : 400px) {
+  .search-container {
+    .search-form {
+      padding: 0px 16px;
+      .search-field{
+        form{
+          input {
+            height: 40px;
+          }
+        }
+        .search-btn{
+          min-width: 96px;
+          padding: 0 10px;
+          height: 40px;
+        }
+      }
+    }
+  }
 }

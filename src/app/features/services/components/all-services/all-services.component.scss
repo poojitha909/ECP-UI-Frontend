@@ -110,25 +110,7 @@ h3{
     border-radius: 4px;
     // color: #1A73E8;
 }
-.button-slidenav{
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    border-radius: 50%;
-    padding: 0;
-    text-align: center;
-    margin: 0 5px;
-    background-color: #ffffff;
-    color: #777;
-    font-size: 18px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    &:hover{
-        color: #000; 
-    }
-    &:focus{
-        color: #000; 
-    }
-}
+
 .m-t-b-0 {
     margin: 0;
     padding: 0;
@@ -199,8 +181,3 @@ h3{
       position: absolute;
     }
 }
-// .uk-subnav > *{
-//     border: 1px solid #D7E0EF;
-//     box-sizing: border-box;
-//     border-radius: 4px;
-// }

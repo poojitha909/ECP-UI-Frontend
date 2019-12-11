@@ -11,11 +11,9 @@ export class DefaultImageDirective {
   @Input() src: string;
 
   constructor() {
-    console.log("hello");
   }
 
   updateUrl() {
-    console.log("updateUrl", this.src);
     this.src = 'assets/images/default-thumbnail.png';
   }
 

@@ -7,17 +7,17 @@
   <div class="search-form">
     <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
 
-      <div class="uk-width-1-1 uk-width-expand@s uk-position-relative">
-        <div class="position-absolute-sm uk-z-index  w-full sm-pr-20">
+      <div class="uk-width-expand uk-position-relative">
+        <div class="uk-position-absolute w-full pr-20">
           <form class="uk-search uk-search-default">
             <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
               <button class="uk-button-link" style="visibility: hidden"></button>
-              <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
+              <button *ngIf="showReset" class="reset-link uk-visible@s" (click)="resetSearch($event)">
                 <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Clear Search
               </button>
 
             </span>
-            <input class="uk-search-input search-box font-regular pr-150" [(ngModel)]="searchPageParam.term"
+            <input class="uk-search-input search-box font-regular sm-pr-150" [(ngModel)]="searchPageParam.term"
               (keyup)="searchEvent($event)" (keydown.enter)="onSearch($event.target.value)" required type="text"
               placeholder="Search here" name="search" />
           </form>
@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <div class="uk-width-1-1 uk-width-auto@s">
+      <div>
         <button class="uk-button uk-button-default search-btn" (click)="onSearch(searchPageParam.term)">Search</button>
       </div>
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 import { AuthService } from 'src/app/core';
 import { Router, Event, NavigationEnd } from '@angular/router';
-
+declare var UIkit: any;
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -38,5 +38,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   logout() {
     this.auth.logout().subscribe(response => console.log(response));
+  }
+
+  closeMobileMenu() {
+    UIkit.offcanvas('#mobile-menu').hide();
   }
 }

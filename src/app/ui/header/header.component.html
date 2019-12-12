@@ -1,12 +1,12 @@
 <div class="header">
   <div class="uk-container">
-    <div class="uk-grid-small uk-child-width-expand@s" uk-grid>
+    <div class="uk-grid-small" uk-grid>
       <div class="uk-width-auto">
         <div class="logo-tagline uk-text-left@s uk-text-center">
           <div class="logo">
             <button class="uk-button uk-button-default" routerLink="/">'TBD' Logo</button>
           </div>
-          <div class="tagline">
+          <div class="tagline uk-visible@s">
             <span>Supported by Tata Trusts</span>
           </div>
         </div>
@@ -49,7 +49,38 @@
           </div>
         </div>
       </div>
+      <div class="uk-hidden@s uk-width-expand uk-flex uk-flex-middle uk-flex-right">
+        <div class="nav-menu">
+          <a href="#mobile-menu" uk-toggle><span uk-icon="icon: menu; ratio: 1.5"></span></a>
+        </div>
+      </div>
     </div>
+    <div id="mobile-menu" uk-offcanvas="container:true;overlay:true">
+      <div class="uk-offcanvas-bar mobile-menu">
+
+        <button class="uk-offcanvas-close" type="button" uk-close></button>
+        <hr class="m-t-40" />
+        <ul class="uk-nav uk-nav-default">
+          <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
+            [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home</a>
+          </li>
+          <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
+            [routerLinkActiveOptions]="{exact: false}"><a routerLink="/community">Community</a></li>
+          <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
+            [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">Ask
+              an Expert</a></li>
+          <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
+            [routerLinkActiveOptions]="{exact: false}"><a routerLink="/products">Products</a></li>
+          <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
+            [routerLinkActiveOptions]="{exact: false}"><a routerLink="/services">Services</a></li>
+          <li class="uk-nav-divider"></li>
+          <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
+            [routerLinkActiveOptions]="{exact: false}"><a routerLink="/about">About Us</a></li>
+        </ul>
+
+      </div>
+    </div>
+
     <nav class="uk-container ecp-navbar uk-visible@s">
       <ul class="uk-child-width-expand" uk-tab>
         <li #homeLink routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home</a>
@@ -66,7 +97,7 @@
             routerLink="/articles">Articles</a></li> -->
       </ul>
     </nav>
-    <nav class="uk-container ecp-navbar uk-hidden@s mobile-menu uk-align-center">
+    <!-- <nav class="uk-container ecp-navbar uk-hidden@s mobile-menu uk-align-center">
       <ul class="uk-flex-nowrap uk-overflow-auto mobile-ul uk-text-truncate" uk-tab>
         <li #homeLink routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home</a>
         </li>
@@ -78,10 +109,11 @@
             routerLink="/products">Products</a></li>
         <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
             routerLink="/services">Services</a></li>
-        <!-- <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+          </ul>
+        </nav> -->
+    <!-- <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
             routerLink="/articles">Articles</a></li> -->
-      </ul>
-    </nav>
+
   </div>
 </div>
 <div class="uk-container seperate-box uk-hidden@s uk-align-center">

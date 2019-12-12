@@ -161,6 +161,12 @@ ngb-rating {
   }
 }
 
+@media (max-width: 640px) {
+  .home-banner {
+    min-height: 504px;
+  }
+}
+
 .featured-tab {
   border-radius: 8px;
   border: 1px solid #d7e0ef;
@@ -225,7 +231,7 @@ ngb-rating {
 .uk-search .uk-search-icon:not(a):not(button):not(input) {
   pointer-events: all;
 }
-@media screen and (max-device-width : 400px) {
+@media screen and (max-device-width: 400px) {
   .m-t-main-screen.search-container {
     padding-top: 16px;
     padding-bottom: 16px;

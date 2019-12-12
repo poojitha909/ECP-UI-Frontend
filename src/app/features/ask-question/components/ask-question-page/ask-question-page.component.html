@@ -2,19 +2,18 @@
   <!-- Search Form START -->
   <div class="search-form">
     <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
-      <div class="uk-width-1-1 uk-width-expand@s">
+      <div class="uk-width-expand">
         <form class="uk-search uk-search-default">
           <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
             <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
-              <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Clear Search
+              <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
             </button>
           </span>
-          <input class="uk-search-input font-regular search-box" [ngClass]="{ 'pr-150':showReset}"
-            [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required type="text"
-            placeholder="Search here" name="search" />
+          <input class="uk-search-input font-regular search-box sm-pr-150" [(ngModel)]="searchParams.searchTxt"
+            (keyup)="onSearchChange($event)" required type="text" placeholder="Search here" name="search" />
         </form>
       </div>
-      <div class="uk-width-1-1 uk-width-auto@s">
+      <div>
         <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
       </div>
     </div>
@@ -61,7 +60,7 @@
 </div>
 
 <div class="uk-background-cover home-banner" data-src="assets/images/landing-img/Ask-1024.png"
-  data-srcset="assets/images/landing-img/mobile/ask-bg.png 640w,assets/images/landing-img/Ask-768.png 768w,assets/images/landing-img/Ask-1024.png 1024w,assets/images/landing-img/Ask-1440.png 1440w"
+  data-srcset="assets/images/landing-img/mobile/ask-bg.png 640w,assets/images/landing-img/Ask-768.png 1023w,assets/images/landing-img/Ask-1024.png 1440w,assets/images/landing-img/Ask-1440.png 1920w"
   uk-img>
   <div class="uk-child-width-1-2@s uk-padding" uk-grid>
     <div class="uk-text-left@s">

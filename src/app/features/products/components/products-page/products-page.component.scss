@@ -47,6 +47,23 @@
           background-color: #ffffff;
         }
       }
+      @media (max-width: 640px) {
+        .search-btn {
+          height: auto;
+          min-width: 80px;
+          padding: 0px;
+        }
+        form {
+          input {
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 640px) {
+    .search-form {
+      padding: 0px 16px;
     }
   }
 }
@@ -102,12 +119,12 @@
   margin-top: 32px;
   margin-bottom: 32px;
 }
-.w-150 {
-  width: 150px;
-}
-.pr-105 {
-  padding-right: 105px !important;
-}
+// .w-150 {
+//   width: 150px;
+// }
+// .pr-105 {
+//   padding-right: 105px !important;
+// }
 
 .reset-search {
   background-color: transparent;
@@ -147,6 +164,24 @@
   min-height: 3rem;
   display: block;
   font-weight: bold;
+}
+
+@media (min-width: 640px) {
+  // .sm-pr-20 {
+  //   padding-right: 20px;
+  // }
+  .w-150 {
+    width: 150px;
+  }
+
+  .sm-pr-150 {
+    padding-right: 150px;
+  }
+}
+@media (max-width: 640px) {
+  .w-150 {
+    width: 50px;
+  }
 }
 // .no-grid-margin .uk-grid-margin {
 //   margin: 0px;

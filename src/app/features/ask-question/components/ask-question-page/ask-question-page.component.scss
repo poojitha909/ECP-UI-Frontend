@@ -195,3 +195,28 @@
     width: 50px;
   }
 }
+
+.landing-bg {
+  background-image: url("/assets/images/landing-img/mobile/ask-bg.png");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media (min-width: 641px) {
+  .landing-bg {
+    background-image: url("/assets/images/landing-img/Ask-768.png");
+  }
+}
+
+@media (min-width: 1024px) {
+  .landing-bg {
+    background-image: url("/assets/images/landing-img/Ask-1024.png");
+  }
+}
+
+@media (min-width: 1440px) {
+  .landing-bg {
+    background-image: url("/assets/images/landing-img/Ask-1440.png");
+  }
+}

@@ -186,3 +186,28 @@
 // .no-grid-margin .uk-grid-margin {
 //   margin: 0px;
 // }
+
+.landing-bg {
+  background-image: url("/assets/images/landing-img/mobile/product-bg.png");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media (min-width: 641px) {
+  .landing-bg {
+    background-image: url("/assets/images/landing-img/Product-768.png");
+  }
+}
+
+@media (min-width: 1024px) {
+  .landing-bg {
+    background-image: url("/assets/images/landing-img/Product-1024.png");
+  }
+}
+
+@media (min-width: 1440px) {
+  .landing-bg {
+    background-image: url("/assets/images/landing-img/Product-1440.png");
+  }
+}

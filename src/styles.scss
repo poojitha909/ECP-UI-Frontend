@@ -161,6 +161,12 @@ ngb-rating {
   }
 }
 
+@media (max-width: 640px) {
+  .home-banner {
+    min-height: 504px;
+  }
+}
+
 .featured-tab {
   border-radius: 8px;
   border: 1px solid #d7e0ef;

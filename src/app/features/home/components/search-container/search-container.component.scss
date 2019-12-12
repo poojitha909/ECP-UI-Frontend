@@ -57,7 +57,7 @@
   @media (max-width: 640px) {
     .search-form {
       padding: 16px;
-    }  
+    }
   }
   .quote-line {
     background-color: #e4eefb;
@@ -122,9 +122,9 @@
   }
 }
 
-// .uk-z-index {
-//   z-index: 10000;
-// }
+.uk-z-index {
+  z-index: 100;
+}
 .search-list {
   box-shadow: 2px 5px 17px 4px rgba(193, 191, 191, 0.5);
 }
@@ -142,6 +142,12 @@
 
   .sm-pr-150 {
     padding-right: 150px;
+  }
+}
+
+@media (max-width: 640px) {
+  .w-150 {
+    width: 50px;
   }
 }
 

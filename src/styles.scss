@@ -209,7 +209,7 @@ ngb-rating {
   text-align: center;
   margin: 0 5px;
   background-color: #ffffff;
-  color: #777;
+  color: #777 !important;
   font-size: 18px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
   &:hover {
@@ -231,9 +231,19 @@ ngb-rating {
 .uk-search .uk-search-icon:not(a):not(button):not(input) {
   pointer-events: all;
 }
-@media screen and (max-device-width: 400px) {
+@media screen and (max-width : 400px) {
   .m-t-main-screen.search-container {
     padding-top: 16px;
     padding-bottom: 16px;
+  }
+  .home-banner {
+    min-height: 504px;
+  }
+  .slidenav-pervious {
+    right: 92% !important;
+  }
+  
+  .slidenav-next {
+    left: 92% !important;
   }
 }

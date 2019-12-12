@@ -1,7 +1,7 @@
 <div class="event-summary bg-white uk-height-1-1 cursor-pointer uk-flex uk-flex uk-flex-column uk-flex-between"
     *ngIf="event?.isPast == isPast || isPast==0" [routerLink]="['/community/event', event?.id ]">
     <div class="event-summary-head uk-grid uk-grid-collapse">
-        <div class="event-title uk-width-1-1@s">
+        <div class="event-title uk-width-1-1">
             {{event?.title}}
         </div>
     </div>
@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="event-summary-footer uk-grid uk-grid-collapse">
-        <div class="left-text uk-width-1-1@s">
+        <div class="left-text uk-width-1-1">
             <hr />
             <span *ngIf="event?.entryFee <= 0" class="green">Free Entry</span>
             <span *ngIf="event?.entryFee > 0">Entry Fees: <span class="green"> Rs. {{event?.entryFee}}</span> </span>

@@ -230,7 +230,17 @@
 .slidenav-next {
   left: 98% !important;
 }
-@media screen and (max-device-width : 400px) {
+@media (max-width : 400px) {
+  .banner{
+    background: url("/assets/images/mobile_community_banner.png");
+  }
+  .slidenav-pervious {
+    right: 92% !important;
+  }
+  
+  .slidenav-next {
+    left: 92% !important;
+  }
   .search-container {
     .search-form {
       padding: 0px 16px;
@@ -241,11 +251,17 @@
           }
         }
         .search-btn{
-          min-width: 96px;
+          min-width: 75px;
           padding: 0 10px;
           height: 40px;
         }
       }
+    }
+    .w-150 {
+      width: 50px;
+    }
+    .pr-150 {
+      padding-right: 50px !important;
     }
   }
 }

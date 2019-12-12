@@ -42,7 +42,7 @@
       @media (max-width: 640px) {
         .search-btn {
           height: auto;
-          min-width: 70px;
+          min-width: 80px;
           padding: 0px;
         }
         form {
@@ -52,6 +52,11 @@
         }
       }
     }
+  }
+  @media (max-width: 640px) {
+    .search-form {
+      padding: 16px;
+    }  
   }
   .quote-line {
     background-color: #e4eefb;

@@ -76,6 +76,13 @@
           <li class="uk-nav-divider"></li>
           <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
             [routerLinkActiveOptions]="{exact: false}"><a routerLink="/about">About Us</a></li>
+          <li *ngIf="!auth.isAuthenticate" class="uk-nav-header" (click)="closeMobileMenu()"
+            routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/user/signin">Sign
+              In</a></li>
+          <li *ngIf="auth.isAuthenticate" class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
+            [routerLinkActiveOptions]="{exact: false}"><a routerLink="/user">User Profile</a></li>
+          <li *ngIf="auth.isAuthenticate" class="uk-nav-header" (click)="closeMobileMenu();logout();"><a
+              routerLink="/about">Logout</a></li>
         </ul>
 
       </div>

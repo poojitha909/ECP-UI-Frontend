@@ -146,9 +146,7 @@
       }
     }
   }
-  .mobile-menu{
-    background-color: $dark-blue-2;
-  }
+
   // .mobile-menu {
   //   ::-webkit-scrollbar {
   //     width: auto;
@@ -186,6 +184,10 @@
   //     }
   //   }
   // }
+}
+
+.mobile-menu{
+  background-color: $dark-blue-2;
 }
 
 @media (max-width: 640px) {

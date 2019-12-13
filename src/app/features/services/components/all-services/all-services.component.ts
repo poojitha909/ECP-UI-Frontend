@@ -9,7 +9,7 @@ import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
-
+declare var UIkit: any;
 
 @Component({
   selector: 'app-all-services',
@@ -185,6 +185,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     // update current page of items
     this.pageServices = services;
     this.cdr.detectChanges();
+    // UIkit.scroll("#serviceList");
+    UIkit.scroll('#serviceList').scrollTo('#serviceList');
   }
 
   onSearchChange(value) {

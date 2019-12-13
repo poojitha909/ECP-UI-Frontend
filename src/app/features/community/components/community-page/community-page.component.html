@@ -82,6 +82,28 @@
 
   <!-- Search Container ends -->
 
+  <div class="uk-child-width-1-2 m-b-30" uk-grid>
+    <div class="uk-text-center">
+      <div class="options-card">
+        <img src="assets/images/discussion.png" />
+      </div>
+      <div routerLink="/community/discussions" class="quote-line-card cursor-pointer">
+        Discussion
+        <span class="uk-float-right" uk-icon="chevron-right"></span>
+      </div>
+    </div>
+  
+    <div class="uk-text-center">
+      <div class="options-card">
+        <img src="assets/images/events.png" />
+      </div>
+      <div routerLink="/community/events" class="quote-line-card cursor-pointer">
+        Events
+        <span class="uk-float-right" uk-icon="chevron-right"></span>
+      </div>
+    </div>
+  </div>
+
   <!-- Discussion Section Start -->
   <div class="uk-container search-container dark">
     <div class="quote-line uk-margin-remove" uk-grid>
@@ -154,7 +176,7 @@
   <!-- Event Section Start -->
   <div class="uk-container search-container dark m-seprator">
     <div class="quote-line uk-margin-remove" uk-grid>
-      <div class="uk-width-1-1@s uk-width-2-3@m uk-padding-remove uk-flex uk-flex-middle">
+      <div class="uk-width-1-1 uk-width-2-3@m uk-padding-remove uk-flex uk-flex-middle title-border">
         <div class="uk-flex uk-flex-middle">
           <h4 class="title">
             <span class="mr-3">
@@ -164,7 +186,7 @@
           </h4>
         </div>
       </div>
-      <div class="uk-width-1-1@s uk-width-1-3@m uk-padding-remove uk-flex uk-flex-middle uk-divider-vertical">
+      <div class="uk-width-1-1 uk-width-1-3@m uk-padding-remove uk-flex uk-flex-middle uk-divider-vertical@s">
         <label class="uk-form-label">Showing:</label>
         <div class="uk-form-controls">
           <select class="uk-select" [(ngModel)]="searchParams.pastEvents" (change)="showEvents2()">

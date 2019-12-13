@@ -4,11 +4,11 @@
     <!-- Search Form START -->
     <div class="search-form">
       <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
-        <div class="uk-width-expand@s uk-width-2-3">
+        <div class="uk-width-expand">
           <form class="uk-search uk-search-default">
             <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
               <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
-                <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Clear Search
+                <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
               </button>
             </span>
             <input class="uk-search-input font-regular search-box" [ngClass]="{ 'pr-150':showReset}"
@@ -16,7 +16,7 @@
               placeholder="Search here" name="search" />
           </form>
         </div>
-        <div class="uk-width-auto@s uk-width-1-3">
+        <div>
           <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
         </div>
       </div>
@@ -65,11 +65,9 @@
   </div>
 
 
-  <div class="uk-background-cover home-banner" data-src="assets/images/landing-img/Community-1024.png"
-    data-srcset="assets/images/landing-img/Community-320.png 320w,assets/images/landing-img/Community-768.png 768w,assets/images/landing-img/Community-1024.png 1024w,assets/images/landing-img/Community-1440.png 1440w"
-    uk-img>
+  <div class="home-banner landing-bg">
     <div class="uk-child-width-1-2@s uk-padding" uk-grid>
-      <div class="uk-text-center uk-text-left@s">
+      <div class="uk-text-left@s">
         <h1>Our Community</h1>
         <p class="font-regular">
           Interested in member contributed articles and discussions or community based events & activities? Find one
@@ -85,25 +83,24 @@
   <div class="uk-child-width-1-2 m-b-30" uk-grid>
     <div class="uk-text-center">
       <div class="options-card">
-        <img src="assets/images/discussion.png" />
-      </div>
-      <div routerLink="/community/discussions" class="quote-line-card cursor-pointer">
-        Discussion
-        <span class="uk-float-right" uk-icon="chevron-right"></span>
-      </div>
-    </div>
-  
-    <div class="uk-text-center">
-      <div class="options-card">
         <img src="assets/images/events.png" />
       </div>
-      <div routerLink="/community/events" class="quote-line-card cursor-pointer">
+      <div (click)="showAllEvents()" class="quote-line cursor-pointer">
         Events
         <span class="uk-float-right" uk-icon="chevron-right"></span>
       </div>
     </div>
-  </div>
 
+    <div class="uk-text-center">
+      <div class="options-card">
+        <img src="assets/images/discussion.png" />
+      </div>
+      <div (click)="showAllDiscussions()" class="quote-line cursor-pointer">
+        Discussions
+        <span class="uk-float-right" uk-icon="chevron-right"></span>
+      </div>
+    </div>
+  </div>
   <!-- Discussion Section Start -->
   <div class="uk-container search-container dark">
     <div class="quote-line uk-margin-remove" uk-grid>
@@ -139,10 +136,10 @@
             </ul>
           </div>
           <div class="uk-hidden@s uk-light">
-            <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#" uk-slidenav-previous
-              uk-slider-item="previous"></a>
-            <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#" uk-slidenav-next
-              uk-slider-item="next"></a>
+            <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
+              uk-slidenav-previous uk-slider-item="previous"></a>
+            <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
+              uk-slidenav-next uk-slider-item="next"></a>
           </div>
           <div class="uk-visible@s">
             <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
@@ -209,7 +206,7 @@
           </div>
           <div class="uk-hidden@s">
             <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
-            uk-slidenav-previous uk-slider-item="previous"></a>
+              uk-slidenav-previous uk-slider-item="previous"></a>
             <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
               uk-slidenav-next uk-slider-item="next"></a>
           </div>

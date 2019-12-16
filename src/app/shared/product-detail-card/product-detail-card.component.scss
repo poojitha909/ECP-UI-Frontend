@@ -21,10 +21,10 @@ a {
 }
 .category {
   font-size: $font-small;
-  position: absolute;
+  // position: absolute;
   bottom: 18px;
 }
-.category span {
+.category-text {
   color: #1a73e8;
   font-size: $font-small;
 }
@@ -46,6 +46,11 @@ a {
 .price-border {
   padding: 8px 16px;
   border-left: 1px solid #d7e0ef;
+}
+
+.price-text-sm {
+  color: #187700;
+  font-weight: 600;
 }
 
 .product-img {

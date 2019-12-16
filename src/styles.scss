@@ -158,6 +158,9 @@ ngb-rating {
   .home-banner {
     min-height: 504px;
   }
+  .m-t-20\@s {
+    margin-top: 20px !important;
+  }
 }
 
 .featured-tab {
@@ -224,18 +227,18 @@ ngb-rating {
 .uk-search .uk-search-icon:not(a):not(button):not(input) {
   pointer-events: all;
 }
-@media screen and (max-width : 640px) {
+@media screen and (max-width: 640px) {
   .home-banner {
     min-height: 504px;
   }
   .slidenav-pervious {
     right: 92% !important;
   }
-  
+
   .slidenav-next {
     left: 92% !important;
   }
-  .grid-reverse-dir{
+  .grid-reverse-dir {
     flex-direction: column-reverse;
   }
 }

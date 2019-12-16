@@ -75,7 +75,7 @@
       </div>
     </div>
   </div>
-  <div class="search-result" *ngIf="productsList2!==undefined && productsList2?.length > 0">
+  <div class="content" *ngIf="productsList2!==undefined && productsList2?.length > 0">
     <app-popular-search [products]="productsList2"></app-popular-search>
   </div>
   <div class="uk-text-center uk-text-bold pt-norec" *ngIf="productsList2!==undefined && productsList2?.length == 0">

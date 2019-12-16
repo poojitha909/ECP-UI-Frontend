@@ -85,7 +85,7 @@
       <div class="options-card">
         <img src="assets/images/events.png" />
       </div>
-      <div (click)="showAllEvents()" class="quote-line cursor-pointer">
+      <div (click)="showAllEvents()" class="quote-line-card cursor-pointer">
         Events
         <span class="uk-float-right" uk-icon="chevron-right"></span>
       </div>
@@ -95,7 +95,7 @@
       <div class="options-card">
         <img src="assets/images/discussion.png" />
       </div>
-      <div (click)="showAllDiscussions()" class="quote-line cursor-pointer">
+      <div (click)="showAllDiscussions()" class="quote-line-card cursor-pointer">
         Discussions
         <span class="uk-float-right" uk-icon="chevron-right"></span>
       </div>
@@ -124,7 +124,7 @@
         </div>
       </div>
     </div>
-    <div class="search-result">
+    <div class="content">
       <div uk-slider *ngIf="discussionsList2!==undefined && discussionsList2?.length > 0">
         <div class="uk-position-relative">
           <div class="uk-slider-container uk-light height-fix-slider">
@@ -194,7 +194,7 @@
         </div>
       </div>
     </div>
-    <div class="search-result">
+    <div class="content">
       <div uk-slider *ngIf="eventsList2!==undefined && eventsList2?.length > 0">
         <div class="uk-position-relative">
           <div class="uk-slider-container uk-light height-fix-slider">

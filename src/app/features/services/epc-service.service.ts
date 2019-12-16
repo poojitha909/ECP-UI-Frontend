@@ -11,9 +11,12 @@ import { UserProfile, DBReviews } from 'src/app/core/interfaces';
 })
 export class EpcServiceService {
 
+  searchedService: string;
+  searchCatID: string;
+
   serviceParam: JDserviceParam = {
     max: 50,
-    pageNo: 1
+    pageNo: 0
   }
   constructor(private http: HttpClient) { }
 
@@ -65,8 +68,8 @@ export class EpcServiceService {
     return this.http.get<any>(`${ApiConstants.GET_DB_SERVICE_DETAIL}/${id}`);
   }
 
-  getDBserviceReview(id: string): Observable<any> {
-    return this.http.get<any>(`${ApiConstants.GET_DB_SERVICE_REVIEWS}?serviceId=${id}&p=0&s=1000`).pipe(
+  getDBserviceReview(id: string, reviwePaginate: any): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_DB_SERVICE_REVIEWS}?serviceId=${id}&p=${reviwePaginate.p}&s=${reviwePaginate.s}`).pipe(
       map(response => {
         if (response) {
           return response.data;
@@ -76,6 +79,51 @@ export class EpcServiceService {
 
   addDBserviceReview(review: DBReviews): Observable<any> {
     return this.http.post<any>(`${ApiConstants.ADD_DB_SERVICE_REVIEWS}`, review).pipe(
+      map(response => {
+        if (response && response.data) {
+          return response.data;
+        }
+      }));
+  }
+
+  deleteDBserviceReview(reviewId: string): Observable<any> {
+    return this.http.delete<any>(`${ApiConstants.DELETE_DB_SERVICE_REVIEWS}/${reviewId}`).pipe(
+      map(response => {
+        if (response && response.data) {
+          return response.data;
+        }
+      }));
+  }
+
+  addDBserviceReport(reportData: any): Observable<any> {
+    return this.http.post<any>(`${ApiConstants.ADD_DB_SERVICE_REPORT}`, reportData).pipe(
+      map(response => {
+        if (response) {
+          return response.data;
+        }
+      }));
+  }
+
+  likeUnlikeReview(reviewId: string): Observable<any> {
+    return this.http.put<any>(`${ApiConstants.ADD_LIKE_SERVICE_REVIEWS}?reviewId=${reviewId}`, {}).pipe(
+      map(response => {
+        if (response) {
+          return response.data;
+        }
+      }));
+  }
+
+  addServiceRating(rating: any): Observable<any> {
+    return this.http.post<any>(`${ApiConstants.ADD_SERVICE_RATEING}`, rating).pipe(
+      map(response => {
+        if (response) {
+          return response.data;
+        }
+      }));
+  }
+
+  getServiceRatings(serviceId: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_SERVICE_RATEINGS}?serviceId=${serviceId}`).pipe(
       map(response => {
         if (response) {
           return response.data;

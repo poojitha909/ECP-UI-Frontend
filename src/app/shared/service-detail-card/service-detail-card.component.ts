@@ -30,8 +30,9 @@ export class ServiceDetailCardComponent implements OnInit {
   }
 
   getDbServiceRating(percent): number {
-
-    if (percent <= 20) {
+    if (percent == 0) {
+      return 0;
+    } else if (percent <= 20) {
       return 1;
     } else if (percent <= 40) {
       return 2;

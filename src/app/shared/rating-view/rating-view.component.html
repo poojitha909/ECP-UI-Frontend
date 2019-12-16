@@ -1,0 +1,175 @@
+<ul class="uk-switcher switcher-container">
+    <li>
+        <!-- DB service ratings view-->
+        <div class="rating">
+            <div class="p-10 uk-flex uk-flex-center" uk-grid>
+                <div>
+                    <h1>{{ detailReview?.rating}}</h1>
+                </div>
+                <div>
+                    <ngb-rating [rate]="detailReview?.rating" [readonly]="true" [max]="5">
+                        <ng-template let-fill="fill" let-index="index">
+                            <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                        </ng-template>
+                    </ngb-rating>
+                    <p class="m-0">
+                        {{ dbReviewCount }} Reviews
+                    </p>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <!-- JD service ratings view-->
+        <div class="jd-rating" *ngIf="jdDetailReview">
+            <div class="p-10 uk-flex uk-flex-center" uk-grid>
+                <div>
+                    <h1>{{ jdDetailReview?.rating}}</h1>
+                </div>
+                <div>
+                    <ngb-rating [rate]="jdDetailReview?.rating" [readonly]="true" [max]="5">
+                        <ng-template let-fill="fill" let-index="index">
+                            <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                        </ng-template>
+                    </ngb-rating>
+                    <p class="m-0">
+                        {{ jdDetailReview?.totalCount }} Reviews
+                    </p>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
+
+<!-- rating count -->
+<div class="m-t-20">
+
+    <ul class="uk-switcher switcher-container">
+        <li>
+            <!-- DB service ratings counts-->
+            <div uk-grid>
+                <div>
+                    5 stars
+                </div>
+                <div class="uk-width-expand uk-flex uk-flex-middle">
+                    <progress class="uk-progress uk-progress-rating" [value]="detailReview?.fiveStar.count"
+                        [max]="detailReview?.totalCount"></progress>
+                </div>
+                <div>
+                    {{detailReview?.fiveStar.count}}
+                </div>
+            </div>
+            <div class="m-t-10" uk-grid>
+                <div>
+                    4 stars
+                </div>
+                <div class="uk-width-expand uk-flex uk-flex-middle">
+                    <progress class="uk-progress uk-progress-rating" [value]="detailReview?.fourStar.count"
+                        [max]="detailReview?.totalCount"></progress>
+                </div>
+                <div>
+                    {{detailReview?.fourStar.count}}
+                </div>
+            </div>
+            <div class="m-t-10" uk-grid>
+                <div>
+                    3 stars
+                </div>
+                <div class="uk-width-expand uk-flex uk-flex-middle">
+                    <progress class="uk-progress uk-progress-rating" [value]="detailReview?.threeStar.count"
+                        [max]="detailReview?.totalCount"></progress>
+                </div>
+                <div>
+                    {{detailReview?.threeStar.count}}
+                </div>
+            </div>
+            <div class="m-t-10" uk-grid>
+                <div>
+                    2 stars
+                </div>
+                <div class="uk-width-expand uk-flex uk-flex-middle">
+                    <progress class="uk-progress uk-progress-rating" [value]="detailReview?.twoStar.count"
+                        [max]="detailReview?.totalCount"></progress>
+                </div>
+                <div>
+                    {{detailReview?.twoStar.count}}
+                </div>
+            </div>
+            <div class="m-t-10" uk-grid>
+                <div>
+                    1 stars
+                </div>
+                <div class="uk-width-expand uk-flex uk-flex-middle">
+                    <progress class="uk-progress uk-progress-rating" [value]="detailReview?.oneStar.count"
+                        [max]="detailReview?.totalCount"></progress>
+                </div>
+                <div>
+                    {{detailReview?.oneStar.count}}
+                </div>
+            </div>
+        </li>
+        <li *ngIf="jdDetailReview">
+            <!-- JD service ratings counts-->
+            <div uk-grid>
+                <div>
+                    5 stars
+                </div>
+                <div class="uk-width-expand uk-flex uk-flex-middle">
+                    <progress class="uk-progress uk-progress-JDrating" [value]="jdDetailReview?.fiveStar.count"
+                        [max]="jdDetailReview?.totalCount"></progress>
+                </div>
+                <div>
+                    {{jdDetailReview?.fiveStar.count}}
+                </div>
+            </div>
+            <div class="m-t-10" uk-grid>
+                <div>
+                    4 stars
+                </div>
+                <div class="uk-width-expand uk-flex uk-flex-middle">
+                    <progress class="uk-progress uk-progress-JDrating" [value]="jdDetailReview?.fourStar.count"
+                        [max]="jdDetailReview?.totalCount"></progress>
+                </div>
+                <div>
+                    {{jdDetailReview?.fourStar.count}}
+                </div>
+            </div>
+            <div class="m-t-10" uk-grid>
+                <div>
+                    3 stars
+                </div>
+                <div class="uk-width-expand uk-flex uk-flex-middle">
+                    <progress class="uk-progress uk-progress-JDrating" [value]="jdDetailReview?.threeStar.count"
+                        [max]="jdDetailReview?.totalCount"></progress>
+                </div>
+                <div>
+                    {{jdDetailReview?.threeStar.count}}
+                </div>
+            </div>
+            <div class="m-t-10" uk-grid>
+                <div>
+                    2 stars
+                </div>
+                <div class="uk-width-expand uk-flex uk-flex-middle">
+                    <progress class="uk-progress uk-progress-JDrating" [value]="jdDetailReview?.twoStar.count"
+                        [max]="jdDetailReview?.totalCount"></progress>
+                </div>
+                <div>
+                    {{jdDetailReview?.twoStar.count}}
+                </div>
+            </div>
+            <div class="m-t-10" uk-grid>
+                <div>
+                    1 stars
+                </div>
+                <div class="uk-width-expand uk-flex uk-flex-middle">
+                    <progress class="uk-progress uk-progress-JDrating" [value]="jdDetailReview?.oneStar.count"
+                        [max]="jdDetailReview?.totalCount"></progress>
+                </div>
+                <div>
+                    {{jdDetailReview?.oneStar.count}}
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

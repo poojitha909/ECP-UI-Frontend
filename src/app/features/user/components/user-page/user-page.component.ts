@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { UserProfile } from 'src/app/core/interfaces';
+import { AuthService } from 'src/app/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-page',
@@ -12,9 +14,18 @@ export class UserPageComponent implements OnInit {
   selectedTab: string = 'displayname';
 
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private auth: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    this.auth.userSource.subscribe(user => {
+      if (!user) {
+        this.router.navigateByUrl('/');
+      }
+    })
     this.getUserProfile();
   }
 
@@ -25,5 +36,13 @@ export class UserPageComponent implements OnInit {
         this.userService.userProfile = response;
         console.log(response);
       });
+  }
+
+  viewEditProfile() {
+    this.selectedTab = 'editprofile';
+  }
+
+  viewUserProfile() {
+    this.selectedTab = 'viewprofile';
   }
 }

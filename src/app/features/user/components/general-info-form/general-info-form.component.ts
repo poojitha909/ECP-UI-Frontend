@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User, monthOptions, IndividualInfo, UserProfile } from 'src/app/core/interfaces';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { UserService } from '../../services/user.service';
@@ -9,6 +9,12 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./general-info-form.component.scss']
 })
 export class GeneralInfoFormComponent implements OnInit {
+
+  @Output() cancelForm = new EventEmitter();
+
+  errorMessage;
+  successMessage;
+  isLoading;
 
   dateOption: number[] = Array.from({ length: 31 }, (v, k) => k + 1);
   monthOption: any[] = monthOptions;
@@ -29,9 +35,9 @@ export class GeneralInfoFormComponent implements OnInit {
     this.generalInfoForm = this.fb.group({
       gender: [this.userService.userProfile.individualInfo.gender || 0],
       maritalStatus: [this.userService.userProfile.individualInfo.maritalStatus || 'Married'],
-      day: [''],
-      month: [''],
-      year: [''],
+      day: [this.userService.userProfile.individualInfo.dob ? new Date(this.userService.userProfile.individualInfo.dob).getDate() : ''],
+      month: [this.userService.userProfile.individualInfo.dob ? new Date(this.userService.userProfile.individualInfo.dob).getMonth() + 1 : ''],
+      year: [this.userService.userProfile.individualInfo.dob ? new Date(this.userService.userProfile.individualInfo.dob).getFullYear() : ''],
       occupation: [this.userService.userProfile.individualInfo.occupation || '']
     });
 
@@ -43,7 +49,6 @@ export class GeneralInfoFormComponent implements OnInit {
 
   ngOnInit() {
 
-
   }
 
   onSubmit() {
@@ -51,22 +56,37 @@ export class GeneralInfoFormComponent implements OnInit {
     const inputDate: string = `${this.formControl.month.value}-${this.formControl.day.value}-${this.formControl.year.value}`;
     this.isDateValid = this.userService.validateDate(inputDate);
     console.log(this.isDateValid);
+    this.resetAlertMessages();
     if (this.isDateValid) {
-      // let userInfo: UserProfile = {
-      //   individualInfo: this.generalInfoForm.value
-      // };
-      // userInfo.individualInfo.dob = new Date(inputDate);
-      // console.log(userInfo);
       this.userService.userProfile.individualInfo.gender = this.formControl.gender.value;
       this.userService.userProfile.individualInfo.maritalStatus = this.formControl.maritalStatus.value;
       this.userService.userProfile.individualInfo.occupation = this.formControl.occupation.value;
       this.userService.userProfile.individualInfo.dob = new Date(inputDate);
       console.log(this.userService.userProfile);
+      this.isLoading = true;
       this.userService.updateUserProfile(this.userService.userProfile).subscribe(
         response => {
+          this.isLoading = false;
+          this.successMessage = "User information updated successfully"
           console.log(response);
+        },
+        error => {
+          this.isLoading = false;
+          this.errorMessage = "Some unknown internal server error occured";
         });
+    } else {
+      this.errorMessage = "Invalid DOB";
     }
+  }
+
+  resetAlertMessages() {
+    this.errorMessage = null;
+    this.successMessage = null;
+  }
+
+  onCancel() {
+    this.resetAlertMessages();
+    this.cancelForm.emit();
   }
 
 }

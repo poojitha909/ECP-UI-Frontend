@@ -1,21 +1,22 @@
-<div [routerLink]="['/products', product.id]" class="cursor uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+<div [routerLink]="['/products', product.id]"
+  class="cursor uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
 
   <div class="uk-card-media-left uk-width-1-4@m uk-width-1-3@s p-16">
-    <img src="{{product.images[0]}}" height="156" alt="">
+    <img class="product-img" src="{{product.images[0]}}" alt="">
   </div>
 
   <div class="uk-card-body uk-width-expand p-16">
-    <a href="javascript:void(0)" class="font-regular">{{product.name}}</a>
+    <a href="javascript:void(0)" class="font-regular">{{product?.name}}</a>
     <div>
-      <ngb-rating [(rate)]="product.rating" [readonly]="true" [max]="5">
+      <ngb-rating [rate]="getDbServiceRating(product.rating)" [readonly]="true" [max]="5">
         <ng-template let-fill="fill" let-index="index">
           <span class="star" [class.filled]="fill === 100">&#9733;</span>
         </ng-template>
       </ngb-rating>
-      <span class="ml-15">{{product.rating}} Ratings</span>
+      <span class="ml-15">{{product?.rating}} Ratings</span>
     </div>
     <div class="category">
-      In: <span>{{product.productCategory.name}}</span>
+      In: <span>{{product?.productCategory?.name}}</span>
     </div>
     <!-- <div>
       <div class="uk-label d-inline-flex uk-flex-middle p-verified">
@@ -35,8 +36,8 @@
       <!-- <div>
         <strike>Rs. {{product.price}}</strike>
       </div> -->
-      <div class="m-0 price">Rs. {{product.price}}</div>
-      <div class="font-regular">On {{product.buyFrom | titlecase }}</div>
+      <div class="m-0 price">Rs. {{product?.price}}</div>
+      <div class="font-regular">On {{product?.buyFrom | titlecase }}</div>
     </div>
   </div>
 </div>

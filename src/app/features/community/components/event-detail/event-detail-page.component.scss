@@ -4,32 +4,28 @@
     font-family: $regular-font;
     color: $font-color-black;
     margin-bottom: 48px;
-    .breadcrumbs {
-      margin-top: 20px;
-      .uk-breadcrumb > :nth-child(n+2):not(.uk-first-column)::before{
-        margin: 0 5px;
-        content: ">";
-      }
-      .uk-breadcrumb {
-        font-size: 18px;
-        color: $primary-txt-color;
-        margin-top: 20px;
-      }
-      .uk-breadcrumb b {
-        font-size: 18px;
-        color:#000;
-        font-weight: bold;
-      }
+    .uk-container{
+      margin-top: 40px;
+    }
+    .publish-on{
+      font-size: 15px;
+      color: rgba(22, 28, 45, 0.68);
+      opacity: 0.5;
     }
     .heading{ 
       font-family: $regular-font;
       font-size: 32px;
       font-weight: bold;
       color: $font-light-black;
+      margin: 0;
+    }
+
+    .details .heading{
+      margin-top:20px;
     }
     .heading2{
       font-family: $regular-font;
-      font-size: 24px;
+      font-size: 18px;
       font-weight: bold;
       color: $font-light-black;      
     }
@@ -62,22 +58,16 @@
     text-align: center;
   }
   .label{
-    font-size: 15px;
+    font-size: $font-small;
     color: $font-light-black;
     margin-bottom: 5px;
   }
   h3{
     font-size:18px;
   }
-  .description{
-    font-size:15px;
-    margin-top: 5px;
-  }
-  .textblue{
-    color:$primary-txt-color;
-  }
   hr{
-    margin:40px 0;
+    margin:25px 0;
+    border-top: 1px solid #D7E0EF;
   }
 
   .category-box{
@@ -123,16 +113,19 @@
   }
   .whatapp-icon{
     background:#009487;
-    color:#fff;
+    color:#fff !important;
   }
 
   .fb-icon{
     background:#2a415e;
-    color:#fff;
+    color:#fff !important;
   }
 
   .email-icon{
     background:#1772eb;
-    color:#fff;
+    color:#fff !important;
+  }
+  .social-link{
+    color: #000 !important;
   }
 }

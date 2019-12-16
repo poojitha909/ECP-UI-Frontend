@@ -1,94 +1,109 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {DiscussionService} from '../../services/discussion.service';
-import {MenuService} from '../../services/menu.service';
-import {Router} from "@angular/router";
-import {AuthService} from "../../../../core/auth/services/auth.service";
-import {StorageHelperService} from "../../../../core/services/storage-helper.service";
+import { ActivatedRoute } from '@angular/router';
+import { DiscussionService } from '../../services/discussion.service';
+import { MenuService } from '../../services/menu.service';
+import { Router } from "@angular/router";
+import { AuthService } from "../../../../core/auth/services/auth.service";
+import { StorageHelperService } from "../../../../core/services/storage-helper.service";
+import { Breadcrumb } from 'src/app/core/interfaces';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-discussion-create-page',
   templateUrl: './discussion-create-page.component.html',
   styleUrls: ['./discussion-create-page.component.scss']
 })
 export class DiscussionCreatePageComponent implements OnInit {
+  breadcrumbLinks: Breadcrumb[] = [
+    {
+      text: 'Home',
+      link: '/'
+    },
+    {
+      text: 'Community',
+      link: '/community'
+    },
+    {
+      text: 'All Articles & Discussions',
+      link: '/community/discussions'
+    }
+  ];
+
   discussId: string;
-  selCategory: string;
   categoryList: any[];
-  title: string;
-  description: string;
+  discussForm: FormGroup;
   user: any;
 
 
-  constructor(private route:ActivatedRoute,private router: Router, private discussionService: DiscussionService, private menuService: MenuService, private store: StorageHelperService,private authService : AuthService) { }
-  
+  constructor(private route: ActivatedRoute, private router: Router, 
+    private discussionService: DiscussionService, private menuService: MenuService,
+    private store: StorageHelperService, private authService: AuthService, private fb: FormBuilder) { }
+
   ngOnInit() {
-    this.title = "";
-    this.description = "";
-    this.selCategory = "";
     this.discussId = this.route.snapshot.params['id'];
-    this.selCategory = "";
     this.user = this.store.retrieve("ECP-USER");
-    if(this.user){
+    if (this.user) {
       this.user = JSON.parse(this.user);
     }
     let discuss = this.store.retrieve("new-discuss");
-    if(discuss){
-      discuss = JSON.parse(discuss); 
-      this.title = discuss.title;
-      this.description = discuss.description;
-      this.selCategory = discuss.selCategory;
+    if (discuss) {
+      discuss = JSON.parse(discuss);
       this.discussId = discuss.discussId;
       this.store.clear("new-discuss");
     }
-    this.menuService.getMenus("564071623e60f5b66f62df27","").subscribe( (response:any) =>{
+    this.discussForm = this.fb.group({
+      title:  [discuss ? discuss.title : "", Validators.required],
+      description:  [discuss ? discuss.description : "", Validators.required],
+      category: [discuss && discuss.category ? discuss.category : ""]
+    });
+    this.menuService.getMenus("564071623e60f5b66f62df27", "").subscribe((response: any) => {
       const data = response;
       this.categoryList = [];
-      if(data.length > 0){
-        for(let i in data){
-          this.categoryList[ data[i].id ] = {id: data[i].id, label: data[i].displayMenuName, tags:[]};
-          if(data[i].tags){
-            this.categoryList[ data[i].id ].tags = data[i].tags;
+      if (data.length > 0) {
+        for (let i in data) {
+          this.categoryList[data[i].id] = { id: data[i].id, label: data[i].displayMenuName, tags: [] };
+          if (data[i].tags) {
+            this.categoryList[data[i].id].tags = data[i].tags;
           }
         }
       }
     });
   }
 
-  onCategorySelect(value){
-    this.selCategory = value;
+  get formControl() {
+    return this.discussForm.controls;
   }
 
-  onReset(){
-    this.title = "";
-    this.description = "";
-    this.selCategory = "";
+  onReset() {
+    this.discussForm.reset();
     this.router.navigate(['/community/discussions']);
   }
-  
-  onSubmit(){
-    if(!this.user){
-      this.store.store("new-discuss",JSON.stringify({title: this.title, description: this.description, selCategory : this.selCategory,discussId: this.discussId}));
+
+  onSubmit() {
+    let discuss = null;
+    Object.keys(this.discussForm.controls).forEach(field => {
+      const control = this.discussForm.get(field);
+      control.markAsTouched({ onlySelf: true });
+    });
+    if (!this.discussForm.valid) {
+      return;
+    }
+    
+    discuss = { ...this.discussForm.value };
+    discuss.discussId = this.discussId;
+    this.store.store("new-discuss", JSON.stringify(discuss));
+    if(!this.user) {
       this.authService.redirectUrl = "community/discussion/add";
       this.router.navigate(['/user/signin']);
       return;
     }
-
-    if(this.selCategory != "" && this.title!= "" && this.description!= ""){
-      this.discussionService.addDiscussion("P", this.description, this.title, this.user.id, this.user.userName, 
-            this.categoryList[ this.selCategory ].tags
-            ,[ this.categoryList[ this.selCategory ].id ],
-            0)
-        .subscribe( (response:any) => {
-          if(response.data.id != ""){
-            this.router.navigate(['/community/discussion', response.data.id]);
-          }
-          else{
-            alert("Oops! something wrong happen, please try again.");            
-          }
-        });
-    }
-    else{
-      alert("All fields are required, please fill all fields.");
-    }
+    this.store.store("new-discuss-preview", JSON.stringify({
+      description: discuss.description,
+      title: discuss.title,
+      userId: this.user.id,
+      userName: this.user.userName,
+      tags: discuss.category ? this.categoryList[discuss.category].tags : [],
+      categories: discuss.category ? [this.categoryList[discuss.category].id] : [],
+      contentType: 0}));
+    this.router.navigate(['/community/discussion/preview']);
   }
 }

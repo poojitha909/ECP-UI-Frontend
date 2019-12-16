@@ -16,7 +16,7 @@
 // 5. Import Font
 // @import url("https://fontlibrary.org/face/hk-grotesk");
 @import "assets/css/suedo.css";
-
+@import "~@ng-select/ng-select/themes/default.theme.css";
 // =============================================================================
 // Font Face
 // =============================================================================
@@ -30,73 +30,212 @@
   }
 }
 
-@include font-face('HKGroteskRegular', 'assets/font/hk-grotesk/HKGrotesk-Regular.ttf',normal,normal);
-@include font-face('HKGroteskRegular', 'assets/font/hk-grotesk/HKGrotesk-SemiBold.ttf',bold,normal);
+@include font-face("HKGroteskRegular", "assets/font/hk-grotesk/HKGrotesk-Regular.ttf", normal, normal);
+@include font-face("HKGroteskRegular", "assets/font/hk-grotesk/HKGrotesk-SemiBold.ttf", bold, normal);
 
-.font-regular{
-    font-size: 18px;
-    font-family:"HKGroteskRegular"; 
+.font-regular {
+  font-size: 18px;
+  font-family: "HKGroteskRegular";
 }
 
-.font-regular-15{
+.font-regular-15 {
   font-size: 15px;
-  font-family:"HKGroteskRegular"; 
+  font-family: "HKGroteskRegular";
 }
 
-.font-regular-24{
-  font-family:"HKGroteskRegular"; 
+.font-regular-24 {
+  font-family: "HKGroteskRegular";
   font-size: 24px;
 }
 
 .star {
-    font-size: 1.5rem;
-    color: #0000007a;
-  }
-  
-  .filled {
-    color: #E8B24A;
-  }
-  
-  ngb-rating{
-      :focus{
-          outline: unset;
-      }
-  }
-
-  .verified-icon{
-    background-image: url('/assets/images/certified.svg');
-    display: inline-block;
-    height: 1em;
-    width: 1em;
-    font-size: 18px;
-  }
-
-  .verified-icon-w{
-    background-image: url('/assets/images/certified-w.svg');
-    display: inline-block;
-    height: 1em;
-    width: 1em;
-    font-size: 15px;
-  }
-
-  .close-icon{
-    background-image: url('/assets/images/cancel.svg');
-    display: inline-block;
-    height: 3em;
-    width: 3em;
-    font-size: 12px;
-  }
-
-  .spinner-border{
-    width: 8rem;
-    height: 8rem;
-    border:0.50em solid #1A72E8;
-    border-right-color: transparent;
-    border-radius: 50%;
+  font-size: 1.5rem;
+  color: #0000007a;
 }
 
-.knx-active{
-  background-color: #1a73e8;
+.filled {
+  color: #e8b24a;
+}
+
+ngb-rating {
+  :focus {
+    outline: unset;
+  }
+}
+
+.verified-icon {
+  background-image: url("/assets/images/certified.svg");
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  font-size: 18px;
+}
+
+.verified-icon-w {
+  background-image: url("/assets/images/certified-w.svg");
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  font-size: 15px;
+}
+
+.close-icon {
+  background-image: url("/assets/images/cancel.svg");
+  display: inline-block;
+  height: 3em;
+  width: 3em;
+  font-size: 12px;
+}
+
+.spinner-border {
+  width: 8rem;
+  height: 8rem;
+  border: 0.5em solid #1a72e8;
+  border-right-color: transparent;
+  border-radius: 50%;
+}
+
+.knx-active {
+  background-color: #d7e0ef;
   font-weight: 400;
-  color: #fff;
+}
+.uk-button-primary,
+.uk-button {
+  border-radius: 4px;
+  font-size: $font-small;
+}
+
+.uk-button {
+  text-transform: none;
+}
+
+.uk-alert-success,
+.uk-alert-danger {
+  border: 1px solid;
+  border-radius: 4px;
+}
+
+.required {
+  color: #ee0202;
+}
+
+.breadcrumbs {
+  margin-top: 48px;
+  .uk-breadcrumb > :nth-child(n + 2):not(.uk-first-column)::before {
+    margin: 0 5px;
+    content: ">";
+  }
+  .uk-breadcrumb {
+    font-size: 18px;
+    color: $primary-txt-color;
+    margin-top: 20px;
+  }
+  .uk-breadcrumb b {
+    font-size: 18px;
+    color: #000;
+    font-weight: bold;
+  }
+}
+
+.font-light {
+  color: $font-light-black;
+}
+
+.home-banner {
+  min-height: 224px;
+  margin: 32px 0 32px 0;
+  border-radius: 8px;
+  font-family: $regular-font;
+  border: 1px solid #d7e0ef;
+  h1 {
+    font-family: $regular-font;
+    font-size: 32px;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-banner {
+    min-height: 504px;
+  }
+}
+
+.featured-tab {
+  border-radius: 8px;
+  border: 1px solid #d7e0ef;
+  .title {
+    background: #ecf4ff;
+    padding: 24px 40px;
+    border-radius: 8px 8px 0px 0px;
+  }
+  .block-footer {
+    background: #ecf4ff;
+    padding: 24px 40px;
+    border-radius: 0px 0px 8px 8px;
+  }
+  .content {
+    background: #e4eefb;
+    padding: 40px;
+  }
+
+  .uk-button-default {
+    background-color: #1a73e8;
+    border-radius: 4px;
+    font-size: 18px;
+    border: none;
+    color: #fff;
+    text-transform: none;
+    padding: 1px 30px;
+    &:focus {
+      color: #1a73e8;
+      background-color: #fff;
+    }
+  }
+}
+
+.button-slidenav {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 50%;
+  padding: 0;
+  text-align: center;
+  margin: 0 5px;
+  background-color: #ffffff;
+  color: #777 !important;
+  font-size: 18px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  &:hover {
+    color: #000;
+  }
+  &:focus {
+    color: #000;
+  }
+}
+
+.slidenav-pervious {
+  right: 97% !important;
+}
+
+.slidenav-next {
+  left: 97% !important;
+}
+
+.uk-search .uk-search-icon:not(a):not(button):not(input) {
+  pointer-events: all;
+}
+@media screen and (max-width : 640px) {
+  .home-banner {
+    min-height: 504px;
+  }
+  .slidenav-pervious {
+    right: 92% !important;
+  }
+  
+  .slidenav-next {
+    left: 92% !important;
+  }
+  .grid-reverse-dir{
+    flex-direction: column-reverse;
+  }
 }

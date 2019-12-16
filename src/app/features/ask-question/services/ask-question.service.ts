@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class AskQuestionService {
     private askQuestionUrl = ApiConstants.ASK_QUESTION_SERVICES;
+    private userProfileUrl= ApiConstants.USER_PROFILE;
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
@@ -28,8 +29,28 @@ export class AskQuestionService {
         return this.http.get<any[]>(`${this.askQuestionUrl}/experts/page?${queryParams}`);
     }
 
+    questions(searchPageParams: any): Observable<any[]> {
+        let queryParams = "";
+        Object.keys(searchPageParams)
+            .forEach((key, i) => {
+                if (i > 0) {
+                    queryParams += `&${key}=${searchPageParams[key]}`;
+                } else {
+                    queryParams += `${key}=${searchPageParams[key]}`;
+                }
+            });
+        if (queryParams == "") {
+            return of([]);
+        }
+        return this.http.get<any[]>(`${this.askQuestionUrl}/page?${queryParams}`);
+    }
+
     getCategoryList(): Observable<any[]> {
         return this.http.get<any[]>(`${this.askQuestionUrl}/category/page?p=0&s=10000`);
+    }
+
+    addQuestion(question: any): Observable<any[]> {
+        return this.http.post<any[]>(`${this.askQuestionUrl}`,{...question});
     }
 
     searchAskQuestion(searchPageParams: any): Observable<any[]> {
@@ -68,25 +89,23 @@ export class AskQuestionService {
         let queryParams = "askQuesId=" + askQuesId;
         return this.http.get<any[]>(`${this.askQuestionUrl}?${queryParams}`);
     }
-
-    addProduct(product: any): Observable<any[]> {
-        return this.http.post<any[]>(`${this.askQuestionUrl}`,{...product});
+    getAskQuesReplies(askQuesId: string): Observable<any[]> {
+        return this.http.get<any[]>(`${this.askQuestionUrl}/reply/page?p=0&s=10000&dir=1&sort=createdAt&questionId=${askQuesId}`);
     }
 
-    
-
-    addComment(productId: string, commentTxt: string, username: string , rating : number){
-        return this.http.post<any[]>(`${this.askQuestionUrl}/review`,{
-                productId: productId,
-                review: commentTxt,
-                userName: username,
-                likeCount: 0,
-                unlikeCount: 0,
-                status: 0
-            });        
+    getUserProfile(profileId): Observable<any[]> {
+        return this.http.get<any[]>(`${this.userProfileUrl}/profile/${profileId}`);
     }
 
-    getReviewList(productId): Observable<any[]> {
-        return this.http.get<any[]>(`${this.askQuestionUrl}/review/page?p=0&s=10000&dir=1&sort=createdAt&productId=${productId}&searchTxt=&category=`);
+    getUserProfileById(userId): Observable<any[]> {
+        return this.http.get<any[]>(`${this.userProfileUrl}/${userId}`);
+    }
+
+    addComment(questionId: string, commentTxt: string, user: any){
+        return this.http.post<any[]>(`${this.askQuestionUrl}/reply`,{
+                askQuestionId: questionId,
+                reply: commentTxt,
+                user: {id: user.id}
+            });
     }
 }

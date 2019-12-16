@@ -32,6 +32,13 @@ export enum UserIdType {
     MOBILE = 1
 }
 
+export enum Gender {
+    MALE = 1,
+    FEMALE = 0,
+    TRANS = 2,
+    "PREFER NOT TO SAY" = 3
+}
+
 export interface UserProfile {
     id?: string;
     userId?: string;

@@ -1,65 +1,98 @@
-<div class="uk-container banner">
-  <div class="logo">
-    <h3>ABCD</h3>
-  </div>
-  <div class="uk-child-width-expand@s uk-child-width-1-1" uk-grid>
-    <div class="para-info uk-text-center uk-text-left@s">
-      <p>
-        An online presence for elders to find reliable products and services.
-        And engage in Events and Discussions
-      </p>
-    </div>
-    <div class="couple-img uk-width-1-2@s uk-width-1-1">
-      <img data-src="assets/images/indian_couple-_slide1-300x206.png" alt="" uk-img class="uk-align-right@s uk-align-center" />
-    </div>
-  </div>
-</div>
-
-<div class="uk-container search-container">
-  <div class="header-label">
-    <h3>Search for Products</h3>
-  </div>
-
+<div class="uk-container search-container m-t-40">
   <!-- Search Form START -->
   <div class="search-form">
     <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
-      <div class="uk-margin uk-width-1-1 uk-width-expand@s">
+      <div class="uk-width-expand">
         <form class="uk-search uk-search-default">
-          <span class="uk-search-icon-flip" [ngClass]="{ 'w-105':showReset}" uk-search-icon>
+          <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
             <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
-              <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Reset
+              <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
             </button>
           </span>
-          <input class="uk-search-input search-box" [ngClass]="{ 'pr-105':showReset}"
-            [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required type="text"
-            placeholder="Search..." name="search" />
+          <input class="uk-search-input font-regular search-box sm-pr-150" [(ngModel)]="searchParams.searchTxt"
+            (keyup)="onSearchChange($event)" required type="text" placeholder="Search here" name="search" />
         </form>
       </div>
-      <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">
+      <div>
         <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
       </div>
     </div>
   </div>
   <!-- Search Form END -->
+  <!-- Search Result START -->
+  <div class="search-result" *ngIf="showResult">
 
-  <!-- Popular search START -->
-  <app-popular-search [products]="productsList"></app-popular-search>
-
-  <!-- <div class="uk-container popular-search-list"></div> -->
-  <div class="quote-line uk-margin-remove" uk-grid>
-    <div class="uk-width-expand@s uk-padding-remove uk-flex uk-flex-middle">
-      <div class="uk-flex uk-flex-middle">
-        <span class="mr-3">
-          <span class="verified-icon"></span>
-        </span>All
-        Products
-        and Services are
-        100% verified. Buy with
-        Trust!
+    <div uk-grid class="uk-flex-left uk-text-center uk-child-width-1-3@m">
+      <div *ngFor="let product of productsList">
+        <app-product-search-card [product]="product"></app-product-search-card>
       </div>
     </div>
-    <div class="uk-width-auto@s uk-text-center">
-      <button routerLink="/products/all" class="uk-button uk-button-default">View All Products</button>
+    <div class="uk-text-center uk-text-bold pt-norec" *ngIf="productsList!==undefined && productsList?.length == 0">
+      No Records found
+    </div>
+    <div class="m-t-30" *ngIf="productsList!==undefined && productsList?.length > 0">
+      <button class="uk-width-1-1 uk-button-default" (click)="showAllProducts()"> See All Products </button>
+    </div>
+
+  </div>
+  <!-- Search Result END -->
+</div>
+
+<div class="uk-container">
+  <div class="home-banner landing-bg">
+    <div class="uk-child-width-1-2@s uk-padding" uk-grid>
+      <div class="uk-text-left@s">
+        <h1>Product You Trust</h1>
+        <p class="font-regular">
+          Find and learn about products specially curated for elders. Share your views about these products.
+          Purchase and get these products delivered from reputed online market places.
+        </p>
+      </div>
     </div>
   </div>
 </div>
+
+<!-- Product Section Start -->
+<div class="uk-container search-container dark m-seprator">
+  <div class="quote-line uk-margin-remove" uk-grid>
+    <div class="uk-width-1-1@s uk-width-2-3@m uk-padding-remove uk-flex uk-flex-middle">
+      <div class="uk-flex uk-flex-middle">
+        <h4 class="title">
+          <span class="mr-3">
+            <img src="assets/images/product-icon.png" />
+          </span>
+          Products
+        </h4>
+      </div>
+    </div>
+    <div class="uk-width-1-1@s uk-width-1-3@m uk-padding-remove uk-flex uk-flex-middle uk-divider-vertical">
+      <label class="uk-form-label">Showing:</label>
+      <div class="uk-form-controls">
+        <select class="uk-select" [(ngModel)]="searchParams.productCategory" (change)="showProducts2()">
+          <option value="">Popular Products</option>
+          <option *ngFor="let cat of catsList" value="{{cat.id}}">{{cat.name}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="content" *ngIf="productsList2!==undefined && productsList2?.length > 0">
+    <app-popular-search [products]="productsList2"></app-popular-search>
+  </div>
+  <div class="uk-text-center uk-text-bold pt-norec" *ngIf="productsList2!==undefined && productsList2?.length == 0">
+    No Records found
+  </div>
+  <!-- Search Result END -->
+  <div class="quote-line uk-margin-remove" uk-grid>
+    <div class="uk-width-1-1@s uk-width-2-3@m uk-padding-remove uk-flex uk-flex-middle">
+      <div class="uk-flex uk-flex-middle">
+        <span class="mr-3">
+          <span class="verified-icon"></span>
+        </span>Hundereds of users are part of more than 25 active discussions.
+      </div>
+    </div>
+    <div class="uk-width-1-1@s uk-width-1-3@m uk-padding-remove uk-flex uk-flex-middle">
+      <button class="uk-width-1-1 uk-button-default" (click)="showAllProducts()"> See All Products </button>
+    </div>
+  </div>
+</div>
+<!-- Product Section End -->

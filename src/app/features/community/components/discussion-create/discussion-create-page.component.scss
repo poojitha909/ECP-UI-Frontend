@@ -10,21 +10,13 @@
       font-weight: bold;
       color: $font-light-black;
     }
-    .breadcrumbs {
-      margin-top: 20px;
-      .uk-breadcrumb > :nth-child(n+2):not(.uk-first-column)::before{
-        margin: 0 5px;
-        content: ">";
-      }
-      .uk-breadcrumb {
-        font-size: 18px;
-        color: $primary-txt-color;
-        margin-top: 20px;
-      }
-      .uk-breadcrumb b {
-        font-size: 18px;
-        color:#000;
-        font-weight: bold;
-      }
+    .inner-container{
+      border-radius: 4px;
+      padding: 24px;
+      border: 1px solid #D7E0EF;
+    }
+    .uk-input, .uk-select{
+      border: 1px solid #D7E0EF;
+      border-radius: 4px;
     }
 }

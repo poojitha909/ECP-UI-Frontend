@@ -5,8 +5,7 @@ import { Pipe } from '@angular/core';
 })
 export class TimeAgoPipe {
   transform(val, args) {
-    
-    console.log(val);
+	  
     let d = new Date(val);
 		let now = new Date();
 		let seconds = Math.round(Math.abs((now.getTime() - d.getTime())/1000));

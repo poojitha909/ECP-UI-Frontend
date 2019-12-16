@@ -1,0 +1,16 @@
+<div class="m-t-40 m-b-40">
+    <div uk-grid>
+        <div class="uk-width-expand">
+            <p class="font-regular-24 font-weight-600">Your search didn’t yield a results.</p>
+            <p class="font-regular font-light font-weight-600">Checkout Popular Search terms for {{tabName}}</p>
+
+            <!-- Popular search component  -->
+            <app-popular-search></app-popular-search>
+            <!-- Popular search component  -->
+            <button [routerLink]="viewLink" class="uk-button uk-button-default m-t-30">View All {{tabName}}</button>
+        </div>
+        <div class="uk-width-auto">
+            <img src="assets/images/norecord.svg" />
+        </div>
+    </div>
+</div>

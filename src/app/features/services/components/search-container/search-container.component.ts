@@ -20,7 +20,7 @@ export class SearchContainerComponent implements OnInit {
   searchTextChanged = new Subject<string>();
   searchPageParam: PageParam = {
     p: 0,
-    s: 5,
+    s: 6,
     term: ''
   };
 
@@ -36,16 +36,24 @@ export class SearchContainerComponent implements OnInit {
     ).subscribe(() => {
       this.onSearchChange(this.searchPageParam.term);
     });
+
+    if (this.homeService.homeSearchtxt) {
+      this.searchPageParam.term = this.homeService.homeSearchtxt;
+      this.showReset = true;
+      this.searchService();
+    }
+
   }
 
   @HostListener('window:click', ['$event.target'])
   clear() {
     this.autocompleteFields = [];
+    this.selectedValue = "";
   }
 
   onSearchChange(value) {
     if (value !== "") {
-      this.showReset = true
+      this.showReset = true;
       this.homeService.searchParam = this.searchPageParam;
       this.homeService.getAutoCompleteServices().subscribe(
         response => {
@@ -57,23 +65,43 @@ export class SearchContainerComponent implements OnInit {
     }
   }
 
-  onSearch() {
-    if (this.searchPageParam.term && this.searchPageParam.term !== '') {
+  searchService() {
+    // const param = this.searchPageParam.term;
+    this.homeService.homeSearchtxt = this.searchPageParam.term;
+    this.homeService.searchParam = this.searchPageParam;
+    this.homeService.getServices().subscribe(response => {
+      this.popullarService = response.data.slice(0, 6);
+    },
+      error => {
+        console.log(error);
+      });
+  }
+
+
+  onSearch(field?: string) {
+    if (field || this.selectedValue) {
+      let service: Service;
       if (this.selectedValue) {
-        this.searchPageParam.term = this.selectedValue;
-      }
-      this.autocompleteFields = [];
-      // const param = this.searchPageParam.term;
-      this.homeService.searchParam = this.searchPageParam;
-      this.homeService.getServices().subscribe(response => {
-        this.popullarService = response.data.slice(0, 5);
-        // this.searchPageParam.term = param;
-        this.selectedValue = "";
-        // console.log(param);
-      },
-        error => {
-          console.log(error);
+        // this.searchPageParam.term = this.selectedValue;
+        service = this.autocompleteFields.find(service => {
+          if (service.name && service.name == this.selectedValue) {
+            return true
+          } else if (service.basicProfileInfo && service.basicProfileInfo.firstName == this.selectedValue) {
+            return true;
+          }
         });
+
+        if (service.hasOwnProperty('basicProfileInfo')) {
+          this.router.navigate([`/services/${service.basicProfileInfo.firstName}/${service.id}/${true}`]);
+        } else {
+          this.router.navigate([`/services/${service.name}/${service.docid}/${false}`]);
+        }
+
+      } else {
+        this.searchService();
+      }
+      this.selectedValue = "";
+      this.autocompleteFields = [];
     }
   }
 
@@ -81,13 +109,21 @@ export class SearchContainerComponent implements OnInit {
     this.searchPageParam.term = "";
     this.autocompleteFields = [];
     this.showReset = false;
+    this.homeService.homeSearchtxt = "";
   }
 
 
-  onAutocompleteClick(field) {
-    this.searchPageParam.term = field;
-    this.selectedValue = "";
-    this.autocompleteFields = [];
+  onAutocompleteClick(service: Service) {
+    // this.searchPageParam.term = field;
+    // this.selectedValue = "";
+    // this.autocompleteFields = [];
+    if (service) {
+      if (service.hasOwnProperty('basicProfileInfo')) {
+        this.router.navigate([`/services/${service.basicProfileInfo.firstName}/${service.id}/${true}`]);
+      } else {
+        this.router.navigate([`/services/${service.name}/${service.docid}/${false}`]);
+      }
+    }
   }
 
   searchEvent($event) {

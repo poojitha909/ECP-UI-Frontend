@@ -1,0 +1,67 @@
+.rating {
+    h1 {
+      font-size: 48px;
+      font-family: "HKGroteskRegular";
+      font-weight: 700;
+      color: #fff;
+    }
+    background-color: #1a73e8;
+    border-radius: 4px;
+    color: #fff;
+    .star {
+      font-size: 1.2em;
+      color: #6fa8f1;
+    }
+    .filled {
+      color: #fff;
+    }
+  }
+
+  .jd-rating {
+    h1 {
+      font-size: 48px;
+      font-family: "HKGroteskRegular";
+      font-weight: 700;
+      color: #fff;
+    }
+    background-color: #a0a2a9;
+    border-radius: 4px;
+    color: #fff;
+    .star {
+      font-size: 1.2em;
+      color: #bdbec5;
+    }
+    .filled {
+      color: #fff;
+    }
+  }
+
+  .uk-progress {
+    height: 6px;
+  }
+
+  .uk-progress-rating {
+    // created class for customisation
+    &::-webkit-progress-value {
+      background-color: #1a73e8;
+    } // those are the overflowing colors
+    &::-ms-fill {
+      background-color: #1a73e8;
+    }
+    &::-moz-progress-bar {
+      background-color: #1a73e8;
+    }
+  }
+
+  .uk-progress-JDrating {
+    // created class for customisation
+    &::-webkit-progress-value {
+      background-color: #a0a2a9;
+    } // those are the overflowing colors
+    &::-ms-fill {
+      background-color: #a0a2a9;
+    }
+    &::-moz-progress-bar {
+      background-color: #a0a2a9;
+    }
+  }

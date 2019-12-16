@@ -9,6 +9,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { SearchContainerComponent } from './components/search-container/search-container.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { PopularSearchComponent } from './components/popular-search/popular-search.component';
+import { NoSearchResultComponent } from './components/no-search-result/no-search-result.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { PopularSearchComponent } from './components/popular-search/popular-sear
     HomePageComponent,
     SearchContainerComponent,
     SearchResultsComponent,
-    PopularSearchComponent
+    PopularSearchComponent,
+    NoSearchResultComponent
   ],
   imports: [CommonModule, CoreModule, HomeRoutingModule, SharedModule]
 })

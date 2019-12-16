@@ -2,7 +2,8 @@
 export interface PageParam {
     p: number,
     s: number,
-    term: string
+    term: string,
+    catid?: number
 }
 
 export interface JDserviceParam {
@@ -10,4 +11,6 @@ export interface JDserviceParam {
     catID?: string;
     max?: number;
     pageNo?: number;
+    isFeatured?: boolean;
+    dir?: number;
 }

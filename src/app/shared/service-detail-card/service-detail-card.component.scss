@@ -9,3 +9,26 @@ a{
 .p-16{
     padding: 16px;
 }
+
+.uk-card-default{
+    border: 1px solid #D7E0EF;
+    border-radius: 4px;
+}
+
+.verified {
+    position: relative;
+    button {
+      right: 10px;
+      position: absolute;
+      background-color: #1a73e8;
+      border-radius: 4px;
+      color: #fff;
+      padding: 7px 10px;
+      display: flex;
+      top: 10px;
+      border: 0px;
+      span {
+        font-size: 18px;
+      }
+    }
+  }

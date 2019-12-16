@@ -1,196 +1,212 @@
 <div class="product-detail" *ngIf="product!==undefined">
     <!-- Bread crumbs Start -->
     <div class="breadcrumbs">
-        <ul class="uk-breadcrumb">
-            <li routerLink="/products/" class="fa fa-angle-right">Products</li>
+        <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
+
+        <!-- <ul class="uk-breadcrumb">
+            <li routerLink="/" class="fa fa-angle-right">Home</li>
+            <li routerLink="/products" class="fa fa-angle-right">Products</li>
             <li routerLink="/products/all" class="fa fa-angle-right">All Products</li>
-        </ul>
+        </ul> -->
     </div>
     <!-- Bread crumbs End -->
     <div class="uk-container">
         <div class="uk-grid uk-grid-large">
             <h2 class="heading">{{product?.name}}</h2>
         </div>
-        <hr/>
-        <div class="no-top-m uk-grid uk-grid-large">
+        <hr class="m-b-30" />
+        <div class="grid-reverse-dir no-top-m uk-grid uk-grid-large">
             <div class="uk-width-1-3@m">
-                <div class="category-box">
-                        <div *ngFor="let slide of slides">
-                            {{slide}}
-                        </div>
-                        <ngb-carousel *ngIf="product && product.images" [activeId]="activeSlideId">
-                            <ng-template *ngFor="let image of product.images" ngbSlide>
-                                <img [src]="image" alt="Random first slide">
-                            </ng-template>
-                        </ngb-carousel>
-                        <ul class="carousel-thumbnail">
-                            <li class="carousel-thumbnail__item list-inline-item" *ngFor="let image of product.images;  let i = index" (click)="setActiveSlide(i)">
-                                <a class="selected">
-                                    <img class="carousel-thumbnail__img" [src]="image">
-                                </a>
-                            </li>
-                        </ul>
+                <div class="carousel-box">
+                    <div *ngFor="let slide of slides">
+                        {{slide}}
+                    </div>
+                    <ngb-carousel *ngIf="product && product.images" [activeId]="activeSlideId">
+                        <ng-template *ngFor="let image of product.images" ngbSlide>
+                            <img [imageHandler] [src]="image" alt="Random first slide">
+                        </ng-template>
+                    </ngb-carousel>
                 </div>
-                <div class="m-t-40 category-box">
+                    <ul class="carousel-thumbnail">
+                        <li class="carousel-thumbnail__item carousel-box list-inline-item"
+                            *ngFor="let image of product.images;  let i = index" (click)="setActiveSlide(i)">
+                            <a class="selected">
+                                <img class="carousel-thumbnail__img" [src]="image">
+                            </a>
+                        </li>
+                    </ul>
+
+                <!-- Rating box START -->
+                <ul class="hidden" uk-tab="connect: .switcher-container; animation: uk-animation-fade">
+                    <li></li>
+                    <li></li>
+                </ul>
+                <div class="rating-box m-t-40 bg-white">
+                    <app-rating-view [detailReview]="detailReview" [dbReviewCount]="totalReviewRecords">
+                    </app-rating-view>
+                </div>
+
+                <!-- Submit Rating START-->
+                <div class="rating-box m-t-20 bg-white">
+                    <app-add-rating [userRating]="userRating" (submitForm)="onRatingSubmit($event)"></app-add-rating>
+                </div>
+                <!-- Submit Rating END-->
+
+                <!-- Rating box END -->
+
+                <div class="m-t-40 category-box bg-white">
                     <div class="m-b-20">
-                        <a href="" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a> <a> Share via
-                        Whatsapp</a>
+                        <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon"
+                            uk-icon="whatsapp"> </a>
+                        <a [href]="whatsappUrl" class="social-link"> Share via
+                            Whatsapp</a>
                     </div>
-            
+
                     <div class="m-b-20">
-                        <a href="" class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail"> </a> <a> Share via Email</a>
+                        <a href="mailto:?subject=%0AThis%20is%20Product%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=Product:%20{{product.name}}%0AProduct%2DURL:%20{{currentUrl}}"
+                            class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail"> </a>
+                        <a class="social-link"
+                            href="mailto:?subject=%0AThis%20is%20Product%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=Product:%20{{product.name}}%0AProduct%2DURL:%20{{currentUrl}}">
+                            Share
+                            via Email</a>
                     </div>
-            
+
                     <div>
-                        <a href="" class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a> Share via
-                        Facebook</a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{product.name}}"
+                            class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a>
+                        <a class="social-link"
+                            href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{product.name}}">
+                            Share via
+                            Facebook</a>
                     </div>
                 </div>
+
             </div>
             <div class="uk-width-2-3@m">
-                <h2 class="heading2">About</h2>
-                <div class="description">
+                <div class="category-box bg-white">
+                    <h2 class="heading2">About</h2>
+                    <div class="description">
                         {{product?.description}}
-                </div>
-                <hr/>
-                <div class="buynow">
-                    <table>
-                        <tr>
-                            <td><button class="uk-button uk-button-primary">Buy On {{product?.buyFrom }}</button></td>
-                            <td><span class="price"> Rs. {{product?.price}}</span></td>
-                        </tr>
-                    </table>                        
-                </div>
-                <hr/>
-                <div class="uk-card uk-card-default comment">
-                    <div class="uk-card-header">
-                        <h3>Write a Review</h3>
                     </div>
-                    <div class="uk-card-body">
-                        <!-- <div class="reply_reply" style="background-color: #FFF" *ngIf="replyParentText!=''">
-                            <div class="reply_reply_inner">
-                                <b>{{replyParentUser}}</b><br/>
-                                {{replyParentText}}
+                    <hr />
+                    <div class="buynow">
+                        <table>
+                            <tr>
+                                <td><button type="button" (click)="redirectToSite()"
+                                        class="uk-button uk-button-primary">{{ auth.isAuthenticate ? 'Buy
+                                        On ' + product?.buyFrom : 'Signin to get details'}}</button></td>
+                                <td><span class="price"> Rs. {{product?.price}}</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <hr />
+                </div>
+                
+                <!-- Write Review Form START-->
+                <!-- This is review modal -->
+                <div id="review-modal" uk-modal>
+                    <div class="uk-modal-dialog uk-modal-body">
+                        <h1 class="font-regular-24 font-weight-600">{{reviewTitle}} Review</h1>
+                        <hr />
+                        <!-- Success box START-->
+                        <div *ngIf="reviewSuccessMessage" class="uk-alert-success" uk-alert>
+                            <p>{{ reviewSuccessMessage }}</p>
+                        </div>
+                        <!-- Success box END-->
+                        <form [formGroup]="reviewForm" class="uk-form-stacked review-form">
+
+
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-stacked-text">Title<span
+                                        class="required">*</span></label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" id="form-stacked-text" formControlName="title" type="text"
+                                        placeholder="Enter your name">
+                                </div>
                             </div>
-                        </div> -->
-                        <div uk-grid>
-                            <div class="uk-width-1-2@m">
-                                <span class="p-b-5">Username</span>
-                                <input type="text" class="review-input" id="prod_username" name="prod_username" [(ngModel)]="username" placeholder="Enter your name" />
+
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-stacked-text">Your Review<span
+                                        class="required">*</span></label>
+                                <div class="uk-form-controls">
+                                    <textarea formControlName="review" class="uk-input min-h-200" id="form-stacked-text"
+                                        placeholder="Enter your review here"></textarea>
+                                </div>
                             </div>
-                            <div class="uk-width-1-2@m">
-                                <span class="p-b-5">Your Rating</span>
-                                <select class="review-input" id="prod_rating" name="prod_rating" [(ngModel)]="rating" placeholder="Enter your name">
-                                    <option value="5">5 Star</option>
-                                    <option value="4">4 Star</option>
-                                    <option value="3">3 Star</option>
-                                    <option value="2">2 Star</option>
-                                    <option value="1">1 Star</option>
-                                </select>
+
+                            <div class="uk-text-right">
+                                <button class="uk-button uk-button-transparent uk-modal-close"
+                                    type="button">Cancel</button>
+                                <button class="uk-button uk-button-default m-l-5 uk-modal-close"
+                                    (click)="onReviewSubmit()" type="button"
+                                    [disabled]="reviewForm.invalid">{{ auth.isAuthenticate ? 'Post Review': 'Signin to Review'}}</button>
                             </div>
-                        </div>                        
+                        </form>
+                    </div>
+                </div>
+                <!-- Write Review Form END-->
+
+                <!-- Review List START -->
+                <!-- Reviews Section-->
+                <div class="m-t-30">
+                    <ul class="uk-switcher switcher-container">
+                        <li>
+                            <!--DB Reviews START-->
+
+                            <ng-container *ngIf="reviews.length == 0">
+                                <app-no-review></app-no-review>
+                            </ng-container>
+
+                            <ng-container *ngIf="reviews.length > 0">
+                                <div class="m-t-50 m-b-20" uk-grid>
+                                    <div class="uk-width-expand uk-flex uk-flex-middle">
+                                        <h1 class="font-regular-24 font-weight-600"> Reviews
+                                            ({{totalReviewRecords}})
+                                        </h1>
+                                    </div>
+                                    <div class="uk-width-auto">
+                                        <button class="uk-button uk-button-default review-btn-transparent"
+                                            uk-toggle="target: #review-modal"
+                                            (click)="reviewForm.reset();reviewSuccessMessage = null;reviewTitle='Add'">Write
+                                            Review</button>
+                                    </div>
+                                </div>
+
+                                <!-- Review Box START-->
+                                <app-reviews-list [userId]="userId" [dbReview]="reviews"
+                                    (likeReview)="likeUnlikeReview($event)" (submitEditForm)="editReview($event)">
+                                </app-reviews-list>
+                                <!-- Review Box END-->
+
+                                <app-pagination *ngIf="reviews.length > 0" [totalRecords]="totalReviewRecords"
+                                    [currentPage]="reviwePaginate.p" [perPage]="reviwePaginate.s"
+                                    (pageChangeCall)="changeReviewPage($event)">
+                                </app-pagination>
+
+                            </ng-container>
+                            <!-- DB Reviews END -->
+                        </li>
+                    </ul>
+                </div>
+
+
+
+
+                <!-- Review List END -->
+
+                <!-- No reviews START -->
+                <!-- <div *ngIf="reviews && reviews.length == 0" class="m-t-30">
+                    <div class="uk-child-width-expand" uk-grid>
+                        <div class="info">
+                            <h1 class="font-regular-24 font-weight-600 m-0"> No review!</h1>
+                            <p class="lable font-regular m-0">No user has left review on this service.</p>
+                        </div>
                         <div>
-                            <span class="p-b-5">Your Review</span>
-                            <textarea id="commentarea" name="commentarea" [(ngModel)]="commentTxt" placeholder="Enter your review here"></textarea>
+                            <img src="/assets/images/norecord.svg" />
                         </div>
-                    </div>
-                    <div class="uk-card-footer">
-                        <div class="uk-flex uk-flex-right">
-                            <button class="btn-primary" (click)="addComment()">{{ !!user ? 'Submit Review' : 'Signin to Review'}}</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="reviews" *ngIf="reviews!==undefined">
-                    <h2 class="heading2">Reviews ({{reviews.length}})</h2>
-                    <div class="uk-card uk-card-default" *ngFor="let reply of reviews">
-                        <div class="uk-card-header">
-                            <div class="uk-grid-small uk-flex-middle" uk-grid>
-                                <!-- <div class="uk-width-auto">
-                                    <img class="uk-border-circle" *ngIf="reply.userProfile && reply.userProfile.basicProfileInfo && reply.userProfile.basicProfileInfo.profileImage && reply.userProfile.basicProfileInfo.profileImage.thumbnailImage" 
-                                        width="40" height="40" src="{{reply.userProfile.basicProfileInfo.profileImage.thumbnailImage}}">
-                                </div> -->
-                                <div class="uk-width-expand">
-                                    <h3 class="uk-card-title uk-margin-remove-bottom">{{reply.userName}}</h3>
-                                    <p class="uk-text-meta uk-margin-remove-top">
-                                        <ngb-rating [(rate)]="reply.rating" [readonly]="true" [max]="5">
-                                            <ng-template let-fill="fill" let-index="index">
-                                                <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                                            </ng-template>
-                                        </ngb-rating>
-                                    </p>
-                                </div>
-                                <div class="uk-width-auto">
-                                    <p class="uk-text-meta">{{ reply.createdAt | timeago }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="uk-card-body">
-                        <!-- <div class="reply_reply" *ngIf="reply.parentText!=''">
-                            <div class="reply_reply_inner">
-                                <b>{{reply.parentUser}}</b><br/>
-                                {{reply.parentText}}
-                            </div>
-                        </div> -->
-                        <div [innerHTML]="reply.review">
-                        </div>
-                        </div>
-                        <div class="uk-card-footer">
-                            <div class="uk-grid-collapse uk-child-width-expand@s" uk-grid>
-                                <div class="like-container">
-                                    <img src="/assets/images/like-outline.svg" (click)="likeReply(reply)"> <span class="like" (click)="likeReply(reply)">{{reply.likeCount}}</span>
-                                </div>
-                                <div class="reply-container" (click)="setReplyId(reply.id,reply.userName,reply.review)">
-                                    <img src="/assets/images/reply.svg"> <label class="reply"> Reply</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- <div class="details">
-                    <h2 class="heading2">Details</h2>
-                    <div class="uk-grid">
-                            <div class="uk-width-1-2@s">
-                                <p class="label">
-                                    Event Category
-                                </p>
-                                <p class="description">
-                                    {{ (event.eventType==1 ? "Outdoor" : "Indoor") }}
-                                </p>
-                                <p class="label">
-                                    Email
-                                </p>
-                                <p class="description">
-                                    {{event.orgEmail}}
-                                </p>
-                                <p class="label">
-                                    Location
-                                </p>
-                                <p class="description">
-                                    {{event.address + " " + event.landmark}}
-                                </p>
-                            </div>
-                            <div class="uk-width-1-2@s description">
-                                <p class="label">
-                                    Event Entry
-                                </p>
-                                <p class="description">
-                                    {{ (event.entryFee >= 1 ? "Paid" : "Free") }}
-                                </p>
-                                <p class="label">
-                                    Languages
-                                </p>
-                                <p class="description">
-                                    {{event.languages}}
-                                </p>
-                                <p class="label">
-                                    Phone Number
-                                </p>
-                                <p class="description">
-                                    {{event.orgPhone}}
-                                </p>
-                            </div>
                     </div>
                 </div> -->
+                <!-- No reviews END -->
             </div>
         </div>
     </div>

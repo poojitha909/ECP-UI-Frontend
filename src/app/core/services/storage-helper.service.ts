@@ -24,6 +24,30 @@ export class StorageHelperService {
   }
 
   /**
+   * Store data to session storage
+   * @param key 
+   * @param value 
+   */
+  public storeSession(key: string, value: any) {
+
+    // this.storage.store(key, CryptoJS.AES.encrypt(value));
+    sessionStorage.setItem(key, CryptoJS.AES.encrypt(value, environment.encryptKey));
+  }
+
+  /**
+   * Retrieve session data
+   * @param key 
+   */
+  public retrieveSession(key: string): any {
+    if (key && sessionStorage.getItem(key)) {
+      return CryptoJS.AES.decrypt(sessionStorage.getItem(key), environment.encryptKey).toString(CryptoJS.enc.Utf8);
+    }
+    return;
+  }
+
+
+
+  /**
    * Retrieve data from LS
    * @param key 
    */
@@ -33,9 +57,22 @@ export class StorageHelperService {
     // }
     // return;
     if (key && localStorage.getItem(key)) {
-      return CryptoJS.AES.decrypt(localStorage.getItem(key),environment.encryptKey).toString(CryptoJS.enc.Utf8);
+      return CryptoJS.AES.decrypt(localStorage.getItem(key), environment.encryptKey).toString(CryptoJS.enc.Utf8);
     }
     return;
+  }
+
+  /**
+   * Clear session storage
+   * @param key 
+   */
+  public clearSession(key?: string) {
+    // this.storage.clear(key);
+    if (key) {
+      sessionStorage.removeItem(key);
+    } else {
+      sessionStorage.clear();
+    }
   }
 
   /**

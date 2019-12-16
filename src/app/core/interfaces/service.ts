@@ -161,6 +161,7 @@ export interface ServiceDetail {
     id?: string;
     facilities?: any[];
     reviewedByUser?: boolean;
+    aggrRatingPercentage?: number;
 }
 
 export interface Review {
@@ -183,20 +184,48 @@ export interface SeoDt {
 export interface JDCategory {
     category_name: string;
     national_catid: string;
+    class?: string[];
+    icon?: string[];
 }
 
 
 export interface DBReviews {
-    id?: any;
+    id?: string;
     serviceId?: string;
+    userId?: string;
     rating?: number;
     review?: string;
-    likeCount?: any;
-    unLikeCount?: any;
+    likeCount?: string[];
+    unLikeCount?: string[];
     status?: number;
+    title?: string;
+    contributors?: string;
     userName?: string;
     parentReviewId?: any;
     createdAt?: number;
     lastModifiedAt?: number;
+    userImage?: any;
 }
 
+export interface DBRating {
+    id?: string;
+    serviceId?: string;
+    userId?: string;
+    rating?: number;
+    createdAt?: number;
+    lastModifiedAt?: number;
+}
+
+export interface SEO {
+    title: string;
+    keywords: string;
+    description: string;
+    author: string;
+    image: string;
+}
+
+export interface Breadcrumb {
+    text: string;
+    link: string | any[];
+    queryParams?: any;
+}

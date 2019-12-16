@@ -1,119 +1,84 @@
 <div class="uk-container products">
   <div class="breadcrumbs">
-      <ul class="uk-breadcrumb">
-          <li routerLink="/products" class="fa fa-angle-right">Products</li>
-      </ul>
+    <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
   </div>
   <h2>All Products</h2>
-  <hr/>
-  <div *ngIf="catsList!==undefined">
-    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" >
-      <div ngxSlickItem *ngFor="let slide of catsList" class="slide">
-          <div style="padding: 0 10px" (click)="onTabChange(slide.id)">
-              <div class="uk-card uk-card-default">
-                <div class="uk-card-media-top">
-                  <img class="w-100" src="assets/images/product-bg.png" alt="">
-                </div>
-                <div class="uk-card-body uk-text-center service-type">
-                  <a>{{slide.name}}</a>
-                </div>
-              </div>
-            </div>
-      </div>
-    </ngx-slick-carousel>
-  </div>
-  
-  <div class="m-t-60" uk-grid>
+  <hr class="m-b-30" />
+  <div class="grid-reverse-dir" uk-grid>
     <div class="uk-width-1-3@m">
-      <div class="search-form">
-          <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
-              <div class="uk-margin uk-width-1-1 uk-width-expand@s">
-              <form class="uk-search uk-search-default">
-                  <span class="uk-search-icon-flip" [ngClass]="{ 'w-105':showReset}" uk-search-icon>
-                      <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)"><fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Reset&nbsp;&nbsp;</button>
-                  </span>
-                  <input class="uk-search-input search-box" [ngClass]="{ 'pr-105':showReset}" [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)"
-                  required type="text" placeholder="Search..." name="search" />
-              </form>
-              </div>
-              <!-- <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">
-              <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
-              </div> -->
+      <div class="category-box bg-white">
+        <div uk-grid>
+          <div class="uk-width-expand">
+            <h4>Categories</h4>
           </div>
-      </div>
-      <!-- <div class="uk-inline">
-        <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: search"></a>
-        <input class="uk-input" type="text">
-      </div> -->
-
-      <div class="m-t-40 category-box">
-        <h4>Categories</h4>
+          <div *ngIf="searchParams.productCategory !== ''">
+            <a class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
+          </div>
+        </div>
         <ul class="uk-list uk-list-large p-2" *ngIf="catsList!==undefined">
-          <li *ngFor="let cat of catsList" (click)="onTabChange(cat.id)">{{cat.name}} <span class="uk-badge uk-float-right">{{cat.productCount}}</span></li>
+          <li *ngFor="let cat of catsList" (click)="onTabChange(cat.id,cat.name)" class="cursor-pointer"
+            [ngClass]="{'cat-active': cat.id === searchParams.productCategory}">{{cat.name}} <span
+              class="uk-badge uk-float-right">{{cat.productCount}}</span></li>
         </ul>
       </div>
-      <!-- <div class="m-t-40 category-box uk-flex-middle uk-flex">
-        <label class="m-0"><input class="uk-checkbox m-r-10" type="checkbox" checked> Show only
-          Verified Profiles</label>
-      </div> -->
-      <div class="m-t-40 category-box">
+      <div class="m-t-30 bg-white category-box bg-white">
         <div class="m-b-20">
-          <a href="" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a> <a> Share via
+          <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
+          <a class="social-link" [href]="whatsappUrl">
+            Share via
             Whatsapp</a>
         </div>
-
         <div class="m-b-20">
-          <a href="" class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail"> </a> <a> Share via Email</a>
+          <a href="mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20{{currentUrl}}"
+            class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail">
+          </a> <a class="social-link"
+            href="mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20{{currentUrl}}">
+            Share via
+            Email</a>
         </div>
-
         <div>
-          <a href="" class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a> Share via
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services"
+            onclick="javascript:window.open(this.href,
+                      '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a
+            class="social-link"
+            href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services"
+            onclick="javascript:window.open(this.href,
+                      '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+            Share via
             Facebook</a>
         </div>
       </div>
     </div>
     <div class="uk-width-expand@m">
-      <!-- <div uk-grid>
-        <div class="uk-width-2-3@s text-center-xs">
-          <div class="uk-button-group" uk-switcher="toggle: > *">
-            <button class="uk-button uk-button-default">Item</button>
-            <button class="uk-button uk-button-default">Item</button>
-            <button class="uk-button uk-button-default">Item</button>
+      <div class="search-form">
+        <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
+          <div class="uk-margin uk-width-1-1 uk-width-expand@s">
+            <form class="uk-search uk-search-default">
+              <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
+                <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
+                  <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Clear Search
+                </button>
+              </span>
+              <input class="uk-input" [ngClass]="{ 'pr-150':showReset}" [(ngModel)]="searchParams.searchTxt"
+                (keyup)="onSearchChange($event)" required type="text" placeholder="Search for product here"
+                name="search" />
+            </form>
+          </div>
+          <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">
+            <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
           </div>
         </div>
-        <div class="uk-width-1-3@s">
-          <div class="uk-flex uk-flex-middle m-0" uk-grid>
-            <div class="p-0 m-r-5">
-              Sort-by
-            </div>
-            <div class="p-0 uk-width-expand">
-              <select class="uk-select">
-                <option>Option 01</option>
-                <option>Option 02</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
+      </div>
       <!-- Products list  -->
-      <div class="m-t-20" *ngIf="productsList!==undefined && productsList.length > 0">
+      <div *ngIf="productsList!==undefined && productsList.length > 0">
         <app-product-detail-card *ngFor="let proudct of productsList" [product]="proudct"></app-product-detail-card>
       </div>
-      <app-pagination *ngIf="(productsList && productsList.length > 0)" [totalRecords]="totalRecords" [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)"></app-pagination>
-      <!-- <hr>
-      <iframe style="width:120px;height:240px;margin-right:30px;" marginwidth="" marginheight="0" scrolling="no" frameborder="0" src="//ws-in.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=IN&source=ac&ref=tf_til&ad_type=product_link&tracking_id=ecplatform-21&marketplace=amazon&region=IN&placement=B07Q29BHXQ&asins=B07Q29BHXQ&linkId=edf19b589914e0aa9bf510c23cd13e6d&show_border=false&link_opens_in_new_window=false&price_color=333333&title_color=0066c0&bg_color=ffffff">
-      </iframe>
-      <iframe style="width:120px;height:240px;margin-right:30px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-in.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=IN&source=ac&ref=tf_til&ad_type=product_link&tracking_id=ecplatform-21&marketplace=amazon&region=IN&placement=B07Q29BHXQ&asins=B07Q29BHXQ&linkId=3e9540df26d6f6595c150d7ed2e268ca&show_border=false&link_opens_in_new_window=false&price_color=333333&title_color=0066c0&bg_color=ffffff">
-      </iframe>
-      <iframe style="width:120px;height:240px;margin-right:30px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-in.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=IN&source=ac&ref=tf_til&ad_type=product_link&tracking_id=ecplatform-21&marketplace=amazon&region=IN&placement=B07V742NZ3&asins=B07V742NZ3&linkId=c32e3b0e95b5f06ef38ce149ebd1e3a2&show_border=false&link_opens_in_new_window=false&price_color=333333&title_color=0066c0&bg_color=ffffff">
-      </iframe>
-      <iframe style="width:120px;height:240px;margin-right:30px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-in.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=IN&source=ac&ref=tf_til&ad_type=product_link&tracking_id=ecplatform-21&marketplace=amazon&region=IN&placement=B07Q29BHXQ&asins=B07Q29BHXQ&linkId=3e9540df26d6f6595c150d7ed2e268ca&show_border=false&link_opens_in_new_window=false&price_color=333333&title_color=0066c0&bg_color=ffffff">
-      </iframe> -->
-      <p><a target="_blank" href="https://www.amazon.in/SahiBUY-5X-Magnifying-Glass-Detector/dp/B00KQH7E7E/ref=sr_1_4_sspa?crid=DEY56FWD9F2O&keywords=magnifying+glass+10x&qid=1566205089&s=gateway&sprefix=magnying+%2Caps%2C307&sr=8-4-spons&psc=1&smid=AFAG8ZML2RKT8&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEyMkY0TFkyV1BOVFo0JmVuY3J5cHRlZElkPUEwNjc3NTI2SlZCV09GQkhCSjdaJmVuY3J5cHRlZEFkSWQ9QTA1NDM3MjIxT1k0NktJVTgwV0c2JndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ==" > Product 1</a></p>
-      <p><a target="_blank" href="https://www.amazon.in/Discount4product-Cutter-Clipper-Magnifying-Pedicure/dp/B00SPYV6HE/ref=sr_1_10?crid=2VUM1SYCJ6HDK&keywords=nail+cutter+for+seniors&qid=1566205144&s=gateway&sprefix=nail+cutter+for+sen%2Caps%2C271&sr=8-10" > Product 2</a></p>
-      <p><a target="_blank" href="https://www.amazon.in/Free-Burdens-Full-Vijaya-Venki/dp/1946983748/ref=sr_1_41?keywords=senior+care&qid=1566205201&s=gateway&sr=8-41" > Product 3</a></p>
-      <iframe src="/assets/banner.html" style="width:100%;height:400px"></iframe>
+      <app-pagination *ngIf="(productsList && productsList.length > 0)" [totalRecords]="totalRecords"
+        [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">
+      </app-pagination>
+      <div class="m-t-20" *ngIf="productsList==undefined || productsList.length == 0">
+        <app-product-no-record></app-product-no-record>
+      </div>
     </div>
   </div>
 

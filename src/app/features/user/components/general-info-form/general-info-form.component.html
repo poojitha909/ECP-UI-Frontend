@@ -1,11 +1,22 @@
 <!-- General info form -->
-<div class="category-box m-t-40">
+<div class="category-box m-t-40 bg-white">
     <h3>General Info</h3>
     <hr />
+    <!-- Error box START-->
+    <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
+        <p>{{ errorMessage }}</p>
+    </div>
+    <!-- Error box END-->
+    <!-- Success box START-->
+    <div *ngIf="!isLoading && successMessage" class="uk-alert-success" uk-alert>
+        <p>{{ successMessage }}</p>
+    </div>
+    <!-- Success box END-->
+
     <form class="uk-form-stacked" [formGroup]="generalInfoForm" (ngSubmit)="onSubmit()">
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-stacked-text">General Info</label>
+            <label class="uk-form-label" for="form-stacked-text">Gender</label>
             <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                 <label><input class="uk-radio" type="radio" formControlName="gender" [value]="1"> Male</label>
                 <label><input class="uk-radio" type="radio" formControlName="gender" [value]="0"> Female</label>
@@ -16,7 +27,7 @@
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-stacked-text">General Info</label>
+            <label class="uk-form-label" for="form-stacked-text">Marital Status</label>
             <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                 <label><input class="uk-radio" type="radio" formControlName="maritalStatus" value="Married">
                     Married</label>
@@ -24,6 +35,9 @@
                     Unmarried</label>
                 <label><input class="uk-radio" type="radio" formControlName="maritalStatus" value="Widowed">
                     Widowed</label>
+                <label><input class="uk-radio" type="radio" formControlName="maritalStatus" value="Prefer not to say">
+                    Prefer not to
+                    say</label>
             </div>
         </div>
 
@@ -49,7 +63,7 @@
                     <div class="uk-form-controls">
                         <select class="uk-select" id="form-stacked-select" formControlName="day">
                             <option disabled selected hidden value="">Day</option>
-                            <option *ngFor="let n of dateOption">{{n}}</option>
+                            <option *ngFor="let n of dateOption" [value]="n">{{n}}</option>
                         </select>
                     </div>
                 </div>
@@ -65,7 +79,7 @@
                     <div class="uk-form-controls">
                         <select class="uk-select" id="form-stacked-select" formControlName="year">
                             <option disabled selected hidden value>Year</option>
-                            <option *ngFor="let year of yearOptions">{{year}}</option>
+                            <option *ngFor="let year of yearOptions" [value]="year">{{year}}</option>
                         </select>
                     </div>
                 </div>
@@ -75,7 +89,8 @@
 
         <hr class="m-t-75" />
         <p class="uk-text-right">
-            <button class="uk-button uk-button-transparent uk-modal-close">Cancel</button>
+            <button class="uk-button uk-button-transparent uk-modal-close" type="button"
+                (click)="onCancel()">Cancel</button>
             <button class="m-l-10 uk-button uk-button-default" type="submit">Submit</button>
         </p>
     </form>

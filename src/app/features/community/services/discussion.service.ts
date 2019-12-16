@@ -63,6 +63,10 @@ export class DiscussionService {
         return this.http.get<any[]>(`${this.discussionDetailUrl}?${queryParams}`);
     }
 
+    editComment(id:string, text:string): Observable<any[]> {
+        return this.http.put<any[]>(`${this.discussionDetailUrl}/editReply`,{id,text});
+    }
+
     addComment(reqParams: any, discussId:string, parentReplyId:string, text:string): Observable<any[]> {
         let queryParams = "";
         Object.keys(reqParams)
@@ -84,9 +88,17 @@ export class DiscussionService {
         const url = "/community/discussion/" + discussId;
         return this.http.post<any[]>(`${this.discussionLikeUrl}?type=0&discussId=${discussId}&url=${url}`,{discussId,url});
     }
+    unlikeDiscussionReply(discussId:string): Observable<any[]> {
+        const url = "/community/discussion/" + discussId;
+        return this.http.put<any[]>(`${this.discussionLikeUrl}?type=0&discussId=${discussId}`,{discussId,url});
+    }
 
     likeReply(discussId:string, replyId:string): Observable<any[]> {
         const url = "/community/discussion/" + discussId;
         return this.http.post<any[]>(`${this.discussionReplyLikeUrl}?type=1&replyId=${replyId}&url=${url}`,{replyId,url});
+    }
+    unlikeReply(discussId:string, replyId:string): Observable<any[]> {
+        const url = "/community/discussion/" + discussId;
+        return this.http.put<any[]>(`${this.discussionReplyLikeUrl}?type=1&replyId=${replyId}`,{replyId,url});
     }
 }

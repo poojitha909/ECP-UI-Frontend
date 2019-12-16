@@ -77,7 +77,7 @@ export class SigninTypesViewComponent implements OnInit {
 
   mobileValidation(): boolean {
     console.log(this.mobileNumber.toString().length);
-    if (this.mobileNumber.toString().length > 10) {
+    if (this.mobileNumber.toString().length !== 10) {
       return false
     }
     return true;

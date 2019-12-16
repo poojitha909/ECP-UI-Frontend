@@ -1,67 +1,70 @@
-<div class="uk-container search-container">
-  <div class="header-label">
-    <h3>Search for Products, Services, Events and Discussions</h3>
-  </div>
+<div class="search-container m-t-40">
+  <!-- <div class="header-label">
+    <h3>Search for Events, Articles, Experts, Products & Services</h3>
+  </div> -->
 
   <!-- Search Form START -->
   <div class="search-form">
     <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
 
-      <div class="uk-margin uk-width-1-1 uk-width-expand@s uk-position-relative">
-        <div class="uk-position-absolute uk-z-index  w-full pr-20">
+      <div class="uk-width-expand uk-position-relative">
+        <div class="uk-position-absolute uk-z-index w-full pr-20">
           <form class="uk-search uk-search-default">
             <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
               <button class="uk-button-link" style="visibility: hidden"></button>
               <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
-                <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Search again
+                <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
               </button>
 
             </span>
-            <input class="uk-search-input search-box font-regular" [(ngModel)]="searchPageParam.term"
-              (keyup)="searchEvent($event)" (keydown.enter)="onSearch()" required type="text" placeholder="Search here"
-              name="search" />
+            <input class="uk-search-input search-box font-regular sm-pr-150" [(ngModel)]="searchPageParam.term"
+              (keyup)="searchEvent($event)" (keydown.enter)="onSearch($event.target.value)" required type="text"
+              placeholder="Search here" name="search" />
           </form>
           <ul *ngIf="autocompleteFields.length > 0"
             class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto search-list" appKeyHandler
             (onItemSelected)="onItemSelected($event)">
-            <li class="cursor-pointer" *ngFor="let field of autocompleteFields"
-              (click)="onAutocompleteClick(field.name || field.basicProfileInfo.firstName)">
+            <li class="cursor-pointer" *ngFor="let field of autocompleteFields" (click)="onAutocompleteClick(field)">
               {{field.name ||  field.basicProfileInfo.firstName }}
             </li>
           </ul>
         </div>
       </div>
 
-      <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">
-        <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
+      <div>
+        <button class="uk-button uk-button-default search-btn" (click)="onSearch(searchPageParam.term)">Search</button>
       </div>
     </div>
-  </div>
-  <!-- Search Form END -->
 
-  <!-- Search Result START -->
-  <app-search-results [searchData]="searchData"></app-search-results>
-  <!-- Search Result END -->
+    <!-- Search Form END -->
 
-  <!-- Popular search component  -->
-  <app-popular-search></app-popular-search>
-  <!-- Popular search component  -->
+    <!-- Search Result START -->
+    <app-search-results *ngIf="!noRecords && !isLoading && showResult" [searchData]="searchData" [term]="searchPageParam.term">
+    </app-search-results>
+    <!-- Search Result END -->
+    <div class="uk-text-center uk-text-bold m-t-20" *ngIf="noRecords">
+      No Records found
+    </div>
+    <!-- Popular search component  -->
+    <!-- <div class="p-24-40"
+    *ngIf="searchData.services.length == 0 && searchData.products.length == 0  && searchData.discussions.length == 0 ">
+    <app-popular-search></app-popular-search>
+  </div> -->
+    <!-- Popular search component  -->
 
-  <!-- <div class="uk-container popular-search-list"></div> -->
-  <div class="quote-line uk-margin-remove" uk-grid>
+    <!-- <div class="uk-container popular-search-list"></div> -->
+    <!-- <div class="quote-line uk-margin-remove" uk-grid>
     <div class="uk-width-expand@s uk-padding-remove uk-flex uk-flex-middle">
       <div class="uk-flex uk-flex-middle">
         <span class="mr-3">
           <span class="verified-icon"></span>
-        </span>All
-        Products
-        and Services are
-        100% verified. Buy with
-        Trust!
+        </span>
+        Engage to empower this community! 
       </div>
     </div>
+  </div> -->
     <!-- <div class="uk-width-auto@s uk-text-center">
-      <button class="uk-button uk-button-default">View All Products</button>
-    </div> -->
+        <button class="uk-button uk-button-default">View All Products</button>
+      </div> -->
   </div>
 </div>

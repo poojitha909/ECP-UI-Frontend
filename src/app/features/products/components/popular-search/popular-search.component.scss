@@ -5,15 +5,43 @@
 }
 .thumb-200{
     max-width: 100%!important;
-    height: 200px;
+    height: 160px;
     display: block;
     margin: auto;
 }
-.f20px{
-    font-size: 20px;
+// .no-grid-margin .uk-grid-margin{
+//     margin: 0px;
+// }
+.title-height{
+    min-height: 3rem;
+    display: block;
+    font-weight: bold;
+}
+.f15px{
+    font-size:15px;
     margin-top: 5px;
     color: $font-color-black;
 }
 .cursor{
     cursor: pointer;
+}
+// .uk-card-body .uk-grid{
+//     margin-left: -20px;
+// }
+// .uk-card-body .uk-grid > * {
+//     padding-left: 20px;
+// }
+.green{
+  color: #187700;
+  font-weight: bold;
+}
+.height-fix-slider {
+    min-height: 375px;
+}
+.slidenav-pervious {
+    right: 98% !important;
+}
+
+.slidenav-next {
+    left: 98% !important;
 }

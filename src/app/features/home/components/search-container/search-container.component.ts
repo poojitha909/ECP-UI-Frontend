@@ -2,10 +2,10 @@ import { Component, OnInit, HostListener } from '@angular/core';
 
 import { PageParam } from 'src/app/core';
 import { HomeService } from '../../home.service';
-import { JDCategory, Service } from 'src/app/core/interfaces';
-import { JdCategoryService } from 'src/app/core/services';
+import { Service } from 'src/app/core/interfaces';
 import { Subject } from 'rxjs';
-import { debounce, debounceTime, distinctUntilChanged, mergeMap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,11 +16,14 @@ import { debounce, debounceTime, distinctUntilChanged, mergeMap } from 'rxjs/ope
 export class SearchContainerComponent implements OnInit {
 
   showReset: boolean;
+  showResult: boolean
   searchTextChanged = new Subject<string>();
   selectedValue: string;
+  noRecords: boolean;
+  isLoading: boolean;
   searchPageParam: PageParam = {
     p: 0,
-    s: 5,
+    s: 6,
     term: ''
   };
 
@@ -29,9 +32,17 @@ export class SearchContainerComponent implements OnInit {
   searchData: any = {
     services: [],
     products: [],
-    Communitys: []
+    discussions: [],
+    experts: [],
+    events: [],
+    maxResult: 0,
+    totalServices: 0,
+    totalProducts: 0,
+    totalDiscussions: 0,
+    totalEvents: 0,
+    totalExperts: 0
   };
-  constructor(private homeService: HomeService) { }
+  constructor(private homeService: HomeService, private router: Router) { }
 
   ngOnInit() {
     this.searchTextChanged.pipe(
@@ -40,16 +51,25 @@ export class SearchContainerComponent implements OnInit {
     ).subscribe(() => {
       this.onSearchChange(this.searchPageParam.term);
     })
+
+
+    if (this.homeService.homeSearchtxt) {
+      this.searchPageParam.term = this.homeService.homeSearchtxt;
+      this.homeSearchPages();
+      this.showReset = true;
+      this.showResult = true;
+    }
   }
 
   @HostListener('window:click', ['$event.target'])
   clear() {
     this.autocompleteFields = [];
+    this.selectedValue = "";
   }
 
   onSearchChange(value) {
     if (value !== "") {
-      this.showReset = true
+      this.showReset = true;
       this.homeService.searchParam = this.searchPageParam;
       this.homeService.getAutoCompleteServices().subscribe(
         response => {
@@ -58,6 +78,7 @@ export class SearchContainerComponent implements OnInit {
     } else {
       this.autocompleteFields = [];
       this.showReset = false;
+      this.showResult = false;
     }
   }
 
@@ -66,32 +87,87 @@ export class SearchContainerComponent implements OnInit {
     this.searchPageParam.term = "";
     this.autocompleteFields = [];
     this.showReset = false;
+    this.showResult = false;
+    this.homeService.homeSearchtxt = "";
   }
 
-  onSearch() {
-    if (this.searchPageParam.term && this.searchPageParam.term !== '') {
-      if (this.selectedValue) {
-        this.searchPageParam.term = this.selectedValue;
+  homeSearchPages() {
+    this.isLoading = true;
+    this.homeService.searchParam = this.searchPageParam;
+    // Home search pages API
+    this.homeService.getHomeSearchPages().subscribe(response => {
+      this.isLoading = false;
+      if (response && response.servicePage) {
+        const servicePage = JSON.parse(response.servicePage);
+        this.searchData.services = servicePage.content.slice(0, 6);
+        this.searchData.totalServices = servicePage.total
       }
-      this.autocompleteFields = [];
-      // const param = this.searchPageParam.term;
-      this.homeService.searchParam = this.searchPageParam;
-      this.homeService.getServices().subscribe(response => {
-        this.searchData.services = response.data.slice(0, 5);
-        // this.searchPageParam.term = param;
-        this.selectedValue = "";
-        // console.log(param);
-      },
-        error => {
-          console.log(error);
+      this.searchData.products = response.productPage.content;
+      this.searchData.totalProducts = response.productPage.total;
+      this.searchData.discussions = response.discussPage.content;
+      this.searchData.totalDiscussions = response.discussPage.total;
+      this.searchData.events = response.eventPage.content;
+      this.searchData.experts = response.expertPage.content;
+      this.searchData.totalEvents = response.eventPage.total;
+      this.searchData.totalExperts = response.expertPage.total;
+      this.searchData.maxResult = Math.max(
+        this.searchData.totalServices,
+        this.searchData.totalProducts,
+        this.searchData.totalDiscussions,
+        this.searchData.totalEvents,
+        this.searchData.totalExperts);
+      if (this.searchData.maxResult == 0) {
+        this.noRecords = true;
+      } else {
+        this.noRecords = false;
+      }
+      this.showResult = true;
+    },
+      error => {
+        this.isLoading = false;
+        console.log(error);
+      });
+  }
+
+  onSearch(field?: string) {
+    if (field || this.selectedValue) {
+      let service: Service;
+      if (this.selectedValue) {
+        // this.searchPageParam.term = this.selectedValue;
+        service = this.autocompleteFields.find(service => {
+          if (service.name && service.name == this.selectedValue) {
+            return true
+          } else if (service.basicProfileInfo && service.basicProfileInfo.firstName == this.selectedValue) {
+            return true;
+          }
         });
+
+        if (service.hasOwnProperty('basicProfileInfo')) {
+          this.router.navigate([`/services/${service.basicProfileInfo.firstName}/${service.id}/${true}`]);
+        } else {
+          this.router.navigate([`/services/${service.name}/${service.docid}/${false}`]);
+        }
+
+      } else {
+        this.homeService.homeSearchtxt = field;
+        this.homeSearchPages();
+      }
+      this.selectedValue = "";
+      this.autocompleteFields = [];
     }
   }
 
-  onAutocompleteClick(field) {
-    this.searchPageParam.term = field;
-    this.selectedValue = "";
-    this.autocompleteFields = [];
+  onAutocompleteClick(service: Service) {
+    // this.searchPageParam.term = field;
+    // this.selectedValue = "";
+    // this.autocompleteFields = [];
+    if (service) {
+      if (service.hasOwnProperty('basicProfileInfo')) {
+        this.router.navigate([`/services/${service.basicProfileInfo.firstName}/${service.id}/${true}`]);
+      } else {
+        this.router.navigate([`/services/${service.name}/${service.docid}/${false}`]);
+      }
+    }
   }
 
   searchEvent($event) {

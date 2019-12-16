@@ -8,19 +8,21 @@ import { AllProductsComponent } from './components/all-products/all-products.com
 import { PopularSearchComponent } from './components/popular-search/popular-search.component';
 import { ProductDetailPageComponent } from './components/product-detail/product-detail-page.component';
 import { ProductCreatePageComponent } from './components/product-create/product-create-page.component';
-import { TimeAgoPipe } from '../../shared/timeago.pipe';
 import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
-
+import { ProductNoRecordComponent } from './components/product-no-record/product-no-record.component'
 @NgModule({
-  declarations: [ProductsPageComponent, AllProductsComponent,  PopularSearchComponent, ProductDetailPageComponent, ProductCreatePageComponent, TimeAgoPipe],
+  declarations: [ ProductsPageComponent,
+          AllProductsComponent,
+          PopularSearchComponent,
+          ProductDetailPageComponent,
+          ProductCreatePageComponent,
+          ProductNoRecordComponent ],
   imports: [
     CoreModule,
     CommonModule,
     ProductsRoutingModule,
     SharedModule,
-    NgbCarouselModule,
-    SlickCarouselModule
+    NgbCarouselModule
   ]
 })
 export class ProductsModule { }

@@ -1,62 +1,79 @@
 <!-- Contact detail from -->
-<div class="category-box m-t-40">
-    <h3>Contact Details</h3>
+<div class="category-box m-t-40 bg-white">
+    <h3>Address Details</h3>
     <hr />
-    <form class="uk-form-stacked">
+    <!-- Error box START-->
+    <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
+        <p>{{ errorMessage }}</p>
+    </div>
+    <!-- Error box END-->
+    <!-- Success box START-->
+    <div *ngIf="!isLoading && successMessage" class="uk-alert-success" uk-alert>
+        <p>{{ successMessage }}</p>
+    </div>
+    <!-- Success box END-->
+    <form [formGroup]="contactForm" class="uk-form-stacked" (ngSubmit)="onSubmit()">
 
-        <div class="uk-margin">
+        <!-- <div class="uk-margin">
             <label class="uk-form-label" for="form-stacked-text">Phone Number</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="form-stacked-text" type="text" placeholder="Enter phone number">
+                <input class="uk-input" id="form-stacked-text" formControlName="primaryPhoneNo" type="text"
+                    placeholder="Enter phone number">
             </div>
         </div>
 
         <div class="uk-margin">
             <label class="uk-form-label" for="form-stacked-text">Email ID</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="form-stacked-text" type="text" placeholder="Enter emailId">
+                <input class="uk-input" id="form-stacked-text" type="text" formControlName="primaryEmail"
+                    placeholder="Enter emailId">
             </div>
-        </div>
+        </div> -->
 
-        <div class="uk-margin">
+        <!-- <div class="uk-margin">
             <label class="uk-form-label" for="form-stacked-select">Country</label>
             <div class="uk-form-controls">
-                <select class="uk-select" id="form-stacked-select">
+                <select class="uk-select" id="form-stacked-select" formControlName="country">
                     <option disabled selected hidden value="">Select Country</option>
                     <option>India</option>
                 </select>
+            </div>
+        </div> -->
+
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-text">Address in india</label>
+            <div class="uk-form-controls">
+                <textarea class="uk-input min-h-100" id="form-stacked-text" formControlName="streetAddress"
+                    placeholder="Enter your address"></textarea>
             </div>
         </div>
 
         <div class="uk-margin">
             <label class="uk-form-label" for="form-stacked-select">City</label>
             <div class="uk-form-controls">
-                <select class="uk-select" id="form-stacked-select">
+                <select class="uk-select" id="form-stacked-select" formControlName="city">
                     <option disabled selected hidden value="">Select City</option>
-                    <option>Bengaluru</option>
+                    <!-- <option>Bengaluru</option> -->
                     <option>Hyderabad</option>
                 </select>
             </div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-stacked-text">Address</label>
-            <div class="uk-form-controls">
-                <textarea class="uk-input min-h-100" id="form-stacked-text" placeholder="Enter your address"></textarea>
-            </div>
-        </div>
-
-        <div class="uk-margin">
             <label class="uk-form-label" for="form-stacked-text">Zip</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="form-stacked-text" type="text" placeholder="Enter zipcode">
+                <input class="uk-input" id="form-stacked-text" type="number" formControlName="zip" type="text"
+                    placeholder="Enter zipcode">
             </div>
         </div>
 
         <hr class="m-t-75" />
         <p class="uk-text-right">
-            <button class="uk-button uk-button-transparent uk-modal-close">Cancel</button>
-            <button class="m-l-10 uk-button uk-button-default">Submit</button>
+            <button class="uk-button uk-button-transparent uk-modal-close" type="button"
+                (click)="onCancel()">Cancel</button>
+            <button class="m-l-10 uk-button uk-button-default" type="submit"
+                [disabled]="contactForm.invalid">Submit</button>
         </p>
     </form>
 </div>

@@ -7,20 +7,16 @@ import { EventsListPageComponent } from './components/events-list/events-list-pa
 import { DiscussionsListPageComponent } from './components/discussions-list/discussions-list-page.component';
 import { DiscussionCreatePageComponent } from './components/discussion-create/discussion-create-page.component';
 import { DiscussionSummaryComponent } from './components/discussion-summary/discussion-summary.component';
-import { DiscussionSummaryCatComponent } from './components/discussion-summary-cat/discussion-summary-cat.component';
-import { EventSummaryComponent } from './components/event-summary/event-summary.component';
 import { EventDetailPageComponent } from './components/event-detail/event-detail-page.component';
 import { EventCreatePageComponent } from './components/event-create/event-create-page.component';
 import { DiscussionDetailPageComponent } from './components/discussion-detail/discussion-detail-page.component';
 import { DiscussionNoRecordComponent } from './components/discussion-no-record/discussion-no-record.component';
 import { EventNoRecordComponent } from './components/event-no-record/event-no-record.component';
-import { EllipsisPipe } from '../../shared/ellipsis.pipe';
-import { TimeAgoPipe } from '../../shared/timeago.pipe';
 import { SharedModule } from '../../shared';
+import { EditorModule } from '@tinymce/tinymce-angular';
+
 @NgModule({
   declarations: [
-    EllipsisPipe,
-    TimeAgoPipe,
     CommunityPageComponent,
     DiscussionNoRecordComponent,
     EventsListPageComponent,
@@ -28,9 +24,7 @@ import { SharedModule } from '../../shared';
     DiscussionDetailPageComponent,
     DiscussionCreatePageComponent,
     DiscussionSummaryComponent,
-    DiscussionSummaryCatComponent,
     EventNoRecordComponent,
-    EventSummaryComponent,
     EventDetailPageComponent,
     DiscussionsListPageComponent
   ],
@@ -38,7 +32,8 @@ import { SharedModule } from '../../shared';
     CommonModule,
     CommunityRoutingModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    EditorModule
   ]
 })
 export class CommunityModule { }

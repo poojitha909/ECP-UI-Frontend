@@ -11,9 +11,60 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { ErrorComponent } from './error/error.component';
 import { FrontendPaginationComponent } from './frontend-pagination/frontend-pagination.component';
 import { KeyHandlerDirective } from './directives/key-handler.directive';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { DefaultImageDirective } from './directives/default-image.directive';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { ReviewsListComponent } from './reviews-list/reviews-list.component';
+import { RatingViewComponent } from './rating-view/rating-view.component';
+import { AddRatingComponent } from './add-rating/add-rating.component';
+import { TimeAgoPipe } from './timeago.pipe';
+import { NoReviewComponent } from './no-review/no-review.component';
+import { FeaturedProductsComponent } from './featured-products/featured-products.component';
+import { FeaturedServicesComponent } from './featured-services/featured-services.component';
+import { FeaturedAskExpertsComponent } from './featured-ask-experts/featured-ask-experts.component';
+import { FeaturedDiscussionsComponent } from './featured-discussions/featured-discussions.component';
+import { FeaturedEventsComponent } from './featured-events/featured-events.component';
+import { EllipsisPipe } from './ellipsis.pipe';
+import { StripHtmlPipe } from './striphtml.pipe';
+import { ServiceSearchCardComponent } from './service-search-card/service-search-card.component';
+import { ProductSearchCardComponent } from './product-search-card/product-search-card.component';
+import { DicussionSummaryCardComponent } from './dicussion-summary-card/dicussion-summary-card.component';
+import { EventSummaryCardComponent } from './event-summary-card/event-summary-card.component';
+import { AskExpertSummaryCardComponent } from './ask-expert-summary-card/ask-expert-summary-card.component';
+import { ActiveMaxDirective } from './directives/active-max.directive';
 
 @NgModule({
-  declarations: [ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, ServicesListComponent, PaginationComponent, ErrorComponent, FrontendPaginationComponent, KeyHandlerDirective],
+  declarations: [
+    ProductsListComponent,
+    ProductDetailCardComponent,
+    ServiceDetailCardComponent,
+    ServicesListComponent,
+    PaginationComponent,
+    ErrorComponent,
+    FrontendPaginationComponent,
+    KeyHandlerDirective,
+    AboutUsComponent,
+    DefaultImageDirective,
+    BreadcrumbComponent,
+    AddRatingComponent,
+    RatingViewComponent,
+    ReviewsListComponent,
+    TimeAgoPipe,
+    EllipsisPipe,
+    StripHtmlPipe,
+    NoReviewComponent,
+    FeaturedProductsComponent,
+    FeaturedServicesComponent,
+    FeaturedAskExpertsComponent,
+    FeaturedDiscussionsComponent,
+    FeaturedEventsComponent,
+    ServiceSearchCardComponent,
+    ProductSearchCardComponent,
+    DicussionSummaryCardComponent,
+    EventSummaryCardComponent,
+    AskExpertSummaryCardComponent,
+    ActiveMaxDirective
+  ],
   imports: [
     CommonModule,
     SharedRoutingModule,
@@ -21,7 +72,33 @@ import { KeyHandlerDirective } from './directives/key-handler.directive';
     // NgxPaginationModule
   ],
   exports: [
-    ProductsListComponent, ProductDetailCardComponent, ServiceDetailCardComponent, PaginationComponent, ServicesListComponent, FrontendPaginationComponent, KeyHandlerDirective
+    ProductsListComponent,
+    ProductDetailCardComponent,
+    ServiceDetailCardComponent,
+    PaginationComponent,
+    ServicesListComponent,
+    FrontendPaginationComponent,
+    KeyHandlerDirective,
+    DefaultImageDirective,
+    BreadcrumbComponent,
+    AddRatingComponent,
+    RatingViewComponent,
+    ReviewsListComponent,
+    TimeAgoPipe,
+    EllipsisPipe,
+    StripHtmlPipe,
+    NoReviewComponent,
+    FeaturedProductsComponent,
+    FeaturedServicesComponent,
+    FeaturedAskExpertsComponent,
+    FeaturedDiscussionsComponent,
+    FeaturedEventsComponent,
+    ServiceSearchCardComponent,
+    ProductSearchCardComponent,
+    DicussionSummaryCardComponent,
+    EventSummaryCardComponent,
+    AskExpertSummaryCardComponent,
+    ActiveMaxDirective
   ]
 })
 export class SharedModule { }

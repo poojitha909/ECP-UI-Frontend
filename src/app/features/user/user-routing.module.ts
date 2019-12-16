@@ -9,18 +9,8 @@ import { UserPageComponent } from './components/user-page/user-page.component';
 const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent,
-    children: [
-      {
-        path: '',
-        component: UserPageComponent
-      }
-    ]
+    component: UserPageComponent
   },
-  // {
-  //   path: 'signin',
-  //   component: SigninComponent
-  // },
   {
     path: 'signin',
     component: SignupComponent

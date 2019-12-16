@@ -1,63 +1,101 @@
 <div class="uk-container discussions" *ngIf="categoryList!==undefined && dropDownList!==undefined">
     <!-- Bread crumbs Start -->
     <div class="breadcrumbs">
-        <ul class="uk-breadcrumb">
-            <li routerLink="/community" class="fa fa-angle-right">Community</li>
-            <li *ngIf="selCategory!=''" class="fa fa-angle-right" routerLink="/community/discussions">All Discussions</li>
-        </ul>
+        <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
     </div>
     <!-- Bread crumbs End -->
-    <!-- Tabs with list start -->
-    <div class="uk-container">
-        <h2 class="heading">{{selCategory=='' ? 'All' : dropDownList[selCategory].label}} Discussions</h2>
-        <div class="uk-grid">
-            <div class="uk-width-1-3@m">
-                <select class="uk-select" [ngModel]="selCategory" (change)="onTabChange($event.target.value)">
-                    <option value="">Select Category</option>
-                    <option *ngFor="let cat of dropDownList | keyvalue" value="{{cat.key}}">{{cat.value.label}}</option>
-                </select>
+    <div class="uk-grid uk-grid-large uk-flex-left">
+        <div class="uk-width-2-3">
+            <h2>{{selCategory=='' ? 'All' : dropDownList[selCategory].label}} Articles & Discussions</h2>
+        </div>
+        <div class="uk-width-1-3">
+            <button routerLink="/community/discussion/add" class="uk-button uk-button-default adddiscuss"> Start a
+                Discussion +</button>
+        </div>
+    </div>
+    <hr class="m-b-30" />
+    <div class="grid-reverse-dir" uk-grid>
+        <div class="uk-width-1-3@m">
+            <div class="category-box bg-white">
+                <div uk-grid>
+                    <div class="uk-width-expand">
+                        <h4>Categories</h4>
+                    </div>
+                    <div *ngIf="searchParams.tags !== ''">
+                        <a class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
+                    </div>
+                </div>
+                <ul class="uk-list uk-list-large p-2" *ngIf="dropDownList!==undefined">
+                    <li *ngFor="let cat of dropDownList | keyvalue" (click)="onTabChange(cat.key)"
+                        class="cursor-pointer" [ngClass]="{'cat-active': cat.key === selCategory}">{{cat.value.label}}
+                        <span class="uk-badge uk-float-right">{{cat.value.totalCount}}</span>
+                    </li>
+                </ul>
             </div>
-            <div class="uk-width-2-3@m uk-text-right search-form">
-                <div class="uk-grid uk-grid-small search-field">
-                    <div class="uk-width-3-4@m">
+            <div class="m-t-30 bg-white category-box bg-white">
+                <div class="m-b-20">
+                    <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon"
+                        uk-icon="whatsapp"> </a>
+                    <a class="social-link" [href]="whatsappUrl">
+                        Share via
+                        Whatsapp</a>
+                </div>
+                <div class="m-b-20">
+                    <a href="mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20{{currentUrl}}"
+                        class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail">
+                    </a> <a class="social-link"
+                        href="mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20{{currentUrl}}">
+                        Share via
+                        Email</a>
+                </div>
+                <div>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services"
+                        onclick="javascript:window.open(this.href,
+                            '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
+                        class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a
+                        class="social-link"
+                        href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services"
+                        onclick="javascript:window.open(this.href,
+                            '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                        Share via
+                        Facebook</a>
+                </div>
+            </div>
+        </div>
+        <div class="uk-width-expand@m">
+            <div class="search-form">
+                <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
+                    <div class="uk-margin uk-width-1-1 uk-width-expand@s">
                         <form class="uk-search uk-search-default">
-                            <span class="uk-search-icon-flip" [ngClass]="{ 'w-105':showReset}" uk-search-icon>
-                                <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)"><fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Reset&nbsp;&nbsp;</button>
+                            <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
+                                <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
+                                    <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Clear Search
+                                </button>
                             </span>
-                            <input class="uk-search-input search-box" [ngClass]="{ 'pr-105':showReset}" [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)"
-                            required type="text" placeholder="Search..." name="search" />
+                            <input class="uk-search-input font-regular search-box" [ngClass]="{ 'pr-150':showReset}"
+                                [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required
+                                type="text" placeholder="Search here" name="search" />
                         </form>
                     </div>
-                    <div class="uk-width-1-4@m">
+                    <div class="uk-width-1-s1 uk-width-auto@s uk-margin-bottom">
                         <button class="uk-button uk-button-default search-btn" (click)="submitSearch()">Search</button>
                     </div>
                 </div>
             </div>
-        </div>
-        <hr/>
-        <div *ngIf="selCategory!='' && discussionsList.length > 0" class="uk-grid uk-grid-large uk-flex-left uk-text-center uk-child-width-1-1@m">
-            <app-discussion-summary-cat *ngFor="let discussion of discussionsList" [category]="selCategory" [discussion]="discussion"></app-discussion-summary-cat>
-        </div>
-        <div *ngIf="selCategory=='' && categoryList" class="uk-grid uk-grid-large uk-flex-left uk-text-center uk-child-width-1-3@m">
-            <div class="add-dicsussion">
-                <div class="add-dicsussion-inner" routerLink="/community/discussion/add">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="6" y="6" width="28" height="28">
-                        <path d="M33.3333 8.40579C33.3333 7.94454 33.1501 7.50219 32.8239 7.17604C32.4978 6.84989 32.0554 6.66666 31.5942 6.66666H8.40576C7.94451 6.66666 7.50216 6.84989 7.17601 7.17604C6.84986 7.50219 6.66663 7.94454 6.66663 8.40579V31.5942C6.66663 32.0554 6.84986 32.4978 7.17601 32.8239C7.50216 33.1501 7.94451 33.3333 8.40576 33.3333H31.5942C32.0554 33.3333 32.4978 33.1501 32.8239 32.8239C33.1501 32.4978 33.3333 32.0554 33.3333 31.5942V8.40579ZM13.0434 21.1594C12.7359 21.1594 12.441 21.0373 12.2236 20.8198C12.0062 20.6024 11.884 20.3075 11.884 20C11.884 19.6925 12.0062 19.3976 12.2236 19.1802C12.441 18.9627 12.7359 18.8406 13.0434 18.8406H18.5507C18.6276 18.8406 18.7013 18.81 18.7556 18.7557C18.81 18.7013 18.8405 18.6276 18.8405 18.5507V13.0435C18.8405 12.736 18.9627 12.4411 19.1801 12.2236C19.3976 12.0062 19.6925 11.884 20 11.884C20.3075 11.884 20.6024 12.0062 20.8198 12.2236C21.0372 12.4411 21.1594 12.736 21.1594 13.0435V18.5507C21.1594 18.6276 21.1899 18.7013 21.2443 18.7557C21.2986 18.81 21.3724 18.8406 21.4492 18.8406H26.9565C27.264 18.8406 27.5589 18.9627 27.7763 19.1802C27.9937 19.3976 28.1159 19.6925 28.1159 20C28.1159 20.3075 27.9937 20.6024 27.7763 20.8198C27.5589 21.0373 27.264 21.1594 26.9565 21.1594H21.4492C21.3724 21.1594 21.2986 21.1899 21.2443 21.2443C21.1899 21.2987 21.1594 21.3724 21.1594 21.4493V26.9565C21.1594 27.264 21.0372 27.5589 20.8198 27.7763C20.6024 27.9938 20.3075 28.1159 20 28.1159C19.6925 28.1159 19.3976 27.9938 19.1801 27.7763C18.9627 27.5589 18.8405 27.264 18.8405 26.9565V21.4493C18.8405 21.3724 18.81 21.2987 18.7556 21.2443C18.7013 21.1899 18.6276 21.1594 18.5507 21.1594H13.0434Z" fill="#111111"/>
-                        </mask>
-                        <g mask="url(#mask0)">
-                        <rect width="40" height="40" fill="#1A73E8"/>
-                        </g>
-                    </svg>
-                    <div>Start a Discussion</div>
+            <div *ngIf="discussionsList!==undefined && discussionsList.length > 0" class="m-b-30">
+                <div class="uk-flex-left uk-text-center uk-child-width-1-2@m" uk-grid>
+                    <div *ngFor="let discussion of discussionsList">
+                        <app-dicussion-summary-card [category]="selCategory" [discussion]="discussion">
+                        </app-dicussion-summary-card>
+                    </div>
                 </div>
             </div>
-            <app-discussion-summary *ngFor="let cat of categoryList | keyvalue" [category]="cat.value" (click)="onTabChange(cat.value.id)"></app-discussion-summary>
-        </div>
-        <div *ngIf="(selCategory!='' && discussionsList.length == 0) || (selCategory=='' && categoryList==null)">
-            <app-discussion-no-record></app-discussion-no-record>
+            <app-pagination *ngIf="(discussionsList.length > 0)" [totalRecords]="totalRecords"
+                [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">
+            </app-pagination>
+            <div *ngIf="discussionsList?.length === 0">
+                <app-discussion-no-record></app-discussion-no-record>
+            </div>
         </div>
     </div>
-    <!-- Tabs with list end   || (selCategory=='' && categoryList) -->
-    <app-pagination *ngIf="(selCategory!='' && discussionsList.length > 0)" [totalRecords]="totalRecords" [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)"></app-pagination>
 </div>

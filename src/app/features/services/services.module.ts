@@ -9,10 +9,12 @@ import { AllServicesComponent } from './components/all-services/all-services.com
 import { SearchContainerComponent } from './components/search-container/search-container.component';
 import { PopularSearchComponent } from './components/popular-search/popular-search.component';
 import { ServiceDetailComponent } from './components/service-detail/service-detail.component';
+import { NoRecordsComponent } from './components/no-records/no-records.component';
+
 
 
 @NgModule({
-  declarations: [ServicesPageComponent, AllServicesComponent, SearchContainerComponent, PopularSearchComponent, ServiceDetailComponent],
+  declarations: [ServicesPageComponent, AllServicesComponent, SearchContainerComponent, PopularSearchComponent, ServiceDetailComponent, NoRecordsComponent],
   imports: [CommonModule, ServicesRoutingModule, SharedModule, CoreModule]
 })
 export class ServicesModule { }

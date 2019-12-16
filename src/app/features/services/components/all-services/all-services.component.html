@@ -167,7 +167,8 @@
                     Search</span>
                 </a>
                 <input class="uk-input" placeholder="Search for Service here" [(ngModel)]="searchPageParam.term"
-                  (keyup)="searchEvent($event)" required type="text" (keydown.enter)="onSearch($event.target.value)">
+                  (keyup)="searchEvent($event)" required type="text" autocomplete='off'
+                  (keydown.enter)="onSearch($event.target.value)">
               </div>
               <!-- Auto complete list -->
               <ul *ngIf="autocompleteFields.length > 0"

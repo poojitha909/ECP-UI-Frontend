@@ -9,7 +9,7 @@
 
       <div class="uk-width-expand uk-position-relative">
         <div class="uk-position-absolute uk-z-index w-full pr-20">
-          <form class="uk-search uk-search-default">
+          <form class="uk-search uk-search-default" autocomplete='off'>
             <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
               <button class="uk-button-link" style="visibility: hidden"></button>
               <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
@@ -19,7 +19,7 @@
             </span>
             <input class="uk-search-input search-box font-regular sm-pr-150" [(ngModel)]="searchPageParam.term"
               (keyup)="searchEvent($event)" (keydown.enter)="onSearch($event.target.value)" required type="text"
-              placeholder="Search here" name="search" />
+              placeholder="Search here" name="search" autocomplete='off' />
           </form>
           <ul *ngIf="autocompleteFields.length > 0"
             class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto search-list" appKeyHandler

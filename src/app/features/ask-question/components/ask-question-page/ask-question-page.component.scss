@@ -171,12 +171,12 @@
   margin-top: 32px;
   margin-bottom: 32px;
 }
-.uk-button-default {
-  color: #ffffff;
+.uk-button-default, .uk-button-default:focus {
+  color: #ffffff !important;
   border: 1px solid #1a73e8;
   border-radius: 4px;
   height: 48px;
-  background-color: #1a73e8;
+  background-color: #1a73e8 !important;
 }
 @media (min-width: 640px) {
   // .sm-pr-20 {

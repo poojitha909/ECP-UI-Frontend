@@ -70,18 +70,14 @@
     }
   }
 }
-.uk-button-default {
-  background-color: #1a73e8;
+.uk-button-default, .uk-button-default:focus {
+  background-color: #1a73e8 !important;
   border-radius: 4px;
   border: 1px solid #1a73e8;
   font-size: 18px;
-  color: #fff;
+  color: #fff !important;
   text-transform: none;
   padding: 1px 30px;
-  &:focus {
-    color: #1a73e8;
-    background-color: #fff;
-  }
 }
 
 .reset-search {

@@ -100,12 +100,14 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
       this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
     }
-    this.onSearch();
+    this.showEvents();
+    this.showEventsCount();
   }
 
   changePage(page: number) {
     this.searchParams.p = page;
-    this.onSearch()
+    this.showEvents();
+    this.showEventsCount();
   }
 
   showEvents() {
@@ -172,8 +174,7 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
   }
 
   onSearch() {
-    this.showEvents();
-    this.showEventsCount();
+    this.router.navigate(['/community/events'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt } });
   }
 
   setSearchTxt(value: string){

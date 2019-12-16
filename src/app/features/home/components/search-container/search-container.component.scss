@@ -27,7 +27,7 @@
       }
       .search-btn {
         height: 56px;
-        background-color: #1a73e8;
+        background-color: #1a73e8 !important;
         border-radius: 4px;
         color: #ffffff;
         text-transform: capitalize;
@@ -71,8 +71,9 @@
     }
   }
 }
-.uk-button-default {
-  color: #1a73e8;
+.uk-button-default, .uk-button-default:focus {
+  color: #ffffff !important;
+  background-color: #1a73e8 !important;
   border: 1px solid #1a73e8;
   border-radius: 4px;
   height: 48px;

@@ -109,18 +109,14 @@
       }
       .search-btn {
         height: 40px;
-        background-color: #1a73e8;
+        background-color: #1a73e8 !important;
         border-radius: 4px;
-        color: #ffffff;
+        color: #ffffff  !important;
         text-transform: capitalize;
         font-size: 18px;
         min-width: 150px;
         width: 100%;
         margin-top: -1px;
-        &:focus{
-          color: #1a73e8;
-          background-color: #ffffff;
-        }
       }
     }
     .reset-search{

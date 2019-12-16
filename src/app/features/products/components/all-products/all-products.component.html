@@ -52,19 +52,18 @@
     <div class="uk-width-expand@m">
       <div class="search-form">
         <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
-          <div class="uk-margin uk-width-1-1 uk-width-expand@s">
+          <div class="uk-margin uk-width-expand">
             <form class="uk-search uk-search-default">
-              <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
+              <span class="uk-search-icon-flip" [ngClass]="{ 'w-sm-150':showReset}" uk-search-icon>
                 <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
-                  <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Clear Search
+                  <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
                 </button>
               </span>
-              <input class="uk-input" [ngClass]="{ 'pr-150':showReset}" [(ngModel)]="searchParams.searchTxt"
-                (keyup)="onSearchChange($event)" required type="text" placeholder="Search for product here"
-                name="search" />
+              <input class="uk-input sm-pr-150" [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)"
+                required type="text" placeholder="Search for product here" name="search" />
             </form>
           </div>
-          <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">
+          <div class="uk-width-auto uk-margin-bottom">
             <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
           </div>
         </div>

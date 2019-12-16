@@ -155,4 +155,11 @@
     content: " ";
     clear: both;
   }
+
+  @media (max-width : 640px) {
+    .addevent{
+      width: 170px;
+      padding: 0px;
+    }
+  }
 }

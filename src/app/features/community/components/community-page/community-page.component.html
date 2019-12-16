@@ -5,7 +5,7 @@
     <div class="search-form">
       <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
         <div class="uk-width-expand">
-          <form class="uk-search uk-search-default">
+          <form class="uk-search uk-search-default" autocomplete='off'>
             <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
               <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
                 <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
@@ -13,7 +13,7 @@
             </span>
             <input class="uk-search-input font-regular search-box" [ngClass]="{ 'pr-150':showReset}"
               [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required type="text"
-              placeholder="Search here" name="search" />
+              placeholder="Search here" name="search" autocomplete='off' />
           </form>
         </div>
         <div>

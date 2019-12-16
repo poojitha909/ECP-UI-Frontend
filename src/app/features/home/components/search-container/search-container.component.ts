@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 export class SearchContainerComponent implements OnInit {
 
   showReset: boolean;
+  showResult: boolean
   searchTextChanged = new Subject<string>();
   selectedValue: string;
   noRecords: boolean;
@@ -56,6 +57,7 @@ export class SearchContainerComponent implements OnInit {
       this.searchPageParam.term = this.homeService.homeSearchtxt;
       this.homeSearchPages();
       this.showReset = true;
+      this.showResult = true;
     }
   }
 
@@ -67,7 +69,7 @@ export class SearchContainerComponent implements OnInit {
 
   onSearchChange(value) {
     if (value !== "") {
-      this.showReset = true
+      this.showReset = true;
       this.homeService.searchParam = this.searchPageParam;
       this.homeService.getAutoCompleteServices().subscribe(
         response => {
@@ -76,6 +78,7 @@ export class SearchContainerComponent implements OnInit {
     } else {
       this.autocompleteFields = [];
       this.showReset = false;
+      this.showResult = false;
     }
   }
 
@@ -84,6 +87,7 @@ export class SearchContainerComponent implements OnInit {
     this.searchPageParam.term = "";
     this.autocompleteFields = [];
     this.showReset = false;
+    this.showResult = false;
     this.homeService.homeSearchtxt = "";
   }
 
@@ -117,6 +121,7 @@ export class SearchContainerComponent implements OnInit {
       } else {
         this.noRecords = false;
       }
+      this.showResult = true;
     },
       error => {
         this.isLoading = false;

@@ -39,7 +39,7 @@
     <!-- Search Form END -->
 
     <!-- Search Result START -->
-    <app-search-results *ngIf="!noRecords && !isLoading" [searchData]="searchData" [term]="searchPageParam.term">
+    <app-search-results *ngIf="!noRecords && !isLoading && showResult" [searchData]="searchData" [term]="searchPageParam.term">
     </app-search-results>
     <!-- Search Result END -->
     <div class="uk-text-center uk-text-bold m-t-20" *ngIf="noRecords">

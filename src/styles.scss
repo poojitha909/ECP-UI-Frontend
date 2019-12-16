@@ -136,13 +136,6 @@ ngb-rating {
     font-weight: bold;
   }
 }
-.m-t-main-screen {
-  margin-top: 40px;
-}
-.m-t-main-screen.search-container {
-  padding-top: 32px;
-  padding-bottom: 32px;
-}
 
 .font-light {
   color: $font-light-black;
@@ -232,10 +225,6 @@ ngb-rating {
   pointer-events: all;
 }
 @media screen and (max-width : 640px) {
-  .m-t-main-screen.search-container {
-    padding-top: 16px;
-    padding-bottom: 16px;
-  }
   .home-banner {
     min-height: 504px;
   }

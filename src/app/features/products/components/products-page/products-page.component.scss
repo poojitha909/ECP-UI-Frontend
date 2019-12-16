@@ -22,7 +22,7 @@
     }
   }
   .search-form {
-    padding: 0px 40px;
+    padding: 32px 40px;
     .search-field {
       form {
         width: 100%;
@@ -63,12 +63,12 @@
   }
   @media (max-width: 640px) {
     .search-form {
-      padding: 0px 16px;
+      padding: 16px 16px;
     }
   }
 }
 .search-result {
-  padding: 24px 40px 0;
+  padding: 0 40px 24px 40px;
 }
 .quote-line {
   background-color: #ecf4ff;

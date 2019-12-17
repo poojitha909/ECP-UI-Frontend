@@ -109,6 +109,7 @@ export class SearchContainerComponent implements OnInit {
     this.searchPageParam.term = "";
     this.autocompleteFields = [];
     this.showReset = false;
+    this.popullarService = undefined;
     this.homeService.homeSearchtxt = "";
   }
 

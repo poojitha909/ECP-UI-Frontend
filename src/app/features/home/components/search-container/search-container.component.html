@@ -37,11 +37,52 @@
     </div>
 
     <!-- Search Form END -->
+    <div #mobileSearchCard>
+      <div class="m-t-20 uk-hidden@s" *ngIf="!noRecords && !isLoading && showResult">
+        <p class="font-regular-15 font-weight-600">Search Results
+          ({{searchData.totalServices + searchData.totalProducts + searchData.totalDiscussions + searchData.totalEvents + searchData.totalExperts}})
+        </p>
 
+        <div class="m-t-20 uk-grid-small" uk-grid>
+          <div class="uk-width-1-2">
+            <div class="search-result-box cursor-pointer" (click)="onMobileSearchTap()">
+              <p>Discussion ({{searchData.totalDiscussions}})</p>
+            </div>
+          </div>
+          <div class="uk-width-1-2">
+            <div class="search-result-box cursor-pointer" (click)="onMobileSearchTap()">
+              <p>Events ({{searchData.totalEvents}})</p>
+            </div>
+          </div>
+          <div class="uk-width-1-2">
+            <div class="search-result-box cursor-pointer" (click)="onMobileSearchTap()">
+              <p>Experts ({{searchData.totalExperts}})</p>
+            </div>
+          </div>
+          <div class="uk-width-1-2">
+            <div class="search-result-box cursor-pointer" (click)="onMobileSearchTap()">
+              <p>Services ({{searchData.totalServices}})</p>
+            </div>
+          </div>
+          <div class="uk-width-1-1">
+            <div class="search-result-box cursor-pointer" (click)="onMobileSearchTap()">
+              <p>Products ({{searchData.totalProducts}})</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="uk-text-center">
+          <fa-icon style="color:#1A73E8;" [icon]="['fas', 'info-circle']"></fa-icon> Tap on any card to see the full
+          results
+        </p>
+      </div>
+    </div>
     <!-- Search Result START -->
-    <app-search-results *ngIf="!noRecords && !isLoading && showResult" [searchData]="searchData"
-      [term]="searchPageParam.term">
-    </app-search-results>
+    <div class="uk-visible@s" #searchResult>
+      <app-search-results *ngIf="!noRecords && !isLoading && showResult" [searchData]="searchData"
+        [term]="searchPageParam.term">
+      </app-search-results>
+    </div>
     <!-- Search Result END -->
     <div class="uk-text-center uk-text-bold m-t-20" *ngIf="noRecords">
       No Records found

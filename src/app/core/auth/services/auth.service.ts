@@ -143,8 +143,20 @@ export class AuthService {
     return this.storage.retrieve(AppConstants.REVIEW_SERVICE) ? JSON.parse(this.storage.retrieve(AppConstants.REVIEW_SERVICE)) : undefined;
   }
 
+  set serviceRatingForm(data: DBReviews) {
+    this.storage.store(AppConstants.RATEING_SERVICE, JSON.stringify(data));
+  }
+
+  get serviceRatingForm(): DBReviews {
+    return this.storage.retrieve(AppConstants.RATEING_SERVICE) ? JSON.parse(this.storage.retrieve(AppConstants.RATEING_SERVICE)) : undefined;
+  }
+
   removeServiceReviewForm() {
     this.storage.clear(AppConstants.REVIEW_SERVICE);
+  }
+
+  removeServiceRatingForm() {
+    this.storage.clear(AppConstants.RATEING_SERVICE);
   }
 
   removeRedirectUrl() {

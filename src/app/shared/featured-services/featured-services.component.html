@@ -12,8 +12,13 @@
                         <small>Showing</small>
                     </div>
                     <div class="uk-width-expand">
-                        <select class="uk-select">
-                            <option>Popular services</option>
+                        <select (change)="searchByCategories($event.target.value)" class="uk-select">
+                            <option value="">-</option>
+                            <option>Chemists</option>
+                            <option>Home Nursing Services</option>
+                            <option>Hospitals</option>
+                            <option>Clinics</option>
+                            <option>Patient Care Taker Services</option>
                             <!-- <option>Past event</option> -->
                         </select>
                     </div>
@@ -66,7 +71,8 @@
                 <img src="assets/images/verified.png" /> <span class="m-l-5">More than 500 service providers</span>
             </div>
             <div class="uk-width-auto@s uk-width-1-1">
-                <button routerLink="/services/all" class="uk-button uk-button-default w-100">See All Services</button>
+                <button routerLink="/services/all" [queryParams]="{ category:category}"
+                    class="uk-button uk-button-default w-100">See All Services</button>
             </div>
         </div>
     </div>

@@ -1,19 +1,20 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DBRating } from 'src/app/core/interfaces';
+import { AuthService } from 'src/app/core';
 
 @Component({
   selector: 'app-add-rating',
   templateUrl: './add-rating.component.html',
   styleUrls: ['./add-rating.component.scss']
 })
-export class AddRatingComponent implements OnInit {
+export class AddRatingComponent implements OnInit, AfterViewInit {
   @Input() userRating: DBRating;
   @Output() submitForm: EventEmitter<any> = new EventEmitter();
 
   ratingForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private auth: AuthService) {
 
     this.ratingForm = this.fb.group({
       serviceId: [""],
@@ -22,6 +23,13 @@ export class AddRatingComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    if (this.auth.serviceRatingForm) {
+      this.ratingForm.patchValue(this.auth.serviceRatingForm);
+      this.auth.removeServiceRatingForm();
+    }
   }
 
   onRatingSubmit() {

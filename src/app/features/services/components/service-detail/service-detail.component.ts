@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceDetail, DBReviews, SEO, Breadcrumb, DBRating } from 'src/app/core/interfaces';
 import { EpcServiceService } from '../../epc-service.service';
@@ -7,14 +7,13 @@ import { AuthService } from 'src/app/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { faLeaf } from '@fortawesome/free-solid-svg-icons';
-
-
+declare var UIkit: any;
 @Component({
   selector: 'app-service-detail',
   templateUrl: './service-detail.component.html',
   styleUrls: ['./service-detail.component.scss']
 })
-export class ServiceDetailComponent implements OnInit {
+export class ServiceDetailComponent implements OnInit, AfterViewInit {
   breadcrumbLinks: Breadcrumb[] = [
     {
       text: 'Home',
@@ -122,10 +121,7 @@ export class ServiceDetailComponent implements OnInit {
     this.getDBserviceReview(this.docId);
     this.getServiceRating(this.docId);
 
-    if (this.auth.serviceReviewForm) {
-      this.reviewForm.patchValue(this.auth.serviceReviewForm);
-      this.auth.removeServiceReviewForm();
-    }
+
 
     this.currentUrl = window.location.href;
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
@@ -133,6 +129,15 @@ export class ServiceDetailComponent implements OnInit {
     if (!this.isDBService) {
       this.getJdDetailRating();
     }
+  }
+
+  ngAfterViewInit() {
+    if (this.auth.serviceReviewForm) {
+      this.reviewForm.patchValue(this.auth.serviceReviewForm);
+      this.auth.removeServiceReviewForm();
+      UIkit.modal('#review-modal').show();
+    }
+
   }
 
   get isDBService(): boolean {
@@ -231,6 +236,7 @@ export class ServiceDetailComponent implements OnInit {
       }
     } else {
       this.auth.redirectUrl = this.router.url;
+      this.auth.serviceRatingForm = ratingData;
       this.router.navigateByUrl('/user/signin');
     }
   }
@@ -285,6 +291,15 @@ export class ServiceDetailComponent implements OnInit {
           console.log(error);
         });
       console.log(this.reportForm.value);
+    } else {
+      this.auth.redirectUrl = this.router.url;
+      this.router.navigateByUrl('/user/signin');
+    }
+  }
+
+  reportFormToggle() {
+    if (this.auth.isAuthenticate) {
+      UIkit.modal('#report-modal').show();
     } else {
       this.auth.redirectUrl = this.router.url;
       this.router.navigateByUrl('/user/signin');

@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 
 import { PageParam } from 'src/app/core';
 import { HomeService } from '../../home.service';
@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./search-container.component.scss']
 })
 export class SearchContainerComponent implements OnInit {
+  @ViewChild('searchResult', { static: false }) searchResult: ElementRef;
+  @ViewChild('mobileSearchCard', { static: false }) mobileSearchCard: ElementRef;
 
   showReset: boolean;
   showResult: boolean
@@ -42,7 +44,7 @@ export class SearchContainerComponent implements OnInit {
     totalEvents: 0,
     totalExperts: 0
   };
-  constructor(private homeService: HomeService, private router: Router) { }
+  constructor(private homeService: HomeService, private router: Router, private renderer: Renderer2) { }
 
   ngOnInit() {
     this.searchTextChanged.pipe(
@@ -80,6 +82,12 @@ export class SearchContainerComponent implements OnInit {
       this.showReset = false;
       this.showResult = false;
     }
+  }
+
+  onMobileSearchTap() {
+    console.log(this.searchResult);
+    this.renderer.addClass(this.mobileSearchCard.nativeElement, 'uk-hidden');
+    this.renderer.removeClass(this.searchResult.nativeElement, 'uk-visible@s');
   }
 
   resetSearch() {

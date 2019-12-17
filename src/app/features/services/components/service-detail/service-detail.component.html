@@ -94,14 +94,15 @@
           <!-- Contact Model END -->
 
           <div class="m-t-10 m-b-20">
-            <a href="#modal-example" uk-toggle>
-              <fa-icon [icon]="['far', 'flag']" class="m-r-5"></fa-icon>Report service provider
+            <a (click)="reportFormToggle()">
+              <fa-icon [icon]="['far', 'flag']" class="m-r-5"></fa-icon>
+              {{ auth.isAuthenticate ? 'Report service provider': 'Signin to Report service provider'}}
             </a>
 
             <!-- Report Form MOdel Start -->
 
             <!-- This is the modal -->
-            <div id="modal-example" uk-modal>
+            <div id="report-modal" uk-modal>
               <div class="uk-modal-dialog uk-modal-body">
                 <h2 class="uk-modal-title">Report</h2>
                 <!-- Success box START-->

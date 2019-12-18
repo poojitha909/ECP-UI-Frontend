@@ -285,6 +285,9 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
           if (response) {
             this.reportForm.reset();
             this.successMessage = "Service report was sent to site admin successfully."
+            setTimeout(() => {
+              UIkit.modal('#report-modal').hide();
+            }, 5000);
           }
         },
         error => {
@@ -444,6 +447,9 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
   ngOnDestroy() {
     document.getElementById("review-modal").remove();
+    document.getElementById("report-modal").remove();
+    document.getElementById("modal-sections").remove();
+
   }
 
 }

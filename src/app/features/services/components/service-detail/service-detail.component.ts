@@ -264,7 +264,7 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit {
               //   this.service.aggrRatingPercentage = totalrating / (this.dbReview.length + 1);
               // }
               this.getDBserviceReview(this.docId);
-              this.reviewForm.reset();
+              // this.reviewForm.reset();
               this.reviewSuccessMessage = "Review successfully posted.";
             }
           },
@@ -415,8 +415,16 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit {
     this.reviewSuccessMessage = null;
     this.reviewForm.patchValue(review);
     this.reviewTitle = "Edit";
+    console.log(review);
+    UIkit.modal('#review-modal').show();
   }
 
+  writeNewReview() {
+    this.reviewForm.reset();
+    this.reviewSuccessMessage = null;
+    this.reviewTitle = 'Add';
+    UIkit.modal('#review-modal').show();
+  }
   // deleteReview() {
   //   this.ecpService.deleteDBserviceReview(this.deleteReviewId).subscribe(
   //     response => {

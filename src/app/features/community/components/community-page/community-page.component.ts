@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { EventService } from '../../services/events.service';
 import { DiscussionService } from '../../services/discussion.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -42,8 +42,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
 
   constructor(private eventService: EventService, private discussionService: DiscussionService,
     private menuService: MenuService, private router: Router, private homeService: HomeService,
-    private seoService: SeoService, private route: ActivatedRoute
-  ) {
+    private seoService: SeoService, private route: ActivatedRoute) {
 
     // Generate meta tag 
     const config: SEO = {
@@ -63,12 +62,12 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
       this.initiate();
     });
   }
-  
+
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
   }
 
-  initiate(){
+  initiate() {
     this.searchParams = {
       p: 0,
       s: 6,
@@ -83,21 +82,21 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
       tags: ""
     }
     this.totalRecordsEvents = 0;
-    this.totalRecordsDiscussions =0;
+    this.totalRecordsDiscussions = 0;
     this.selDiscussCategory = "";
     this.selEventCategory = "";
     this.getAllDiscussCategories();
-    
+
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
       this.showReset = this.searchParams.searchTxt ? true : false;
     }
-    
+
     if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
       this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
     }
-    
+
     this.showEvents();
     this.showEvents2();
     this.showDiscussions();
@@ -214,7 +213,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
       this.showResult = false;
     }
     this.setSearchTxt(value);
-    
+
     if (event.key == "Enter") {
       this.onSearch();
     }
@@ -237,7 +236,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
 
   }
 
-  setSearchTxt(value: string){
+  setSearchTxt(value: string) {
     this.searchParams.searchTxt = value;
     this.searchParamsDiscussions.searchTxt = value;
     this.homeService.homeSearchtxt = value;

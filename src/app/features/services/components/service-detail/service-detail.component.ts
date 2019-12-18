@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceDetail, DBReviews, SEO, Breadcrumb, DBRating } from 'src/app/core/interfaces';
 import { EpcServiceService } from '../../epc-service.service';
@@ -13,7 +13,7 @@ declare var UIkit: any;
   templateUrl: './service-detail.component.html',
   styleUrls: ['./service-detail.component.scss']
 })
-export class ServiceDetailComponent implements OnInit, AfterViewInit {
+export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   breadcrumbLinks: Breadcrumb[] = [
     {
       text: 'Home',
@@ -440,6 +440,10 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit {
   changeReviewPage(page: number) {
     this.reviwePaginate.p = page;
     this.getDBserviceReview(this.docId);
+  }
+
+  ngOnDestroy() {
+    document.getElementById("review-modal").remove();
   }
 
 }

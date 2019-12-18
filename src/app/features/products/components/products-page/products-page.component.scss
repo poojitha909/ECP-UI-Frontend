@@ -97,7 +97,8 @@
   margin-top: 5px;
   color: $font-color-black;
 }
-.uk-button-default, .uk-button-default:focus {
+.uk-button-default,
+.uk-button-default:focus {
   color: #ffffff !important;
   border: 1px solid #1a73e8;
   border-radius: 4px;
@@ -180,6 +181,9 @@
 @media (max-width: 640px) {
   .w-150 {
     width: 50px;
+  }
+  .search-result {
+    padding: 0 16px 16px 16px;
   }
 }
 // .no-grid-margin .uk-grid-margin {

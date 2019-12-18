@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { AskQuestionService } from '../../services/ask-question.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageHelperService } from 'src/app/core/services/storage-helper.service';
@@ -54,12 +54,12 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
       this.initiate();
     });
   }
-  
+
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
   }
-  
-  initiate(){
+
+  initiate() {
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
@@ -111,7 +111,7 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
           this.experts = data.content;
           this.expertsTotal = data.total;
         }
-      });  
+      });
     }
   }
 
@@ -158,7 +158,7 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
     this.showExperts();
   }
 
-  setSearchTxt(value: string){
+  setSearchTxt(value: string) {
     this.searchParams.searchTxt = value;
     this.homeService.homeSearchtxt = value;
   }

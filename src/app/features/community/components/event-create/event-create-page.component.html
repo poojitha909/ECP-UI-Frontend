@@ -161,10 +161,9 @@
                     <div>
                         <label
                             [ngClass]="{'uk-text-danger' : formControl.landmark.invalid && ( formControl.landmark.dirty ||  formControl.landmark.touched) }"
-                            class="uk-form-label">Landmark<span class="required">*</span></label>
+                            class="uk-form-label">Landmark</label>
                         <div class="uk-form-controls">
                             <input
-                                [ngClass]="{'uk-form-danger' : formControl.landmark.invalid && ( formControl.landmark.dirty ||  formControl.landmark.touched) }"
                                 class="uk-input" formControlName="landmark" placeholder="Eg.: Infront of Bhagvati Hospital" />
                         </div>
                     </div>

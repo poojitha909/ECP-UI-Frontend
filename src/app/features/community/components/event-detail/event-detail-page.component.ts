@@ -59,7 +59,6 @@ export class EventDetailPageComponent implements OnInit {
     this.eventId = this.route.snapshot.params['id'];
     this.getEvent()
     this.reportEmail = "admin@socialpha.com";
-    this.showOrg = false;
     this.user = this.store.retrieve("ECP-USER");
     this.markIt = false;
     if (this.user) {
@@ -100,11 +99,6 @@ export class EventDetailPageComponent implements OnInit {
     }
 
     this.seoService.generateTags(config);
-  }
-
-
-  showOrganiserDetails() {
-    this.showOrg = !this.showOrg;
   }
 
   markFavourite() {

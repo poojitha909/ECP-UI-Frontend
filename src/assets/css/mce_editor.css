@@ -1,0 +1,19 @@
+
+@font-face {
+    font-family: "HKGroteskRegular";
+    font-style: normal;
+    font-weight: normal;
+    src: url("/assets/font/hk-grotesk/HKGrotesk-Regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: "HKGroteskRegular";
+    font-style: normal;
+    font-weight: bold;
+    src: url("/assets/font/hk-grotesk/HKGrotesk-SemiBold.ttf") format("truetype");
+}
+body{
+    font-family: "HKGroteskRegular";
+}
+p{
+    color:#666;
+}

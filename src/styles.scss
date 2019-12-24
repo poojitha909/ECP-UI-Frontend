@@ -189,7 +189,8 @@ ngb-rating {
     color: #fff;
     text-transform: none;
     padding: 1px 30px;
-    &:focus {
+    &:hover,
+    &:active {
       color: #1a73e8;
       background-color: #fff;
     }
@@ -209,9 +210,6 @@ ngb-rating {
   font-size: 18px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
   &:hover {
-    color: #000;
-  }
-  &:focus {
     color: #000;
   }
 }
@@ -251,5 +249,10 @@ ngb-rating {
   }
   .grid-reverse-dir {
     flex-direction: column-reverse;
+  }
+}
+.uk-button {
+  &:focus {
+    outline: -webkit-focus-ring-color auto 5px;
   }
 }

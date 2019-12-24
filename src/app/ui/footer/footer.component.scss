@@ -21,12 +21,12 @@
     border: unset;
     border-radius: 4px;
     padding: 10px 30px;
-    &:hover,
-    &:focus {
+    &:active{
       background-color: #ffffff;
       color: $primary-btn;
     }
   }
+
   .partners {
     background: #ffffff;
     border-radius: 4px;
@@ -35,10 +35,24 @@
     align-items: center;
   }
 
-  ul {
-    a {
-      color: #fff;
-    }
+  a {
+    color: #fff;
+  }
+
+  .uk-icon-button {
+    background: #e4eefb;
+    border-radius: 2px;
+    color: #585f70;
+  }
+
+  .font-small {
+    font-size: 12px;
+    font-family: "HKGroteskRegular";
+  }
+
+  .bottom-footer {
+    border-top: 1px solid #2d3758;
+    padding: 12px;
   }
 
   @media (min-width: 1200px) {

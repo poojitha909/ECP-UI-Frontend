@@ -19,7 +19,7 @@ a{
     height: 48px;
     border-radius: 4px;
     font-size: $font-small;
-    &:focus{
+    &:active{
         border: 2px solid #1A72E8;
     }
 }

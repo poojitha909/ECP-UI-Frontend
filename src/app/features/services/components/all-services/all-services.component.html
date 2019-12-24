@@ -119,7 +119,7 @@
       </div>
 
       <!-- Socailmedia share box  -->
-      <div class="m-t-30 m-b-30 bg-white category-box">
+      <div class="m-t-30 m-b-30 bg-white category-box" *ngIf="showShareBox">
         <div class="m-b-20">
           <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
           <a class="social-link" [href]="whatsappUrl">
@@ -162,7 +162,7 @@
                 <a class="uk-form-icon uk-form-icon-flip" (click)="onSearch(searchPageParam.term)"
                   uk-icon="icon: search"></a>
                 <a class="uk-form-icon uk-form-icon-flip reset-link" href="javascript:void(0)"
-                  *ngIf="searchPageParam.term !== ''" (click)="searchPageParam.term = ''">
+                  *ngIf="searchPageParam.term !== ''" (click)="clearSerach()">
                   <fa-icon [icon]="['fas', 'times-circle']" class="m-r-5"></fa-icon><span class="uk-visible@s"> Clear
                     Search</span>
                 </a>

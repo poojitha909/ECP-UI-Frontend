@@ -34,7 +34,7 @@
         font-size: 18px;
         min-width: 216px;
         width: 100%;
-        &:focus {
+        &:active {
           color: #1a73e8;
           background-color: #ffffff;
         }
@@ -72,7 +72,7 @@
   }
 }
 .uk-button-default,
-.uk-button-default:focus {
+.uk-button-default:active {
   color: #ffffff !important;
   background-color: #1a73e8 !important;
   border: 1px solid #1a73e8;

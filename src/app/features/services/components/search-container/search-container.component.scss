@@ -34,9 +34,9 @@
         font-size: 18px;
         min-width: 216px;
         width: 100%;
-        &:focus {
-          color: #1a73e8;
-          background-color: #ffffff;
+        &:active {
+          color: $primary-btn;
+          background-color: #fff;
         }
       }
       @media (max-width: 640px) {
@@ -70,7 +70,7 @@
     }
   }
 }
-.uk-button-default, .uk-button-default:focus {
+.uk-button-default, .uk-button-default:active {
   background-color: #1a73e8 !important;
   border-radius: 4px;
   border: 1px solid #1a73e8;

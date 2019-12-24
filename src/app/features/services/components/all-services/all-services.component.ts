@@ -44,6 +44,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   autocompleteFields: Service[] = [];
   currentUrl: string;
   whatsappUrl;
+  showShareBox: boolean;
   verfiedCheck: boolean;
   selectedCategory: string;
 
@@ -104,7 +105,9 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
             this.ecpService.searchCatID = null;
             this.getCategoryServices(queryCategory, 0);
           }
+          this.showShareBox = true;
         } else {
+          this.showShareBox = false;
           this.getAllService();
         }
       });
@@ -178,6 +181,11 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   clearSelection() {
     this.selectedCategory = '';
     // this.searchPageParam.term = '';
+    this.router.navigateByUrl('services/all');
+  }
+
+  clearSerach() {
+    this.searchPageParam.term = '';
     this.router.navigateByUrl('services/all');
   }
 

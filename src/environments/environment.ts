@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://ec.code-alpha.org/BY/api',
-  imageBaseUrl: 'https://ec.code-alpha.org/project/images/',
+  apiBaseUrl: 'https://ec.qa.code-alpha.org/BY/api',
+  imageBaseUrl: 'https://ec.qa.code-alpha.org/project/images/',
   encryptKey: 'SECRET',
   facebook: {
     clientId: '2776633365685417',

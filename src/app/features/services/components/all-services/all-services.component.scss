@@ -161,7 +161,7 @@ h3 {
   //   min-width: 150px;
   text-transform: none;
   padding: 0px;
-  &:active {
+  &:active,&:hover {
     color: #1a73e8;
     border: 1px solid #1a73e8;
     background-color: #fff;

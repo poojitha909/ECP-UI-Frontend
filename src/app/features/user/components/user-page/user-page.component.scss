@@ -47,7 +47,7 @@ h3{
     color:$primary-btn;
     text-transform: none;
     padding: 0px 30px;
-    &:active{
+    &:active,&:hover{
       color: $primary-btn;
       background-color: #fff;
     }
@@ -61,7 +61,7 @@ h3{
         color: #fff;
         text-transform: none;
         padding: 2px 30px;
-        &:active{
+        &:active,&:hover{
           color: $primary-btn;
           background-color: #fff;
         }

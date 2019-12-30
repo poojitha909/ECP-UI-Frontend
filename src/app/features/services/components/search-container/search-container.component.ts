@@ -17,6 +17,7 @@ export class SearchContainerComponent implements OnInit {
   showReset: boolean;
   selectedValue: string;
   popullarService: Service[];
+  totalService: number;
   searchTextChanged = new Subject<string>();
   searchPageParam: PageParam = {
     p: 0,
@@ -71,6 +72,7 @@ export class SearchContainerComponent implements OnInit {
     this.homeService.searchParam = this.searchPageParam;
     this.homeService.getServices().subscribe(response => {
       this.popullarService = response.data.slice(0, 6);
+      this.totalService = response.total;
     },
       error => {
         console.log(error);
@@ -109,6 +111,7 @@ export class SearchContainerComponent implements OnInit {
     this.searchPageParam.term = "";
     this.autocompleteFields = [];
     this.showReset = false;
+    this.popullarService = undefined;
     this.homeService.homeSearchtxt = "";
   }
 

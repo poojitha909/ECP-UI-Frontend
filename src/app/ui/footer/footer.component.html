@@ -54,7 +54,7 @@
 
 <div class="footer">
 
-  <div class="uk-container uk-section">
+  <div class="uk-container p-t-40">
 
     <div class="uk-grid-large uk-grid-match" uk-grid>
 
@@ -64,7 +64,7 @@
           An ElderSpring Initiative by Tata Trusts
         </div>
         <div class="uk-flex uk-flex-bottom m-t-10">
-          <button class="uk-button uk-button-default help-line w-100">
+          <button class="uk-button uk-button-default help-line w-100" role="button">
             <span uk-icon="receiver"></span>Elder Spring Connect Center <b>14567</b>
           </button>
         </div>
@@ -97,21 +97,38 @@
         </div>
       </div>
 
-      <div class="uk-width-auto@m p-l-md-100">
-        <div class="font-regular font-weight-600">
-          Quick Links
+      <div class="uk-width-expand@m">
+        <div class="uk-child-width-1-2 uk-child-width-1-1@m uk-grid-small" uk-grid>
+          <div class="uk-flex uk-flex-between uk-flex-column">
+            <div class="font-regular font-weight-600">
+              Quick Links
+            </div>
+            <div>
+              <div class="uk-child-width-1-2@m uk-grid-small" uk-grid>
+                <div><a routerLink="/about">About Us</a></div>
+                <div><a routerLink="/user">User Profile</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="uk-flex uk-flex-between uk-flex-column">
+            <div class="font-regular font-weight-600">
+              Follow Us On
+            </div>
+            <div>
+              <a href="#" class="uk-icon-button uk-margin-small-right" uk-icon="linkedin"></a>
+              <a href="#" class="uk-icon-button uk-margin-small-right" uk-icon="twitter"></a>
+              <a href="#" class="uk-icon-button uk-margin-small-right" uk-icon="facebook"></a>
+            </div>
+          </div>
+
         </div>
-        <div>
-          <ul class="uk-list uk-list-large">
-            <li><a routerLink="/about">About Us</a></li>
-            <li><a routerLink="/user">User Profile</a></li>
-          </ul>
-        </div>
+
       </div>
 
     </div>
 
+    <div class="bottom-footer m-t-50 uk-text-center">
+      <div class="font-small"><a>Terms and Conditions</a> | <a>Acceptable Use Policy</a> | <a>Disclaimer</a> </div>
+    </div>
+
   </div>
-
-
-</div>

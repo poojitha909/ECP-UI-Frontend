@@ -12,9 +12,21 @@
                         <small>Showing</small>
                     </div>
                     <div class="uk-width-expand">
-                        <select class="uk-select">
-                            <option>Popular services</option>
-                            <!-- <option>Past event</option> -->
+                        <select (change)="searchByCategories($event.target.value)" class="uk-select">
+                            <option value="">Popular Services</option>
+
+                            <option>Ambulances</option>
+                            <option>Diagnostic Centre</option>
+                            <option>Financial Consultants</option>
+                            <option>Clinics</option>
+                            <option>Home Nursing Services</option>
+                            <option>Hospitals</option>
+                            <option>Institutions for Aged</option>
+                            <option>Legal Advisors</option>
+                            <option>Medical Equipment on Hire</option>
+                            <option>Taxi Services</option>
+                            <option>Retirement Homes</option>
+
                         </select>
                     </div>
                 </div>
@@ -66,7 +78,8 @@
                 <img src="assets/images/verified.png" /> <span class="m-l-5">More than 500 service providers</span>
             </div>
             <div class="uk-width-auto@s uk-width-1-1">
-                <button routerLink="/services/all" class="uk-button uk-button-default w-100">See All Services</button>
+                <button routerLink="/services/all" [queryParams]="{ category:category}"
+                    class="uk-button uk-button-default w-100">See All Services</button>
             </div>
         </div>
     </div>

@@ -66,7 +66,7 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
     this.countData = { "all": 0, "outdoor": 0, "indoor": 0 };
     this.searchParams = {
       p: 0,
-      s: 10,
+      s: 6,
       searchTxt: "",
       eventType: 0,
       pastEvents: 0
@@ -82,7 +82,7 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
   initiate() {
     this.searchParams = {
       p: 0,
-      s: 4,
+      s: 6,
       searchTxt: "",
       eventType: 0,
       pastEvents: 0

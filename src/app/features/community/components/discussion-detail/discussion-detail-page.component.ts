@@ -172,11 +172,19 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
       this.menuService.getMenuItem(this.category).subscribe((response: any) => {
         if (response[0]) {
           this.categoryName = response[0].displayMenuName;
-          this.breadcrumbLinks.push({
-            text: this.categoryName,
-            link: ['/community/discussions'],
-            queryParams: { category: this.category }
-          });
+          let found = 0;
+          for(let br of this.breadcrumbLinks){
+            if(br.queryParams && br.queryParams.category == this.category){
+              found = 1;
+            }
+          }
+          if(found == 0){
+            this.breadcrumbLinks.push({
+              text: this.categoryName,
+              link: ['/community/discussions'],
+              queryParams: { category: this.category }
+            });
+          }
         }
       });
     }

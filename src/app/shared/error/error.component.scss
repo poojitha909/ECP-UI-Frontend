@@ -28,7 +28,7 @@
     color: #fff;
     text-transform: none;
     padding: 0px 30px;
-    &:focus{
+    &:active,&:hover{
       color: $primary-btn;
       background-color: #fff;
       border: 1px solid $primary-btn;
@@ -43,7 +43,7 @@
   color:$primary-btn;
   text-transform: none;
   padding: 0px 30px;
-  &:focus{
+  &:active,&:hover{
     color: $primary-btn;
     background-color: #fff;
   }

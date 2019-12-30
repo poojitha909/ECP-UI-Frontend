@@ -73,7 +73,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
     this.searchParams = {
       p: 0,
-      s: 10,
+      s: 6,
       searchTxt: "",
       tags: ""
     }

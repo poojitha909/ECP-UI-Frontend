@@ -1,13 +1,14 @@
 .uk-button-default {
     background-color: #1a73e8;
     border-radius: 4px;
+    border: 1px solid #1a73e8;
     font-size: 18px;
     border: none;
     color: #fff;
     text-transform: none;
     padding: 1px 30px;
-    &:focus {
-      color: #1a73e8;
-      background-color: #fff;
+    &:active,&:hover {
+      color:#fff;
+      background-color:#1a73e8;
     }
   }

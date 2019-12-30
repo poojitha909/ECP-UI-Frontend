@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EpcServiceService } from 'src/app/features/services/epc-service.service';
 import { Service } from 'src/app/core/interfaces';
+import { HomeService } from 'src/app/features/home/home.service';
 
 @Component({
   selector: 'app-featured-services',
@@ -10,7 +11,8 @@ import { Service } from 'src/app/core/interfaces';
 export class FeaturedServicesComponent implements OnInit {
 
   services: Service[] = [];
-  constructor(private ecpService: EpcServiceService) { }
+  category: string;
+  constructor(private ecpService: EpcServiceService, private homeService: HomeService) { }
 
   ngOnInit() {
     this.getFeatureServices();
@@ -28,4 +30,17 @@ export class FeaturedServicesComponent implements OnInit {
       });
   }
 
+  searchByCategories(category) {
+    if (category) {
+      this.category = category;
+      this.homeService.searchParam.term = category;
+      this.homeService.getServices().subscribe(
+        response => {
+          if (response && response.data) {
+            this.services = response.data.slice(0, 9);
+          }
+        });
+    }
+    // console.log(category.text);
+  }
 }

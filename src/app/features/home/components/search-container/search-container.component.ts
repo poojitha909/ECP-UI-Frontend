@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 
 import { PageParam } from 'src/app/core';
 import { HomeService } from '../../home.service';
@@ -81,6 +81,7 @@ export class SearchContainerComponent implements OnInit {
       this.showResult = false;
     }
   }
+
 
   resetSearch() {
     console.log("reset");

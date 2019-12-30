@@ -119,7 +119,7 @@
       </div>
 
       <!-- Socailmedia share box  -->
-      <div class="m-t-30 m-b-30 bg-white category-box">
+      <div class="m-t-30 m-b-30 bg-white category-box" *ngIf="showShareBox">
         <div class="m-b-20">
           <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
           <a class="social-link" [href]="whatsappUrl">
@@ -127,7 +127,7 @@
             Whatsapp</a>
         </div>
 
-        <div class="m-b-20">
+        <div>
 
           <a href="mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20{{currentUrl}}"
             class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail">
@@ -137,7 +137,7 @@
             Email</a>
         </div>
 
-        <div>
+        <!-- <div>
           <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services" onclick="javascript:window.open(this.href,
                   '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
             class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a class="social-link"
@@ -145,7 +145,7 @@
                   '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
             Share via
             Facebook</a>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -162,12 +162,13 @@
                 <a class="uk-form-icon uk-form-icon-flip" (click)="onSearch(searchPageParam.term)"
                   uk-icon="icon: search"></a>
                 <a class="uk-form-icon uk-form-icon-flip reset-link" href="javascript:void(0)"
-                  *ngIf="searchPageParam.term !== ''" (click)="searchPageParam.term = ''">
+                  *ngIf="searchPageParam.term !== ''" (click)="clearSerach()">
                   <fa-icon [icon]="['fas', 'times-circle']" class="m-r-5"></fa-icon><span class="uk-visible@s"> Clear
                     Search</span>
                 </a>
                 <input class="uk-input" placeholder="Search for Service here" [(ngModel)]="searchPageParam.term"
-                  (keyup)="searchEvent($event)" required type="text" (keydown.enter)="onSearch($event.target.value)">
+                  (keyup)="searchEvent($event)" required type="text" autocomplete='off'
+                  (keydown.enter)="onSearch($event.target.value)">
               </div>
               <!-- Auto complete list -->
               <ul *ngIf="autocompleteFields.length > 0"

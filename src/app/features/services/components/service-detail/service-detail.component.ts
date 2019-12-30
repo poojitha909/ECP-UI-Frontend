@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceDetail, DBReviews, SEO, Breadcrumb, DBRating } from 'src/app/core/interfaces';
 import { EpcServiceService } from '../../epc-service.service';
@@ -7,14 +7,13 @@ import { AuthService } from 'src/app/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { faLeaf } from '@fortawesome/free-solid-svg-icons';
-
-
+declare var UIkit: any;
 @Component({
   selector: 'app-service-detail',
   templateUrl: './service-detail.component.html',
   styleUrls: ['./service-detail.component.scss']
 })
-export class ServiceDetailComponent implements OnInit {
+export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   breadcrumbLinks: Breadcrumb[] = [
     {
       text: 'Home',
@@ -122,10 +121,7 @@ export class ServiceDetailComponent implements OnInit {
     this.getDBserviceReview(this.docId);
     this.getServiceRating(this.docId);
 
-    if (this.auth.serviceReviewForm) {
-      this.reviewForm.patchValue(this.auth.serviceReviewForm);
-      this.auth.removeServiceReviewForm();
-    }
+
 
     this.currentUrl = window.location.href;
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
@@ -133,6 +129,15 @@ export class ServiceDetailComponent implements OnInit {
     if (!this.isDBService) {
       this.getJdDetailRating();
     }
+  }
+
+  ngAfterViewInit() {
+    if (this.auth.serviceReviewForm) {
+      this.reviewForm.patchValue(this.auth.serviceReviewForm);
+      this.auth.removeServiceReviewForm();
+      UIkit.modal('#review-modal').show();
+    }
+
   }
 
   get isDBService(): boolean {
@@ -231,6 +236,7 @@ export class ServiceDetailComponent implements OnInit {
       }
     } else {
       this.auth.redirectUrl = this.router.url;
+      this.auth.serviceRatingForm = ratingData;
       this.router.navigateByUrl('/user/signin');
     }
   }
@@ -258,7 +264,7 @@ export class ServiceDetailComponent implements OnInit {
               //   this.service.aggrRatingPercentage = totalrating / (this.dbReview.length + 1);
               // }
               this.getDBserviceReview(this.docId);
-              this.reviewForm.reset();
+              // this.reviewForm.reset();
               this.reviewSuccessMessage = "Review successfully posted.";
             }
           },
@@ -279,12 +285,24 @@ export class ServiceDetailComponent implements OnInit {
           if (response) {
             this.reportForm.reset();
             this.successMessage = "Service report was sent to site admin successfully."
+            setTimeout(() => {
+              UIkit.modal('#report-modal').hide();
+            }, 5000);
           }
         },
         error => {
           console.log(error);
         });
       console.log(this.reportForm.value);
+    } else {
+      this.auth.redirectUrl = this.router.url;
+      this.router.navigateByUrl('/user/signin');
+    }
+  }
+
+  reportFormToggle() {
+    if (this.auth.isAuthenticate) {
+      UIkit.modal('#report-modal').show();
     } else {
       this.auth.redirectUrl = this.router.url;
       this.router.navigateByUrl('/user/signin');
@@ -400,8 +418,16 @@ export class ServiceDetailComponent implements OnInit {
     this.reviewSuccessMessage = null;
     this.reviewForm.patchValue(review);
     this.reviewTitle = "Edit";
+    console.log(review);
+    UIkit.modal('#review-modal').show();
   }
 
+  writeNewReview() {
+    this.reviewForm.reset();
+    this.reviewSuccessMessage = null;
+    this.reviewTitle = 'Add';
+    UIkit.modal('#review-modal').show();
+  }
   // deleteReview() {
   //   this.ecpService.deleteDBserviceReview(this.deleteReviewId).subscribe(
   //     response => {
@@ -417,6 +443,13 @@ export class ServiceDetailComponent implements OnInit {
   changeReviewPage(page: number) {
     this.reviwePaginate.p = page;
     this.getDBserviceReview(this.docId);
+  }
+
+  ngOnDestroy() {
+    document.getElementById("review-modal").remove();
+    document.getElementById("report-modal").remove();
+    document.getElementById("modal-sections").remove();
+
   }
 
 }

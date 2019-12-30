@@ -9,7 +9,7 @@
 
       <div class="uk-width-expand uk-position-relative">
         <div class="uk-position-absolute uk-z-index w-full pr-20">
-          <form class="uk-search uk-search-default">
+          <form class="uk-search uk-search-default" autocomplete='off'>
             <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
               <button class="uk-button-link" style="visibility: hidden"></button>
               <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
@@ -19,7 +19,7 @@
             </span>
             <input class="uk-search-input search-box font-regular sm-pr-150" [(ngModel)]="searchPageParam.term"
               (keyup)="searchEvent($event)" (keydown.enter)="onSearch($event.target.value)" required type="text"
-              placeholder="Search here" name="search" />
+              placeholder="Search here" name="search" autocomplete='off' />
           </form>
           <ul *ngIf="autocompleteFields.length > 0"
             class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto search-list" appKeyHandler
@@ -37,10 +37,57 @@
     </div>
 
     <!-- Search Form END -->
+    <!-- Mobile view card -->
+
+    <div class="m-t-20 uk-hidden@s" *ngIf="!noRecords && !isLoading && showResult">
+      <p class="font-regular-15 font-weight-600">Search Results
+        ({{searchData.totalServices + searchData.totalProducts + searchData.totalDiscussions + searchData.totalEvents + searchData.totalExperts}})
+      </p>
+
+      <div class="m-t-20 uk-grid-small" uk-grid>
+        <div class="uk-width-1-2">
+          <div class="search-result-box cursor-pointer" routerLink="/community/discussions"
+            [queryParams]="{ searchTxt:searchPageParam.term}">
+            <p>Discussion ({{searchData.totalDiscussions}})</p>
+          </div>
+        </div>
+        <div class="uk-width-1-2">
+          <div class="search-result-box cursor-pointer" routerLink="/community/events"
+            [queryParams]="{ searchTxt:searchPageParam.term}">
+            <p>Events ({{searchData.totalEvents}})</p>
+          </div>
+        </div>
+        <div class="uk-width-1-2">
+          <div class="search-result-box cursor-pointer" routerLink="/ask-question/all"
+            [queryParams]="{ searchTxt:searchPageParam.term}">
+            <p>Experts ({{searchData.totalExperts}})</p>
+          </div>
+        </div>
+        <div class="uk-width-1-2">
+          <div class="search-result-box cursor-pointer" routerLink="/services/all"
+            [queryParams]="{ category:searchPageParam.term}">
+            <p>Services ({{searchData.totalServices}})</p>
+          </div>
+        </div>
+        <div class="uk-width-1-1" routerLink="/products/all" [queryParams]="{ searchTxt:searchPageParam.term}">
+          <div class="search-result-box cursor-pointer">
+            <p>Products ({{searchData.totalProducts}})</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="uk-text-center">
+        <fa-icon style="color:#1A73E8;" [icon]="['fas', 'info-circle']"></fa-icon> Tap on any card to see the full
+        results
+      </p>
+    </div>
 
     <!-- Search Result START -->
-    <app-search-results *ngIf="!noRecords && !isLoading && showResult" [searchData]="searchData" [term]="searchPageParam.term">
-    </app-search-results>
+    <div class="uk-visible@s">
+      <app-search-results *ngIf="!noRecords && !isLoading && showResult" [searchData]="searchData"
+        [term]="searchPageParam.term">
+      </app-search-results>
+    </div>
     <!-- Search Result END -->
     <div class="uk-text-center uk-text-bold m-t-20" *ngIf="noRecords">
       No Records found

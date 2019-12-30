@@ -10,7 +10,7 @@
     border-radius: 4px;
     text-transform: unset;
     width: 100%;
-    &:focus{
+    &:active,&:hover{
         background-color: #ffffff;
         color: #4267B2;
     }
@@ -22,7 +22,7 @@
     border-radius: 4px;
     text-transform: unset;
     width: 100%;
-    &:focus{
+    &:active,&:hover{
         background-color: #ffffff;
         color: #EA4335;
     }
@@ -34,7 +34,7 @@
     border-radius: 4px;
     color: #ffffff;
     font-size: $font-small;
-    &:focus{
+    &:active,&:hover{
         background-color: #ffffff;
         color: #1a73e8;
     }

@@ -153,18 +153,26 @@
         <li><a class="db" [ngClass]="{'hidden':isDBService }" href="#">TBD</a></li>
         <li *ngIf="!isDBService"><a class="jd" href="#">JustDial</a></li>
       </ul>
-      <div class="rating-box bg-white">
 
+
+      <div class="rating-box bg-white">
         <app-rating-view [detailReview]="detailReview" [dbReviewCount]="totalReviewRecords"
           [jdDetailReview]="jdDetailReview"></app-rating-view>
-
       </div>
+
+
       <!-- Rating box END -->
 
       <!-- Submit Rating START-->
-      <div class="rating-box m-t-20 bg-white">
-        <app-add-rating [userRating]="userRating" (submitForm)="onRatingSubmit($event)"></app-add-rating>
-      </div>
+      <ul class="uk-switcher switcher-container">
+        <li>
+          <div class="rating-box m-t-20 bg-white">
+            <app-add-rating [userRating]="userRating" (submitForm)="onRatingSubmit($event)"></app-add-rating>
+          </div>
+        </li>
+        <li>
+        </li>
+      </ul>
       <!-- Submit Rating END-->
 
       <!-- Socailmedia share box  START-->
@@ -287,7 +295,7 @@
               <label class="uk-form-label" for="form-stacked-text">Title<span class="required">*</span></label>
               <div class="uk-form-controls">
                 <input class="uk-input" id="form-stacked-text" formControlName="title" type="text"
-                  placeholder="Enter your name">
+                  placeholder="Enter your title">
               </div>
             </div>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DBRating } from 'src/app/core/interfaces';
 import { AuthService } from 'src/app/core';
@@ -8,12 +8,12 @@ import { AuthService } from 'src/app/core';
   templateUrl: './add-rating.component.html',
   styleUrls: ['./add-rating.component.scss']
 })
-export class AddRatingComponent implements OnInit, AfterViewInit {
+export class AddRatingComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() userRating: DBRating;
   @Output() submitForm: EventEmitter<any> = new EventEmitter();
 
   ratingForm: FormGroup;
-
+  btnText: string;
   constructor(private fb: FormBuilder, private auth: AuthService) {
 
     this.ratingForm = this.fb.group({
@@ -23,6 +23,18 @@ export class AddRatingComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+
+
+  }
+  ngOnChanges(simpleChanges: SimpleChanges) {
+    if (simpleChanges) {
+      if (this.auth.isAuthenticate) {
+        console.log(this.userRating);
+        this.userRating ? this.btnText = 'Edit Rating' : this.btnText = 'Submit';
+      } else {
+        this.btnText = 'Signin to Submit';
+      }
+    }
   }
 
   ngAfterViewInit() {
@@ -30,6 +42,7 @@ export class AddRatingComponent implements OnInit, AfterViewInit {
       this.ratingForm.patchValue(this.auth.serviceRatingForm);
       this.auth.removeServiceRatingForm();
     }
+
   }
 
   onRatingSubmit() {

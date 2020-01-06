@@ -123,7 +123,7 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
 
 
-    this.currentUrl = window.location.href;
+    this.currentUrl = encodeURI(window.location.href);
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
 
     if (!this.isDBService) {

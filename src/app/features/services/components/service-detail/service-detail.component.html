@@ -374,8 +374,8 @@
                   </h1>
                 </div>
                 <div class="uk-width-auto">
-                  <button class="uk-button uk-button-default review-btn-transparent" (click)="writeNewReview()">Write
-                    Review</button>
+                  <button class="uk-button uk-button-default review-btn-transparent"
+                    (click)="writeNewReview()">{{  auth.isAuthenticate ? 'Write Review': 'Signin to Review'  }}</button>
                 </div>
               </div>
 
@@ -498,7 +498,7 @@
                 <hr />
                 <div uk-grid>
                   <div class="uk-width-expand uk-flex uk-flex-middle">
-                    <p class="font-regular font-weight-600">Reviewed by justdail user</p>
+                    <p class="font-regular font-weight-600">JustDial Review</p>
                   </div>
                   <div>
                     <ngb-rating [rate]="review.review_rate" [readonly]="true" [max]="5">

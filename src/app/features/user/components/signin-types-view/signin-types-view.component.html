@@ -13,14 +13,15 @@
           <a *ngIf="mobileNumber" class="uk-form-icon uk-form-icon-flip" (click)="changeNumber()">Change Number</a>
           <input class="uk-input otpnumber"
             [ngClass]="{'uk-form-danger' : mobile.invalid && (mobile.dirty || mobile.touched) }" id="form-stacked-text"
-            type="number" [(ngModel)]="mobileNumber" placeholder="Enter Phone Number..." required #mobile="ngModel" />
+            type="number" [(ngModel)]="mobileNumber" (keydown.enter)="requestOtp()" placeholder="Enter Phone Number..."
+            required #mobile="ngModel" />
         </div>
       </div>
     </div>
     <div class="uk-margin">
       <div class="uk-form-controls">
         <input class="uk-input" id="form-stacked-text" type="number" name="otpcode" [(ngModel)]="OtpCode"
-          placeholder="Enter OTP..." [disabled]="!otpGenerated" />
+          placeholder="Enter OTP..." (keydown.enter)="requestOtp()" [disabled]="!otpGenerated" />
         <a *ngIf="otpGenerated" (click)="requestResendOtp()" href="javascript:void(0)" class="resend-otp"> Resend
           OTP</a>
       </div>

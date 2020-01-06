@@ -369,7 +369,7 @@
             <ng-container *ngIf="dbReview.length > 0">
               <div class="m-t-50 m-b-20" uk-grid>
                 <div class="uk-width-expand uk-flex uk-flex-middle">
-                  <h1 class="font-regular-24 font-weight-600"> Reviews
+                  <h1 class="font-regular-24 font-weight-600">TBD Reviews
                     ({{totalReviewRecords}})
                   </h1>
                 </div>
@@ -395,7 +395,7 @@
           <li>
             <!--JD Reviews START-->
             <ng-container *ngIf="!isDBService && service.Reviews.length == 0">
-              <h1 class="font-regular-24 font-weight-600"> Reviews(0)</h1>
+              <h1 class="font-regular-24 font-weight-600">JustDial Reviews(0)</h1>
 
               <div class="uk-child-width-expand m-t-50 m-b-50" uk-grid>
                 <div class="info">
@@ -409,7 +409,7 @@
             </ng-container>
 
             <ng-container *ngIf="!isDBService && service.Reviews.length > 0">
-              <h1 class="font-regular-24 font-weight-600 m-t-50 m-b-20"> Reviews
+              <h1 class="font-regular-24 font-weight-600 m-t-50 m-b-20">JustDial Reviews
                 ({{service.Reviews.length}})
               </h1>
               <!-- Demo box -->

@@ -100,14 +100,16 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
       this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
     }
+    if (this.route.snapshot.queryParams['page'] !== undefined) {
+      this.searchParams.p = this.route.snapshot.queryParams['page'];
+    }
     this.showEvents();
     this.showEventsCount();
   }
 
   changePage(page: number) {
     this.searchParams.p = page;
-    this.showEvents();
-    this.showEventsCount();
+    this.onSearch();
   }
 
   showEvents() {
@@ -174,12 +176,13 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
   }
 
   onSearch() {
-    this.router.navigate(['/community/events'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt } });
+    this.router.navigate(['/community/events'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
   }
 
   setSearchTxt(value: string){
     this.searchParams.searchTxt = value;
     this.homeService.homeSearchtxt = value;
+    this.searchParams.p = 0;
   }
 
 }

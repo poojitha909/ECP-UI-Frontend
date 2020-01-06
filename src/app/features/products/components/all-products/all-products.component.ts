@@ -88,6 +88,9 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     if (this.route.snapshot.queryParams['productCategory'] !== undefined) {
       this.searchParams.productCategory = this.route.snapshot.queryParams['productCategory'];
     }
+    if (this.route.snapshot.queryParams['page'] !== undefined) {
+      this.searchParams.p = this.route.snapshot.queryParams['page'];
+    }
     this.productService.getCategoryList().subscribe((response: any) => {
       const data = response.data;
       this.catsList = [];
@@ -151,11 +154,12 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   setSearchTxt(value: string){
     this.searchParams.searchTxt = value;
     this.homeService.homeSearchtxt = value;
+    this.searchParams.p = 0;
   }
 
 
   onSearch() {
-    this.router.navigate(['/products/all'], { queryParams: { productCategory: this.searchParams.productCategory, searchTxt: this.searchParams.searchTxt } });
+    this.router.navigate(['/products/all'], { queryParams: { productCategory: this.searchParams.productCategory, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p} });
   }
 
 }

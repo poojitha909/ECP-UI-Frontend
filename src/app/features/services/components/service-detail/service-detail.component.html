@@ -153,18 +153,26 @@
         <li><a class="db" [ngClass]="{'hidden':isDBService }" href="#">TBD</a></li>
         <li *ngIf="!isDBService"><a class="jd" href="#">JustDial</a></li>
       </ul>
-      <div class="rating-box bg-white">
 
+
+      <div class="rating-box bg-white">
         <app-rating-view [detailReview]="detailReview" [dbReviewCount]="totalReviewRecords"
           [jdDetailReview]="jdDetailReview"></app-rating-view>
-
       </div>
+
+
       <!-- Rating box END -->
 
       <!-- Submit Rating START-->
-      <div class="rating-box m-t-20 bg-white">
-        <app-add-rating [userRating]="userRating" (submitForm)="onRatingSubmit($event)"></app-add-rating>
-      </div>
+      <ul class="uk-switcher switcher-container">
+        <li>
+          <div class="rating-box m-t-20 bg-white">
+            <app-add-rating [userRating]="userRating" (submitForm)="onRatingSubmit($event)"></app-add-rating>
+          </div>
+        </li>
+        <li>
+        </li>
+      </ul>
       <!-- Submit Rating END-->
 
       <!-- Socailmedia share box  START-->
@@ -287,7 +295,7 @@
               <label class="uk-form-label" for="form-stacked-text">Title<span class="required">*</span></label>
               <div class="uk-form-controls">
                 <input class="uk-input" id="form-stacked-text" formControlName="title" type="text"
-                  placeholder="Enter your name">
+                  placeholder="Enter your title">
               </div>
             </div>
 
@@ -361,13 +369,13 @@
             <ng-container *ngIf="dbReview.length > 0">
               <div class="m-t-50 m-b-20" uk-grid>
                 <div class="uk-width-expand uk-flex uk-flex-middle">
-                  <h1 class="font-regular-24 font-weight-600"> Reviews
+                  <h1 class="font-regular-24 font-weight-600">TBD Reviews
                     ({{totalReviewRecords}})
                   </h1>
                 </div>
                 <div class="uk-width-auto">
-                  <button class="uk-button uk-button-default review-btn-transparent" (click)="writeNewReview()">Write
-                    Review</button>
+                  <button class="uk-button uk-button-default review-btn-transparent"
+                    (click)="writeNewReview()">{{  auth.isAuthenticate ? 'Write Review': 'Signin to Review'  }}</button>
                 </div>
               </div>
 
@@ -387,7 +395,7 @@
           <li>
             <!--JD Reviews START-->
             <ng-container *ngIf="!isDBService && service.Reviews.length == 0">
-              <h1 class="font-regular-24 font-weight-600"> Reviews(0)</h1>
+              <h1 class="font-regular-24 font-weight-600">JustDial Reviews(0)</h1>
 
               <div class="uk-child-width-expand m-t-50 m-b-50" uk-grid>
                 <div class="info">
@@ -401,7 +409,7 @@
             </ng-container>
 
             <ng-container *ngIf="!isDBService && service.Reviews.length > 0">
-              <h1 class="font-regular-24 font-weight-600 m-t-50 m-b-20"> Reviews
+              <h1 class="font-regular-24 font-weight-600 m-t-50 m-b-20">JustDial Reviews
                 ({{service.Reviews.length}})
               </h1>
               <!-- Demo box -->
@@ -490,7 +498,7 @@
                 <hr />
                 <div uk-grid>
                   <div class="uk-width-expand uk-flex uk-flex-middle">
-                    <p class="font-regular font-weight-600">Reviewed by justdail user</p>
+                    <p class="font-regular font-weight-600">JustDial Review</p>
                   </div>
                   <div>
                     <ngb-rating [rate]="review.review_rate" [readonly]="true" [max]="5">

@@ -30,6 +30,7 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
   questions: any[];
   catsList: any[];
   user: any;
+  topTabs: number;
   searchParams: {
     p: number,
     s: number,
@@ -116,6 +117,9 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
       this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
     }
+    if (this.route.snapshot.queryParams['page'] !== undefined) {
+      this.searchParams.p = this.route.snapshot.queryParams['page'];
+    }
 
     this.askQuesService.getCategoryList().subscribe((response: any) => {
       const data = response.data;
@@ -124,9 +128,11 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
         this.catsList = data.content;
       }
     });
-    this.onSearch();
+    this.showExperts();
+    this.showQuestions();
     setTimeout(() => {
       if (this.route.snapshot.queryParams['tab']) {
+        this.topTabs = this.route.snapshot.queryParams['tab'];
         UIkit.tab("#questionstab").show(this.route.snapshot.queryParams['tab']);
       }
     }, 500);
@@ -167,12 +173,12 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
   }
 
   onTopTabChange(value) {
+    this.topTabs = value;
     this.router.navigate(['/ask-question/all'], { queryParams: { category: this.searchParamsQues.askCategory, tab: value } });
   }
 
   onSearch() {
-    this.showExperts();
-    this.showQuestions();
+    this.router.navigate(['/ask-question/all'], { queryParams: { category: this.searchParamsQues.askCategory, page: this.searchParams.p, tab:  this.topTabs} });
   }
 
   onSearchChange(event: any) {
@@ -199,5 +205,6 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
   setSearchTxt(value: string){
     this.searchParams.searchTxt = value;
     this.homeService.homeSearchtxt = value;
+    this.searchParams.p = 0;
   }
 }

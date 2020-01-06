@@ -227,7 +227,8 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
               console.log(response);
               this.userRating = response;
               this.dbRating.push(response);
-              this.getDetailRating()
+              this.getDetailRating();
+              this.getDBserviceReview(this.docId);
             },
             error => {
               console.log(error);
@@ -423,10 +424,15 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   writeNewReview() {
-    this.reviewForm.reset();
-    this.reviewSuccessMessage = null;
-    this.reviewTitle = 'Add';
-    UIkit.modal('#review-modal').show();
+    if (this.auth.isAuthenticate) {
+      this.reviewForm.reset();
+      this.reviewSuccessMessage = null;
+      this.reviewTitle = 'Add';
+      UIkit.modal('#review-modal').show();
+    } else {
+      this.auth.redirectUrl = this.router.url;
+      this.router.navigateByUrl('/user/signin');
+    }
   }
   // deleteReview() {
   //   this.ecpService.deleteDBserviceReview(this.deleteReviewId).subscribe(

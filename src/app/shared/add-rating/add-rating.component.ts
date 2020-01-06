@@ -24,8 +24,16 @@ export class AddRatingComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit() {
 
-
+    this.auth.userSource.subscribe(
+      user => {
+        if (!user) {
+          this.userRating = null;
+          this.btnText = 'Signin to Submit';
+          this.ratingForm.controls.rating.setValue('');
+        }
+      });
   }
+
   ngOnChanges(simpleChanges: SimpleChanges) {
     if (simpleChanges) {
       if (this.auth.isAuthenticate) {

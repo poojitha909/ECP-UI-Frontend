@@ -42,7 +42,8 @@
         font-size: 18px;
         min-width: 216px;
         width: 100%;
-        &:active {
+        &:active,
+        &:hover {
           color: $primary-btn;
           background-color: #fff;
         }
@@ -171,13 +172,17 @@
   margin-top: 32px;
   margin-bottom: 32px;
 }
-.uk-button-default,
-.uk-button-default:active {
-  color: #ffffff !important;
+.uk-button-default {
+  color: #ffffff;
   border: 1px solid #1a73e8;
   border-radius: 4px;
   height: 48px;
-  background-color: #1a73e8 !important;
+  background-color: #1a73e8;
+  &:active,
+  &:hover {
+    color: $primary-btn;
+    background-color: #fff;
+  }
 }
 @media (min-width: 640px) {
   // .sm-pr-20 {

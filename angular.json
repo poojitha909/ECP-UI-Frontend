@@ -22,9 +22,21 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              { "glob": "**/*", "input": "node_modules/tinymce/skins", "output": "/tinymce/skins/" },
-              { "glob": "**/*", "input": "node_modules/tinymce/themes", "output": "/tinymce/themes/" },
-              { "glob": "**/*", "input": "node_modules/tinymce/plugins", "output": "/tinymce/plugins/" }
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce/skins",
+                "output": "/tinymce/skins/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce/themes",
+                "output": "/tinymce/themes/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce/plugins",
+                "output": "/tinymce/plugins/"
+              }
             ],
             "styles": [
               "src/styles.scss"
@@ -61,6 +73,23 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "qa": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
             }
           }
         },
@@ -72,6 +101,9 @@
           "configurations": {
             "production": {
               "browserTarget": "ecp-ui-frontend:build:production"
+            },
+            "qa": {
+              "browserTarget": "ecp-ui-frontend:build:qa"
             }
           }
         },
@@ -88,8 +120,13 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": []
           }
         },
@@ -101,7 +138,9 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "e2e": {

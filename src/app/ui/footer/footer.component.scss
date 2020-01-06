@@ -21,7 +21,7 @@
     border: unset;
     border-radius: 4px;
     padding: 10px 30px;
-    &:active{
+    &:active,&:hover{
       background-color: #ffffff;
       color: $primary-btn;
     }

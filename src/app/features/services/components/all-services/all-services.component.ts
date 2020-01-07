@@ -42,12 +42,12 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     term: ''
   };
   autocompleteFields: Service[] = [];
-  currentUrl: string;
+  // currentUrl: string;
   whatsappUrl;
   showShareBox: boolean;
   verfiedCheck: boolean;
   selectedCategory: string;
-
+  mailUrl: string;
 
   constructor(public ecpService: EpcServiceService,
     public JDcategory: JdCategoryService,
@@ -85,14 +85,18 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     ).subscribe(() => {
       this.onSearchChange(this.searchPageParam.term);
     });
-    this.currentUrl = window.location.href;
-    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
+    // this.currentUrl = encodeURI(window.location.href);
+    this.mailUrl = `mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20${encodeURI(window.location.href)}`
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
   }
 
   ngAfterViewInit() {
 
     this.activeRoute.queryParamMap.subscribe(
       value => {
+        // this.currentUrl = encodeURI(window.location.href);
+        this.mailUrl = `mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20${encodeURI(window.location.href)}`;
+        this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
         const queryCategory = value.get("category");
         const catId = value.get("catid");
         if (queryCategory) {

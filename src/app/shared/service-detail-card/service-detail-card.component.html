@@ -10,7 +10,7 @@
         class="h-150 w-100" alt="No Image">
       <img [imageHandler] *ngIf="!isDBService" [src]="service?.thumbnail" class="h-150 w-100" alt="">
 
-      <button *ngIf="service?.verified == '1'"><span class="verified-icon-w"></span></button>
+      <button class="uk-button-default" *ngIf="service?.verified == '1'"><span class="verified-icon-w"></span></button>
     </div>
 
   </div>

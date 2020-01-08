@@ -65,7 +65,7 @@
                         <div class="comments-add uk-width-1-3@s">
                             <button class="uk-button uk-button-default adddiscuss"
                             (click)="setParentReplyId('')"
-                            uk-toggle="target: #reply-modal"
+                            uk-toggle="target: #reply-modal-discussion"
                             > Add Comment </button>
                         </div>
                     </div>
@@ -102,12 +102,12 @@
                                 </span>
                             </div>
                             <div *ngIf="repliesGroup.value[0].userId == user?.id" class="like-container">
-                                <a class="font-regular uk-text-primary" href="#reply-modal" uk-toggle
+                                <a class="font-regular uk-text-primary" href="#reply-modal-discussion" uk-toggle
                                     (click)="editReply('',repliesGroup.value[0])">
                                     Edit
                                 </a>
                             </div>
-                            <div class="reply-container" uk-toggle="target: #reply-modal" (click)="setParentReplyId(repliesGroup.value[0].id)">
+                            <div class="reply-container" uk-toggle="target: #reply-modal-discussion" (click)="setParentReplyId(repliesGroup.value[0].id)">
                                 <img class="img" src="/assets/images/reply.svg"> <label class="reply" for="commentarea">
                                     Reply</label>
                             </div>
@@ -149,7 +149,7 @@
                                                     </span>
                                                 </div>
                                                 <div *ngIf="rep.userId == user?.id" class="like-container">
-                                                    <a class="font-regular uk-text-primary" href="#reply-modal" uk-toggle
+                                                    <a class="font-regular uk-text-primary" href="#reply-modal-discussion" uk-toggle
                                                         (click)="editReply('',rep)">
                                                         Edit
                                                     </a>
@@ -164,7 +164,7 @@
                 </div>
                 </div>
 
-                <div id="reply-modal" uk-modal>
+                <div id="reply-modal-discussion" uk-modal>
                     <div class="uk-modal-dialog uk-modal-body">
                     <h1 class="font-regular-24 font-weight-600">Add Comment</h1>
                     <hr />

@@ -8,6 +8,7 @@ import { Breadcrumb, SEO, DBReviews, DBRating } from 'src/app/core/interfaces';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+declare var UIkit;
 
 @Component({
   selector: 'app-product-detail',
@@ -126,8 +127,11 @@ export class ProductDetailPageComponent implements OnInit {
   }
 
   redirectToSite(){
+    window.open(this.product.buyLink);
+  }
+  redirectConfirm(){
     if(this.user){
-      window.open(this.product.buyLink);
+      UIkit.modal("#modal-product-leaving").show();
     }
     else{
       this.authService.redirectUrl = "/products/" + this.product.id;

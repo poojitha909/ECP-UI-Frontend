@@ -37,16 +37,11 @@
 }
 
 .uk-button-default{
-  background-color: #1a73e8;
+
 border-radius: 4px;
 font-size: 18px;
 border: none;
-color: #fff;
 text-transform: none;
 padding: 1px 30px;
-&:active,&:hover {
-  border: 1px solid #1a73e8;
-  color: #1a73e8;
-  background-color: #fff;
-}
+
 }

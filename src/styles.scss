@@ -182,18 +182,12 @@ ngb-rating {
   }
 
   .uk-button-default {
-    background-color: #1a73e8;
     border-radius: 4px;
-    border: 1px solid #1a73e8;
+
     font-size: 18px;
-    color: #fff;
+
     text-transform: none;
     padding: 1px 30px;
-    &:hover,
-    &:active {
-      color: #1a73e8;
-      background-color: #fff;
-    }
   }
 }
 
@@ -236,6 +230,57 @@ ngb-rating {
 .uk-search .uk-search-icon:not(a):not(button):not(input) {
   pointer-events: all;
 }
+
+.uk-button-default:focus:active {
+  background: #0050ba;
+  color: #ffffff;
+}
+
+.uk-button-default {
+  color: #ffffff;
+  background: #1a73e8;
+  &:hover {
+    background: #529bfb;
+    color: #ffffff;
+  }
+  &:focus {
+    color: #ffffff;
+    background: #1a73e8;
+  }
+  &:disabled {
+    color: #a2a4ab;
+    background-color: #c7c9cd;
+  }
+}
+
+.uk-button-transparent:focus:active {
+  background: transparent;
+  color: #0050ba;
+  border: 1px solid #0050ba;
+}
+
+.uk-button-transparent {
+  color: #1a73e8;
+  background: transparent;
+  border: 1px solid #1a73e8;
+  &:hover {
+    background: transparent;
+    color: #529bfb;
+    border: 1px solid #529bfb;
+  }
+  &:focus {
+    color: #1a73e8;
+    background: transparent;
+    border: 1px solid #1a73e8;  
+  }
+  &:disabled {
+    color: #c7c9cd;
+    border: 1px solid #c7c9cd;
+    background-color: transparent;
+  }
+ 
+}
+
 @media screen and (max-width: 640px) {
   .home-banner {
     min-height: 504px;
@@ -251,11 +296,7 @@ ngb-rating {
     flex-direction: column-reverse;
   }
 }
-.uk-button {
-  &:focus {
-    outline: -webkit-focus-ring-color auto 5px;
-  }
-}
+
 
 .uk-search-input {
   &:focus {

@@ -1,34 +1,32 @@
-a{
-    color: #1A72E8;
+a {
+  color: #1a72e8;
 }
 
-.p-verified{
-    padding: 3px 10px;
+.p-verified {
+  padding: 3px 10px;
 }
 
-.p-16{
-    padding: 16px;
+.p-16 {
+  padding: 16px;
 }
 
-.uk-card-default{
-    border: 1px solid #D7E0EF;
-    border-radius: 4px;
+.uk-card-default {
+  border: 1px solid #d7e0ef;
+  border-radius: 4px;
 }
 
 .verified {
-    position: relative;
-    button {
-      right: 10px;
-      position: absolute;
-      background-color: #1a73e8;
-      border-radius: 4px;
-      color: #fff;
-      padding: 7px 10px;
-      display: flex;
-      top: 10px;
-      border: 0px;
-      span {
-        font-size: 18px;
-      }
+  position: relative;
+  button {
+    right: 10px;
+    position: absolute;
+    border-radius: 4px;
+    padding: 7px 10px;
+    display: flex;
+    top: 10px;
+    border: 0px;
+    span {
+      font-size: 18px;
     }
   }
+}

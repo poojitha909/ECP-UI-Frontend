@@ -1,49 +1,50 @@
 @import "src/assets/css/variables.scss";
 
-.product-detail{
+.product-detail {
   font-family: $regular-font;
   color: $font-color-black;
   margin-bottom: 48px;
-  .heading{
+  .heading {
     font-family: $regular-font;
     font-size: 32px;
     font-weight: bold;
     color: $font-light-black;
   }
-  .heading2{
+  .heading2 {
     font-family: $regular-font;
     font-size: 24px;
     font-weight: bold;
-    color: $font-light-black;      
+    color: $font-light-black;
   }
-  .no-top-m{
+  .no-top-m {
     margin-top: 0pc !important;
   }
   // .buynow button.uk-button {
   //   line-height: 52px;
   // }
-  .price{
+  .price {
     font-size: 32px;
     line-height: 32px;
     display: inline-block;
     padding-left: 40px;
     font-weight: bold;
   }
-  .description{
+  .description {
     font-size: $font-small;
     margin-top: 5px;
   }
-  .textblue{
-    color:$primary-txt-color;
+  .textblue {
+    color: $primary-txt-color;
   }
- 
-  .category-box{
-    border: 1px solid #D7E0EF;
+
+  .category-box {
+    border: 1px solid #d7e0ef;
     box-sizing: border-box;
     border-radius: 4px;
     padding: 16px;
     color: $font-light-black;
-    h3, p{
+    h3,
+    p {
       text-align: center;
     }
     // a{
@@ -51,125 +52,126 @@
     // }
   }
 
-  .carousel-box{
-    border: 1px solid #D7E0EF;
+  .carousel-box {
+    border: 1px solid #d7e0ef;
     box-sizing: border-box;
     border-radius: 4px;
   }
 
-  .comment{
-    span{
+  .comment {
+    span {
       font-size: $font-small;
       padding: 15px 0 0 0;
       display: inline-block;
     }
-    .uk-card-body{
+    .uk-card-body {
       padding-top: 20px;
     }
-    textarea{
+    textarea {
       width: 100%;
       height: 100px;
       margin-top: 10px;
     }
-    button{
-      border-radius: 4px; 
+    button {
+      border-radius: 4px;
     }
-    .uk-card-header h3{
-      border-bottom: 1px solid #D7E0EF;
+    .uk-card-header h3 {
+      border-bottom: 1px solid #d7e0ef;
     }
   }
-  .uk-card-title{
+  .uk-card-title {
     font-family: $regular-font;
     font-size: 18px;
     font-weight: bold;
   }
-  .uk-card-header{
+  .uk-card-header {
     font-family: $regular-font;
     padding: 9px 20px;
     font-size: 24px;
     border: none;
-    h3{
+    h3 {
       color: $font-light-black;
     }
   }
-  .uk-card-body{
+  .uk-card-body {
     padding: 0px 20px 0px 20px;
     font-size: 18px;
   }
-  .uk-card-footer{
+  .uk-card-footer {
     border-top: none;
-    img{
+    img {
       height: 35px;
     }
-    .like, .reply{
+    .like,
+    .reply {
       font-size: 18px;
       display: inline-block;
       vertical-align: middle;
     }
-    .reply-container{
+    .reply-container {
       text-align: right;
-      .reply{
+      .reply {
         cursor: pointer;
       }
     }
   }
-  .review-input{
-    display:block;
+  .review-input {
+    display: block;
     margin: 10px 0px;
     width: 100%;
     height: 36px;
-    border: 1px solid #D7E0EF;
+    border: 1px solid #d7e0ef;
     border-radius: 4px;
     padding: 3px 5px;
   }
-  select.review-input,#commentarea{
+  select.review-input,
+  #commentarea {
     padding: 3px 5px;
     background: #fff;
   }
-  
-  
-  .comment.uk-card-default{
+
+  .comment.uk-card-default {
     margin-bottom: 20px;
     box-shadow: none;
-    border: 1px solid #D7E0EF;
+    border: 1px solid #d7e0ef;
     border-radius: 4px;
   }
 
-  .reviews .uk-card-default{
+  .reviews .uk-card-default {
     background-color: #fff;
     box-shadow: none;
-    border-bottom: 1px solid #D7E0EF;
+    border-bottom: 1px solid #d7e0ef;
     margin-bottom: 20px;
   }
 
-  .like-link{
-    .upvoted{
-        color: #1A73E8; 
-    } 
-    :hover{
-        color: #1A73E8; 
+  .like-link {
+    .upvoted {
+      color: #1a73e8;
     }
-}
+    :hover {
+      color: #1a73e8;
+    }
+  }
 
-  .review-avatar{
+  .review-avatar {
     width: 48px;
     height: 48px;
     border-radius: 50%;
-}
-
-  .whatapp-icon{
-    background:#009487;
-    color:#fff;
   }
 
-  .fb-icon{
-    background:#2a415e;
-    color:#fff;
+  .whatapp-icon {
+    background: #009487;
+    color: #fff;
   }
 
-  .email-icon{
-    background:#1772eb;
-    color:#fff;
+  .fb-icon {
+    background: #2a415e;
+    color: #fff;
+  }
+
+  .email-icon {
+    background: #1772eb;
+    color: #fff;
   }
 
   .carousel-thumbnail {
@@ -179,13 +181,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
   }
-  
+
   .carousel-thumbnail__item {
     cursor: pointer;
   }
-  
+
   .carousel-thumbnail__img {
     width: 60px;
     height: 60px;
@@ -193,79 +194,50 @@
     border: 1px solid #eae5e5;
   }
 }
-.review-form{
-  input,textarea,select{
-      border-radius: 4px;
+.review-form {
+  input,
+  textarea,
+  select {
+    border-radius: 4px;
   }
-  button{
-      background-color: $primary-btn;
-      border-radius: 4px;
-      font-size: 18px;
-      border: none;
-      color: #fff;
-      text-transform: none;
-      padding: 2px 30px;
-      &:active,&:hover{
-        color: $primary-btn;
-        background-color: #fff;
-      }
-      &:disabled{
-          background-color: transparent;
-          color: #999;
-          border-color: #e5e5e5;
-          border: 1px solid;
-      }
-  }
-
-  .uk-button-transparent{
-      background-color: transparent;
-      border-radius: 4px;
-      font-size: 18px;
-      border: 1px solid $primary-btn;
-      color:$primary-btn;
-      text-transform: none;
-      padding: 0px 30px;
-      &:active,&:hover{
-        color: $primary-btn;
-        background-color: #fff;
-      }
-    }
-}
-.social-link{
-  color: #000;
-  }
-
-  .review-btn{
-    background-color: $primary-btn;
+  .uk-button-default {
     border-radius: 4px;
     font-size: 18px;
     border: none;
-    color: #fff;
+    text-transform: none;
+    padding: 2px 30px;
+  }
+
+  .uk-button-transparent {
+    border-radius: 4px;
+    font-size: 18px;
+    text-transform: none;
+    padding: 0px 30px;
+  }
+  .social-link {
+    color: #000;
+  }
+
+  .review-btn {
+    border-radius: 4px;
+    font-size: 18px;
+    border: none;
     text-transform: none;
     padding: 1px 30px;
-    &:active,&:hover {
-      color: $primary-btn;
-      background-color: #fff;
-    }
-}
-
-.review-btn-transparent, .uk-button-transparent {
-  background-color: transparent;
-  border-radius: 4px;
-  font-size: 18px;
-  border: 1px solid $primary-btn;
-  color: $primary-btn;
-  text-transform: none;
-  padding: 0px 30px;
-  &:active,&:hover {
-    color: $primary-btn;
-    background-color: #fff;
   }
-}
 
-.rating-box {
-  border: 1px solid #d7e0ef;
-  box-sizing: border-box;
-  border-radius: 4px;
-  padding: 10px;
+  .review-btn-transparent,
+  .uk-button-transparent {
+    border-radius: 4px;
+    font-size: 18px;
+    text-transform: none;
+    padding: 0px 30px;
+  }
+
+  .rating-box {
+    border: 1px solid #d7e0ef;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 10px;
+  }
 }

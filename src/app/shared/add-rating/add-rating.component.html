@@ -1,6 +1,6 @@
 <div class="add-rating p-20">
     <div class="p-10 uk-flex uk-flex-center">
-      {{userRating ? 'Your Ratings':'Rate this service'}}
+      {{userRating ? 'Your Ratings':'Rate this ' + ratingOf }}
     </div>
   </div>
   <form class="review-form" [formGroup]="ratingForm" (ngSubmit)="onRatingSubmit()">

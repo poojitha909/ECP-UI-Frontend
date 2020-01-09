@@ -37,7 +37,7 @@ export class FeaturedServicesComponent implements OnInit {
       this.homeService.getServices().subscribe(
         response => {
           if (response && response.data) {
-            this.services = response.data.slice(0, 9);
+            this.services = response.data.slice(0, 6);
           }
         });
     }

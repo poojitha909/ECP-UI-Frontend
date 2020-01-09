@@ -10,7 +10,7 @@ export class FeaturedEventsComponent implements OnInit {
 
   searchParams = {
     p: 0,
-    s: 9,
+    s: 6,
     searchTxt: "",
     eventType: 0,
     pastEvents: -1

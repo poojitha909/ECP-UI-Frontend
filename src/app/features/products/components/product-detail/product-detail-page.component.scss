@@ -214,9 +214,7 @@
     text-transform: none;
     padding: 0px 30px;
   }
-  .social-link {
-    color: #000;
-  }
+ 
 
   .review-btn {
     border-radius: 4px;
@@ -233,11 +231,13 @@
     text-transform: none;
     padding: 0px 30px;
   }
-
-  .rating-box {
-    border: 1px solid #d7e0ef;
-    box-sizing: border-box;
-    border-radius: 4px;
-    padding: 10px;
-  }
+}
+.rating-box {
+  border: 1px solid #d7e0ef;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 10px;
+}
+.social-link {
+  color: #000;
 }

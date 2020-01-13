@@ -1,9 +1,9 @@
-.pagination {
+.f-pagination {
   border-top: 1px solid #d7e0ef;
 }
 .uk-pagination {
   justify-content: center;
-  width: 100%;
+  // width: 100%;
   margin: 30px auto 30px auto;
   .first {
     line-height: 50px;
@@ -12,42 +12,59 @@
     line-height: 50px;
   }
 }
-.uk-pagination > li.pagenum {
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
-  border-radius: 50%;
-  padding: 0;
-  text-align: center;
-  margin: 0 5px;
-  background-color: rgba(22, 28, 45, 0.4);
-  color: #fff;
-  font-size: 18px;
-}
-.uk-pagination > li.pagenum:hover {
-  border: 1px solid #1a73e8;
-  background-color: white;
-  color: #1a73e8;
+.uk-pagination > li {
+  .pagenum {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    padding: 0;
+    text-align: center;
+    margin: 0 5px;
+    background-color:#c7c9cd;
+    color: #fff;
+    font-size: 18px;
+  }
+  .pagenum:hover {
+    background-color: #93969e;
+  }
+
+  .pagenum:focus:active {
+    background-color: #61656f;
+  }
 }
 
-.uk-pagination > li.pagenum.uk-active {
-  a {
-    color: #fff;
-  }
-  background-color: #1a73e8;
-  &:hover {
-    color: #fff;
+.uk-pagination > li {
+  .pagenum.uk-active {
+    a {
+      color: #fff;
+    }
+    background-color: #1a73e8;
+    &:hover {
+      color: #fff;
+    }
   }
 }
 .uk-pagination > * > * {
   display: inline-block;
 }
 
+.pagenum-rm {
+  background-color: transparent !important;
+  color: rgba(22, 28, 45, 0.4) !important;
+  &:hover {
+    background-color: transparent !important;
+    color: rgba(22, 28, 45, 0.4) !important;
+  }
+}
+
 @media (max-width: 640px) {
-  .uk-pagination > li.pagenum {
-    width: 35px;
-    height: 35px;
-    line-height: 35px;
+  .uk-pagination > li {
+    .pagenum {
+      width: 35px;
+      height: 35px;
+      line-height: 35px;
+    }
   }
   .uk-pagination {
     .first {
@@ -65,4 +82,12 @@
   .pr\@s {
     padding-right: 20px;
   }
+}
+
+.pageNext{
+  color: #1a73e8;
+}
+
+.pagePrev{
+  color: #616570;
 }

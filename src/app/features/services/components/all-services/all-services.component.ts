@@ -46,8 +46,9 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   whatsappUrl;
   showShareBox: boolean;
   verfiedCheck: boolean;
-  selectedCategory: string;
+  selectedCategory: string = "allServices";
   mailUrl: string;
+  categoryTypes: string[];
 
   constructor(public ecpService: EpcServiceService,
     public JDcategory: JdCategoryService,
@@ -58,6 +59,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     public sanitizer: DomSanitizer,
     private seoService: SeoService
   ) {
+    this.categoryTypes = Object.keys(JDcategory.categories).reverse();
 
     // Generate meta tag 
     const config: SEO = {
@@ -146,7 +148,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     if (catId) {
       this.selectedCategory = category;
     } else {
-      this.selectedCategory = '';
+      this.selectedCategory = 'allServices';
     }
     this.isLoading = true;
     const param: PageParam = {
@@ -183,7 +185,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   }
 
   clearSelection() {
-    this.selectedCategory = '';
+    this.selectedCategory = 'allServices';
     // this.searchPageParam.term = '';
     this.router.navigateByUrl('services/all');
   }

@@ -16,9 +16,14 @@
     </li>
 </ul> -->
 
-<div *ngIf="pager.pages && pager.pages.length" class="uk-container pagination">
+<div *ngIf="pager.pages && pager.pages.length" class="uk-container f-pagination uk-flex">
+    <div class="uk-flex uk-flex-middle cursor-pointer pagePrev">
+        <div *ngIf="pager.currentPage !== 1" (click)="setPage(pager.currentPage - 1)">
+            <span uk-pagination-previous></span> Previous
+        </div>
+    </div>
     <ul class="uk-pagination cursor-pointer" uk-margin>
-        <li class="first uk-visible@s">
+        <!-- <li class="first uk-visible@s">
             <div *ngIf="pager.currentPage !== 1" (click)="setPage(1)">
                 First
             </div>
@@ -27,12 +32,13 @@
             <div *ngIf="pager.currentPage !== 1" (click)="setPage(pager.currentPage - 1)">
                 <span uk-pagination-previous></span> Previous
             </div>
+        </li> -->
+        <li class="p-l-0" *ngFor="let page of getpages()" (click)="setPage(page)">
+            <div class="pagenum" [ngClass]="{'uk-active':pager.currentPage === page, 'pagenum-rm': page === '...'}">
+                <a>{{page}}</a>
+            </div>
         </li>
-        <li class="pagenum" *ngFor="let page of getpages()" [ngClass]="{'uk-active':pager.currentPage === page}"
-            (click)="setPage(page)">
-            <a>{{page}}</a>
-        </li>
-        <li class="last">
+        <!-- <li class="last">
             <div *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(pager.currentPage + 1)">
                 Next <span uk-pagination-next></span>
             </div>
@@ -41,6 +47,11 @@
             <div *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(pager.totalPages)">
                 Last
             </div>
-        </li>
+        </li> -->
     </ul>
+    <div class="uk-flex uk-flex-middle cursor-pointer pageNext">
+        <div *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(pager.currentPage + 1)">
+            Next <span uk-pagination-next></span>
+        </div>
+    </div>
 </div>

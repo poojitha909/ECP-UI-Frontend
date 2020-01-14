@@ -34,7 +34,6 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     productCategory: string
   };
   currentUrl: string;
-  whatsappUrl;
 
 
   paramsSubs: any;
@@ -68,10 +67,9 @@ export class AllProductsComponent implements OnInit, OnDestroy {
 
   initiate() {
     this.currentUrl = window.location.href;
-    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
     this.searchParams = {
       p: 0,
-      s: 6,
+      s: 4,
       searchTxt: "",
       productCategory: ""
     }

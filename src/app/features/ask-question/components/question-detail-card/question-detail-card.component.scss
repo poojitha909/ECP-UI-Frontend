@@ -9,6 +9,10 @@ a{
     color: #161C2D;
     font-size:18px;
 }
+.image-user{
+    height: 168px;
+    max-width: 100%;
+}
 .expertdetial{
     font-size: $font-small;
     color: rgba(22, 28, 45, 0.68);
@@ -41,7 +45,7 @@ a{
 }
 .reply-card{
     text-align: center;
-    padding-top: 43%;
+    padding-top: 47%;
     background-color: #ECF4FF;
     border-radius: 4px;
     height: 100%;
@@ -57,6 +61,5 @@ a{
 }
 
 .reply-border{
-    padding: 8px 16px;
-    border-left: 1px solid #D7E0EF;
+    padding: 16px;
 }

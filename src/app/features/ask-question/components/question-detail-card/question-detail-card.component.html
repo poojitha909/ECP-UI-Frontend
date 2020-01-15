@@ -1,9 +1,9 @@
 <div routerLink="/ask-question/detail/{{question?.id}}" class="cursor uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
-  <div class="uk-card-media-left uk-width-1-4@m uk-width-1-3@s p-16" *ngIf="viewby == 'user'">
-    <img [imageHandler] [src]="question?.answeredBy?.basicProfileInfo?.profileImage?.titleImage" height="156" alt="">
+  <div class="uk-card-media-left uk-width-1-4 uk-width-1-6@s p-16" *ngIf="viewby == 'user'">
+    <img class="image-user" [imageHandler] [src]="question?.answeredBy?.basicProfileInfo?.profileImage?.titleImage" height="156" alt="">
   </div>
-  <div class="uk-card-media-left uk-width-1-4@m uk-width-1-3@s p-16" *ngIf="viewby == 'expert'">
-    <img [imageHandler] [src]="question?.askedBy?.basicProfileInfo?.profileImage?.titleImage" height="156" alt="">
+  <div class="uk-card-media-left uk-width-1-4 uk-width-1-6@s p-16" *ngIf="viewby == 'expert'">
+    <img class="image-user" [imageHandler] [src]="question?.askedBy?.basicProfileInfo?.profileImage?.titleImage" height="156" alt="">
   </div>
 
   <div class="uk-card-body uk-width-expand p-16">
@@ -22,7 +22,7 @@
       </span>
     </div>
   </div>
-  <div class="uk-width-1-4@m  reply-border">
+  <div class="uk-width-1-6  reply-border">
     <div class="reply-card">
       <div class="m-0 replycnt" *ngIf="question?.replyCount > 0"> <img src="/assets/images/comments.svg">{{question?.replyCount}} Replies</div>
       <div class="m-0 replycnt" *ngIf="question?.replyCount <= 0">No Replies</div>

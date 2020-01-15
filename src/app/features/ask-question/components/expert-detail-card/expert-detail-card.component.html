@@ -2,7 +2,7 @@
 
   <div class="uk-card-media-left uk-width-1-4@m uk-width-1-3@s p-16">
     <!--TODO: apply imageHandler directive-->
-    <img [src]="expert?.basicProfileInfo?.profileImage?.titleImage" (error)="setDefaultPic($event)" height="156" alt="" />
+    <img class="image-user" [src]="expert?.basicProfileInfo?.profileImage?.titleImage" (error)="setDefaultPic($event)" alt="" />
   </div>
 
   <div class="uk-card-body uk-width-expand p-16">
@@ -20,6 +20,6 @@
   </div>
 
   <div class="uk-width-1-4@m askques">
-    <button class="uk-button uk-button-primary">Ask an Expert</button>
+    <button class="uk-button uk-button-primary">Ask Question</button>
   </div>
 </div>

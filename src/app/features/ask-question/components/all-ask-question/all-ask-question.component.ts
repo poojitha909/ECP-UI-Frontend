@@ -84,14 +84,14 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
   initiate() {
     this.searchParams = {
       p: 0,
-      s: 6,
+      s: 4,
       experties: "",
       searchTxt: ""
     }
 
     this.searchParamsQues = {
       p: 0,
-      s: 6,
+      s: 4,
       searchTxt: "",
       askCategory: "",
       askedBy: "",

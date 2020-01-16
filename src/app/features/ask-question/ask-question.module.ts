@@ -8,6 +8,7 @@ import { AllAskQuestionComponent } from './components/all-ask-question/all-ask-q
 import { AskQuestionCreatePageComponent }  from './components/ask-question-create/ask-question-create-page.component';
 import { ExpertDetailCardComponent } from './components/expert-detail-card/expert-detail-card.component';
 import { ExpertNoRecordComponent } from './components/expert-no-record/expert-no-record.component';
+import { NoExpertReplyComponent } from './components/no-expert-reply/no-expert-reply.component';
 import { QuestionNoRecordComponent } from './components/question-no-record/question-no-record.component';
 import { QuestionDetailCardComponent } from './components/question-detail-card/question-detail-card.component';
 import { AskQuestionDetailPageComponent } from './components/ask-question-detail/ask-question-detail-page.component';
@@ -21,6 +22,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     ExpertDetailCardComponent,
     AskQuestionCreatePageComponent,
     ExpertNoRecordComponent,
+    NoExpertReplyComponent,
     QuestionNoRecordComponent,
     QuestionDetailCardComponent,
     AskQuestionDetailPageComponent,

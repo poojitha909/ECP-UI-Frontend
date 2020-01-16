@@ -105,7 +105,6 @@ export class AskQuestionCreatePageComponent implements OnInit {
   }
 
   showQuestions(){
-
     this.askQuesService.questions(this.searchParams).subscribe( (response:any) =>{
       this.totalRecords = 0;
       const data = response.data;
@@ -115,6 +114,10 @@ export class AskQuestionCreatePageComponent implements OnInit {
         this.totalRecords = data.total;
       }
     });
+  }
+
+  redirectToQuestions(){
+    this.router.navigate(['/ask-question/all'], { queryParams: { tab: 1 } });
   }
 
   setSeoTags(expert: any) {

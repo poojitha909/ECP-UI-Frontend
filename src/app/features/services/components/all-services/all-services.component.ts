@@ -44,6 +44,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   autocompleteFields: Service[] = [];
   // currentUrl: string;
   whatsappUrl;
+  whatsMobileUrl;
+
   showShareBox: boolean;
   verfiedCheck: boolean;
   selectedCategory: string = "allServices";
@@ -89,7 +91,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     });
     // this.currentUrl = encodeURI(window.location.href);
     this.mailUrl = `mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20${encodeURI(window.location.href)}`
-    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(window.location.href)}`);
+    this.whatsMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
   }
 
   ngAfterViewInit() {
@@ -98,7 +101,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
       value => {
         // this.currentUrl = encodeURI(window.location.href);
         this.mailUrl = `mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20${encodeURI(window.location.href)}`;
-        this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
+        this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(window.location.href)}`);
+        this.whatsMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
         const queryCategory = value.get("category");
         const catId = value.get("catid");
         if (queryCategory) {

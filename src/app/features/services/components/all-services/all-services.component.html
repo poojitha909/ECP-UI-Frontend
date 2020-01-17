@@ -138,9 +138,17 @@
 
       <!-- Socailmedia share box  -->
       <div class="m-t-30 m-b-30 bg-white category-box" *ngIf="showShareBox">
-        <div class="m-b-20">
-          <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
-          <a class="social-link" [href]="whatsappUrl">
+        <div class="m-b-20 uk-visible@s">
+          <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"
+            target="_blank"> </a>
+          <a class="social-link" [href]="whatsappUrl" target="_blank">
+            Share via
+            Whatsapp</a>
+        </div>
+
+        <div class="m-b-20 uk-hidden@s">
+          <a [href]="whatsMobileUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
+          <a class="social-link" [href]="whatsMobileUrl">
             Share via
             Whatsapp</a>
         </div>

@@ -37,6 +37,7 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   reviewSuccessMessage: string;
   currentUrl: string;
   whatsappUrl;
+  whatsappMobileUrl;
   docId: string;
   userId: string;
   reviewTitle: string = "Add";
@@ -124,7 +125,8 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
 
     this.currentUrl = encodeURI(window.location.href);
-    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(this.currentUrl)}`);
+    this.whatsappMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
 
     if (!this.isDBService) {
       this.getJdDetailRating();

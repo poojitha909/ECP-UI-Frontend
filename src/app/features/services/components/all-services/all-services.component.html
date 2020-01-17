@@ -96,35 +96,43 @@
           <div class="uk-width-expand">
             <h4>Categories</h4>
           </div>
-          <!-- <div *ngIf="selectedCategory">
-            <a class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
-          </div> -->
+          <div class="uk-flex uk-flex-bottom uk-text-small">
+            <a *ngIf="!selectedCategoryType" href="javascript:void(0)" class="light-text uk-disabled">Showing All</a>
+            <a *ngIf="selectedCategoryType" class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
+          </div>
         </div>
-        <div class="m-t-20 m-b-20">
+        <div *ngIf="!selectedCategoryType" class="m-t-20 m-b-20">
           <ul class="uk-list uk-list-small">
-            <li [ngClass]="{'cat-active': selectedCategory === 'allServices'}" (click)="clearSelection()"
+            <li *ngFor="let categoryType of categoryTypes"
+              (click)="selectedCategoryType = categoryType;onCategoryChanged(categoryType,'')"
               class="cursor-pointer font-regular">
-              All Services
+              {{ categoryType }}
+              <div class="uk-float-right">
+                <span style="color: gray;" uk-icon="icon: chevron-right; ratio: 1.3"></span>
+              </div>
             </li>
           </ul>
         </div>
-        <div class="sroll-category m-t-20">
-          <div *ngFor="let categoryType of categoryTypes">
-            <div class="pl-5 font-regular-15 category-group">{{categoryType}}</div>
-            <ul class="uk-list uk-list-small">
-              <li [ngClass]="{'cat-active': category.category_name === selectedCategory}"
-                (click)="onCategoryChanged(category.category_name,category.national_catid)"
-                *ngFor="let category of JDcategory.categories[categoryType]" class="cursor-pointer font-regular">
-                {{category.category_name}}
-              </li>
-            </ul>
+        <div *ngIf="selectedCategoryType" class="m-t-20 uk-animation-fade uk-animation-fast">
+          <div class="font-weight-700 font-regular sel-type cursor-pointer" (click)="clearSelection()"><span
+              style="color: gray;" uk-icon="icon: chevron-left; ratio: 1.3"></span>
+            {{selectedCategoryType}}
           </div>
-          <!-- <li class="cursor-pointer" *ngFor="let category of JDcategory.categories"
-            (click)="onCategoryChanged(category.category_name,category.national_catid)"
-            [ngClass]="{'cat-active': category.category_name === selectedCategory}">
-            {{category.category_name}}
-          </li> -->
+          <ul class="uk-list uk-list-small pl-15 sroll-category">
+            <li [ngClass]="{'cat-active': selectedCategory === 'All' }"
+              (click)="onCategoryChanged(selectedCategoryType,'')" class="cursor-pointer font-regular">All</li>
+            <li [ngClass]="{'cat-active': category.category_name === selectedCategory}"
+              (click)="onCategoryChanged(category.category_name,category.national_catid)"
+              *ngFor="let category of JDcategory.categories[selectedCategoryType]" class="cursor-pointer font-regular">
+              {{category.category_name}}
+            </li>
+          </ul>
         </div>
+        <!-- <li class="cursor-pointer" *ngFor="let category of JDcategory.categories"
+          (click)="onCategoryChanged(category.category_name,category.national_catid)"
+          [ngClass]="{'cat-active': category.category_name === selectedCategory}">
+          {{category.category_name}}
+        </li> -->
       </div>
       <!-- Catgory filter END -->
 

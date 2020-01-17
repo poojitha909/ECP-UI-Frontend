@@ -134,13 +134,21 @@ h3 {
 .sroll-category {
   max-height: 358px;
   overflow: hidden;
-  .category-group{
-    color:#c4c4c4;
-    font-weight: 600;
-  }
   &:hover {
     overflow-y: scroll;
   }
+}
+
+.sel-type {
+  padding: 10px 5px;
+  &:hover {
+    background-color: #d7e0ef;
+    border-radius: 4px;
+  }
+}
+
+.light-text {
+  color: #c4c4c4;
 }
 
 .reset-link {

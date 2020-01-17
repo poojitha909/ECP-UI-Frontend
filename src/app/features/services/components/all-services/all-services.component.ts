@@ -48,7 +48,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
 
   showShareBox: boolean;
   verfiedCheck: boolean;
-  selectedCategory: string = "allServices";
+  selectedCategory: string = 'All';
+  selectedCategoryType: string;
   mailUrl: string;
   categoryTypes: string[];
 
@@ -111,14 +112,18 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
             this.ecpService.searchCatID = catId;
             this.getCategoryServices(queryCategory, catId);
           } else {
-            this.searchPageParam.term = queryCategory;
+            if (!this.selectedCategoryType) {
+              this.searchPageParam.term = queryCategory;
+            }
             this.ecpService.searchCatID = null;
             this.getCategoryServices(queryCategory, 0);
           }
           this.showShareBox = true;
         } else {
+
           this.showShareBox = false;
           this.getAllService();
+          this.selectedCategoryType = undefined;
         }
       });
 
@@ -152,7 +157,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     if (catId) {
       this.selectedCategory = category;
     } else {
-      this.selectedCategory = 'allServices';
+      this.selectedCategory = 'All';
     }
     this.isLoading = true;
     const param: PageParam = {
@@ -189,7 +194,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   }
 
   clearSelection() {
-    this.selectedCategory = 'allServices';
+    this.selectedCategory = 'All';
+    this.selectedCategoryType = '';
     // this.searchPageParam.term = '';
     this.router.navigateByUrl('services/all');
   }

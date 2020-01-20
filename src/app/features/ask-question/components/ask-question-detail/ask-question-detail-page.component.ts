@@ -40,6 +40,9 @@ export class AskQuestionDetailPageComponent implements OnInit {
   replyParentText: string;
   askedByProfile: any;
   isExpert: boolean;
+  totalRecordsReplies: number;
+  replyPage: number;
+  replyPageSize: number
 
   constructor(private router: Router, private route: ActivatedRoute,
     private askQuesService: AskQuestionService,
@@ -58,6 +61,9 @@ export class AskQuestionDetailPageComponent implements OnInit {
     this.replyId = "";
     this.replyParentText = "";
     this.replyParentUser = "";
+    this.totalRecordsReplies = 0;
+    this.replyPage = 0;
+    this.replyPageSize = 5;
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
@@ -111,9 +117,10 @@ export class AskQuestionDetailPageComponent implements OnInit {
         if (response.data.reply) {
           this.commentTxt = "";
           UIkit.modal("#reply-modal").hide();
-          this.askQuesService.getAskQuesReplies(this.question.id).subscribe((response: any) => {
+          this.askQuesService.getAskQuesReplies(this.question.id,this.replyPage,this.replyPageSize).subscribe((response: any) => {
             if (response.data) {
               this.replyForm.reset();
+              this.totalRecordsReplies = response.data.total;
               this.setReplies(response.data.content);
             }
           });
@@ -138,6 +145,15 @@ export class AskQuestionDetailPageComponent implements OnInit {
   }
 
 
+  changeReplyPage(page: number) {
+    this.replyPage = page;
+    this.askQuesService.getAskQuesReplies(this.question.id,this.replyPage,this.replyPageSize).subscribe((response: any) => {
+      if (response.data) {
+        this.totalRecordsReplies = response.data.total;
+        this.setReplies(response.data.content);
+      }
+    });
+  }
 
   getQuestion() {
     if (this.questionId == "preview") {
@@ -153,8 +169,9 @@ export class AskQuestionDetailPageComponent implements OnInit {
           this.question = response.data;
           this.setSeoTags(this.question);
         }
-        this.askQuesService.getAskQuesReplies(this.question.id).subscribe((response: any) => {
+        this.askQuesService.getAskQuesReplies(this.question.id,this.replyPage,this.replyPageSize).subscribe((response: any) => {
           if (response.data) {
+            this.totalRecordsReplies = response.data.total;
             this.setReplies(response.data.content);
           }
         });

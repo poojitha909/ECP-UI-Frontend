@@ -1,5 +1,5 @@
 <div class="popular-search">
-    <div class="uk-card uk-card-default p-10 cursor" [routerLink]="['/ask-question/add']"
+    <div class="uk-card uk-card-hover uk-card-default p-10 cursor" [routerLink]="['/ask-question/add']"
         [queryParams]="{category: expert.experties[0].id, answeredBy: expert.id}">
         <div class="uk-card-media-top">
             <img class="thumb-100" *ngIf="expert" [imageHandler]
@@ -7,7 +7,6 @@
         </div>
         <div class="uk-card-body p-10">
             <p><b>{{expert.basicProfileInfo.firstName}}</b></p>
-            <p>{{expert.workTitle}}</p>
             <p>{{ expert.age ? expert.age : "0" }} Years</p>
             <p>
                 <span class="experties" *ngFor="let ex of expert.experties; let idx = index;">

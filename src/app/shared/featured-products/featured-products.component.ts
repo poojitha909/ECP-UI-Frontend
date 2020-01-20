@@ -9,7 +9,7 @@ import { ProductService } from 'src/app/features/products/services/products.serv
 export class FeaturedProductsComponent implements OnInit {
   searchParams = {
     p: 0,
-    s: 9,
+    s: 6,
   };
   products: any[] = [];
   constructor(private productService: ProductService) { }

@@ -64,13 +64,6 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
     this.currentUrl = window.location.href;
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
     this.countData = { "all": 0, "outdoor": 0, "indoor": 0 };
-    this.searchParams = {
-      p: 0,
-      s: 6,
-      searchTxt: "",
-      eventType: 0,
-      pastEvents: 0
-    }
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
@@ -82,7 +75,7 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
   initiate() {
     this.searchParams = {
       p: 0,
-      s: 6,
+      s: 4,
       searchTxt: "",
       eventType: 0,
       pastEvents: 0

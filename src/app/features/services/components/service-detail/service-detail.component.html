@@ -167,7 +167,8 @@
       <ul class="uk-switcher switcher-container">
         <li>
           <div class="rating-box m-t-20 bg-white">
-            <app-add-rating [userRating]="userRating" (submitForm)="onRatingSubmit($event)"></app-add-rating>
+            <app-add-rating [userRating]="userRating" ratingOf="service" (submitForm)="onRatingSubmit($event)">
+            </app-add-rating>
           </div>
         </li>
         <li>
@@ -177,12 +178,22 @@
 
       <!-- Socailmedia share box  START-->
       <div class="m-t-30 bg-white category-box">
-        <div class="m-b-20">
-          <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
-          <a class="social-link" [href]="whatsappUrl">
+        <div class="m-b-20 uk-visible@s">
+          <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"
+            target="_blank"> </a>
+          <a class="social-link" [href]="whatsappUrl" target="_blank">
             Share via
             Whatsapp</a>
         </div>
+
+        <div class="m-b-20 uk-hidden@s">
+          <a [href]="whatsappMobileUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp">
+          </a>
+          <a class="social-link" [href]="whatsappMobileUrl">
+            Share via
+            Whatsapp</a>
+        </div>
+
 
         <div>
 
@@ -374,7 +385,7 @@
                   </h1>
                 </div>
                 <div class="uk-width-auto">
-                  <button class="uk-button uk-button-default review-btn-transparent"
+                  <button class="uk-button uk-button-transparent review-btn-transparent"
                     (click)="writeNewReview()">{{  auth.isAuthenticate ? 'Write Review': 'Signin to Review'  }}</button>
                 </div>
               </div>

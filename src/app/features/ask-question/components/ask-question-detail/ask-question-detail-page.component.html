@@ -83,7 +83,7 @@
                             uk-grid>
                             <div class="uk-width-auto">
                                 <img class="uk-border-circle" width="40" height="40"
-                                    src="{{question.answeredBy.basicProfileInfo.profileImage.thumbnailImage}}">
+                                    src="{{question?.answeredBy?.basicProfileInfo?.profileImage?.thumbnailImage}}">
                             </div>
                             <div class="uk-width-expand">
                                 <h3 class="uk-card-title uk-margin-remove-bottom">
@@ -105,6 +105,10 @@
                         </div>
                     </div>
                 </div>
+                <app-pagination *ngIf="(replies && replies.length > 0)" [totalRecords]="totalRecordsReplies"
+                    [currentPage]="replyPage" [perPage]="replyPageSize" (pageChangeCall)="changeReplyPage($event)">
+                </app-pagination>
+                <app-no-expert-reply *ngIf="replies?.length <= 0"></app-no-expert-reply>
             </div>
         </div>
     </div>

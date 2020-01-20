@@ -17,8 +17,6 @@
     }
   }
   .adddiscuss {
-    border: 1px solid #1a73e8;
-    color: #1a73e8;
     text-transform: capitalize;
     float: right;
     height: 38px;
@@ -169,6 +167,7 @@
     img.user {
       display: block;
       margin: auto auto;
+      max-height: 150px;
     }
     .uk-badge {
       background: #d9dadc;
@@ -198,15 +197,8 @@
   background-color: transparent;
   border-radius: 4px;
   font-size: 18px;
-  border: 1px solid $primary-btn;
-  color: $primary-btn;
   text-transform: none;
   padding: 0px 30px;
-  &:active,
-  &:hover {
-    color: $primary-btn;
-    background-color: #fff;
-  }
 }
 input,
 textarea,

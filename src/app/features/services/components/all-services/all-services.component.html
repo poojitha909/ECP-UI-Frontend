@@ -1,4 +1,4 @@
-<div class="uk-section m-t-b-0">
+<div class="uk-section m-t-b-0" id="serviceList">
   <!-- Breadcrumb  -->
   <div class="breadcrumbs">
     <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
@@ -87,7 +87,7 @@
 
   <div class="grid-reverse-dir" uk-grid>
 
-    <div class="uk-width-1-3@m">
+    <div class="uk-width-1-3@m min-vh-100">
       <!-- Search textbox -->
 
       <!-- Catgory filter START -->
@@ -96,17 +96,43 @@
           <div class="uk-width-expand">
             <h4>Categories</h4>
           </div>
-          <div *ngIf="selectedCategory">
-            <a class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
+          <div class="uk-flex uk-flex-bottom uk-text-small">
+            <a *ngIf="!selectedCategoryType" href="javascript:void(0)" class="light-text uk-disabled">Showing All</a>
+            <a *ngIf="selectedCategoryType" class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
           </div>
         </div>
-        <ul class="uk-list uk-list-small m-b-0  sroll-category">
-          <li class="cursor-pointer" *ngFor="let category of JDcategory.categories"
-            (click)="onCategoryChanged(category.category_name,category.national_catid)"
-            [ngClass]="{'cat-active': category.category_name === selectedCategory}">
-            {{category.category_name}}
-          </li>
-        </ul>
+        <div *ngIf="!selectedCategoryType" class="m-t-20 m-b-20 uk-animation-slide-right-small">
+          <ul class="uk-list uk-list-small">
+            <li *ngFor="let categoryType of categoryTypes"
+              (click)="selectedCategoryType = categoryType;onCategoryChanged(categoryType,'')"
+              class="cursor-pointer font-regular">
+              {{ categoryType }}
+              <div class="uk-float-right">
+                <span style="color: gray;" uk-icon="icon: chevron-right; ratio: 1.3"></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="selectedCategoryType" class="m-t-20  uk-animation-slide-left-small">
+          <div class="font-weight-700 font-regular sel-type cursor-pointer" (click)="clearSelection()"><span
+              style="color: gray;" uk-icon="icon: chevron-left; ratio: 1.3"></span>
+            {{selectedCategoryType}}
+          </div>
+          <ul class="uk-list uk-list-small pl-15 sroll-category">
+            <li [ngClass]="{'cat-active': selectedCategory === 'All' }"
+              (click)="onCategoryChanged(selectedCategoryType,'')" class="cursor-pointer font-regular">All</li>
+            <li [ngClass]="{'cat-active': category.category_name === selectedCategory}"
+              (click)="onCategoryChanged(category.category_name,category.national_catid)"
+              *ngFor="let category of JDcategory.categories[selectedCategoryType]" class="cursor-pointer font-regular">
+              {{category.category_name}}
+            </li>
+          </ul>
+        </div>
+        <!-- <li class="cursor-pointer" *ngFor="let category of JDcategory.categories"
+          (click)="onCategoryChanged(category.category_name,category.national_catid)"
+          [ngClass]="{'cat-active': category.category_name === selectedCategory}">
+          {{category.category_name}}
+        </li> -->
       </div>
       <!-- Catgory filter END -->
 
@@ -120,9 +146,17 @@
 
       <!-- Socailmedia share box  -->
       <div class="m-t-30 m-b-30 bg-white category-box" *ngIf="showShareBox">
-        <div class="m-b-20">
-          <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
-          <a class="social-link" [href]="whatsappUrl">
+        <div class="m-b-20 uk-visible@s">
+          <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"
+            target="_blank"> </a>
+          <a class="social-link" [href]="whatsappUrl" target="_blank">
+            Share via
+            Whatsapp</a>
+        </div>
+
+        <div class="m-b-20 uk-hidden@s">
+          <a [href]="whatsMobileUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
+          <a class="social-link" [href]="whatsMobileUrl">
             Share via
             Whatsapp</a>
         </div>
@@ -151,23 +185,25 @@
 
       <!-- Search textbox -->
 
-      <div id="serviceList" class="uk-grid-small" uk-grid>
+      <div class="uk-grid-small" uk-grid>
         <div class="uk-width-expand@s uk-width-2-3">
 
           <div class="uk-position-relative">
             <div class="uk-position-absolute uk-z-index w-full">
-              <div class="uk-inline w-full">
-                <a class="uk-form-icon uk-form-icon-flip" (click)="onSearch(searchPageParam.term)"
-                  uk-icon="icon: search"></a>
-                <a class="uk-form-icon uk-form-icon-flip reset-link" href="javascript:void(0)"
-                  *ngIf="searchPageParam.term !== ''" (click)="clearSerach()">
-                  <fa-icon [icon]="['fas', 'times-circle']" class="m-r-5"></fa-icon><span class="uk-visible@s"> Clear
-                    Search</span>
-                </a>
-                <input class="uk-input" placeholder="Search for Service here" [(ngModel)]="searchPageParam.term"
-                  (keyup)="searchEvent($event)" required type="text" autocomplete='off'
-                  (keydown.enter)="onSearch($event.target.value)">
-              </div>
+              <form>
+                <div class="uk-inline w-full">
+                  <a class="uk-form-icon uk-form-icon-flip" (click)="onSearch(searchPageParam.term)"
+                    uk-icon="icon: search"></a>
+                  <a class="uk-form-icon uk-form-icon-flip reset-link" href="javascript:void(0)"
+                    *ngIf="searchPageParam.term !== ''" (click)="clearSerach()">
+                    <fa-icon [icon]="['fas', 'times-circle']" class="m-r-5"></fa-icon><span class="uk-visible@s"> Clear
+                      Search</span>
+                  </a>
+                  <input class="uk-input" placeholder="Search for Service here" [(ngModel)]="searchPageParam.term"
+                    (keyup)="searchEvent($event)" required type="text" autocomplete='off'
+                    (keydown.enter)="onSearch($event.target.value)" name="searchtxt" />
+                </div>
+              </form>
               <!-- Auto complete list -->
               <ul *ngIf="autocompleteFields.length > 0"
                 class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto regular-link search-list" appKeyHandler

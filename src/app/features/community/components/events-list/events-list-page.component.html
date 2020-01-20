@@ -7,7 +7,7 @@
             <h2>All Events</h2>
         </div>
         <div class="uk-width-1-3">
-            <button routerLink="/community/event/add" class="uk-button uk-button-default addevent"> Create an Event
+            <button routerLink="/community/event/add" class="uk-button uk-button-transparent addevent"> Create an Event
                 +</button>
         </div>
     </div>
@@ -87,7 +87,7 @@
             </div>
             <!-- Events list  -->
             <div *ngIf="eventsList!==undefined && eventsList.length > 0">
-                <div class="uk-flex-left uk-text-center uk-child-width-1-2@m" uk-grid>
+                <div class="uk-flex-left uk-text-center uk-child-width-1-2@m m-b-30" uk-grid>
                     <div *ngFor="let event of eventsList">
                         <app-event-summary-card [event]="event" [isPast]="searchParams.pastEvents">
                         </app-event-summary-card>

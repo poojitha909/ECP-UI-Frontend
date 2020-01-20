@@ -44,10 +44,14 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   autocompleteFields: Service[] = [];
   // currentUrl: string;
   whatsappUrl;
+  whatsMobileUrl;
+
   showShareBox: boolean;
   verfiedCheck: boolean;
-  selectedCategory: string;
+  selectedCategory: string = 'All';
+  selectedCategoryType: string;
   mailUrl: string;
+  categoryTypes: string[];
 
   constructor(public ecpService: EpcServiceService,
     public JDcategory: JdCategoryService,
@@ -58,6 +62,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     public sanitizer: DomSanitizer,
     private seoService: SeoService
   ) {
+    this.categoryTypes = Object.keys(JDcategory.categories).reverse();
 
     // Generate meta tag 
     const config: SEO = {
@@ -87,7 +92,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     });
     // this.currentUrl = encodeURI(window.location.href);
     this.mailUrl = `mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20${encodeURI(window.location.href)}`
-    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(window.location.href)}`);
+    this.whatsMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
   }
 
   ngAfterViewInit() {
@@ -96,7 +102,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
       value => {
         // this.currentUrl = encodeURI(window.location.href);
         this.mailUrl = `mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20${encodeURI(window.location.href)}`;
-        this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
+        this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(window.location.href)}`);
+        this.whatsMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
         const queryCategory = value.get("category");
         const catId = value.get("catid");
         if (queryCategory) {
@@ -104,15 +111,31 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
           if (catId) {
             this.ecpService.searchCatID = catId;
             this.getCategoryServices(queryCategory, catId);
+            //Set selected category
+            if (!this.selectedCategoryType) {
+              let category = null;
+              this.selectedCategoryType = this.categoryTypes.find(value => {
+                category = this.JDcategory.categories[value].find(category => category.national_catid == catId);
+                if (category) {
+                  return true;
+                }
+              });
+            }
+
           } else {
-            this.searchPageParam.term = queryCategory;
+            //Set selected category
+            if (!this.selectedCategoryType) {
+              this.selectedCategoryType = this.categoryTypes.find(type => type == queryCategory);
+            }
             this.ecpService.searchCatID = null;
             this.getCategoryServices(queryCategory, 0);
           }
           this.showShareBox = true;
         } else {
+
           this.showShareBox = false;
           this.getAllService();
+          this.selectedCategoryType = undefined;
         }
       });
 
@@ -146,7 +169,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     if (catId) {
       this.selectedCategory = category;
     } else {
-      this.selectedCategory = '';
+      this.selectedCategory = 'All';
     }
     this.isLoading = true;
     const param: PageParam = {
@@ -183,7 +206,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   }
 
   clearSelection() {
-    this.selectedCategory = '';
+    this.selectedCategory = 'All';
+    this.selectedCategoryType = '';
     // this.searchPageParam.term = '';
     this.router.navigateByUrl('services/all');
   }
@@ -197,7 +221,6 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     // update current page of items
     this.pageServices = services;
     this.cdr.detectChanges();
-    // UIkit.scroll("#serviceList");
     UIkit.scroll('#serviceList').scrollTo('#serviceList');
   }
 

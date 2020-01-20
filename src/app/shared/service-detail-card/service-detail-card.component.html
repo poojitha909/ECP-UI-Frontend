@@ -1,4 +1,4 @@
-<div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin cursor-pointer" (click)="navigate()"
+<div class="uk-card uk-card-hover uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin cursor-pointer" (click)="navigate()"
   uk-grid>
   <div class="uk-card-media-left uk-width-1-4@m uk-width-1-3@s p-16">
     <!-- <img [imageHandler] *ngIf="isDBService" [src]="service?.basicProfileInfo?.profileImage?.thumbnailImage" width="152"
@@ -10,7 +10,7 @@
         class="h-150 w-100" alt="No Image">
       <img [imageHandler] *ngIf="!isDBService" [src]="service?.thumbnail" class="h-150 w-100" alt="">
 
-      <button *ngIf="service?.verified == '1'"><span class="verified-icon-w"></span></button>
+      <button class="uk-button-default" *ngIf="service?.verified == '1'"><span class="verified-icon-w"></span></button>
     </div>
 
   </div>

@@ -10,7 +10,7 @@ export class FeaturedAskExpertsComponent implements OnInit {
 
   searchParams = {
     p: 0,
-    s: 9,
+    s: 6,
     searchTxt: "",
     experties: ""
   }

@@ -1,14 +1,13 @@
-<div [routerLink]="['/ask-question/add']" [queryParams]="{category: expert.experties[0].id, answeredBy: expert.id}" class="cursor uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+<div [routerLink]="['/ask-question/add']" [queryParams]="{category: expert.experties[0].id, answeredBy: expert.id}" class="cursor uk-card uk-card-hover uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
 
   <div class="uk-card-media-left uk-width-1-4@m uk-width-1-3@s p-16">
     <!--TODO: apply imageHandler directive-->
-    <img [src]="expert?.basicProfileInfo?.profileImage?.titleImage" (error)="setDefaultPic($event)" height="156" alt="" />
+    <img class="image-user" [src]="expert?.basicProfileInfo?.profileImage?.titleImage" (error)="setDefaultPic($event)" alt="" />
   </div>
 
   <div class="uk-card-body uk-width-expand p-16">
     <p class="font-regular"><b class="fname">{{expert.basicProfileInfo.firstName}}</b></p>
     <p class="expertdetial">
-      {{expert.workTitle}}<br/>
       {{expert.age ? expert.age + " Years" : "" }}
     </p>
     
@@ -21,6 +20,9 @@
   </div>
 
   <div class="uk-width-1-4@m askques">
-    <button class="uk-button uk-button-primary">Ask an Expert</button>
+    <div class="reply-card">
+      {{ expert?.answersCount }} Queries Answered
+    </div>
+    <button class="uk-button uk-button-primary">Ask Question</button>
   </div>
 </div>

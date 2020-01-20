@@ -21,30 +21,17 @@
 }
 
 .uk-button-default{
-    background-color: $primary-btn;
+
     border-radius: 4px;
     font-size: 18px;
     border: none;
-    color: #fff;
     text-transform: none;
     padding: 0px 30px;
-    &:active,&:hover{
-      color: $primary-btn;
-      background-color: #fff;
-      border: 1px solid $primary-btn;
-    }
 }
 
 .uk-button-transparent{
-  background-color: transparent;
   border-radius: 4px;
   font-size: 18px;
-  border: 1px solid $primary-btn;
-  color:$primary-btn;
   text-transform: none;
   padding: 0px 30px;
-  &:active,&:hover{
-    color: $primary-btn;
-    background-color: #fff;
-  }
 }

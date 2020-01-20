@@ -98,6 +98,9 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
       this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
     }
+    if (this.route.snapshot.queryParams['page'] !== undefined) {
+      this.searchParams.p = this.route.snapshot.queryParams['page'];
+    }
     this.getAllCategories();
   }
 
@@ -116,11 +119,11 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
 
   changePage(page) {
     this.searchParams.p = page;
-    this.search();
+    this.submitSearch();
   }
 
   submitSearch() {
-    this.router.navigate(['/community/discussions'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt } });
+    this.router.navigate(['/community/discussions'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
   }
 
   onTabChange(value) {

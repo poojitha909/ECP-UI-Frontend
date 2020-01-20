@@ -84,14 +84,14 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
   initiate() {
     this.searchParams = {
       p: 0,
-      s: 6,
+      s: 4,
       experties: "",
       searchTxt: ""
     }
 
     this.searchParamsQues = {
       p: 0,
-      s: 6,
+      s: 4,
       searchTxt: "",
       askCategory: "",
       askedBy: "",
@@ -120,6 +120,9 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
     if (this.route.snapshot.queryParams['page'] !== undefined) {
       this.searchParams.p = this.route.snapshot.queryParams['page'];
     }
+    if (this.route.snapshot.queryParams['pageQ'] !== undefined) {
+      this.searchParamsQues.p = this.route.snapshot.queryParams['pageQ'];
+    }
 
     this.askQuesService.getCategoryList().subscribe((response: any) => {
       const data = response.data;
@@ -142,6 +145,12 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
     this.searchParams.p = page;
     this.onSearch()
   }
+
+  changeQuesPage(page: number){
+    this.searchParamsQues.p = page;
+    this.router.navigate(['/ask-question/all'], { queryParams: { category: this.searchParamsQues.askCategory, pageQ: this.searchParamsQues.p, tab:  this.topTabs} });
+  }
+
   clearSelection() {
     this.searchParamsQues.askCategory = '';
     this.router.navigateByUrl('ask-question/all');

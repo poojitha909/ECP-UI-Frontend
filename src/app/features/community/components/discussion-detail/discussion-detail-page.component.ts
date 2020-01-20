@@ -123,7 +123,7 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
         if (response.data.replies) {
           this.replyForm.reset();
           this.getDiscussion();
-          UIkit.modal("#reply-modal").hide();
+          UIkit.modal("#reply-modal-discussion.uk-open").hide();
         }
       });
     }
@@ -133,7 +133,7 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
           this.replyForm.reset();
           this.getDiscussion();
           //this.successMessage = "Reply Submitted successfully.";
-          UIkit.modal("#reply-modal").hide();
+          UIkit.modal("#reply-modal-discussion.uk-open").hide();
         }
       });
     }
@@ -221,7 +221,9 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
       image: `${window.location.origin}/assets/imgaes/landing-img/Community-320.png`,
     }
 
-    if (discussion.userProfile.basicProfileInfo.profileImage && discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage) {
+    if (discussion.userProfile && discussion.userProfile.basicProfileInfo && 
+        discussion.userProfile.basicProfileInfo.profileImage && 
+        discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage) {
       config.image = discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage;
     }
 
@@ -229,6 +231,7 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
   }
 
   setParentReplyId(id) {
+    this.replyForm.reset();
     this.parentReplyId = id;
     this.replyId = "";
     this.successMessage = "";

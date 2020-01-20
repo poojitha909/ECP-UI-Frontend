@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/core';
 })
 export class AddRatingComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() userRating: DBRating;
+  @Input() ratingOf: String;
   @Output() submitForm: EventEmitter<any> = new EventEmitter();
 
   ratingForm: FormGroup;

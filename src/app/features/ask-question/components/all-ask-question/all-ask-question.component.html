@@ -89,6 +89,9 @@
         <app-question-detail-card *ngFor="let question of questions" [question]="question">
         </app-question-detail-card>
       </div>
+      <app-pagination *ngIf="(questions && questions.length > 0)" [totalRecords]="totalRecordsQues"
+        [currentPage]="searchParamsQues.p" [perPage]="searchParamsQues.s" (pageChangeCall)="changeQuesPage($event)">
+      </app-pagination>
       <div class="m-t-20" *ngIf="!questions || questions?.length == 0">
         <app-question-no-record></app-question-no-record>
       </div>

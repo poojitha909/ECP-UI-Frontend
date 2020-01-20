@@ -105,6 +105,9 @@
                         </div>
                     </div>
                 </div>
+                <app-pagination *ngIf="(replies && replies.length > 0)" [totalRecords]="totalRecordsReplies"
+                    [currentPage]="replyPage" [perPage]="replyPageSize" (pageChangeCall)="changeReplyPage($event)">
+                </app-pagination>
                 <app-no-expert-reply *ngIf="replies?.length <= 0"></app-no-expert-reply>
             </div>
         </div>

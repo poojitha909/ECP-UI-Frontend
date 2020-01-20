@@ -10,15 +10,15 @@ import { ApiConstants } from 'src/app/api.constants';
 })
 export class JdCategoryService {
 
-  private allCategories: JDCategory[] = [];
+  private allCategories: any;
   constructor(private http: HttpClient) { }
 
-  get categories(): JDCategory[] {
+  get categories(): any {
     return this.allCategories
   }
 
   fetchAllCategories() {
-    this.http.get<JDCategory[]>(`${ApiConstants.GET_JD_CATEGORIES}`).subscribe(
+    this.http.get<any>(`${ApiConstants.GET_JD_CATEGORIES}`).subscribe(
       response => {
         if (response) {
           this.allCategories = response;

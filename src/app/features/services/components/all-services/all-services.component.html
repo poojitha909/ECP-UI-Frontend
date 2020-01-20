@@ -190,18 +190,20 @@
 
           <div class="uk-position-relative">
             <div class="uk-position-absolute uk-z-index w-full">
-              <div class="uk-inline w-full">
-                <a class="uk-form-icon uk-form-icon-flip" (click)="onSearch(searchPageParam.term)"
-                  uk-icon="icon: search"></a>
-                <a class="uk-form-icon uk-form-icon-flip reset-link" href="javascript:void(0)"
-                  *ngIf="searchPageParam.term !== ''" (click)="clearSerach()">
-                  <fa-icon [icon]="['fas', 'times-circle']" class="m-r-5"></fa-icon><span class="uk-visible@s"> Clear
-                    Search</span>
-                </a>
-                <input class="uk-input" placeholder="Search for Service here" [(ngModel)]="searchPageParam.term"
-                  (keyup)="searchEvent($event)" required type="text" autocomplete='off'
-                  (keydown.enter)="onSearch($event.target.value)">
-              </div>
+              <form>
+                <div class="uk-inline w-full">
+                  <a class="uk-form-icon uk-form-icon-flip" (click)="onSearch(searchPageParam.term)"
+                    uk-icon="icon: search"></a>
+                  <a class="uk-form-icon uk-form-icon-flip reset-link" href="javascript:void(0)"
+                    *ngIf="searchPageParam.term !== ''" (click)="clearSerach()">
+                    <fa-icon [icon]="['fas', 'times-circle']" class="m-r-5"></fa-icon><span class="uk-visible@s"> Clear
+                      Search</span>
+                  </a>
+                  <input class="uk-input" placeholder="Search for Service here" [(ngModel)]="searchPageParam.term"
+                    (keyup)="searchEvent($event)" required type="text" autocomplete='off'
+                    (keydown.enter)="onSearch($event.target.value)" name="searchtxt" />
+                </div>
+              </form>
               <!-- Auto complete list -->
               <ul *ngIf="autocompleteFields.length > 0"
                 class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto regular-link search-list" appKeyHandler

@@ -111,9 +111,21 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
           if (catId) {
             this.ecpService.searchCatID = catId;
             this.getCategoryServices(queryCategory, catId);
-          } else {
+            //Set selected category
             if (!this.selectedCategoryType) {
-              this.searchPageParam.term = queryCategory;
+              let category = null;
+              this.selectedCategoryType = this.categoryTypes.find(value => {
+                category = this.JDcategory.categories[value].find(category => category.national_catid == catId);
+                if (category) {
+                  return true;
+                }
+              });
+            }
+
+          } else {
+            //Set selected category
+            if (!this.selectedCategoryType) {
+              this.selectedCategoryType = this.categoryTypes.find(type => type == queryCategory);
             }
             this.ecpService.searchCatID = null;
             this.getCategoryServices(queryCategory, 0);
@@ -209,10 +221,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     // update current page of items
     this.pageServices = services;
     this.cdr.detectChanges();
-    // UIkit.scroll("#serviceList");
     UIkit.scroll('#serviceList').scrollTo('#serviceList');
-    setTimeout(() => {
-    }, 500);
   }
 
   onSearchChange(value) {

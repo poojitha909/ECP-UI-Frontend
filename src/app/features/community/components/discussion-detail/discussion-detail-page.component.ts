@@ -231,6 +231,7 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
   }
 
   setParentReplyId(id) {
+    this.replyForm.reset();
     this.parentReplyId = id;
     this.replyId = "";
     this.successMessage = "";

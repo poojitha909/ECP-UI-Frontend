@@ -10,7 +10,7 @@
                 <div class="category-box top bg-white">
                     <div class="img-container"
                         *ngIf="discussion.userProfile && discussion.userProfile.basicProfileInfo && discussion.userProfile.basicProfileInfo.profileImage && discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage">
-                        <img class="user" src="{{discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage}}">
+                        <img class="user" [imageHandler] [src]="discussion?.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage">
                     </div>
                     <div class="heading2 username">
                         {{discussion.username}}

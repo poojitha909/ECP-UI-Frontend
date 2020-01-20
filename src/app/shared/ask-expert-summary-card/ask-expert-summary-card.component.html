@@ -1,5 +1,5 @@
 <div class="popular-search">
-    <div class="uk-card uk-card-default p-10 cursor" [routerLink]="['/ask-question/add']"
+    <div class="uk-card uk-card-hover uk-card-default p-10 cursor" [routerLink]="['/ask-question/add']"
         [queryParams]="{category: expert.experties[0].id, answeredBy: expert.id}">
         <div class="uk-card-media-top">
             <img class="thumb-100" *ngIf="expert" [imageHandler]

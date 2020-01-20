@@ -211,6 +211,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     this.cdr.detectChanges();
     // UIkit.scroll("#serviceList");
     UIkit.scroll('#serviceList').scrollTo('#serviceList');
+    setTimeout(() => {
+    }, 500);
   }
 
   onSearchChange(value) {

@@ -10,11 +10,13 @@ import { SearchContainerComponent } from './components/search-container/search-c
 import { PopularSearchComponent } from './components/popular-search/popular-search.component';
 import { ServiceDetailComponent } from './components/service-detail/service-detail.component';
 import { NoRecordsComponent } from './components/no-records/no-records.component';
+import { CategoryResolverService } from './category-resolver.service';
 
 
 
 @NgModule({
   declarations: [ServicesPageComponent, AllServicesComponent, SearchContainerComponent, PopularSearchComponent, ServiceDetailComponent, NoRecordsComponent],
-  imports: [CommonModule, ServicesRoutingModule, SharedModule, CoreModule]
+  imports: [CommonModule, ServicesRoutingModule, SharedModule, CoreModule],
+  providers: [CategoryResolverService]
 })
 export class ServicesModule { }

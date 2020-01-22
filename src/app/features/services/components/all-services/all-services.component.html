@@ -123,7 +123,7 @@
               (click)="onCategoryChanged(selectedCategoryType,'')" class="cursor-pointer font-regular">All</li>
             <li [ngClass]="{'cat-active': category.category_name === selectedCategory}"
               (click)="onCategoryChanged(category.category_name,category.national_catid)"
-              *ngFor="let category of JDcategory.categories[selectedCategoryType]" class="cursor-pointer font-regular">
+              *ngFor="let category of categories[selectedCategoryType]" class="cursor-pointer font-regular">
               {{category.category_name}}
             </li>
           </ul>

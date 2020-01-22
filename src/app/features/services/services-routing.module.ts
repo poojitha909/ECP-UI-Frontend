@@ -6,6 +6,7 @@ import { AllServicesComponent } from './components/all-services/all-services.com
 import { ServiceDetailComponent } from './components/service-detail/service-detail.component';
 import { DetailResolverService } from './components/service-detail/resolver/detail-resolver.service';
 import { ErrorComponent } from 'src/app/shared';
+import { CategoryResolverService } from './category-resolver.service';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
     component: ServicesPageComponent
   }, {
     path: 'all',
-    component: AllServicesComponent
+    component: AllServicesComponent,
+    resolve: { categories: CategoryResolverService }
   },
   {
     path: ':name/:docId/:dbservice',

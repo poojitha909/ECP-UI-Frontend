@@ -2,7 +2,6 @@ import { Component, OnInit, AfterViewInit, ChangeDetectorRef, HostListener } fro
 
 import { EpcServiceService } from '../../epc-service.service';
 import { Service, PageParam, SEO, Breadcrumb } from 'src/app/core/interfaces';
-import { JdCategoryService } from 'src/app/core/services';
 import { HomeService } from 'src/app/features/home/home.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -52,9 +51,9 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   selectedCategoryType: string;
   mailUrl: string;
   categoryTypes: string[];
+  categories: any;
 
   constructor(public ecpService: EpcServiceService,
-    public JDcategory: JdCategoryService,
     private homeService: HomeService,
     private cdr: ChangeDetectorRef,
     private router: Router,
@@ -62,8 +61,9 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     public sanitizer: DomSanitizer,
     private seoService: SeoService
   ) {
-    this.categoryTypes = Object.keys(JDcategory.categories).reverse();
-
+    console.log(this.activeRoute.snapshot.data);
+    this.categories = this.activeRoute.snapshot.data.categories;
+    this.categoryTypes = Object.keys(this.categories).reverse();
     // Generate meta tag 
     const config: SEO = {
       title: `An Elder Spring Initiative by Tata Trusts All Service`,
@@ -115,7 +115,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
             if (!this.selectedCategoryType) {
               let category = null;
               this.selectedCategoryType = this.categoryTypes.find(value => {
-                category = this.JDcategory.categories[value].find(category => category.national_catid == catId);
+                category = this.categories[value].find(category => category.national_catid == catId);
                 if (category) {
                   return true;
                 }

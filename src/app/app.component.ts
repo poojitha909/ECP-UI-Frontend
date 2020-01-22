@@ -11,9 +11,7 @@ import { SEO } from './core/interfaces';
 export class AppComponent {
   title = 'ecp-ui-frontend';
 
-  constructor(private JDCategory: JdCategoryService, private seoService: SeoService) {
-    this.JDCategory.fetchAllCategories();
-
+  constructor(private seoService: SeoService) {
     const config: SEO = {
       title: 'An Elderly Care Platform engineered by Social Alpha and Supported by Tata Trusts',
       keywords: 'Elderly Care, products, services, events, discussions',

@@ -9,20 +9,9 @@ import { ApiConstants } from 'src/app/api.constants';
   providedIn: 'root'
 })
 export class JdCategoryService {
-
-  private allCategories: any;
   constructor(private http: HttpClient) { }
 
-  get categories(): any {
-    return this.allCategories
-  }
-
-  fetchAllCategories() {
-    this.http.get<any>(`${ApiConstants.GET_JD_CATEGORIES}`).subscribe(
-      response => {
-        if (response) {
-          this.allCategories = response;
-        }
-      });
+  fetchAllCategories(): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_JD_CATEGORIES}`);
   }
 }

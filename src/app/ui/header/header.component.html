@@ -20,14 +20,14 @@
           </div> -->
           <div class="helpline-note">
             <button class="uk-button uk-button-default">
-              <span uk-icon="receiver"></span>Elder Spring Connect Center <b>14567</b>
+              <span uk-icon="receiver"></span>REACH US ON <b>14567</b>
             </button>
           </div>
           <div>
             <div class="sign-in-button">
 
-              <button *ngIf="!auth.isAuthenticate" routerLink="/user/signin" class="uk-button uk-button-default">Sign
-                In</button>
+              <button *ngIf="!auth.isAuthenticate" routerLink="/user/signin"
+                class="uk-button uk-button-default">CHECK-IN HERE</button>
               <div class="uk-inline" *ngIf="auth.isAuthenticate">
                 <button
                   class="uk-button uk-button-default">{{ auth.user.userName || auth.user.email || auth.user.phoneNumber }}</button>
@@ -62,23 +62,23 @@
         <hr class="m-t-40" />
         <ul class="uk-nav uk-nav-default">
           <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
-            [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home</a>
+            [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Know us</a>
           </li>
           <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
-            [routerLinkActiveOptions]="{exact: false}"><a routerLink="/community">Community</a></li>
+            [routerLinkActiveOptions]="{exact: false}"><a routerLink="/community">Let’s Talk</a></li>
           <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
             [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">Ask
-              an Expert</a></li>
+              our Expert</a></li>
           <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
-            [routerLinkActiveOptions]="{exact: false}"><a routerLink="/products">Products</a></li>
+            [routerLinkActiveOptions]="{exact: false}"><a routerLink="/products">Shop Easy</a></li>
           <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
-            [routerLinkActiveOptions]="{exact: false}"><a routerLink="/services">Services</a></li>
+            [routerLinkActiveOptions]="{exact: false}"><a routerLink="/services">At your service</a></li>
           <li class="uk-nav-divider"></li>
           <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
             [routerLinkActiveOptions]="{exact: false}"><a routerLink="/about">About Us</a></li>
           <li *ngIf="!auth.isAuthenticate" class="uk-nav-header" (click)="closeMobileMenu()"
-            routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/user/signin">Sign
-              In</a></li>
+            routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+              routerLink="/user/signin">CHECK-IN HERE</a></li>
           <li *ngIf="auth.isAuthenticate" class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
             [routerLinkActiveOptions]="{exact: false}"><a routerLink="/user">User Profile</a></li>
           <li *ngIf="auth.isAuthenticate" class="uk-nav-header" (click)="closeMobileMenu();logout();"><a
@@ -90,16 +90,18 @@
 
     <nav class="uk-container ecp-navbar uk-visible@s">
       <ul class="uk-child-width-expand" uk-tab>
-        <li #homeLink routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home</a>
+        <li #homeLink routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Know
+            us</a>
         </li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
-            routerLink="/community">Community</a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">Ask an
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/community">Let’s
+            Talk</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">Ask
+            our
             Expert</a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
-            routerLink="/products">Products</a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
-            routerLink="/services">Services</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/products">Shop
+            Easy</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/services">At your
+            service</a></li>
         <!-- <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
             routerLink="/articles">Articles</a></li> -->
       </ul>

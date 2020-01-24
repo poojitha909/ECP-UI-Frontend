@@ -97,11 +97,12 @@
   <div class="home-banner landing-bg">
     <div class="uk-child-width-1-2@s uk-padding" uk-grid>
       <div class="uk-text-left@s">
-        <h1>Our Community</h1>
+        <h1>Let’s talk!</h1>
         <p class="font-regular">
-          Interested in member contributed articles and discussions or community based events & activities? Find one
-          or start one!
-          And share what you like with your loved ones.
+          Is there something you wish to discuss about? We are here!
+          Let’s start a discussion or conversation, exchange views, arrive at a conclusion, or just talk! Read our
+          interesting blogs or publish your own here!
+          Check out what’s happening around you. You might find something that really you!
         </p>
       </div>
     </div>
@@ -115,7 +116,7 @@
         <img src="assets/images/events.png" />
       </div>
       <div (click)="showAllEvents()" class="quote-line-card cursor-pointer">
-        Events
+        What’s Happening
         <span class="uk-float-right" uk-icon="chevron-right"></span>
       </div>
     </div>
@@ -125,7 +126,7 @@
         <img src="assets/images/discussion.png" />
       </div>
       <div (click)="showAllDiscussions()" class="quote-line-card cursor-pointer">
-        Discussions
+        Let’s discuss
         <span class="uk-float-right" uk-icon="chevron-right"></span>
       </div>
     </div>
@@ -139,7 +140,7 @@
             <span class="mr-3">
               <img src="assets/images/discussion-icon.png" />
             </span>
-            Discussions
+            Let’s discuss
           </h4>
         </div>
       </div>
@@ -209,7 +210,7 @@
             <span class="mr-3">
               <img src="assets/images/event-icon.png" />
             </span>
-            Events
+            What’s Happening
           </h4>
         </div>
       </div>
@@ -217,7 +218,7 @@
         <label class="uk-form-label">Showing:</label>
         <div class="uk-form-controls">
           <select class="uk-select" [(ngModel)]="searchParams.pastEvents" (change)="showEvents2()">
-            <option value="-1">Upcoming Events</option>
+            <option value="-1">What’s Next?</option>
             <option value="1">Past Events</option>
             <option value="0">All Events</option>
           </select>

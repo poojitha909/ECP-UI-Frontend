@@ -116,7 +116,7 @@
         <img src="assets/images/events.png" />
       </div>
       <div (click)="showAllEvents()" class="quote-line-card cursor-pointer">
-        Events
+        What’s Happening
         <span class="uk-float-right" uk-icon="chevron-right"></span>
       </div>
     </div>
@@ -126,7 +126,7 @@
         <img src="assets/images/discussion.png" />
       </div>
       <div (click)="showAllDiscussions()" class="quote-line-card cursor-pointer">
-        Discussions
+        Let’s discuss
         <span class="uk-float-right" uk-icon="chevron-right"></span>
       </div>
     </div>
@@ -140,7 +140,7 @@
             <span class="mr-3">
               <img src="assets/images/discussion-icon.png" />
             </span>
-            Discussions
+            Let’s discuss
           </h4>
         </div>
       </div>
@@ -210,7 +210,7 @@
             <span class="mr-3">
               <img src="assets/images/event-icon.png" />
             </span>
-            Events
+            What’s Happening
           </h4>
         </div>
       </div>
@@ -218,7 +218,7 @@
         <label class="uk-form-label">Showing:</label>
         <div class="uk-form-controls">
           <select class="uk-select" [(ngModel)]="searchParams.pastEvents" (change)="showEvents2()">
-            <option value="-1">Upcoming Events</option>
+            <option value="-1">What’s Next?</option>
             <option value="1">Past Events</option>
             <option value="0">All Events</option>
           </select>

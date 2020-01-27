@@ -164,6 +164,13 @@
                 <app-dicussion-summary-card [category]="selDiscussCategory" [discussion]="discussion">
                 </app-dicussion-summary-card>
               </li>
+              <li>
+                <div class="uk-flex uk-flex-middle bg-white" [routerLink]="['/community/discussions']">
+                  <div class="see-all-card">
+                    See all discussions
+                  </div>
+                </div>
+              </li>
             </ul>
           </div>
           <div class="uk-hidden@s uk-light">
@@ -232,6 +239,13 @@
             <ul class="uk-slider-items uk-grid-match uk-child-width-1-3@m uk-grid">
               <li *ngFor="let event of eventsList2">
                 <app-event-summary-card [event]="event" [isPast]="searchParams.pastEvents"></app-event-summary-card>
+              </li>
+              <li>
+                <div class="uk-flex uk-flex-middle bg-white" [routerLink]="['/community/events']">
+                  <div class="see-all-card">
+                    See all events
+                  </div>
+                </div>
               </li>
             </ul>
           </div>

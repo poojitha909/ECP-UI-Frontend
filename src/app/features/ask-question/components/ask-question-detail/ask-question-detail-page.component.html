@@ -27,7 +27,7 @@
                 <div class="category-box info">
                     <div>
                         <a class="uk-margin-small-right">
-                            <img src="/assets/images/secure.png" />
+                            <img src="/assets/images/secure.png" alt="No Image Found" />
                         </a>
                         <a> All conversations are private</a>
                     </div>
@@ -70,7 +70,7 @@
                         <div *ngIf="reply.user.id === question.askedBy.id" class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-auto">
                                 <img class="uk-border-circle" width="40" height="40"
-                                    src="{{askedByProfile?.basicProfileInfo?.profileImage?.thumbnailImage}}">
+                                    src="{{askedByProfile?.basicProfileInfo?.profileImage?.thumbnailImage}}" alt="No Image Found">
                             </div>
                             <div class="uk-width-expand">
                                 <h3 class="uk-card-title uk-margin-remove-bottom">{{reply.user.userName}}</h3>
@@ -83,7 +83,7 @@
                             uk-grid>
                             <div class="uk-width-auto">
                                 <img class="uk-border-circle" width="40" height="40"
-                                    src="{{question?.answeredBy?.basicProfileInfo?.profileImage?.thumbnailImage}}">
+                                    src="{{question?.answeredBy?.basicProfileInfo?.profileImage?.thumbnailImage}}" alt="No Image Found">
                             </div>
                             <div class="uk-width-expand">
                                 <h3 class="uk-card-title uk-margin-remove-bottom">

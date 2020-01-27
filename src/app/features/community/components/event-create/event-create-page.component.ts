@@ -76,17 +76,19 @@ export class EventCreatePageComponent implements OnInit {
 
   onSubmit() {
     this.successMessage = "";
+    
+    this.store.store("new-event", JSON.stringify( this.eventForm.value ));
+    if (!this.user) {
+      this.authService.redirectUrl = "/community/event/add";
+      this.router.navigate(['/user/signin']);
+      return;
+    }
+
     Object.keys(this.eventForm.controls).forEach(field => {
       const control = this.eventForm.get(field);
       control.markAsTouched({ onlySelf: true });
     });
     if (!this.eventForm.valid) {
-      return;
-    }
-    this.store.store("new-event", JSON.stringify( this.eventForm.value ));
-    if (!this.user) {
-      this.authService.redirectUrl = "/community/event/add";
-      this.router.navigate(['/user/signin']);
       return;
     }
     

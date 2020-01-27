@@ -5,11 +5,13 @@ import { SignupComponent } from './components/signup/signup.component';
 import { LayoutComponent } from 'src/app/ui';
 import { SigninComponent } from './components/signin/signin.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
+import { UserResolverService } from './services/user-resolver.service';
 
 const routes: Routes = [
   {
     path: '',
-    component: UserPageComponent
+    component: UserPageComponent,
+    resolve: { userData: UserResolverService }
   },
   {
     path: 'signin',

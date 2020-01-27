@@ -8,12 +8,12 @@
       <div class="category-box bg-white">
         <p class="font-regular-24 font-weight-600">Settings</p>
         <ul class="uk-nav uk-nav-default">
-          <li [ngClass]="{'uk-active':selectedTab == 'displayname' }"><a href="javascript:void(0)" class="font-regular"
+          <!-- <li [ngClass]="{'uk-active':selectedTab == 'displayname' }"><a href="javascript:void(0)" class="font-regular"
               (click)="selectedTab='displayname'">Change Display Name
               <span uk-icon="icon:chevron-right; ratio: 1.5" class="uk-float-right"></span></a>
-          </li>
+          </li> -->
           <li [ngClass]="{'uk-active':selectedTab == 'editprofile' }"><a href="javascript:void(0)" class="font-regular"
-              (click)="selectedTab='editprofile'">Edit Profile <span uk-icon="icon:chevron-right; ratio: 1.5"
+              (click)="selectedTab='editprofile'">Profile <span uk-icon="icon:chevron-right; ratio: 1.5"
                 class="uk-float-right"></span></a></li>
         </ul>
       </div>
@@ -34,9 +34,9 @@
     <div class="uk-width-expand@m">
 
       <ng-container [ngSwitch]="selectedTab">
-        <div class="uk-animation-fade uk-animation-fast" *ngSwitchCase="'displayname'">
+        <!-- <div class="uk-animation-fade uk-animation-fast" *ngSwitchCase="'displayname'">
           <app-display-name-form></app-display-name-form>
-        </div>
+        </div> -->
 
         <div class="uk-animation-fade uk-animation-fast" *ngSwitchCase="'editprofile'">
           <app-edit-profile-form (cancelForm)="viewUserProfile()"></app-edit-profile-form>

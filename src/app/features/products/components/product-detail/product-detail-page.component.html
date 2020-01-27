@@ -31,7 +31,7 @@
                     <li class="carousel-thumbnail__item carousel-box list-inline-item"
                         *ngFor="let image of product.images;  let i = index" (click)="setActiveSlide(i)">
                         <a class="selected">
-                            <img class="carousel-thumbnail__img" [src]="image">
+                            <img class="carousel-thumbnail__img" alt="No Image Found" [src]="image">
                         </a>
                     </li>
                 </ul>

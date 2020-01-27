@@ -149,18 +149,18 @@ export class AskQuestionCreatePageComponent implements OnInit {
   }
 
   onSubmit() {
+    this.store.store("new-question", JSON.stringify(this.quesForm.value));
+    if (!this.user) {
+      this.authService.redirectUrl = "/ask-question/add";
+      this.router.navigate(['/user/signin']);
+      return;
+    }
+
     Object.keys(this.quesForm.controls).forEach(field => {
       const control = this.quesForm.get(field);
       control.markAsTouched({ onlySelf: true });
     });
     if (!this.quesForm.valid) {
-      return;
-    }
-    this.store.store("new-question", JSON.stringify(this.quesForm.value));
-
-    if (!this.user) {
-      this.authService.redirectUrl = "/ask-question/add";
-      this.router.navigate(['/user/signin']);
       return;
     }
 

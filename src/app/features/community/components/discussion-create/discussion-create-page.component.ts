@@ -80,13 +80,6 @@ export class DiscussionCreatePageComponent implements OnInit {
 
   onSubmit() {
     let discuss = null;
-    Object.keys(this.discussForm.controls).forEach(field => {
-      const control = this.discussForm.get(field);
-      control.markAsTouched({ onlySelf: true });
-    });
-    if (!this.discussForm.valid) {
-      return;
-    }
     
     discuss = { ...this.discussForm.value };
     discuss.discussId = this.discussId;
@@ -96,6 +89,15 @@ export class DiscussionCreatePageComponent implements OnInit {
       this.router.navigate(['/user/signin']);
       return;
     }
+
+    Object.keys(this.discussForm.controls).forEach(field => {
+      const control = this.discussForm.get(field);
+      control.markAsTouched({ onlySelf: true });
+    });
+    if (!this.discussForm.valid) {
+      return;
+    }
+    
     this.store.store("new-discuss-preview", JSON.stringify({
       description: discuss.description,
       title: discuss.title,

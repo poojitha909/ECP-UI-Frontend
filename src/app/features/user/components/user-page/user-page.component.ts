@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { UserProfile } from 'src/app/core/interfaces';
 import { AuthService } from 'src/app/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-page',
@@ -11,14 +11,17 @@ import { Router } from '@angular/router';
 })
 export class UserPageComponent implements OnInit {
 
-  selectedTab: string = 'displayname';
+  selectedTab: string = 'editprofile';
 
 
   constructor(
     private userService: UserService,
     private auth: AuthService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private activeRoute: ActivatedRoute
+  ) {
+    this.userService.userProfile = this.activeRoute.snapshot.data.userData;
+  }
 
   ngOnInit() {
     this.auth.userSource.subscribe(user => {
@@ -26,17 +29,8 @@ export class UserPageComponent implements OnInit {
         this.router.navigateByUrl('/');
       }
     })
-    this.getUserProfile();
   }
 
-
-  getUserProfile() {
-    this.userService.getUserProfile().subscribe(
-      response => {
-        this.userService.userProfile = response;
-        console.log(response);
-      });
-  }
 
   viewEditProfile() {
     this.selectedTab = 'editprofile';

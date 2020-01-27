@@ -1,8 +1,10 @@
-<div [routerLink]="['/ask-question/add']" [queryParams]="{category: expert.experties[0].id, answeredBy: expert.id}" class="cursor uk-card uk-card-hover uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+<div [routerLink]="['/ask-question/add']" [queryParams]="{category: expert.experties[0].id, answeredBy: expert.id}"
+  class="cursor uk-card uk-card-hover uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
 
   <div class="uk-card-media-left uk-width-1-4@m uk-width-1-3@s p-16">
     <!--TODO: apply imageHandler directive-->
-    <img class="image-user" [src]="expert?.basicProfileInfo?.profileImage?.titleImage" (error)="setDefaultPic($event)" alt="" />
+    <img class="image-user" [src]="expert?.basicProfileInfo?.profileImage?.titleImage" (error)="setDefaultPic($event)"
+      alt="No Image Found" />
   </div>
 
   <div class="uk-card-body uk-width-expand p-16">
@@ -10,12 +12,12 @@
     <p class="expertdetial">
       {{expert.age ? expert.age + " Years" : "" }}
     </p>
-    
+
     <div class="category">
       In: <span *ngFor="let ex of expert.experties; let idx = index;">
-            {{ex.name}}
-            {{ (idx == (expert.experties.length -1)) ? "": "," }}
-          </span>
+        {{ex.name}}
+        {{ (idx == (expert.experties.length -1)) ? "": "," }}
+      </span>
     </div>
   </div>
 

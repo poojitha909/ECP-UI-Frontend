@@ -21,8 +21,8 @@
       <div class="details-box bg-white">
 
         <div class="verified">
-          <img [imageHandler] *ngIf="!isDBService" [src]="service?.disp_pic" />
-          <img [imageHandler] *ngIf="isDBService" [src]="service?.basicProfileInfo?.profileImage?.original" />
+          <img [imageHandler] *ngIf="!isDBService" [src]="service?.disp_pic" alt="No Image Found" />
+          <img [imageHandler] *ngIf="isDBService" [src]="service?.basicProfileInfo?.profileImage?.original" alt="No Image Found" />
           <button *ngIf="service?.verified == '1'"><span class="verified-icon-w"></span></button>
         </div>
         <div class="uk-text-center">
@@ -414,7 +414,7 @@
                   <p class="lable font-regular m-0"> No user has left review for this service.</p>
                 </div>
                 <div class="uk-text-right">
-                  <img src="/assets/images/norecord.svg" />
+                  <img src="/assets/images/norecord.svg" alt="No Image Found" />
                 </div>
               </div>
             </ng-container>
@@ -493,7 +493,7 @@
                   <div class="uk-width-expand">
                     <div class="child-width-auto" uk-grid>
                       <div>
-                        <img class="review-avatar" [src]="review.reviewer_photo" />
+                        <img class="review-avatar" [src]="review.reviewer_photo" alt="No Image Found" />
                       </div>
                       <div class="p-l-20">
                         <p class="font-regular m-0">{{ review.reviewer_name}}</p>

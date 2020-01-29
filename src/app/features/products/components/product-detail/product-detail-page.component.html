@@ -2,12 +2,6 @@
     <!-- Bread crumbs Start -->
     <div class="breadcrumbs">
         <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
-
-        <!-- <ul class="uk-breadcrumb">
-            <li routerLink="/" class="fa fa-angle-right">Home</li>
-            <li routerLink="/products" class="fa fa-angle-right">Products</li>
-            <li routerLink="/products/all" class="fa fa-angle-right">All Products</li>
-        </ul> -->
     </div>
     <!-- Bread crumbs End -->
     <div class="uk-container">
@@ -55,10 +49,19 @@
                 <!-- Rating box END -->
 
                 <div class="m-t-40 category-box bg-white">
-                    <div class="m-b-20">
-                        <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon"
-                            uk-icon="whatsapp"> </a>
-                        <a [href]="whatsappUrl" class="social-link"> Share via
+                    <div class="m-b-20 uk-visible@s">
+                        <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"
+                          target="_blank"> </a>
+                        <a class="social-link" [href]="whatsappUrl" target="_blank">
+                          Share via
+                          Whatsapp</a>
+                    </div>
+            
+                    <div class="m-b-20 uk-hidden@s">
+                        <a [href]="whatsappMobileUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp">
+                        </a>
+                        <a class="social-link" [href]="whatsappMobileUrl">
+                            Share via
                             Whatsapp</a>
                     </div>
 

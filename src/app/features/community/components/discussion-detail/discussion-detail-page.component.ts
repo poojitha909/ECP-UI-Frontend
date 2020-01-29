@@ -35,6 +35,7 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
   paramsSubs: any;
   currentUrl: string;
   whatsappUrl;
+  whatsappMobileUrl;
 
   constructor(private router: Router, private route: ActivatedRoute,
     private discussionService: DiscussionService, private menuService: MenuService,
@@ -44,7 +45,8 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentUrl = window.location.href;
-    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(this.currentUrl)}`);
+    this.whatsappMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
     this.paramsSubs = this.route.params.subscribe(params => {
       this.initiate();
     });

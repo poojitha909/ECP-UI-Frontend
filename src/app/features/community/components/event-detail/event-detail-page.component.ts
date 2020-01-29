@@ -38,6 +38,7 @@ export class EventDetailPageComponent implements OnInit {
   paramsSubs: any;
   currentUrl: string;
   whatsappUrl;
+  whatsappMobileUrl;
 
   constructor(private router: Router, private route: ActivatedRoute,
     private eventService: EventService, private store: StorageHelperService,
@@ -55,7 +56,8 @@ export class EventDetailPageComponent implements OnInit {
 
   initiate() {
     this.currentUrl = window.location.href;
-    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(this.currentUrl)}`);
+    this.whatsappMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
     this.eventId = this.route.snapshot.params['id'];
     this.getEvent()
     this.reportEmail = "admin@socialpha.com";

@@ -21,17 +21,25 @@
                 </div>
 
                 <div class="m-t-30 bg-white category-box">
-                    <div class="m-b-20">
-                        <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
-                        <a class="social-link" [href]="whatsappUrl">
-                        Share via
-                        Whatsapp</a>
+                    <div class="m-b-20 uk-visible@s">
+                        <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"
+                          target="_blank"> </a>
+                        <a class="social-link" [href]="whatsappUrl" target="_blank">
+                          Share via
+                          Whatsapp</a>
+                    </div>
+                    <div class="m-b-20 uk-hidden@s">
+                        <a [href]="whatsappMobileUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp">
+                        </a>
+                        <a class="social-link" [href]="whatsappMobileUrl">
+                            Share via
+                            Whatsapp</a>
                     </div>
                     <div class="m-b-20">
-                        <a href="mailto:?subject=Report an Event: {{event.title}}&body=%0AService%2DURL:%20{{currentUrl}}"
+                        <a href="mailto:?subject=Regarding Event: {{event.title}}&body=Event URL: {{currentUrl}}"
                         class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail">
                         </a> <a class="social-link"
-                        href="mailto:?subject=Report an Event: {{event.title}}&body=%0AService%2DURL:%20{{currentUrl}}">
+                        href="mailto:?subject=Regarding Event: {{event.title}}&body=&body=Event URL: {{currentUrl}}">
                         Share via
                         Email</a>
                     </div>
@@ -78,14 +86,6 @@
                         <div>
                             <img src="/assets/images/phone.png" alt="No Image Found" class="icons-ev">{{event?.orgPhone}}<!-- time only -->
                         </div>
-                        <!-- <div class="uk-width-1-4@m">
-                            <a href="" *ngIf="event?.eventType==1" class="uk-margin-small-right outdoor-icon" title="Outdoor Event">
-                                <span class="icontxt">Outdoor</span>
-                            </a>
-                            <a href="" *ngIf="event?.eventType==2" class="uk-margin-small-right indoor-icon" title="Indoor Event">
-                                <span class="icontxt">Indoor</span>
-                            </a>
-                        </div> -->
                     </div>    
                 </div>
                 <div class="m-t-30 bg-white category-box">

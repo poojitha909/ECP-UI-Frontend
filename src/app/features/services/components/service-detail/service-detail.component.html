@@ -193,19 +193,15 @@
             Share via
             Whatsapp</a>
         </div>
-
-
-        <div>
-
-          <a href="mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=Service:%20{{ service?.name || service?.basicProfileInfo?.firstName}}%0AService%2DURL:%20{{currentUrl}}"
+        <div class="m-b-20">
+          <a href="mailto:?subject=Regarding Service '{{ service?.name || service?.basicProfileInfo?.firstName  }}' from An Elder Spring Initiative by Tata Trusts&body=Service URL: {{currentUrl}}"
             class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail">
           </a> <a class="social-link"
-            href="mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=Service:%20{{ service?.name || service?.basicProfileInfo?.firstName}}%0AService%2DURL:%20{{currentUrl}}">
+            href="mailto:?subject=Regarding Service '{{ service?.name || service?.basicProfileInfo?.firstName  }}' from An Elder Spring Initiative by Tata Trusts&body=Service URL: {{currentUrl}}">
             Share via
             Email</a>
         </div>
-
-        <!-- <div>
+        <div>
           <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{ service?.name || service?.basicProfileInfo?.firstName  }}"
             onclick="javascript:window.open(this.href,
                     '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
@@ -215,7 +211,7 @@
                     '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
             Share via
             Facebook</a>
-        </div> -->
+        </div>
       </div>
       <!-- Socailmedia share box  END-->
 

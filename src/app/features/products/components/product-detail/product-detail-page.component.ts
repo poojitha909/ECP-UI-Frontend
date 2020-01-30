@@ -43,6 +43,7 @@ export class ProductDetailPageComponent implements OnInit {
   activeSlideId: string;
   currentUrl: string;
   whatsappUrl;
+  whatsappMobileUrl;
   userId: string;
   reviwePaginate: any;
   totalReviewRecords: number;
@@ -91,7 +92,8 @@ export class ProductDetailPageComponent implements OnInit {
       this.user = JSON.parse(this.user);
     }
     this.currentUrl = window.location.href;
-    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(this.currentUrl)}`);
+    this.whatsappMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
 
     this.reviewForm = this.fb.group({
       productId: [this.productId],

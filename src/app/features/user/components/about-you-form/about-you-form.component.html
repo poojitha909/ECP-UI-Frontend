@@ -18,47 +18,47 @@
     <form [formGroup]="aboutForm" (ngSubmit)="onSubmit()" class="uk-form-stacked">
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-stacked-text">Tell us something about yourself</label>
+            <label class="uk-form-label" for="about-you">Tell us something about yourself</label>
             <div class="uk-form-controls">
-                <textarea class="uk-input min-h-300" formControlName="shortDescription" id="form-stacked-text"
+                <textarea class="uk-input min-h-300" formControlName="shortDescription" id="about-you"
                     placeholder="Type here"></textarea>
             </div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-stacked-select">Emotional Challenges</label>
+            <label class="uk-form-label" for="Emotional-Challenges">Emotional Challenges</label>
             <div class="uk-form-controls">
                 <!-- <select class="uk-select" formControlName="emotionalIssues" id="form-stacked-select">
                     <option>Option 01</option>
                     <option>Option 02</option>
                 </select> -->
-                <ng-select [addTag]="addTagFn" [hideSelected]="true" multiple="true" formControlName="emotionalIssues">
+                <ng-select [addTag]="addTagFn" [hideSelected]="true" id="Emotional-Challenges" multiple="true" formControlName="emotionalIssues">
                 </ng-select>
             </div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-stacked-select">Medical Issues</label>
+            <label class="uk-form-label" for="Medical-Issues">Medical Issues</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" [items]="medicalIssues" [hideSelected]="true" multiple="true"
+                <ng-select [addTag]="addTagFn" [items]="medicalIssues" id="Medical-Issues" [hideSelected]="true" multiple="true"
                     formControlName="medicalIssues">
                 </ng-select>
             </div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-stacked-select">Other Difficulties</label>
+            <label class="uk-form-label" for="Other-Difficulties">Other Difficulties</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" placeholder="" [hideSelected]="true" multiple="true"
+                <ng-select [addTag]="addTagFn" placeholder="" id="Other-Difficulties" [hideSelected]="true" multiple="true"
                     formControlName="otherIssues">
                 </ng-select>
             </div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-stacked-select">Languages</label>
+            <label class="uk-form-label" for="Languages">Languages</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addLangFn" [items]="languages" placeholder="Add Languages" [hideSelected]="true"
+                <ng-select [addTag]="addLangFn" id="Languages" [items]="languages" placeholder="Add Languages" [hideSelected]="true"
                     multiple="true" bindLabel="name" formControlName="language">
                 </ng-select>
             </div>
@@ -66,18 +66,18 @@
 
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-stacked-select">My Hobbies</label>
+            <label class="uk-form-label" for="My-Hobbies">My Hobbies</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" placeholder="" [items]="hobbies" [hideSelected]="true" multiple="true"
+                <ng-select [addTag]="addTagFn" id="My-Hobbies" placeholder="" [items]="hobbies" [hideSelected]="true" multiple="true"
                     formControlName="hobbies">
                 </ng-select>
             </div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-stacked-select">Topic of Interests</label>
+            <label class="uk-form-label" for="Topic-Interests">Topic of Interests</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" placeholder="" [hideSelected]="true" multiple="true"
+                <ng-select [addTag]="addTagFn" id="Topic-Interests" placeholder="" [hideSelected]="true" multiple="true"
                     formControlName="otherInterests">
                 </ng-select>
             </div>
@@ -86,7 +86,7 @@
         <hr class="m-t-75" />
         <div uk-grid>
             <div class="uk-width-expand@s">
-                <label class="private-checkbox"><input class="uk-checkbox" type="checkbox" checked> This information is
+                <label class="private-checkbox" for="private-imformation"><input class="uk-checkbox" id="private-imformation" type="checkbox" checked> This information is
                     private</label>
             </div>
             <div>

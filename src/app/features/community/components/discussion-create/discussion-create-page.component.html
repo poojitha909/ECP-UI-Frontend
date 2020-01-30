@@ -1,7 +1,7 @@
 <div class="discussion-create">
     <!-- Bread crumbs Start -->
     <div class="breadcrumbs">
-            <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
+        <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
         <!-- <ul class="uk-breadcrumb">
             <li routerLink="/community" class="fa fa-angle-right">Community</li>
             <li routerLink="/community/discussions" class="fa fa-angle-right">All Articles & Discussions</li>
@@ -10,47 +10,52 @@
     <!-- Bread crumbs End -->
     <div class="uk-container">
         <h2 class="heading">Submit an Article or Start a Discussion</h2>
-        <hr/>
+        <hr />
         <form [formGroup]="discussForm" class="uk-form inner-container bg-white">
             <div class="uk-margin">
-                <label 
+                <label
                     [ngClass]="{'uk-text-danger' : formControl.title.invalid && ( formControl.title.dirty ||  formControl.title.touched) }"
-                    class="uk-form-label" for="form-stacked-text">Title<span class="required">*</span></label>
+                    class="uk-form-label" for="Title">Title<span class="required">*</span></label>
                 <div class="uk-form-controls">
-                    <input 
+                    <input
                         [ngClass]="{'uk-form-danger' : formControl.title.invalid && ( formControl.title.dirty ||  formControl.title.touched) }"
-                        class="uk-input" formControlName="title" id="form-stacked-text" type="text" placeholder="Add an interesting title here!">
+                        class="uk-input" formControlName="title" id="Title" type="text"
+                        placeholder="Add an interesting title here!">
                 </div>
             </div>
             <div class="uk-margin">
-                <label 
+                <label
                     [ngClass]="{'uk-text-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
-                    class="uk-form-label" for="form-stacked-text">Content<span class="required">*</span></label>
+                    class="uk-form-label" for="Content">Content<span class="required">*</span></label>
                 <div class="uk-form-controls">
                     <!-- <textarea 
                         [ngClass]="{'uk-form-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
                         class="uk-textarea" formControlName="description" rows="5" placeholder="Add your content here!"></textarea> -->
-                        <editor [ngClass]="{'uk-form-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
-                            formControlName="description" 
-                            [init]="{menubar:false, statusbar: false, base_url: '/tinymce', plugins: 'lists advlist', content_css : '/assets/css/mce_editor.css'}"></editor>
+                    <editor
+                        [ngClass]="{'uk-form-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
+                        id="Content" formControlName="description"
+                        [init]="{menubar:false, statusbar: false, base_url: '/tinymce', plugins: 'lists advlist', content_css : '/assets/css/mce_editor.css'}">
+                    </editor>
                 </div>
             </div>
             <div class="uk-margin">
-                <label 
+                <label
                     [ngClass]="{'uk-text-danger' : formControl.category.invalid && ( formControl.category.dirty ||  formControl.category.touched) }"
-                    class="uk-form-label" for="form-stacked-text">Pick a Category</label>
+                    class="uk-form-label" for="Category">Pick a Category</label>
                 <div class="uk-form-controls">
-                    <select 
+                    <select
                         [ngClass]="{'uk-form-danger' : formControl.category.invalid && ( formControl.category.dirty ||  formControl.category.touched) }"
-                        class="uk-select" formControlName="category" id="form-stacked-select">
+                        class="uk-select" formControlName="category" id="Category">
                         <option value="">Select Category</option>
-                        <option *ngFor="let cat of categoryList | keyvalue" value="{{cat.key}}">{{cat.value.label}}</option>
+                        <option *ngFor="let cat of categoryList | keyvalue" value="{{cat.key}}">{{cat.value.label}}
+                        </option>
                     </select>
                 </div>
             </div>
             <div class="uk-margin">
                 <button class="uk-button uk-button-transparent m-r-15" (click)="onReset()">Cancel & Go Back</button>
-                <button class="uk-button uk-button-default" (click)="onSubmit()">{{!!user ? 'Preview to Publish' : 'Signin to create this Discussion'}}</button>
+                <button class="uk-button uk-button-default"
+                    (click)="onSubmit()">{{!!user ? 'Preview to Publish' : 'Signin to create this Discussion'}}</button>
             </div>
         </form>
     </div>

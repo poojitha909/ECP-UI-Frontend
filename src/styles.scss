@@ -33,6 +33,9 @@
 @include font-face("HKGroteskRegular", "assets/font/hk-grotesk/HKGrotesk-Regular.ttf", normal, normal);
 @include font-face("HKGroteskRegular", "assets/font/hk-grotesk/HKGrotesk-SemiBold.ttf", bold, normal);
 
+html {
+  scroll-behavior: smooth;
+}
 .font-regular {
   font-size: 18px;
   font-family: "HKGroteskRegular";

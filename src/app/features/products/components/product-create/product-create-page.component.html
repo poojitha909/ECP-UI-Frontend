@@ -11,65 +11,65 @@
             <hr class="m-b-30" />
             <form class="uk-form">
                 <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Pick a Category</label>
+                    <label class="uk-form-label" for="Category">Pick a Category</label>
                     <div class="uk-form-controls" *ngIf="categoryList!=undefined">
-                        <select class="uk-select" name="productCategory" [(ngModel)]="productCategory" >
+                        <select id="Category" class="uk-select" name="productCategory" [(ngModel)]="productCategory" >
                             <option *ngFor="let cat of categoryList" value="{{cat.id}}">{{cat.name}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="uk-margin">
-                    <label class="uk-form-label">Name</label>
+                    <label for="name" class="uk-form-label">Name</label>
                     <div class="uk-form-controls">
-                        <input class="uk-input" name="name" type="text" [(ngModel)]="name" placeholder="Product Name">
+                        <input class="uk-input" id="name" name="name" type="text" [(ngModel)]="name" placeholder="Product Name">
                     </div>
                 </div>
                 <div class="uk-margin">
-                    <label class="uk-form-label">Short Description</label>
+                    <label class="uk-form-label" for="shortDescription">Short Description</label>
                     <div class="uk-form-controls">
-                        <input class="uk-input" name="shortDescription" type="text" [(ngModel)]="shortDescription" placeholder="Product Short Description">
+                        <input class="uk-input" id="shortDescription" name="shortDescription" type="text" [(ngModel)]="shortDescription" placeholder="Product Short Description">
                     </div>
                 </div>
                 <div class="uk-margin">
-                    <label class="uk-form-label">Description</label>
+                    <label class="uk-form-label" for="description">Description</label>
                     <div class="uk-form-controls">
-                        <input class="uk-input" name="description" type="text" [(ngModel)]="description" placeholder="Product Description">
+                        <input class="uk-input" id="description" name="description" type="text" [(ngModel)]="description" placeholder="Product Description">
                     </div>
                 </div>
                 <div class="uk-margin">
-                    <label class="uk-form-label">Is Featured</label>
+                    <label class="uk-form-label" for="isFeatured">Is Featured</label>
                     <div class="uk-form-controls">
-                        <input class="uk-input" name="Is Featured" type="number" [(ngModel)]="isFeatured" placeholder="mark featured as 0 or 1">
+                        <input class="uk-input" id="isFeatured" name="Is Featured" type="number" [(ngModel)]="isFeatured" placeholder="mark featured as 0 or 1">
                     </div>
                 </div>
                 <div class="uk-margin">
-                    <label class="uk-form-label">Price</label>
+                    <label class="uk-form-label" for="price">Price</label>
                     <div class="uk-form-controls">
-                        <input class="uk-input" name="price" type="number" [(ngModel)]="price" placeholder="Price of Product">
+                        <input class="uk-input" id="price" name="price" type="number" [(ngModel)]="price" placeholder="Price of Product">
                     </div>
                 </div>
                 <div class="uk-margin">
-                    <label class="uk-form-label">Status</label>
+                    <label class="uk-form-label" for="Status">Status</label>
                     <div class="uk-form-controls">
-                        <input class="uk-input" name="status" type="number" [(ngModel)]="status" placeholder="Status: 0 for Active and 1 for In Active">
+                        <input class="uk-input" id="Status" name="status" type="number" [(ngModel)]="status" placeholder="Status: 0 for Active and 1 for In Active">
                     </div>
                 </div>
                 <div class="uk-margin">
-                    <label class="uk-form-label">Buy Link</label>
+                    <label class="uk-form-label" for="buy-Link">Buy Link</label>
                     <div class="uk-form-controls">
-                        <input class="uk-input" name="buyLink" type="text" [(ngModel)]="buyLink" placeholder="Product Buy From Link (link of product on buyer site)">
+                        <input class="uk-input" id="buy-Link" name="buyLink" type="text" [(ngModel)]="buyLink" placeholder="Product Buy From Link (link of product on buyer site)">
                     </div>
                 </div>
                 <div class="uk-margin">
-                    <label class="uk-form-label">Buy From</label>
+                    <label class="uk-form-label" for="buy-From">Buy From</label>
                     <div class="uk-form-controls">
-                        <input class="uk-input" name="buyFrom" type="text" [(ngModel)]="buyFrom" placeholder="Product Buy From Site Ex. Senerioty or Amazon">
+                        <input class="uk-input" id="buy-From" name="buyFrom" type="text" [(ngModel)]="buyFrom" placeholder="Product Buy From Site Ex. Senerioty or Amazon">
                     </div>
                 </div>
                 <div class="uk-margin">
-                    <label class="uk-form-label">Images</label>
+                    <label class="uk-form-label" for="product-image">Images</label>
                     <div class="uk-form-controls">
-                        <input class="uk-input" name="images" type="text" [(ngModel)]="images" placeholder="Product Buy From Site Ex. Senerioty or Amazon">
+                        <input class="uk-input" id="product-image" name="images" type="text" [(ngModel)]="images" placeholder="Product Buy From Site Ex. Senerioty or Amazon">
                     </div>
                 </div>
                 <div class="uk-margin">

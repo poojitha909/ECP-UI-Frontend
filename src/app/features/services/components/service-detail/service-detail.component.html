@@ -113,10 +113,10 @@
                 <!-- Success box END-->
                 <form [formGroup]="reportForm" (ngSubmit)="onSubmitReport()" class="uk-form-stacked review-form">
                   <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-select">Cause of
+                    <label class="uk-form-label" for="reporting-cause">Cause of
                       Reporting</label>
                     <div class="uk-form-controls">
-                      <select formControlName="cause" class="uk-select" id="form-stacked-select">
+                      <select formControlName="cause" class="uk-select" id="reporting-cause">
                         <option disabled selected hidden value="">Select your cause of reporting
                         </option>
                         <option>Information provided is incorrect</option>
@@ -128,9 +128,9 @@
                   </div>
 
                   <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Comment (optional)</label>
+                    <label class="uk-form-label" for="comment">Comment (optional)</label>
                     <div class="uk-form-controls">
-                      <textarea formControlName="comment" class="uk-input min-h-200" id="form-stacked-text"
+                      <textarea formControlName="comment" id="comment" class="uk-input min-h-200" id="form-stacked-text"
                         placeholder="Enter your comment here"></textarea>
                     </div>
                   </div>
@@ -300,9 +300,9 @@
 
 
             <div class="uk-margin">
-              <label class="uk-form-label" for="form-stacked-text">Title<span class="required">*</span></label>
+              <label class="uk-form-label" for="review-title">Title<span class="required">*</span></label>
               <div class="uk-form-controls">
-                <input class="uk-input" id="form-stacked-text" formControlName="title" type="text"
+                <input class="uk-input" id="review-title" formControlName="title" type="text"
                   placeholder="Enter your title">
               </div>
             </div>
@@ -329,9 +329,9 @@
             <!-- </div> -->
 
             <div class="uk-margin">
-              <label class="uk-form-label" for="form-stacked-text">Your Review<span class="required">*</span></label>
+              <label class="uk-form-label" for="review">Your Review<span class="required">*</span></label>
               <div class="uk-form-controls">
-                <textarea formControlName="review" class="uk-input min-h-200" id="form-stacked-text"
+                <textarea formControlName="review" class="uk-input min-h-200" id="review"
                   placeholder="Enter your review here"></textarea>
               </div>
             </div>

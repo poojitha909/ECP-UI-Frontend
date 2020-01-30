@@ -16,12 +16,16 @@
     <form class="uk-form-stacked" [formGroup]="generalInfoForm" (ngSubmit)="onSubmit()">
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-stacked-text">Gender</label>
+            <label class="uk-form-label">Gender</label>
             <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                <label><input class="uk-radio" type="radio" formControlName="gender" [value]="1"> Male</label>
-                <label><input class="uk-radio" type="radio" formControlName="gender" [value]="0"> Female</label>
-                <label><input class="uk-radio" type="radio" formControlName="gender" [value]="2"> Trans</label>
-                <label><input class="uk-radio" type="radio" formControlName="gender" [value]="3"> Prefer not to
+                <label for="Male"><input class="uk-radio" id="Male" type="radio" formControlName="gender" [value]="1">
+                    Male</label>
+                <label for="Female"><input class="uk-radio" id="Female" type="radio" formControlName="gender"
+                        [value]="0"> Female</label>
+                <label for="Trans"><input class="uk-radio" id="Trans" type="radio" formControlName="gender" [value]="2">
+                    Trans</label>
+                <label for="prefer-not-say"><input class="uk-radio" id="prefer-not-say" type="radio"
+                        formControlName="gender" [value]="3"> Prefer not to
                     say</label>
             </div>
         </div>
@@ -29,22 +33,26 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="form-stacked-text">Marital Status</label>
             <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                <label><input class="uk-radio" type="radio" formControlName="maritalStatus" value="Married">
+                <label for="Married"><input class="uk-radio" id="Married" type="radio" formControlName="maritalStatus"
+                        value="Married">
                     Married</label>
-                <label><input class="uk-radio" type="radio" formControlName="maritalStatus" value="Unmarried">
+                <label for="Unmarried"><input class="uk-radio" id="Unmarried" type="radio"
+                        formControlName="maritalStatus" value="Unmarried">
                     Unmarried</label>
-                <label><input class="uk-radio" type="radio" formControlName="maritalStatus" value="Widowed">
+                <label for="Widowed"><input class="uk-radio" id="Widowed" type="radio" formControlName="maritalStatus"
+                        value="Widowed">
                     Widowed</label>
-                <label><input class="uk-radio" type="radio" formControlName="maritalStatus" value="Prefer not to say">
+                <label for="Prefer-not"><input class="uk-radio" id="Prefer-not" type="radio"
+                        formControlName="maritalStatus" value="Prefer not to say">
                     Prefer not to
                     say</label>
             </div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-stacked-select1">Occuption</label>
+            <label class="uk-form-label" for="Occuption">Occuption</label>
             <div class="uk-form-controls">
-                <select class="uk-select" id="form-stacked-select1" formControlName="occupation">
+                <select class="uk-select" id="Occuption" formControlName="occupation">
                     <option disabled selected hidden value="">Occuption</option>
                     <option>Working</option>
                     <option>Not Working</option>
@@ -56,12 +64,12 @@
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-stacked-select2">Birthday</label>
+            <label class="uk-form-label" for="Birthday">Birthday</label>
             <div class="uk-child-width-expand@s uk-grid-small" uk-grid>
 
                 <div>
                     <div class="uk-form-controls">
-                        <select class="uk-select" id="form-stacked-select2" formControlName="day">
+                        <select class="uk-select" id="Day" formControlName="day">
                             <option disabled selected hidden value="">Day</option>
                             <option *ngFor="let n of dateOption" [value]="n">{{n}}</option>
                         </select>
@@ -69,7 +77,7 @@
                 </div>
                 <div>
                     <div class="uk-form-controls">
-                        <select class="uk-select" id="form-stacked-select3" formControlName="month">
+                        <select class="uk-select" id="Month" formControlName="month">
                             <option disabled selected hidden value="">Month</option>
                             <option *ngFor="let month of monthOption" [value]="month.value">{{month.name}}</option>
                         </select>
@@ -77,7 +85,7 @@
                 </div>
                 <div>
                     <div class="uk-form-controls">
-                        <select class="uk-select" id="form-stacked-select4" formControlName="year">
+                        <select class="uk-select" id="Year" formControlName="year">
                             <option disabled selected hidden value>Year</option>
                             <option *ngFor="let year of yearOptions" [value]="year">{{year}}</option>
                         </select>

@@ -1,59 +1,65 @@
 <div class="event-create">
-        <!-- Bread crumbs Start -->
-        <div class="breadcrumbs">
+    <!-- Bread crumbs Start -->
+    <div class="breadcrumbs">
         <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
-        </div>
-        <!-- Bread crumbs End -->
-        <div class="uk-container">
-            <h2 class="heading">Create an Event</h2>
-            <hr/>
-            <div class="inner-container bg-white">
+    </div>
+    <!-- Bread crumbs End -->
+    <div class="uk-container">
+        <h2 class="heading">Create an Event</h2>
+        <hr />
+        <div class="inner-container bg-white">
             <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
                 <p>{{ successMessage }}</p>
             </div>
             <form [formGroup]="eventForm" class="uk-form">
                 <div class="uk-margin">
-                    <label [ngClass]="{'uk-text-danger' : formControl.title.invalid && ( formControl.title.dirty ||  formControl.title.touched) }"
-                        class="uk-form-label">Title<span class="required">*</span></label>
+                    <label
+                        [ngClass]="{'uk-text-danger' : formControl.title.invalid && ( formControl.title.dirty ||  formControl.title.touched) }"
+                        class="uk-form-label" for="Title">Title<span class="required">*</span></label>
                     <div class="uk-form-controls">
-                        <input [ngClass]="{'uk-form-danger' : formControl.title.invalid && ( formControl.title.dirty ||  formControl.title.touched) }"
-                            class="uk-input" formControlName="title" type="text"  placeholder="What’s the title of your event?">
+                        <input
+                            [ngClass]="{'uk-form-danger' : formControl.title.invalid && ( formControl.title.dirty ||  formControl.title.touched) }"
+                            class="uk-input" id="Title" formControlName="title" type="text"
+                            placeholder="What’s the title of your event?">
                     </div>
                 </div>
                 <div class="uk-margin">
                     <label
                         [ngClass]="{'uk-text-danger' : formControl.eventType.invalid && ( formControl.eventType.dirty ||  formControl.eventType.touched) }"
-                        class="uk-form-label" for="form-stacked-text">Pick a Category<span class="required">*</span></label>
+                        class="uk-form-label" for="Event-Type">Pick a Category<span class="required">*</span></label>
                     <div class="uk-form-controls">
-                        <select 
+                        <select
                             [ngClass]="{'uk-form-danger' : formControl.eventType.invalid && ( formControl.eventType.dirty ||  formControl.eventType.touched) }"
-                            class="uk-select" formControlName="eventType" >
-                                <option value="0">Select Category</option>
-                                <option value="1">Outdoor</option>
-                                <option value="2">Indoor</option>
+                            class="uk-select" formControlName="eventType" id="Event-Type">
+                            <option value="0">Select Category</option>
+                            <option value="1">Outdoor</option>
+                            <option value="2">Indoor</option>
                         </select>
                     </div>
                 </div>
                 <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
                     <div>
-                        <label [ngClass]="{'uk-text-danger' : formControl.date.invalid && ( formControl.date.dirty ||  formControl.date.touched) }"
-                            class="uk-form-label" >Date<span class="required">*</span></label>
+                        <label
+                            [ngClass]="{'uk-text-danger' : formControl.date.invalid && ( formControl.date.dirty ||  formControl.date.touched) }"
+                            class="uk-form-label" for="Date">Date<span class="required">*</span></label>
                         <div class="uk-form-controls">
-                            <input 
+                            <input
                                 [ngClass]="{'uk-form-danger' : formControl.date.invalid && ( formControl.date.dirty ||  formControl.date.touched) }"
-                                class="uk-input" type="date" formControlName="date"  min="" placeholder="yyyy-mm-dd" />
+                                class="uk-input" id="Date" type="date" formControlName="date" min=""
+                                placeholder="yyyy-mm-dd" />
                         </div>
                     </div>
                     <div>
-                        <div class="uk-grid-small uk-child-width-1-2@m"  uk-grid>
+                        <div class="uk-grid-small uk-child-width-1-2@m" uk-grid>
                             <div>
                                 <label
-                                    [ngClass]="{'uk-text-danger' : formControl.startTime.invalid && ( formControl.startTime.dirty ||  formControl.startTime.touched) }" 
-                                    class="uk-form-label">Start Time<span class="required">*</span></label>
+                                    [ngClass]="{'uk-text-danger' : formControl.startTime.invalid && ( formControl.startTime.dirty ||  formControl.startTime.touched) }"
+                                    class="uk-form-label" for="Start-Time">Start Time<span
+                                        class="required">*</span></label>
                                 <div class="uk-form-controls">
-                                    <select 
-                                        [ngClass]="{'uk-form-danger' : formControl.startTime.invalid && ( formControl.startTime.dirty ||  formControl.startTime.touched) }" 
-                                        class="uk-select" formControlName="startTime" >
+                                    <select
+                                        [ngClass]="{'uk-form-danger' : formControl.startTime.invalid && ( formControl.startTime.dirty ||  formControl.startTime.touched) }"
+                                        class="uk-select" id="Start-Time" formControlName="startTime">
                                         <option value="00:00">12:00 am</option>
                                         <option value="00:30">12:30 am</option>
                                         <option value="01:00">01:00 am</option>
@@ -107,11 +113,11 @@
                             </div>
                             <div>
                                 <label
-                                    [ngClass]="{'uk-text-danger' : formControl.duration.invalid && ( formControl.duration.dirty ||  formControl.duration.touched) }" 
-                                    class="uk-form-label">Duration<span class="required">*</span></label>
+                                    [ngClass]="{'uk-text-danger' : formControl.duration.invalid && ( formControl.duration.dirty ||  formControl.duration.touched) }"
+                                    class="uk-form-label" for="Duration">Duration<span class="required">*</span></label>
                                 <div class="uk-form-controls">
-                                    <select 
-                                        [ngClass]="{'uk-form-danger' : formControl.duration.invalid && ( formControl.duration.dirty ||  formControl.duration.touched) }" 
+                                    <select id="Duration"
+                                        [ngClass]="{'uk-form-danger' : formControl.duration.invalid && ( formControl.duration.dirty ||  formControl.duration.touched) }"
                                         class="uk-select" formControlName="duration">
                                         <option value="30">30 minutes</option>
                                         <option value="60">1 hour</option>
@@ -138,53 +144,55 @@
                     </div>
                 </div>
                 <div class="uk-margin">
-                    <label 
-                        [ngClass]="{'uk-text-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }" 
-                        class="uk-form-label">Description<span class="required">*</span></label>
+                    <label
+                        [ngClass]="{'uk-text-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
+                        class="uk-form-label" for="Description">Description<span class="required">*</span></label>
                     <div class="uk-form-controls">
-                        <editor [ngClass]="{'uk-form-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
-                            formControlName="description" 
-                            [init]="{menubar:false, statusbar: false, base_url: '/tinymce', plugins: 'lists advlist', content_css : '/assets/css/mce_editor.css'}"></editor>
+                        <editor
+                            [ngClass]="{'uk-form-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
+                            formControlName="description" id="Description"
+                            [init]="{menubar:false, statusbar: false, base_url: '/tinymce', plugins: 'lists advlist', content_css : '/assets/css/mce_editor.css'}">
+                        </editor>
                     </div>
                 </div>
                 <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
                     <div>
-                        <label
-                            [ngClass]="{'uk-text-danger' : formControl.address.invalid && ( formControl.address.dirty ||  formControl.address.touched) }"  
+                        <label for="Address"
+                            [ngClass]="{'uk-text-danger' : formControl.address.invalid && ( formControl.address.dirty ||  formControl.address.touched) }"
                             class="uk-form-label">Address<span class="required">*</span></label>
                         <div class="uk-form-controls">
-                            <input
-                                [ngClass]="{'uk-form-danger' : formControl.address.invalid && ( formControl.address.dirty ||  formControl.address.touched) }"  
+                            <input id="Address"
+                                [ngClass]="{'uk-form-danger' : formControl.address.invalid && ( formControl.address.dirty ||  formControl.address.touched) }"
                                 class="uk-input" formControlName="address" placeholder="Eg.: HSR layout, sector 6" />
                         </div>
                     </div>
                     <div>
-                        <label
+                        <label for="Landmark"
                             [ngClass]="{'uk-text-danger' : formControl.landmark.invalid && ( formControl.landmark.dirty ||  formControl.landmark.touched) }"
                             class="uk-form-label">Landmark</label>
                         <div class="uk-form-controls">
-                            <input
-                                class="uk-input" formControlName="landmark" placeholder="Eg.: Infront of Bhagvati Hospital" />
+                            <input id="Landmark" class="uk-input" formControlName="landmark"
+                                placeholder="Eg.: Infront of Bhagvati Hospital" />
                         </div>
                     </div>
                 </div>
                 <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
                     <div>
-                        <label
+                        <label for="organiser-name"
                             [ngClass]="{'uk-text-danger' : formControl.organiser.invalid && ( formControl.organiser.dirty ||  formControl.organiser.touched) }"
                             class="uk-form-label">Organiser Name<span class="required">*</span></label>
                         <div class="uk-form-controls">
-                            <input 
+                            <input id="organiser-name"
                                 [ngClass]="{'uk-form-danger' : formControl.organiser.invalid && ( formControl.organiser.dirty ||  formControl.organiser.touched) }"
                                 class="uk-input" formControlName="organiser" placeholder="Organiser Name" />
                         </div>
                     </div>
                     <div>
-                        <label
+                        <label for="Languages"
                             [ngClass]="{'uk-text-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
                             class="uk-form-label">Languages<span class="required">*</span></label>
                         <div class="uk-form-controls">
-                            <input
+                            <input id="Languages"
                                 [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
                                 class="uk-input" formControlName="languages" placeholder="Eg.: Hindi, Punjabi, Tamil" />
                         </div>
@@ -192,21 +200,21 @@
                 </div>
                 <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
                     <div>
-                        <label
+                        <label for="Organiser-Email"
                             [ngClass]="{'uk-text-danger' : formControl.orgEmail.invalid && ( formControl.orgEmail.dirty ||  formControl.orgEmail.touched) }"
                             class="uk-form-label">Organiser Email address<span class="required">*</span></label>
                         <div class="uk-form-controls">
-                            <input
+                            <input id="Organiser-Email"
                                 [ngClass]="{'uk-form-danger' : formControl.orgEmail.invalid && ( formControl.orgEmail.dirty ||  formControl.orgEmail.touched) }"
                                 class="uk-input" formControlName="orgEmail" placeholder="abcd@xyz.com" />
                         </div>
                     </div>
                     <div>
-                        <label
+                        <label for="Organiser-Phone"
                             [ngClass]="{'uk-text-danger' : formControl.orgPhone.invalid && ( formControl.orgPhone.dirty ||  formControl.orgPhone.touched) }"
                             class="uk-form-label">Organiser Phone number<span class="required">*</span></label>
                         <div class="uk-form-controls">
-                            <input
+                            <input id="Organiser-Phone"
                                 [ngClass]="{'uk-form-danger' : formControl.orgPhone.invalid && ( formControl.orgPhone.dirty ||  formControl.orgPhone.touched) }"
                                 class="uk-input" formControlName="orgPhone" placeholder="9999999999" />
                         </div>
@@ -214,31 +222,33 @@
                 </div>
                 <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
                     <div>
-                        <label
+                        <label for="Event-Capacity"
                             [ngClass]="{'uk-text-danger' : formControl.capacity.invalid && ( formControl.capacity.dirty ||  formControl.capacity.touched) }"
-                            class="uk-form-label" >Event Capacity<span class="required">*</span></label>
+                            class="uk-form-label">Event Capacity<span class="required">*</span></label>
                         <div class="uk-form-controls">
-                            <input 
+                            <input id="Event-Capacity"
                                 [ngClass]="{'uk-form-danger' : formControl.capacity.invalid && ( formControl.capacity.dirty ||  formControl.capacity.touched) }"
                                 class="uk-input" formControlName="capacity" placeholder="Eg. 75 People" />
                         </div>
                     </div>
                     <div>
-                        <label
+                        <label for="Event-Fees"
                             [ngClass]="{'uk-text-danger' : formControl.entryFee.invalid && ( formControl.entryFee.dirty ||  formControl.entryFee.touched) }"
                             class="uk-form-label">Event Fees (in Rupees)<span class="required">*</span></label>
                         <div class="uk-form-controls">
-                            <input
+                            <input id="Event-Fees"
                                 [ngClass]="{'uk-form-danger' : formControl.entryFee.invalid && ( formControl.entryFee.dirty ||  formControl.entryFee.touched) }"
-                                class="uk-input" type="number" formControlName="entryFee" placeholder="Entry Fees (just place 0 in case of free entries)" />
+                                class="uk-input" type="number" formControlName="entryFee"
+                                placeholder="Entry Fees (just place 0 in case of free entries)" />
                         </div>
                     </div>
                 </div>
                 <div class="uk-margin">
-                        <button class="uk-button uk-button-transparent m-r-15" (click)="onReset()">Cancel & Go Back</button>
-                        <button class="uk-button uk-button-default" (click)="onSubmit()">{{!!user ? 'Preview to Publish' : 'Signin to create Event'}}</button>                        
+                    <button class="uk-button uk-button-transparent m-r-15" (click)="onReset()">Cancel & Go Back</button>
+                    <button class="uk-button uk-button-default"
+                        (click)="onSubmit()">{{!!user ? 'Preview to Publish' : 'Signin to create Event'}}</button>
                 </div>
             </form>
-            </div>
         </div>
     </div>
+</div>

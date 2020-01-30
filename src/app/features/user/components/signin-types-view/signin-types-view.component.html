@@ -6,13 +6,13 @@
   <!-- Error box END-->
   <div class="uk-form-stacked">
     <div class="uk-margin">
-      <label class="uk-form-label" for="form-stacked-text">Phone Number</label>
+      <label class="uk-form-label" for="Phone-Number">Phone Number</label>
       <div class="uk-form-controls">
 
         <div class="uk-inline mobile-number">
           <a *ngIf="mobileNumber" class="uk-form-icon uk-form-icon-flip" (click)="changeNumber()">Change Number</a>
           <input class="uk-input otpnumber"
-            [ngClass]="{'uk-form-danger' : mobile.invalid && (mobile.dirty || mobile.touched) }" id="form-stacked-text"
+            [ngClass]="{'uk-form-danger' : mobile.invalid && (mobile.dirty || mobile.touched) }" id="Phone-Number"
             type="number" [(ngModel)]="mobileNumber" (keydown.enter)="requestOtp()" placeholder="Enter Phone Number..."
             required #mobile="ngModel" />
         </div>
@@ -20,7 +20,7 @@
     </div>
     <div class="uk-margin">
       <div class="uk-form-controls">
-        <input class="uk-input" id="form-stacked-text" type="number" name="otpcode" [(ngModel)]="OtpCode"
+        <input class="uk-input" aria-label="otpcode" type="number" name="otpcode" [(ngModel)]="OtpCode"
           placeholder="Enter OTP..." (keydown.enter)="requestOtp()" [disabled]="!otpGenerated" />
         <a *ngIf="otpGenerated" (click)="requestResendOtp()" href="javascript:void(0)" class="resend-otp"> Resend
           OTP</a>

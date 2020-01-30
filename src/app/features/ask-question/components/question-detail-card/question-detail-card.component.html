@@ -7,7 +7,7 @@
   </div>
 
   <div class="uk-card-body uk-width-expand p-16">
-    <p class="font-regular"><b class="fname">{{question?.question}}</b></p>
+    <h3 class="font-regular fname">{{question?.question}}</h3>
     <p class="expertdetial" *ngIf="viewby == 'user'">
       Answered By <b>{{question?.answeredBy?.basicProfileInfo?.firstName}}</b><br/>
       {{question?.lastModifiedAt | timeago}}

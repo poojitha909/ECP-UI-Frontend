@@ -5,7 +5,7 @@
             <img class="h-150 w-100" [src]="product.images[0]" alt="No Image Found" />
             <!-- <button class="perOff">35% OFF</button> -->
         </div>
-        <p class="font-regular font-weight-600 m-b-5">{{product?.name}} </p>
+        <h3 class="font-regular font-weight-600 m-b-5">{{product?.name}} </h3>
 
         <ngb-rating [rate]="getDbServiceRating(product.rating)" [readonly]="true" [max]="5">
             <ng-template let-fill="fill" let-index="index">

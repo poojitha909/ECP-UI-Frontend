@@ -4,7 +4,7 @@
         <div class="rating">
             <div class="p-10 uk-flex uk-flex-center" uk-grid>
                 <div>
-                    <h1>{{ detailReview?.rating}}</h1>
+                    <h3>{{ detailReview?.rating}}</h3>
                 </div>
                 <div>
                     <ngb-rating [rate]="detailReview?.rating" [readonly]="true" [max]="5">
@@ -24,7 +24,7 @@
         <div class="jd-rating" *ngIf="jdDetailReview">
             <div class="p-10 uk-flex uk-flex-center" uk-grid>
                 <div>
-                    <h1>{{ jdDetailReview?.rating}}</h1>
+                    <h3>{{ jdDetailReview?.rating}}</h3>
                 </div>
                 <div>
                     <ngb-rating [rate]="jdDetailReview?.rating" [readonly]="true" [max]="5">

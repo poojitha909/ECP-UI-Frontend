@@ -2,7 +2,7 @@
   <div class="breadcrumbs">
     <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
   </div>
-  <h2>All Experts</h2>
+  <h1 class="uk-h2">All Experts</h1>
   <ul class="m-t-20 m-b-30" id="questionstab" uk-tab>
     <li (click)="onTopTabChange(0)"><a href="#">All Experts ({{totalRecords}})</a></li>
     <li (click)="onTopTabChange(1)"><a href="#">My Questions ({{totalRecordsQues}})</a></li>
@@ -14,7 +14,7 @@
         <div class="category-box bg-white">
           <div uk-grid>
             <div class="uk-width-expand">
-              <h4>Categories</h4>
+              <h3 class="uk-h4">Categories</h3>
             </div>
             <div *ngIf="searchParamsQues.askCategory !== ''">
               <a class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>

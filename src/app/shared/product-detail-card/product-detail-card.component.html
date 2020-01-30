@@ -8,7 +8,7 @@
 
   <div class="uk-card-body uk-width-expand uk-flex uk-flex-between uk-flex-column p-16">
     <div>
-      <a href="javascript:void(0)" class="font-regular">{{product?.name}}</a>
+      <h3 class="font-regular"><a href="javascript:void(0)">{{product?.name}}</a></h3>
       <div class="m-t-20@s">
         <ngb-rating [rate]="getDbServiceRating(product.rating)" [readonly]="true" [max]="5">
           <ng-template let-fill="fill" let-index="index">

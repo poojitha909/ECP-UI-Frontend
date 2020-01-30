@@ -16,8 +16,8 @@
   </div>
 
   <div class="uk-card-body uk-text-center uk-text-left@s uk-width-expand p-16">
-    <h4 class="font-regular font-weight-600 m-0">{{ isDBService ? service?.basicProfileInfo.firstName :  service?.name}}
-    </h4>
+    <h3 class="font-regular font-weight-600 m-0">{{ isDBService ? service?.basicProfileInfo.firstName :  service?.name}}
+    </h3>
     <div>
       <ngb-rating *ngIf="isDBService" [rate]="getDbServiceRating(service?.ratingPercentage)" [readonly]="true"
         [max]="5">

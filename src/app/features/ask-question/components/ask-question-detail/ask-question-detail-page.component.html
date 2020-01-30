@@ -35,11 +35,11 @@
             </div>
             <div class="uk-width-2-3@m">
                 <div class="inner-container bg-white" *ngIf="question!==undefined">
-                    <h2 class="heading">{{question.question}}</h2>
+                    <h1 class="heading">{{question.question}}</h1>
                     <hr class="m-b-30" />
-                    <h2 class="heading1">
+                    <h3 class="heading1">
                         Description
-                    </h2>
+                    </h3>
                     <div [innerHTML]="question?.description">
                     </div>
                     <div *ngIf="questionId == 'preview'">

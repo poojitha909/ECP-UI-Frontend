@@ -1,7 +1,7 @@
 @import "src/assets/css/variables.scss";
 .products {
   margin-bottom: 24px;
-  h2 {
+  h1 {
     color: $font-light-black;
     font-family: $regular-font;
     font-weight: bold;
@@ -38,11 +38,11 @@
       }
     }
   }
-  h3 {
-    margin: 0px;
-    font-family: "HKGroteskRegular";
-    font-size: 32px;
-  }
+  // h3 {
+  //   margin: 0px;
+  //   font-family: "HKGroteskRegular";
+  //   font-weight: 400;
+  // }
   .cat-active {
     font-weight: 400;
     background-color: #d7e0ef;

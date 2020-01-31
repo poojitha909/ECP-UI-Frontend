@@ -1,6 +1,7 @@
 <div>
   <!-- Error box START-->
-  <div *ngIf="numberError" class="uk-alert-danger uk-animation-fade" uk-alert>
+  <div *ngIf="numberError" role="alert" aria-live="polite" aria-atomic="true" class="uk-alert-danger uk-animation-fade"
+    uk-alert>
     <p>{{ numberError }}</p>
   </div>
   <!-- Error box END-->
@@ -10,7 +11,8 @@
       <div class="uk-form-controls">
 
         <div class="uk-inline mobile-number">
-          <a *ngIf="mobileNumber" class="uk-form-icon uk-form-icon-flip" (click)="changeNumber()">Change Number</a>
+          <a href="javascript:void(0)" *ngIf="mobileNumber" aria-live="polite" aria-atomic="true"
+            class="uk-form-icon uk-form-icon-flip" (click)="changeNumber()">Change Number</a>
           <input class="uk-input otpnumber"
             [ngClass]="{'uk-form-danger' : mobile.invalid && (mobile.dirty || mobile.touched) }" id="Phone-Number"
             type="number" [(ngModel)]="mobileNumber" (keydown.enter)="requestOtp()" placeholder="Enter Phone Number..."
@@ -18,11 +20,12 @@
         </div>
       </div>
     </div>
-    <div class="uk-margin">
+    <div id="otp-input" class="uk-margin">
       <div class="uk-form-controls">
-        <input class="uk-input" aria-label="otpcode" type="number" name="otpcode" [(ngModel)]="OtpCode"
-          placeholder="Enter OTP..." (keydown.enter)="requestOtp()" [disabled]="!otpGenerated" />
-        <a *ngIf="otpGenerated" (click)="requestResendOtp()" href="javascript:void(0)" class="resend-otp"> Resend
+        <input id="opttxt" class="uk-input" aria-label="otpcode" aria-describedby="otp-input" type="number" name="otpcode"
+          [(ngModel)]="OtpCode" placeholder="Enter OTP" (keydown.enter)="requestOtp()" [disabled]="!otpGenerated" />
+        <a *ngIf="otpGenerated" aria-live="polite" aria-atomic="true" (click)="requestResendOtp()"
+          href="javascript:void(0)" class="resend-otp"> Resend
           OTP</a>
       </div>
     </div>
@@ -30,7 +33,8 @@
   <div class="m-b-40" uk-grid>
     <div *ngIf="!otpGenerated" class="uk-width-expand uk-flex uk-flex-middle">- An OTP will be sent to the above number.
     </div>
-    <div *ngIf="otpGenerated" class="uk-width-expand uk-flex uk-flex-middle">- 4-digit OTP was
+    <div *ngIf="otpGenerated" aria-live="polite" aria-atomic="true" class="uk-width-expand uk-flex uk-flex-middle">-
+      4-digit OTP was
       {{ otpResend ? 'resent': 'sent' }} to
       {{ mobileNumber }}.</div>
     <div class="uk-width-auto"> <button class="uk-button uk-button-default otp-btn"

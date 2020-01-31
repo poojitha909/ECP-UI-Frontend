@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { SEO } from 'src/app/core/interfaces';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-services-page',
   templateUrl: './services-page.component.html',
   styleUrls: ['./services-page.component.scss']
 })
-export class ServicesPageComponent implements OnInit {
+export class ServicesPageComponent implements OnInit, AfterViewInit {
 
-  constructor(private seoService: SeoService) {
+  constructor(private seoService: SeoService, private titleService: Title) {
 
     // Generate meta tag 
     const config: SEO = {
@@ -21,10 +22,15 @@ export class ServicesPageComponent implements OnInit {
     }
 
     this.seoService.generateTags(config);
+    this.titleService.setTitle("Services - Elderly Care Platform");
+
   }
 
   ngOnInit() {
 
   }
 
+  ngAfterViewInit() {
+    document.getElementById("serviceHeader").focus();
+  }
 }

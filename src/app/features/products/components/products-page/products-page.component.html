@@ -1,6 +1,6 @@
 <div class="uk-container search-container m-t-40">
   <!-- Search Form START -->
-  <div class="search-form">
+  <div class="search-form" role=“search”>
     <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
       <div class="uk-width-expand">
         <form class="uk-search uk-search-default" autocomplete='off'>
@@ -61,9 +61,9 @@
 
 <div class="uk-container">
   <div class="home-banner landing-bg">
-    <div class="uk-child-width-1-2@s uk-padding" uk-grid>
+    <div class="uk-child-width-1-2@s uk-padding" role="banner" uk-grid>
       <div class="uk-text-left@s">
-        <h1>Shop Easy</h1>
+        <h1 tabindex=0 id="productHeader">Shop Easy</h1>
         <p class="font-regular">
           Products & solutions crop up everyday to confuse you even more and so we are here to simplify things for you.
           We have include every single best option available for you. Just pick what you want based on your need and get
@@ -75,8 +75,8 @@
 </div>
 
 <!-- Product Section Start -->
-<div class="uk-container search-container dark m-seprator">
-  <div class="quote-line uk-margin-remove" uk-grid>
+<div class="uk-container search-container dark m-seprator" id="Featured-products">
+  <div class="quote-line uk-margin-remove" role='region' aria-labelledby="Featured-products"  uk-grid>
     <div class="uk-width-1-1@s uk-width-2-3@m uk-padding-remove uk-flex uk-flex-middle">
       <div class="uk-flex uk-flex-middle">
         <h2 class="title font-regular-24 font-weight-600">

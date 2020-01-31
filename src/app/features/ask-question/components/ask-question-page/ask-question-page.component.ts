@@ -1,17 +1,18 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 import { AskQuestionService } from '../../services/ask-question.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageHelperService } from 'src/app/core/services/storage-helper.service';
 import { SEO } from 'src/app/core/interfaces';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { HomeService } from 'src/app/features/home/home.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-ask-question-page',
   templateUrl: './ask-question-page.component.html',
   styleUrls: ['./ask-question-page.component.scss']
 })
-export class AskQuestionPageComponent implements OnInit, OnDestroy {
+export class AskQuestionPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   showReset: boolean;
   showResult: boolean;
@@ -34,7 +35,8 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
       private store: StorageHelperService,
       private askQuestionService: AskQuestionService,
       private homeService: HomeService,
-      private seoService: SeoService
+      private seoService: SeoService,
+      private titleService: Title
     ) {
     // Generate meta tag 
     const config: SEO = {
@@ -46,13 +48,18 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
     }
 
     this.seoService.generateTags(config);
-
+    this.titleService.setTitle("Ask Questions - Elderly Care Platform");
   }
 
   ngOnInit() {
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
+  }
+
+  ngAfterViewInit(){
+    document.getElementById("expertHeader").focus();
+
   }
 
   ngOnDestroy() {

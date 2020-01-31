@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/core';
 import { User, SocialAccount, UserIdType } from 'src/app/core/interfaces';
 import { UserService } from '../../services/user.service';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, AfterViewInit {
   isOtpGenerated: boolean;
   isLoading: boolean;
   verifiedString: string;
@@ -23,8 +24,11 @@ export class SignupComponent implements OnInit {
     private activeroute: ActivatedRoute,
     private auth: AuthService,
     private userService: UserService,
-    private router: Router) {
+    private router: Router,
+    private titleService: Title
+  ) {
     this.user = this.auth.user;
+    this.titleService.setTitle("User Signin - Elderly Care Platform");
   }
 
   ngOnInit() {
@@ -48,6 +52,10 @@ export class SignupComponent implements OnInit {
       });
     }
 
+  }
+
+  ngAfterViewInit() {
+    document.getElementById("signin-header").focus();
   }
 
 

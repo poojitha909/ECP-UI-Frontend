@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './signin-types-view.component.html',
   styleUrls: ['./signin-types-view.component.scss']
 })
-export class SigninTypesViewComponent implements OnInit {
+export class SigninTypesViewComponent implements OnInit, OnChanges {
   @Input() otpGenerated: boolean;
   @Output() requestForOtp = new EventEmitter();
   @Output() verfiyOtp = new EventEmitter();
@@ -25,6 +25,16 @@ export class SigninTypesViewComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.router.url);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes && changes.otpGenerated.currentValue) {
+      console.log(changes.otpGenerated.currentValue);
+      setTimeout(() => {
+        document.getElementById("opttxt").focus();
+      }, 500);
+    }
+
   }
 
   //Signin with facebook

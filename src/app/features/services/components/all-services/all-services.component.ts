@@ -138,7 +138,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
           this.selectedCategoryType = undefined;
         }
       });
-
+      document.getElementById("allserviceHeader").focus();
   }
 
   getAllService() {

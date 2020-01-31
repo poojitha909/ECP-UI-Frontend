@@ -90,17 +90,22 @@
 
     <nav class="uk-container ecp-navbar uk-visible@s">
       <ul class="uk-child-width-expand" uk-tab>
-        <li #homeLink routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Know
+        <li #homeLink routerLinkActive="uk-active" #link1="routerLinkActive" [routerLinkActiveOptions]="{exact: true}">
+          <a [attr.aria-current]="link1.isActive" routerLink="/">Know
             us</a>
         </li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/community">Let’s
+        <li routerLinkActive="uk-active" #link2="routerLinkActive" [routerLinkActiveOptions]="{exact: false}"><a
+            [attr.aria-current]="link2.isActive" routerLink="/community">Let’s
             Talk</a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">Ask
+        <li routerLinkActive="uk-active" #link3="routerLinkActive" [routerLinkActiveOptions]="{exact: false}"><a
+            [attr.aria-current]="link3.isActive" routerLink="/ask-question">Ask
             our
             Expert</a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/products">Shop
+        <li routerLinkActive="uk-active" #link4="routerLinkActive" [routerLinkActiveOptions]="{exact: false}"><a
+            [attr.aria-current]="link4.isActive" routerLink="/products">Shop
             Easy</a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/services">At your
+        <li routerLinkActive="uk-active" #link5="routerLinkActive" [routerLinkActiveOptions]="{exact: false}"><a
+            [attr.aria-current]="link5.isActive" routerLink="/services">At your
             service</a></li>
         <!-- <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
             routerLink="/articles">Articles</a></li> -->

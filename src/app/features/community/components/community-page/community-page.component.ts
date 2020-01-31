@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 import { EventService } from '../../services/events.service';
 import { DiscussionService } from '../../services/discussion.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -6,13 +6,14 @@ import { MenuService } from '../../services/menu.service';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { SEO } from 'src/app/core/interfaces';
 import { HomeService } from 'src/app/features/home/home.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-community-page',
   templateUrl: './community-page.component.html',
   styleUrls: ['./community-page.component.scss']
 })
-export class CommunityPageComponent implements OnInit, OnDestroy {
+export class CommunityPageComponent implements OnInit, OnDestroy,AfterViewInit {
 
   showReset: boolean;
   showResult: boolean;
@@ -42,7 +43,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
 
   constructor(private eventService: EventService, private discussionService: DiscussionService,
     private menuService: MenuService, private router: Router, private homeService: HomeService,
-    private seoService: SeoService, private route: ActivatedRoute) {
+    private seoService: SeoService, private route: ActivatedRoute,private titleService:Title) {
 
     // Generate meta tag 
     const config: SEO = {
@@ -54,6 +55,9 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     }
 
     this.seoService.generateTags(config);
+
+    this.titleService.setTitle("Community - Elderly Care Platform");
+
   }
 
 
@@ -61,6 +65,10 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
+  }
+
+  ngAfterViewInit(){
+    document.getElementById("communityHeader").focus();
   }
 
   ngOnDestroy() {

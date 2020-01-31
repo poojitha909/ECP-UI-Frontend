@@ -2,7 +2,7 @@
   <!-- Search Container starts -->
   <div class="uk-container search-container m-t-40">
     <!-- Search Form START -->
-    <div class="search-form">
+    <div class="search-form" role=“search”>
       <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
         <div class="uk-width-expand">
           <form class="uk-search uk-search-default" autocomplete='off'>
@@ -95,9 +95,9 @@
 
 
   <div class="home-banner landing-bg">
-    <div class="uk-child-width-1-2@s uk-padding" uk-grid>
+    <div class="uk-child-width-1-2@s uk-padding" role="banner" uk-grid>
       <div class="uk-text-left@s">
-        <h1>Let’s talk!</h1>
+        <h1 tabindex=0 id="communityHeader">Let’s talk!</h1>
         <p class="font-regular">
           Is there something you wish to discuss about? We are here!
           Let’s start a discussion or conversation, exchange views, arrive at a conclusion, or just talk! Read our
@@ -132,8 +132,8 @@
     </div>
   </div>
   <!-- Discussion Section Start -->
-  <div class="uk-container search-container dark">
-    <div class="quote-line uk-margin-remove" uk-grid>
+  <div class="uk-container search-container dark" id="Featured-discussions">
+    <div class="quote-line uk-margin-remove" role='region' aria-labelledby="Featured-discussions" uk-grid>
       <div class="uk-width-1-1 uk-width-2-3@m uk-padding-remove uk-flex uk-flex-middle title-border">
         <div class="uk-flex uk-flex-middle">
           <h2 class="title font-regular-24 font-weight-600 m-0">
@@ -147,7 +147,8 @@
       <div class="uk-width-1-1 uk-width-1-3@m uk-padding-remove uk-flex uk-flex-middle uk-divider-vertical">
         <label class="uk-form-label" for="Showing-Discussions">Showing:</label>
         <div class="uk-form-controls">
-          <select class="uk-select" [(ngModel)]="selDiscussCategory" id="Showing-Discussions" (change)="showDiscussions2()">
+          <select class="uk-select" [(ngModel)]="selDiscussCategory" id="Showing-Discussions"
+            (change)="showDiscussions2()">
             <option value="">Active Discussions</option>
             <option *ngFor="let cat of discussCategoryList | keyvalue" value="{{cat.key}}">{{cat.value.label}}
             </option>
@@ -174,16 +175,16 @@
             </ul>
           </div>
           <div class="uk-hidden@s uk-light">
-            <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
-              uk-slidenav-previous uk-slider-item="previous"></a>
-            <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
-              uk-slidenav-next uk-slider-item="next"></a>
+            <a role='button' class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
+              uk-slidenav-previous uk-slider-item="previous" aria-label="previous discussion cards"></a >
+            <a role='button' class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
+              uk-slidenav-next uk-slider-item="next" aria-label="next discussion cards"></a>
           </div>
           <div class="uk-visible@s">
-            <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
-              uk-slidenav-previous uk-slider-item="previous"></a>
-            <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
-              uk-slidenav-next uk-slider-item="next"></a>
+            <a role='button' class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
+              uk-slidenav-previous uk-slider-item="previous" aria-label="previous discussion cards"></a>
+            <a role='button' class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
+              uk-slidenav-next uk-slider-item="next" aria-label="next discussion cards"></a>
           </div>
         </div>
       </div>
@@ -209,8 +210,8 @@
   <!-- Discussion Section End -->
 
   <!-- Event Section Start -->
-  <div class="uk-container search-container dark m-seprator">
-    <div class="quote-line uk-margin-remove" uk-grid>
+  <div class="uk-container search-container dark m-seprator" id="Featured-Events">
+    <div class="quote-line uk-margin-remove" role='region' aria-labelledby="Featured-Events" uk-grid>
       <div class="uk-width-1-1 uk-width-2-3@m uk-padding-remove uk-flex uk-flex-middle title-border">
         <div class="uk-flex uk-flex-middle">
           <h2 class="title font-regular-24 font-weight-600 m-0">
@@ -250,16 +251,16 @@
             </ul>
           </div>
           <div class="uk-hidden@s">
-            <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
-              uk-slidenav-previous uk-slider-item="previous"></a>
-            <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
-              uk-slidenav-next uk-slider-item="next"></a>
+            <a role='button' class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious"
+              href="#" uk-slidenav-previous uk-slider-item="previous" aria-label="previous event cards"></a>
+            <a role='button' class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next"
+              href="#" uk-slidenav-next uk-slider-item="next" aria-label="next event cards"></a>
           </div>
           <div class="uk-visible@s">
-            <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
-              uk-slidenav-previous uk-slider-item="previous"></a>
-            <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
-              uk-slidenav-next uk-slider-item="next"></a>
+            <a role='button' class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious"
+              href="#" uk-slidenav-previous uk-slider-item="previous" aria-label="previous event cards"></a>
+            <a role='button' class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next"
+              href="#" uk-slidenav-next uk-slider-item="next" aria-label="next event cards"></a>
           </div>
         </div>
       </div>

@@ -139,7 +139,7 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
       this.auth.removeServiceReviewForm();
       UIkit.modal('#review-modal').show();
     }
-
+    document.getElementById("serviceHeader").focus();
   }
 
   get isDBService(): boolean {

@@ -8,7 +8,7 @@
     <li><a routerLink="/services/all">All Services</a></li>
     <li><span> {{ service?.name || service?.basicProfileInfo?.firstName  }}</span></li>
   </ul> -->
-  <h1>
+  <h1 tabindex=0 id="serviceHeader">
     {{ service?.name || service?.basicProfileInfo?.firstName  }}
   </h1>
   <hr class="m-b-30" />

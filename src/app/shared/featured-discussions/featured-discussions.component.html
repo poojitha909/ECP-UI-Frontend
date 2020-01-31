@@ -1,6 +1,6 @@
 <!-- Service Featured START tabs -->
-<div class="featured-tab m-b-30">
-    <div class="title">
+<div class="featured-tab m-b-30" id="Featured-discussions">
+    <div class="title" role='region' aria-labelledby="Featured-discussions">
         <div uk-grid>
             <div class="uk-width-expand@s">
                 <h2 class="font-regular-24 font-weight-600">
@@ -48,10 +48,12 @@
                 </div> -->
 
                 <div>
-                    <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
-                        uk-slidenav-previous uk-slider-item="previous"></a>
-                    <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
-                        uk-slidenav-next uk-slider-item="next"></a>
+                    <a role='button'
+                        class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
+                        uk-slidenav-previous uk-slider-item="previous" aria-label="previous discussion cards"></a>
+                    <a role='button'
+                        class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
+                        uk-slidenav-next uk-slider-item="next" aria-label="next discussion cards"></a>
                 </div>
                 <!-- <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#" uk-slidenav-previous
                     uk-slider-item="previous"></a>

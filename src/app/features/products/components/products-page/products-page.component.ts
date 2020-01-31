@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ProductService } from '../../services/products.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { SEO } from 'src/app/core/interfaces';
 import { HomeService } from 'src/app/features/home/home.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-products-page',
   templateUrl: './products-page.component.html',
   styleUrls: ['./products-page.component.scss']
 })
-export class ProductsPageComponent implements OnInit {
+export class ProductsPageComponent implements OnInit,AfterViewInit {
 
   showReset: boolean;
   showResult: boolean;
@@ -32,7 +33,8 @@ export class ProductsPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService, private router: Router,
-    private homeService: HomeService, private seoService: SeoService
+    private homeService: HomeService, private seoService: SeoService,
+    private titleService:Title
   ) {
     this.productService.selectedCatId = null;
     this.productService.selectedCatname = null;
@@ -47,12 +49,18 @@ export class ProductsPageComponent implements OnInit {
     }
 
     this.seoService.generateTags(config);
+    this.titleService.setTitle("Products - Elderly Care Platform");
+
   }
 
   ngOnInit() {
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
+  }
+
+  ngAfterViewInit(){
+    document.getElementById("productHeader").focus();
   }
 
   ngOnDestroy() {

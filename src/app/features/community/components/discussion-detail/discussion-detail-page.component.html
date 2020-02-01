@@ -54,7 +54,7 @@
             <div class="uk-width-2-3@m">
                 <div class="bg-white category-box">
                     <h4 class="publish-on">Published On: {{discussion.createdAt | date:'dd MMM yyyy' }} at {{discussion?.createdAt | date:'shortTime' }}</h4>
-                    <h1 class="heading">{{discussion.title}}</h1>
+                    <h1 id="discussionTitleHeader" tabindex=0 class="heading">{{discussion.title}}</h1>
                     <hr/>
                     <h4 class="heading2">Description</h4>
                     <div class="description" [innerHTML]="discussion.text">

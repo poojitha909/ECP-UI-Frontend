@@ -1,4 +1,4 @@
-<div [routerLink]="['/ask-question/add']" [queryParams]="{category: expert.experties[0].id, answeredBy: expert.id}"
+<div [routerLink]="['/ask-question/add']" tabindex=-1 [queryParams]="{category: expert.experties[0].id, answeredBy: expert.id}"
   class="cursor uk-card uk-card-hover uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
 
   <div class="uk-card-media-left uk-width-1-4@m uk-width-1-3@s p-16">
@@ -8,7 +8,7 @@
   </div>
 
   <div class="uk-card-body uk-width-expand p-16">
-    <h3 class="font-regular fname">{{expert.basicProfileInfo.firstName}}</h3>
+    <h3 tabindex=0 class="font-regular fname">{{expert.basicProfileInfo.firstName}}</h3>
     <p class="expertdetial">
       {{expert.age ? expert.age + " Years" : "" }}
     </p>

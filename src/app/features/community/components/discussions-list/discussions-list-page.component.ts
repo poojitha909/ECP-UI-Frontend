@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DiscussionService } from '../../services/discussion.service';
 import { MenuService } from '../../services/menu.service';
@@ -12,7 +12,7 @@ import { HomeService } from 'src/app/features/home/home.service';
   templateUrl: './discussions-list-page.component.html',
   styleUrls: ['./discussions-list-page.component.scss']
 })
-export class DiscussionsListPageComponent implements OnInit, OnDestroy {
+export class DiscussionsListPageComponent implements OnInit, AfterViewInit, OnDestroy {
   breadcrumbLinks: Breadcrumb[] = [
     {
       text: 'Home',
@@ -64,6 +64,11 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
       this.initiate();
     });
   }
+
+  ngAfterViewInit() {
+    document.getElementById("discussionListHeader").focus();
+  }
+
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
   }
@@ -198,7 +203,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  setSearchTxt(value: string){
+  setSearchTxt(value: string) {
     this.searchParams.searchTxt = value;
     this.homeService.homeSearchtxt = value;
   }

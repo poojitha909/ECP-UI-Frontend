@@ -1,11 +1,11 @@
-<div [routerLink]="['/products', product.id]"
+<div tabindex=-1 [routerLink]="['/products', product.id]"
     class="uk-card uk-card-hover uk-card-default product-content cursor-pointer uk-height-1-1">
     <div class="p-8">
         <div class="verified">
             <img class="h-150 w-100" [src]="product.images[0]" alt="No Image Found" />
             <!-- <button class="perOff">35% OFF</button> -->
         </div>
-        <h3 class="font-regular font-weight-600 m-b-5">{{product?.name}} </h3>
+        <h3 tabindex=0 class="font-regular font-weight-600 m-b-5">{{product?.name}} </h3>
 
         <ngb-rating [rate]="getDbServiceRating(product.rating)" [readonly]="true" [max]="5">
             <ng-template let-fill="fill" let-index="index">

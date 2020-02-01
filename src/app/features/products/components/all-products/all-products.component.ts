@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/products.service';
 import { Breadcrumb, SEO } from 'src/app/core/interfaces';
@@ -11,7 +11,7 @@ import { HomeService } from 'src/app/features/home/home.service';
   templateUrl: './all-products.component.html',
   styleUrls: ['./all-products.component.scss']
 })
-export class AllProductsComponent implements OnInit, OnDestroy {
+export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   breadcrumbLinks: Breadcrumb[] = [
     {
@@ -40,7 +40,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   totalRecords: number;
   slideConfig = { "slidesToShow": 3, "slidesToScroll": 1 };
   constructor(private route: ActivatedRoute, private router: Router,
-    private productService: ProductService, public sanitizer: DomSanitizer, 
+    private productService: ProductService, public sanitizer: DomSanitizer,
     private homeService: HomeService, public seoService: SeoService) {
     // Generate meta tag 
     const config: SEO = {
@@ -60,7 +60,11 @@ export class AllProductsComponent implements OnInit, OnDestroy {
       this.initiate();
     });
   }
-  
+
+  ngAfterViewInit() {
+    document.getElementById("allproductHeader").focus();
+  }
+
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
   }
@@ -149,7 +153,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     }
   }
 
-  setSearchTxt(value: string){
+  setSearchTxt(value: string) {
     this.searchParams.searchTxt = value;
     this.homeService.homeSearchtxt = value;
     this.searchParams.p = 0;
@@ -157,7 +161,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
 
 
   onSearch() {
-    this.router.navigate(['/products/all'], { queryParams: { productCategory: this.searchParams.productCategory, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p} });
+    this.router.navigate(['/products/all'], { queryParams: { productCategory: this.searchParams.productCategory, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
   }
 
 }

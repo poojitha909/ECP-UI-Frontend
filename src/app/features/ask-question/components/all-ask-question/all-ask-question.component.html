@@ -2,7 +2,7 @@
   <div class="breadcrumbs">
     <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
   </div>
-  <h1 class="uk-h2">All Experts</h1>
+  <h1 id="allexpertHeader" tabindex=0 class="uk-h2">All Experts</h1>
   <ul class="m-t-20 m-b-30" id="questionstab" uk-tab>
     <li (click)="onTopTabChange(0)"><a href="#">All Experts ({{totalRecords}})</a></li>
     <li (click)="onTopTabChange(1)"><a href="#">My Questions ({{totalRecordsQues}})</a></li>

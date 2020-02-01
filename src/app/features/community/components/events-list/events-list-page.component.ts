@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../services/events.service';
 import { Breadcrumb, SEO } from 'src/app/core/interfaces';
@@ -13,7 +13,7 @@ declare var UIkit;
   templateUrl: './events-list-page.component.html',
   styleUrls: ['./events-list-page.component.scss']
 })
-export class EventsListPageComponent implements OnInit, OnDestroy {
+export class EventsListPageComponent implements OnInit, AfterViewInit, OnDestroy {
   breadcrumbLinks: Breadcrumb[] = [
     {
       text: 'Home',
@@ -68,6 +68,11 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
       this.initiate();
     });
   }
+
+  ngAfterViewInit() {
+    document.getElementById("allEventsHeader").focus();
+  }
+
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
   }
@@ -172,7 +177,7 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
     this.router.navigate(['/community/events'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
   }
 
-  setSearchTxt(value: string){
+  setSearchTxt(value: string) {
     this.searchParams.searchTxt = value;
     this.homeService.homeSearchtxt = value;
     this.searchParams.p = 0;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router";
 import { EventService } from '../../services/events.service';
@@ -13,7 +13,7 @@ import { SeoService } from 'src/app/core/services/seo.service';
   templateUrl: './event-detail-page.component.html',
   styleUrls: ['./event-detail-page.component.scss']
 })
-export class EventDetailPageComponent implements OnInit {
+export class EventDetailPageComponent implements OnInit, AfterViewInit {
 
   breadcrumbLinks: Breadcrumb[] = [
     {
@@ -50,6 +50,11 @@ export class EventDetailPageComponent implements OnInit {
       this.initiate();
     });
   }
+
+  ngAfterViewInit() {
+    document.getElementById("eventHeader").focus();
+  }
+
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
   }

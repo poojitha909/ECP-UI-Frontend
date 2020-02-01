@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AskQuestionService } from '../../services/ask-question.service';
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
@@ -14,7 +14,7 @@ declare var UIkit;
   templateUrl: './all-ask-question.component.html',
   styleUrls: ['./all-ask-question.component.scss']
 })
-export class AllAskQuestionComponent implements OnInit, OnDestroy {
+export class AllAskQuestionComponent implements OnInit, AfterViewInit, OnDestroy {
   breadcrumbLinks: Breadcrumb[] = [
     {
       text: 'Home',
@@ -75,6 +75,10 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
+  }
+
+  ngAfterViewInit() {
+    document.getElementById("allexpertHeader").focus();
   }
 
   ngOnDestroy() {
@@ -146,9 +150,9 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
     this.onSearch()
   }
 
-  changeQuesPage(page: number){
+  changeQuesPage(page: number) {
     this.searchParamsQues.p = page;
-    this.router.navigate(['/ask-question/all'], { queryParams: { category: this.searchParamsQues.askCategory, pageQ: this.searchParamsQues.p, tab:  this.topTabs} });
+    this.router.navigate(['/ask-question/all'], { queryParams: { category: this.searchParamsQues.askCategory, pageQ: this.searchParamsQues.p, tab: this.topTabs } });
   }
 
   clearSelection() {
@@ -187,7 +191,7 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
   }
 
   onSearch() {
-    this.router.navigate(['/ask-question/all'], { queryParams: { category: this.searchParamsQues.askCategory, page: this.searchParams.p, tab:  this.topTabs} });
+    this.router.navigate(['/ask-question/all'], { queryParams: { category: this.searchParamsQues.askCategory, page: this.searchParams.p, tab: this.topTabs } });
   }
 
   onSearchChange(event: any) {
@@ -211,7 +215,7 @@ export class AllAskQuestionComponent implements OnInit, OnDestroy {
     }
   }
 
-  setSearchTxt(value: string){
+  setSearchTxt(value: string) {
     this.searchParams.searchTxt = value;
     this.homeService.homeSearchtxt = value;
     this.searchParams.p = 0;

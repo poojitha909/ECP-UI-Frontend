@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router";
 import { ProductService } from '../../services/products.service';
@@ -15,7 +15,7 @@ declare var UIkit;
   templateUrl: './product-detail-page.component.html',
   styleUrls: ['./product-detail-page.component.scss']
 })
-export class ProductDetailPageComponent implements OnInit {
+export class ProductDetailPageComponent implements OnInit, AfterViewInit {
 
   breadcrumbLinks: Breadcrumb[] = [
     {
@@ -50,7 +50,7 @@ export class ProductDetailPageComponent implements OnInit {
   reviewSuccessMessage: string;
   reviewTitle: string = 'Add';
   detailReview: any;
-  userRating:DBRating;
+  userRating: DBRating;
 
   constructor(
     private router: Router,
@@ -104,6 +104,10 @@ export class ProductDetailPageComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+    document.getElementById("productHeader").focus();
+  }
+
   getProduct() {
     this.productService.getProduct(this.productId).subscribe((response: any) => {
       const data = response.data;
@@ -128,14 +132,14 @@ export class ProductDetailPageComponent implements OnInit {
     this.seoService.generateTags(config);
   }
 
-  redirectToSite(){
+  redirectToSite() {
     window.open(this.product.buyLink);
   }
-  redirectConfirm(){
-    if(this.user){
+  redirectConfirm() {
+    if (this.user) {
       UIkit.modal("#modal-product-leaving").show();
     }
-    else{
+    else {
       this.authService.redirectUrl = "/products/" + this.product.id;
       this.router.navigate(['/user/signin']);
     }
@@ -191,9 +195,9 @@ export class ProductDetailPageComponent implements OnInit {
       });
   }
 
-    /**
-   * Add rating 
-   */
+  /**
+ * Add rating 
+ */
   onRatingSubmit(ratingData: any) {
     ratingData["productId"] = this.productId;
     if (this.auth.isAuthenticate) {

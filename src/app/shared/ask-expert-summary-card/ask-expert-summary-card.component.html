@@ -1,12 +1,12 @@
 <div class="popular-search">
-    <div class="uk-card uk-card-hover uk-card-default p-10 cursor" [routerLink]="['/ask-question/add']"
+    <div tabindex=-1 class="uk-card uk-card-hover uk-card-default p-10 cursor" [routerLink]="['/ask-question/add']"
         [queryParams]="{category: expert.experties[0].id, answeredBy: expert.id}">
         <div class="uk-card-media-top">
             <img class="thumb-100" *ngIf="expert" [imageHandler]
                 [src]="expert.basicProfileInfo?.profileImage?.thumbnailImage" alt="No Image Found">
         </div>
         <div class="uk-card-body p-10">
-            <h3 class="font-regular font-weight-600 uk-text-center m-0">{{expert.basicProfileInfo.firstName}}</h3>
+            <h3 tabindex=0 class="font-regular font-weight-600 uk-text-center m-0">{{expert.basicProfileInfo.firstName}}</h3>
             <p>{{ expert.age ? expert.age : "0" }} Years</p>
             <p>
                 <span class="experties" *ngFor="let ex of expert.experties; let idx = index;">

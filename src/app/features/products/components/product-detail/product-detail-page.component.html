@@ -6,7 +6,7 @@
     <!-- Bread crumbs End -->
     <div class="uk-container">
         <div class="uk-grid uk-grid-large">
-            <h1 class="heading">{{product?.name}}</h1>
+            <h1 id="productHeader" tabindex=0 class="heading">{{product?.name}}</h1>
         </div>
         <hr class="m-b-30" />
         <div class="uk-grid-large" uk-grid>
@@ -42,7 +42,8 @@
 
                 <!-- Submit Rating START-->
                 <div class="rating-box m-t-20 bg-white">
-                    <app-add-rating [userRating]="userRating" ratingOf="product" (submitForm)="onRatingSubmit($event)"></app-add-rating>
+                    <app-add-rating [userRating]="userRating" ratingOf="product" (submitForm)="onRatingSubmit($event)">
+                    </app-add-rating>
                 </div>
                 <!-- Submit Rating END-->
 
@@ -50,15 +51,16 @@
 
                 <div class="m-t-40 category-box bg-white">
                     <div class="m-b-20 uk-visible@s">
-                        <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"
-                          target="_blank"> </a>
+                        <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon"
+                            uk-icon="whatsapp" target="_blank"> </a>
                         <a class="social-link" [href]="whatsappUrl" target="_blank">
-                          Share via
-                          Whatsapp</a>
+                            Share via
+                            Whatsapp</a>
                     </div>
-            
+
                     <div class="m-b-20 uk-hidden@s">
-                        <a [href]="whatsappMobileUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp">
+                        <a [href]="whatsappMobileUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon"
+                            uk-icon="whatsapp">
                         </a>
                         <a class="social-link" [href]="whatsappMobileUrl">
                             Share via
@@ -223,13 +225,15 @@
             <div class="uk-modal-body">
                 <div class="uk-child-width-1-1 uk-grid-small" uk-grid>
                     <div>
-                        <p class="font-regular-15 m-b-10 lable">You will be leaving our page and go to Seniority Page</p>
+                        <p class="font-regular-15 m-b-10 lable">You will be leaving our page and go to Seniority Page
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-transparent uk-modal-close close-btn" type="button">No</button>
-                <button class="uk-button uk-button-primary m-l-5 uk-modal-close close-btn" (click)="redirectToSite()" type="button">Yes</button>
+                <button class="uk-button uk-button-primary m-l-5 uk-modal-close close-btn" (click)="redirectToSite()"
+                    type="button">Yes</button>
             </div>
         </div>
     </div>

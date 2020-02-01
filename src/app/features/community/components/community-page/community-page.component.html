@@ -115,7 +115,7 @@
       <div class="options-card">
         <img src="assets/images/events.png" alt="No Image Found" />
       </div>
-      <div (click)="showAllEvents()" class="quote-line-card cursor-pointer">
+      <div tabindex=0 (click)="showAllEvents()" class="quote-line-card cursor-pointer">
         What’s Happening
         <span class="uk-float-right" uk-icon="chevron-right"></span>
       </div>
@@ -125,12 +125,13 @@
       <div class="options-card">
         <img src="assets/images/discussion.png" alt="No Image Found" />
       </div>
-      <div (click)="showAllDiscussions()" class="quote-line-card cursor-pointer">
+      <div tabindex=0 (click)="showAllDiscussions()" class="quote-line-card cursor-pointer">
         Let’s discuss
         <span class="uk-float-right" uk-icon="chevron-right"></span>
       </div>
     </div>
   </div>
+
   <!-- Discussion Section Start -->
   <div class="uk-container search-container dark" id="Featured-discussions">
     <div class="quote-line uk-margin-remove" role='region' aria-labelledby="Featured-discussions" uk-grid>

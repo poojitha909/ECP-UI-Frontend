@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router"
 import { DiscussionService } from '../../services/discussion.service';
@@ -17,7 +17,7 @@ declare var UIkit;
   templateUrl: './discussion-detail-page.component.html',
   styleUrls: ['./discussion-detail-page.component.scss']
 })
-export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
+export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   breadcrumbLinks: Breadcrumb[];
   discussionId: string;
@@ -50,6 +50,10 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
     this.paramsSubs = this.route.params.subscribe(params => {
       this.initiate();
     });
+  }
+
+  ngAfterViewInit() {
+    document.getElementById("discussionTitleHeader").focus();
   }
 
   ngOnDestroy() {
@@ -175,12 +179,12 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
         if (response[0]) {
           this.categoryName = response[0].displayMenuName;
           let found = 0;
-          for(let br of this.breadcrumbLinks){
-            if(br.queryParams && br.queryParams.category == this.category){
+          for (let br of this.breadcrumbLinks) {
+            if (br.queryParams && br.queryParams.category == this.category) {
               found = 1;
             }
           }
-          if(found == 0){
+          if (found == 0) {
             this.breadcrumbLinks.push({
               text: this.categoryName,
               link: ['/community/discussions'],
@@ -223,9 +227,9 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
       image: `${window.location.origin}/assets/imgaes/landing-img/Community-320.png`,
     }
 
-    if (discussion.userProfile && discussion.userProfile.basicProfileInfo && 
-        discussion.userProfile.basicProfileInfo.profileImage && 
-        discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage) {
+    if (discussion.userProfile && discussion.userProfile.basicProfileInfo &&
+      discussion.userProfile.basicProfileInfo.profileImage &&
+      discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage) {
       config.image = discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage;
     }
 

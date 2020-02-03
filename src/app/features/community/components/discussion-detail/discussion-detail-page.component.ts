@@ -91,7 +91,9 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
       this.parentReplyId = comment.parentReplyId;
       this.replyId = comment.replyId;
       this.store.clear("new-d-comment");
-      UIkit.modal("#reply-modal-discussion").show();
+      setTimeout( () => {
+        UIkit.modal("#reply-modal-discussion").show();
+      },500);
     }
     this.replyForm = this.fb.group({
       commentTxt: [comment ? comment.commentTxt : "", Validators.required]

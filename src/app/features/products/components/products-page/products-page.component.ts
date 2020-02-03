@@ -11,7 +11,7 @@ import { Title } from '@angular/platform-browser';
   templateUrl: './products-page.component.html',
   styleUrls: ['./products-page.component.scss']
 })
-export class ProductsPageComponent implements OnInit,AfterViewInit {
+export class ProductsPageComponent implements OnInit, AfterViewInit {
 
   showReset: boolean;
   showResult: boolean;
@@ -34,7 +34,7 @@ export class ProductsPageComponent implements OnInit,AfterViewInit {
     private route: ActivatedRoute,
     private productService: ProductService, private router: Router,
     private homeService: HomeService, private seoService: SeoService,
-    private titleService:Title
+    private titleService: Title
   ) {
     this.productService.selectedCatId = null;
     this.productService.selectedCatname = null;
@@ -59,7 +59,7 @@ export class ProductsPageComponent implements OnInit,AfterViewInit {
     });
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     document.getElementById("productHeader").focus();
   }
 
@@ -142,7 +142,7 @@ export class ProductsPageComponent implements OnInit,AfterViewInit {
       this.onSearch();
     }
   }
-  
+
   getDbServiceRating(percent): number {
     if (percent == 0) {
       return 0;
@@ -167,12 +167,13 @@ export class ProductsPageComponent implements OnInit,AfterViewInit {
     }
   }
 
-  setSearchTxt(value: string){
+  setSearchTxt(value: string) {
     this.searchParams.searchTxt = value;
     this.homeService.homeSearchtxt = value;
   }
 
   onSearch() {
-      this.showProducts();
+    this.showProducts();
+    document.getElementById("productSearch").focus();
   }
 }

@@ -13,7 +13,7 @@ import { Title } from '@angular/platform-browser';
   templateUrl: './community-page.component.html',
   styleUrls: ['./community-page.component.scss']
 })
-export class CommunityPageComponent implements OnInit, OnDestroy,AfterViewInit {
+export class CommunityPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   showReset: boolean;
   showResult: boolean;
@@ -43,7 +43,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy,AfterViewInit {
 
   constructor(private eventService: EventService, private discussionService: DiscussionService,
     private menuService: MenuService, private router: Router, private homeService: HomeService,
-    private seoService: SeoService, private route: ActivatedRoute,private titleService:Title) {
+    private seoService: SeoService, private route: ActivatedRoute, private titleService: Title) {
 
     // Generate meta tag 
     const config: SEO = {
@@ -67,7 +67,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy,AfterViewInit {
     });
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     document.getElementById("communityHeader").focus();
   }
 
@@ -238,6 +238,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy,AfterViewInit {
   onSearch() {
     this.showEvents();
     this.showDiscussions();
+    document.getElementById("communitySearch").focus();
   }
 
   onTabChange(tab: number) {

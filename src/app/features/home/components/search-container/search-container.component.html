@@ -17,14 +17,14 @@
               </button>
 
             </span>
-            <input class="uk-search-input search-box font-regular sm-pr-150" aria-label="search" aria-autocomplete=”both” [(ngModel)]="searchPageParam.term"
+            <input id="homeSearch" class="uk-search-input search-box font-regular sm-pr-150" aria-label="search" aria-autocomplete=list [(ngModel)]="searchPageParam.term"
               (keyup)="searchEvent($event)" (keydown.enter)="onSearch($event.target.value)" required type="text"
               placeholder="Search here" name="search" autocomplete='off' />
           </form>
-          <ul *ngIf="autocompleteFields.length > 0"
+          <ul aria-live="polite" aria-atomic="true" *ngIf="autocompleteFields.length > 0"
             class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto search-list" appKeyHandler
             (onItemSelected)="onItemSelected($event)">
-            <li class="cursor-pointer" *ngFor="let field of autocompleteFields" (click)="onAutocompleteClick(field)">
+            <li role="option" class="cursor-pointer" *ngFor="let field of autocompleteFields" (click)="onAutocompleteClick(field)">
               {{field.name ||  field.basicProfileInfo.firstName }}
             </li>
           </ul>
@@ -39,7 +39,7 @@
     <!-- Search Form END -->
     <!-- Mobile view card -->
 
-    <div class="m-t-20 uk-hidden@s" *ngIf="!noRecords && !isLoading && showResult">
+    <div aria-live="polite" aria-atomic="true" class="m-t-20 uk-hidden@s" *ngIf="!noRecords && !isLoading && showResult">
       <p class="font-regular-15 font-weight-600">Search Results
         ({{searchData.totalServices + searchData.totalProducts + searchData.totalDiscussions + searchData.totalEvents + searchData.totalExperts}})
       </p>

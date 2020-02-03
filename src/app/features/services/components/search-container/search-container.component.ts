@@ -104,6 +104,7 @@ export class SearchContainerComponent implements OnInit {
       }
       this.selectedValue = "";
       this.autocompleteFields = [];
+      document.getElementById("serviceSearch").focus();
     }
   }
 

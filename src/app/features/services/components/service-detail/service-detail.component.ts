@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceDetail, DBReviews, SEO, Breadcrumb, DBRating } from 'src/app/core/interfaces';
 import { EpcServiceService } from '../../epc-service.service';
@@ -137,7 +137,9 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     if (this.auth.serviceReviewForm) {
       this.reviewForm.patchValue(this.auth.serviceReviewForm);
       this.auth.removeServiceReviewForm();
+      this.onOpenModel();
       UIkit.modal('#review-modal').show();
+      document.getElementById("reviewTitle").focus();
     }
     document.getElementById("serviceHeader").focus();
   }
@@ -290,6 +292,7 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
             this.successMessage = "Service report was sent to site admin successfully."
             setTimeout(() => {
               UIkit.modal('#report-modal').hide();
+              this.onCloseModel();
             }, 5000);
           }
         },
@@ -305,7 +308,9 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
   reportFormToggle() {
     if (this.auth.isAuthenticate) {
+      this.onOpenModel();
       UIkit.modal('#report-modal').show();
+      document.getElementById("reportTitle").focus();
     } else {
       this.auth.redirectUrl = this.router.url;
       this.router.navigateByUrl('/user/signin');
@@ -421,8 +426,9 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     this.reviewSuccessMessage = null;
     this.reviewForm.patchValue(review);
     this.reviewTitle = "Edit";
-    console.log(review);
+    this.onOpenModel();
     UIkit.modal('#review-modal').show();
+    document.getElementById("reviewTitle").focus();
   }
 
   writeNewReview() {
@@ -430,7 +436,9 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
       this.reviewForm.reset();
       this.reviewSuccessMessage = null;
       this.reviewTitle = 'Add';
+      this.onOpenModel();
       UIkit.modal('#review-modal').show();
+      document.getElementById("reviewTitle").focus();
     } else {
       this.auth.redirectUrl = this.router.url;
       this.router.navigateByUrl('/user/signin');
@@ -453,10 +461,31 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     this.getDBserviceReview(this.docId);
   }
 
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscapeKeyHandler(event: KeyboardEvent) {
+    this.onCloseModel();
+  }
+
+  onCloseModel() {
+    document.getElementsByClassName("main-container")[0].removeAttribute("aria-hidden");
+  }
+
+  onOpenModel() {
+    document.getElementsByClassName("main-container")[0].setAttribute("aria-hidden", "true");
+  }
+
+  openContactModel() {
+    this.onOpenModel();
+    UIkit.modal('#contact-sections').show();
+    document.getElementById("contactModalTitle").focus();
+  }
+
+
+
   ngOnDestroy() {
     document.getElementById("review-modal").remove();
     document.getElementById("report-modal").remove();
-    document.getElementById("modal-sections").remove();
+    document.getElementById("contact-sections").remove();
 
   }
 

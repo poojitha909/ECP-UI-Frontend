@@ -11,7 +11,7 @@
                 <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
               </button>
             </span>
-            <input class="uk-search-input font-regular search-box" aria-label="search" [ngClass]="{ 'pr-150':showReset}"
+            <input id="communitySearch" class="uk-search-input font-regular search-box" aria-label="search" [ngClass]="{ 'pr-150':showReset}"
               [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required type="text"
               placeholder="Search here" name="search" autocomplete='off' />
           </form>

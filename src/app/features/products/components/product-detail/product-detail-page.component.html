@@ -52,14 +52,14 @@
                 <div class="m-t-40 category-box bg-white">
                     <div class="m-b-20 uk-visible@s">
                         <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon"
-                            uk-icon="whatsapp" target="_blank"> </a>
+                            uk-icon="whatsapp" aria-label="Share via Whatsapp" target="_blank"> </a>
                         <a class="social-link" [href]="whatsappUrl" target="_blank">
                             Share via
                             Whatsapp</a>
                     </div>
 
                     <div class="m-b-20 uk-hidden@s">
-                        <a [href]="whatsappMobileUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon"
+                        <a [href]="whatsappMobileUrl" aria-label="Share via Whatsapp" class="uk-icon-button  uk-margin-small-right whatapp-icon"
                             uk-icon="whatsapp">
                         </a>
                         <a class="social-link" [href]="whatsappMobileUrl">
@@ -69,7 +69,7 @@
 
                     <div class="m-b-20">
                         <a href="mailto:?subject=Regarding Product '{{product.name}}' from An Elder Spring Initiative by Tata Trusts&body=Product URL: {{currentUrl}}"
-                            class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail"> </a>
+                            class="uk-icon-button  uk-margin-small-right fb-icon" aria-label="Share via Email" uk-icon="mail"> </a>
                         <a class="social-link"
                             href="mailto:?subject=Regarding Product '{{product.name}}' from An Elder Spring Initiative by Tata Trusts&body=Product URL: {{currentUrl}}">
                             Share
@@ -78,7 +78,7 @@
 
                     <div>
                         <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{product.name}}"
-                            class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a>
+                            class="uk-icon-button  uk-margin-small-right email-icon" aria-label="Share via Facebook" uk-icon="facebook"> </a>
                         <a class="social-link"
                             href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{product.name}}">
                             Share via

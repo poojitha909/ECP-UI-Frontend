@@ -147,7 +147,7 @@
       <!-- Socailmedia share box  -->
       <div class="m-t-30 m-b-30 bg-white category-box" *ngIf="showShareBox">
         <div class="m-b-20 uk-visible@s">
-          <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"
+          <a [href]="whatsappUrl" aria-label="Share via Whatsapp" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"
             target="_blank"> </a>
           <a class="social-link" [href]="whatsappUrl" target="_blank">
             Share via
@@ -155,7 +155,7 @@
         </div>
 
         <div class="m-b-20 uk-hidden@s">
-          <a [href]="whatsMobileUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
+          <a [href]="whatsMobileUrl" aria-label="Share via Whatsapp" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"> </a>
           <a class="social-link" [href]="whatsMobileUrl">
             Share via
             Whatsapp</a>
@@ -163,7 +163,7 @@
 
         <div>
 
-          <a [href]="mailUrl" class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail">
+          <a [href]="mailUrl" class="uk-icon-button  uk-margin-small-right fb-icon" aria-label="Share via Email" uk-icon="mail">
           </a> <a class="social-link" [href]="mailUrl">
             Share via
             Email</a>
@@ -199,16 +199,16 @@
                     <fa-icon [icon]="['fas', 'times-circle']" class="m-r-5"></fa-icon><span class="uk-visible@s"> Clear
                       Search</span>
                   </a>
-                  <input class="uk-input" placeholder="Search for Service here" [(ngModel)]="searchPageParam.term"
+                  <input class="uk-input" aria-label="search" aria-autocomplete=list placeholder="Search for Service here" [(ngModel)]="searchPageParam.term"
                     (keyup)="searchEvent($event)" required type="text" autocomplete='off'
                     (keydown.enter)="onSearch($event.target.value)" name="searchtxt" />
                 </div>
               </form>
               <!-- Auto complete list -->
-              <ul *ngIf="autocompleteFields.length > 0"
+              <ul aria-live="polite" aria-atomic="true" *ngIf="autocompleteFields.length > 0"
                 class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto regular-link search-list" appKeyHandler
                 (onItemSelected)="onItemSelected($event)">
-                <li class="cursor-pointer" *ngFor="let field of autocompleteFields" (click)="onSearchClick(field)">
+                <li role="option" class="cursor-pointer" *ngFor="let field of autocompleteFields" (click)="onSearchClick(field)">
                   {{field.name ||  field.basicProfileInfo.firstName }}
                 </li>
               </ul>
@@ -254,7 +254,7 @@
         <app-no-records></app-no-records>
       </div>
       <!-- Service list  -->
-      <div class="m-t-40" *ngIf="services  && pageServices && pageServices.length > 0 && !isLoading">
+      <div class="m-t-40" aria-live="polite" aria-atomic="true" *ngIf="services  && pageServices && pageServices.length > 0 && !isLoading">
         <app-services-list [services]="pageServices"></app-services-list>
       </div>
       <!-- Service list  -->

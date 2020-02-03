@@ -57,7 +57,7 @@ export class AskQuestionPageComponent implements OnInit, AfterViewInit, OnDestro
     });
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     document.getElementById("expertHeader").focus();
 
   }
@@ -163,6 +163,7 @@ export class AskQuestionPageComponent implements OnInit, AfterViewInit, OnDestro
 
   onSearch() {
     this.showExperts();
+    document.getElementById("askSearch").focus();
   }
 
   setSearchTxt(value: string) {

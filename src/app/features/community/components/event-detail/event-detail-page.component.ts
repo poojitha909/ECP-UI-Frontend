@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router";
 import { EventService } from '../../services/events.service';
@@ -7,6 +7,7 @@ import { AuthService } from "../../../../core/auth/services/auth.service";
 import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
+declare var UIkit: any;
 
 @Component({
   selector: 'app-event-detail',
@@ -149,4 +150,26 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscapeKeyHandler(event: KeyboardEvent) {
+    this.onCloseModel();
+  }
+
+  onCloseModel() {
+    document.getElementsByClassName("main-container")[0].removeAttribute("aria-hidden");
+  }
+
+  onOpenModel() {
+    document.getElementsByClassName("main-container")[0].setAttribute("aria-hidden", "true");
+  }
+
+  openContactModel() {
+    this.onOpenModel();
+    UIkit.modal('#modal-sections-events').show();
+    document.getElementById("eventContactitle").focus();
+  }
+
+
+
 }

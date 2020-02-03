@@ -91,6 +91,7 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
       this.parentReplyId = comment.parentReplyId;
       this.replyId = comment.replyId;
       this.store.clear("new-d-comment");
+      UIkit.modal("#reply-modal-discussion").show();
     }
     this.replyForm = this.fb.group({
       commentTxt: [comment ? comment.commentTxt : "", Validators.required]
@@ -99,10 +100,7 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
   }
 
   addComment() {
-    
-    
     let comment = { ...this.replyForm.value };
-    
     if (!this.user) {
       this.store.store("new-d-comment",
         JSON.stringify({

@@ -13,9 +13,9 @@
                         <small>Showing</small>
                     </div>
                     <div class="uk-width-expand">
-                        <select class="uk-select">
-                            <option>Popular products</option>
-                            <!-- <option>Past event</option> -->
+                        <select class="uk-select" id="product-category" [(ngModel)]="searchParams.productCategory" (change)="showProducts()">
+                            <option value="">Popular Products</option>
+                            <option *ngFor="let cat of catsList" value="{{cat.id}}">{{cat.name}}</option>
                         </select>
                     </div>
                 </div>
@@ -24,39 +24,29 @@
     </div>
     <div class="content">
         <!-- Featured Service card  -->
-        <div uk-slider *ngIf="products.length > 0">
+        <div uk-slider *ngIf="productsList.length > 0">
             <div class="uk-position-relative">
                 <div class="uk-slider-container">
                     <!-- Product Card -->
                     <ul class="uk-slider-items uk-grid-match uk-child-width-1-3@m uk-grid">
-                        <li *ngFor="let product of products">
+                        <li *ngFor="let product of productsList">
                             <app-product-search-card [product]="product"></app-product-search-card>
                         </li>
+                        <li>
+                            <div class="uk-flex uk-flex-middle bg-white" [routerLink]="['/products/all']">
+                              <div class="see-all-card">
+                                See all products
+                              </div>
+                            </div>
+                        </li>
                     </ul>
-                    <!-- <a class="uk-position-center-left-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
-                uk-slider-item="previous"></a>
-              <a class="uk-position-center-left-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
-                uk-slider-item="next"></a> -->
                 </div>
-                <!-- <div class="uk-hidden@s uk-light">
-                    <a class="uk-position-center-left uk-position-small button-slidenav" href="#" uk-slidenav-previous
-                        uk-slider-item="previous"></a>
-                    <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#" uk-slidenav-next
-                        uk-slider-item="next"></a>
-                </div> -->
-
                 <div>
                     <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
                         uk-slidenav-previous uk-slider-item="previous"></a>
                     <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
                         uk-slidenav-next uk-slider-item="next"></a>
                 </div>
-                <!-- <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#" uk-slidenav-previous
-                uk-slider-item="previous"></a>
-              <a class="uk-position-center-right uk-position-small  button-slidenav" href="#" uk-slidenav-next
-                uk-slider-item="next"></a> -->
-                <!-- <div class="uk-margin"></div> -->
-
             </div>
         </div>
 

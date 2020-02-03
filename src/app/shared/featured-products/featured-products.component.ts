@@ -10,20 +10,39 @@ export class FeaturedProductsComponent implements OnInit {
   searchParams = {
     p: 0,
     s: 6,
+    searchTxt: '',
+    productCategory: ''
   };
-  products: any[] = [];
+  productsList: any[];
+  productsTotal: number;
+  catsList: any[];
   constructor(private productService: ProductService) { }
 
   ngOnInit() {
-    this.getProducts();
+    this.initiate();
   }
 
-  getProducts() {
-    this.productService.searchProducts(this.searchParams).subscribe((response: any) => {
+  initiate(){
+    this.productService.getCategoryList().subscribe((response: any) => {
       const data = response.data;
+      this.catsList = [];
       if (data.content) {
-        this.products = data.content;
+        this.catsList = data.content;
       }
+      this.showProducts();
+    });
+  }
+
+  showProducts() {
+    let searchParams = JSON.parse(JSON.stringify(this.searchParams));
+    searchParams.searchTxt = "";
+    this.productService.searchProducts(searchParams).subscribe((response: any) => {
+      const data = response.data;
+      this.productsList = [];
+      if (data.content) {
+        this.productsList = data.content;
+      }
+      this.productsTotal = data.total;
     });
   }
 

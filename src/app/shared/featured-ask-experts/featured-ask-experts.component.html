@@ -14,9 +14,9 @@
                         <small>Showing</small>
                     </div>
                     <div class="uk-width-expand">
-                        <select class="uk-select">
-                            <option>Latest experts</option>
-                            <!-- <option>Past event</option> -->
+                        <select class="uk-select" [(ngModel)]="searchParams.experties" id="Showing-Advisors" (change)="showExperts()">
+                            <option value="">Select Category</option>
+                            <option *ngFor="let cat of catsList" value="{{cat.id}}">{{cat.name}}</option>
                         </select>
                     </div>
                 </div>
@@ -31,34 +31,23 @@
 
                     <ul class="uk-slider-items uk-grid-match uk-child-width-1-3@m uk-grid">
                         <li *ngFor="let expert of experts">
-                            <!-- Expert card -->
                             <app-ask-expert-summary-card [expert]="expert"></app-ask-expert-summary-card>
                         </li>
+                        <li>
+                            <div class="uk-flex uk-flex-middle bg-white" [routerLink]="['/ask-question/all']">
+                              <div class="see-all-card">
+                                See all experts
+                              </div>
+                            </div>
+                        </li>
                     </ul>
-                    <!-- <a class="uk-position-center-left-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
-                uk-slider-item="previous"></a>
-              <a class="uk-position-center-left-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
-                uk-slider-item="next"></a> -->
                 </div>
-                <!-- <div class="uk-hidden@s uk-light">
-                    <a class="uk-position-center-left uk-position-small button-slidenav" href="#" uk-slidenav-previous
-                        uk-slider-item="previous"></a>
-                    <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#" uk-slidenav-next
-                        uk-slider-item="next"></a>
-                </div> -->
-
                 <div>
                     <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
                         uk-slidenav-previous uk-slider-item="previous"></a>
                     <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
                         uk-slidenav-next uk-slider-item="next"></a>
                 </div>
-                <!-- <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#" uk-slidenav-previous
-                uk-slider-item="previous"></a>
-              <a class="uk-position-center-right uk-position-small  button-slidenav" href="#" uk-slidenav-next
-                uk-slider-item="next"></a> -->
-                <!-- <div class="uk-margin"></div> -->
-
             </div>
         </div>
 

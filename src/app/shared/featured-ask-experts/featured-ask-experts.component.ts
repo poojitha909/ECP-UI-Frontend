@@ -14,16 +14,30 @@ export class FeaturedAskExpertsComponent implements OnInit {
     searchTxt: "",
     experties: ""
   }
+  catsList: any[];
   experts: any[] = [];
 
   constructor(private askQuestionService: AskQuestionService) { }
 
   ngOnInit() {
+    this.initiate();
+  }
+
+  initiate(){
+    this.askQuestionService.getCategoryList().subscribe((response: any) => {
+      const data = response.data;
+      this.catsList = [];
+      if (data.content) {
+        this.catsList = data.content;
+      }
+    });
     this.showExperts();
   }
 
   showExperts() {
-    this.askQuestionService.experts(this.searchParams).subscribe((response: any) => {
+    let searchParams = JSON.parse(JSON.stringify(this.searchParams));
+    searchParams.searchTxt = "";
+    this.askQuestionService.experts(searchParams).subscribe((response: any) => {
       const data = response.data;
       this.experts = [];
       if (data.content) {

@@ -70,7 +70,7 @@ export class UserService {
         userName: user.basicProfileInfo.firstName
       }
       return this.changeUserName(userData).pipe(
-        switchMap(() => this.http.put<any>(`${ApiConstants.USER_PROFILE}/${this.auth.user.id}`, user).pipe(
+        switchMap(() => this.http.put<any>(`${ApiConstants.USER_PROFILE}/${user.userId}`, user).pipe(
           map
             ((response) => {
               return response.data;
@@ -78,7 +78,7 @@ export class UserService {
         ))
       )
     } else {
-      return this.http.put<any>(`${ApiConstants.USER_PROFILE}/${this.auth.user.id}`, user).pipe(
+      return this.http.put<any>(`${ApiConstants.USER_PROFILE}/${user.userId}`, user).pipe(
         map
           ((response) => {
             return response.data;

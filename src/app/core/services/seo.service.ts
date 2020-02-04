@@ -3,6 +3,7 @@ import { Meta } from '@angular/platform-browser';
 import { SEO } from '../interfaces';
 import { DOCUMENT } from '@angular/common';
 import { environment } from 'src/environments/environment';
+import { Title }     from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class SeoService {
 
   constructor(
     private meta: Meta,
+    private titleService: Title,
     @Inject(DOCUMENT) private dom
   ) { }
 
@@ -30,6 +32,8 @@ export class SeoService {
     this.meta.updateTag({ name: 'description', content: config.description });
     this.meta.updateTag({ name: 'image', content: config.image })
     this.meta.updateTag({ name: 'author', content: config.author });
+    this.meta.updateTag({ name: 'title', content: config.title });
+    this.titleService.setTitle( config.title );
 
     this.meta.updateTag({ name: 'twitter:card', content: 'summary' });
     this.meta.updateTag({ name: 'twitter:site', content: 'An Elder Spring Initiative by Tata Trusts' });

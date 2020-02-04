@@ -37,7 +37,7 @@ export class ProductsPageComponent implements OnInit {
 
     // Generate meta tag 
     const config: SEO = {
-      title: `An Elder Spring Initiative by Tata Trusts Products`,
+      title: `Shop Easy - An Elder Spring Initiative by Tata Trusts Products`,
       keywords: 'products,services,events,dscussions',
       description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
       author: `An Elder Spring Initiative by Tata Trusts`,

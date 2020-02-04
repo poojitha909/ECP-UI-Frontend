@@ -36,13 +36,14 @@
           <p *ngIf="isDBService && service?.systemTags.length > 0" class="m-t-0">
             {{service?.systemTags[0].name}}</p>
 
-          <button class="uk-button uk-button-default"  aria-label="Service contact detail in popup" (click)="openContactModel()">Contact Service
+          <button class="uk-button uk-button-default" id="btnContactProvider"
+            aria-label="Service contact detail in popup" (click)="openContactModel($event.target)">Contact Service
             Provider</button>
 
 
 
           <div class="m-t-10 m-b-20">
-            <a (click)="reportFormToggle()">
+            <a href="javascript:void(0)" id="reportFormLink" (click)="reportFormToggle($event.target)">
               <fa-icon [icon]="['far', 'flag']" class="m-r-5"></fa-icon>
               {{ auth.isAuthenticate ? 'Report service provider': 'Signin to Report service provider'}}
             </a>
@@ -227,7 +228,8 @@
                 </div>
                 <div class="uk-width-auto">
                   <button class="uk-button uk-button-transparent review-btn-transparent"
-                    (click)="writeNewReview()">{{  auth.isAuthenticate ? 'Write Review': 'Signin to Review'  }}</button>
+                    (click)="writeNewReview($event.target)"
+                    id="btnWriteReview">{{  auth.isAuthenticate ? 'Write Review': 'Signin to Review'  }}</button>
                 </div>
               </div>
 
@@ -399,7 +401,8 @@
 <div id="contact-sections" role="dialog" aria-labelledby="contactModalTitle" aria-modal="true"
   aria-describedby="contactBody" class="uk-modal-container" uk-modal="bg-close:false;container:false;">
   <div class="uk-modal-dialog">
-    <button class="uk-modal-close-default" aria-label="Close popup" type="button" uk-close></button>
+    <button class="uk-modal-close-default" aria-label="Close popup" type="button" (click)="onCloseModel()"
+      uk-close></button>
     <div class="uk-modal-header">
       <h3 id="contactModalTitle" tabindex=0 class="uk-modal-title">Contact Details</h3>
     </div>
@@ -445,7 +448,7 @@
       </div>
     </div>
     <div class="uk-modal-footer uk-text-right review-form">
-      <button class="uk-button uk-button-default uk-modal-close" (click)="onCloseModel()" type="button">Close</button>
+      <button class="uk-button uk-button-default uk-modal-close" (click)="onCloseModel();" type="button">Close</button>
     </div>
   </div>
 </div>
@@ -455,12 +458,12 @@
 <!-- Write Review Form START-->
 <!-- This is review modal -->
 <div id="review-modal" role="dialog" aria-labelledby="reviewTitle" aria-modal="true" aria-describedby="reviewForm"
-uk-modal="bg-close:false;container:false;">
+  uk-modal="bg-close:false;container:false;">
   <div class="uk-modal-dialog uk-modal-body">
     <h4 id="reviewTitle" tabindex=0 class="font-regular-24 font-weight-600">{{reviewTitle}} Review</h4>
     <hr />
     <!-- Success box START-->
-    <div *ngIf="reviewSuccessMessage" class="uk-alert-success" uk-alert>
+    <div aria-live="polite" aria-atomic="true"  *ngIf="reviewSuccessMessage" class="uk-alert-success" uk-alert>
       <p>{{ reviewSuccessMessage }}</p>
     </div>
     <!-- Success box END-->
@@ -504,7 +507,8 @@ uk-modal="bg-close:false;container:false;">
       </div>
 
       <div class="uk-text-right">
-        <button class="uk-button uk-button-transparent uk-modal-close" (click)="onCloseModel()" type="button">Cancel</button>
+        <button class="uk-button uk-button-transparent uk-modal-close" (click)="onCloseModel()"
+          type="button">Cancel</button>
         <button class="uk-button uk-button-default m-l-5 uk-modal-close" (click)="onReviewSubmit()" type="button"
           [disabled]="reviewForm.invalid">{{ auth.isAuthenticate ? 'Post Review': 'Signin to Review'}}</button>
       </div>
@@ -517,11 +521,11 @@ uk-modal="bg-close:false;container:false;">
 
 <!-- This is the modal -->
 <div id="report-modal" role="dialog" aria-labelledby="reportTitle" aria-modal="true" aria-describedby="reportForm"
-uk-modal="bg-close:false;container:false;">
+  uk-modal="bg-close:false;container:false;">
   <div class="uk-modal-dialog uk-modal-body">
     <h3 id="reportTitle" tabindex=0 class="uk-modal-title">Report</h3>
     <!-- Success box START-->
-    <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
+    <div aria-live="polite" aria-atomic="true" *ngIf="successMessage" class="uk-alert-success" uk-alert>
       <p>{{ successMessage }}</p>
     </div>
     <!-- Success box END-->
@@ -550,7 +554,8 @@ uk-modal="bg-close:false;container:false;">
       </div>
 
       <p class="uk-text-right">
-        <button class="uk-button uk-button-transparent uk-modal-close" (click)="onCloseModel()" type="button">Cancel</button>
+        <button class="uk-button uk-button-transparent uk-modal-close" (click)="onCloseModel()"
+          type="button">Cancel</button>
         <button class="m-l-10 uk-button uk-button-default" type="submit" [disabled]="reportForm.invalid">Submit</button>
       </p>
     </form>

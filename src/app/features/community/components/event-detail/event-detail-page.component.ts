@@ -40,6 +40,7 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
   currentUrl: string;
   whatsappUrl;
   whatsappMobileUrl;
+  currentModelLink:string;
 
   constructor(private router: Router, private route: ActivatedRoute,
     private eventService: EventService, private store: StorageHelperService,
@@ -158,16 +159,18 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
 
   onCloseModel() {
     document.getElementsByClassName("main-container")[0].removeAttribute("aria-hidden");
+    document.getElementById(this.currentModelLink).focus();
   }
 
   onOpenModel() {
     document.getElementsByClassName("main-container")[0].setAttribute("aria-hidden", "true");
   }
 
-  openContactModel() {
+  openContactModel(element:any) {
     this.onOpenModel();
     UIkit.modal('#modal-sections-events').show();
     document.getElementById("eventContactitle").focus();
+    this.currentModelLink = element.id;
   }
 
 

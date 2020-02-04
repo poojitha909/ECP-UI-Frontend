@@ -11,8 +11,8 @@
                     <h3>{{event.organiser}}</h3>
                     <p>Organiser</p>
                     <div>
-                        <button class="uk-button uk-button-default cont-org" aria-label="event contact detail in popup"
-                            (click)="openContactModel()">
+                        <button class="uk-button uk-button-default cont-org" id="btnContactOrganiser"
+                            aria-label="event contact detail in popup" (click)="openContactModel($event.target)">
                             Contact
                             Organiser</button>
                     </div>
@@ -156,7 +156,8 @@
         <div id="modal-sections-events" role="dialog" aria-labelledby="eventContactitle" aria-modal="true"
             aria-describedby="contactDetails" class="uk-modal-container" uk-modal="bg-close:false;container:false;">
             <div class="uk-modal-dialog">
-                <button class="uk-modal-close-default" aria-label="Close popup" type="button" (click)="onCloseModel()" uk-close></button>
+                <button class="uk-modal-close-default" aria-label="Close popup" type="button" (click)="onCloseModel()"
+                    uk-close></button>
                 <div class="uk-modal-header">
                     <h2 id="eventContactitle" tabindex=0 class="uk-modal-title">Contact Details</h2>
                 </div>

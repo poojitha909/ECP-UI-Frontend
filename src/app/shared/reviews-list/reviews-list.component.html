@@ -55,7 +55,7 @@
           <fa-icon [icon]="['far', 'thumbs-down']" class="m-r-5 font-22"></fa-icon>
         </a> {{ review.unLikeCount ? review.unLikeCount.length : '0' }} -->
         <ng-container *ngIf="userId == review.userId">
-          <a class="font-regular uk-text-primary" (click)="editReview(review)">
+          <a class="font-regular uk-text-primary" [attr.id]="review.id" href="javascript:void(0)" (click)="editReview(review,$event.target)">
             Edit
           </a>
           <!-- <a class="font-regular uk-text-danger m-l-5" href="#delete-modal"

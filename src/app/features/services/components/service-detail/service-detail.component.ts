@@ -32,6 +32,7 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   dbReview: DBReviews[] = [];
   reviewForm: FormGroup;
   reportForm: FormGroup;
+  currentModelLink: string;
   // ratingForm: FormGroup;
   successMessage: string;
   reviewSuccessMessage: string;
@@ -306,11 +307,12 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     }
   }
 
-  reportFormToggle() {
+  reportFormToggle(element: any) {
     if (this.auth.isAuthenticate) {
       this.onOpenModel();
       UIkit.modal('#report-modal').show();
       document.getElementById("reportTitle").focus();
+      this.currentModelLink = element.id;
     } else {
       this.auth.redirectUrl = this.router.url;
       this.router.navigateByUrl('/user/signin');
@@ -422,16 +424,17 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
 
 
-  editReview(review: DBReviews) {
+  editReview(editData: any) {
     this.reviewSuccessMessage = null;
-    this.reviewForm.patchValue(review);
+    this.reviewForm.patchValue(editData.review);
     this.reviewTitle = "Edit";
     this.onOpenModel();
     UIkit.modal('#review-modal').show();
     document.getElementById("reviewTitle").focus();
+    this.currentModelLink = editData.elementId;
   }
 
-  writeNewReview() {
+  writeNewReview(element: any) {
     if (this.auth.isAuthenticate) {
       this.reviewForm.reset();
       this.reviewSuccessMessage = null;
@@ -439,6 +442,7 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
       this.onOpenModel();
       UIkit.modal('#review-modal').show();
       document.getElementById("reviewTitle").focus();
+      this.currentModelLink = element.id;
     } else {
       this.auth.redirectUrl = this.router.url;
       this.router.navigateByUrl('/user/signin');
@@ -468,14 +472,16 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
   onCloseModel() {
     document.getElementsByClassName("main-container")[0].removeAttribute("aria-hidden");
+    document.getElementById(this.currentModelLink).focus();
   }
 
   onOpenModel() {
     document.getElementsByClassName("main-container")[0].setAttribute("aria-hidden", "true");
   }
 
-  openContactModel() {
+  openContactModel(element: any) {
     this.onOpenModel();
+    this.currentModelLink = element.id;
     UIkit.modal('#contact-sections').show();
     document.getElementById("contactModalTitle").focus();
   }

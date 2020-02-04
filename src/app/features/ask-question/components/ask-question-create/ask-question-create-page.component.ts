@@ -129,7 +129,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
       experties = experties.substring(0, experties.lastIndexOf(","));
     }
     const config: SEO = {
-      title: `An Elder Spring Initiative by Tata Trusts Ask an expert ${expert.workTitle} ${expert.basicProfileInfo.firstName}`,
+      title: `Ask our expert - ${expert.basicProfileInfo.firstName} - An Elder Spring Initiative by Tata Trusts`,
       keywords: 'products,services,events,dscussions',
       description: `Experties in ${experties}`,
       author: `An Elder Spring Initiative by Tata Trusts`,

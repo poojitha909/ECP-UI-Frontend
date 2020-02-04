@@ -221,7 +221,7 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
 
   setSeoTags(discussion: any) {
     let config: SEO = {
-      title: `An Elder Spring Initiative by Tata Trusts Dscussions on ${discussion.title}`,
+      title: `Dscussions - ${discussion.title} - An Elder Spring Initiative by Tata Trusts`,
       keywords: 'products,services,events,dscussions',
       description: `${discussion.shortSynopsis}`,
       author: `An Elder Spring Initiative by Tata Trusts`,

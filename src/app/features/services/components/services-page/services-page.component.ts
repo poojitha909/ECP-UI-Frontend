@@ -13,7 +13,7 @@ export class ServicesPageComponent implements OnInit {
 
     // Generate meta tag 
     const config: SEO = {
-      title: `At your service - An Elder Spring Initiative by Tata Trusts Services`,
+      title: `At your service - An Elder Spring Initiative by Tata Trusts`,
       keywords: 'products,services,events,dscussions',
       description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
       author: `An Elder Spring Initiative by Tata Trusts`,

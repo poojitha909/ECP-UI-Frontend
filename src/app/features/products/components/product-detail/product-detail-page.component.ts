@@ -128,7 +128,7 @@ export class ProductDetailPageComponent implements OnInit {
 
   setSeoTags(product: any) {
     const config: SEO = {
-      title: `An Elder Spring Initiative by Tata Trusts Product ${product.name}`,
+      title: `Shop Easy - ${product.name} - An Elder Spring Initiative by Tata Trusts`,
       keywords: 'products,services,events,dscussions',
       description: `${product.description}`,
       author: `An Elder Spring Initiative by Tata Trusts`,

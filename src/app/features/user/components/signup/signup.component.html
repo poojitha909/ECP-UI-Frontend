@@ -22,7 +22,7 @@
                 <!-- SignIn types View START -->
                 <ng-container *ngIf="!isLoading && !user">
                     <!-- Error box START-->
-                    <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
+                    <div *ngIf="!isLoading && errorMessage" role="alert" aria-live="polite" aria-atomic="true" class="uk-alert-danger" uk-alert>
                         <p>{{ errorMessage }}</p>
                     </div>
                     <!-- Error box END-->

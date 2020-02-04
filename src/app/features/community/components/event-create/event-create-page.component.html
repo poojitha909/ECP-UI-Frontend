@@ -8,7 +8,7 @@
         <h2 class="heading">Create an Event</h2>
         <hr />
         <div class="inner-container bg-white">
-            <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
+            <div aria-live="polite" aria-atomic="true" *ngIf="successMessage" class="uk-alert-success" uk-alert>
                 <p>{{ successMessage }}</p>
             </div>
             <form [formGroup]="eventForm" class="uk-form">

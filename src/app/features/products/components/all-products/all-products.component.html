@@ -43,7 +43,9 @@
       </div>
       <!-- Products list  -->
       <div *ngIf="productsList!==undefined && productsList.length > 0">
-        <app-product-detail-card *ngFor="let proudct of productsList" [product]="proudct"></app-product-detail-card>
+        <div *ngFor="let proudct of productsList;let i=index" role="group" [attr.aria-label]="'Product ' + i">
+          <app-product-detail-card [product]="proudct"></app-product-detail-card>
+        </div>
       </div>
       <app-pagination *ngIf="(productsList && productsList.length > 0)" [totalRecords]="totalRecords"
         [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">

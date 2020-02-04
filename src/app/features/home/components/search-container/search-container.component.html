@@ -17,7 +17,7 @@
               </button>
 
             </span>
-            <input id="homeSearch" class="uk-search-input search-box font-regular sm-pr-150" aria-label="search" aria-autocomplete=list [(ngModel)]="searchPageParam.term"
+            <input id="homeSearch" class="uk-search-input search-box font-regular sm-pr-150" aria-label="search all" aria-autocomplete=list [(ngModel)]="searchPageParam.term"
               (keyup)="searchEvent($event)" (keydown.enter)="onSearch($event.target.value)" required type="text"
               placeholder="Search here" name="search" autocomplete='off' />
           </form>

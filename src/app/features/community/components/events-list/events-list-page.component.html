@@ -20,18 +20,18 @@
                         <h3 class="uk-h4">Categories</h3>
                     </div>
                     <div *ngIf="this.searchParams.pastEvents !== 0">
-                        <a class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
+                        <a href="javascript:void(0)" class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
                     </div>
                 </div>
                 <ul class="uk-list uk-list-large p-2">
                     <li (click)="onTabChange(0)" [ngClass]="{'cat-active': 0 == searchParams.pastEvents}">
-                        All Events <span class="uk-badge uk-float-right">{{countData.all}}</span>
+                        <a (click)="onTabChange(0)" href="javascript:void(0)">All Events <span class="uk-badge uk-float-right">{{countData.all}}</span></a>
                     </li>
                     <li (click)="onTabChange(-1)" [ngClass]="{'cat-active': -1 == searchParams.pastEvents}">
-                        Upcoming Events <span class="uk-badge uk-float-right">{{countData.upcoming}}</span>
+                        <a (click)="onTabChange(-1)" href="javascript:void(0)">Upcoming Events <span class="uk-badge uk-float-right">{{countData.upcoming}}</span></a>
                     </li>
                     <li (click)="onTabChange(1)" [ngClass]="{'cat-active': 1 == searchParams.pastEvents}">
-                        Past Events <span class="uk-badge uk-float-right">{{countData.past}}</span>
+                        <a (click)="onTabChange(1)" href="javascript:void(0)">Past Events <span class="uk-badge uk-float-right">{{countData.past}}</span></a>
                     </li>
                 </ul>
             </div>
@@ -88,7 +88,7 @@
             <!-- Events list  -->
             <div *ngIf="eventsList!==undefined && eventsList.length > 0">
                 <div class="uk-flex-left uk-text-center uk-child-width-1-2@m m-b-30" uk-grid>
-                    <div *ngFor="let event of eventsList">
+                    <div *ngFor="let event of eventsList;let i=index" role="group" [attr.aria-label]="'Event ' + i">
                         <app-event-summary-card [event]="event" [isPast]="searchParams.pastEvents">
                         </app-event-summary-card>
                     </div>

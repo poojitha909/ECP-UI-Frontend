@@ -84,7 +84,7 @@
             </div>
             <div *ngIf="discussionsList!==undefined && discussionsList.length > 0" class="m-b-30">
                 <div class="uk-flex-left uk-text-center uk-child-width-1-2@m" uk-grid>
-                    <div *ngFor="let discussion of discussionsList">
+                    <div *ngFor="let discussion of discussionsList;let i=index" role="group" [attr.aria-label]="'Discussion ' + i">
                         <app-dicussion-summary-card [category]="selCategory" [discussion]="discussion">
                         </app-dicussion-summary-card>
                     </div>

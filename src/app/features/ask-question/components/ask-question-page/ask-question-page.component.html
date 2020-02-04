@@ -9,7 +9,7 @@
               <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
             </button>
           </span>
-          <input id="askSearch" class="uk-search-input font-regular search-box sm-pr-150" aria-label="search"
+          <input id="askSearch" class="uk-search-input font-regular search-box sm-pr-150" aria-label="search experts"
             [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required type="text"
             placeholder="Search here" name="search" autocomplete='off' />
         </form>
@@ -46,7 +46,7 @@
 
     <div class="uk-visible@s">
       <div uk-grid class="uk-grid-large uk-flex-left uk-text-center uk-child-width-1-3@m">
-        <div *ngFor="let expert of experts">
+        <div *ngFor="let expert of experts;let i=index" role="group" [attr.aria-label]="'Expert ' + i">
           <app-ask-expert-summary-card [expert]="expert"></app-ask-expert-summary-card>
         </div>
       </div>
@@ -73,11 +73,11 @@
   </div>
 </div>
 
-<div class="uk-container search-container dark m-seprator" id="Featured-ask-questions">
-  <div class="quote-line uk-margin-remove" role='region' aria-labelledby="Featured-ask-questions" uk-grid>
+<div class="uk-container search-container dark m-seprator" role='region' aria-labelledby="Featured-ask-questions">
+  <div class="quote-line uk-margin-remove" uk-grid>
     <div class="uk-width-1-1@s uk-width-2-3@m uk-padding-remove uk-flex uk-flex-middle">
       <div class="uk-flex uk-flex-middle">
-        <h2 class="title font-regular-24 font-weight-600">
+        <h2 id="Featured-ask-questions" class="title font-regular-24 font-weight-600">
           <span>
             <img src="assets/images/expert-icon.png" alt="No Image Found" />
           </span>
@@ -100,7 +100,7 @@
       <div class="uk-position-relative">
         <div class="uk-slider-container height-fix-slider">
           <ul class="uk-slider-items uk-grid-match uk-child-width-1-3@m uk-grid">
-            <li *ngFor="let expert of experts2">
+            <li *ngFor="let expert of experts2;let i=index" role="group" [attr.aria-label]="'Expert ' + i">
               <app-ask-expert-summary-card [expert]="expert"></app-ask-expert-summary-card>
             </li>
             <li>

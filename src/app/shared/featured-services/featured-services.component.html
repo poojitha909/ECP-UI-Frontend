@@ -1,9 +1,9 @@
 <!-- Service Featured START tabs -->
-<div class="featured-tab m-b-30" id="Featured-services">
-    <div class="title" role='region' aria-labelledby="Featured-services">
+<div class="featured-tab m-b-30" role='region' aria-labelledby="Featured-services">
+    <div class="title" >
         <div uk-grid>
             <div class="uk-width-expand@s">
-                <h2 class="font-regular-24 font-weight-600">
+                <h2 id="Featured-services" class="font-regular-24 font-weight-600">
                     <img src="assets/images/events.png" alt="No Image Found" /> At your
                     service
                 </h2>
@@ -43,7 +43,7 @@
                 <div class="uk-slider-container">
 
                     <ul class="uk-slider-items uk-grid-match uk-child-width-1-3@m uk-grid">
-                        <li *ngFor="let service of services">
+                        <li *ngFor="let service of services;let i=index" role="group" [attr.aria-label]="'Service ' + i">
                             <app-service-search-card [service]="service"></app-service-search-card>
                         </li>
                     </ul>

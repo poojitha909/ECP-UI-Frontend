@@ -9,9 +9,9 @@
               <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
             </button>
           </span>
-          <input id="productSearch" class="uk-search-input font-regular search-box sm-pr-150" aria-label="search" [(ngModel)]="searchParams.searchTxt"
-            (keyup)="onSearchChange($event)" required type="text" placeholder="Search here" name="search"
-            autocomplete='off' />
+          <input id="productSearch" class="uk-search-input font-regular search-box sm-pr-150" aria-label="search products"
+            [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required type="text"
+            placeholder="Search here" name="search" autocomplete='off' />
         </form>
       </div>
       <div>
@@ -46,7 +46,7 @@
     </div>
     <div class="uk-visible@s">
       <div uk-grid class="uk-flex-left uk-text-center uk-child-width-1-3@m">
-        <div *ngFor="let product of productsList">
+        <div *ngFor="let product of productsList;let i=index" role="group" [attr.aria-label]="'Product ' + i">
           <app-product-search-card [product]="product"></app-product-search-card>
         </div>
       </div>
@@ -75,11 +75,11 @@
 </div>
 
 <!-- Product Section Start -->
-<div class="uk-container search-container dark m-seprator" id="Featured-products">
-  <div class="quote-line uk-margin-remove" role='region' aria-labelledby="Featured-products"  uk-grid>
+<div class="uk-container search-container dark m-seprator" role='region' aria-labelledby="Featured-products">
+  <div class="quote-line uk-margin-remove" uk-grid>
     <div class="uk-width-1-1@s uk-width-2-3@m uk-padding-remove uk-flex uk-flex-middle">
       <div class="uk-flex uk-flex-middle">
-        <h2 class="title font-regular-24 font-weight-600">
+        <h2 id="Featured-products" class="title font-regular-24 font-weight-600">
           <span>
             <img src="assets/images/product-icon.png" alt="No Image Found" />
           </span>
@@ -90,7 +90,8 @@
     <div class="uk-width-1-1@s uk-width-1-3@m uk-padding-remove uk-flex uk-flex-middle uk-divider-vertical">
       <label class="uk-form-label" for="product-category">Showing:</label>
       <div class="uk-form-controls">
-        <select class="uk-select" id="product-category" [(ngModel)]="searchParams.productCategory" (change)="showProducts2()">
+        <select class="uk-select" id="product-category" [(ngModel)]="searchParams.productCategory"
+          (change)="showProducts2()">
           <option value="">Popular Products</option>
           <option *ngFor="let cat of catsList" value="{{cat.id}}">{{cat.name}}</option>
         </select>

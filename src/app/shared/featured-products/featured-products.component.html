@@ -1,9 +1,9 @@
 <!-- Product Featured START tabs -->
-<div class="featured-tab m-b-30" id="Featured-products">
-    <div class="title" role='region' aria-labelledby="Featured-products">
+<div class="featured-tab m-b-30" role='region' aria-labelledby="Featured-products">
+    <div class="title">
         <div uk-grid>
             <div class="uk-width-expand@s">
-                <h2 class="font-regular-24 font-weight-600">
+                <h2 id="Featured-products" class="font-regular-24 font-weight-600">
                     <img src="assets/images/products.png" alt="No Image Found" /> Shop Easy
                 </h2>
             </div>
@@ -29,7 +29,7 @@
                 <div class="uk-slider-container">
                     <!-- Product Card -->
                     <ul class="uk-slider-items uk-grid-match uk-child-width-1-3@m uk-grid">
-                        <li *ngFor="let product of products">
+                        <li *ngFor="let product of products;let i=index" role="group" [attr.aria-label]="'Product ' + i">
                             <app-product-search-card [product]="product"></app-product-search-card>
                         </li>
                     </ul>

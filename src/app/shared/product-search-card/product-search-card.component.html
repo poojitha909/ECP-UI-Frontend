@@ -5,7 +5,8 @@
             <img class="h-150 w-100" [src]="product.images[0]" alt="No Image Found" />
             <!-- <button class="perOff">35% OFF</button> -->
         </div>
-        <h3 tabindex=0 class="font-regular font-weight-600 m-b-5">{{product?.name}} </h3>
+        <h3 class="font-regular font-weight-600 m-b-5"><a [routerLink]="['/products', product.id]">{{product?.name}}</a>
+        </h3>
 
         <ngb-rating [rate]="getDbServiceRating(product.rating)" [readonly]="true" [max]="5">
             <ng-template let-fill="fill" let-index="index">

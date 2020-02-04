@@ -1,9 +1,9 @@
 <!-- Service Featured START tabs -->
-<div class="featured-tab m-b-30" id="Featured-events">
-    <div class="title" role='region' aria-labelledby="Featured-events">
+<div class="featured-tab m-b-30" role='region' aria-labelledby="Featured-events">
+    <div class="title">
         <div uk-grid>
             <div class="uk-width-expand@s">
-                <h2 class="font-regular-24 font-weight-600">
+                <h2 id="Featured-events" class="font-regular-24 font-weight-600">
                     <img src="assets/images/events.png" alt="No Image Found" /> What’s Happening
                 </h2>
             </div>
@@ -29,7 +29,7 @@
                 <div class="uk-slider-container">
 
                     <ul class="uk-slider-items uk-grid-match uk-child-width-1-3@m uk-grid">
-                        <li *ngFor="let event of events">
+                        <li *ngFor="let event of events;let i=index" role="group" [attr.aria-label]="'Event ' + i">
                             <app-event-summary-card [event]="event" [isPast]="searchParams.pastEvents">
                             </app-event-summary-card>
                         </li>

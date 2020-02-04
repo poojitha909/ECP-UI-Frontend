@@ -22,8 +22,8 @@
     </div>
     <div id="otp-input" class="uk-margin">
       <div class="uk-form-controls">
-        <input id="opttxt" class="uk-input" aria-label="otpcode" aria-describedby="otp-input" type="number" name="otpcode"
-          [(ngModel)]="OtpCode" placeholder="Enter OTP" (keydown.enter)="requestOtp()" [disabled]="!otpGenerated" />
+        <input id="opttxt" class="uk-input" aria-label="otpcode input" type="number" name="otpcode" [(ngModel)]="OtpCode"
+          placeholder="Enter OTP" (keydown.enter)="requestOtp()" [disabled]="!otpGenerated" />
         <a *ngIf="otpGenerated" aria-live="polite" aria-atomic="true" (click)="requestResendOtp()"
           href="javascript:void(0)" class="resend-otp"> Resend
           OTP</a>
@@ -33,7 +33,7 @@
   <div class="m-b-40" uk-grid>
     <div *ngIf="!otpGenerated" class="uk-width-expand uk-flex uk-flex-middle">- An OTP will be sent to the above number.
     </div>
-    <div *ngIf="otpGenerated" aria-live="polite" aria-atomic="true" class="uk-width-expand uk-flex uk-flex-middle">-
+    <div *ngIf="otpGenerated" aria-describedby="otp-input" aria-live="polite" aria-atomic="true" class="uk-width-expand uk-flex uk-flex-middle">-
       4-digit OTP was
       {{ otpResend ? 'resent': 'sent' }} to
       {{ mobileNumber }}.</div>

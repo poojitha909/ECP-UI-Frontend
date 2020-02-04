@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router"
 import { DiscussionService } from '../../services/discussion.service';
@@ -36,6 +36,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
   currentUrl: string;
   whatsappUrl;
   whatsappMobileUrl;
+  currentModelLink:string;
 
   constructor(private router: Router, private route: ActivatedRoute,
     private discussionService: DiscussionService, private menuService: MenuService,
@@ -236,11 +237,16 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.seoService.generateTags(config);
   }
 
-  setParentReplyId(id) {
+  setParentReplyId(id,element) {
     this.replyForm.reset();
     this.parentReplyId = id;
     this.replyId = "";
     this.successMessage = "";
+    this.onOpenModel();
+    this.currentModelLink = element.id;
+    UIkit.modal('#reply-modal-discussion').show();
+    document.getElementById("addCommentTitle").focus();
+    
   }
 
   editReply(parentReplyId, reply) {
@@ -276,6 +282,20 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
           alert("Oops! something wrong happen, please try again.");
         }
       });
+  }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscapeKeyHandler(event: KeyboardEvent) {
+    this.onCloseModel();
+  }
+
+  onCloseModel() {
+    document.getElementsByClassName("main-container")[0].removeAttribute("aria-hidden");
+    document.getElementById(this.currentModelLink).focus();
+  }
+
+  onOpenModel() {
+    document.getElementsByClassName("main-container")[0].setAttribute("aria-hidden", "true");
   }
 
 

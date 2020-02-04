@@ -13,6 +13,9 @@
         <div class="time">
             <b>Time</b>: {{event?.datetime | date: 'h:mm a'}}
         </div>
+        <div class="time">
+            <b>Location</b>: {{event?.address}}
+        </div>
         <hr />
         <div class="detail">
             {{event?.description | striphtml | ellipsis: 75}}

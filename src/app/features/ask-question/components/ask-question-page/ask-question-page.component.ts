@@ -17,9 +17,7 @@ export class AskQuestionPageComponent implements OnInit, AfterViewInit, OnDestro
   showReset: boolean;
   showResult: boolean;
   experts: any[];
-  experts2: any[];
   expertsTotal: number;
-  catsList: any[];
   searchParams: {
     p: number,
     s: number,
@@ -35,12 +33,11 @@ export class AskQuestionPageComponent implements OnInit, AfterViewInit, OnDestro
       private store: StorageHelperService,
       private askQuestionService: AskQuestionService,
       private homeService: HomeService,
-      private seoService: SeoService,
-      private titleService: Title
+      private seoService: SeoService
     ) {
     // Generate meta tag 
     const config: SEO = {
-      title: `An Elder Spring Initiative by Tata Trusts Experts`,
+      title: `Ask Our Expert - An Elder Spring Initiative by Tata Trusts`,
       keywords: 'products,services,events,dscussions',
       description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
       author: `An Elder Spring Initiative by Tata Trusts`,
@@ -48,7 +45,6 @@ export class AskQuestionPageComponent implements OnInit, AfterViewInit, OnDestro
     }
 
     this.seoService.generateTags(config);
-    this.titleService.setTitle("Ask Questions - Elderly Care Platform");
   }
 
   ngOnInit() {
@@ -85,14 +81,6 @@ export class AskQuestionPageComponent implements OnInit, AfterViewInit, OnDestro
     if (this.route.snapshot.params['category']) {
       this.searchParams.experties = this.route.snapshot.params['category'];
     }
-    this.askQuestionService.getCategoryList().subscribe((response: any) => {
-      const data = response.data;
-      this.catsList = [];
-      if (data.content) {
-        this.catsList = data.content;
-      }
-    });
-
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
       this.showReset = this.searchParams.searchTxt ? true : false;
@@ -102,7 +90,6 @@ export class AskQuestionPageComponent implements OnInit, AfterViewInit, OnDestro
       this.showReset = true;
     }
     this.showExperts();
-    this.showExperts2();
   }
 
   showExperts() {
@@ -120,19 +107,6 @@ export class AskQuestionPageComponent implements OnInit, AfterViewInit, OnDestro
         }
       });
     }
-  }
-
-  showExperts2() {
-    let searchParams = JSON.parse(JSON.stringify(this.searchParams));
-    searchParams.searchTxt = "";
-    this.askQuestionService.experts(searchParams).subscribe((response: any) => {
-      const data = response.data;
-      this.experts2 = [];
-      if (data.content) {
-        this.experts2 = data.content;
-        console.log(this.experts);
-      }
-    });
   }
 
   showAllExperts() {

@@ -43,15 +43,8 @@
   border-bottom: 1px solid #d7e0ef;
   padding: 8px;
 }
-.see-all-card {
-  color: #1A73E8;
-  text-align: center;
-  width: 100%;
-}
+
 .search-container {
-  &.dark {
-    background-color: #e4eefb;
-  }
   border: 1px solid #d7e0ef;
   h4.title {
     font-size: 24px;
@@ -114,30 +107,6 @@
     & > .uk-active > a {
       color: #1a73e8;
       border-color: #1e87f0;
-    }
-  }
-  .quote-line {
-    background-color: #ecf4ff;
-    border-left: 1px solid #d7e0ef;
-    border-right: 1px solid #d7e0ef;
-    border-bottom: 1px solid #d7e0ef;
-    padding: 21px 40px 21px 40px;
-    color: #161c2d;
-    font-size: 18px;
-    p {
-      margin: 0;
-    }
-    .uk-divider-vertical {
-      height: auto;
-    }
-    .uk-form-label {
-      margin-bottom: 0px;
-      margin-left: 24px;
-    }
-    select {
-      margin-left: 16px;
-      border: 0px;
-      border-radius: 4px;
     }
   }
 }
@@ -227,14 +196,6 @@
 .community-result-footer svg {
   float: right;
   margin: 13px;
-}
-
-.slidenav-pervious {
-  right: 98% !important;
-}
-
-.slidenav-next {
-  left: 98% !important;
 }
 
 @media (max-width: 640px) {

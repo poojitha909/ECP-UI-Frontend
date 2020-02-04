@@ -15,18 +15,25 @@ export class FeaturedEventsComponent implements OnInit {
     eventType: 0,
     pastEvents: -1
   };
+  events: any;
 
-  events: any[] = [];
-
+  
   constructor(private eventService: EventService) { }
 
   ngOnInit() {
+    this.initiate();
+  }
+
+  initiate(){
     this.showEvents();
   }
 
   showEvents() {
-    this.eventService.searchEvents(this.searchParams).subscribe((response: any) => {
+    let searchParams = JSON.parse(JSON.stringify(this.searchParams));
+    searchParams.searchTxt = "";
+    this.eventService.searchEvents(searchParams).subscribe((response: any) => {
       const data = response.data;
+      this.events = [];
       if (data.content) {
         this.events = data.content;
       }

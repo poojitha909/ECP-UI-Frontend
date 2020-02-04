@@ -73,49 +73,6 @@
     </div>
   </div>
 </div>
-
-<!-- Product Section Start -->
-<div class="uk-container search-container dark m-seprator" role='region' aria-labelledby="Featured-products">
-  <div class="quote-line uk-margin-remove" uk-grid>
-    <div class="uk-width-1-1@s uk-width-2-3@m uk-padding-remove uk-flex uk-flex-middle">
-      <div class="uk-flex uk-flex-middle">
-        <h2 id="Featured-products" class="title font-regular-24 font-weight-600">
-          <span>
-            <img src="assets/images/product-icon.png" alt="No Image Found" />
-          </span>
-          Shop Easy
-        </h2>
-      </div>
-    </div>
-    <div class="uk-width-1-1@s uk-width-1-3@m uk-padding-remove uk-flex uk-flex-middle uk-divider-vertical">
-      <label class="uk-form-label" for="product-category">Showing:</label>
-      <div class="uk-form-controls">
-        <select class="uk-select" id="product-category" [(ngModel)]="searchParams.productCategory"
-          (change)="showProducts2()">
-          <option value="">Popular Products</option>
-          <option *ngFor="let cat of catsList" value="{{cat.id}}">{{cat.name}}</option>
-        </select>
-      </div>
-    </div>
-  </div>
-  <div class="content" *ngIf="productsList2!==undefined && productsList2?.length > 0">
-    <app-popular-search [products]="productsList2"></app-popular-search>
-  </div>
-  <div class="uk-text-center uk-text-bold pt-norec" *ngIf="productsList2!==undefined && productsList2?.length == 0">
-    No Records found
-  </div>
-  <!-- Search Result END -->
-  <div class="quote-line uk-margin-remove" uk-grid>
-    <div class="uk-width-1-1@s uk-width-2-3@m uk-padding-remove uk-flex uk-flex-middle">
-      <div class="uk-flex uk-flex-middle">
-        <span class="mr-3">
-          <span class="verified-icon"></span>
-        </span>Hundereds of users are part of more than 25 active discussions.
-      </div>
-    </div>
-    <div class="uk-width-1-1@s uk-width-1-3@m uk-padding-remove uk-flex uk-flex-middle">
-      <button class="uk-width-1-1 uk-button-default" (click)="showAllProducts()"> See All Products </button>
-    </div>
-  </div>
+<div class="m-seprator">
+  <app-featured-products></app-featured-products>
 </div>
-<!-- Product Section End -->

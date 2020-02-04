@@ -16,7 +16,7 @@
   </div>
 
   <div class="uk-card-body uk-text-center uk-text-left@s uk-width-expand p-16">
-    <h3 class="font-regular font-weight-600 m-0"><a href="java:script:void(0)">{{ isDBService ? service?.basicProfileInfo.firstName :  service?.name}}</a>
+    <h3 class="font-regular font-weight-600 m-0"><a href="javascript:void(0)">{{ isDBService ? service?.basicProfileInfo.firstName :  service?.name}}</a>
     </h3>
     <div>
       <ngb-rating *ngIf="isDBService" [rate]="getDbServiceRating(service?.ratingPercentage)" [readonly]="true"

@@ -107,6 +107,23 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true
+            },
+            "uat": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.uat.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
             }
           }
         },
@@ -124,6 +141,9 @@
             },
             "security": {
               "browserTarget": "ecp-ui-frontend:build:security"
+            },
+            "uat": {
+              "browserTarget": "ecp-ui-frontend:build:uat"
             }
           }
         },

@@ -19,11 +19,8 @@ export class CommunityPageComponent implements OnInit, OnDestroy, AfterViewInit 
   showResult: boolean;
   eventsList: any[] = [];
   discussionsList: any[] = [];
-  discussCategoryList: any;
   selDiscussCategory: string;
-  discussionsList2: any;
   selEventCategory: string;
-  eventsList2: any;
   paramsSubs: any;
   totalRecordsEvents: number;
   totalRecordsDiscussions: number;
@@ -42,12 +39,12 @@ export class CommunityPageComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   constructor(private eventService: EventService, private discussionService: DiscussionService,
-    private menuService: MenuService, private router: Router, private homeService: HomeService,
-    private seoService: SeoService, private route: ActivatedRoute, private titleService: Title) {
+    private router: Router, private homeService: HomeService,
+    private seoService: SeoService, private route: ActivatedRoute) {
 
     // Generate meta tag 
     const config: SEO = {
-      title: `An Elder Spring Initiative by Tata Trusts Community`,
+      title: `Community Let's Talk - An Elder Spring Initiative by Tata Trusts`,
       keywords: 'products,services,events,dscussions',
       description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
       author: `An Elder Spring Initiative by Tata Trusts`,
@@ -56,7 +53,6 @@ export class CommunityPageComponent implements OnInit, OnDestroy, AfterViewInit 
 
     this.seoService.generateTags(config);
 
-    this.titleService.setTitle("Community - Elderly Care Platform");
 
   }
 
@@ -93,7 +89,6 @@ export class CommunityPageComponent implements OnInit, OnDestroy, AfterViewInit 
     this.totalRecordsDiscussions = 0;
     this.selDiscussCategory = "";
     this.selEventCategory = "";
-    this.getAllDiscussCategories();
 
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
@@ -106,28 +101,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy, AfterViewInit 
     }
 
     this.showEvents();
-    this.showEvents2();
     this.showDiscussions();
-  }
-
-  getAllDiscussCategories() {
-    this.menuService.getMenus("564071623e60f5b66f62df27", "").subscribe((response: any) => {
-      const data = response;
-      let tags = [];
-      this.discussCategoryList = {};
-      if (data.length > 0) {
-        for (let i in data) {
-          this.discussCategoryList[data[i].id] = { id: data[i].id, label: data[i].displayMenuName, tagIds: [] };
-          if (data[i].tags) {
-            for (let j in data[i].tags) {
-              this.discussCategoryList[data[i].id].tagIds[j] = data[i].tags[j].id;
-            }
-            tags[i] = data[i].id + "_" + this.discussCategoryList[data[i].id].tagIds.join("_"); // this si just to pass extrs key in tags which is menu item id
-          }
-        }
-      }
-      this.showDiscussions2();
-    });
   }
 
   showEvents() {
@@ -167,49 +141,6 @@ export class CommunityPageComponent implements OnInit, OnDestroy, AfterViewInit 
   }
   showAllEvents() {
     this.router.navigate(['/community/events'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt } });
-  }
-
-  showDiscussions2() {
-    let searchParams = JSON.parse(JSON.stringify(this.searchParamsDiscussions));
-    searchParams.tags = "";
-    searchParams.searchTxt = "";
-    if (this.selDiscussCategory != "") {
-      searchParams.tags = this.discussCategoryList[this.selDiscussCategory].tagIds.join(",");
-    }
-    this.discussionService.searchDiscussions(searchParams).subscribe((response: any) => {
-      const data = response.data;
-      this.discussionsList2 = [];
-      if (data.content) {
-        this.discussionsList2 = data.content;
-      }
-    });
-  }
-  showEvents2() {
-    let searchParams = JSON.parse(JSON.stringify(this.searchParams));
-    searchParams.searchTxt = "";
-    this.eventService.searchEvents(searchParams).subscribe((response: any) => {
-      const data = response.data;
-      this.eventsList2 = [];
-      if (data.content) {
-        this.eventsList2 = data.content;
-      }
-    });
-  }
-
-  showTodayText(timestamp: number) {
-    const today = new Date();
-    let checkDay = new Date(timestamp);
-    if (checkDay.getDate() == today.getDate() &&
-      checkDay.getMonth() == today.getMonth() &&
-      checkDay.getFullYear() == today.getFullYear()) {
-      return "(Today)";
-    }
-    checkDay = new Date(timestamp - 86400000);
-    if (checkDay.getDate() == today.getDate() &&
-      checkDay.getMonth() == today.getMonth() &&
-      checkDay.getFullYear() == today.getFullYear()) {
-      return "(Tomorrow)";
-    }
   }
 
   onSearchChange(event: any) {

@@ -8,7 +8,6 @@ import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
-declare var UIkit: any;
 
 @Component({
   selector: 'app-all-services',
@@ -66,7 +65,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     this.categoryTypes = Object.keys(this.categories).reverse();
     // Generate meta tag 
     const config: SEO = {
-      title: `An Elder Spring Initiative by Tata Trusts All Service`,
+      title: `All Service - An Elder Spring Initiative by Tata Trusts`,
       keywords: 'products,services,events,dscussions',
       description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
       author: `An Elder Spring Initiative by Tata Trusts`,
@@ -171,6 +170,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     } else {
       this.selectedCategory = 'All';
     }
+    !this.selectedCategoryType ? this.searchPageParam.term = category : this.searchPageParam.term = '';
     this.isLoading = true;
     const param: PageParam = {
       p: 0,
@@ -221,7 +221,9 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     // update current page of items
     this.pageServices = services;
     this.cdr.detectChanges();
-    UIkit.scroll('#serviceList').scrollTo('#serviceList');
+    const elmnt = document.getElementById("serviceList");
+    elmnt.scrollIntoView();
+    // UIkit.scroll('#serviceList').scrollTo('#serviceList');
   }
 
   onSearchChange(value) {

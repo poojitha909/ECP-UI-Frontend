@@ -10,11 +10,11 @@ import { Title } from '@angular/platform-browser';
 })
 export class ServicesPageComponent implements OnInit, AfterViewInit {
 
-  constructor(private seoService: SeoService, private titleService: Title) {
+  constructor(private seoService: SeoService) {
 
     // Generate meta tag 
     const config: SEO = {
-      title: `An Elder Spring Initiative by Tata Trusts Services`,
+      title: `At your service - An Elder Spring Initiative by Tata Trusts`,
       keywords: 'products,services,events,dscussions',
       description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
       author: `An Elder Spring Initiative by Tata Trusts`,
@@ -22,7 +22,6 @@ export class ServicesPageComponent implements OnInit, AfterViewInit {
     }
 
     this.seoService.generateTags(config);
-    this.titleService.setTitle("Services - Elderly Care Platform");
 
   }
 

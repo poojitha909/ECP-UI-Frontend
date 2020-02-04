@@ -1,7 +1,7 @@
 export const environment = {
     production: true,
-    apiBaseUrl: 'https://ec.qa.code-alpha.org/BY/api',
-    imageBaseUrl: 'https://ec.qa.code-alpha.org/project/images/',
+    apiBaseUrl: '/BY/api',
+    imageBaseUrl: '/project/images/',
     encryptKey: 'SECRET',
     facebook: {
         clientId: '2776633365685417',

@@ -14,7 +14,8 @@
                         <label class="uk-form-label" for="Showing-Advisors">Showing:</label>
                     </div>
                     <div class="uk-width-expand">
-                        <select class="uk-select" [(ngModel)]="searchParams.experties" id="Showing-Advisors" (change)="showExperts()">
+                        <select class="uk-select" [(ngModel)]="searchParams.experties" id="Showing-Advisors"
+                            (change)="showExperts()">
                             <option value="">Select Category</option>
                             <option *ngFor="let cat of catsList" value="{{cat.id}}">{{cat.name}}</option>
                         </select>
@@ -35,10 +36,8 @@
                             <app-ask-expert-summary-card [expert]="expert"></app-ask-expert-summary-card>
                         </li>
                         <li>
-                            <div class="uk-flex uk-flex-middle bg-white" [routerLink]="['/ask-question/all']">
-                              <div class="see-all-card">
-                                See all experts
-                              </div>
+                            <div class="uk-flex uk-flex-middle bg-white" >
+                                <a class="see-all-card" [routerLink]="['/ask-question/all']">See all experts</a>
                             </div>
                         </li>
                     </ul>

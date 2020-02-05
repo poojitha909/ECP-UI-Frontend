@@ -14,11 +14,13 @@
                         <label class="uk-form-label" for="Showing-Discussions">Showing:</label>
                     </div>
                     <div class="uk-width-expand">
-                        <select class="uk-select" [(ngModel)]="selDiscussCategory" id="Showing-Discussions" (change)="showDiscussions()">
+                        <select class="uk-select" [(ngModel)]="selDiscussCategory" id="Showing-Discussions"
+                            (change)="showDiscussions()">
                             <option value="">Active Discussions</option>
-                            <option *ngFor="let cat of discussCategoryList | keyvalue" value="{{cat.key}}">{{cat.value.label}}
+                            <option *ngFor="let cat of discussCategoryList | keyvalue" value="{{cat.key}}">
+                                {{cat.value.label}}
                             </option>
-                          </select>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -31,16 +33,18 @@
                 <div class="uk-slider-container">
 
                     <ul class="uk-slider-items uk-grid-match uk-child-width-1-3@m uk-grid">
-                        <li *ngFor="let discussion of discussions;let i= index" role="group" [attr.aria-label]="'Discussion ' + i">
+                        <li *ngFor="let discussion of discussions;let i= index" role="group"
+                            [attr.aria-label]="'Discussion ' + i">
                             <!-- Discussion card -->
                             <app-dicussion-summary-card [category]="selDiscussCategory" [discussion]="discussion">
                             </app-dicussion-summary-card>
                         </li>
                         <li>
-                            <div class="uk-flex uk-flex-middle bg-white" [routerLink]="['/community/discussions']">
-                              <div class="see-all-card">
-                                See all discussions
-                              </div>
+                            <div class="uk-flex uk-flex-middle bg-white">
+
+                                <a [routerLink]="['/community/discussions']" class="see-all-card">See all
+                                    discussions</a>
+
                             </div>
                         </li>
                     </ul>

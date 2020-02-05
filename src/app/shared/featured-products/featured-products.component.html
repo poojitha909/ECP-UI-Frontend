@@ -13,7 +13,8 @@
                         <label class="uk-form-label" for="product-category">Showing:</label>
                     </div>
                     <div class="uk-width-expand">
-                        <select class="uk-select" id="product-category" [(ngModel)]="searchParams.productCategory" (change)="showProducts()">
+                        <select class="uk-select" id="product-category" [(ngModel)]="searchParams.productCategory"
+                            (change)="showProducts()">
                             <option value="">Popular Products</option>
                             <option *ngFor="let cat of catsList" value="{{cat.id}}">{{cat.name}}</option>
                         </select>
@@ -29,14 +30,13 @@
                 <div class="uk-slider-container">
                     <!-- Product Card -->
                     <ul class="uk-slider-items uk-grid-match uk-child-width-1-3@m uk-grid">
-                        <li *ngFor="let product of products;let i=index" role="group" [attr.aria-label]="'Product ' + i">
+                        <li *ngFor="let product of products;let i=index" role="group"
+                            [attr.aria-label]="'Product ' + i">
                             <app-product-search-card [product]="product"></app-product-search-card>
                         </li>
                         <li>
-                            <div class="uk-flex uk-flex-middle bg-white" [routerLink]="['/products/all']">
-                              <div class="see-all-card">
-                                See all products
-                              </div>
+                            <div class="uk-flex uk-flex-middle bg-white">
+                                <a class="see-all-card" [routerLink]="['/products/all']">See all products</a>
                             </div>
                         </li>
                     </ul>

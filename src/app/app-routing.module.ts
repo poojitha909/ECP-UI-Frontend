@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ErrorComponent, AboutUsComponent } from './shared';
 import { LayoutComponent } from './ui';
+import { UserTermsComponent } from './shared/user-terms/user-terms.component';
+import { UserPolicyComponent } from './shared/user-policy/user-policy.component';
 
 const routes: Routes = [
   {
@@ -35,6 +37,14 @@ const routes: Routes = [
       {
         path: 'about',
         component: AboutUsComponent
+      },
+      {
+        path: 'user-terms',
+        component: UserTermsComponent
+      },
+      {
+        path: 'user-policy',
+        component: UserPolicyComponent
       },
       {
         path: 'user',

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { ApiConstants } from 'src/app/api.constants';
 import { Observable } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { UserProfile, User } from 'src/app/core/interfaces';
 import { AuthService } from 'src/app/core';
 import { environment } from 'src/environments/environment';
@@ -72,12 +72,27 @@ export class UserService {
 
   updateUserProfile(user: UserProfile): Observable<any> {
     user.userId = this.auth.user.id;
-    return this.http.put<any>(`${ApiConstants.USER_PROFILE}/${this.auth.user.id}`, user).pipe(
-      map
-        ((response) => {
-          return response.data;
-        })
-    );
+    if (user.basicProfileInfo.firstName !== this.auth.user.userName) {
+      const userData: User = {
+        id: user.userId,
+        userName: user.basicProfileInfo.firstName
+      }
+      return this.changeUserName(userData).pipe(
+        switchMap(() => this.http.put<any>(`${ApiConstants.USER_PROFILE}/${user.userId}`, user).pipe(
+          map
+            ((response) => {
+              return response.data;
+            })
+        ))
+      )
+    } else {
+      return this.http.put<any>(`${ApiConstants.USER_PROFILE}/${user.userId}`, user).pipe(
+        map
+          ((response) => {
+            return response.data;
+          })
+      );
+    }
   }
 
   uploadUserImage(userImage: FormData): Observable<any> {

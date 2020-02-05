@@ -6,7 +6,6 @@ import {shareReplay} from 'rxjs/operators';
 interface Configuration {
     apiBaseUrl: string,
     imageBaseUrl: string,
-    encryptKey: string,
     facebook: {
       clientId: string,
       urlState: string,

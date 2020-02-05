@@ -1,7 +1,6 @@
 {
     "apiBaseUrl": "/BY/api",
     "imageBaseUrl": "/project/images/",
-    "encryptKey": "SECRET",
     "facebook": {
       "clientId": "2776633365685417",
       "urlState": "'{st=fbState,ds=123456789}'",

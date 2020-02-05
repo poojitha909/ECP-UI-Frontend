@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 import * as CryptoJS from 'crypto-js';
 import { environment } from 'src/environments/environment';
-import { ConfigurationService } from './configuration.service';
 // import { LocalStorageService } from 'ngx-webstorage';
 
 @Injectable({
@@ -11,13 +10,7 @@ import { ConfigurationService } from './configuration.service';
 
 export class StorageHelperService {
 
-  config: any;
-
-  constructor(private configServ: ConfigurationService) {
-    this.configServ.loadConfigurations().subscribe( (c) => {
-      this.config = c;
-    })
-   }
+  constructor() { }
 
   /**
    * Store data to LS
@@ -27,7 +20,7 @@ export class StorageHelperService {
   public store(key: string, value: any) {
 
     // this.storage.store(key, CryptoJS.AES.encrypt(value));
-    localStorage.setItem(key, CryptoJS.AES.encrypt(value, this.config.encryptKey));
+    localStorage.setItem(key, CryptoJS.AES.encrypt(value, environment.encryptKey));
   }
 
   /**
@@ -38,7 +31,7 @@ export class StorageHelperService {
   public storeSession(key: string, value: any) {
 
     // this.storage.store(key, CryptoJS.AES.encrypt(value));
-    sessionStorage.setItem(key, CryptoJS.AES.encrypt(value, this.config.encryptKey));
+    sessionStorage.setItem(key, CryptoJS.AES.encrypt(value, environment.encryptKey));
   }
 
   /**
@@ -47,7 +40,7 @@ export class StorageHelperService {
    */
   public retrieveSession(key: string): any {
     if (key && sessionStorage.getItem(key)) {
-      return CryptoJS.AES.decrypt(sessionStorage.getItem(key), this.config.encryptKey).toString(CryptoJS.enc.Utf8);
+      return CryptoJS.AES.decrypt(sessionStorage.getItem(key), environment.encryptKey).toString(CryptoJS.enc.Utf8);
     }
     return;
   }
@@ -64,7 +57,7 @@ export class StorageHelperService {
     // }
     // return;
     if (key && localStorage.getItem(key)) {
-      return CryptoJS.AES.decrypt(localStorage.getItem(key), this.config.encryptKey).toString(CryptoJS.enc.Utf8);
+      return CryptoJS.AES.decrypt(localStorage.getItem(key), environment.encryptKey).toString(CryptoJS.enc.Utf8);
     }
     return;
   }

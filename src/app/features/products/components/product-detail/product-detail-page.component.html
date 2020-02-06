@@ -115,7 +115,7 @@
                         <hr />
                         <!-- Success box START-->
                         <div *ngIf="reviewSuccessMessage" class="uk-alert-success" uk-alert>
-                            <p>{{ reviewSuccessMessage }}</p>
+                            <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ reviewSuccessMessage }}</p>
                         </div>
                         <!-- Success box END-->
                         <form [formGroup]="reviewForm" class="uk-form-stacked review-form">

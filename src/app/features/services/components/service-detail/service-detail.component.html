@@ -464,7 +464,7 @@
     <hr />
     <!-- Success box START-->
     <div aria-live="polite" aria-atomic="true"  *ngIf="reviewSuccessMessage" class="uk-alert-success" uk-alert>
-      <p>{{ reviewSuccessMessage }}</p>
+      <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ reviewSuccessMessage }}</p>
     </div>
     <!-- Success box END-->
     <form [formGroup]="reviewForm" id="reviewForm" class="uk-form-stacked review-form">
@@ -526,7 +526,7 @@
     <h3 id="reportTitle" tabindex=0 class="uk-modal-title">Report</h3>
     <!-- Success box START-->
     <div aria-live="polite" aria-atomic="true" *ngIf="successMessage" class="uk-alert-success" uk-alert>
-      <p>{{ successMessage }}</p>
+      <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ successMessage }}</p>
     </div>
     <!-- Success box END-->
     <form [formGroup]="reportForm" id="reportForm" (ngSubmit)="onSubmitReport()" class="uk-form-stacked review-form">

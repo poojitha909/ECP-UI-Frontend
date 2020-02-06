@@ -9,7 +9,7 @@
         <hr />
         <div class="inner-container bg-white">
             <div aria-live="polite" aria-atomic="true" *ngIf="successMessage" class="uk-alert-success" uk-alert>
-                <p>{{ successMessage }}</p>
+                <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ successMessage }}</p>
             </div>
             <form [formGroup]="eventForm" class="uk-form">
                 <div class="uk-margin">

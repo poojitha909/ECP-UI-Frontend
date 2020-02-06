@@ -25,7 +25,7 @@
           <!-- Error box START-->
           <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
             <a class="uk-alert-close" uk-close></a>
-            <p>{{ errorMessage }}</p>
+            <p><span class="uk-icon mr-5" uk-icon="warning"></span> {{ errorMessage }}</p>
           </div>
           <!-- Error box END-->
           <app-signin-types-view [otpGenerated]="isOtpGenerated" (requestForOtp)="requestForOtp($event)"

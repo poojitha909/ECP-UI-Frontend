@@ -111,7 +111,6 @@ export class SignupComponent implements OnInit, AfterViewInit {
         this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
         // this.isLoading = false;
         this.getUserProfile();
-        console.log("signup response", userData)
       },
       error => {
         this.isLoading = false;

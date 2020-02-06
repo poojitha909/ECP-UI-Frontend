@@ -16,8 +16,6 @@ export class ProductsPageComponent implements OnInit {
   showResult: boolean;
   productsList: any[];
   productsTotal: number;
-  productsList2: any[];
-  productsTotal2: number;
   catsList: any[];
   searchParams: {
     p: number,
@@ -39,7 +37,7 @@ export class ProductsPageComponent implements OnInit {
 
     // Generate meta tag 
     const config: SEO = {
-      title: `An Elder Spring Initiative by Tata Trusts Products`,
+      title: `Shop Easy - An Elder Spring Initiative by Tata Trusts`,
       keywords: 'products,services,events,dscussions',
       description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
       author: `An Elder Spring Initiative by Tata Trusts`,
@@ -67,14 +65,6 @@ export class ProductsPageComponent implements OnInit {
       productCategory: ""
     }
 
-    this.productService.getCategoryList().subscribe((response: any) => {
-      const data = response.data;
-      this.catsList = [];
-      if (data.content) {
-        this.catsList = data.content;
-      }
-    });
-
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
       this.showReset = this.searchParams.searchTxt ? true : false;
@@ -84,7 +74,6 @@ export class ProductsPageComponent implements OnInit {
       this.showReset = true;
     }
     this.showProducts();
-    this.showProducts2();
   }
 
   showProducts() {
@@ -106,19 +95,6 @@ export class ProductsPageComponent implements OnInit {
 
   showAllProducts() {
     this.router.navigate(['/products/all'], { queryParams: { productCategory: this.searchParams.productCategory, searchTxt: this.searchParams.searchTxt } });
-  }
-
-  showProducts2() {
-    let searchParams = JSON.parse(JSON.stringify(this.searchParams));
-    searchParams.searchTxt = "";
-    this.productService.searchProducts(searchParams).subscribe((response: any) => {
-      const data = response.data;
-      this.productsList2 = [];
-      if (data.content) {
-        this.productsList2 = data.content;
-      }
-      this.productsTotal2 = data.total;
-    });
   }
 
   onSearchChange(event: any) {

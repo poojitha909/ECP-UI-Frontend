@@ -8,9 +8,9 @@
     <li><a routerLink="/services/all">All Services</a></li>
     <li><span> {{ service?.name || service?.basicProfileInfo?.firstName  }}</span></li>
   </ul> -->
-  <h3>
+  <h1>
     {{ service?.name || service?.basicProfileInfo?.firstName  }}
-  </h3>
+  </h1>
   <hr class="m-b-30" />
 
   <div uk-grid>
@@ -22,7 +22,8 @@
 
         <div class="verified">
           <img [imageHandler] *ngIf="!isDBService" [src]="service?.disp_pic" alt="No Image Found" />
-          <img [imageHandler] *ngIf="isDBService" [src]="service?.basicProfileInfo?.profileImage?.original" alt="No Image Found" />
+          <img [imageHandler] *ngIf="isDBService" [src]="service?.basicProfileInfo?.profileImage?.original"
+            alt="No Image Found" />
           <button *ngIf="service?.verified == '1'"><span class="verified-icon-w"></span></button>
         </div>
         <div class="uk-text-center">
@@ -43,7 +44,7 @@
             <div class="uk-modal-dialog">
               <button class="uk-modal-close-default" type="button" uk-close></button>
               <div class="uk-modal-header">
-                <h2 class="uk-modal-title">Contact Details</h2>
+                <h3 class="uk-modal-title">Contact Details</h3>
               </div>
               <div class="uk-modal-body">
                 <div class="uk-child-width-1-2@s uk-grid-small" uk-grid>
@@ -104,7 +105,7 @@
             <!-- This is the modal -->
             <div id="report-modal" uk-modal>
               <div class="uk-modal-dialog uk-modal-body">
-                <h2 class="uk-modal-title">Report</h2>
+                <h3 class="uk-modal-title">Report</h3>
                 <!-- Success box START-->
                 <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
                   <p>{{ successMessage }}</p>
@@ -112,10 +113,10 @@
                 <!-- Success box END-->
                 <form [formGroup]="reportForm" (ngSubmit)="onSubmitReport()" class="uk-form-stacked review-form">
                   <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-select">Cause of
+                    <label class="uk-form-label" for="reporting-cause">Cause of
                       Reporting</label>
                     <div class="uk-form-controls">
-                      <select formControlName="cause" class="uk-select" id="form-stacked-select">
+                      <select formControlName="cause" class="uk-select" id="reporting-cause">
                         <option disabled selected hidden value="">Select your cause of reporting
                         </option>
                         <option>Information provided is incorrect</option>
@@ -127,9 +128,9 @@
                   </div>
 
                   <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Comment (optional)</label>
+                    <label class="uk-form-label" for="comment">Comment (optional)</label>
                     <div class="uk-form-controls">
-                      <textarea formControlName="comment" class="uk-input min-h-200" id="form-stacked-text"
+                      <textarea formControlName="comment" id="comment" class="uk-input min-h-200" id="form-stacked-text"
                         placeholder="Enter your comment here"></textarea>
                     </div>
                   </div>
@@ -223,7 +224,7 @@
         <!-- About -->
         <ng-container *ngIf="service?.seo_dt?.desc || service?.basicProfileInfo?.description">
           <div>
-            <h1 class="font-regular-24 font-weight-600">About</h1>
+            <h3 class="font-regular-24 font-weight-600">About</h3>
             <p *ngIf="!isDBService && service?.seo_dt?.desc">
               {{service?.seo_dt?.desc }}
             </p>
@@ -232,7 +233,7 @@
           <hr />
         </ng-container>
 
-        <h1 class="font-regular-24 font-weight-600">Details</h1>
+        <h3 class="font-regular-24 font-weight-600">Details</h3>
         <div uk-grid>
           <div class="uk-width-2-5@s">
 
@@ -288,7 +289,7 @@
       <!-- This is review modal -->
       <div id="review-modal" uk-modal>
         <div class="uk-modal-dialog uk-modal-body">
-          <h1 class="font-regular-24 font-weight-600">{{reviewTitle}} Review</h1>
+          <h4 class="font-regular-24 font-weight-600">{{reviewTitle}} Review</h4>
           <hr />
           <!-- Success box START-->
           <div *ngIf="reviewSuccessMessage" class="uk-alert-success" uk-alert>
@@ -299,9 +300,9 @@
 
 
             <div class="uk-margin">
-              <label class="uk-form-label" for="form-stacked-text">Title<span class="required">*</span></label>
+              <label class="uk-form-label" for="review-title">Title<span class="required">*</span></label>
               <div class="uk-form-controls">
-                <input class="uk-input" id="form-stacked-text" formControlName="title" type="text"
+                <input class="uk-input" id="review-title" formControlName="title" type="text"
                   placeholder="Enter your title">
               </div>
             </div>
@@ -328,9 +329,9 @@
             <!-- </div> -->
 
             <div class="uk-margin">
-              <label class="uk-form-label" for="form-stacked-text">Your Review<span class="required">*</span></label>
+              <label class="uk-form-label" for="review">Your Review<span class="required">*</span></label>
               <div class="uk-form-controls">
-                <textarea formControlName="review" class="uk-input min-h-200" id="form-stacked-text"
+                <textarea formControlName="review" class="uk-input min-h-200" id="review"
                   placeholder="Enter your review here"></textarea>
               </div>
             </div>
@@ -376,9 +377,9 @@
             <ng-container *ngIf="dbReview.length > 0">
               <div class="m-t-50 m-b-20" uk-grid>
                 <div class="uk-width-expand uk-flex uk-flex-middle">
-                  <h1 class="font-regular-24 font-weight-600">TBD Reviews
+                  <h3 class="font-regular-24 font-weight-600">TBD Reviews
                     ({{totalReviewRecords}})
-                  </h1>
+                  </h3>
                 </div>
                 <div class="uk-width-auto">
                   <button class="uk-button uk-button-transparent review-btn-transparent"
@@ -402,11 +403,11 @@
           <li>
             <!--JD Reviews START-->
             <ng-container *ngIf="!isDBService && service.Reviews.length == 0">
-              <h1 class="font-regular-24 font-weight-600">JustDial Reviews(0)</h1>
+              <h3 class="font-regular-24 font-weight-600">JustDial Reviews(0)</h3>
 
               <div class="uk-child-width-expand m-t-50 m-b-50" uk-grid>
                 <div class="info">
-                  <h1 class="font-regular-24 font-weight-600 m-0"> No review!</h1>
+                  <h4 class="font-regular-24 font-weight-600 m-0"> No review!</h4>
                   <p class="lable font-regular m-0"> No user has left review for this service.</p>
                 </div>
                 <div class="uk-text-right">
@@ -416,9 +417,9 @@
             </ng-container>
 
             <ng-container *ngIf="!isDBService && service.Reviews.length > 0">
-              <h1 class="font-regular-24 font-weight-600 m-t-50 m-b-20">JustDial Reviews
+              <h3 class="font-regular-24 font-weight-600 m-t-50 m-b-20">JustDial Reviews
                 ({{service.Reviews.length}})
-              </h1>
+              </h3>
               <!-- Demo box -->
               <!-- <div class="category-box m-t-30 bg-white">
                 <div uk-grid>

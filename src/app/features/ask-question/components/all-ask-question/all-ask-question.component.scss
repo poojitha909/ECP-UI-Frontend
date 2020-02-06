@@ -2,7 +2,7 @@
 .ask-question{
     margin-bottom: 24px;
 
-    h2{
+    h1{
         color: $font-light-black;
         font-family: $regular-font;
         font-weight: bold;
@@ -19,11 +19,6 @@
                 font-weight: 400;
             }
         }
-    }
-    h3{
-        margin: 0px;
-        font-family:"HKGroteskRegular";
-        font-size: 32px;
     }
     .w-150{
         width: 150px;

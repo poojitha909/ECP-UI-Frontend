@@ -9,7 +9,7 @@
               <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
             </button>
           </span>
-          <input class="uk-search-input font-regular search-box sm-pr-150" [(ngModel)]="searchParams.searchTxt"
+          <input class="uk-search-input font-regular search-box sm-pr-150" aria-label="search" [(ngModel)]="searchParams.searchTxt"
             (keyup)="onSearchChange($event)" required type="text" placeholder="Search here" name="search"
             autocomplete='off' />
         </form>
@@ -74,74 +74,5 @@
 </div>
 
 <div class="uk-container search-container dark m-seprator">
-  <div class="quote-line uk-margin-remove" uk-grid>
-    <div class="uk-width-1-1@s uk-width-2-3@m uk-padding-remove uk-flex uk-flex-middle">
-      <div class="uk-flex uk-flex-middle">
-        <h4 class="title font-regular-24 font-weight-600">
-          <span>
-            <img src="assets/images/expert-icon.png" alt="No Image Found" />
-          </span>
-          Our Advisors
-        </h4>
-      </div>
-    </div>
-    <div class="uk-width-1-1@s uk-width-1-3@m uk-padding-remove uk-flex uk-flex-middle uk-divider-vertical">
-      <label class="uk-form-label">Showing:</label>
-      <div class="uk-form-controls">
-        <select class="uk-select" [(ngModel)]="searchParams.experties" (change)="showExperts2()">
-          <option value="">Select Category</option>
-          <option *ngFor="let cat of catsList" value="{{cat.id}}">{{cat.name}}</option>
-        </select>
-      </div>
-    </div>
-  </div>
-  <div class="p-40">
-    <div uk-slider *ngIf="experts2!==undefined && experts2?.length > 0">
-      <div class="uk-position-relative">
-        <div class="uk-slider-container height-fix-slider">
-          <ul class="uk-slider-items uk-grid-match uk-child-width-1-3@m uk-grid">
-            <li *ngFor="let expert of experts2">
-              <app-ask-expert-summary-card [expert]="expert"></app-ask-expert-summary-card>
-            </li>
-            <li>
-              <div class="uk-flex uk-flex-middle bg-white" [routerLink]="['/ask-question/all']">
-                <div class="see-all-card">
-                  See all experts
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="uk-hidden@s">
-          <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
-            uk-slidenav-previous uk-slider-item="previous"></a>
-          <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
-            uk-slidenav-next uk-slider-item="next"></a>
-        </div>
-        <div class="uk-visible@s">
-          <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
-            uk-slidenav-previous uk-slider-item="previous"></a>
-          <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
-            uk-slidenav-next uk-slider-item="next"></a>
-        </div>
-      </div>
-    </div>
-    <div class="uk-text-center uk-text-bold pt-norec height-fix-slider" *ngIf="experts2!==undefined && experts2?.length == 0">
-      No Records found
-    </div>
-  </div>
-
-  <div class="quote-line uk-margin-remove" uk-grid>
-    <div class="uk-width-expand@s uk-padding-remove uk-flex uk-flex-middle">
-      <div class="uk-flex uk-flex-middle">
-        <span class="mr-3">
-          <span class="verified-icon"></span>
-        </span>Private. Confidential. Assurance. Real world experts you can trust.
-      </div>
-    </div>
-    <div class="uk-width-auto@s uk-text-center">
-      <button [routerLink]="['/ask-question/all']" [queryParams]="{ category: '', tab:0}"
-        class="uk-button uk-button-default">More experts</button>
-    </div>
-  </div>
+  <app-featured-ask-experts></app-featured-ask-experts>
 </div>

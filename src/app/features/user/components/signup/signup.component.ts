@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/core';
 import { User, SocialAccount, UserIdType } from 'src/app/core/interfaces';
 import { UserService } from '../../services/user.service';
+import { ConfigurationService } from 'src/app/core/services/configuration.service';
 
 
 @Component({
@@ -18,12 +19,18 @@ export class SignupComponent implements OnInit {
   verifiedString: string;
   errorMessage: string;
   user: any;
+  config: any;
 
   constructor(
     private activeroute: ActivatedRoute,
     private auth: AuthService,
     private userService: UserService,
+    private configServ: ConfigurationService,
     private router: Router) {
+      
+    this.configServ.loadConfigurations().subscribe( (c) => {
+      this.config = c;
+    })
     this.user = this.auth.user;
   }
 
@@ -35,13 +42,13 @@ export class SignupComponent implements OnInit {
 
       //value from route params
       this.activeroute.queryParams.subscribe(({ state }) => {
-        if (state === environment.facebook.urlState) {
+        if (state === this.config.facebook.urlState) {
           if (loginCred.access_token) {
             // localStorage.setItem('loginCredential', loginResponse.access_token);
             this.getFbUserData(loginCred.access_token);
           }
         } else {
-          if (loginCred.state === environment.google.urlState) {
+          if (loginCred.state === this.config.google.urlState) {
             this.getGoogleUserData(loginCred.access_token);
           }
         }

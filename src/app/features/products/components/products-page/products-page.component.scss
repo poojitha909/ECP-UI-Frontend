@@ -67,58 +67,14 @@
 .content {
   padding: 40px;
 }
-.quote-line {
-  background-color: #ecf4ff;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  padding: 21px 40px 21px 40px;
-  color: #161c2d;
-  font-size: 18px;
-  p {
-    margin: 0;
-  }
-  .uk-divider-vertical {
-    height: auto;
-  }
-  .uk-form-label {
-    margin-bottom: 0px;
-    margin-left: 24px;
-  }
-  select {
-    margin-left: 16px;
-    border: 0px;
-    border-radius: 4px;
-  }
-}
-.f15px {
-  font-size: 15px;
-  margin-top: 5px;
-  color: $font-color-black;
-}
 .uk-button-default {
   border-radius: 4px;
   height: 48px;
-}
-// .uk-card-body .uk-grid {
-//   margin-left: -10px;
-// }
-// .uk-card-body .uk-grid > * {
-//   padding-left: 10px;
-// }
-.green {
-  color: #187700;
-  font-weight: bold;
 }
 .m-seprator {
   margin-top: 32px;
   margin-bottom: 32px;
 }
-// .w-150 {
-//   width: 150px;
-// }
-// .pr-105 {
-//   padding-right: 105px !important;
-// }
 
 .reset-search {
   background-color: transparent;
@@ -161,9 +117,6 @@
 }
 
 @media (min-width: 640px) {
-  // .sm-pr-20 {
-  //   padding-right: 20px;
-  // }
   .w-150 {
     width: 150px;
   }
@@ -180,10 +133,6 @@
     padding: 0 16px 16px 16px;
   }
 }
-// .no-grid-margin .uk-grid-margin {
-//   margin: 0px;
-// }
-
 .landing-bg {
   background-image: url("/assets/images/landing-img/mobile/product-bg.png");
   background-position: 50% 50%;

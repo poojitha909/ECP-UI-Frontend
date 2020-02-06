@@ -10,7 +10,7 @@
     </div>
     <!-- Bread crumbs End -->
     <div class="uk-container">
-        <h2 class="heading">Ask an Expert</h2>
+        <h1 class="heading">Ask an Expert</h1>
         <hr class="m-b-30" />
         <div uk-grid>
             <div class="uk-width-1-3@m">
@@ -62,19 +62,20 @@
                     <form [formGroup]="quesForm" class="uk-form">
                         <div class="uk-margin">
                             <label [ngClass]="{'uk-text-danger' : formControl.question.invalid && ( formControl.question.dirty ||  formControl.question.touched) }"
-                                class="uk-form-label">Question<span class="required">*</span></label>
+                                class="uk-form-label" for="question">Question<span class="required">*</span></label>
                             <div class="uk-form-controls">
                                 <input [ngClass]="{'uk-form-danger' : formControl.question.invalid && ( formControl.question.dirty ||  formControl.question.touched) }"
-                                    class="uk-input" formControlName="question" type="text"  placeholder="Question">
+                                    class="uk-input" formControlName="question" id="question" type="text"  placeholder="Question">
                             </div>
                         </div>
                         <div class="uk-margin">
                             <label 
                                 [ngClass]="{'uk-text-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }" 
-                                class="uk-form-label">Description<span class="required">*</span></label>
+                                class="uk-form-label" for="description">Description<span class="required">*</span></label>
                             <div class="uk-form-controls">
                                 <editor [ngClass]="{'uk-form-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
                                     formControlName="description" 
+                                    id="description"
                                     [init]="{menubar:false, statusbar: false, base_url: '/tinymce', plugins: 'lists advlist'}"></editor>
                             </div>
                         </div>

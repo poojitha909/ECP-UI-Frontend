@@ -95,13 +95,23 @@ export class ProductDetailPageComponent implements OnInit {
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(this.currentUrl)}`);
     this.whatsappMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
 
+    let review = this.store.retrieve("new-p-review");
+    if (review) {
+      review = JSON.parse(review);
+    }
     this.reviewForm = this.fb.group({
       productId: [this.productId],
-      review: ["", Validators.required],
-      title: ["", Validators.required],
+      review: [review ? review.review : "", Validators.required],
+      title: [review ? review.title : "", Validators.required],
       id: [""]
-      // userName: ["", Validators.required]
     });
+    if(review){
+      this.store.clear("new-p-review");
+      setTimeout( () => {
+        UIkit.modal("#review-modal").show();
+      },500);
+    }
+
   }
 
   getProduct() {
@@ -118,7 +128,7 @@ export class ProductDetailPageComponent implements OnInit {
 
   setSeoTags(product: any) {
     const config: SEO = {
-      title: `An Elder Spring Initiative by Tata Trusts Product ${product.name}`,
+      title: `Shop Easy - ${product.name} - An Elder Spring Initiative by Tata Trusts`,
       keywords: 'products,services,events,dscussions',
       description: `${product.description}`,
       author: `An Elder Spring Initiative by Tata Trusts`,
@@ -150,30 +160,6 @@ export class ProductDetailPageComponent implements OnInit {
     });
   }
 
-  // addComment() {
-  //   Object.keys(this.reviewForm.controls).forEach(field => {
-  //     const control = this.reviewForm.get(field);
-  //     control.markAsTouched({ onlySelf: true });
-  //   });
-  //   let review = { ...this.reviewForm.value };
-  //   if (!this.reviewForm.valid) {
-  //     return;
-  //   }
-  //   if (!this.user) {
-  //     this.store.store("new-p-comment", JSON.stringify({ productId: this.productId, commentTxt: review.commentTxt, username: review.username, rating: review.rating }));
-  //     this.authService.redirectUrl = "product/" + this.productId;
-  //     this.router.navigate(['/user/signin']);
-  //     return;
-  //   }
-  //   this.productService.addComment(this.productId, review.commentTxt, review.username, review.rating).subscribe((response: any) => {
-  //     if (response.data) {
-  //       this.successMessage = "Review Submitted successfully.";
-  //       this.reviewForm.reset();
-  //       this.getReviews();
-  //     }
-  //   });
-  // }
-
   /**
    * Get Product rating 
    */
@@ -182,8 +168,7 @@ export class ProductDetailPageComponent implements OnInit {
       response => {
         if (response) {
           this.dbRating = response;
-          console.log(this.dbRating);
-          if (this.auth.user) {
+           if (this.auth.user) {
             this.userRating = this.dbRating.find(val => val.userId == this.userId);
           }
           this.getDetailRating();
@@ -205,7 +190,6 @@ export class ProductDetailPageComponent implements OnInit {
           ratingData.rating = this.getRatingValue(ratingData.rating);
           this.productService.addRating(ratingData).subscribe(
             response => {
-              console.log(response);
               this.userRating = response;
               this.dbRating.push(response);
               this.getDetailRating()
@@ -259,10 +243,6 @@ export class ProductDetailPageComponent implements OnInit {
     };
 
     this.detailReview.totalCount = this.dbRating.length;
-    // if (this.isDBService) {
-    //   this.detailReview.rating = this.getDbServiceRating(this.service.aggrRatingPercentage);
-    // } else {
-    // }
     if (this.dbRating.length > 0) {
       let totalrating = 0;
       this.dbRating.forEach(rate => {
@@ -304,7 +284,6 @@ export class ProductDetailPageComponent implements OnInit {
   * Add review
   */
   onReviewSubmit() {
-    if (this.reviewForm.valid) {
       if (this.auth.isAuthenticate) {
         this.reviewSuccessMessage = null;
         this.reviewForm.controls.productId.setValue(this.productId);
@@ -319,14 +298,12 @@ export class ProductDetailPageComponent implements OnInit {
           error => {
             console.log(error);
           });
-        console.log(this.reviewForm.value);
       } else {
-        // this.login();
-        // this.store.store("new-p-comment", JSON.stringify({ productId: this.productId, commentTxt: review.commentTxt, username: review.username, rating: review.rating }));
-        this.authService.redirectUrl = "product/" + this.productId;
+        console.log(this.reviewForm.value);
+        this.store.store("new-p-review", JSON.stringify(this.reviewForm.value));
+        this.authService.redirectUrl = "products/" + this.productId;
         this.router.navigate(['/user/signin']);
       }
-    }
   }
 
   // likeReply(reply) {
@@ -368,9 +345,13 @@ export class ProductDetailPageComponent implements OnInit {
   }
 
   editReview(review: DBReviews) {
+    //console.log(review,"rev");
     this.reviewSuccessMessage = null;
+
     this.reviewForm.patchValue(review);
     this.reviewTitle = "Edit";
+    UIkit.modal("#review-modal").show();
+
   }
 
   changeReviewPage(page: number) {

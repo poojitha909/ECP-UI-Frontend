@@ -1,9 +1,9 @@
 <div class="event-summary bg-white uk-height-1-1 uk-card-hover cursor-pointer uk-flex uk-flex uk-flex-column uk-flex-between"
     *ngIf="event?.isPast == isPast || isPast==0" [routerLink]="['/community/event', event?.id ]">
     <div class="event-summary-head uk-grid uk-grid-collapse">
-        <div class="event-title uk-width-1-1">
+        <h3 class="event-title">
             {{event?.title}}
-        </div>
+        </h3>
     </div>
     <div class="event-summary-body">
         <div class="date">
@@ -11,6 +11,9 @@
         </div>
         <div class="time">
             <b>Time</b>: {{event?.datetime | date: 'h:mm a'}}
+        </div>
+        <div class="time">
+            <b>Location</b>: {{event?.address}}
         </div>
         <hr />
         <div class="detail">

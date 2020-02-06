@@ -91,6 +91,9 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
       this.parentReplyId = comment.parentReplyId;
       this.replyId = comment.replyId;
       this.store.clear("new-d-comment");
+      setTimeout( () => {
+        UIkit.modal("#reply-modal-discussion").show();
+      },500);
     }
     this.replyForm = this.fb.group({
       commentTxt: [comment ? comment.commentTxt : "", Validators.required]
@@ -99,14 +102,7 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
   }
 
   addComment() {
-    Object.keys(this.replyForm.controls).forEach(field => {
-      const control = this.replyForm.get(field);
-      control.markAsTouched({ onlySelf: true });
-    });
     let comment = { ...this.replyForm.value };
-    if (!this.replyForm.valid) {
-      return;
-    }
     if (!this.user) {
       this.store.store("new-d-comment",
         JSON.stringify({
@@ -117,9 +113,18 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
           commentTxt: comment.commentTxt
         }));
       this.authService.redirectUrl = "community/discussion/" + this.discussionId + (this.category ? "/" + this.category : "");
+      UIkit.modal("#reply-modal-discussion.uk-open").hide();
       this.router.navigate(['/user/signin']);
       return;
     }
+    Object.keys(this.replyForm.controls).forEach(field => {
+      const control = this.replyForm.get(field);
+      control.markAsTouched({ onlySelf: true });
+    });
+    if (!this.replyForm.valid) {
+      return;
+    }
+    
     if (this.replyId) {
       this.discussionService.editComment(this.replyId, comment.commentTxt).subscribe((response: any) => {
         if (response.data.replies) {
@@ -216,7 +221,7 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
 
   setSeoTags(discussion: any) {
     let config: SEO = {
-      title: `An Elder Spring Initiative by Tata Trusts Dscussions on ${discussion.title}`,
+      title: `Dscussions - ${discussion.title} - An Elder Spring Initiative by Tata Trusts`,
       keywords: 'products,services,events,dscussions',
       description: `${discussion.shortSynopsis}`,
       author: `An Elder Spring Initiative by Tata Trusts`,

@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './core';
+import { ConfigurationService } from './core/services/configuration.service';
 
 // import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 // import { NgxWebstorageModule } from 'ngx-webstorage';
@@ -15,6 +16,12 @@ import { AuthInterceptor } from './core';
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule],
   bootstrap: [AppComponent],
   providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (configService: ConfigurationService) => () => configService.loadConfigurations().toPromise(),
+      deps: [ConfigurationService],
+      multi: true
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

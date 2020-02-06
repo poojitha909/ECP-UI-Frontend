@@ -5,30 +5,30 @@
   </div>
   <form class="uk-form-stacked" [formGroup]="userform">
     <div class="uk-margin">
-      <label class="uk-form-label" for="form-stacked-text">What’s your name?</label>
+      <label class="uk-form-label" for="firstName">What’s your name?</label>
       <div class="uk-form-controls">
-        <input class="uk-input" id="form-stacked-text"
+        <input class="uk-input" id="firstName"
           [ngClass]="{'uk-form-danger' : formControl.firstName.invalid && (formControl.firstName.dirty || formControl.firstName.touched) }"
           type="text" formControlName="firstName" placeholder="Your Display Name...">
       </div>
     </div>
 
     <div [hidden]="auth.user?.userIdType === userIdType.EMAIL" class="uk-margin">
-      <label class="uk-form-label" for="form-stacked-text">Email</label>
+      <label class="uk-form-label" for="Email">Email</label>
       <div class="uk-form-controls">
         <input
           [ngClass]="{'uk-form-danger' : formControl.primaryEmail.invalid && (formControl.primaryEmail.dirty || formControl.primaryEmail.touched) }"
-          class="uk-input" id="form-stacked-text" type="text" formControlName="primaryEmail"
+          class="uk-input" id="Email" type="text" formControlName="primaryEmail"
           placeholder="Your Email...">
       </div>
     </div>
 
     <div [hidden]="auth.user?.userIdType === userIdType.MOBILE" class="uk-margin">
-      <label class="uk-form-label" for="form-stacked-text">Mobile Number</label>
+      <label class="uk-form-label" for="Mobile-Number">Mobile Number</label>
       <div class="uk-form-controls">
         <input
           [ngClass]="{'uk-form-danger' : formControl.primaryPhoneNo.invalid && (formControl.primaryPhoneNo.dirty || formControl.primaryPhoneNo.touched) }"
-          class="uk-input" id="form-stacked-text" type="number" formControlName="primaryPhoneNo"
+          class="uk-input" id="Mobile-Number" type="number" formControlName="primaryPhoneNo"
           placeholder="Your Mobile Number...">
       </div>
     </div>

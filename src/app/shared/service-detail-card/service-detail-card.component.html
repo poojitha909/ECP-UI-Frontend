@@ -1,5 +1,5 @@
-<div class="uk-card uk-card-hover uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin cursor-pointer" (click)="navigate()"
-  uk-grid>
+<div class="uk-card uk-card-hover uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin cursor-pointer"
+  (click)="navigate()" tabindex=0 uk-grid>
   <div class="uk-card-media-left uk-width-1-4@m uk-width-1-3@s p-16">
     <!-- <img [imageHandler] *ngIf="isDBService" [src]="service?.basicProfileInfo?.profileImage?.thumbnailImage" width="152"
       height="152" alt="No Image">
@@ -16,8 +16,8 @@
   </div>
 
   <div class="uk-card-body uk-text-center uk-text-left@s uk-width-expand p-16">
-    <h4 class="font-regular font-weight-600 m-0">{{ isDBService ? service?.basicProfileInfo.firstName :  service?.name}}
-    </h4>
+    <h3 class="font-regular font-weight-600 m-0">{{ isDBService ? service?.basicProfileInfo.firstName :  service?.name}}
+    </h3>
     <div>
       <ngb-rating *ngIf="isDBService" [rate]="getDbServiceRating(service?.ratingPercentage)" [readonly]="true"
         [max]="5">

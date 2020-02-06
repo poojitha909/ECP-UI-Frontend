@@ -6,7 +6,7 @@
     <!-- Bread crumbs End -->
     <div class="uk-container">
         <div class="uk-grid uk-grid-large">
-            <h2 class="heading">{{product?.name}}</h2>
+            <h1 class="heading">{{product?.name}}</h1>
         </div>
         <hr class="m-b-30" />
         <div class="uk-grid-large" uk-grid>
@@ -87,7 +87,7 @@
             </div>
             <div class="uk-width-2-3@m">
                 <div class="category-box bg-white">
-                    <h2 class="heading2">About</h2>
+                    <h3 class="heading2">About</h3>
                     <div class="description">
                         {{product?.description}}
                     </div>
@@ -109,7 +109,7 @@
                 <!-- This is review modal -->
                 <div id="review-modal" uk-modal>
                     <div class="uk-modal-dialog uk-modal-body">
-                        <h1 class="font-regular-24 font-weight-600">{{reviewTitle}} Review</h1>
+                        <h3 class="font-regular-24 font-weight-600">{{reviewTitle}} Review</h3>
                         <hr />
                         <!-- Success box START-->
                         <div *ngIf="reviewSuccessMessage" class="uk-alert-success" uk-alert>
@@ -120,19 +120,19 @@
 
 
                             <div class="uk-margin">
-                                <label class="uk-form-label" for="form-stacked-text">Title<span
+                                <label class="uk-form-label" for="review-title">Title<span
                                         class="required">*</span></label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input" id="form-stacked-text" formControlName="title" type="text"
+                                    <input class="uk-input" id="review-title" formControlName="title" type="text"
                                         placeholder="Enter your name">
                                 </div>
                             </div>
 
                             <div class="uk-margin">
-                                <label class="uk-form-label" for="form-stacked-text">Your Review<span
+                                <label class="uk-form-label" for="review">Your Review<span
                                         class="required">*</span></label>
                                 <div class="uk-form-controls">
-                                    <textarea formControlName="review" class="uk-input min-h-200" id="form-stacked-text"
+                                    <textarea formControlName="review" class="uk-input min-h-200" id="review"
                                         placeholder="Enter your review here"></textarea>
                                 </div>
                             </div>
@@ -142,7 +142,7 @@
                                     type="button">Cancel</button>
                                 <button class="uk-button uk-button-default m-l-5 uk-modal-close"
                                     (click)="onReviewSubmit()" type="button"
-                                    [disabled]="reviewForm.invalid">{{ auth.isAuthenticate ? 'Post Review': 'Signin to Review'}}</button>
+                                    >{{ auth.isAuthenticate ? 'Post Review': 'Signin to Review'}}</button>
                             </div>
                         </form>
                     </div>
@@ -163,9 +163,9 @@
                             <ng-container *ngIf="reviews.length > 0">
                                 <div class="m-t-50 m-b-20" uk-grid>
                                     <div class="uk-width-expand uk-flex uk-flex-middle">
-                                        <h1 class="font-regular-24 font-weight-600"> Reviews
+                                        <h3 class="font-regular-24 font-weight-600"> Reviews
                                             ({{totalReviewRecords}})
-                                        </h1>
+                                        </h3>
                                     </div>
                                     <div class="uk-width-auto">
                                         <button class="uk-button uk-button-transparent review-btn-transparent"

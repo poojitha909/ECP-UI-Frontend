@@ -1,9 +1,9 @@
 <div class="discussion-summary uk-card-hover bg-white uk-height-1-1 cursor-pointer uk-flex uk-flex uk-flex-column uk-flex-between"
     [routerLink]="['/community/discussion', discussion.id, category ]">
     <div class="discussion-summary-head uk-grid uk-grid-collapse">
-        <div class="discussion-title uk-width-1-1">
+        <h3 class="discussion-title">
             {{discussion.title | ellipsis:65}}
-        </div>
+        </h3>
     </div>
     <div class="discussion-summary-body uk-grid uk-grid-collapse">
         <div class="uk-width-1-3">

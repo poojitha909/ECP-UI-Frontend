@@ -54,7 +54,6 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    document.getElementById("eventHeader").focus();
   }
 
   ngOnDestroy() {
@@ -66,7 +65,7 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(this.currentUrl)}`);
     this.whatsappMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
     this.eventId = this.route.snapshot.params['id'];
-    this.getEvent()
+    this.getEvent();
     this.reportEmail = "admin@socialpha.com";
     this.user = this.store.retrieve("ECP-USER");
     this.markIt = false;
@@ -79,6 +78,7 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
     if (this.eventId == "preview") {
       this.event = this.store.retrieve("new-event-preview");
       this.event = JSON.parse(this.event);
+      document.getElementById("eventHeader").focus();
     }
     else {
       this.eventService.getEvent(this.eventId).subscribe((response: any) => {
@@ -93,6 +93,7 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
           else {
             this.markIt = false;
           }
+          document.getElementById("eventHeader").focus();
         }
       });
     }

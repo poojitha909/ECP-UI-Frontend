@@ -9,8 +9,12 @@
     }
     .publish-on{
       font-size: 15px;
+      font-weight: 600;
       color: rgba(22, 28, 45, 0.68);
-      opacity: 0.5;
+      span{
+        font-weight: 400;
+        opacity: 0.5;
+      }
     }
     .heading{ 
       font-family: $regular-font;

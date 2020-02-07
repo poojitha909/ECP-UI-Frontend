@@ -16,8 +16,8 @@
           <div>
             <div class="sign-in-button">
 
-              <button *ngIf="!auth.isAuthenticate" routerLink="/user/signin" class="uk-button uk-button-default">Join
-                Us</button>
+              <button *ngIf="!auth.isAuthenticate" routerLink="/user/signin"
+                class="uk-button uk-button-default">Join Us</button>
               <div class="uk-inline" *ngIf="auth.isAuthenticate">
                 <button
                   class="uk-button uk-button-default">{{ auth.user.userName || auth.user.email || auth.user.phoneNumber }}</button>

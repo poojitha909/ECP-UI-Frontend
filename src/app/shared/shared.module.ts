@@ -32,6 +32,8 @@ import { DicussionSummaryCardComponent } from './dicussion-summary-card/dicussio
 import { EventSummaryCardComponent } from './event-summary-card/event-summary-card.component';
 import { AskExpertSummaryCardComponent } from './ask-expert-summary-card/ask-expert-summary-card.component';
 import { ActiveMaxDirective } from './directives/active-max.directive';
+import { FeaturedMyQuestionsComponent } from './featured-my-questions/featured-my-questions.component';
+import { MyQuestionsSummaryCardComponent } from './my-questions-summary-card/my-questions-summary-card.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import { ActiveMaxDirective } from './directives/active-max.directive';
     DicussionSummaryCardComponent,
     EventSummaryCardComponent,
     AskExpertSummaryCardComponent,
-    ActiveMaxDirective
+    ActiveMaxDirective,
+    FeaturedMyQuestionsComponent,
+    MyQuestionsSummaryCardComponent
   ],
   imports: [
     CommonModule,
@@ -98,7 +102,9 @@ import { ActiveMaxDirective } from './directives/active-max.directive';
     DicussionSummaryCardComponent,
     EventSummaryCardComponent,
     AskExpertSummaryCardComponent,
-    ActiveMaxDirective
+    ActiveMaxDirective,
+    FeaturedMyQuestionsComponent,
+    MyQuestionsSummaryCardComponent
   ]
 })
 export class SharedModule { }

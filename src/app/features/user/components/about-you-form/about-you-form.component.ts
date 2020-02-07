@@ -25,14 +25,43 @@ export class AboutYouFormComponent implements OnInit {
     "Reading", "Writing"
   ];
 
+  emotionalChallenges: string[] = [
+    "Depression",
+    "Mental health issues",
+    "No Challenges"
+  ];
+
+  otherDifficulties: string[] = [
+    "Mobility Issues",
+    "Hearing Problems",
+    "Speech",
+    "No Difficulties"
+  ];
+
   languages: any[] = [
     {
       id: 1,
-      name: 'English'
+      name: 'Telugu'
     },
     {
       id: 2,
+      name: 'English'
+    },
+    {
+      id: 3,
       name: 'Hindi'
+    },
+    {
+      id: 4,
+      name: 'Tamil'
+    },
+    {
+      id: 5,
+      name: 'Urdu'
+    },
+    {
+      id: 6,
+      name: 'Others'
     }
   ];
 

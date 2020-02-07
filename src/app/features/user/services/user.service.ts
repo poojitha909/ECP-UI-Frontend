@@ -3,10 +3,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { ApiConstants } from 'src/app/api.constants';
 import { Observable } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { UserProfile, User } from 'src/app/core/interfaces';
 import { AuthService } from 'src/app/core';
 import { environment } from 'src/environments/environment';
+import { ConfigurationService } from 'src/app/core/services/configuration.service';
 
 
 
@@ -16,10 +17,17 @@ import { environment } from 'src/environments/environment';
 export class UserService {
 
   userProfile: UserProfile;
+  config: any;
 
   constructor(
     private http: HttpClient,
-    private auth: AuthService) { }
+    private configServ: ConfigurationService,
+    private auth: AuthService) {
+    
+    this.configServ.loadConfigurations().subscribe( (c) => {
+      this.config = c;
+    })
+  }
 
   createUserProfile(userData: UserProfile): Observable<UserProfile> {
     return this.http.post<any>(ApiConstants.USER_PROFILE, userData).pipe(
@@ -64,12 +72,27 @@ export class UserService {
 
   updateUserProfile(user: UserProfile): Observable<any> {
     user.userId = this.auth.user.id;
-    return this.http.put<any>(`${ApiConstants.USER_PROFILE}/${this.auth.user.id}`, user).pipe(
-      map
-        ((response) => {
-          return response.data;
-        })
-    );
+    if (user.basicProfileInfo.firstName !== this.auth.user.userName) {
+      const userData: User = {
+        id: user.userId,
+        userName: user.basicProfileInfo.firstName
+      }
+      return this.changeUserName(userData).pipe(
+        switchMap(() => this.http.put<any>(`${ApiConstants.USER_PROFILE}/${user.userId}`, user).pipe(
+          map
+            ((response) => {
+              return response.data;
+            })
+        ))
+      )
+    } else {
+      return this.http.put<any>(`${ApiConstants.USER_PROFILE}/${user.userId}`, user).pipe(
+        map
+          ((response) => {
+            return response.data;
+          })
+      );
+    }
   }
 
   uploadUserImage(userImage: FormData): Observable<any> {
@@ -78,7 +101,7 @@ export class UserService {
       map((response) => {
         if (response && response.data) {
           this.userProfile.basicProfileInfo.profileImage = {
-            thumbnailImage: environment.imageBaseUrl + response.data[0]
+            thumbnailImage: this.config.imageBaseUrl + response.data[0]
           }
           return response.data;
         }

@@ -34,6 +34,8 @@ import { AskExpertSummaryCardComponent } from './ask-expert-summary-card/ask-exp
 import { ActiveMaxDirective } from './directives/active-max.directive';
 import { FeaturedMyQuestionsComponent } from './featured-my-questions/featured-my-questions.component';
 import { MyQuestionsSummaryCardComponent } from './my-questions-summary-card/my-questions-summary-card.component';
+import { UserTermsComponent } from './user-terms/user-terms.component';
+import { UserPolicyComponent } from './user-policy/user-policy.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { MyQuestionsSummaryCardComponent } from './my-questions-summary-card/my-
     AskExpertSummaryCardComponent,
     ActiveMaxDirective,
     FeaturedMyQuestionsComponent,
-    MyQuestionsSummaryCardComponent
+    MyQuestionsSummaryCardComponent,
+    UserTermsComponent,
+    UserPolicyComponent
   ],
   imports: [
     CommonModule,

@@ -113,16 +113,6 @@
   <div class="uk-child-width-1-2 m-b-30" uk-grid>
     <div class="uk-text-center">
       <div class="options-card">
-        <img src="assets/images/events.png" alt="No Image Found" />
-      </div>
-      <div (click)="showAllEvents()" class="quote-line-card cursor-pointer">
-        What is Happening
-        <span class="uk-float-right" uk-icon="chevron-right"></span>
-      </div>
-    </div>
-
-    <div class="uk-text-center">
-      <div class="options-card">
         <img src="assets/images/discussion.png" alt="No Image Found" />
       </div>
       <div (click)="showAllDiscussions()" class="quote-line-card cursor-pointer">
@@ -130,6 +120,17 @@
         <span class="uk-float-right" uk-icon="chevron-right"></span>
       </div>
     </div>
+  
+    <div class="uk-text-center">
+      <div class="options-card">
+        <img src="assets/images/events.png" alt="No Image Found" />
+      </div>
+      <div (click)="showAllEvents()" class="quote-line-card cursor-pointer">
+        Happening near You
+        <span class="uk-float-right" uk-icon="chevron-right"></span>
+      </div>
+    </div>
+  
   </div>
   <div class="m-seprator">
     <app-featured-discussions></app-featured-discussions>

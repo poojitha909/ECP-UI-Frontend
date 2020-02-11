@@ -10,6 +10,8 @@ declare var UIkit: any;
 export class HeaderComponent implements OnInit, AfterViewInit {
 
   @ViewChildren('homeLink') private homeLink: QueryList<ElementRef>;
+  @ViewChild('navLinks', { static: false }) private navLinks: ElementRef;
+
 
   constructor(public auth: AuthService, private router: Router) {
 
@@ -30,6 +32,14 @@ export class HeaderComponent implements OnInit, AfterViewInit {
         )
       }, 50);
     }
+  }
+
+  removeAttr() {
+    setTimeout(() => {
+      this.navLinks.nativeElement.childNodes.forEach(node => {
+        node.firstChild.removeAttribute("aria-expanded");
+      });
+    }, 1);
   }
 
   navigateUser() {

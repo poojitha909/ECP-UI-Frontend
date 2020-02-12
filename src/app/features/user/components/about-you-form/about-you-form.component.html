@@ -1,9 +1,9 @@
 <!-- About You form START-->
 <div class="category-box m-t-40 bg-white">
-    <h3>Personal information  </h3>
+    <h3>Personal information </h3>
     <p>(Note to Content Writer: Add text here explaining how this information will be used)</p>
     <hr />
-    
+
     <!-- Error box START-->
     <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
         <p>{{ errorMessage }}</p>
@@ -32,7 +32,8 @@
                     <option>Option 01</option>
                     <option>Option 02</option>
                 </select> -->
-                <ng-select [addTag]="addTagFn" [hideSelected]="true" id="Emotional-Challenges" multiple="true" formControlName="emotionalIssues">
+                <ng-select [addTag]="addTagFn" [items]="emotionalChallenges" [hideSelected]="true"
+                    id="Emotional-Challenges" multiple="true" formControlName="emotionalIssues">
                 </ng-select>
             </div>
         </div>
@@ -40,8 +41,8 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="Medical-Issues">Medical Issues</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" [items]="medicalIssues" id="Medical-Issues" [hideSelected]="true" multiple="true"
-                    formControlName="medicalIssues">
+                <ng-select [addTag]="addTagFn" [items]="medicalIssues" id="Medical-Issues" [hideSelected]="true"
+                    multiple="true" formControlName="medicalIssues">
                 </ng-select>
             </div>
         </div>
@@ -49,8 +50,8 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="Other-Difficulties">Other Difficulties</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" placeholder="" id="Other-Difficulties" [hideSelected]="true" multiple="true"
-                    formControlName="otherIssues">
+                <ng-select [addTag]="addTagFn" [items]="otherDifficulties" placeholder="" id="Other-Difficulties"
+                    [hideSelected]="true" multiple="true" formControlName="otherIssues">
                 </ng-select>
             </div>
         </div>
@@ -58,8 +59,8 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="Languages">Languages</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addLangFn" id="Languages" [items]="languages" placeholder="Add Languages" [hideSelected]="true"
-                    multiple="true" bindLabel="name" formControlName="language">
+                <ng-select [addTag]="addLangFn" id="Languages" [items]="languages" placeholder="Add Languages"
+                    [hideSelected]="true" multiple="true" bindLabel="name" formControlName="language">
                 </ng-select>
             </div>
         </div>
@@ -68,8 +69,8 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="My-Hobbies">My Hobbies</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" id="My-Hobbies" placeholder="" [items]="hobbies" [hideSelected]="true" multiple="true"
-                    formControlName="hobbies">
+                <ng-select [addTag]="addTagFn" id="My-Hobbies" placeholder="" [items]="hobbies" [hideSelected]="true"
+                    multiple="true" formControlName="hobbies">
                 </ng-select>
             </div>
         </div>
@@ -86,7 +87,8 @@
         <hr class="m-t-75" />
         <div uk-grid>
             <div class="uk-width-expand@s">
-                <label class="private-checkbox" for="private-imformation"><input class="uk-checkbox" id="private-imformation" type="checkbox" checked> This information is
+                <label class="private-checkbox" for="private-imformation"><input class="uk-checkbox"
+                        id="private-imformation" type="checkbox" checked> This information is
                     private</label>
             </div>
             <div>

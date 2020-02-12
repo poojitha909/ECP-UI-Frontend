@@ -17,14 +17,14 @@
             <div class="sign-in-button">
 
               <button *ngIf="!auth.isAuthenticate" routerLink="/user/signin"
-                class="uk-button uk-button-default">CHECK-IN HERE</button>
+                class="uk-button uk-button-default">Join Us</button>
               <div class="uk-inline" *ngIf="auth.isAuthenticate">
                 <button
                   class="uk-button uk-button-default">{{ auth.user.userName || auth.user.email || auth.user.phoneNumber }}</button>
                 <div uk-dropdown="pos: bottom-left">
                   <ul class="uk-nav uk-dropdown-nav">
                     <li><a class="uk-padding-remove font-regular" (click)="navigateUser()">
-                        <fa-icon icon="user" [style]="{'margin-right':'20px','color':'#1A73E8'}"></fa-icon>User Profile
+                        <fa-icon icon="user" [style]="{'margin-right':'20px','color':'#1A73E8'}"></fa-icon>My Profile
                       </a>
                     </li>
                     <hr />
@@ -60,7 +60,7 @@
             [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">Ask
               our Expert</a></li>
           <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
-            [routerLinkActiveOptions]="{exact: false}"><a routerLink="/products">Shop Easy</a></li>
+            [routerLinkActiveOptions]="{exact: false}"><a routerLink="/products">Products for you</a></li>
           <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
             [routerLinkActiveOptions]="{exact: false}"><a routerLink="/services">At your service</a></li>
           <li class="uk-nav-divider"></li>
@@ -83,15 +83,15 @@
         <li #homeLink routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Know
             us</a>
         </li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/community">Let’s
-            Talk</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/community">Let us
+            Engage</a></li>
         <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">Ask
             our
-            Expert</a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/products">Shop
-            Easy</a></li>
+            Experts</a></li>
+        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/products">Products for You
+            </a></li>
         <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/services">At your
-            service</a></li>
+            Service</a></li>
         <!-- <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
             routerLink="/articles">Articles</a></li> -->
       </ul>

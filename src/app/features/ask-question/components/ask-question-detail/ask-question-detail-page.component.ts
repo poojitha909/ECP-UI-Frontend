@@ -232,6 +232,7 @@ export class AskQuestionDetailPageComponent implements OnInit {
     }
     this.askQuesService.addQuestion({
       question: this.question.question,
+      answered: this.question.answered,
       description: this.question.description,
       askCategory: { id: this.question.askCategory.id },
       answeredBy: { id: this.question.answeredBy.id },

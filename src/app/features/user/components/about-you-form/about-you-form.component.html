@@ -15,7 +15,7 @@
     </div>
     <!-- Success box END-->
 
-    <form [formGroup]="aboutForm" (ngSubmit)="onSubmit()" class="uk-form-stacked">
+    <form [formGroup]="aboutForm" (ngSubmit)="onSubmit('SAVE_FINAL_CHANGES')" class="uk-form-stacked">
 
         <div class="uk-margin">
             <label class="uk-form-label" for="about-you">Tell us something about yourself</label>
@@ -91,10 +91,13 @@
                         id="private-imformation" type="checkbox" checked> This information is
                     private</label>
             </div>
+            <button class="uk-button uk-button-transparent uk-modal-close" type="button"
+            (click)="onCancel()">Cancel</button>
             <div>
                 <button class="m-l-10 uk-button uk-button-default" type="submit"
                     [disabled]="this.aboutForm.invalid">Save Changes</button>
             </div>
+
         </div>
     </form>
 </div>

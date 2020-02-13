@@ -11,8 +11,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class UserPageComponent implements OnInit {
 
-  selectedTab: string = 'editprofile';
-
+  selectedTab: string = 'viewprofile';
+  eventEmitted: any;
+  ViewEventEmitted: any;
 
   constructor(
     private userService: UserService,
@@ -32,11 +33,14 @@ export class UserPageComponent implements OnInit {
   }
 
 
-  viewEditProfile() {
+  viewEditProfile(event) {
+    console.log(event)
+    this.eventEmitted = event;
     this.selectedTab = 'editprofile';
   }
 
-  viewUserProfile() {
+  viewUserProfile(event) {
+  this.ViewEventEmitted=event
     this.selectedTab = 'viewprofile';
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 
@@ -8,6 +8,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./about-you-form.component.scss']
 })
 export class AboutYouFormComponent implements OnInit {
+  @Output() cancelForm = new EventEmitter();
 
   aboutForm: FormGroup;
   medicalIssues: string[] = ["Diabetes", "Blood", "Pressure", "Dementia", "Arthiritis"];
@@ -100,7 +101,7 @@ export class AboutYouFormComponent implements OnInit {
     return { id: 0, name: name };
   }
 
-  onSubmit() {
+  onSubmit(Event) {
     if (this.aboutForm.valid) {
       this.formControl.language.value.forEach(
         (val, index) => {
@@ -130,11 +131,18 @@ export class AboutYouFormComponent implements OnInit {
           this.errorMessage = "Some unknown internal server error occured";
         });
     }
+    console.log('CancelForm after Submit from ',event)
+    this.cancelForm.emit();
   }
 
   resetAlertMessages() {
     this.errorMessage = null;
     this.successMessage = null;
+  }
+
+  onCancel() {
+    this.resetAlertMessages();
+    this.cancelForm.emit();
   }
 
 

@@ -5,7 +5,7 @@
             <div class="uk-width-expand@s">
                 <h2 class="font-regular-24 font-weight-600">
                     <img src="assets/images/experts.png" alt="No Image Found" />Ask our Experts
-                    
+
                 </h2>
             </div>
             <div class="uk-width-1-3@m">
@@ -14,7 +14,8 @@
                         <small>Showing</small>
                     </div>
                     <div class="uk-width-expand">
-                        <select class="uk-select" [(ngModel)]="searchParams.experties" id="Showing-Advisors" (change)="showExperts()">
+                        <select class="uk-select" [(ngModel)]="searchParams.experties" id="Showing-Advisors"
+                            (change)="showExperts()">
                             <option value="">Select Category</option>
                             <option *ngFor="let cat of catsList" value="{{cat.id}}">{{cat.name}}</option>
                         </select>
@@ -34,10 +35,11 @@
                             <app-ask-expert-summary-card [expert]="expert"></app-ask-expert-summary-card>
                         </li>
                         <li>
-                            <div class="uk-flex uk-flex-middle bg-white" [routerLink]="['/ask-question/all']">
-                              <div class="see-all-card">
-                                See all experts
-                              </div>
+                            <div class="uk-flex uk-flex-middle bg-white" routerLink="/ask-question/all"
+                                [queryParams]="{ category:searchParams.experties}">
+                                <div class="see-all-card">
+                                    See all experts
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -55,10 +57,12 @@
     <div class="block-footer">
         <div uk-grid>
             <div class="uk-width-expand@s">
-                <img src="assets/images/verified.png" alt="No Image Found" /> <span class="m-l-5">Experts you can trust</span>
+                <img src="assets/images/verified.png" alt="No Image Found" /> <span class="m-l-5">Experts you can
+                    trust</span>
             </div>
             <div class="uk-width-auto@s uk-width-1-1">
-                <button routerLink="/ask-question/all" class="uk-button uk-button-default w-100">See All
+                <button routerLink="/ask-question/all" [queryParams]="{ category:searchParams.experties}"
+                    class="uk-button uk-button-default w-100">See All
                     Experts</button>
             </div>
         </div>

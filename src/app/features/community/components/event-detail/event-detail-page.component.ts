@@ -26,7 +26,8 @@ export class EventDetailPageComponent implements OnInit {
     },
     {
       text: 'All Events',
-      link: '/community/events'
+      link: '/community/events',
+      queryParams: {}
     }
   ];
   eventId: string;
@@ -66,6 +67,7 @@ export class EventDetailPageComponent implements OnInit {
     if (this.user) {
       this.user = JSON.parse(this.user);
     }
+    this.breadcrumbLinks[2].queryParams = this.route.snapshot.queryParams;
   }
 
   getEvent() {

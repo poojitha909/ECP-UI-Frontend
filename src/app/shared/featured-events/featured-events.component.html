@@ -13,11 +13,12 @@
                         <small>Showing</small>
                     </div>
                     <div class="uk-width-expand">
-                        <select class="uk-select" [(ngModel)]="searchParams.pastEvents" id="Showing-Events" (change)="showEvents()">
+                        <select class="uk-select" [(ngModel)]="searchParams.pastEvents" id="Showing-Events"
+                            (change)="showEvents()">
                             <option value="-1">What’s Next?</option>
                             <option value="1">Past Events</option>
                             <option value="0">All Events</option>
-                          </select>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -34,35 +35,37 @@
                             </app-event-summary-card>
                         </li>
                         <li>
-                            <div class="uk-flex uk-flex-middle bg-white" [routerLink]="['/community/events']">
-                              <div class="see-all-card">
+                            <div class="uk-flex uk-flex-middle bg-white" routerLink="/community/events"
+                                [queryParams]="{past:searchParams.pastEvents}">
+                              <div class=" see-all-card">
                                 See all events
-                              </div>
                             </div>
-                        </li>
-                    </ul>
                 </div>
-                <div>
-                    <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
-                        uk-slidenav-previous uk-slider-item="previous"></a>
-                    <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
-                        uk-slidenav-next uk-slider-item="next"></a>
-                </div>
+                </li>
+                </ul>
+            </div>
+            <div>
+                <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
+                    uk-slidenav-previous uk-slider-item="previous"></a>
+                <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
+                    uk-slidenav-next uk-slider-item="next"></a>
             </div>
         </div>
     </div>
-    <div class="block-footer">
-        <div uk-grid>
-            <div class="uk-width-expand@s">
-                <img src="assets/images/verified.png" alt="No Image Found" /> <span class="m-l-5">Events curated for elders</span>
-            </div>
-            <div class="uk-width-auto@s uk-width-1-1">
-                <button routerLink="/community/events" [queryParams]="{past:searchParams.pastEvents}"
-                    class="uk-button uk-button-default w-100">See
-                    All
-                    Events</button>
-            </div>
+</div>
+<div class="block-footer">
+    <div uk-grid>
+        <div class="uk-width-expand@s">
+            <img src="assets/images/verified.png" alt="No Image Found" /> <span class="m-l-5">Events curated for
+                elders</span>
+        </div>
+        <div class="uk-width-auto@s uk-width-1-1">
+            <button routerLink="/community/events" [queryParams]="{past:searchParams.pastEvents}"
+                class="uk-button uk-button-default w-100">See
+                All
+                Events</button>
         </div>
     </div>
+</div>
 </div>
 <!-- Service Featured END tabs -->

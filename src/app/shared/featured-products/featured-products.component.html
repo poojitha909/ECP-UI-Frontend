@@ -13,7 +13,8 @@
                         <small>Showing</small>
                     </div>
                     <div class="uk-width-expand">
-                        <select class="uk-select" id="product-category" [(ngModel)]="searchParams.productCategory" (change)="showProducts()">
+                        <select class="uk-select" id="product-category" [(ngModel)]="searchParams.productCategory"
+                            (change)="showProducts()">
                             <option value="">Popular Products</option>
                             <option *ngFor="let cat of catsList" value="{{cat.id}}">{{cat.name}}</option>
                         </select>
@@ -33,10 +34,11 @@
                             <app-product-search-card [product]="product"></app-product-search-card>
                         </li>
                         <li>
-                            <div class="uk-flex uk-flex-middle bg-white" [routerLink]="['/products/all']">
-                              <div class="see-all-card">
-                                See all products
-                              </div>
+                            <div class="uk-flex uk-flex-middle bg-white" routerLink="/products/all"
+                                [queryParams]="{ productCategory:searchParams.productCategory}">
+                                <div class="see-all-card">
+                                    See all products
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -54,10 +56,12 @@
     <div class="block-footer">
         <div uk-grid>
             <div class="uk-width-expand@s">
-                <img src="assets/images/verified.png" alt="No Image Found" /> <span class="m-l-5">Products for elderly needs</span>
+                <img src="assets/images/verified.png" alt="No Image Found" /> <span class="m-l-5">Products for elderly
+                    needs</span>
             </div>
             <div class="uk-width-auto@s uk-width-1-1">
-                <button routerLink="/products/all" class="uk-button uk-button-default w-100">See All Products</button>
+                <button routerLink="/products/all" [queryParams]="{ productCategory:searchParams.productCategory}"
+                    class="uk-button uk-button-default w-100">See All Products</button>
             </div>
         </div>
     </div>

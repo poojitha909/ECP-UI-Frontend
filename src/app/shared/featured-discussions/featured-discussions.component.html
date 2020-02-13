@@ -14,11 +14,13 @@
                         <small>Showing</small>
                     </div>
                     <div class="uk-width-expand">
-                        <select class="uk-select" [(ngModel)]="selDiscussCategory" id="Showing-Discussions" (change)="showDiscussions()">
+                        <select class="uk-select" [(ngModel)]="selDiscussCategory" id="Showing-Discussions"
+                            (change)="showDiscussions()">
                             <option value="">Active Discussions</option>
-                            <option *ngFor="let cat of discussCategoryList | keyvalue" value="{{cat.key}}">{{cat.value.label}}
+                            <option *ngFor="let cat of discussCategoryList | keyvalue" value="{{cat.key}}">
+                                {{cat.value.label}}
                             </option>
-                          </select>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -37,10 +39,11 @@
                             </app-dicussion-summary-card>
                         </li>
                         <li>
-                            <div class="uk-flex uk-flex-middle bg-white" [routerLink]="['/community/discussions']">
-                              <div class="see-all-card">
-                                See all discussions
-                              </div>
+                            <div class="uk-flex uk-flex-middle bg-white" routerLink="/community/discussions"
+                                [queryParams]="{ category:selDiscussCategory}">
+                                <div class="see-all-card">
+                                    See all discussions
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -58,10 +61,12 @@
     <div class="block-footer">
         <div uk-grid>
             <div class="uk-width-expand@s">
-                <img src="assets/images/verified.png" alt="No Image Found" /> <span class="m-l-5">Articles & discussions for elders</span>
+                <img src="assets/images/verified.png" alt="No Image Found" /> <span class="m-l-5">Articles & discussions
+                    for elders</span>
             </div>
             <div class="uk-width-auto@s uk-width-1-1">
-                <button routerLink="/community/discussions" class="uk-button uk-button-default w-100">See All
+                <button routerLink="/community/discussions" [queryParams]="{ category:selDiscussCategory}"
+                    class="uk-button uk-button-default w-100">See All
                     Discussions</button>
             </div>
         </div>

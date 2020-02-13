@@ -15,6 +15,10 @@ import { GeneralInfoFormComponent } from './components/general-info-form/general
 import { ContactDetailFormComponent } from './components/contact-detail-form/contact-detail-form.component';
 import { AboutYouFormComponent } from './components/about-you-form/about-you-form.component';
 import { ChangeProfilePictureFormComponent } from './components/change-profile-picture-form/change-profile-picture-form.component';
+import { ViewUserDetailsComponent } from './components/view-profile/view-user-details/view-user-details.component';
+import { ViewGeneralInfoComponent } from './components/view-profile/view-general-info/view-general-info.component';
+import { ViewAddressDetailsComponent } from './components/view-profile/view-address-details/view-address-details.component';
+import { ViewPersonalInformationComponent } from './components/view-profile/view-personal-information/view-personal-information.component';
 
 
 
@@ -32,7 +36,11 @@ import { ChangeProfilePictureFormComponent } from './components/change-profile-p
     GeneralInfoFormComponent, 
     ContactDetailFormComponent, 
     AboutYouFormComponent, 
-    ChangeProfilePictureFormComponent],
+    ChangeProfilePictureFormComponent, 
+    ViewUserDetailsComponent, 
+    ViewGeneralInfoComponent, 
+    ViewAddressDetailsComponent, 
+    ViewPersonalInformationComponent],
   imports: [
     CommonModule,
     CoreModule,

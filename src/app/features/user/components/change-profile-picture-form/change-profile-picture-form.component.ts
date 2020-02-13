@@ -10,11 +10,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ChangeProfilePictureFormComponent implements OnInit {
   @Output() cancelForm = new EventEmitter();
+  EditUser:string;
+  eventEmitted: any;
+
 
   basicProfile: FormGroup;
   errorMessage;
   successMessage;
   isLoading;
+  
+  
 
   constructor(
     private auth: AuthService,
@@ -32,7 +37,9 @@ export class ChangeProfilePictureFormComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
+
 
   get formControl() {
     return this.basicProfile.controls;
@@ -61,7 +68,7 @@ export class ChangeProfilePictureFormComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  onSubmit(event) {
     this.userService.userProfile.basicProfileInfo.firstName = this.formControl.firstName.value;
     this.userService.userProfile.basicProfileInfo.primaryEmail = this.formControl.primaryEmail.value;
     this.userService.userProfile.basicProfileInfo.primaryPhoneNo = this.formControl.primaryPhoneNo.value;
@@ -78,6 +85,9 @@ export class ChangeProfilePictureFormComponent implements OnInit {
         this.isLoading = false;
         this.errorMessage = "Some unknown internal server error occured";
       });
+
+      console.log('CancelForm after Submit from ',event)
+      this.cancelForm.emit();
   }
 
   resetAlertMessages() {

@@ -11,7 +11,7 @@ import { Gender } from 'src/app/core/interfaces';
 })
 export class ViewProfileComponent implements OnInit {
 
-  @Output() editProfile = new EventEmitter();
+  @Output() editProfile = new EventEmitter<{ obj: any, action: "" }>();
 
   gender: string;
 
@@ -26,8 +26,8 @@ export class ViewProfileComponent implements OnInit {
     console.log(this.gender);
   }
 
-  edit() {
-    this.editProfile.emit();
+  edit(actionName) {
+    this.editProfile.emit({ obj: "", action: actionName });
   }
 
 }

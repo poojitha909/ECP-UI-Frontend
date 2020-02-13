@@ -89,7 +89,7 @@
             <div *ngIf="eventsList!==undefined && eventsList.length > 0">
                 <div class="uk-flex-left uk-text-center uk-child-width-1-2@m m-b-30" uk-grid>
                     <div *ngFor="let event of eventsList">
-                        <app-event-summary-card [event]="event" [isPast]="searchParams.pastEvents">
+                        <app-event-summary-card [event]="event" [pageParam]={past:this.searchParams.pastEvents,searchTxt:this.searchParams.searchTxt,page:this.searchParams.p} [isPast]="searchParams.pastEvents">
                         </app-event-summary-card>
                     </div>
                 </div>

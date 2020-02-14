@@ -13,18 +13,29 @@
   }
   .help-line {
     span {
-      margin-right: 8px;
+      margin-right: 1px;
     }
+    width: 50%;
+    height: 50px;
+    font-size: 15px;
     text-transform: none;
     background-color: $dark-blue-1;
     color: #ffffff;
     border: unset;
     border-radius: 4px;
-    padding: 10px 30px;
+    padding: 7px 24px;
     &:active,&:hover{
       background-color: #ffffff;
       color: $primary-btn;
     }
+  }
+
+  .JoyofAge{
+    margin-right: -143px;
+  }
+  .ourpartners{
+    margin-right: 100px
+    
   }
 
   .partners {

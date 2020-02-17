@@ -41,8 +41,9 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="Medical-Issues">Medical Issues</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" [items]="medicalIssues" id="Medical-Issues" [hideSelected]="true"
-                    multiple="true" formControlName="medicalIssues">
+                <ng-select [addTag]="addTagFn" [items]="medicalIssues" id="Medical-Issues"
+                    placeholder="Add Medical Issues" [hideSelected]="true" multiple="true"
+                    formControlName="medicalIssues">
                 </ng-select>
             </div>
         </div>
@@ -50,8 +51,8 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="Other-Difficulties">Other Difficulties</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" [items]="otherDifficulties" placeholder="" id="Other-Difficulties"
-                    [hideSelected]="true" multiple="true" formControlName="otherIssues">
+                <ng-select [addTag]="addTagFn" [items]="otherDifficulties" placeholder="Add Other Difficulties"
+                    id="Other-Difficulties" [hideSelected]="true" multiple="true" formControlName="otherIssues">
                 </ng-select>
             </div>
         </div>
@@ -69,7 +70,7 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="My-Hobbies">My Hobbies</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" id="My-Hobbies" placeholder="" [items]="hobbies" [hideSelected]="true"
+                <ng-select [addTag]="addTagFn" id="My-Hobbies" placeholder="Add Hobbies" [items]="hobbies" [hideSelected]="true"
                     multiple="true" formControlName="hobbies">
                 </ng-select>
             </div>
@@ -78,7 +79,7 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="Topic-Interests">Topic of Interests</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" id="Topic-Interests" placeholder="" [hideSelected]="true" multiple="true"
+                <ng-select [addTag]="addTagFn" id="Topic-Interests" placeholder="Add Topic of Interests" [hideSelected]="true" multiple="true"
                     formControlName="otherInterests">
                 </ng-select>
             </div>
@@ -92,7 +93,7 @@
                     private</label>
             </div>
             <button class="uk-button uk-button-transparent uk-modal-close" type="button"
-            (click)="onCancel()">Cancel</button>
+                (click)="onCancel()">Cancel</button>
             <div>
                 <button class="m-l-10 uk-button uk-button-default" type="submit"
                     [disabled]="this.aboutForm.invalid">Save Changes</button>

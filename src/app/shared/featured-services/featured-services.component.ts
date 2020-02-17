@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { EpcServiceService } from 'src/app/features/services/epc-service.service';
-import { Service } from 'src/app/core/interfaces';
+import { Service, PageParam } from 'src/app/core/interfaces';
 import { HomeService } from 'src/app/features/home/home.service';
+import { StorageHelperService } from 'src/app/core/services';
+import { AppConstants } from 'src/app/app.constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-featured-services',
@@ -11,11 +14,22 @@ import { HomeService } from 'src/app/features/home/home.service';
 export class FeaturedServicesComponent implements OnInit {
 
   services: Service[] = [];
-  category: string;
-  constructor(private ecpService: EpcServiceService, private homeService: HomeService) { }
+  category: string = "";
+  constructor(
+    private ecpService: EpcServiceService,
+    private homeService: HomeService,
+    private storageHelper: StorageHelperService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-    this.getFeatureServices();
+    const featuredServiceSession = this.storageHelper.retrieveSession(AppConstants.FEATURED_SERVICE);
+    if (featuredServiceSession) {
+      this.category = featuredServiceSession;
+      this.searchByCategories();
+    } else {
+      this.getFeatureServices();
+    }
   }
 
   getFeatureServices() {
@@ -30,17 +44,27 @@ export class FeaturedServicesComponent implements OnInit {
       });
   }
 
-  searchByCategories(category) {
-    if (category) {
-      this.category = category;
-      this.homeService.searchParam.term = category;
-      this.homeService.getServices().subscribe(
+  searchByCategories() {
+    if (this.category) {
+      const searchParam: PageParam = {
+        p: 1,
+        s: 5,
+        term: this.category
+      };
+
+      this.homeService.getFeaturedServices(searchParam).subscribe(
         response => {
           if (response && response.data) {
             this.services = response.data.slice(0, 6);
           }
         });
+    } else {
+      this.getFeatureServices();
     }
-    // console.log(category.text);
+  }
+
+  seeAllServices() {
+    this.storageHelper.storeSession(AppConstants.FEATURED_SERVICE, this.category);
+    this.router.navigate(["/services/all"], { queryParams: { category: this.category } });
   }
 }

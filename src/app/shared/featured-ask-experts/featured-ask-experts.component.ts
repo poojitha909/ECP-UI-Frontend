@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AskQuestionService } from 'src/app/features/ask-question/services/ask-question.service';
+import { AppConstants } from 'src/app/app.constants';
+import { StorageHelperService } from 'src/app/core/services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-featured-ask-experts',
@@ -17,13 +20,21 @@ export class FeaturedAskExpertsComponent implements OnInit {
   catsList: any[];
   experts: any[] = [];
 
-  constructor(private askQuestionService: AskQuestionService) { }
+  constructor(
+    private askQuestionService: AskQuestionService,
+    private storageHelper: StorageHelperService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    const featuredExpertSession = this.storageHelper.retrieveSession(AppConstants.FEATURED_EXPERT);
+    if (featuredExpertSession) {
+      this.searchParams.experties = featuredExpertSession;
+    }
     this.initiate();
   }
 
-  initiate(){
+  initiate() {
     this.askQuestionService.getCategoryList().subscribe((response: any) => {
       const data = response.data;
       this.catsList = [];
@@ -46,4 +57,8 @@ export class FeaturedAskExpertsComponent implements OnInit {
     });
   }
 
+  seeAllExperts() {
+    this.storageHelper.storeSession(AppConstants.FEATURED_EXPERT, this.searchParams.experties);
+    this.router.navigate(["/ask-question/all"], { queryParams: { category: this.searchParams.experties } });
+  }
 }

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/features/products/services/products.service';
+import { Router } from '@angular/router';
+import { StorageHelperService } from 'src/app/core/services';
+import { AppConstants } from 'src/app/app.constants';
 
 @Component({
   selector: 'app-featured-products',
@@ -16,13 +19,21 @@ export class FeaturedProductsComponent implements OnInit {
   productsList: any[];
   productsTotal: number;
   catsList: any[];
-  constructor(private productService: ProductService) { }
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private storageHelper: StorageHelperService
+  ) { }
 
   ngOnInit() {
+    const featuredProductSession = this.storageHelper.retrieveSession(AppConstants.FEATURED_PRODUCT);
+    if (featuredProductSession) {
+      this.searchParams.productCategory = featuredProductSession;
+    }
     this.initiate();
   }
 
-  initiate(){
+  initiate() {
     this.productService.getCategoryList().subscribe((response: any) => {
       const data = response.data;
       this.catsList = [];
@@ -44,6 +55,11 @@ export class FeaturedProductsComponent implements OnInit {
       }
       this.productsTotal = data.total;
     });
+  }
+
+  seeAllProducts() {
+    this.storageHelper.storeSession(AppConstants.FEATURED_PRODUCT, this.searchParams.productCategory);
+    this.router.navigate(["/products/all"], { queryParams: { productCategory: this.searchParams.productCategory } });
   }
 
 }

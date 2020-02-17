@@ -39,8 +39,7 @@
                             </app-dicussion-summary-card>
                         </li>
                         <li>
-                            <div class="uk-flex uk-flex-middle bg-white" routerLink="/community/discussions"
-                                [queryParams]="{ category:selDiscussCategory}">
+                            <div class="uk-flex uk-flex-middle bg-white cursor-pointer" (click)="seeAllDiscussions()">
                                 <div class="see-all-card">
                                     See all discussions
                                 </div>
@@ -65,8 +64,7 @@
                     for elders</span>
             </div>
             <div class="uk-width-auto@s uk-width-1-1">
-                <button routerLink="/community/discussions" [queryParams]="{ category:selDiscussCategory}"
-                    class="uk-button uk-button-default w-100">See All
+                <button (click)="seeAllDiscussions()" class="uk-button uk-button-default w-100">See All
                     Discussions</button>
             </div>
         </div>

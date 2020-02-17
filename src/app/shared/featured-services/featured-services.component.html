@@ -4,7 +4,7 @@
         <div uk-grid>
             <div class="uk-width-expand@s">
                 <h2 class="font-regular-24 font-weight-600">
-                    <img src="assets/images/events.png" alt="No Image Found" /> 
+                    <img src="assets/images/events.png" alt="No Image Found" />
                     Services for You
                 </h2>
             </div>
@@ -14,7 +14,8 @@
                         <small>Showing</small>
                     </div>
                     <div class="uk-width-expand">
-                        <select (change)="searchByCategories($event.target.value)" class="uk-select">
+                        <select (change)="searchByCategories()" [(ngModel)]="category" name="Popular Services"
+                            class="uk-select">
                             <option value="">Popular Services</option>
 
                             <option>Ambulances</option>
@@ -77,11 +78,11 @@
     <div class="block-footer">
         <div uk-grid>
             <div class="uk-width-expand@s">
-                <img src="assets/images/verified.png" alt="No Image Found" /> <span class="m-l-5">Services for elderly needs</span>
+                <img src="assets/images/verified.png" alt="No Image Found" /> <span class="m-l-5">Services for elderly
+                    needs</span>
             </div>
             <div class="uk-width-auto@s uk-width-1-1">
-                <button routerLink="/services/all" [queryParams]="{ category:category}"
-                    class="uk-button uk-button-default w-100">See All Services</button>
+                <button (click)="seeAllServices()" class="uk-button uk-button-default w-100">See All Services</button>
             </div>
         </div>
     </div>

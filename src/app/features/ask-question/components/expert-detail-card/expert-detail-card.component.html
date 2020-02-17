@@ -25,6 +25,6 @@
     <div class="reply-card">
       {{ expert?.answersCount }} Queries Answered
     </div>
-    <button class="uk-button uk-button-primary">Ask Question</button>
+  <button class="uk-button uk-button-primary" style="text-overflow: ellipsis;">Ask {{ (expertfullName.length>6)? (expertfullName | slice:0:8)+' '+'..':(expertfullName) }}</button>
   </div>
 </div>

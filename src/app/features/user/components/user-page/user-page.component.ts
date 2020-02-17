@@ -30,17 +30,18 @@ export class UserPageComponent implements OnInit {
         this.router.navigateByUrl('/');
       }
     })
-  }
+}
 
 
   viewEditProfile(event) {
-    console.log(event)
-    this.eventEmitted = event;
-    this.selectedTab = 'editprofile';
+      console.log(event)
+      this.eventEmitted = event;
+      this.selectedTab = 'editprofile';
   }
 
   viewUserProfile(event) {
   this.ViewEventEmitted=event
     this.selectedTab = 'viewprofile';
   }
+  
 }

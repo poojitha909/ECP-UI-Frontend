@@ -9,8 +9,6 @@ import { UserService } from '../../../services/user.service';
 })
 export class ViewAddressDetailsComponent implements OnInit {
   @Output() editProfile = new EventEmitter();
-  
-
   constructor(
     public userService: UserService,
     public auth: AuthService
@@ -19,9 +17,10 @@ export class ViewAddressDetailsComponent implements OnInit {
   ngOnInit() {
   }
 
-  edit(Event) {
-    console.log(Event)
-    this.editProfile.emit(Event);
+  edit(modal_address) {
+    alert("Please Submit or Cancel before edit");
+    console.log('modal_address')
+    
   }
 
 }

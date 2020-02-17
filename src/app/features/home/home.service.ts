@@ -119,4 +119,19 @@ export class HomeService {
   //   this.storageHelper.clearSession(AppConstants.HOME_SEARCH_RESULT);
   // }
 
+  getFeaturedServices(searchParam: PageParam): Observable<any> {
+    let queryParams: string = '';
+
+    Object.keys(searchParam)
+      .forEach((key, i) => {
+        if (i > 0) {
+          queryParams += `&${key}=${searchParam[key]}`;
+        } else {
+          queryParams += `${key}=${searchParam[key]}`;
+        }
+      });
+
+    return this.http.get(`${ApiConstants.GET_SERVICES}?${queryParams}`);
+  }
+
 }

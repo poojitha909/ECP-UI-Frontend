@@ -6,4 +6,12 @@ export class AppConstants {
     public static RATEING_SERVICE = 'RATEING_SERVICE';
     public static HOME_SEARCH = 'homeSearchText';
     public static HOME_SEARCH_RESULT = 'homeSearchResult';
+    public static FEATURED_SERVICE = 'featuredServiceResult';
+    public static FEATURED_PRODUCT = 'featuredProductResult';
+    public static FEATURED_EVENT = 'featuredEventResult';
+    public static FEATURED_DISCUSSION = 'featuredDiscussionResult';
+    public static FEATURED_EXPERT = 'featuredExpertResult';
+
+
+
 }

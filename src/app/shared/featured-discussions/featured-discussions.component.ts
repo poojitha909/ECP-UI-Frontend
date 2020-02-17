@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DiscussionService } from 'src/app/features/community/services/discussion.service';
 import { MenuService } from '../../features/community/services/menu.service';
+import { AppConstants } from 'src/app/app.constants';
+import { StorageHelperService } from 'src/app/core/services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-featured-discussions',
@@ -18,13 +21,22 @@ export class FeaturedDiscussionsComponent implements OnInit {
     searchTxt: "",
     tags: ""
   }
-  constructor(private discussionService: DiscussionService,private menuService: MenuService) { }
+  constructor(
+    private discussionService: DiscussionService,
+    private menuService: MenuService,
+    private storageHelper: StorageHelperService,
+    private router: Router
+  ) { }
   ngOnInit() {
     this.initiate();
   }
 
-  initiate(){
+  initiate() {
     this.selDiscussCategory = "";
+    const featuredDiscussSession = this.storageHelper.retrieveSession(AppConstants.FEATURED_DISCUSSION);
+    if (featuredDiscussSession) {
+      this.selDiscussCategory = featuredDiscussSession;
+    }
     this.getAllDiscussCategories();
   }
 
@@ -62,6 +74,11 @@ export class FeaturedDiscussionsComponent implements OnInit {
         this.discussions = data.content;
       }
     });
+  }
+
+  seeAllDiscussions() {
+    this.storageHelper.storeSession(AppConstants.FEATURED_DISCUSSION, this.selDiscussCategory);
+    this.router.navigate(["/community/discussions"], { queryParams: { category: this.selDiscussCategory } });
   }
 
 }

@@ -50,10 +50,10 @@
             </div>
             <div class="uk-width-expand@m">
                 <div class="inner-container bg-white" *ngIf="expert?.basicProfileInfo?.shortDescription != '' && expert?.basicProfileInfo?.shortDescription != undefined" >
-                    <h4>About Us</h4>
+                    <h4>About {{expert.basicProfileInfo.firstName}}</h4>
                     <hr />
                     <div class="uk-margin">
-                        {{ expert?.basicProfileInfo?.shortDescription }}
+                        {{ expert?.basicProfileInfo?.description }}
                     </div>
                 </div>
                 <div class="inner-container bg-white  m-t-30">

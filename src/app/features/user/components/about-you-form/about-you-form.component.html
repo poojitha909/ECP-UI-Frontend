@@ -33,7 +33,8 @@
                     <option>Option 02</option>
                 </select> -->
                 <ng-select [addTag]="addTagFn" [items]="emotionalChallenges" [hideSelected]="true"
-                    id="Emotional-Challenges" multiple="true" formControlName="emotionalIssues">
+                    id="Emotional-Challenges" placeholder="Add Emotional Challenges" multiple="true"
+                    formControlName="emotionalIssues">
                 </ng-select>
             </div>
         </div>
@@ -70,8 +71,8 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="My-Hobbies">My Hobbies</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" id="My-Hobbies" placeholder="Add Hobbies" [items]="hobbies" [hideSelected]="true"
-                    multiple="true" formControlName="hobbies">
+                <ng-select [addTag]="addTagFn" id="My-Hobbies" placeholder="Add Hobbies" [items]="hobbies"
+                    [hideSelected]="true" multiple="true" formControlName="hobbies">
                 </ng-select>
             </div>
         </div>
@@ -79,8 +80,8 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="Topic-Interests">Topic of Interests</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" id="Topic-Interests" placeholder="Add Topic of Interests" [hideSelected]="true" multiple="true"
-                    formControlName="otherInterests">
+                <ng-select [addTag]="addTagFn" id="Topic-Interests" placeholder="Add Topic of Interests"
+                    [hideSelected]="true" multiple="true" formControlName="otherInterests">
                 </ng-select>
             </div>
         </div>

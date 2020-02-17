@@ -5,7 +5,7 @@
             <h3>Personal information</h3>
         </div>
         <div class="uk-width-auto uk-flex uk-flex-middle">
-            <a href="javascript:void(0)" (click)="edit()" class="edit font-regular">Edit</a>
+            <a href="javascript:void(0)" (click)="edit('modal_personal')" class="edit font-regular">Edit</a>
         </div>
     </div>
 
@@ -55,4 +55,4 @@
         <p class="font-regular-15 m-b-10 lable">Topic of Interests</p>
         <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.otherInterests || '-'}}</p>
     </div>
-</div> -->
+</div> 

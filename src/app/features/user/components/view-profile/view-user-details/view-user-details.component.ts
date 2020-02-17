@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 
@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/core/auth/services/auth.service';
 })
 export class ViewUserDetailsComponent implements OnInit {
 
+
   constructor(
     public userService: UserService,
     public auth: AuthService
@@ -16,5 +17,9 @@ export class ViewUserDetailsComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  edit(event){
+    alert("Please Submit or Cancel before edit");
+    console.log('modal_userDetails')
+   
+  }
 }

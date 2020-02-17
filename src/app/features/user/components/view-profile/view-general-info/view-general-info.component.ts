@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { Gender } from 'src/app/core/interfaces';
@@ -9,6 +9,9 @@ import { Gender } from 'src/app/core/interfaces';
   styleUrls: ['./view-general-info.component.scss']
 })
 export class ViewGeneralInfoComponent implements OnInit {
+
+  
+  
   gender: string;
   constructor(
     public userService: UserService,
@@ -20,4 +23,9 @@ export class ViewGeneralInfoComponent implements OnInit {
     console.log(this.gender);
   }
 
+  edit(modal_general){
+    alert("Please Submit or Cancel before edit");
+    console.log('modal_general')
+    
+  }
 }

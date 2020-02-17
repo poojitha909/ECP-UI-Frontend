@@ -37,6 +37,7 @@ export class FeaturedDiscussionsComponent implements OnInit {
     if (featuredDiscussSession) {
       this.selDiscussCategory = featuredDiscussSession;
     }
+    
     this.getAllDiscussCategories();
   }
 

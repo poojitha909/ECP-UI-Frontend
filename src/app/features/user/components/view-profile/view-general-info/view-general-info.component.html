@@ -6,8 +6,28 @@
             <h3>General Info</h3>
         </div>
         <div class="uk-width-auto uk-flex uk-flex-middle">
-            <a href="javascript:void(0)" (click)="edit('modal_general')" class="edit font-regular">Edit</a>
+            <a href="javascript:void(0)" uk-toggle="target: #modal-sections">Edit</a>
         </div>
+         <!-- Edit Model START -->
+         <div id="modal-sections" class="uk-modal-container" uk-modal>
+            <div class="uk-modal-dialog">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <div class="uk-modal-header">
+                    <h3 class="uk-modal-title">Notice!</h3>
+                </div>
+                <div class="uk-modal-body">
+                    <div class="uk-child-width-1-2@s uk-grid-small" uk-grid>
+                        <div>
+                            <p class="font-regular-15 m-b-10 lable">Please Submit or Cancel before edit.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-modal-footer uk-text-right review-form">
+                    <button class="uk-button uk-button-default uk-modal-close" type="button">Close</button>
+                </div>
+            </div>
+        </div>
+          <!-- Edit Model END -->
     </div>
     <hr />
     <div class="uk-child-width-1-2@s m-t-40" uk-grid>

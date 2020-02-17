@@ -36,8 +36,10 @@
           <p *ngIf="isDBService && service?.systemTags.length > 0" class="m-t-0">
             {{service?.systemTags[0].name}}</p>
 
-          <button class="uk-button uk-button-default" uk-toggle="target: #modal-sections">Contact Service
-            Provider</button>
+          <!-- <button class="uk-button uk-button-default" uk-toggle="target: #modal-sections">Contact Service
+            Provider</button> -->
+            <a class="uk-button uk-button-default" uk-toggle="target: #modal-sections">Contact Service
+              Provider</a>
 
           <!-- Contact Model START -->
           <div id="modal-sections" class="uk-modal-container" uk-modal>

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { ConfigurationService } from 'src/app/core/services/configuration.service';
 
 @Component({
   selector: 'app-signin-types-view',
@@ -17,10 +18,15 @@ export class SigninTypesViewComponent implements OnInit, OnChanges {
   mobileNumber: string;
   numberError: string;
   OtpCode: string;
-  constructor(
-    private router: Router
-  ) {
+  config: any;
 
+  constructor(
+    private router: Router,
+    private configServ: ConfigurationService
+  ) {
+    this.configServ.loadConfigurations().subscribe( (c) => {
+      this.config = c;
+    })
   }
 
   ngOnInit() {
@@ -40,13 +46,13 @@ export class SigninTypesViewComponent implements OnInit, OnChanges {
   signinWithFacebook() {
     console.log("submit login to facebook");
 
-    window.open(`${environment.facebook.auth_uri}?client_id=${environment.facebook.clientId}&response_type=token,code&redirect_uri=${environment.facebook.redirectUrl}${this.router.url}?state=${environment.facebook.urlState}&scope=email&state={${environment.facebook.urlState}}`, '_self');
+    window.open(`${this.config.facebook.auth_uri}?client_id=${this.config.facebook.clientId}&response_type=token,code&redirect_uri=${this.config.facebook.redirectUrl}${this.router.url}?state=${this.config.facebook.urlState}&scope=email&state={${this.config.facebook.urlState}}`, '_self');
   }
 
 
   signinWithGoogle() {
-    console.log("submit login to google", encodeURIComponent(environment.google.redirectUrl));
-    window.open(`${environment.google.auth_uri}?scope=profile email&include_granted_scopes=true&state=${environment.google.urlState}&redirect_uri=${encodeURIComponent(environment.google.redirectUrl)}${encodeURIComponent(this.router.url)}&response_type=token&client_id=${environment.google.client_id}`, '_self');
+    console.log("submit login to google", encodeURIComponent(this.config.google.redirectUrl));
+    window.open(`${this.config.google.auth_uri}?scope=profile email&include_granted_scopes=true&state=${this.config.google.urlState}&redirect_uri=${encodeURIComponent(this.config.google.redirectUrl)}${encodeURIComponent(this.router.url)}&response_type=token&client_id=${this.config.google.client_id}`, '_self');
   }
 
   requestOtp() {

@@ -8,9 +8,13 @@ import { UserProfile } from 'src/app/core/interfaces';
 })
 export class EditProfileFormComponent implements OnInit {
   @Output() cancelForm = new EventEmitter();
+  @Input() eventEmitted : any;
   constructor() { }
 
+  editOption:string;
+
   ngOnInit() {
+    
   }
 
   onCancel() {

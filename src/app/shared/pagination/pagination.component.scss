@@ -14,7 +14,7 @@
   padding: 0;
   text-align: center;
   margin: 0 5px;
-  background-color: rgba(22, 28, 45, 0.4);
+  background-color:#c7c9cd;
   color: #fff;
   font-size: 18px;
   cursor: pointer;
@@ -24,7 +24,20 @@
 }
 .uk-pagination > li.pagenum.uk-active {
   background-color: #1a73e8;
+
 }
+.uk-pagination> .pagenum:hover {
+    background-color: #93969e;
+  }
+
+  .uk-pagination> .pagenum:focus:active {
+    background-color: #61656f;
+  }
+
+
+
+
+
 .uk-pagination > * > * {
   display: inline-block;
 }
@@ -36,6 +49,7 @@
   width: 95px;
   line-height: 50px;
 }
+
 
 @media (max-width: 640px) {
   .uk-pagination > li.pagenum {
@@ -52,12 +66,10 @@
     line-height: 35px;
   }
 }
-
 .pageNext{
   color: #1a73e8;
 }
 
 .pagePrev{
-  color: #616570;
+  color: #1a73e8;
 }
-

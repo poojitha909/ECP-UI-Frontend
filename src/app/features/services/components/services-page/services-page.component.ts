@@ -30,6 +30,5 @@ export class ServicesPageComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    document.getElementById("serviceHeader").focus();
   }
 }

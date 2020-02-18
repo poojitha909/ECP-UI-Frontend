@@ -77,6 +77,9 @@ export class GeneralInfoFormComponent implements OnInit {
     } else {
       this.errorMessage = "Invalid DOB";
     }
+
+      console.log('CancelForm after Submit')
+      this.cancelForm.emit();
   }
 
   resetAlertMessages() {

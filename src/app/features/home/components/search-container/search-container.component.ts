@@ -45,6 +45,7 @@ export class SearchContainerComponent implements OnInit {
   constructor(private homeService: HomeService, private router: Router) { }
 
   ngOnInit() {
+    document.getElementById("homeSearch").focus();
     this.searchTextChanged.pipe(
       debounceTime(500),
       distinctUntilChanged()

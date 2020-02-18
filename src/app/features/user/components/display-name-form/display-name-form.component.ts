@@ -49,6 +49,7 @@ export class DisplayNameFormComponent implements OnInit {
           console.log(error);
         })
     }
+    
   }
 
   resetAlertMessages() {

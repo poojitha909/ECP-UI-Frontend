@@ -27,7 +27,8 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
     },
     {
       text: 'All Events',
-      link: '/community/events'
+      link: '/community/events',
+      queryParams: {}
     }
   ];
   eventId: string;
@@ -72,13 +73,16 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
     if (this.user) {
       this.user = JSON.parse(this.user);
     }
+    this.breadcrumbLinks[2].queryParams = this.route.snapshot.queryParams;
   }
 
   getEvent() {
     if (this.eventId == "preview") {
       this.event = this.store.retrieve("new-event-preview");
       this.event = JSON.parse(this.event);
-      document.getElementById("eventHeader").focus();
+      setTimeout(() => {
+        document.getElementById("eventHeader").focus();
+      }, 500);
     }
     else {
       this.eventService.getEvent(this.eventId).subscribe((response: any) => {
@@ -93,7 +97,9 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
           else {
             this.markIt = false;
           }
-          document.getElementById("eventHeader").focus();
+          setTimeout(() => {
+            document.getElementById("eventHeader").focus();
+          }, 500);
         }
       });
     }

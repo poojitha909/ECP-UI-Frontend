@@ -36,7 +36,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
   currentUrl: string;
   whatsappUrl;
   whatsappMobileUrl;
-  currentModelLink:string;
+  currentModelLink: string;
 
   constructor(private router: Router, private route: ActivatedRoute,
     private discussionService: DiscussionService, private menuService: MenuService,
@@ -54,7 +54,6 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
   }
 
   ngAfterViewInit() {
-    document.getElementById("discussionTitleHeader").focus();
   }
 
   ngOnDestroy() {
@@ -96,9 +95,9 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
       this.parentReplyId = comment.parentReplyId;
       this.replyId = comment.replyId;
       this.store.clear("new-d-comment");
-      setTimeout( () => {
+      setTimeout(() => {
         UIkit.modal("#reply-modal-discussion").show();
-      },500);
+      }, 500);
     }
     this.replyForm = this.fb.group({
       commentTxt: [comment ? comment.commentTxt : "", Validators.required]
@@ -129,7 +128,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     if (!this.replyForm.valid) {
       return;
     }
-    
+
     if (this.replyId) {
       this.discussionService.editComment(this.replyId, comment.commentTxt).subscribe((response: any) => {
         if (response.data.replies) {
@@ -198,7 +197,12 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
             });
           }
         }
-      });
+      },
+        error => { },
+        () => {
+
+        }
+      );
     }
 
     if (this.discussionId == "preview") {
@@ -222,6 +226,10 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
         }
       });
     }
+
+    setTimeout(() => {
+      document.getElementById("discussionTitleHeader").focus();
+    }, 500);
   }
 
   setSeoTags(discussion: any) {
@@ -242,7 +250,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.seoService.generateTags(config);
   }
 
-  setParentReplyId(id,element) {
+  setParentReplyId(id, element) {
     this.replyForm.reset();
     this.parentReplyId = id;
     this.replyId = "";
@@ -251,7 +259,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.currentModelLink = element.id;
     UIkit.modal('#reply-modal-discussion').show();
     document.getElementById("addCommentTitle").focus();
-    
+
   }
 
   editReply(parentReplyId, reply) {

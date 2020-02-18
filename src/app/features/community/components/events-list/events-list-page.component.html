@@ -20,18 +20,22 @@
                         <h3 class="uk-h4">Categories</h3>
                     </div>
                     <div *ngIf="this.searchParams.pastEvents !== 0">
-                        <a href="javascript:void(0)" class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
+                        <a href="javascript:void(0)" class="uk-text-danger" (click)="clearSelection()">Clear
+                            Selection</a>
                     </div>
                 </div>
                 <ul class="uk-list uk-list-large p-2">
                     <li (click)="onTabChange(0)" [ngClass]="{'cat-active': 0 == searchParams.pastEvents}">
-                        <a (click)="onTabChange(0)" href="javascript:void(0)">All Events <span class="uk-badge uk-float-right">{{countData.all}}</span></a>
+                        <a (click)="onTabChange(0)" href="javascript:void(0)">All Events <span
+                                class="uk-badge uk-float-right">{{countData.all}}</span></a>
                     </li>
                     <li (click)="onTabChange(-1)" [ngClass]="{'cat-active': -1 == searchParams.pastEvents}">
-                        <a (click)="onTabChange(-1)" href="javascript:void(0)">Upcoming Events <span class="uk-badge uk-float-right">{{countData.upcoming}}</span></a>
+                        <a (click)="onTabChange(-1)" href="javascript:void(0)">Upcoming Events <span
+                                class="uk-badge uk-float-right">{{countData.upcoming}}</span></a>
                     </li>
                     <li (click)="onTabChange(1)" [ngClass]="{'cat-active': 1 == searchParams.pastEvents}">
-                        <a (click)="onTabChange(1)" href="javascript:void(0)">Past Events <span class="uk-badge uk-float-right">{{countData.past}}</span></a>
+                        <a (click)="onTabChange(1)" href="javascript:void(0)">Past Events <span
+                                class="uk-badge uk-float-right">{{countData.past}}</span></a>
                     </li>
                 </ul>
             </div>
@@ -45,7 +49,8 @@
                 </div>
                 <div class="m-b-20">
                     <a href="mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20{{currentUrl}}"
-                        class="uk-icon-button  uk-margin-small-right fb-icon" aria-label="Share via Email" uk-icon="mail">
+                        class="uk-icon-button  uk-margin-small-right fb-icon" aria-label="Share via Email"
+                        uk-icon="mail">
                     </a> <a class="social-link"
                         href="mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20{{currentUrl}}">
                         Share via
@@ -55,8 +60,8 @@
                     <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services"
                         onclick="javascript:window.open(this.href,
                         '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
-                        class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook" aria-label="Share via Facebook"> </a> <a
-                        class="social-link"
+                        class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"
+                        aria-label="Share via Facebook"> </a> <a class="social-link"
                         href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services"
                         onclick="javascript:window.open(this.href,
                         '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
@@ -89,7 +94,9 @@
             <div *ngIf="eventsList!==undefined && eventsList.length > 0">
                 <div class="uk-flex-left uk-text-center uk-child-width-1-2@m m-b-30" uk-grid>
                     <div *ngFor="let event of eventsList;let i=index" role="group" [attr.aria-label]="'Event ' + i">
-                        <app-event-summary-card [event]="event" [isPast]="searchParams.pastEvents">
+                        <app-event-summary-card [event]="event"
+                            [pageParam]={past:this.searchParams.pastEvents,searchTxt:this.searchParams.searchTxt,page:this.searchParams.p}
+                            [isPast]="searchParams.pastEvents">
                         </app-event-summary-card>
                     </div>
                 </div>

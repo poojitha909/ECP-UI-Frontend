@@ -55,7 +55,7 @@ export class ProductsPageComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    document.getElementById("productHeader").focus();
+    document.getElementById("productSearch").focus();
   }
 
   ngOnDestroy() {

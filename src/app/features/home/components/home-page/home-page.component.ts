@@ -25,6 +25,6 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   ngOnInit() { }
 
   ngAfterViewInit() {
-    document.getElementById("homeHeader").focus();
+
   }
 }

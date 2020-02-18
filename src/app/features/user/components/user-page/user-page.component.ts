@@ -12,8 +12,9 @@ import { Title } from '@angular/platform-browser';
 })
 export class UserPageComponent implements OnInit, AfterViewInit {
 
-  selectedTab: string = 'editprofile';
-
+  selectedTab: string = 'viewprofile';
+  eventEmitted: any;
+  ViewEventEmitted: any;
 
   constructor(
     private userService: UserService,
@@ -33,18 +34,22 @@ export class UserPageComponent implements OnInit, AfterViewInit {
         this.router.navigateByUrl('/');
       }
     })
-  }
+}
 
   ngAfterViewInit() {
     document.getElementById("myprofileHeader").focus();
   }
 
 
-  viewEditProfile() {
-    this.selectedTab = 'editprofile';
+  viewEditProfile(event) {
+      console.log(event)
+      this.eventEmitted = event;
+      this.selectedTab = 'editprofile';
   }
 
-  viewUserProfile() {
+  viewUserProfile(event) {
+  this.ViewEventEmitted=event
     this.selectedTab = 'viewprofile';
   }
+  
 }

@@ -33,6 +33,10 @@ import { EventSummaryCardComponent } from './event-summary-card/event-summary-ca
 import { AskExpertSummaryCardComponent } from './ask-expert-summary-card/ask-expert-summary-card.component';
 import { ActiveMaxDirective } from './directives/active-max.directive';
 import { FocusInvalidInputDirective } from './directives/focus-invalid-input.directive';
+import { FeaturedMyQuestionsComponent } from './featured-my-questions/featured-my-questions.component';
+import { MyQuestionsSummaryCardComponent } from './my-questions-summary-card/my-questions-summary-card.component';
+import { UserTermsComponent } from './user-terms/user-terms.component';
+import { UserPolicyComponent } from './user-policy/user-policy.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +69,11 @@ import { FocusInvalidInputDirective } from './directives/focus-invalid-input.dir
     EventSummaryCardComponent,
     AskExpertSummaryCardComponent,
     ActiveMaxDirective,
-    FocusInvalidInputDirective
+    FocusInvalidInputDirective,
+    FeaturedMyQuestionsComponent,
+    MyQuestionsSummaryCardComponent,
+    UserTermsComponent,
+    UserPolicyComponent
   ],
   imports: [
     CommonModule,
@@ -101,7 +109,9 @@ import { FocusInvalidInputDirective } from './directives/focus-invalid-input.dir
     EventSummaryCardComponent,
     AskExpertSummaryCardComponent,
     ActiveMaxDirective,
-    FocusInvalidInputDirective
+    FocusInvalidInputDirective,
+    FeaturedMyQuestionsComponent,
+    MyQuestionsSummaryCardComponent
   ]
 })
 export class SharedModule { }

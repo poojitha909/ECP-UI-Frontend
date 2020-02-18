@@ -1,10 +1,11 @@
-<div [routerLink]="['/ask-question/add']" tabindex=-1 [queryParams]="{category: expert.experties[0].id, answeredBy: expert.id}"
+<div [routerLink]="['/ask-question/add']" tabindex=-1
+  [queryParams]="{category: expert.experties[0].id, answeredBy: expert.id}"
   class="cursor uk-card uk-card-hover uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
 
   <div class="uk-card-media-left uk-width-1-4@m uk-width-1-3@s p-16">
     <!--TODO: apply imageHandler directive-->
-    <img class="image-user" [src]="expert?.basicProfileInfo?.profileImage?.titleImage" (error)="setDefaultPic($event)"
-      alt="No Image Found" />
+    <img class="image-user" [src]="expert?.basicProfileInfo?.profileImage?.thumbnailImage"
+      (error)="setDefaultPic($event)" alt="No Image Found" />
   </div>
 
   <div class="uk-card-body uk-width-expand p-16">
@@ -25,6 +26,8 @@
     <div class="reply-card">
       {{ expert?.answersCount }} Queries Answered
     </div>
-    <button [attr.aria-label]="'Ask an Expert ' + expert.basicProfileInfo.firstName" class="uk-button uk-button-primary">Ask Question</button>
+    <button [attr.aria-label]="'Ask an Expert ' + expert.basicProfileInfo.firstName" class="uk-button uk-button-primary"
+      style="text-overflow: ellipsis;">Ask
+      {{ (expertfullName.length>6)? (expertfullName | slice:0:8)+' '+'..':(expertfullName) }}</button>
   </div>
 </div>

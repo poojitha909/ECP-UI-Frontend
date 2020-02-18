@@ -10,6 +10,7 @@ export class EventSummaryCardComponent implements OnInit {
  
   @Input() event: any;
   @Input() isPast: number;
+  @Input() pageParam:Object;
 
   constructor() { }
   ngOnInit() {

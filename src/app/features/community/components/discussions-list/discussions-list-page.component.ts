@@ -66,7 +66,6 @@ export class DiscussionsListPageComponent implements OnInit, AfterViewInit, OnDe
   }
 
   ngAfterViewInit() {
-    document.getElementById("discussionListHeader").focus();
   }
 
   ngOnDestroy() {
@@ -168,7 +167,14 @@ export class DiscussionsListPageComponent implements OnInit, AfterViewInit, OnDe
           this.search();
         });
       }
-    });
+    },
+    error=>{},
+    ()=>{
+      setTimeout(() => {      
+        document.getElementById("discussionListHeader").focus();
+      }, 500);
+    }
+    );
   }
 
 

@@ -3,14 +3,18 @@
   <ul class="uk-pagination" uk-margin>
     <li class="cursor-pointer">
       <div *ngIf="currentPage>0" (click)="callParent(currentPage-1)">
-        <span uk-pagination-previous></span><a class="pagePrev" aria-label="Previous page" href="javascript:void(0)"> Previous</a>
+        <span uk-pagination-previous></span><a class="pagePrev" aria-label="Previous page" href="javascript:void(0)">
+          Previous</a>
       </div>
     </li>
     <li class="pagenum" *ngFor="let i of items" [ngClass]="{'uk-active': i==currentPage}" (click)="callParent(i)">
-      <a href="javascript:void(0)" [attr.aria-label]="getPageLabel(i)">{{i+1}}</a></li>
+      <a href="javascript:void(0)" [attr.aria-label]="getPageLabel(i)">{{i+1}}</a>
+    </li>
     <li class="cursor-pointer">
       <div *ngIf="currentPage<lastPage" (click)="callParent(currentPage -- 1)">
-        <a class="pageNext" aria-label="Next page" href="javascript:void(0)">Next </a><span uk-pagination-next></span>
+        <div class="pageNext">
+          Next <span uk-pagination-next></span>
+        </div>
       </div>
     </li>
   </ul>

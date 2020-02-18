@@ -64,7 +64,9 @@ export class ContactDetailFormComponent implements OnInit {
           this.errorMessage = "Some unknown internal server error occured";
         });
     }
-
+    
+      console.log('CancelForm after Submit')
+      this.cancelForm.emit();
   }
 
   resetAlertMessages() {

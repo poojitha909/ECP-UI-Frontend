@@ -70,7 +70,7 @@ export class EventsListPageComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   ngAfterViewInit() {
-    document.getElementById("allEventsHeader").focus();
+
   }
 
   ngOnDestroy() {
@@ -118,7 +118,15 @@ export class EventsListPageComponent implements OnInit, AfterViewInit, OnDestroy
         this.eventsList = data.content;
         this.totalRecords = data.total;
       }
-    });
+    },
+      error => {
+
+      },
+      () => {
+        setTimeout(() => {
+          document.getElementById("allEventsHeader").focus();
+        }, 500);
+      });
   }
 
   showEventsCount() {

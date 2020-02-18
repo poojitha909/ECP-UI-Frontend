@@ -4,7 +4,7 @@
         <div uk-grid>
             <div class="uk-width-expand@s">
                 <h2 id="Featured-products" class="font-regular-24 font-weight-600">
-                    <img src="assets/images/products.png" alt="No Image Found" /> Shop Easy
+                    <img src="assets/images/products.png" alt="No Image Found" /> Products for You
                 </h2>
             </div>
             <div class="uk-width-1-3@m">
@@ -30,13 +30,15 @@
                 <div class="uk-slider-container">
                     <!-- Product Card -->
                     <ul class="uk-slider-items uk-grid-match uk-child-width-1-3@m uk-grid">
-                        <li *ngFor="let product of products;let i=index" role="group"
+                        <li *ngFor="let product of productsList;let i=index" role="group"
                             [attr.aria-label]="'Product ' + i">
                             <app-product-search-card [product]="product"></app-product-search-card>
                         </li>
                         <li>
-                            <div class="uk-flex uk-flex-middle bg-white">
-                                <a class="see-all-card" [routerLink]="['/products/all']">See all products</a>
+                            <div class="uk-flex uk-flex-middle bg-white cursor-pointer" (click)="seeAllProducts()">
+                                <div class="see-all-card">
+                                    See all products
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -56,12 +58,11 @@
     <div class="block-footer">
         <div uk-grid>
             <div class="uk-width-expand@s">
-                <img src="assets/images/verified.png" alt="No Image Found" /> <span class="m-l-5">More than 1000
-                    products for all your basic
+                <img src="assets/images/verified.png" alt="No Image Found" /> <span class="m-l-5">Products for elderly
                     needs</span>
             </div>
             <div class="uk-width-auto@s uk-width-1-1">
-                <button routerLink="/products/all" class="uk-button uk-button-default w-100">See All Products</button>
+                <button (click)="seeAllProducts()" class="uk-button uk-button-default w-100">See All Products</button>
             </div>
         </div>
     </div>

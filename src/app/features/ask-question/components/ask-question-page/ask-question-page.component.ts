@@ -54,8 +54,7 @@ export class AskQuestionPageComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   ngAfterViewInit() {
-    document.getElementById("expertHeader").focus();
-
+    document.getElementById("askSearch").focus();
   }
 
   ngOnDestroy() {

@@ -31,14 +31,14 @@
                         </p>
                     </div>
                 </div>
-                <div class="category-box info">
+                <!-- <div class="category-box info">
                     <div>
                         <a class="uk-margin-small-right">
                             <img src="/assets/images/chat.png" alt="No Image Found" />
                         </a>
                         <a>More than 500 questions asked</a>
                     </div>
-                </div>
+                </div> -->
                 <div class="category-box info">
                     <div>
                         <a class="uk-margin-small-right">
@@ -50,7 +50,7 @@
             </div>
             <div class="uk-width-expand@m">
                 <div class="inner-container bg-white" *ngIf="expert?.basicProfileInfo?.shortDescription != '' && expert?.basicProfileInfo?.shortDescription != undefined" >
-                    <h4>About Us</h4>
+                    <h4>About {{expert.basicProfileInfo.firstName}}</h4>
                     <hr />
                     <div class="uk-margin">
                         {{ expert?.basicProfileInfo?.shortDescription }}

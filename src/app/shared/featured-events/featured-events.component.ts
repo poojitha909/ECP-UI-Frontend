@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/features/community/services/events.service';
+import { StorageHelperService } from 'src/app/core/services';
+import { Router } from '@angular/router';
+import { AppConstants } from 'src/app/app.constants';
 
 @Component({
   selector: 'app-featured-events',
@@ -17,14 +20,22 @@ export class FeaturedEventsComponent implements OnInit {
   };
   events: any;
 
-  
-  constructor(private eventService: EventService) { }
+
+  constructor(
+    private eventService: EventService,
+    private storageHelper: StorageHelperService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    const featuredEventSession = this.storageHelper.retrieveSession(AppConstants.FEATURED_EVENT);
+    if (featuredEventSession) {
+      this.searchParams.pastEvents = featuredEventSession;
+    }
     this.initiate();
   }
 
-  initiate(){
+  initiate() {
     this.showEvents();
   }
 
@@ -38,6 +49,11 @@ export class FeaturedEventsComponent implements OnInit {
         this.events = data.content;
       }
     });
+  }
+
+  seeAllEvetns() {
+    this.storageHelper.storeSession(AppConstants.FEATURED_EVENT, this.searchParams.pastEvents);
+    this.router.navigate(["/community/events"], { queryParams: { past: this.searchParams.pastEvents } });
   }
 
 }

@@ -7,9 +7,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ExpertDetailCardComponent implements OnInit {
   @Input() expert: any;
+
+  expertfullName:any;
   constructor() { }
 
   ngOnInit() {
+    this.expertfullName=this.expert.basicProfileInfo.firstName
+
   }
 
   /**

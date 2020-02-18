@@ -43,7 +43,7 @@ export class SearchContainerComponent implements OnInit {
       this.showReset = true;
       this.searchService();
     }
-
+    document.getElementById("serviceSearch").focus();
   }
 
   @HostListener('window:click', ['$event.target'])

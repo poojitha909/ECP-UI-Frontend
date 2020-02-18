@@ -58,7 +58,8 @@
           <li class="uk-active">
 
             <div class="uk-child-width-1-3@m" uk-grid>
-              <div *ngFor="let discussion of discussionsList;let i=index" role="group" [attr.aria-label]="'Discussion ' + i">
+              <div *ngFor="let discussion of discussionsList;let i=index" role="group"
+                [attr.aria-label]="'Discussion ' + i">
                 <app-dicussion-summary-card [category]="selCategory" [discussion]="discussion">
                 </app-dicussion-summary-card>
               </div>
@@ -97,7 +98,7 @@
   <div class="home-banner landing-bg">
     <div class="uk-child-width-1-2@s uk-padding" role="banner" uk-grid>
       <div class="uk-text-left@s">
-        <h1 tabindex=0 id="communityHeader">Let’s talk!</h1>
+        <h1 tabindex=0 id="communityHeader">Let us Engage!</h1>
         <p class="font-regular">
           Is there something you wish to discuss about? We are here!
           Let’s start a discussion or conversation, exchange views, arrive at a conclusion, or just talk! Read our
@@ -113,23 +114,24 @@
   <div class="uk-child-width-1-2 m-b-30" uk-grid>
     <div class="uk-text-center">
       <div class="options-card">
-        <img src="assets/images/events.png" alt="No Image Found" />
+        <img src="assets/images/discussion.png" alt="No Image Found" />
       </div>
-      <div tabindex=0 (click)="showAllEvents()" class="quote-line-card cursor-pointer">
-        What’s Happening
+      <div (click)="showAllDiscussions()" class="quote-line-card cursor-pointer">
+        Let us Discuss
         <span class="uk-float-right" uk-icon="chevron-right"></span>
       </div>
     </div>
 
     <div class="uk-text-center">
       <div class="options-card">
-        <img src="assets/images/discussion.png" alt="No Image Found" />
+        <img src="assets/images/events.png" alt="No Image Found" />
       </div>
-      <div tabindex=0 (click)="showAllDiscussions()" class="quote-line-card cursor-pointer">
-        Let’s discuss
+      <div (click)="showAllEvents()" class="quote-line-card cursor-pointer">
+        Happening near You
         <span class="uk-float-right" uk-icon="chevron-right"></span>
       </div>
     </div>
+
   </div>
   <div class="m-seprator">
     <app-featured-discussions></app-featured-discussions>

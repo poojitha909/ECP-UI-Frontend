@@ -64,7 +64,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   ngAfterViewInit() {
-    document.getElementById("communityHeader").focus();
+    document.getElementById("communitySearch").focus();
   }
 
   ngOnDestroy() {

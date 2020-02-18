@@ -7,6 +7,7 @@ import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { UserProfile, User } from 'src/app/core/interfaces';
 import { AuthService } from 'src/app/core';
 import { environment } from 'src/environments/environment';
+import { ConfigurationService } from 'src/app/core/services/configuration.service';
 
 
 
@@ -16,10 +17,17 @@ import { environment } from 'src/environments/environment';
 export class UserService {
 
   userProfile: UserProfile;
+  config: any;
 
   constructor(
     private http: HttpClient,
-    private auth: AuthService) { }
+    private configServ: ConfigurationService,
+    private auth: AuthService) {
+    
+    this.configServ.loadConfigurations().subscribe( (c) => {
+      this.config = c;
+    })
+  }
 
   createUserProfile(userData: UserProfile): Observable<UserProfile> {
     return this.http.post<any>(ApiConstants.USER_PROFILE, userData).pipe(
@@ -93,7 +101,7 @@ export class UserService {
       map((response) => {
         if (response && response.data) {
           this.userProfile.basicProfileInfo.profileImage = {
-            thumbnailImage: environment.imageBaseUrl + response.data[0]
+            thumbnailImage: this.config.imageBaseUrl + response.data[0]
           }
           return response.data;
         }

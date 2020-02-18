@@ -52,7 +52,7 @@ export class FeaturedEventsComponent implements OnInit {
   }
 
   seeAllEvetns() {
-    this.storageHelper.storeSession(AppConstants.FEATURED_EVENT, this.searchParams.pastEvents);
+    //this.storageHelper.storeSession(AppConstants.FEATURED_EVENT, this.searchParams.pastEvents);
     this.router.navigate(["/community/events"], { queryParams: { past: this.searchParams.pastEvents } });
   }
 

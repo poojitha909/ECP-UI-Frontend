@@ -19,14 +19,14 @@
                     <div class="uk-width-expand">
                         <h3 class="uk-h4">Categories</h3>
                     </div>
-                    <div *ngIf="this.searchParams.pastEvents !== 0">
+                    <div *ngIf="searchParams.pastEvents !== -1">
                         <a class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
                     </div>
                 </div>
                 <ul class="uk-list uk-list-large p-2">
-                    <li (click)="onTabChange(0)" [ngClass]="{'cat-active': 0 == searchParams.pastEvents}">
+                    <!-- <li (click)="onTabChange(0)" [ngClass]="{'cat-active': 0 == searchParams.pastEvents}">
                         All Events <span class="uk-badge uk-float-right">{{countData.all}}</span>
-                    </li>
+                    </li> -->
                     <li (click)="onTabChange(-1)" [ngClass]="{'cat-active': -1 == searchParams.pastEvents}">
                         Upcoming Events <span class="uk-badge uk-float-right">{{countData.upcoming}}</span>
                     </li>

@@ -154,8 +154,8 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
   }
 
   clearSelection() {
-    this.searchParams.pastEvents = 0;
-    this.router.navigateByUrl('/community/events');
+    this.searchParams.pastEvents = -1;
+    this.router.navigate(['/community/events'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt } });
   }
 
   onSearchChange(event: any) {

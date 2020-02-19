@@ -10,7 +10,7 @@
                 <div class="category-box top bg-white">
                     <div class="img-container"
                         *ngIf="discussion.userProfile && discussion.userProfile.basicProfileInfo && discussion.userProfile.basicProfileInfo.profileImage && discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage">
-                        <img class="user" [imageHandler] [src]="discussion?.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage" alt="No Image Found">
+                        <img class="user" [imageHandler] [src]="discussion?.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage" alt="discussion user profile image">
                     </div>
                     <div class="heading2 username">
                         {{discussion.username}}
@@ -84,7 +84,7 @@
                                 <img class="uk-border-circle"
                                     width="40" height="40"
                                     (error)="setDefaultPic($event)"
-                                    alt="No Image Found"
+                                    alt="replies user profile image"
                                     src="{{repliesGroup.value[0].userProfile?.basicProfileInfo?.profileImage?.thumbnailImage}}">
                             </div>
                             <div class="uk-width-expand">
@@ -103,7 +103,7 @@
                         <div class="uk-grid-collapse uk-child-width-expand@s" uk-grid>
                             <div *ngIf="repliesGroup.value[0].userId != user?.id" class="like-container">
                                 <img class="img" 
-                                    src="/assets/images/like-outline.svg" alt="No Image Found" (click)="likeReply(repliesGroup.value[0])">
+                                    src="/assets/images/like-outline.svg" alt="like icon" (click)="likeReply(repliesGroup.value[0])">
                                 <span
                                     class="like" (click)="likeReply(repliesGroup.value[0])">
                                     {{repliesGroup.value[0].likeCount}}
@@ -116,7 +116,7 @@
                                 </a>
                             </div>
                             <div class="reply-container" uk-toggle="target: #reply-modal-discussion" (click)="setParentReplyId(repliesGroup.value[0].id)">
-                                <img class="img" src="/assets/images/reply.svg" alt="No Image Found"> <label class="reply" for="commentarea">
+                                <img class="img" src="/assets/images/reply.svg" alt="reply icon"> <label class="reply" for="commentarea">
                                     Reply</label>
                             </div>
                         </div>
@@ -133,7 +133,7 @@
                                                 <div class="uk-grid-small uk-flex-middle" uk-grid>
                                                     <div class="uk-width-auto">
                                                         <img class="uk-border-circle"
-                                                            alt="No Image Found"
+                                                            alt="replies user profile image"
                                                             (error)="setDefaultPic($event)"
                                                             width="40" height="40"
                                                             [src]="rep.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage">
@@ -151,7 +151,7 @@
                                                 </div>
                                                 <div *ngIf="rep.userId != user?.id" class="like-container">
                                                     <img class="img" 
-                                                        src="/assets/images/like-outline.svg" alt="No Image Found" (click)="likeReply(rep)">
+                                                        src="/assets/images/like-outline.svg" alt="like icon" (click)="likeReply(rep)">
                                                     <span
                                                         class="like" (click)="likeReply(rep)">
                                                         {{rep.likeCount}}

@@ -41,7 +41,7 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
   currentUrl: string;
   whatsappUrl;
   whatsappMobileUrl;
-  currentModelLink:string;
+  currentModelLink: string;
 
   constructor(private router: Router, private route: ActivatedRoute,
     private eventService: EventService, private store: StorageHelperService,
@@ -90,13 +90,16 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
         if (data) {
           this.setSeoTags(data);
           this.event = data;
-          const fav = this.user.favEvents.filter(elem => elem == this.event.id);
-          if (fav) {
-            this.markIt = true;
+          if (this.user) {
+            const fav = this.user.favEvents.filter(elem => elem == this.event.id);
+            if (fav) {
+              this.markIt = true;
+            }
+            else {
+              this.markIt = false;
+            }
           }
-          else {
-            this.markIt = false;
-          }
+
           setTimeout(() => {
             document.getElementById("eventHeader").focus();
           }, 500);
@@ -173,7 +176,7 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
     document.getElementsByClassName("main-container")[0].setAttribute("aria-hidden", "true");
   }
 
-  openContactModel(element:any) {
+  openContactModel(element: any) {
     this.onOpenModel();
     UIkit.modal('#modal-sections-events').show();
     document.getElementById("eventContactitle").focus();

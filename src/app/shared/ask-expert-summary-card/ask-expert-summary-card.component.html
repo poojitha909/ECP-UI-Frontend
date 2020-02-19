@@ -3,7 +3,7 @@
         [queryParams]="{category: expert.experties[0].id, answeredBy: expert.id}">
         <div class="uk-card-media-top">
             <img class="thumb-100" *ngIf="expert" [imageHandler]
-                [src]="expert.basicProfileInfo?.profileImage?.thumbnailImage" alt="No Image Found">
+                [src]="expert.basicProfileInfo?.profileImage?.thumbnailImage" alt="expert user profile image">
         </div>
         <div class="uk-card-body p-10">
             <h3 tabindex=0 class="font-regular font-weight-600 uk-text-center m-0">{{expert.basicProfileInfo.firstName}}

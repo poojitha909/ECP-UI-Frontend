@@ -17,7 +17,7 @@
         <div class="uk-width-1-3@s uk-flex uk-flex-center">
             <div class="display-picture">
                 <img [src]="userService.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage || 'assets/images/default-thumbnail.png'"
-                    alt="No Image Found" />
+                    alt="user profile image" />
                 <div class="uk-text-center p-12">
                     <div uk-form-custom class="w-100">
                         <input type="file" (change)="fileChange($event)" accept="image/*">

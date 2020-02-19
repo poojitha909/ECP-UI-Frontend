@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/core';
-import { User, SocialAccount, UserIdType } from 'src/app/core/interfaces';
+import { User, SocialAccount, UserIdType, OtpErrorMessage } from 'src/app/core/interfaces';
 import { UserService } from '../../services/user.service';
 import { Title } from '@angular/platform-browser';
 import { ConfigurationService } from 'src/app/core/services/configuration.service';
@@ -16,6 +16,7 @@ import { ConfigurationService } from 'src/app/core/services/configuration.servic
 })
 export class SignupComponent implements OnInit, AfterViewInit {
   isOtpGenerated: boolean;
+  otpFailedNumber: string
   isLoading: boolean;
   verifiedString: string;
   errorMessage: string;
@@ -29,8 +30,8 @@ export class SignupComponent implements OnInit, AfterViewInit {
     private router: Router,
     private titleService: Title,
     private configServ: ConfigurationService) {
-      
-    this.configServ.loadConfigurations().subscribe( (c) => {
+
+    this.configServ.loadConfigurations().subscribe((c) => {
       this.config = c;
     })
     this.user = this.auth.user;
@@ -161,8 +162,11 @@ export class SignupComponent implements OnInit, AfterViewInit {
         this.userSignup(user, SocialAccount.MOBILE);
       } else {
         this.isLoading = false;
-        this.errorMessage = response.message;
-        this.isOtpGenerated = false;
+        if (response.message == OtpErrorMessage.otpNotVerified) {
+          this.errorMessage = "Invalid Otp, Please try again!";
+        }
+        this.otpFailedNumber = verification.number;
+        // this.isOtpGenerated = false;
       }
     },
       error => {
@@ -173,11 +177,15 @@ export class SignupComponent implements OnInit, AfterViewInit {
   resendOtp(number) {
     if (number) {
       // this.isLoading = true;
+      this.otpFailedNumber = null;
+      this.errorMessage = null;
       this.auth.resendOtp(number).subscribe(response => {
         console.log(response);
         if (response.type === "success") {
         } else {
-          this.errorMessage = response.message;
+          if (response.message == OtpErrorMessage.maxRetry) {
+            this.errorMessage = "Max resend otp count exceeded";
+          }
           this.isOtpGenerated = false;
         }
       },

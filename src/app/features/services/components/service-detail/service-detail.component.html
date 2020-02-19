@@ -21,9 +21,9 @@
       <div class="details-box bg-white">
 
         <div class="verified">
-          <img [imageHandler] *ngIf="!isDBService" [src]="service?.disp_pic" alt="No Image Found" />
+          <img [imageHandler] *ngIf="!isDBService" [src]="service?.disp_pic" alt="Service image" />
           <img [imageHandler] *ngIf="isDBService" [src]="service?.basicProfileInfo?.profileImage?.original"
-            alt="No Image Found" />
+            alt="service image" />
           <button *ngIf="service?.verified == '1'"><span class="verified-icon-w"></span></button>
         </div>
         <div class="uk-text-center">
@@ -41,14 +41,14 @@
             Provider</button> -->
           <!-- <button class="uk-button uk-button-default" uk-toggle="target: #modal-sections">Contact Service
             Provider</button> -->
-          <a class="uk-button uk-button-default" id="btnContactProvider" aria-label="Service contact detail in popup"
+          <a href="javascript:void(0)" class="uk-button uk-button-default" id="btnContactProvider" aria-label="Service contact detail in popup"
             (click)="openContactModel($event.target)">Contact Service
             Provider</a>
 
 
 
           <div class="m-t-10 m-b-20">
-            <a href="javascript:void(0)" id="reportFormLink" (click)="reportFormToggle($event.target)">
+            <a class="link-black" href="javascript:void(0)" id="reportFormLink" (click)="reportFormToggle($event.target)">
               <fa-icon [icon]="['far', 'flag']" class="m-r-5"></fa-icon>
               {{ auth.isAuthenticate ? 'Report service provider': 'Signin to Report service provider'}}
             </a>
@@ -262,7 +262,7 @@
                   <p class="lable font-regular m-0"> No user has left review for this service.</p>
                 </div>
                 <div class="uk-text-right">
-                  <img src="/assets/images/norecord.svg" alt="No Image Found" />
+                  <img src="/assets/images/norecord.svg" alt="No record icon" />
                 </div>
               </div>
             </ng-container>
@@ -341,7 +341,7 @@
                   <div class="uk-width-expand">
                     <div class="child-width-auto" uk-grid>
                       <div>
-                        <img class="review-avatar" [src]="review.reviewer_photo" alt="No Image Found" />
+                        <img class="review-avatar" [src]="review.reviewer_photo" alt="review user image" />
                       </div>
                       <div class="p-l-20">
                         <p class="font-regular m-0">{{ review.reviewer_name}}</p>

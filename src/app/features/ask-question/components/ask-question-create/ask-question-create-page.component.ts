@@ -26,7 +26,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
     {
       text: 'All Experts',
       link: '/ask-question/all',
-      queryParams: { category: '', tab:0}
+      queryParams: { category: '', tab: 0 }
     }
   ];
   category: string;
@@ -39,7 +39,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
     p: number,
     s: number,
     askedBy: string,
-		answeredBy: string
+    answeredBy: string
   };
   questions: any[];
   totalRecords: number;
@@ -52,6 +52,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
+    document.getElementById("askExpertHeading").focus();
   }
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
@@ -77,7 +78,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
       this.answeredBy = this.route.snapshot.queryParams['answeredBy'];
       this.searchParams.answeredBy = this.route.snapshot.queryParams['answeredBy'];
     }
-    if(this.searchParams.askedBy && this.searchParams.answeredBy){
+    if (this.searchParams.askedBy && this.searchParams.answeredBy) {
       this.showQuestions();
     }
 
@@ -101,22 +102,22 @@ export class AskQuestionCreatePageComponent implements OnInit {
         alert("Oops! something wrong happen, please try again.");
       }
     });
-    
+
   }
 
-  showQuestions(){
-    this.askQuesService.questions(this.searchParams).subscribe( (response:any) =>{
+  showQuestions() {
+    this.askQuesService.questions(this.searchParams).subscribe((response: any) => {
       this.totalRecords = 0;
       const data = response.data;
       this.questions = [];
-      if(data.content){
+      if (data.content) {
         this.questions = data.content;
         this.totalRecords = data.total;
       }
     });
   }
 
-  redirectToQuestions(){
+  redirectToQuestions() {
     this.router.navigate(['/ask-question/all'], { queryParams: { tab: 1 } });
   }
 

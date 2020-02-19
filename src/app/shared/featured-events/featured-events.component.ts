@@ -16,7 +16,7 @@ export class FeaturedEventsComponent implements OnInit {
     s: 6,
     searchTxt: "",
     eventType: 0,
-    pastEvents: -1
+    pastEvents: "-1"
   };
   events: any;
 

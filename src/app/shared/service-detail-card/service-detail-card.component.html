@@ -7,16 +7,18 @@
     <div class="verified">
 
       <img [imageHandler] *ngIf="isDBService" [src]="service?.basicProfileInfo?.profileImage?.thumbnailImage"
-        class="h-150 w-100" alt="No Image">
-      <img [imageHandler] *ngIf="!isDBService" [src]="service?.thumbnail" class="h-150 w-100" alt="No Image Found">
+        class="h-150 w-100" alt="service thumbnail image">
+      <img [imageHandler] *ngIf="!isDBService" [src]="service?.thumbnail" class="h-150 w-100" alt="service thumbnail image">
 
-      <button class="uk-button-default" tabindex=-1 *ngIf="service?.verified == '1'"><span class="verified-icon-w"></span></button>
+      <button class="uk-button-default" tabindex=-1 *ngIf="service?.verified == '1'"><span
+          class="verified-icon-w"></span></button>
     </div>
 
   </div>
 
   <div class="uk-card-body uk-text-center uk-text-left@s uk-width-expand p-16">
-    <h3 class="font-regular font-weight-600 m-0"><a href="javascript:void(0)">{{ isDBService ? service?.basicProfileInfo.firstName :  service?.name}}</a>
+    <h3 class="font-regular font-weight-600 m-0"><a
+        href="javascript:void(0)">{{ isDBService ? service?.basicProfileInfo.firstName :  service?.name}}</a>
     </h3>
     <div>
       <ngb-rating *ngIf="isDBService" [rate]="getDbServiceRating(service?.ratingPercentage)" [readonly]="true"

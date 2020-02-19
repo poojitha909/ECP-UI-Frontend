@@ -16,8 +16,8 @@
                         {{slide}}
                     </div>
                     <ngb-carousel *ngIf="product && product.images" [activeId]="activeSlideId">
-                        <ng-template *ngFor="let image of product.images" ngbSlide>
-                            <img [imageHandler] [src]="image" alt="Random first slide">
+                        <ng-template *ngFor="let image of product.images;let i =index" ngbSlide>
+                            <img [imageHandler] [src]="image" [attr.alt]="'Product silder image'+ i">
                         </ng-template>
                     </ngb-carousel>
                 </div>
@@ -25,7 +25,7 @@
                     <li class="carousel-thumbnail__item carousel-box list-inline-item"
                         *ngFor="let image of product.images;  let i = index" (click)="setActiveSlide(i)">
                         <a class="selected">
-                            <img class="carousel-thumbnail__img" alt="No Image Found" [src]="image">
+                            <img class="carousel-thumbnail__img" [attr.alt]="'Product carousel image'+ i" [src]="image">
                         </a>
                     </li>
                 </ul>
@@ -59,8 +59,8 @@
                     </div>
 
                     <div class="m-b-20 uk-hidden@s">
-                        <a [href]="whatsappMobileUrl" aria-label="Share via Whatsapp" class="uk-icon-button  uk-margin-small-right whatapp-icon"
-                            uk-icon="whatsapp">
+                        <a [href]="whatsappMobileUrl" aria-label="Share via Whatsapp"
+                            class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp">
                         </a>
                         <a class="social-link" [href]="whatsappMobileUrl">
                             Share via
@@ -69,7 +69,8 @@
 
                     <div class="m-b-20">
                         <a href="mailto:?subject=Regarding Product '{{product.name}}' from An Elder Spring Initiative by Tata Trusts&body=Product URL: {{currentUrl}}"
-                            class="uk-icon-button  uk-margin-small-right fb-icon" aria-label="Share via Email" uk-icon="mail"> </a>
+                            class="uk-icon-button  uk-margin-small-right fb-icon" aria-label="Share via Email"
+                            uk-icon="mail"> </a>
                         <a class="social-link"
                             href="mailto:?subject=Regarding Product '{{product.name}}' from An Elder Spring Initiative by Tata Trusts&body=Product URL: {{currentUrl}}">
                             Share
@@ -78,7 +79,8 @@
 
                     <div>
                         <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{product.name}}"
-                            class="uk-icon-button  uk-margin-small-right email-icon" aria-label="Share via Facebook" uk-icon="facebook"> </a>
+                            class="uk-icon-button  uk-margin-small-right email-icon" aria-label="Share via Facebook"
+                            uk-icon="facebook"> </a>
                         <a class="social-link"
                             href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{product.name}}">
                             Share via
@@ -143,8 +145,8 @@
                                 <button class="uk-button uk-button-transparent uk-modal-close"
                                     type="button">Cancel</button>
                                 <button class="uk-button uk-button-default m-l-5 uk-modal-close"
-                                    (click)="onReviewSubmit()" type="button"
-                                    >{{ auth.isAuthenticate ? 'Post Review': 'Signin to Review'}}</button>
+                                    (click)="onReviewSubmit()"
+                                    type="button">{{ auth.isAuthenticate ? 'Post Review': 'Signin to Review'}}</button>
                             </div>
                         </form>
                     </div>

@@ -10,6 +10,7 @@ import { ConfigurationService } from 'src/app/core/services/configuration.servic
 })
 export class SigninTypesViewComponent implements OnInit, OnChanges {
   @Input() otpGenerated: boolean;
+  @Input() otpFailed: string;
   @Output() requestForOtp = new EventEmitter();
   @Output() verfiyOtp = new EventEmitter();
   @Output() resendOtp = new EventEmitter();
@@ -24,7 +25,7 @@ export class SigninTypesViewComponent implements OnInit, OnChanges {
     private router: Router,
     private configServ: ConfigurationService
   ) {
-    this.configServ.loadConfigurations().subscribe( (c) => {
+    this.configServ.loadConfigurations().subscribe((c) => {
       this.config = c;
     })
   }
@@ -38,6 +39,10 @@ export class SigninTypesViewComponent implements OnInit, OnChanges {
       setTimeout(() => {
         document.getElementById("opttxt").focus();
       }, 500);
+    }
+
+    if (changes && changes.otpFailed.currentValue) {
+      this.mobileNumber = changes.otpFailed.currentValue
     }
 
   }

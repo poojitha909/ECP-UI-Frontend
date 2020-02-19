@@ -105,17 +105,17 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit {
       title: [review ? review.title : "", Validators.required],
       id: [""]
     });
-    if(review){
+    if (review) {
       this.store.clear("new-p-review");
-      setTimeout( () => {
+      setTimeout(() => {
         UIkit.modal("#review-modal").show();
-      },500);
+      }, 500);
     }
 
   }
 
   ngAfterViewInit() {
-    document.getElementById("productHeader").focus();
+
   }
 
   getProduct() {
@@ -126,6 +126,9 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit {
         this.getReviews();
         this.getProductRating();
         this.setSeoTags(this.product);
+        setTimeout(() => {
+          document.getElementById("productHeader").focus();
+        }, 500);
       }
     });
   }
@@ -172,7 +175,7 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit {
       response => {
         if (response) {
           this.dbRating = response;
-           if (this.auth.user) {
+          if (this.auth.user) {
             this.userRating = this.dbRating.find(val => val.userId == this.userId);
           }
           this.getDetailRating();
@@ -288,26 +291,26 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit {
   * Add review
   */
   onReviewSubmit() {
-      if (this.auth.isAuthenticate) {
-        this.reviewSuccessMessage = null;
-        this.reviewForm.controls.productId.setValue(this.productId);
-        this.productService.addReview(this.reviewForm.value).subscribe(
-          response => {
-            if (response) {
-              this.getReviews();
-              this.reviewForm.reset();
-              this.reviewSuccessMessage = "Review successfully posted.";
-            }
-          },
-          error => {
-            console.log(error);
-          });
-      } else {
-        console.log(this.reviewForm.value);
-        this.store.store("new-p-review", JSON.stringify(this.reviewForm.value));
-        this.authService.redirectUrl = "products/" + this.productId;
-        this.router.navigate(['/user/signin']);
-      }
+    if (this.auth.isAuthenticate) {
+      this.reviewSuccessMessage = null;
+      this.reviewForm.controls.productId.setValue(this.productId);
+      this.productService.addReview(this.reviewForm.value).subscribe(
+        response => {
+          if (response) {
+            this.getReviews();
+            this.reviewForm.reset();
+            this.reviewSuccessMessage = "Review successfully posted.";
+          }
+        },
+        error => {
+          console.log(error);
+        });
+    } else {
+      console.log(this.reviewForm.value);
+      this.store.store("new-p-review", JSON.stringify(this.reviewForm.value));
+      this.authService.redirectUrl = "products/" + this.productId;
+      this.router.navigate(['/user/signin']);
+    }
   }
 
   // likeReply(reply) {

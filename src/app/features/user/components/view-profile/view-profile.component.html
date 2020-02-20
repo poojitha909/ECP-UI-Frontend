@@ -12,8 +12,8 @@
     <hr>
     <div class="m-t-40" uk-grid>
         <div class="uk-width-1-3@s">
-            <img
-                [src]="userService.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage || 'assets/images/default-thumbnail.png'" alt="No Image Found" />
+            <img [src]="userService?.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage || 'assets/images/default-thumbnail.png'"
+                alt="No Image Found">
         </div>
         <div class="uk-width-expand@s">
             <p class="font-regular-15 m-b-10 lable">Name</p>

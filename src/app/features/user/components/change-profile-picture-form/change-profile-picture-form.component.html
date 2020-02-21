@@ -84,7 +84,7 @@
         <button class="uk-button uk-button-transparent uk-modal-close" type="button"
             (click)="onCancel()">Cancel</button>
         <button class="m-l-10 uk-button uk-button-default" (click)="onSubmit('SUBMIT_USER_DETAILS')"
-            [disabled]="basicProfile.invalid">Submit</button>
+            [disabled]="basicProfile.invalid || isLoading">Submit</button>
     </p>
 </div>
 <!-- Change picture form END-->

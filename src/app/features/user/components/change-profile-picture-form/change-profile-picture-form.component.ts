@@ -83,15 +83,20 @@ export class ChangeProfilePictureFormComponent implements OnInit {
       response => {
         this.isLoading = false;
         this.successMessage = "User information updated successfully"
+        this.cancelForm.emit();
         console.log(response);
       },
       error => {
         this.isLoading = false;
-        this.errorMessage = "Some unknown internal server error occured";
+        if (this.imageData) {
+          this.errorMessage = "Profile image could not be updated";
+        } else {
+          this.errorMessage = "Some unknown internal server error occurred";
+        }
       });
 
     console.log('CancelForm after Submit from ', event)
-    this.cancelForm.emit();
+
   }
 
   resetAlertMessages() {

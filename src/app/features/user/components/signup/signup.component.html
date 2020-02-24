@@ -2,10 +2,10 @@
     <div class="uk-container uk-container-large">
         <div class="signup-title" uk-grid>
             <div class="uk-flex uk-flex-middle uk-width-expand">
-                <h1>Signup for Joy of Age </h1>
+                <h1>Join Us for Joy of Age </h1>
             </div>
-            <div class="uk-width-auto">
-                <a routerLink="/"><span class="close-icon"></span></a>
+            <div class="uk-width-auto" >
+                <a routerLink="/"><span class="close-icon" data-uk-tooltip title="Cancel Join Us"></span></a>
             </div>
         </div>
         <hr>
@@ -39,18 +39,20 @@
                 <!-- Signup discription link START-->
                 <div *ngIf="!user" class="signup-detail uk-text-center">
                     <div class="list uk-padding">
-                        <h3>Signin for Joy of Age </h3>
+                        <h3>Join the Joy of Age Community</h3>
                         <ul class="uk-list">
                             <li>
-                                <fa-icon icon="star" [style]="{'float': 'left'}"></fa-icon> <span class="uk-text-justify " >Participate in Events and
-                                    Discussions</span> 
+                                 <span class="uk-text-justify " >Participate in Discussions.</span> 
                             </li>
                             <li>
-                                <fa-icon icon="star" [style]="{'float': 'left'}"></fa-icon> <span class="uk-text-justify" >Find Products and Services
-                                    suit your need</span> 
+                                 <span class="uk-text-justify" >Look for Events happening around you.</span> 
                             </li>
                             <li>
-                                <fa-icon icon="star" [style]="{'float': 'left'}"></fa-icon> <span class="uk-text-justify" >Ask questions to domain experts, privately</span> 
+                                <span class="uk-text-justify" >Find Products and Services that suit your need.</span> 
+                            </li>
+                            
+                            <li>
+                                 <span class="uk-text-justify" >Post your queries and get expert guidance, privately with assured confidentiality.</span> 
                             </li>
                         </ul>
                     </div>

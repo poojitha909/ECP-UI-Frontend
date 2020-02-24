@@ -10,16 +10,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ChangeProfilePictureFormComponent implements OnInit {
   @Output() cancelForm = new EventEmitter();
-  EditUser:string;
+  EditUser: string;
   eventEmitted: any;
+  imageData: FormData;
 
-
+  profileImage;
   basicProfile: FormGroup;
   errorMessage;
   successMessage;
   isLoading;
-  
-  
+
+
 
   constructor(
     private auth: AuthService,
@@ -29,11 +30,11 @@ export class ChangeProfilePictureFormComponent implements OnInit {
 
     this.basicProfile = this.fb.group({
       firstName: [this.userService.userProfile.basicProfileInfo.firstName || '', Validators.required],
-      primaryEmail: [this.userService.userProfile.basicProfileInfo.primaryEmail || '', Validators.required],
+      primaryEmail: [this.userService.userProfile.basicProfileInfo.primaryEmail || '', [Validators.required, Validators.email]],
       primaryPhoneNo: [this.userService.userProfile.basicProfileInfo.primaryPhoneNo || '', Validators.required],
 
     });
-
+    this.profileImage = this.userService.userProfile.basicProfileInfo.profileImage.thumbnailImage;
   }
 
   ngOnInit() {
@@ -49,23 +50,26 @@ export class ChangeProfilePictureFormComponent implements OnInit {
     let fileList: FileList = event.target.files;
     if (fileList.length > 0) {
       let file: File = fileList[0];
-      let formData = new FormData();
-      formData.append('images', file);
-      formData.append("name", "new");
-      formData.append("description", "test");
-      const mimeType = file.type;
-      if (mimeType.match(/image\/*/) == null) {
-        alert("Only images are supported.");
-        return;
-      }
-
-      console.log(formData.getAll);
-
-      this.userService.uploadUserImage(formData).subscribe(
-        response => {
-          console.log(response);
-        })
+      this.imageData = new FormData();
+      this.imageData.append('images', file);
+      this.imageData.append("name", "new");
+      this.imageData.append("description", "test");
+      const cur = this;
+      const reader = new FileReader();
+      reader.onload = (ev: any) => {
+        cur.profileImage = ev.target.result;;
+      };
+      reader.readAsDataURL(file);
+      // const mimeType = file.type;
+      // if (mimeType.match(/image\/*/) == null) {
+      //   alert("Only images are supported.");
+      //   return;
+      // }
+      // console.log(file);
+      // console.log(this.imageData.getAll);
+      // console.log(reader.readAsDataURL(file));
     }
+    // console.log(this.profileImage);
   }
 
   onSubmit(event) {
@@ -75,19 +79,24 @@ export class ChangeProfilePictureFormComponent implements OnInit {
     this.isLoading = true;
     this.resetAlertMessages();
 
-    this.userService.updateUserProfile(this.userService.userProfile).subscribe(
+    this.userService.uploadUserImage(this.imageData).subscribe(
       response => {
         this.isLoading = false;
         this.successMessage = "User information updated successfully"
+        this.cancelForm.emit();
         console.log(response);
       },
       error => {
         this.isLoading = false;
-        this.errorMessage = "Some unknown internal server error occured";
+        if (this.imageData) {
+          this.errorMessage = "Profile image could not be updated";
+        } else {
+          this.errorMessage = "Some unknown internal server error occurred";
+        }
       });
 
-      console.log('CancelForm after Submit from ',event)
-      this.cancelForm.emit();
+    console.log('CancelForm after Submit from ', event)
+
   }
 
   resetAlertMessages() {

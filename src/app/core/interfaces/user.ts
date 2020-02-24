@@ -160,3 +160,8 @@ export const monthOptions: any[] = [
         value: 12
     }
 ]
+
+export enum OtpErrorMessage {
+    maxRetry = "max_retry_count_exceeded",
+    otpNotVerified = 'otp_not_verified',
+}

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/core';
-import { User, SocialAccount, UserIdType } from 'src/app/core/interfaces';
+import { User, SocialAccount, UserIdType, OtpErrorMessage } from 'src/app/core/interfaces';
 import { UserService } from '../../services/user.service';
 import { ConfigurationService } from 'src/app/core/services/configuration.service';
 
@@ -27,8 +27,8 @@ export class SignupComponent implements OnInit {
     private userService: UserService,
     private configServ: ConfigurationService,
     private router: Router) {
-      
-    this.configServ.loadConfigurations().subscribe( (c) => {
+
+    this.configServ.loadConfigurations().subscribe((c) => {
       this.config = c;
     })
     this.user = this.auth.user;
@@ -155,7 +155,11 @@ export class SignupComponent implements OnInit {
         this.userSignup(user, SocialAccount.MOBILE);
       } else {
         this.isLoading = false;
-        this.errorMessage = response.message;
+        if (response.message == OtpErrorMessage.otpNotVerified) {
+          this.errorMessage = "Invalid Otp, Please Enter a Valid OTP Number !";
+        } else {
+          this.errorMessage = response.message;
+        }
         this.isOtpGenerated = false;
       }
     },
@@ -171,7 +175,11 @@ export class SignupComponent implements OnInit {
         console.log(response);
         if (response.type === "success") {
         } else {
-          this.errorMessage = response.message;
+          if (response.message == OtpErrorMessage.maxRetry) {
+            this.errorMessage = "Max resend otp count exceeded";
+          } else {
+            this.errorMessage = response.message;
+          }
           this.isOtpGenerated = false;
         }
       },

@@ -29,7 +29,7 @@ export class AddRatingComponent implements OnInit, AfterViewInit, OnChanges {
       user => {
         if (!user) {
           this.userRating = null;
-          this.btnText = 'Signin to Submit';
+          this.btnText = 'Join Us to Submit';
           this.ratingForm.controls.rating.setValue('');
         }
       });

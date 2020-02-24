@@ -99,7 +99,7 @@
           <div class="m-t-10 m-b-20">
             <a (click)="reportFormToggle()">
               <fa-icon [icon]="['far', 'flag']" class="m-r-5"></fa-icon>
-              {{ auth.isAuthenticate ? 'Report service provider': 'Signin to Report service provider'}}
+              {{ auth.isAuthenticate ? 'Report service provider': 'Join Us to Report service provider'}}
             </a>
 
             <!-- Report Form MOdel Start -->
@@ -341,7 +341,7 @@
             <div class="uk-text-right">
               <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
               <button class="uk-button uk-button-default m-l-5 uk-modal-close" (click)="onReviewSubmit()" type="button"
-                [disabled]="reviewForm.invalid">{{ auth.isAuthenticate ? 'Post Review': 'Signin to Review'}}</button>
+                [disabled]="reviewForm.invalid">{{ auth.isAuthenticate ? 'Post Review': 'Join Us to Review'}}</button>
             </div>
           </form>
         </div>
@@ -385,7 +385,7 @@
                 </div>
                 <div class="uk-width-auto">
                   <button class="uk-button uk-button-transparent review-btn-transparent"
-                    (click)="writeNewReview()">{{  auth.isAuthenticate ? 'Write Review': 'Signin to Review'  }}</button>
+                    (click)="writeNewReview()">{{  auth.isAuthenticate ? 'Write Review': 'Join Us to Review'  }}</button>
                 </div>
               </div>
 

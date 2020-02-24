@@ -16,7 +16,8 @@ export class FeaturedEventsComponent implements OnInit {
     s: 6,
     searchTxt: "",
     eventType: 0,
-    pastEvents: -1
+    pastEvents: -1,
+    dir:0
   };
   events: any;
 
@@ -42,6 +43,12 @@ export class FeaturedEventsComponent implements OnInit {
   showEvents() {
     let searchParams = JSON.parse(JSON.stringify(this.searchParams));
     searchParams.searchTxt = "";
+    if(searchParams.pastEvents == -1){
+      searchParams.dir = 1;
+    }
+    else{
+      searchParams.dir = 0;
+    }
     this.eventService.searchEvents(searchParams).subscribe((response: any) => {
       const data = response.data;
       this.events = [];

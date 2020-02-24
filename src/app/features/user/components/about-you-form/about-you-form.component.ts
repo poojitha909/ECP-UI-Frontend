@@ -11,7 +11,7 @@ export class AboutYouFormComponent implements OnInit {
   @Output() cancelForm = new EventEmitter();
 
   aboutForm: FormGroup;
-  medicalIssues: string[] = ["Diabetes", "Blood", "Pressure", "Dementia", "Arthiritis"];
+  medicalIssues: string[] = ["Diabetes", "Blood Pressure", "Dementia", "Arthiritis","Others"];
   hobbies: string[] = [
     "Sports",
     "Music",

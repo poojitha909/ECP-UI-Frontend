@@ -118,6 +118,7 @@ export class DiscussionsListPageComponent implements OnInit, AfterViewInit, OnDe
     this.setSearchTxt(value);
     if (event.key === "Enter") {
       this.submitSearch();
+      document.getElementById("discussion-searchtxt").focus();
     }
   }
 
@@ -141,6 +142,7 @@ export class DiscussionsListPageComponent implements OnInit, AfterViewInit, OnDe
       this.setSearchTxt("");
       this.showReset = false;
       this.search();
+      document.getElementById("discussion-searchtxt").focus();
     }
   }
 
@@ -168,12 +170,12 @@ export class DiscussionsListPageComponent implements OnInit, AfterViewInit, OnDe
         });
       }
     },
-    error=>{},
-    ()=>{
-      setTimeout(() => {      
-        document.getElementById("discussionListHeader").focus();
-      }, 500);
-    }
+      error => { },
+      () => {
+        setTimeout(() => {
+          document.getElementById("discussionListHeader").focus();
+        }, 500);
+      }
     );
   }
 

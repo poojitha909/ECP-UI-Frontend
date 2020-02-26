@@ -215,6 +215,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   clearSerach() {
     this.searchPageParam.term = '';
     this.router.navigateByUrl('services/all');
+    document.getElementById("allservice-search").focus();
+
   }
 
   onChangePage(services: any[]) {
@@ -260,6 +262,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
       } else {
         this.router.navigate(['services/all'], { queryParams: { category: field } });
         // this.getCategoryServices(field, 0);
+        document.getElementById("allservice-search").focus();
       }
       this.selectedValue = "";
       this.autocompleteFields = [];

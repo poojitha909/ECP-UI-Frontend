@@ -124,6 +124,7 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.productService.selectedCatname = null;
     this.searchParams.productCategory = '';
     this.router.navigateByUrl('products/all');
+    document.getElementById("allproduct-searchtxt").focus();
   }
 
   onTabChange(value, catName) {
@@ -162,6 +163,7 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onSearch() {
     this.router.navigate(['/products/all'], { queryParams: { productCategory: this.searchParams.productCategory, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
+    document.getElementById("allproduct-searchtxt").focus();
   }
 
 }

@@ -41,14 +41,16 @@
             Provider</button> -->
           <!-- <button class="uk-button uk-button-default" uk-toggle="target: #modal-sections">Contact Service
             Provider</button> -->
-          <a href="javascript:void(0)" class="uk-button uk-button-default" id="btnContactProvider" aria-label="Opens up service contact detail in popup"
-            (click)="openContactModel($event.target)">Contact Service
+          <a href="javascript:void(0)" class="uk-button uk-button-default" id="btnContactProvider"
+            aria-label="Opens popup with service contact detail" (click)="openContactModel($event.target)">Contact
+            Service
             Provider</a>
 
 
 
           <div class="m-t-10 m-b-20">
-            <a class="link-black" href="javascript:void(0)" id="reportFormLink" (click)="reportFormToggle($event.target)">
+            <a class="link-black" href="javascript:void(0)" id="reportFormLink"
+              (click)="reportFormToggle($event.target)">
               <fa-icon [icon]="['far', 'flag']" class="m-r-5"></fa-icon>
               {{ auth.isAuthenticate ? 'Report service provider': 'Signin to Report service provider'}}
             </a>

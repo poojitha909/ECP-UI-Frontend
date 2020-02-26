@@ -54,6 +54,9 @@
     // color: #1A73E8;
   }
   .uk-list{
+    a {
+      color: #000;
+    }
     background-color: #ffffff;
     & > li{
         padding: 10px 5px;

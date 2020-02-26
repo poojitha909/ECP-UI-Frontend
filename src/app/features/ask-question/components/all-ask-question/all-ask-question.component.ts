@@ -204,6 +204,7 @@ export class AllAskQuestionComponent implements OnInit, AfterViewInit, OnDestroy
     this.setSearchTxt(value);
     if (event.key === "Enter") {
       this.showExperts();
+      document.getElementById("askquestion-searchtxt").focus();
     }
   }
 
@@ -212,6 +213,7 @@ export class AllAskQuestionComponent implements OnInit, AfterViewInit, OnDestroy
       this.setSearchTxt("");
       this.showReset = false;
       this.showExperts();
+      document.getElementById("askquestion-searchtxt").focus();
     }
   }
 

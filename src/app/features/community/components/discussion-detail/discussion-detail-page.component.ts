@@ -134,6 +134,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
         if (response.data.replies) {
           this.replyForm.reset();
           this.getDiscussion();
+          this.successMessage = "Reply edited successfully.";
           UIkit.modal("#reply-modal-discussion.uk-open").hide();
         }
       });
@@ -143,7 +144,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
         if (response.data.replies) {
           this.replyForm.reset();
           this.getDiscussion();
-          //this.successMessage = "Reply Submitted successfully.";
+          this.successMessage = "Reply Submitted successfully.";
           UIkit.modal("#reply-modal-discussion.uk-open").hide();
         }
       });

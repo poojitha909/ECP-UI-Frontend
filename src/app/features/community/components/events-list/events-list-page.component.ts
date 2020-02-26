@@ -70,6 +70,7 @@ export class EventsListPageComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   ngAfterViewInit() {
+    document.getElementById("allEventsHeader").focus();
 
   }
 
@@ -123,9 +124,9 @@ export class EventsListPageComponent implements OnInit, AfterViewInit, OnDestroy
 
       },
       () => {
-        setTimeout(() => {
-          document.getElementById("allEventsHeader").focus();
-        }, 500);
+        // setTimeout(() => {
+        //   document.getElementById("allEventsHeader").focus();
+        // }, 500);
       });
   }
 
@@ -177,12 +178,14 @@ export class EventsListPageComponent implements OnInit, AfterViewInit, OnDestroy
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
       this.setSearchTxt("");
       this.showReset = false;
-      this.onSearch()
+      this.onSearch();
+      // document.getElementById("event-searchtxt").focus();
     }
   }
 
   onSearch() {
     this.router.navigate(['/community/events'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
+    document.getElementById("event-searchtxt").focus();
   }
 
   setSearchTxt(value: string) {

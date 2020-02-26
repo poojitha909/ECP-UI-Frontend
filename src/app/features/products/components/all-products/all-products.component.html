@@ -12,13 +12,14 @@
             <h3 class="uk-h4">Categories</h3>
           </div>
           <div *ngIf="searchParams.productCategory !== ''">
-            <a class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
+            <a class="uk-text-danger" href="javascript:void(0)" (click)="clearSelection()">Clear Selection</a>
           </div>
         </div>
         <ul class="uk-list uk-list-large p-2" *ngIf="catsList!==undefined">
           <li *ngFor="let cat of catsList" (click)="onTabChange(cat.id,cat.name)" class="cursor-pointer"
-            [ngClass]="{'cat-active': cat.id === searchParams.productCategory}">{{cat.name}} <span
-              class="uk-badge uk-float-right">{{cat.productCount}}</span></li>
+            [ngClass]="{'cat-active': cat.id === searchParams.productCategory}"><a
+              href="javascript:void(0)">{{cat.name}} <span
+                class="uk-badge uk-float-right">{{cat.productCount}}</span></a></li>
         </ul>
       </div>
     </div>
@@ -27,13 +28,14 @@
         <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
           <div class="uk-margin uk-width-expand">
             <form class="uk-search uk-search-default">
+              <input class="uk-input sm-pr-150" id="allproduct-searchtxt" [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)"
+                required type="text" placeholder="Search for product here" name="search" />
               <span class="uk-search-icon-flip" [ngClass]="{ 'w-sm-150':showReset}" uk-search-icon>
-                <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
+                <button *ngIf="showReset" class="reset-link" (keyup.enter)="resetSearch($event)"
+                  (click)="resetSearch($event)">
                   <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
                 </button>
               </span>
-              <input class="uk-input sm-pr-150" [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)"
-                required type="text" placeholder="Search for product here" name="search" />
             </form>
           </div>
           <div class="uk-width-auto uk-margin-bottom">

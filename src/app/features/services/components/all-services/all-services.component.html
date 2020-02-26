@@ -197,6 +197,10 @@
             <div class="uk-position-absolute uk-z-index w-full">
               <form>
                 <div class="uk-inline w-full">
+                  <input class="uk-input" id="allservice-search" aria-label="search services" aria-autocomplete=list
+                    placeholder="Search for Service here" [(ngModel)]="searchPageParam.term"
+                    (keyup)="searchEvent($event)" required type="text" autocomplete='off'
+                    (keydown.enter)="onSearch($event.target.value)" name="searchtxt" />
                   <a class="uk-form-icon uk-form-icon-flip" (click)="onSearch(searchPageParam.term)"
                     uk-icon="icon: search"></a>
                   <a class="uk-form-icon uk-form-icon-flip reset-link" href="javascript:void(0)"
@@ -204,10 +208,6 @@
                     <fa-icon [icon]="['fas', 'times-circle']" class="m-r-5"></fa-icon><span class="uk-visible@s"> Clear
                       Search</span>
                   </a>
-                  <input class="uk-input" aria-label="search services" aria-autocomplete=list
-                    placeholder="Search for Service here" [(ngModel)]="searchPageParam.term"
-                    (keyup)="searchEvent($event)" required type="text" autocomplete='off'
-                    (keydown.enter)="onSearch($event.target.value)" name="searchtxt" />
                 </div>
               </form>
               <!-- Auto complete list -->

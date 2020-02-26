@@ -34,7 +34,6 @@ export class ConfigurationService {
         shareReplay(1)
       );
     }
-    console.log(this.configuration$);
     return this.configuration$;
   }
 

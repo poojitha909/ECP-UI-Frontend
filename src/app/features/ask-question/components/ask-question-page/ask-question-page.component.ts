@@ -61,9 +61,9 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
-      if (this.user.userRoleId == "EXPERT") {
-        this.router.navigate(['/ask-question/expert']);
-      }
+      // if (this.user.userRoleId == "EXPERT") {
+      //   this.router.navigate(['/ask-question/expert']);
+      // }
     }
     this.searchParams = {
       p: 0,

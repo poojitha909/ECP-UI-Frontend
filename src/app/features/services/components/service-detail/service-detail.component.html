@@ -218,6 +218,11 @@
       <div class="m-t-30">
 
         <!-- <h1 *ngIf="isDBService" class="font-regular-24 font-weight-600"> Reviews ({{dbReview.length}})</h1> -->
+        <!-- Success box START-->
+        <div aria-live="polite" aria-atomic="true" *ngIf="reviewSuccessMessage" class="uk-alert-success" uk-alert>
+          <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ reviewSuccessMessage }}</p>
+        </div>
+        <!-- Success box END-->
         <ul class="uk-switcher switcher-container">
           <li>
             <!--DB Reviews START-->
@@ -469,11 +474,7 @@
   <div class="uk-modal-dialog uk-modal-body">
     <h4 id="reviewTitle" tabindex=0 class="font-regular-24 font-weight-600">{{reviewTitle}} Review</h4>
     <hr />
-    <!-- Success box START-->
-    <div aria-live="polite" aria-atomic="true" *ngIf="reviewSuccessMessage" class="uk-alert-success" uk-alert>
-      <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ reviewSuccessMessage }}</p>
-    </div>
-    <!-- Success box END-->
+
     <form [formGroup]="reviewForm" id="reviewForm" class="uk-form-stacked review-form">
 
 

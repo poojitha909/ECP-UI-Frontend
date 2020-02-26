@@ -37,7 +37,7 @@ export class AskQuestionPageComponent implements OnInit, AfterViewInit, OnDestro
     ) {
     // Generate meta tag 
     const config: SEO = {
-      title: `Ask Our Expert - An Elder Spring Initiative by Tata Trusts`,
+      title: `Ask an Expert`,
       keywords: 'products,services,events,dscussions',
       description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
       author: `An Elder Spring Initiative by Tata Trusts`,

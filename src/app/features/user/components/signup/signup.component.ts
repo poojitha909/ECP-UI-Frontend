@@ -35,7 +35,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
       this.config = c;
     })
     this.user = this.auth.user;
-    this.titleService.setTitle("User Signin - Elderly Care Platform");
+    this.titleService.setTitle("Sign In - Joy of Age");
   }
 
   ngOnInit() {

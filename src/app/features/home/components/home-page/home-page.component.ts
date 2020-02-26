@@ -13,7 +13,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
 
     // Generate meta tag 
     const config: SEO = {
-      title: 'Know Us -  An Elderly Care Platform engineered by Social Alpha and Supported by Tata Trusts',
+      title: 'Home - Joy of Age',
       keywords: 'Elderly Care, products, services, events, discussions',
       description: 'Supported by Tata Trusts',
       author: 'Social Alpa',

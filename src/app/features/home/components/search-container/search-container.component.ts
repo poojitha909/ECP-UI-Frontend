@@ -91,6 +91,8 @@ export class SearchContainerComponent implements OnInit {
     this.showReset = false;
     this.showResult = false;
     this.homeService.homeSearchtxt = "";
+    document.getElementById("homeSearch").focus();
+
   }
 
   homeSearchPages() {

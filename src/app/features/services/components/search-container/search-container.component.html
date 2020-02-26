@@ -10,6 +10,10 @@
       <div class="uk-width-expand uk-position-relative">
         <div class="uk-position-absolute uk-z-index w-full pr-20">
           <form class="uk-search uk-search-default" autocomplete='off'>
+            <input id="serviceSearch" class="uk-search-input search-box font-regular sm-pr-150"
+              aria-label="search service" aria-autocomplete=list [(ngModel)]="searchPageParam.term"
+              (keyup)="searchEvent($event)" (keydown.enter)="onSearch($event.target.value)" required type="text"
+              placeholder="Search here" name="search" autocomplete='off' />
             <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
               <button class="uk-button-link" style="visibility: hidden"></button>
               <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
@@ -17,14 +21,12 @@
               </button>
 
             </span>
-            <input id="serviceSearch" class="uk-search-input search-box font-regular sm-pr-150" aria-label="search service" aria-autocomplete=list [(ngModel)]="searchPageParam.term"
-              (keyup)="searchEvent($event)" (keydown.enter)="onSearch($event.target.value)" required type="text"
-              placeholder="Search here" name="search" autocomplete='off' />
           </form>
           <ul aria-live="polite" aria-atomic="true" *ngIf="autocompleteFields.length > 0"
             class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto search-list" appKeyHandler
             (onItemSelected)="onItemSelected($event)">
-            <li role="option" class="cursor-pointer" *ngFor="let field of autocompleteFields" (click)="onAutocompleteClick(field)">
+            <li role="option" class="cursor-pointer" *ngFor="let field of autocompleteFields"
+              (click)="onAutocompleteClick(field)">
               {{field.name ||  field.basicProfileInfo.firstName }}
             </li>
           </ul>
@@ -38,7 +40,8 @@
     </div>
 
     <!-- Search Form END -->
-    <div class="m-t-20 uk-hidden@s" aria-live="polite" aria-atomic="true" *ngIf="popullarService && popullarService.length > 0">
+    <div class="m-t-20 uk-hidden@s" aria-live="polite" aria-atomic="true"
+      *ngIf="popullarService && popullarService.length > 0">
       <p class="font-regular-15 font-weight-600">Search Results ({{totalService}})
       </p>
 

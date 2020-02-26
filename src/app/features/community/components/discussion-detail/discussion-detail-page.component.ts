@@ -234,7 +234,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
 
   setSeoTags(discussion: any) {
     let config: SEO = {
-      title: `Discussions - ${discussion.title} - An Elder Spring Initiative by Tata Trusts`,
+      title: `Discussions - ${discussion.title}`,
       keywords: 'products,services,events,dscussions',
       description: `${discussion.shortSynopsis}`,
       author: `An Elder Spring Initiative by Tata Trusts`,

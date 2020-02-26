@@ -100,7 +100,7 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
 
     let config: SEO = {
-      title: `Service - ${this.isDBService ? this.service.basicProfileInfo.firstName : this.service.name} - An Elder Spring Initiative by Tata Trusts`,
+      title: `Service - ${this.isDBService ? this.service.basicProfileInfo.firstName : this.service.name}`,
       keywords: 'products,services,events,dscussions',
       description: `${this.isDBService ? this.service.basicProfileInfo.description : 'Just Dail Service'}`,
       author: `An Elder Spring Initiative by Tata Trusts`,

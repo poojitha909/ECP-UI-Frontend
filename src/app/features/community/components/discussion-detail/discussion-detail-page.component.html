@@ -18,7 +18,7 @@
                 </div>
                 <div class="m-t-30 bg-white category-box">
                     <div class="m-b-20 uk-visible@s">
-                        <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" aria-label="Share via Whatsapp" uk-icon="whatsapp"
+                        <a aria-label="Share via Whatsapp" [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" aria-label="Share via Whatsapp" uk-icon="whatsapp"
                           target="_blank"> </a>
                         <a class="social-link" [href]="whatsappUrl" target="_blank">
                           Share via
@@ -26,14 +26,14 @@
                     </div>
             
                     <div class="m-b-20 uk-hidden@s">
-                        <a [href]="whatsappMobileUrl" aria-label="Share via Whatsapp" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp">
+                        <a aria-label="Share via Whatsapp" [href]="whatsappMobileUrl" aria-label="Share via Whatsapp" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp">
                         </a>
                         <a class="social-link" [href]="whatsappMobileUrl">
                             Share via
                             Whatsapp</a>
                     </div>
                     <div class="m-b-20">
-                        <a href="mailto:?subject=This is regarding discussion '{{discussion.title}}' from An Elder Spring Initiative by Tata Trusts&body= Discussion URL: {{currentUrl}}"
+                        <a aria-label="Share via Email" href="mailto:?subject=This is regarding discussion '{{discussion.title}}' from An Elder Spring Initiative by Tata Trusts&body= Discussion URL: {{currentUrl}}"
                         class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail" aria-label="Share via Email">
                         </a> <a class="social-link"
                         href="mailto:?subject=This is regarding discussion '{{discussion.title}}' from An Elder Spring Initiative by Tata Trusts&body= Discussion URL: {{currentUrl}}">
@@ -41,7 +41,7 @@
                         Email</a>
                     </div>
                     <div>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services" onclick="javascript:window.open(this.href,
+                        <a aria-label="Share via facebook" href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services" onclick="javascript:window.open(this.href,
                                 '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
                         class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook" aria-label="Share via Facebook"> </a> <a class="social-link"
                         href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services" onclick="javascript:window.open(this.href,

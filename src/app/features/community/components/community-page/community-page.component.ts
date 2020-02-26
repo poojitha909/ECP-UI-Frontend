@@ -159,11 +159,11 @@ export class CommunityPageComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   resetSearch(event: any) {
-    if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
+    // if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
       this.setSearchTxt("");
       this.showReset = false;
       this.onSearch()
-    }
+    // }
   }
 
   onSearch() {

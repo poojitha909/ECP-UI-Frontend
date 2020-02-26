@@ -109,9 +109,8 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
   }
 
   setSeoTags(event: any) {
-    // title: `Event - ${event.title} - An Elder Spring Initiative by Tata Trusts`,
     const config: SEO = {
-      title: 'Event Details',
+      title: `Event Details- ${event.title}`,
       keywords: 'products,services,events,dscussions',
       description: `${event.description}`,
       author: `An Elder Spring Initiative by Tata Trusts`,

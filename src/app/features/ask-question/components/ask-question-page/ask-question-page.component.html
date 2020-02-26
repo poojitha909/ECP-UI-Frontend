@@ -8,6 +8,7 @@
             [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required type="text"
             placeholder="Search here" name="search" autocomplete='off' />
           <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
+            <button class="uk-button-link" style="visibility: hidden"></button>
             <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
               <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
             </button>

@@ -135,7 +135,7 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit {
 
   setSeoTags(product: any) {
     const config: SEO = {
-      title: `Shop Easy - ${product.name} - An Elder Spring Initiative by Tata Trusts`,
+      title: `Shop Easy - ${product.name}`,
       keywords: 'products,services,events,dscussions',
       description: `${product.description}`,
       author: `An Elder Spring Initiative by Tata Trusts`,

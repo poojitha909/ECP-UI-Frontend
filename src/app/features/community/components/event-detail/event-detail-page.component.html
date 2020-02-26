@@ -12,7 +12,8 @@
                     <p>Organiser</p>
                     <div>
                         <button class="uk-button uk-button-default cont-org" id="btnContactOrganiser"
-                            aria-label="event contact detail in popup" (click)="openContactModel($event.target)">
+                            aria-label="Opens up event contact organizer details in popup"
+                            (click)="openContactModel($event.target)">
                             Contact
                             Organiser</button>
                     </div>
@@ -78,7 +79,7 @@
             <div class="uk-width-2-3@m">
                 <div class="bg-white category-box">
                     <h4 class="publish-on">Published on: <span>{{event.createdAt | date:'dd MMM yyyy' }} at
-                        {{event?.datetime | date:'shortTime' }}</span></h4>
+                            {{event?.datetime | date:'shortTime' }}</span></h4>
                     <h1 id="eventHeader" tabindex=0 class="heading">{{event.title}}</h1>
                     <hr />
                     <div class="uk-grid uk-child-width-1-2@m">
@@ -97,8 +98,7 @@
                             <!-- time only -->
                         </div>
                         <div>
-                            <img src="/assets/images/phone.png" alt="phone icon"
-                                class="icons-ev">{{event?.orgPhone}}
+                            <img src="/assets/images/phone.png" alt="phone icon" class="icons-ev">{{event?.orgPhone}}
                             <!-- time only -->
                         </div>
                     </div>

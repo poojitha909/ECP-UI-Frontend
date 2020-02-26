@@ -15,6 +15,8 @@ import { ConfigurationService } from 'src/app/core/services/configuration.servic
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit, AfterViewInit {
+
+  welcomeText: boolean;
   isOtpGenerated: boolean;
   otpFailedNumber: string
   isLoading: boolean;
@@ -116,6 +118,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
       userData => {
         this.user = userData;
         this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
+        this.welcomeText = true;
         // this.isLoading = false;
         this.getUserProfile();
       },

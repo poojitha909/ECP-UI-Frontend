@@ -16,8 +16,7 @@
     <div uk-grid>
         <div class="uk-width-1-3@s uk-flex uk-flex-center">
             <div class="display-picture">
-                <img [src]="userService.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage || 'assets/images/default-thumbnail.png'"
-                    alt="user profile image" />
+                <img [src]="profileImage || 'assets/images/default-thumbnail.png'" alt="user profile image">
                 <div class="uk-text-center p-12">
                     <div uk-form-custom class="w-100">
                         <input type="file" (change)="fileChange($event)" accept="image/*">
@@ -54,7 +53,12 @@
                             id="Email-ID" formControlName="primaryEmail" type="text" placeholder="Email ID">
                         <small aria-describedby="Email-ID"
                             *ngIf="formControl.primaryEmail.invalid && ( formControl.primaryEmail.dirty ||  formControl.primaryEmail.touched)"
-                            class="uk-text-danger">Error: Email ID can't be empty.</small>
+                            class="uk-text-danger">
+                            <span *ngIf="formControl.primaryEmail.errors.required">Error: Email ID can't be
+                                empty.</span>
+                            <span *ngIf="formControl.primaryEmail.errors.email">Error: Invalid Email ID, please enter a
+                                valid email ID.</span>
+                        </small>
                     </div>
                 </div>
 
@@ -80,7 +84,7 @@
         <button class="uk-button uk-button-transparent uk-modal-close" type="button"
             (click)="onCancel()">Cancel</button>
         <button class="m-l-10 uk-button uk-button-default" (click)="onSubmit('SUBMIT_USER_DETAILS')"
-            [disabled]="basicProfile.invalid">Submit</button>
+            [disabled]="basicProfile.invalid || isLoading">Submit</button>
     </p>
 </div>
 <!-- Change picture form END-->

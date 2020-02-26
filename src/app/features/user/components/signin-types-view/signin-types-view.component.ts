@@ -81,6 +81,7 @@ export class SigninTypesViewComponent implements OnInit, OnChanges {
   }
 
   changeNumber() {
+    this.numberError =null;
     this.mobileNumber = null;
     this.otpResend = false;
     this.requestForOtp.emit(this.mobileNumber);

@@ -23,8 +23,8 @@ export class UserService {
     private http: HttpClient,
     private configServ: ConfigurationService,
     private auth: AuthService) {
-    
-    this.configServ.loadConfigurations().subscribe( (c) => {
+
+    this.configServ.loadConfigurations().subscribe((c) => {
       this.config = c;
     })
   }
@@ -97,18 +97,22 @@ export class UserService {
 
   uploadUserImage(userImage: FormData): Observable<any> {
     // let headers = new HttpHeaders().append('Content-Type', 'multipart/form-data');
-    return this.http.post<any>(ApiConstants.IMAGE_UPLOAD, userImage).pipe(
-      map((response) => {
-        if (response && response.data) {
-          this.userProfile.basicProfileInfo.profileImage = {
-            thumbnailImage: this.config.imageBaseUrl + response.data[0]
+    if (userImage) {
+      return this.http.post<any>(ApiConstants.IMAGE_UPLOAD, userImage).pipe(
+        map((response) => {
+          if (response && response.data) {
+            this.userProfile.basicProfileInfo.profileImage = {
+              thumbnailImage: this.config.imageBaseUrl + response.data[0]
+            }
+            return response.data;
           }
-          return response.data;
-        }
 
-      }),
-      mergeMap(val => this.updateUserProfile(this.userProfile))
-    );
+        }),
+        mergeMap(val => this.updateUserProfile(this.userProfile))
+      );
+    } else {
+      return this.updateUserProfile(this.userProfile);
+    }
   }
 
   validateDate(value): boolean {

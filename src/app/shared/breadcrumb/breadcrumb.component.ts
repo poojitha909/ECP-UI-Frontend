@@ -13,7 +13,6 @@ export class BreadcrumbComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.breadcrumbLinks);
   }
 
 }

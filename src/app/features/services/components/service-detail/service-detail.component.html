@@ -52,7 +52,7 @@
             <a class="link-black" href="javascript:void(0)" id="reportFormLink"
               (click)="reportFormToggle($event.target)">
               <fa-icon [icon]="['far', 'flag']" class="m-r-5"></fa-icon>
-              {{ auth.isAuthenticate ? 'Report service provider': 'Signin to Report service provider'}}
+              {{ auth.isAuthenticate ? 'Report service provider': 'Join Us to Report service provider'}}
             </a>
           </div>
         </div>
@@ -240,8 +240,7 @@
                 </div>
                 <div class="uk-width-auto">
                   <button class="uk-button uk-button-transparent review-btn-transparent"
-                    (click)="writeNewReview($event.target)"
-                    id="btnWriteReview">{{  auth.isAuthenticate ? 'Write Review': 'Signin to Review'  }}</button>
+                    (click)="writeNewReview()" id="btnWriteReview">{{  auth.isAuthenticate ? 'Write Review': 'Join Us to Review'  }}</button>
                 </div>
               </div>
 

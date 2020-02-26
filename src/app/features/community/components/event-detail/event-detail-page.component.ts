@@ -66,8 +66,8 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(this.currentUrl)}`);
     this.whatsappMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
     this.eventId = this.route.snapshot.params['id'];
-    this.getEvent();
-    this.reportEmail = "admin@socialpha.com";
+    this.getEvent()
+    this.reportEmail = "admin@joyofage.org";
     this.user = this.store.retrieve("ECP-USER");
     this.markIt = false;
     if (this.user) {

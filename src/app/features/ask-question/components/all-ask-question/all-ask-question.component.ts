@@ -6,6 +6,7 @@ import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { HomeService } from 'src/app/features/home/home.service';
+import { UserService } from '../../../../features/user/services/user.service';
 
 declare var UIkit;
 
@@ -51,10 +52,34 @@ export class AllAskQuestionComponent implements OnInit, AfterViewInit, OnDestroy
   currentUrl: string;
   whatsappUrl;
 
+  unansweredE: any[];
+  questionsE: any[];
+  viewbyE = "expert";
+  searchParamsE: {
+    p: number,
+    s: number,
+    askCategory: string,
+    askedBy: string,
+    answered: number,
+		answeredBy: string
+  };
+  searchParamsQuesE: {
+    p: number,
+    s: number,
+    searchTxt: string,
+    askCategory: string,
+    askedBy: string,
+    answered: number,
+		answeredBy: string
+  };
+  paramsSubsE: any;
+  totalRecordsE: number;
+  totalRecordsQuesE: number;
+
   constructor(private route: ActivatedRoute, private router: Router,
     private store: StorageHelperService, private askQuesService: AskQuestionService,
     public sanitizer: DomSanitizer, private seoService: SeoService,
-    private homeService: HomeService) {
+    private userService: UserService, private homeService: HomeService) {
 
     // Generate meta tag 
     const config: SEO = {
@@ -101,10 +126,32 @@ export class AllAskQuestionComponent implements OnInit, AfterViewInit, OnDestroy
       askedBy: "",
       answeredBy: ""
     };
+
+    this.searchParamsE = {
+      p: 0,
+      s: 10000,
+      askCategory: "",
+      askedBy: "",
+      answered: 0,
+      answeredBy: ""
+    }
+    this.searchParamsQuesE = {
+      p: 0,
+      s: 1000,
+      searchTxt: "",
+      askCategory: "",
+      askedBy: "",
+      answered: 1,
+      answeredBy: ""
+    };
+
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
       this.searchParamsQues.askedBy = this.user.id;
+    }
+    else{
+      this.searchParamsQues.askedBy = "no_user";
     }
 
     this.totalRecords = 0;
@@ -137,12 +184,59 @@ export class AllAskQuestionComponent implements OnInit, AfterViewInit, OnDestroy
     });
     this.showExperts();
     this.showQuestions();
+    this.initiateExpertsTabs();
     setTimeout(() => {
       if (this.route.snapshot.queryParams['tab']) {
         this.topTabs = this.route.snapshot.queryParams['tab'];
         UIkit.tab("#questionstab").show(this.route.snapshot.queryParams['tab']);
       }
     }, 500);
+  }
+
+  initiateExpertsTabs(){
+    if(this.user){
+      // this.user = JSON.parse(this.user);
+      this.userService.getUserProfile().subscribe(
+        userProfie => {
+          this.searchParamsE.answeredBy = userProfie.id;
+          this.searchParamsQuesE.answeredBy = userProfie.id;
+
+          this.totalRecordsE = 0;
+          this.totalRecordsQuesE = 0;
+          if(this.route.snapshot.queryParams['category'] !== undefined){
+            this.searchParamsE.askCategory = this.route.snapshot.queryParams['category'];
+            this.searchParamsQuesE.askCategory = this.route.snapshot.queryParams['category'];
+          }
+          
+          this.onSearchE();
+          
+        }
+      );
+    }
+  }
+  onSearchE() {
+    this.showUnansweredE();
+    this.showQuestionsE();
+  }
+  showUnansweredE(){
+    this.askQuesService.questions(this.searchParamsE).subscribe( (response:any) =>{
+      const data = response.data;
+      this.unansweredE = [];
+      if(data.content){
+        this.unansweredE = data.content;
+        this.totalRecordsE = data.total;
+      }
+    });
+  }
+  showQuestionsE(){
+    this.askQuesService.questions(this.searchParamsQuesE).subscribe( (response:any) =>{
+      const data = response.data;
+      this.questionsE = [];
+      if(data.content){
+        this.questionsE = data.content;
+        this.totalRecordsQuesE = data.total;
+      }
+    });
   }
 
   changePage(page: number) {
@@ -153,6 +247,15 @@ export class AllAskQuestionComponent implements OnInit, AfterViewInit, OnDestroy
   changeQuesPage(page: number) {
     this.searchParamsQues.p = page;
     this.router.navigate(['/ask-question/all'], { queryParams: { category: this.searchParamsQues.askCategory, pageQ: this.searchParamsQues.p, tab: this.topTabs } });
+  }
+  changePageE(page: number) {
+    this.searchParamsE.p = page;
+    this.onSearchE()
+  }
+
+  changePageQuesE(page: number) {
+    this.searchParamsQuesE.p = page;
+    this.onSearchE()
   }
 
   clearSelection() {

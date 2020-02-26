@@ -32,7 +32,8 @@ export class EventsListPageComponent implements OnInit, AfterViewInit, OnDestroy
     s: number,
     searchTxt: string,
     eventType: number,
-    pastEvents: number
+    pastEvents: number,
+    dir:number
   };
   paramsSubs: any;
   totalRecords: number;
@@ -84,7 +85,8 @@ export class EventsListPageComponent implements OnInit, AfterViewInit, OnDestroy
       s: 4,
       searchTxt: "",
       eventType: 0,
-      pastEvents: 0
+      pastEvents: 0,
+      dir:0
     }
 
     this.totalRecords = 0;
@@ -112,6 +114,15 @@ export class EventsListPageComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   showEvents() {
+    if(this.searchParams.pastEvents==-1){
+      this.searchParams.dir = 1;
+    }
+    else if(this.searchParams.pastEvents==1){
+      this.searchParams.dir = 0;
+    }
+    else if(this.searchParams.pastEvents==0){
+      this.searchParams.dir = 0;
+    }
     this.eventService.searchEvents(this.searchParams).subscribe((response: any) => {
       const data = response.data;
       this.eventsList = [];
@@ -157,8 +168,8 @@ export class EventsListPageComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   clearSelection() {
-    this.searchParams.pastEvents = 0;
-    this.router.navigateByUrl('/community/events');
+    this.searchParams.pastEvents = -1;
+    this.router.navigate(['/community/events'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt } });
   }
 
   onSearchChange(event: any) {

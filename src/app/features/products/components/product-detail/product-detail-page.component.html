@@ -101,7 +101,7 @@
                             <tr>
                                 <td><button type="button" (click)="redirectConfirm()"
                                         class="uk-button uk-button-primary">{{ auth.isAuthenticate ? 'Buy
-                                        On ' + product?.buyFrom : 'Signin to get details'}}</button></td>
+                                        On ' + product?.buyFrom : 'Join Us to get details'}}</button></td>
                                 <td><span class="price"> Rs. {{product?.price}}</span></td>
                             </tr>
                         </table>
@@ -146,7 +146,7 @@
                                     type="button">Cancel</button>
                                 <button class="uk-button uk-button-default m-l-5 uk-modal-close"
                                     (click)="onReviewSubmit()"
-                                    type="button">{{ auth.isAuthenticate ? 'Post Review': 'Signin to Review'}}</button>
+                                    type="button">{{ auth.isAuthenticate ? 'Post Review': 'Join Us to Review'}}</button>
                             </div>
                         </form>
                     </div>

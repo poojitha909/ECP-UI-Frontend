@@ -27,14 +27,6 @@ export enum SocialAccount {
     MOBILE = "mobile"
 }
 
-export enum OtpErrorMessage {
-    maxRetry = "max_retry_count_exceeded",
-    otpNotVerified = 'otp_not_verified',
-}
-
-
- 
-
 export enum UserIdType {
     EMAIL = 0,
     MOBILE = 1
@@ -168,3 +160,8 @@ export const monthOptions: any[] = [
         value: 12
     }
 ]
+
+export enum OtpErrorMessage {
+    maxRetry = "max_retry_count_exceeded",
+    otpNotVerified = 'otp_not_verified',
+}

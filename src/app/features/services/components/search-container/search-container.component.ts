@@ -114,6 +114,7 @@ export class SearchContainerComponent implements OnInit {
     this.showReset = false;
     this.popullarService = undefined;
     this.homeService.homeSearchtxt = "";
+    document.getElementById("serviceSearch").focus();
   }
 
 

@@ -10,7 +10,7 @@
               [ngClass]="{ 'pr-150':showReset}" [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)"
               required type="text" placeholder="Search here" name="search" autocomplete='off' />
             <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
-            <button class="uk-button-link" style="visibility: hidden"></button>
+              <button class="uk-button-link" style="visibility: hidden"></button>
               <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
                 <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
               </button>
@@ -118,7 +118,7 @@
         <img src="assets/images/discussion.png" alt="discussion icon" />
       </div>
       <div (click)="showAllDiscussions()" class="quote-line-card cursor-pointer">
-        Let us Discuss
+        <a href="javascript:void(0)" (click)="showAllDiscussions()">Let us Discuss</a>
         <span class="uk-float-right" uk-icon="chevron-right"></span>
       </div>
     </div>
@@ -128,7 +128,7 @@
         <img src="assets/images/events.png" alt="event icon" />
       </div>
       <div (click)="showAllEvents()" class="quote-line-card cursor-pointer">
-        Happening near You
+        <a href="javascript:void(0)" (click)="showAllEvents()">Happening near You</a>
         <span class="uk-float-right" uk-icon="chevron-right"></span>
       </div>
     </div>

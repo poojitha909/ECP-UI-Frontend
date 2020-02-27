@@ -6,6 +6,8 @@
   <ul class="m-t-20 m-b-30" id="questionstab" uk-tab>
     <li (click)="onTopTabChange(0)"><a href="#">All Experts ({{totalRecords}})</a></li>
     <li (click)="onTopTabChange(1)"><a href="#">My Questions ({{totalRecordsQues}})</a></li>
+    <li (click)="onTopTabChange(2)" *ngIf="user?.userRoleId == 'EXPERT'" ><a href="#">Unanswered ({{totalRecordsE}})</a></li>
+    <li (click)="onTopTabChange(3)" *ngIf="user?.userRoleId == 'EXPERT'" ><a href="#">Answered ({{totalRecordsQuesE}})</a></li>
   </ul>
   <ul class="uk-switcher uk-margin">
     <li>
@@ -94,6 +96,24 @@
       </app-pagination>
       <div class="m-t-20" *ngIf="!questions || questions?.length == 0">
         <app-question-no-record></app-question-no-record>
+      </div>
+    </li>
+    <li>
+      <div  *ngIf="unansweredE!==undefined && unansweredE.length > 0">
+        <app-question-detail-card *ngFor="let unanswer of unansweredE" [question]="unanswer" [viewby]="viewbyE"></app-question-detail-card>
+      </div>
+      <app-pagination *ngIf="(unansweredE && unansweredE.length > 0)" [totalRecords]="totalRecordsE" [currentPage]="searchParamsE.p" [perPage]="searchParamsE.s" (pageChangeCall)="changePageE($event)"></app-pagination>
+      <div class="m-t-20" *ngIf="unansweredE==undefined || unansweredE.length == 0">
+        <app-question-expert-no-record></app-question-expert-no-record>
+      </div>
+    </li>
+    <li>
+      <div  *ngIf="questionsE!==undefined && questionsE.length > 0">
+        <app-question-detail-card *ngFor="let questionE of questionsE" [question]="questionE" [viewby]="viewbyE"></app-question-detail-card>
+      </div>
+      <app-pagination *ngIf="(questionsE && questionsE.length > 0)" [totalRecords]="totalRecordsQuesE" [currentPage]="searchParamsQuesE.p" [perPage]="searchParamsQuesE.s" (pageChangeCall)="changePageQuesE($event)"></app-pagination>
+      <div class="m-t-20" *ngIf="questionsE==undefined || questionsE.length == 0">
+          <app-question-expert-no-record></app-question-expert-no-record>
       </div>
     </li>
   </ul>

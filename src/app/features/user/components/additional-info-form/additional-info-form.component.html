@@ -5,7 +5,7 @@
   </div>
   <form class="uk-form-stacked" [formGroup]="userform">
     <div class="uk-margin">
-      <label class="uk-form-label" for="firstName">What’s your name?</label>
+      <label class="uk-form-label" for="firstName">Please enter your name</label>
       <div class="uk-form-controls">
         <input class="uk-input" id="firstName"
           [ngClass]="{'uk-form-danger' : formControl.firstName.invalid && (formControl.firstName.dirty || formControl.firstName.touched) }"

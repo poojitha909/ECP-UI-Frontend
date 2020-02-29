@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
+declare var UIkit: any;
 
 @Component({
   selector: 'app-all-services',
@@ -51,6 +52,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   mailUrl: string;
   categoryTypes: string[];
   categories: any;
+  selectedCatid: string;
+  showingCategory: string = 'All Services';
 
   constructor(public ecpService: EpcServiceService,
     private homeService: HomeService,
@@ -166,8 +169,10 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
 
   getCategoryServices(category, catId) {
     if (catId) {
+      this.showingCategory = category;
       this.selectedCategory = category;
     } else {
+      this.showingCategory = 'All ' + category;
       this.selectedCategory = 'All';
     }
     !this.selectedCategoryType ? this.searchPageParam.term = category : this.searchPageParam.term = '';
@@ -208,11 +213,12 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   clearSelection() {
     this.selectedCategory = 'All';
     this.selectedCategoryType = '';
+    this.selectedCatid = null;
     // this.searchPageParam.term = '';
     this.router.navigateByUrl('services/all');
   }
 
-  clearSerach() {
+  clearSerach(event:any) {
     this.searchPageParam.term = '';
     this.router.navigateByUrl('services/all');
   }
@@ -306,5 +312,23 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     // this.onSearch(value);
     this.selectedValue = value;
     // this.searchPageParam.term = value;
+  }
+
+  applyFilter() {
+    UIkit.modal('#mobile-category-modal').hide();
+    if (this.selectedCategoryType && this.selectedCategory == 'All') {
+      this.onCategoryChanged(this.selectedCategoryType, '');
+    } else if (this.selectedCategoryType && this.selectedCatid) {
+      this.onCategoryChanged(this.selectedCategory, this.selectedCatid);
+    } else {
+      this.clearSelection();
+    }
+  }
+
+  clearFilter() {
+    this.selectedCategoryType = '';
+    this.selectedCatid = null;
+    this.selectedCategory = 'All';
+    // this.router.navigateByUrl('services/all');
   }
 }

@@ -175,7 +175,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
       this.showingCategory = 'All ' + category;
       this.selectedCategory = 'All';
     }
-    !this.selectedCategoryType ? this.searchPageParam.term = category : this.searchPageParam.term = '';
+    !this.selectedCategoryType ? this.searchPageParam.term = category : '';
     this.isLoading = true;
     const param: PageParam = {
       p: 0,
@@ -214,11 +214,11 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     this.selectedCategory = 'All';
     this.selectedCategoryType = '';
     this.selectedCatid = null;
-    // this.searchPageParam.term = '';
+    this.searchPageParam.term = '';
     this.router.navigateByUrl('services/all');
   }
 
-  clearSerach(event:any) {
+  clearSerach(event: any) {
     this.searchPageParam.term = '';
     this.router.navigateByUrl('services/all');
   }

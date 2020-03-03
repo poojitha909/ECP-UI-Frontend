@@ -19,7 +19,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
       link: '/'
     },
     {
-      text: 'Community',
+      text: 'Engage with us',
       link: '/community'
     }
   ];

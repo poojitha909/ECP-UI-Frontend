@@ -65,11 +65,11 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
         link: '/'
       },
       {
-        text: 'Community',
+        text: 'Engage with us',
         link: '/community'
       },
       {
-        text: 'All Articles & Discussions',
+        text: 'Articles & Discussions',
         link: '/community/discussions'
       }
     ];

@@ -20,7 +20,7 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
       link: '/'
     },
     {
-      text: 'Community',
+      text: 'Engage with us',
       link: '/community'
     }
   ];

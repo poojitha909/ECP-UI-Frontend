@@ -184,7 +184,7 @@
   background-color: $dark-blue-2;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 640px) { 
   .header {
     padding-bottom: 16px;
   }
@@ -258,5 +258,12 @@
       background-color: #ffffff;
       color: $primary-btn;
     }
+  }
+}
+
+// Mobile Screens
+@media (max-width: 640px) { 
+  .header {
+    padding-bottom: 16px;
   }
 }

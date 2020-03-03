@@ -32,12 +32,27 @@
 
   .JoyofAge{
     margin-right: -160px;
-  }
-  .ourpartners{
-    margin-right: 100px
-    
+    .response{
+      margin-right: -64px;
+      margin-top: 31px
+    }
   }
 
+  .ourpartners{
+    margin-right: 47px;
+    
+    .partners-logo{
+      margin-left: 0px;  
+    }
+  }
+  
+    
+    .links{
+      margin-left: 40px;
+    }
+  
+  
+  
   .partners {
     background: #ffffff;
     border-radius: 4px;
@@ -172,5 +187,37 @@
     .divider {
       border-right: 1px solid #161c2dad;
     }
+  }
+}
+
+@media(min-width:414px){
+  .footer{
+    .JoyofAge{
+      margin-top: 9px;
+      margin-bottom: -16px;
+      .response{
+        margin-top: 10px;
+        margin-bottom: 40px;
+      }
+    }
+   
+    .ourpartners{
+      margin-right: 0px;
+      .partners-logo
+      {
+        margin-right: 0px;
+        margin-top: 16px;
+        margin-left: 0px;
+        width: 286px;
+      }
+    }
+      
+      .links{
+        margin-left: 0px;
+        
+      }
+      .socialicons{
+        width: 184px;
+      }
   }
 }

@@ -63,20 +63,40 @@
   background-size: cover;
 }
 
-@media (min-width: 641px) {
-  .landing-bg {
-    background-image: url("/assets/images/landing-img/Landing-768.png");
+@media (min-width: 414px) {
+  .featured{
+    display: none;
   }
+  .landing-bg{
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .options{
+    margin-top: 16px;
+    margin-right: -16px;
+  }
+}
+@media only screen and (max-width: 600px){
+  .featured{
+    display: none;
+  }
+  
 }
 
 @media (min-width: 1024px) {
   .landing-bg {
     background-image: url("/assets/images/landing-img/Landing-1024.png");
   }
+  .featured{
+    display: block;
+  }
 }
 
 @media (min-width: 1440px) {
   .landing-bg {
     background-image: url("/assets/images/landing-img/Landing-1440.png");
+  }
+  .featured{
+    display: block;
   }
 }

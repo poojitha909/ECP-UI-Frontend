@@ -1,17 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/products.service';
 import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { HomeService } from 'src/app/features/home/home.service';
-
+declare var UIkit: any;
 @Component({
   selector: 'app-all-products',
   templateUrl: './all-products.component.html',
   styleUrls: ['./all-products.component.scss']
 })
-export class AllProductsComponent implements OnInit, OnDestroy {
+export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   breadcrumbLinks: Breadcrumb[] = [
     {
@@ -34,13 +34,12 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     productCategory: string
   };
   currentUrl: string;
-
-
+  showingProduct: string;
   paramsSubs: any;
   totalRecords: number;
   slideConfig = { "slidesToShow": 3, "slidesToScroll": 1 };
   constructor(private route: ActivatedRoute, private router: Router,
-    private productService: ProductService, public sanitizer: DomSanitizer, 
+    private productService: ProductService, public sanitizer: DomSanitizer,
     private homeService: HomeService, public seoService: SeoService) {
     // Generate meta tag 
     const config: SEO = {
@@ -60,9 +59,22 @@ export class AllProductsComponent implements OnInit, OnDestroy {
       this.initiate();
     });
   }
-  
+
+  ngAfterViewInit() {
+    UIkit.util.on('#product-mobile-category-modal', 'hidden', () => {
+      // do something
+      if (this.showingProduct && this.showingProduct !== 'All Products') {
+        this.searchParams.productCategory = this.catsList.find(cat => cat.name == this.showingProduct).id;
+      } else {
+        this.searchParams.productCategory = '';
+      }
+    });
+
+  }
+
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
+    document.getElementById("product-mobile-category-modal").remove();
   }
 
   initiate() {
@@ -94,6 +106,11 @@ export class AllProductsComponent implements OnInit, OnDestroy {
       this.catsList = [];
       if (data.content) {
         this.catsList = data.content;
+        if (this.searchParams.productCategory) {
+          this.showingProduct = this.catsList.find(cat => cat.id === this.searchParams.productCategory).name;
+        } else {
+          this.showingProduct = "All Products";
+        }
       }
     });
     this.showProducts();
@@ -149,7 +166,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     }
   }
 
-  setSearchTxt(value: string){
+  setSearchTxt(value: string) {
     this.searchParams.searchTxt = value;
     this.homeService.homeSearchtxt = value;
     this.searchParams.p = 0;
@@ -157,7 +174,17 @@ export class AllProductsComponent implements OnInit, OnDestroy {
 
 
   onSearch() {
-    this.router.navigate(['/products/all'], { queryParams: { productCategory: this.searchParams.productCategory, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p} });
+    this.router.navigate(['/products/all'], { queryParams: { productCategory: this.searchParams.productCategory, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
+  }
+
+  applyFilter() {
+    UIkit.modal('#product-mobile-category-modal').hide();
+    if (this.searchParams.productCategory) {
+      this.router.navigate(['/products/all'], { queryParams: { productCategory: this.searchParams.productCategory, searchTxt: this.searchParams.searchTxt } });
+    } else {
+      this.clearSelection();
+    }
+
   }
 
 }

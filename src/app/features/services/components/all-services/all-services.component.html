@@ -137,7 +137,7 @@
       <!-- Catgory filter END -->
 
       <!-- Show only Verified Profiles -->
-      <div class="m-t-40 m-b-30 bg-white category-box uk-flex-middle uk-flex">
+      <div class="m-t-40 m-b-30 bg-white category-box uk-flex-middle uk-flex uk-visible@s">
         <label class="m-0" for="Verified-Profiles"><input id="Verified-Profiles" class="uk-checkbox m-r-10"
             type="checkbox" [(ngModel)]="verfiedCheck" (change)="onCheckVerified($event.target.checked)"> Show
           only
@@ -202,7 +202,7 @@
       <div id="mobile-category-modal" uk-modal>
         <div class="uk-modal-dialog">
           <button class="uk-modal-close-default color-white" type="button" uk-close></button>
-          <div class="uk-modal-header bg-title-header p-20">
+          <div class="uk-modal-header bg-filter-header p-20">
             <h2 class="font-regular-24 color-white uk-text-bold">Categories</h2>
           </div>
           <div class="uk-modal-body p-20">

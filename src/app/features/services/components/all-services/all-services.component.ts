@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef, HostListener } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef, HostListener, OnDestroy } from '@angular/core';
 
 import { EpcServiceService } from '../../epc-service.service';
 import { Service, PageParam, SEO, Breadcrumb } from 'src/app/core/interfaces';
@@ -15,7 +15,7 @@ declare var UIkit: any;
   templateUrl: './all-services.component.html',
   styleUrls: ['./all-services.component.scss']
 })
-export class AllServicesComponent implements OnInit, AfterViewInit {
+export class AllServicesComponent implements OnInit, AfterViewInit, OnDestroy {
   breadcrumbLinks: Breadcrumb[] = [
     {
       text: 'Home',
@@ -63,7 +63,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     public sanitizer: DomSanitizer,
     private seoService: SeoService
   ) {
-    console.log(this.activeRoute.snapshot.data);
+
     this.categories = this.activeRoute.snapshot.data.categories;
     this.categoryTypes = Object.keys(this.categories).reverse();
     // Generate meta tag 
@@ -107,39 +107,62 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
         this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(window.location.href)}`);
         this.whatsMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
         const queryCategory = value.get("category");
+        const categoryLink = value.get("categoryLink");
         const catId = value.get("catid");
-        if (queryCategory) {
-          this.ecpService.searchedService = queryCategory;
-          if (catId) {
-            this.ecpService.searchCatID = catId;
-            this.getCategoryServices(queryCategory, catId);
-            //Set selected category
-            if (!this.selectedCategoryType) {
-              let category = null;
-              this.selectedCategoryType = this.categoryTypes.find(value => {
-                category = this.categories[value].find(category => category.national_catid == catId);
-                if (category) {
-                  return true;
-                }
-              });
-            }
 
+        if (categoryLink) {
+          this.ecpService.searchedService =categoryLink;
+          let category = null;
+          this.selectedCategoryType = this.categoryTypes.find(value => {
+            category = this.categories[value].find(category => category.category_name.toLowerCase() == categoryLink.toLowerCase());
+            if (category) {
+              return true;
+            }
+          });
+          if (category) {
+            this.ecpService.searchCatID = category.national_catid;
+            this.getCategoryServices(categoryLink, category.national_catid);
           } else {
-            //Set selected category
-            if (!this.selectedCategoryType) {
-              this.selectedCategoryType = this.categoryTypes.find(type => type == queryCategory);
-            }
-            this.ecpService.searchCatID = null;
-            this.getCategoryServices(queryCategory, 0);
+            this.selectedCategoryType = this.categoryTypes.find(type => type == queryCategory);
+            this.getCategoryServices(categoryLink, 0);
           }
-          this.showShareBox = true;
-        } else {
 
-          this.showShareBox = false;
-          this.getAllService();
-          this.selectedCategoryType = undefined;
+
+        } else {
+          if (queryCategory) {
+            this.ecpService.searchedService = queryCategory;
+            if (catId) {
+              this.ecpService.searchCatID = catId;
+              this.getCategoryServices(queryCategory, catId);
+              //Set selected category
+              if (!this.selectedCategoryType) {
+                let category = null;
+                this.selectedCategoryType = this.categoryTypes.find(value => {
+                  category = this.categories[value].find(category => category.national_catid == catId);
+                  if (category) {
+                    return true;
+                  }
+                });
+              }
+
+            } else {
+              //Set selected category
+              if (!this.selectedCategoryType) {
+                this.selectedCategoryType = this.categoryTypes.find(type => type == queryCategory);
+              }
+              this.ecpService.searchCatID = null;
+              this.getCategoryServices(queryCategory, 0);
+            }
+            this.showShareBox = true;
+          } else {
+
+            this.showShareBox = false;
+            this.getAllService();
+            this.selectedCategoryType = undefined;
+          }
         }
       });
+
 
   }
 
@@ -330,5 +353,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     this.selectedCatid = null;
     this.selectedCategory = 'All';
     // this.router.navigateByUrl('services/all');
+  }
+  ngOnDestroy() {
+    document.getElementById("mobile-category-modal").remove();
   }
 }

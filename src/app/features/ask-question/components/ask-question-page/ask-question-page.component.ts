@@ -105,7 +105,13 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
   }
 
   showAllExperts() {
-    this.router.navigate(['/ask-question/all'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt, tab: 0 } });
+    this.router.navigate(['/ask-question/experts'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt } });
+  }
+  showAllMyQues() {
+    this.router.navigate(['/ask-question/myques']);
+  }
+  showAllExpertQues(){
+    this.router.navigate(['/ask-question/expertques']);
   }
 
   onSearchChange(event: any) {

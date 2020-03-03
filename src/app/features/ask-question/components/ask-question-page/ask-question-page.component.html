@@ -72,6 +72,35 @@
     </div>
   </div>
 </div>
+<div [ngClass]="{'uk-child-width-1-3': user?.userRoleId == 'EXPERT', 'uk-child-width-1-2': user==undefined || user==null || user.userRoleId != 'EXPERT'}" class="m-b-30" uk-grid>
+  <div class="uk-text-center">
+    <div class="options-card">
+      <img src="assets/images/discussion.png" alt="No Image Found" />
+    </div>
+    <div (click)="showAllExperts()" class="quote-line-card cursor-pointer">
+      All Experts
+      <span class="uk-float-right" uk-icon="chevron-right"></span>
+    </div>
+  </div>
+  <div class="uk-text-center">
+    <div class="options-card">
+      <img src="assets/images/events.png" alt="No Image Found" />
+    </div>
+    <div (click)="showAllMyQues()" class="quote-line-card cursor-pointer">
+      My Questions
+      <span class="uk-float-right" uk-icon="chevron-right"></span>
+    </div>
+  </div>
+  <div class="uk-text-center" *ngIf="user?.userRoleId == 'EXPERT'">
+      <div class="options-card">
+      <img src="assets/images/events.png" alt="No Image Found" />
+    </div>
+    <div (click)="showAllExpertQues()" class="quote-line-card cursor-pointer">
+      Questions I need to answer
+      <span class="uk-float-right" uk-icon="chevron-right"></span>
+    </div>
+  </div>
+</div>
 
 <div class="uk-container  dark" >
   <app-featured-ask-experts></app-featured-ask-experts>

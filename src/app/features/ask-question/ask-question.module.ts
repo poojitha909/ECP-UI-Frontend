@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared';
 import { AskQuestionPageComponent } from './components/ask-question-page/ask-question-page.component';
 import { AskQuestionRoutingModule } from './ask-question-routing.module';
-import { AllAskQuestionComponent } from './components/all-ask-question/all-ask-question.component';
+import { AskQuestionExpertsComponent }  from './components/ask-question-experts/ask-question-experts.component';
+import { AskQuestionMyQuesComponent } from './components/ask-question-myques/ask-question-myques.component';
 import { AskQuestionCreatePageComponent }  from './components/ask-question-create/ask-question-create-page.component';
 import { ExpertDetailCardComponent } from './components/expert-detail-card/expert-detail-card.component';
 import { ExpertNoRecordComponent } from './components/expert-no-record/expert-no-record.component';
@@ -18,7 +19,8 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [AskQuestionPageComponent,
-    AllAskQuestionComponent,
+    AskQuestionExpertsComponent,
+    AskQuestionMyQuesComponent,
     ExpertDetailCardComponent,
     AskQuestionCreatePageComponent,
     ExpertNoRecordComponent,

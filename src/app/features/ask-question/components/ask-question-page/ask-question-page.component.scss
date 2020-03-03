@@ -202,7 +202,26 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
-
+.quote-line-card {
+  background-color: #e4eefb;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-left: 1px solid #d7e0ef;
+  border-right: 1px solid #d7e0ef;
+  border-bottom: 1px solid #d7e0ef;
+  padding: 8px;
+}
+.options-card {
+  background-color: #ecf4ff;
+  border-radius: 4px 4px 0px 0px;
+  border-top: 1px solid #d7e0ef;
+  border-left: 1px solid #d7e0ef;
+  border-right: 1px solid #d7e0ef;
+  img {
+    margin: 16px 0px;
+  }
+  // padding: 16px 94px;
+}
 @media (min-width: 641px) {
   .landing-bg {
     background-image: url("/assets/images/landing-img/Ask-768.png");

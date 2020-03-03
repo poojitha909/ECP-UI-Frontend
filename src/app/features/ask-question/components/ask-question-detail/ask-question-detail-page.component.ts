@@ -24,7 +24,7 @@ export class AskQuestionDetailPageComponent implements OnInit {
     },
     {
       text: 'All Experts',
-      link: '/ask-question/all'
+      link: '/ask-question/experts'
     }
   ];
   questionId: string;

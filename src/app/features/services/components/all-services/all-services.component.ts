@@ -111,7 +111,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit, OnDestroy {
         const catId = value.get("catid");
 
         if (categoryLink) {
-          this.ecpService.searchedService =categoryLink;
+          this.ecpService.searchedService = categoryLink;
           let category = null;
           this.selectedCategoryType = this.categoryTypes.find(value => {
             category = this.categories[value].find(category => category.category_name.toLowerCase() == categoryLink.toLowerCase());
@@ -287,6 +287,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit, OnDestroy {
         }
 
       } else {
+        this.clearFilter();
         this.router.navigate(['services/all'], { queryParams: { category: field } });
         // this.getCategoryServices(field, 0);
       }

@@ -25,8 +25,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
     },
     {
       text: 'All Experts',
-      link: '/ask-question/all',
-      queryParams: { category: '', tab:0}
+      link: '/ask-question/experts'
     }
   ];
   category: string;
@@ -43,6 +42,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
   };
   questions: any[];
   totalRecords: number;
+  rUrl: string;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private askQuesService: AskQuestionService, private store: StorageHelperService,
@@ -70,12 +70,15 @@ export class AskQuestionCreatePageComponent implements OnInit {
       this.user = JSON.parse(this.user);
       this.searchParams.askedBy = this.user.id;
     }
+    this.rUrl="?";
     if (this.route.snapshot.queryParams['category']) {
       this.category = this.route.snapshot.queryParams['category'];
+      this.rUrl= this.rUrl + "category=" + this.category + "&";
     }
     if (this.route.snapshot.queryParams['answeredBy']) {
       this.answeredBy = this.route.snapshot.queryParams['answeredBy'];
       this.searchParams.answeredBy = this.route.snapshot.queryParams['answeredBy'];
+      this.rUrl= this.rUrl + "answeredBy=" + this.answeredBy + "&";
     }
     if(this.searchParams.askedBy && this.searchParams.answeredBy){
       this.showQuestions();
@@ -117,7 +120,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
   }
 
   redirectToQuestions(){
-    this.router.navigate(['/ask-question/all'], { queryParams: { tab: 1 } });
+    this.router.navigate(['/ask-question/myques']);
   }
 
   setSeoTags(expert: any) {
@@ -151,7 +154,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
   onSubmit() {
     this.store.store("new-question", JSON.stringify(this.quesForm.value));
     if (!this.user) {
-      this.authService.redirectUrl = "/ask-question/add";
+      this.authService.redirectUrl = "/ask-question/add"+this.rUrl;
       this.router.navigate(['/user/signin']);
       return;
     }

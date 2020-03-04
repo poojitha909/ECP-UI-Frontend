@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { StorageHelperService } from 'src/app/core/services/storage-helper.service';
 
 @Component({
   selector: 'app-expert-detail-card',
@@ -7,14 +8,27 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ExpertDetailCardComponent implements OnInit {
   @Input() expert: any;
+  user:any;
+  isSame: boolean;
+
 
   expertfullName:any;
-  constructor() { }
+  constructor( private store: StorageHelperService,) { }
 
   ngOnInit() {
-    this.expertfullName=this.expert.basicProfileInfo.firstName
+    this.expertfullName=this.expert.basicProfileInfo.firstName;
+    this.isSame = false;
+    this.user = this.store.retrieve("ECP-USER");
+    if (this.user) {
+      this.user = JSON.parse(this.user);  
+      console.log(this.user,this.expert)  
+      if (this.user.id == this.expert.userId) {
+        this.isSame = true;
+      }
+    }
 
   }
+ 
 
   /**
    * TODO: method to be removed
@@ -22,5 +36,10 @@ export class ExpertDetailCardComponent implements OnInit {
   setDefaultPic(e) {
     e.target.src = "assets/images/default-thumbnail.png";
   }
+
+ 
+
+
+
 
 }

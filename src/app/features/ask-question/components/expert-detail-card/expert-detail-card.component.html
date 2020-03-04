@@ -1,4 +1,4 @@
-<div [routerLink]="['/ask-question/add']" [queryParams]="{category: expert.experties[0].id, answeredBy: expert.id}"
+<div [routerLink]="isSame ? ['/ask-question/expertques'] : ['/ask-question/add']" [queryParams]="{category: expert.experties[0].id, answeredBy: expert.id}"
   class="cursor uk-card uk-card-hover uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
 
   <div class="uk-card-media-left uk-width-1-4@m uk-width-1-3@s p-16">
@@ -25,6 +25,7 @@
     <div class="reply-card">
       {{ expert?.answersCount }} Queries Answered
     </div>
-  <button class="uk-button uk-button-primary" style="text-overflow: ellipsis;">Ask {{ (expertfullName.length>6)? (expertfullName | slice:0:8)+' '+'..':(expertfullName) }}</button>
+  <button *ngIf="isSame==false" class="uk-button uk-button-primary" style="text-overflow: ellipsis;">Ask {{ (expertfullName.length>6)? (expertfullName | slice:0:8)+' '+'..':(expertfullName) }}</button>
+  <button *ngIf="isSame==true" class="uk-button uk-button-primary" style="font-size: 0.8em;">Questions for you</button>
   </div>
 </div>

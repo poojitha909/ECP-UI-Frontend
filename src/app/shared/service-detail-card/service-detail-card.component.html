@@ -46,9 +46,10 @@
       <p class="m-0"><span>{{isDBService ? service?.basicProfileInfo.primaryUserAddress.city :  service?.city}}</span>
       </p>
       <p *ngIf="!isDBService" class="m-0 font-regular"><a routerLink="/services/all"
-          [queryParams]="{ categoryLink:service.type}" class="">{{service?.type}}</a></p>
-      <p *ngIf="isDBService && service?.systemTags.length > 0" class="m-0 font-regular"><a routerLink="/services/all"
-          [queryParams]="{ categoryLink:service.systemTags[0].name}" class="">{{service?.systemTags[0].name}}</a></p>
+          [queryParams]="{ categoryLink:service.type}">{{service?.type}}</a></p>
+      <p *ngIf="isDBService && service?.systemTags.length > 0" class="m-0 font-regular">
+        <a routerLink="/services/all"
+          [queryParams]="{ categoryLink:service.systemTags[0].name}">{{service?.systemTags[0].name}}</a></p>
     </div>
   </div>
 

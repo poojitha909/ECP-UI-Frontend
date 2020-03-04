@@ -114,16 +114,17 @@ export class AllServicesComponent implements OnInit, AfterViewInit, OnDestroy {
           this.ecpService.searchedService = categoryLink;
           let category = null;
           this.selectedCategoryType = this.categoryTypes.find(value => {
-            category = this.categories[value].find(category => category.category_name.toLowerCase() == categoryLink.toLowerCase());
+            category = this.categories[value].find(category => category.category_name.trim().toLowerCase() == categoryLink.trim().toLowerCase());
             if (category) {
               return true;
             }
           });
           if (category) {
             this.ecpService.searchCatID = category.national_catid;
-            this.getCategoryServices(categoryLink, category.national_catid);
+            this.getCategoryServices(category.category_name, category.national_catid);
           } else {
-            this.selectedCategoryType = this.categoryTypes.find(type => type == queryCategory);
+            this.selectedCategoryType = this.categoryTypes.find(type => type.trim().toLowerCase() == queryCategory.trim().toLowerCase());
+            this.ecpService.searchCatID = null;
             this.getCategoryServices(categoryLink, 0);
           }
 
@@ -148,7 +149,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit, OnDestroy {
             } else {
               //Set selected category
               if (!this.selectedCategoryType) {
-                this.selectedCategoryType = this.categoryTypes.find(type => type == queryCategory);
+                this.selectedCategoryType = this.categoryTypes.find(type => type.trim().toLowerCase() == queryCategory.trim().toLowerCase());
               }
               this.ecpService.searchCatID = null;
               this.getCategoryServices(queryCategory, 0);

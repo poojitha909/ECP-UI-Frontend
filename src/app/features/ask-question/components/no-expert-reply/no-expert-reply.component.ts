@@ -6,6 +6,8 @@ import { Component,Input, OnInit } from '@angular/core';
   styleUrls: ['./no-expert-reply.component.scss']
 })
 export class NoExpertReplyComponent implements OnInit {
+  @Input() isExpert: boolean;
+
   constructor() { }
     ngOnInit() {
   }

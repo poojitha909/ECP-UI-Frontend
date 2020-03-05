@@ -1,6 +1,6 @@
 <div class="community-page">
   <!-- Search Container starts -->
-  <div class="uk-container search-container m-t-40">
+  <div class="uk-container search-container ">
     <!-- Search Form START -->
     <div class="search-form">
       <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
@@ -110,8 +110,8 @@
 
   <!-- Search Container ends -->
 
-  <div class="uk-child-width-1-2 m-b-30" uk-grid>
-    <div class="uk-text-center">
+  <div class="uk-child-width-1-2 m-b-30 " uk-grid>
+    <div class="uk-text-center cards1">
       <div class="options-card">
         <img src="assets/images/discussion.png" alt="No Image Found" />
       </div>
@@ -121,12 +121,12 @@
       </div>
     </div>
   
-    <div class="uk-text-center">
+    <div class="uk-text-center cards2">
       <div class="options-card">
         <img src="assets/images/events.png" alt="No Image Found" />
       </div>
       <div (click)="showAllEvents()" class="quote-line-card cursor-pointer">
-        Happening near You
+        Happening near you
         <span class="uk-float-right" uk-icon="chevron-right"></span>
       </div>
     </div>
@@ -139,3 +139,5 @@
     <app-featured-events></app-featured-events>
   </div>
 </div>
+
+<app-discussions-list-page></app-discussions-list-page>

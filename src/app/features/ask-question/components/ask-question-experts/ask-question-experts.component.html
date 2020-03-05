@@ -1,7 +1,8 @@
 <div class="uk-container ask-question">
-  <div class="breadcrumbs">
+  <!-- Sample Implementation on 04-03-20 -->
+  <!-- <div class="breadcrumbs">
     <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
-  </div>
+  </div> -->
   <div class="uk-grid uk-grid-large uk-flex-left">
     <div class="uk-width-2-3">
       <h1 class="uk-h2">All Experts</h1>
@@ -55,7 +56,8 @@
       </div>
     </div>
     <div class="uk-width-expand@m">
-      <div class="search-form">
+      <!-- Sample Implementation on 04-03-20 -->
+      <!-- <div class="search-form">
         <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
           <div class="uk-margin uk-width-1-1 uk-width-expand@s">
             <form class="uk-search uk-search-default">
@@ -73,7 +75,7 @@
             <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
           </div>
         </div>
-      </div>
+      </div> -->
       <div *ngIf="experts && experts.length > 0">
         <app-expert-detail-card *ngFor="let expert of experts" [expert]="expert"></app-expert-detail-card>
       </div>

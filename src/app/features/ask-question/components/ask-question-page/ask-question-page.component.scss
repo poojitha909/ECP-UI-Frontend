@@ -239,3 +239,11 @@
     background-image: url("/assets/images/landing-img/Ask-1440.png");
   }
 }
+
+// Sample Implementation on 05/03/20
+
+@media(min-width:1024px){
+  .dark{
+    display: none;
+  }
+}

@@ -1,6 +1,11 @@
 <div class="uk-container products">
   <div class="breadcrumbs">
-    <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
+
+    <!-- sample implementation on 04-03-20 -->
+    <!-- <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb> -->
+
+
+    <!-- End here -->
   </div>
   <h1 class="uk-h2">All Products</h1>
   <hr class="m-b-30" />
@@ -23,9 +28,12 @@
       </div>
     </div>
     <div class="uk-width-expand@m">
-      <div class="search-form">
+<!-- Sample Implementation on 04-03-20 -->
+      <!-- <div class="search-form">
         <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
           <div class="uk-margin uk-width-expand">
+
+            
             <form class="uk-search uk-search-default">
               <span class="uk-search-icon-flip" [ngClass]="{ 'w-sm-150':showReset}" uk-search-icon>
                 <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
@@ -40,7 +48,10 @@
             <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
           </div>
         </div>
-      </div>
+      </div> -->
+
+<!-- Sample Implementation End here on 04-03-20 -->
+
       <!-- Products list  -->
       <div *ngIf="productsList!==undefined && productsList.length > 0">
         <app-product-detail-card *ngFor="let proudct of productsList" [product]="proudct"></app-product-detail-card>

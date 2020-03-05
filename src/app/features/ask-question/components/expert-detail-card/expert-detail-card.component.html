@@ -14,7 +14,7 @@
     </p>
 
     <div class="category">
-      In: <span *ngFor="let ex of expert.experties; let idx = index;">
+      <span *ngFor="let ex of expert.experties; let idx = index;">
         {{ex.name}}
         {{ (idx == (expert.experties.length -1)) ? "": "," }}
       </span>

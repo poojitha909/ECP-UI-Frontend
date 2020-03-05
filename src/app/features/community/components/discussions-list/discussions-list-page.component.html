@@ -1,8 +1,9 @@
 <div class="uk-container discussions" *ngIf="categoryList!==undefined && dropDownList!==undefined">
     <!-- Bread crumbs Start -->
-    <div class="breadcrumbs">
+    <!-- Sample Implementation on 04-03-20 -->
+    <!-- <div class="breadcrumbs">
         <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
-    </div>
+    </div> -->
     <!-- Bread crumbs End -->
     <div class="uk-grid uk-grid-large uk-flex-left">
         <div class="uk-width-2-3">
@@ -63,7 +64,8 @@
             </div>
         </div>
         <div class="uk-width-expand@m">
-            <div class="search-form">
+            <!-- Sample Implementation on 04-03-20 -->
+            <!-- <div class="search-form">
                 <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
                     <div class="uk-margin uk-width-1-1 uk-width-expand@s">
                         <form class="uk-search uk-search-default">
@@ -81,7 +83,7 @@
                         <button class="uk-button uk-button-default search-btn" (click)="submitSearch()">Search</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div *ngIf="discussionsList!==undefined && discussionsList.length > 0" class="m-b-30">
                 <div class="uk-flex-left uk-text-center uk-child-width-1-2@m" uk-grid>
                     <div *ngFor="let discussion of discussionsList">

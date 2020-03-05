@@ -213,7 +213,9 @@
   .slidenav-next {
     left: 92% !important;
   }
+
   .search-container {
+    
     .title-border {
       border-bottom: 1px solid #e5e5e5;
     }
@@ -242,6 +244,23 @@
     .pr-150 {
       padding-right: 50px !important;
     }
+  }
+  .home-banner{
+    margin-bottom: 16px;
+    margin-top: 16px;
+  }
+  .cards1{
+    width: 214px;
+  }
+  .cards2{
+    width: 214px;
+    margin-left: -16px;
+  }
+
+  .m-seprator{
+    height: 552px;
+    margin-top:16px;
+    margin-bottom: 16px;
   }
 }
 
@@ -279,5 +298,21 @@
 @media (min-width: 1440px) {
   .landing-bg {
     background-image: url("/assets/images/landing-img/Community-1440.png");
+  }
+}
+
+
+
+.community-page{
+  .search-container{
+    margin-top: 40px;
+  }
+}
+
+// Sample Implementation on 05/03/20
+
+@media(min-width:1024px){
+  .m-seprator{
+    display: none;
   }
 }

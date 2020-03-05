@@ -157,3 +157,12 @@
     background-image: url("/assets/images/landing-img/Product-1440.png");
   }
 }
+
+
+// Sample Implementation on 05/03/20
+
+@media(min-width:1024px){
+  .m-seprator{
+    display: none;
+  }
+}

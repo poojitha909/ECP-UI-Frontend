@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="category m-t-20">
-      In: <span class="category-text">{{product?.productCategory?.name}}</span>
+      In: <span (click)="onclick($event,product)" class="category-text">{{product?.productCategory?.name}}</span>
     </div>
     <!-- <div>
       <div class="uk-label d-inline-flex uk-flex-middle p-verified">

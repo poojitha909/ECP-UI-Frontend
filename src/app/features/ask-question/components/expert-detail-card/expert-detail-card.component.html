@@ -13,8 +13,8 @@
       {{ expert?.workTitle }} &nbsp;
     </p>
 
-    <div class="category">
-      In: <span *ngFor="let ex of expert.experties; let idx = index;">
+    <div class="category"  >
+      In: <span  (click)="onclick($event,expert.experties)" class="category-text" *ngFor="let ex of expert.experties; let idx = index;">
         {{ex.name}}
         {{ (idx == (expert.experties.length -1)) ? "": "," }}
       </span>

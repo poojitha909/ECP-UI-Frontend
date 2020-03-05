@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { StorageHelperService } from 'src/app/core/services/storage-helper.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-expert-detail-card',
@@ -13,7 +14,7 @@ export class ExpertDetailCardComponent implements OnInit {
 
 
   expertfullName:any;
-  constructor( private store: StorageHelperService,) { }
+  constructor( private store: StorageHelperService ,private route :Router) { }
 
   ngOnInit() {
     this.expertfullName=this.expert.basicProfileInfo.firstName;
@@ -28,6 +29,12 @@ export class ExpertDetailCardComponent implements OnInit {
     }
 
   }
+  onclick(e,experties){
+    e.stopPropagation();
+    this.route.navigate(['ask-question/experts'],{
+     queryParams:{category:experties[0].id}
+    })
+} 
  
 
   /**

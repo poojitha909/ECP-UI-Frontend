@@ -21,7 +21,7 @@ export class EventDetailPageComponent implements OnInit {
       link: '/'
     },
     {
-      text: 'Community',
+      text: 'Engage with us',
       link: '/community'
     },
     {

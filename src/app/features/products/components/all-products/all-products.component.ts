@@ -24,6 +24,7 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   ];
 
+  showResult:boolean;
   showReset: boolean;
   productsList: any[];
   catsList: any[];
@@ -122,6 +123,7 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   showProducts() {
+    this.showResult = false;
     this.productService.searchProducts(this.searchParams).subscribe((response: any) => {
       const data = response.data;
       this.productsList = [];

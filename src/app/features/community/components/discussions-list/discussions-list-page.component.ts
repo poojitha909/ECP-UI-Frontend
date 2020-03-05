@@ -140,6 +140,10 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  onSearch() {
+    // this.showExperts();
+  }
+
   getAllCategories() {
     this.menuService.getMenus("564071623e60f5b66f62df27", "").subscribe((response: any) => {
       const data = response;
@@ -202,4 +206,8 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
     this.searchParams.searchTxt = value;
     this.homeService.homeSearchtxt = value;
   }
+
+
+
+  
 }

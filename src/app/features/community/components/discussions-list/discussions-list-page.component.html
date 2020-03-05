@@ -1,14 +1,77 @@
-<div class="uk-container discussions" *ngIf="categoryList!==undefined && dropDownList!==undefined">
-    <!-- Bread crumbs Start -->
-    <!-- Sample Implementation on 04-03-20 -->
-    <!-- <div class="breadcrumbs">
-        <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
-    </div> -->
-    <!-- Bread crumbs End -->
-    <div class="uk-grid uk-grid-large uk-flex-left">
-        <div class="uk-width-2-3">
-            <h1 class="heading">{{selCategory=='' ? 'All' : dropDownList[selCategory].label}} Articles & Discussions</h1>
+<div class="uk-container search-container m-t-40">
+    <!-- Search Form START -->
+    <div class="search-form">
+      <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
+        <div class="uk-width-expand">
+          <form class="uk-search uk-search-default" >
+            <span class="uk-search-icon-flip" [ngClass]="{ 'w-200':showReset}" uk-search-icon>
+              <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
+                <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
+              </button>
+            </span>
+            <input class="uk-search-input font-regular search-box " aria-label="search" [ngClass]="{ 'pr-200':showReset}" [(ngModel)]="searchParams.searchTxt"
+              (keyup)="onSearchChange($event)" required type="text" placeholder="Search here" name="search">
+          </form>
         </div>
+        <div>
+          <button class="uk-button uk-button-default search-btn" (click)="submitSearch()">Search</button>
+        </div>
+      </div>
+    </div>
+    <!-- Search Form END -->
+    <!-- Search Result START -->
+    <!-- <div class="search-result" *ngIf="showResult">
+  
+  
+      <div class="m-t-20 uk-hidden@s" *ngIf="experts && experts?.length > 0">
+        <p class="font-regular-15 font-weight-600">Search Results ({{expertsTotal}})
+        </p>
+  
+  
+        <div class="m-t-20 uk-grid-small" uk-grid>
+          <div class="uk-width-1-1">
+            <div class="search-result-box cursor-pointer" routerLink="/ask-question/all"
+              [queryParams]="{ searchTxt:searchParams.searchTxt}">
+              <p>Expert ({{expertsTotal}})</p>
+            </div>
+          </div>
+        </div>
+        <p class="uk-text-center">
+          <fa-icon style="color:#1A73E8;" [icon]="['fas', 'info-circle']"></fa-icon> Tap on the card to see the full
+          results
+        </p>
+      </div>
+  
+  
+      <div class="uk-visible@s">
+        <div uk-grid class="uk-grid-large uk-flex-left uk-text-center uk-child-width-1-3@m">
+          <div *ngFor="let expert of experts">
+            <app-ask-expert-summary-card [expert]="expert"></app-ask-expert-summary-card>
+          </div>
+        </div>
+        <div class="m-t-30 m-b-20" *ngIf="experts!==undefined && experts?.length > 0">
+          <button class="uk-width-1-1 uk-button-default" (click)="showAllExperts()"> See All Experts </button>
+        </div>
+      </div>
+      <div class="uk-text-center uk-text-bold pt-norec m-b-20" *ngIf="experts!==undefined && experts?.length == 0">
+        No Records found
+      </div>
+    </div> -->
+    <!-- Search Result END -->
+  </div>
+
+  <div class="description-for-articles m-t-30">
+    <h1>Articles & Discussions</h1>
+    <p>Description about Articles & Discussions</p> 
+  </div>
+
+<div class="uk-container discussions " *ngIf="categoryList!==undefined && dropDownList!==undefined"> 
+    <div class="uk-grid uk-grid-large uk-flex-left">
+       <!-- Bread crumbs Start -->
+          <div class="breadcrumbs uk-width-2-3">
+            <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
+        </div>
+        <!-- Bread crumbs End -->
         <div class="uk-width-1-3">
             <button routerLink="/community/discussion/add" class="uk-button uk-button-transparent adddiscuss"> Start a
                 Discussion +</button>

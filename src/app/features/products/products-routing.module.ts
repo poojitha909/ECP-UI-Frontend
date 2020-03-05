@@ -9,7 +9,7 @@ import { ProductCreatePageComponent } from './components/product-create/product-
 const routes: Routes = [
   {
     path: '',
-    component: ProductsPageComponent
+    component: AllProductsComponent
   },
   {
     path: 'all',

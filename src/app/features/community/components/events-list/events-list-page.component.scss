@@ -1,5 +1,103 @@
 @import "../../../../../assets/css/variables.scss";
 
+.search-container {
+  .uk-search-default .uk-search-icon {
+    width: 164px;
+}
+  &.dark {
+    background-color: #e4eefb;
+    h4.title {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0;
+    }
+  }
+  border: 1px solid #d7e0ef;
+  background-color: #ecf4ff;
+  font-family: $regular-font;
+  border-radius: 8px;
+  .header-label {
+    font-size: 24px;
+    color: rgba(22, 28, 45, 0.87);
+    margin: 40px 40px 16px 40px;
+    h3 {
+      font-weight: 600;
+    }
+  }
+  .search-form {
+    padding: 32px 40px;
+    .search-field {
+      form {
+        width: 100%;
+        input {
+          height: 56px;
+          border-radius: 4px;
+          background-color: #ffffff;
+          color: $font-light-black;
+        }
+      }
+      .search-btn {
+        height: 56px;
+        border-radius: 4px;
+        text-transform: capitalize;
+        font-size: 18px;
+        min-width: 216px;
+        width: 100%;
+      }
+      @media (max-width: 640px) {
+        .search-btn {
+          height: auto;
+          min-width: 80px;
+          padding: 0px;
+        }
+        form {
+          input {
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 640px) {
+    .search-form {
+      padding: 16px 16px;
+    }
+  }
+  // .w-150 {
+  //   width: 150px;
+  // }
+  // .pr-150 {
+  //   padding-right: 150px !important;
+  // }
+  .reset-search {
+    background-color: transparent;
+    color: red;
+    border-radius: 50%;
+    padding: 2px 5px;
+    border: unset;
+    cursor: pointer;
+    margin: 0;
+    font-family: $regular-font;
+    font-size: 16px;
+    line-height: 1em;
+    &:focus {
+      outline: none;
+    }
+  }
+  .reset-link {
+    margin: 0 5px;
+    background: none;
+    color: red;
+    border: none;
+    padding: 0 !important;
+    font: inherit;
+    cursor: pointer;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
 .events {
   font-family: $regular-font;
   margin-bottom: 24px;
@@ -15,6 +113,7 @@
     text-transform: capitalize;
     float:right;
     height: 38px;
+    margin-top: -50px;
   }
   .uk-tab > .uk-active > a {
     font-weight: bold;

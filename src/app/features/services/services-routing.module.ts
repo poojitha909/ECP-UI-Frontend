@@ -12,7 +12,8 @@ import { CategoryResolverService } from './category-resolver.service';
 const routes: Routes = [
   {
     path: '',
-    component: ServicesPageComponent
+    component: AllServicesComponent,
+    
   }, {
     path: 'all',
     component: AllServicesComponent,

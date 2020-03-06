@@ -75,7 +75,7 @@ export class DiscussionCreatePageComponent implements OnInit {
 
   onReset() {
     this.discussForm.reset();
-    this.router.navigate(['/community/discussions']);
+    this.router.navigate(['/community']);
   }
 
   onSubmit() {

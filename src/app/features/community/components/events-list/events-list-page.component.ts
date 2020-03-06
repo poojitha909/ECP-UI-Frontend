@@ -150,12 +150,12 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
   }
 
   onTabChange(value) {
-    this.router.navigate(['/community/events'], { queryParams: { past: value, searchTxt: this.searchParams.searchTxt } });
+    this.router.navigate([], { queryParams: { past: value, searchTxt: this.searchParams.searchTxt } });
   }
 
   clearSelection() {
     this.searchParams.pastEvents = -1;
-    this.router.navigate(['/community/events'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt } });
+    this.router.navigate([], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt } });
   }
 
   onSearchChange(event: any) {

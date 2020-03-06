@@ -113,9 +113,10 @@
   <div class="uk-child-width-1-2 m-b-30 " uk-grid>
     <div class="uk-text-center cards1">
       <div class="options-card">
-        <img src="assets/images/discussion.png" alt="No Image Found" />
+        <img  src="assets/images/discussion.png" alt="No Image Found" />
+        <span>All articles & Discussions</span>
       </div>
-      <div (click)="showAllDiscussions()" class="quote-line-card cursor-pointer">
+      <div (click)="showAll('showAllDiscussions')" class="quote-line-card cursor-pointer">
         Let us Discuss
         <span class="uk-float-right" uk-icon="chevron-right"></span>
       </div>
@@ -123,15 +124,23 @@
   
     <div class="uk-text-center cards2">
       <div class="options-card">
-        <img src="assets/images/events.png" alt="No Image Found" />
+        <img  src="assets/images/events.png" alt="No Image Found" />
+        <span>All Events</span>
       </div>
-      <div (click)="showAllEvents()" class="quote-line-card cursor-pointer">
+      <div (click)="showAll('showAllEvents')" class="quote-line-card cursor-pointer">
         Happening near you
         <span class="uk-float-right" uk-icon="chevron-right"></span>
       </div>
     </div>
   
   </div>
+
+<router-outlet>
+  <app-discussions-list-page *ngIf="showAllDiscussionsEventspage === 'showAllDiscussions'"></app-discussions-list-page>
+  <app-events-list-page *ngIf="showAllDiscussionsEventspage === 'showAllEvents'"></app-events-list-page>
+</router-outlet>
+
  
+
 </div>
 

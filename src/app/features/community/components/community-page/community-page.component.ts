@@ -23,6 +23,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   paramsSubs: any;
   totalRecordsEvents: number;
   totalRecordsDiscussions: number;
+  showAllDiscussionsEventspage:any
   searchParams: {
     p: number,
     s: number,
@@ -129,12 +130,16 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  showAllDiscussions() {
-    this.router.navigate(['/community/discussions'], { queryParams: { category: this.selDiscussCategory, searchTxt: this.searchParamsDiscussions.searchTxt } });
+  showAll(i) {
+    console.log("showAll",i)
+    this.showAllDiscussionsEventspage=i
+    // this.router.navigate(['/community/discussions'], { queryParams: { category: this.selDiscussCategory, searchTxt: this.searchParamsDiscussions.searchTxt } });
   }
-  showAllEvents() {
-    this.router.navigate(['/community/events'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt } });
-  }
+  // showAll(i) {
+  //   console.log("showAllEventspage",i)
+  //   this.showAllEventspage=i
+  //   // this.router.navigate(['/community/events'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt } });
+  // }
 
   onSearchChange(event: any) {
     const value = event.target.value;

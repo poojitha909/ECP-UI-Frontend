@@ -129,7 +129,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
   onTabChange(value) {
     this.selCategory = value;
     this.searchParams.p = 0;
-    this.router.navigate(['/community/discussions'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt } });
+    this.router.navigate([], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt } });
   }
 
   resetSearch(event: any) {
@@ -182,7 +182,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
 
   clearSelection() {
     this.searchParams.tags = "";
-    this.router.navigateByUrl('/community/discussions');
+    this.router.navigate([]);
   }
 
   showDiscussions() {

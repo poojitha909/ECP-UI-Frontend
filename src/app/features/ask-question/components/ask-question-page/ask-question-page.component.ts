@@ -25,6 +25,8 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
   };
   user: any;
   paramsSubs: any;
+ 
+  showAllQues: any;
 
   constructor
     (private route: ActivatedRoute,
@@ -84,7 +86,13 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
       this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
     }
-    this.showExperts();
+    if(this.route.snapshot.queryParams['show'] == "expert"){
+      this.showAllQues = "showAllExpertQuestion";
+    }
+    if(this.route.snapshot.queryParams['show'] == "ques"){
+      this.showAllQues = "showAllExpertQuestion";
+    }
+    
   }
 
   showExperts() {
@@ -104,15 +112,18 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  showAllExperts() {
-    this.router.navigate(['/ask-question/experts'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt } });
+  showAll(i) {
+    console.log("showAll",i)
+    this.showAllQues=i 
+
+    //this.router.navigate(['/ask-question/experts'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt } });
   }
-  showAllMyQues() {
-    this.router.navigate(['/ask-question/myques']);
-  }
-  showAllExpertQues(){
-    this.router.navigate(['/ask-question/expertques']);
-  }
+  // showAllMyQues() {
+  //  // this.router.navigate(['/ask-question/myques']);
+  // }
+  // showAllExpertQues(){
+  //   this.router.navigate(['/ask-question/expertques']);
+  // }
 
   onSearchChange(event: any) {
     const value = event.target.value;

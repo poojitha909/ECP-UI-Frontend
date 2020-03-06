@@ -77,7 +77,7 @@
     <div class="options-card">
       <img src="assets/images/discussion.png" alt="No Image Found" />
     </div>
-    <div (click)="showAllExperts()" class="quote-line-card cursor-pointer">
+    <div (click)="showAll('showAllExpertQuestion')" class="quote-line-card cursor-pointer">
       All Experts
       <span class="uk-float-right" uk-icon="chevron-right"></span>
     </div>
@@ -86,7 +86,7 @@
     <div class="options-card">
       <img src="assets/images/events.png" alt="No Image Found" />
     </div>
-    <div (click)="showAllMyQues()" class="quote-line-card cursor-pointer">
+    <div (click)="showAll('showAllMyQuestion')" class="quote-line-card cursor-pointer">
       My Questions
       <span class="uk-float-right" uk-icon="chevron-right"></span>
     </div>
@@ -101,6 +101,10 @@
     </div>
   </div>
 </div>
+<router-outlet>
+<ask-question-experts *ngIf="showAllQues === 'showAllExpertQuestion'"></ask-question-experts>
+<ask-question-myques *ngIf="showAllQues === 'showAllMyQuestion'"></ask-question-myques>
+</router-outlet>
 <!-- Sample Implementation on 04-03-20 -->
 <!-- <div class="uk-container  dark" >
   <app-featured-ask-experts></app-featured-ask-experts>
@@ -109,6 +113,10 @@
 <div class="uk-container  dark ">
   <app-featured-my-questions></app-featured-my-questions>
 </div> -->
+
+
+
+
 
 
 

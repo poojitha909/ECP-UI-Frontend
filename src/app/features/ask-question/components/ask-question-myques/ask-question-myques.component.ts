@@ -16,16 +16,16 @@ declare var UIkit;
   styleUrls: ['./ask-question-myques.component.scss']
 })
 export class AskQuestionMyQuesComponent implements OnInit, OnDestroy {
-  breadcrumbLinks: Breadcrumb[] = [
-    {
-      text: 'Home',
-      link: '/'
-    },
-    {
-      text: 'Ask an Expert',
-      link: '/ask-question'
-    }
-  ];
+  // breadcrumbLinks: Breadcrumb[] = [
+  //   {
+  //     text: 'Home',
+  //     link: '/'
+  //   },
+  //   {
+  //     text: 'Ask an Expert',
+  //     link: '/ask-question'
+  //   }
+  // ];
   questions: any[];
   user: any;
   searchParamsQues: {
@@ -100,7 +100,7 @@ export class AskQuestionMyQuesComponent implements OnInit, OnDestroy {
 
   changeQuesPage(page: number){
     this.searchParamsQues.p = page;
-    this.router.navigate(['/ask-question/myques'], { queryParams: { pageQ: this.searchParamsQues.p} });
+    this.router.navigate(['/ask-question'], { queryParams: { pageQ: this.searchParamsQues.p} });
   }
   
   showQuestions() {

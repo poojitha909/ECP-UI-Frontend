@@ -1,8 +1,8 @@
 <div class="uk-container ask-question">
-  <div class="breadcrumbs">
+  <!-- <div class="breadcrumbs">
     <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
-  </div>
-  <div class="uk-grid uk-grid-large uk-flex-left">
+  </div> -->
+  <!-- <div class="uk-grid uk-grid-large uk-flex-left">
     <div class="uk-width-2-3">
       <h1 class="uk-h2">My Questions</h1>
     </div>
@@ -10,7 +10,7 @@
         <button routerLink="/ask-question/experts" class="uk-button uk-button-transparent myques"> All Experts <img src="/assets/images/next.png" id="next"></button>
     </div>
   </div>
-  <hr class="m-b-30" />
+  <hr class="m-b-30" > -->
   <div *ngIf="questions && questions.length > 0">
     <app-question-detail-card *ngFor="let question of questions" [question]="question">
     </app-question-detail-card>

@@ -16,16 +16,16 @@ declare var UIkit;
   styleUrls: ['./ask-question-experts.component.scss']
 })
 export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
-  breadcrumbLinks: Breadcrumb[] = [
-    {
-      text: 'Home',
-      link: '/'
-    },
-    {
-      text: 'Ask an Expert',
-      link: '/ask-question'
-    }
-  ];
+  // breadcrumbLinks: Breadcrumb[] = [
+  //   {
+  //     text: 'Home',
+  //     link: '/'
+  //   },
+  //   {
+  //     text: 'Ask an Expert',
+  //     link: '/ask-question'
+  //   }
+  // ];
   showReset: boolean;
   experts: any[];
   catsList: any[];
@@ -119,7 +119,7 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
 
   clearSelection() {
     this.searchParams.experties = '';
-    this.router.navigateByUrl('ask-question/experts');
+    this.router.navigateByUrl('ask-question');
   }
 
   showExperts() {
@@ -134,11 +134,11 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
   }
   
   onTabChange(value) {
-    this.router.navigate(['/ask-question/experts'], { queryParams: { category: value } });
+    this.router.navigate(['/ask-question'], { queryParams: { category: value } });
   }
   
   onSearch() {
-    this.router.navigate(['/ask-question/experts'], { queryParams: { page: this.searchParams.p} });
+    this.router.navigate(['/ask-question'], { queryParams: { page: this.searchParams.p} });
   }
 
   onSearchChange(event: any) {

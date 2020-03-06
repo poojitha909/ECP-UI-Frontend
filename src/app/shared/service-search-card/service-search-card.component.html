@@ -32,9 +32,9 @@
             <div class="font-regular-15">{{isDBService ? service?.reviewCount : service?.totalReviews}} Reviews</div>
         </div>
         <div class="m-t-10">
-            <a *ngIf="!isDBService" routerLink="/services/all"
+            <a *ngIf="!isDBService" routerLink="/services"
                 [queryParams]="{ categoryLink:service.type}">{{service?.type}}</a>
-            <a *ngIf="isDBService && service?.systemTags.length > 0" routerLink="/services/all"
+            <a *ngIf="isDBService && service?.systemTags.length > 0" routerLink="/services"
                 [queryParams]="{ categoryLink:service.systemTags[0].name}">{{service?.systemTags[0].name}}</a>
 
         </div>

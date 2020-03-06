@@ -64,8 +64,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     private seoService: SeoService
   ) {
     console.log(this.activeRoute.snapshot.data);
-    // this.categories = this.activeRoute.snapshot.data.categories;
-    // this.categoryTypes = Object.keys(this.categories).reverse();
+    this.categories = this.activeRoute.snapshot.data.categories;
+    this.categoryTypes = Object.keys(this.categories).reverse();
     // Generate meta tag 
     const config: SEO = {
       title: `All Service - An Elder Spring Initiative by Tata Trusts`,
@@ -207,7 +207,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
 
   onCategoryChanged(category, catId) {
     this.searchPageParam.term = '';
-    this.router.navigate(['services/all'], { queryParams: { category: category, catid: catId } });
+    this.router.navigate(['services'], { queryParams: { category: category, catid: catId } });
   }
 
   clearSelection() {
@@ -215,12 +215,12 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     this.selectedCategoryType = '';
     this.selectedCatid = null;
     this.searchPageParam.term = '';
-    this.router.navigateByUrl('services/all');
+    this.router.navigateByUrl('services');
   }
 
   clearSerach(event: any) {
     this.searchPageParam.term = '';
-    this.router.navigateByUrl('services/all');
+    this.router.navigateByUrl('services');
   }
 
   onChangePage(services: any[]) {
@@ -264,7 +264,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
         }
 
       } else {
-        this.router.navigate(['services/all'], { queryParams: { category: field } });
+        this.router.navigate(['services'], { queryParams: { category: field } });
         // this.getCategoryServices(field, 0);
       }
       this.selectedValue = "";

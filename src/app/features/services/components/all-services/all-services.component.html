@@ -1,10 +1,9 @@
-
 <!-- Search Container starts -->
 <app-search-container></app-search-container>
 <!-- Search Container ends -->
 
 
-<div class="home-banner landing-bg">
+<div class="home-banner landing-bg m-b-0">
   <div class="uk-child-width-1-2@s uk-padding" uk-grid>
     <div class="uk-text-left@s">
       <h1>At your Service!</h1>
@@ -23,12 +22,12 @@
   <div class="breadcrumbs">
     <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
   </div>
-  <h1>
+  <h1 class="uk-h2">
     All Services
   </h1>
   <hr class="m-b-30" />
 
-  
+
 
   <!-- Category Slider END-->
 
@@ -202,7 +201,7 @@
       <!-- Mobile view category END-->
 
       <!-- Search textbox -->
-    
+
       <!-- <div uk-grid>
         <div class="uk-width-2-3@s text-center-xs">
           <div class="uk-button-group" uk-switcher="toggle: > *">
@@ -232,12 +231,12 @@
         <span uk-spinner="ratio: 3"></span>
       </div>
 
-      <div *ngIf="services && services.length == 0 && !isLoading" class="m-t-40">
+      <div *ngIf="services && services.length == 0 && !isLoading">
         <!-- <img src="assets/images/no-result.png" /> -->
         <app-no-records></app-no-records>
       </div>
       <!-- Service list  -->
-      <div class="m-t-40" *ngIf="services  && pageServices && pageServices.length > 0 && !isLoading">
+      <div *ngIf="services  && pageServices && pageServices.length > 0 && !isLoading">
         <app-services-list [services]="pageServices"></app-services-list>
       </div>
       <!-- Service list  -->

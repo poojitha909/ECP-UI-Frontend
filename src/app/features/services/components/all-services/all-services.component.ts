@@ -158,7 +158,11 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
           } else {
 
             this.showShareBox = false;
-            this.getAllService();
+            if (this.homeService.homeSearchtxt) {
+              this.getCategoryServices(this.homeService.homeSearchtxt, 0);  
+            } else {
+              this.getAllService();
+            }
             this.selectedCategoryType = undefined;
           }
         }

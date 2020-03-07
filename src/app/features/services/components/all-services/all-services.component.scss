@@ -72,11 +72,11 @@
   }
 }
 
-@media(min-width:640px){
-    .home-banner{
-      margin-top: 16px;
-    }
-}
+// @media(min-width:640px){
+//     .home-banner{
+//       margin-top: 16px;
+//     }
+// }
 
 
 // Banner ends here 
@@ -97,10 +97,11 @@
 }
 
 h1 {
-  margin: 0px;
-  font-family: "HKGroteskRegular";
-  font-size: 32px;
-  color: #151c2c;
+  color: $font-light-black;
+  font-family: $regular-font;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .bg-card-peach {

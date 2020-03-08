@@ -63,7 +63,7 @@
                 </app-dicussion-summary-card>
               </div>
             </div>
-            <div class="uk-text-center uk-text-bold pt-norec"
+            <div class="uk-text-center uk-text-bold"
               *ngIf="discussionsList!==undefined && discussionsList?.length == 0">
               No Records found
             </div>
@@ -78,7 +78,7 @@
                 <app-event-summary-card [event]="event" [isPast]="0"></app-event-summary-card>
               </div>
             </div>
-            <div class="uk-text-center uk-text-bold pt-norec" *ngIf="eventsList!==undefined && eventsList?.length == 0">
+            <div class="uk-text-center uk-text-bold" *ngIf="eventsList!==undefined && eventsList?.length == 0">
               No Records found
             </div>
             <div class="m-t-30" *ngIf="eventsList!==undefined && eventsList?.length > 0">

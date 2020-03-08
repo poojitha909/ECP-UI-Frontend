@@ -24,7 +24,7 @@
                         <p>{{expert.workTitle}}</p>
                         <p>{{expert.age}}</p>
                         <p>
-                            <span *ngFor="let ex of expert.experties; let idx = index;">
+                            <span *ngFor="let ex of expert.experties; let idx = index;" routerLink="/ask-question" [queryParams]="{category: ex.id }">
                                 {{ex.name}}
                                 {{ (idx == (expert.experties.length -1)) ? "": "," }}
                             </span>

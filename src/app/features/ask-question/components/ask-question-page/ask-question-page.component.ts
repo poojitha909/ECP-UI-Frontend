@@ -25,6 +25,8 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
   };
   user: any;
   paramsSubs: any;
+ 
+  showAllQues: any;
 
   constructor
     (private route: ActivatedRoute,
@@ -79,12 +81,19 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
       this.showReset = this.searchParams.searchTxt ? true : false;
+      this.showExperts();
+    }
+    if(this.route.snapshot.queryParams['show'] == "ques"){
+      this.showAllQues = "showAllExpertQuestion";
+    }
+    else{
+      this.showAllQues = "showAllExpertQuestion";
     }
     if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
       this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
+      this.showExperts();
     }
-    this.showExperts();
   }
 
   showExperts() {
@@ -104,15 +113,17 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  showAllExperts() {
-    this.router.navigate(['/ask-question/experts'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt } });
+  showAll(i) {
+    this.showAllQues=i 
+
+    //this.router.navigate(['/ask-question/experts'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt } });
   }
-  showAllMyQues() {
-    this.router.navigate(['/ask-question/myques']);
-  }
-  showAllExpertQues(){
-    this.router.navigate(['/ask-question/expertques']);
-  }
+  // showAllMyQues() {
+  //  // this.router.navigate(['/ask-question/myques']);
+  // }
+  // showAllExpertQues(){
+  //   this.router.navigate(['/ask-question/expertques']);
+  // }
 
   onSearchChange(event: any) {
     const value = event.target.value;
@@ -137,7 +148,8 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
   }
 
   onSearch() {
-    this.showExperts();
+    //this.showExperts();
+    this.router.navigate(['/ask-question'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt, show: "expert" } });
   }
 
   setSearchTxt(value: string) {

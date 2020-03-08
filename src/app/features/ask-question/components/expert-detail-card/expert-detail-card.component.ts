@@ -31,7 +31,7 @@ export class ExpertDetailCardComponent implements OnInit {
   }
   onclick(e,experties){
     e.stopPropagation();
-    this.route.navigate(['ask-question/experts'],{
+    this.route.navigate(['ask-question'],{
      queryParams:{category:experties[0].id}
     })
 } 

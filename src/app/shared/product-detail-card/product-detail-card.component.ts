@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class ProductDetailCardComponent implements OnInit {
   @Input() product: any;
+  @Input() searchTxt: any;
   constructor( private route:Router) { }
 
   ngOnInit() {
@@ -16,7 +17,7 @@ export class ProductDetailCardComponent implements OnInit {
   onclick(e,product){
     e.stopPropagation();
     this.route.navigate(['products/all'],{
-     queryParams:{productCategory:product.productCategory.id,searchTxt:""}
+     queryParams:{productCategory:product.productCategory.id,searchTxt: this.searchTxt}
     })
 } 
 

@@ -67,9 +67,9 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
           this.searchParams.answeredBy = userProfie.id;
           
           this.totalRecords = 0;
-          if(this.route.snapshot.queryParams['category'] !== undefined){
-            this.searchParams.askCategory = this.route.snapshot.queryParams['category'];
-          }
+          // if(this.route.snapshot.queryParams['category'] !== undefined){
+          //   this.searchParams.askCategory = this.route.snapshot.queryParams['category'];
+          // }
           this.onSearch();
         }
       );

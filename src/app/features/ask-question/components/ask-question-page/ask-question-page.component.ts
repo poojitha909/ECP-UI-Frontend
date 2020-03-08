@@ -84,10 +84,13 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
       this.showExperts();
     }
     if(this.route.snapshot.queryParams['show'] == "ques"){
-      this.showAllQues = "showAllExpertQuestion";
+      this.showAllQues = "showAllMyQues";
+    }
+    else if(this.route.snapshot.queryParams['show'] == "expques"){
+      this.showAllQues = "showAllExpertQues";
     }
     else{
-      this.showAllQues = "showAllExpertQuestion";
+      this.showAllQues = "showAllExperts";
     }
     if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
       this.setSearchTxt(this.homeService.homeSearchtxt);

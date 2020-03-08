@@ -88,9 +88,9 @@ export class AskQuestionMyQuesComponent implements OnInit, OnDestroy {
     }
 
     this.totalRecordsQues = 0;
-    if (this.route.snapshot.queryParams['category'] !== undefined) {
-      this.searchParamsQues.askCategory = this.route.snapshot.queryParams['category'];
-    }
+    // if (this.route.snapshot.queryParams['category'] !== undefined) {
+    //   this.searchParamsQues.askCategory = this.route.snapshot.queryParams['category'];
+    // }
     if (this.route.snapshot.queryParams['pageQ'] !== undefined) {
       this.searchParamsQues.p = this.route.snapshot.queryParams['pageQ'];
     }

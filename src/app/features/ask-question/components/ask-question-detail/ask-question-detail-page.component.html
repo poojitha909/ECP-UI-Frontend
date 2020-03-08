@@ -17,7 +17,7 @@
                         <p>{{question?.answeredBy?.workTitle}}</p>
                         <p>{{question?.answeredBy?.age}}</p>
                         <p>
-                            <span *ngFor="let ex of question?.answeredBy?.experties; let idx = index;">
+                            <span *ngFor="let ex of question?.answeredBy?.experties; let idx = index;" routerLink="/ask-question" [queryParams]="{category: ex.id }">
                                 {{ex.name}}
                                 {{ (idx == (question?.answeredBy?.experties.length -1)) ? "": "," }}
                             </span>

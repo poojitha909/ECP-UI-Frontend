@@ -22,10 +22,6 @@ export class AskQuestionCreatePageComponent implements OnInit {
     {
       text: 'Ask an Expert',
       link: '/ask-question'
-    },
-    {
-      text: 'All Experts',
-      link: '/ask-question/experts'
     }
   ];
   category: string;

@@ -134,11 +134,11 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
   }
   
   onTabChange(value) {
-    this.router.navigate(['/ask-question'], { queryParams: { category: value } });
+    this.router.navigate(['/ask-question'], { queryParams: { category: value, searchTxt: this.searchParams.searchTxt } });
   }
   
   onSearch() {
-    this.router.navigate(['/ask-question'], { queryParams: { page: this.searchParams.p} });
+    this.router.navigate(['/ask-question'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p} });
   }
 
   onSearchChange(event: any) {

@@ -64,8 +64,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     private seoService: SeoService
   ) {
     console.log(this.activeRoute.snapshot.data);
-    // this.categories = this.activeRoute.snapshot.data.categories;
-    // this.categoryTypes = Object.keys(this.categories).reverse();
+    this.categories = this.activeRoute.snapshot.data.categories;
+    this.categoryTypes = Object.keys(this.categories).reverse();
     // Generate meta tag 
     const config: SEO = {
       title: `All Service - An Elder Spring Initiative by Tata Trusts`,
@@ -108,37 +108,65 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
         this.whatsMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
         const queryCategory = value.get("category");
         const catId = value.get("catid");
-        if (queryCategory) {
-          this.ecpService.searchedService = queryCategory;
-          if (catId) {
-            this.ecpService.searchCatID = catId;
-            this.getCategoryServices(queryCategory, catId);
-            //Set selected category
-            if (!this.selectedCategoryType) {
-              let category = null;
-              this.selectedCategoryType = this.categoryTypes.find(value => {
-                category = this.categories[value].find(category => category.national_catid == catId);
-                if (category) {
-                  return true;
-                }
-              });
-            }
+        const categoryLink = value.get("categoryLink");
 
+        if (categoryLink) {
+          this.ecpService.searchedService = categoryLink;
+          let category = null;
+          this.selectedCategoryType = this.categoryTypes.find(value => {
+            category = this.categories[value].find(category => category.category_name.trim().toLowerCase() == categoryLink.trim().toLowerCase());
+            if (category) {
+              return true;
+            }
+          });
+          if (category) {
+            this.ecpService.searchCatID = category.national_catid;
+            this.getCategoryServices(category.category_name, category.national_catid);
           } else {
-            //Set selected category
-            if (!this.selectedCategoryType) {
-              this.selectedCategoryType = this.categoryTypes.find(type => type == queryCategory);
-            }
+            this.selectedCategoryType = this.categoryTypes.find(type => type.trim().toLowerCase() == categoryLink.trim().toLowerCase());
             this.ecpService.searchCatID = null;
-            this.getCategoryServices(queryCategory, 0);
+            this.getCategoryServices(categoryLink, 0);
           }
-          this.showShareBox = true;
-        } else {
 
-          this.showShareBox = false;
-          this.getAllService();
-          this.selectedCategoryType = undefined;
+
+        } else {
+          if (queryCategory) {
+            this.ecpService.searchedService = queryCategory;
+            if (catId) {
+              this.ecpService.searchCatID = catId;
+              this.getCategoryServices(queryCategory, catId);
+              //Set selected category
+              if (!this.selectedCategoryType) {
+                let category = null;
+                this.selectedCategoryType = this.categoryTypes.find(value => {
+                  category = this.categories[value].find(category => category.national_catid == catId);
+                  if (category) {
+                    return true;
+                  }
+                });
+              }
+
+            } else {
+              //Set selected category
+              if (!this.selectedCategoryType) {
+                this.selectedCategoryType = this.categoryTypes.find(type => type.trim().toLowerCase() == queryCategory.trim().toLowerCase());
+              }
+              this.ecpService.searchCatID = null;
+              this.getCategoryServices(queryCategory, 0);
+            }
+            this.showShareBox = true;
+          } else {
+
+            this.showShareBox = false;
+            if (this.homeService.homeSearchtxt) {
+              this.getCategoryServices(this.homeService.homeSearchtxt, 0);  
+            } else {
+              this.getAllService();
+            }
+            this.selectedCategoryType = undefined;
+          }
         }
+
       });
 
   }
@@ -207,7 +235,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
 
   onCategoryChanged(category, catId) {
     this.searchPageParam.term = '';
-    this.router.navigate(['services/all'], { queryParams: { category: category, catid: catId } });
+    this.router.navigate(['services'], { queryParams: { category: category, catid: catId } });
   }
 
   clearSelection() {
@@ -215,12 +243,12 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     this.selectedCategoryType = '';
     this.selectedCatid = null;
     this.searchPageParam.term = '';
-    this.router.navigateByUrl('services/all');
+    this.router.navigateByUrl('services');
   }
 
   clearSerach(event: any) {
     this.searchPageParam.term = '';
-    this.router.navigateByUrl('services/all');
+    this.router.navigateByUrl('services');
   }
 
   onChangePage(services: any[]) {
@@ -264,7 +292,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
         }
 
       } else {
-        this.router.navigate(['services/all'], { queryParams: { category: field } });
+        this.router.navigate(['services'], { queryParams: { category: field } });
         // this.getCategoryServices(field, 0);
       }
       this.selectedValue = "";

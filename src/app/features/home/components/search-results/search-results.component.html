@@ -113,7 +113,7 @@
 
       <!-- Services List -->
       <!-- No search result START-->
-      <app-no-search-result *ngIf="searchData.services.length == 0" [viewLink]="'/services/all'" [tabName]="'Services'">
+      <app-no-search-result *ngIf="searchData.services.length == 0" [viewLink]="'/services'" [tabName]="'Services'">
       </app-no-search-result>
       <!-- No search result END-->
 
@@ -123,7 +123,7 @@
         </div>
       </div>
 
-      <div *ngIf="searchData.totalServices > 6"><button routerLink="/services/all" [queryParams]="{ category:term}"
+      <div *ngIf="searchData.totalServices > 6"><button routerLink="/services" [queryParams]="{ category:term}"
           class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
           Results</button>
       </div>

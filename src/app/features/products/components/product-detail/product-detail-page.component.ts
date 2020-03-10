@@ -25,10 +25,6 @@ export class ProductDetailPageComponent implements OnInit {
     {
       text: 'Products',
       link: '/products'
-    },
-    {
-      text: 'All Products',
-      link: '/products/all'
     }
   ];
 

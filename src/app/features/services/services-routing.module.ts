@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: '',
     component: AllServicesComponent,
-    
+    resolve: { categories: CategoryResolverService }
   }, {
     path: 'all',
     component: AllServicesComponent,

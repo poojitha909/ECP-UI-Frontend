@@ -1,16 +1,4 @@
 <div class="uk-container products">
-  <div class="breadcrumbs">
-      <ul class="uk-breadcrumb">
-          <li routerLink="/ask-question" class="fa fa-angle-right">Ask an Expert</li>
-      </ul>
-  </div>
-  <div class="uk-grid uk-grid-large uk-flex-left">
-    <div class="uk-width-2-3">
-      <h1 class="uk-h2">Questions I need to answer</h1>
-    </div>
-  </div>
-  
-  <hr class="m-b-30"/>
   <div uk-grid>
     <div class="uk-width-expand@m">
       <div  *ngIf="questions!==undefined && questions.length > 0">

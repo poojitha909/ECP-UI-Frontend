@@ -68,6 +68,7 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
+    this.router.navigate([], { queryParams: { past: -1, searchTxt: this.searchParams.searchTxt } });
   }
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
@@ -180,7 +181,7 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
   }
 
   onSearch() {
-    this.router.navigate(['/community/events'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
+    this.router.navigate(['/community'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
   }
 
   setSearchTxt(value: string){

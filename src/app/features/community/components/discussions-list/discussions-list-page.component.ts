@@ -117,13 +117,13 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  changePage(page) {
+  changePage(page:number) {
     this.searchParams.p = page;
     this.submitSearch();
   }
 
   submitSearch() {
-    this.router.navigate(['/community/discussions'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
+    this.router.navigate(['/community'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
   }
 
   onTabChange(value) {

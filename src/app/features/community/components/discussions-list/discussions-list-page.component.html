@@ -63,7 +63,7 @@
             <app-pagination *ngIf="(discussionsList.length > 0)" [totalRecords]="totalRecords"
                 [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">
             </app-pagination>
-            <div *ngIf="discussionsList?.length === 0">
+            <div *ngIf=" discussionsList==undefined || discussionsList?.length === 0">
                 <app-discussion-no-record></app-discussion-no-record>
             </div>
         </div>

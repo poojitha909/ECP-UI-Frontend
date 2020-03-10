@@ -6,6 +6,8 @@ import { MenuService } from '../../services/menu.service';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { SEO } from 'src/app/core/interfaces';
 import { HomeService } from 'src/app/features/home/home.service';
+// import 'rxjs/add/observable/timer';
+// import { Observable, observable } from 'rxjs';
 
 @Component({
   selector: 'app-community-page',
@@ -24,6 +26,8 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   totalRecordsEvents: number;
   totalRecordsDiscussions: number;
   showAllDiscussionsEventspage:any
+  isLoading: boolean = false;
+
   searchParams: {
     p: number,
     s: number,
@@ -131,15 +135,22 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   }
 
   showAll(i) {
-    console.log("showAll",i)
-    this.showAllDiscussionsEventspage=i
-    // this.router.navigate(['/community/discussions'], { queryParams: { category: this.selDiscussCategory, searchTxt: this.searchParamsDiscussions.searchTxt } });
+   this.isLoading=true;
+    this.showAllDiscussionsEventspage=i;
+    this.isLoading=false
   }
-  // showAll(i) {
-  //   console.log("showAllEventspage",i)
-  //   this.showAllEventspage=i
-  //   // this.router.navigate(['/community/events'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt } });
-  // }
+  showAllDiscussions(i){
+    console.log("search showAllDiscussion")
+    const value = i;
+    this.showAll(value)
+    this.resetSearch(event)
+  }
+  showAllEvents(i){
+    console.log("search showAllEvents")
+    const value=i
+    this.showAll(value)
+    this.resetSearch(event)
+  }
 
   onSearchChange(event: any) {
     const value = event.target.value;

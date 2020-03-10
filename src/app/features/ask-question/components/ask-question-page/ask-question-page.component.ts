@@ -25,7 +25,7 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
   };
   user: any;
   paramsSubs: any;
- 
+  show: string;
   showAllQues: any;
 
   constructor
@@ -83,11 +83,21 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
       this.showReset = this.searchParams.searchTxt ? true : false;
       this.showExperts();
     }
+    if(this.route.snapshot.queryParams['show']){
+      this.show = this.route.snapshot.queryParams['show'];
+      console.log(12312323, this.show);
+    }
     if(this.route.snapshot.queryParams['show'] == "ques"){
       this.showAllQues = "showAllMyQues";
+      this.showAll(this.showAllQues);
     }
     else if(this.route.snapshot.queryParams['show'] == "expques"){
       this.showAllQues = "showAllExpertQues";
+      this.showAll(this.showAllQues);
+    }
+    else if(this.route.snapshot.queryParams['show'] == "experts"){
+      this.showAllQues = "showAllExperts";
+      this.showAll(this.showAllQues);
     }
     else{
       this.showAllQues = "showAllExperts";
@@ -118,15 +128,11 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
 
   showAll(i) {
     this.showAllQues=i 
-
-    //this.router.navigate(['/ask-question/experts'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt } });
+    if(this.show){
+      const elmnt = document.getElementById("searchResultList");
+      setTimeout( () => { elmnt.scrollIntoView(true); },700);
+    }
   }
-  // showAllMyQues() {
-  //  // this.router.navigate(['/ask-question/myques']);
-  // }
-  // showAllExpertQues(){
-  //   this.router.navigate(['/ask-question/expertques']);
-  // }
 
   onSearchChange(event: any) {
     const value = event.target.value;
@@ -152,7 +158,7 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
 
   onSearch() {
     //this.showExperts();
-    this.router.navigate(['/ask-question'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt, show: "expert" } });
+    this.router.navigate(['/ask-question'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt, show: this.show } });
   }
 
   setSearchTxt(value: string) {

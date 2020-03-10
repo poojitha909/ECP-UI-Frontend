@@ -119,7 +119,7 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
 
   clearSelection() {
     this.searchParams.experties = '';
-    this.router.navigateByUrl('ask-question');
+    this.router.navigate(['/ask-question'], { queryParams: { show:"experts" } });
   }
 
   showExperts() {
@@ -134,11 +134,11 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
   }
   
   onTabChange(value) {
-    this.router.navigate(['/ask-question'], { queryParams: { category: value, searchTxt: this.searchParams.searchTxt } });
+    this.router.navigate(['/ask-question'], { queryParams: { category: value, searchTxt: this.searchParams.searchTxt, show:"experts" } });
   }
   
   onSearch() {
-    this.router.navigate(['/ask-question'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p} });
+    this.router.navigate(['/ask-question'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p, show:"experts"} });
   }
 
   onSearchChange(event: any) {

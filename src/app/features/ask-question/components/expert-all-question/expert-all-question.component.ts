@@ -70,7 +70,7 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
           // if(this.route.snapshot.queryParams['category'] !== undefined){
           //   this.searchParams.askCategory = this.route.snapshot.queryParams['category'];
           // }
-          this.onSearch();
+          this.showQuestions();
         }
       );
     }
@@ -94,6 +94,6 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
   }
   
   onSearch() {
-    this.showQuestions();
+    this.router.navigate(['/ask-question'], { queryParams: { page: this.searchParams.p, show: "expques"} });
   }
 }

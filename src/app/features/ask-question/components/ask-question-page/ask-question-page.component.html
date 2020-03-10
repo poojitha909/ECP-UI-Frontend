@@ -101,11 +101,11 @@
     </div>
   </div>
 </div>
-<router-outlet>
-<ask-question-experts *ngIf="showAllQues === 'showAllExperts'"></ask-question-experts>
-<expert-all-question *ngIf="showAllQues === 'showAllExpertQues'"></expert-all-question>
-<ask-question-myques *ngIf="showAllQues === 'showAllMyQues'"></ask-question-myques>
-</router-outlet>
+<div id="searchResultList">
+  <ask-question-experts *ngIf="showAllQues === 'showAllExperts'"></ask-question-experts>
+  <expert-all-question *ngIf="showAllQues === 'showAllExpertQues'"></expert-all-question>
+  <ask-question-myques *ngIf="showAllQues === 'showAllMyQues'"></ask-question-myques>
+</div>
 <!-- Sample Implementation on 04-03-20 -->
 <!-- <div class="uk-container  dark" >
   <app-featured-ask-experts></app-featured-ask-experts>

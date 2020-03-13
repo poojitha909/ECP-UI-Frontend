@@ -23,7 +23,7 @@
     </div>
     <!-- Search Form END -->
     <!-- Search Result START -->
-    <div class="search-result" *ngIf="showResult">
+    <!-- <div class="search-result" *ngIf="showResult">
 
       <div class="m-t-20 uk-hidden@s">
         <p class="font-regular-15 font-weight-600">Search Results ({{totalRecordsDiscussions + totalRecordsEvents}})
@@ -89,12 +89,10 @@
         </ul>
       </div>
 
-    </div>
+    </div> -->
     <!-- Search Result END -->
   </div>
-
-
-  <div class="home-banner landing-bg">
+  <!-- <div class="home-banner landing-bg">
     <div class="uk-child-width-1-2@s uk-padding" uk-grid>
       <div class="uk-text-left@s">
         <h1>Let us Engage!</h1>
@@ -106,11 +104,19 @@
         </p>
       </div>
     </div>
+  </div> -->
+
+  <div class= "tab">
+    <ul class="uk-child-width-expand" uk-tab >
+        <li class="uk-active"><a x-no-tabbing (click)="showAll('showAllDiscussions')">All articles & Discussions</a></li>
+        <li><a x-no-tabbing (click)="showAll('showAllEvents')">All Events</a></li>
+           
+    </ul>
   </div>
 
   <!-- Search Container ends -->
 
-  <div class="uk-child-width-1-2 m-b-30 " uk-grid>
+  <!-- <div class="uk-child-width-1-2 m-b-30 " uk-grid>
     <div class="uk-text-center cards1">
       <div class="options-card">
         <img  src="assets/images/discussion.png" alt="No Image Found" />
@@ -133,14 +139,15 @@
       </div>
     </div>
   
-  </div>
+  </div> -->
+</div>
 
-<router-outlet>
+
   <app-discussions-list-page *ngIf="showAllDiscussionsEventspage === 'showAllDiscussions'"></app-discussions-list-page>
   <app-events-list-page *ngIf="showAllDiscussionsEventspage === 'showAllEvents'"></app-events-list-page>
-</router-outlet>
+
 
  
 
-</div>
+
 

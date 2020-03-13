@@ -19,11 +19,23 @@
       </div>
     </div>
   </div>
+</div>
+     <!-- tab start -->
+
+<div class= "tab">
+  <ul class="uk-child-width-expand" uk-tab>
+      <li class="uk-active"><a x-no-tabbing (click)="showAll('showAllExperts')">All Experts</a></li>
+      <li><a x-no-tabbing (click)="showAll('showAllMyQues')">My Questions</a></li>
+      <li><a x-no-tabbing (click)="showAll('showAllExpertQues')">Questions I need to answer</a></li>   
+  </ul>
+</div>
+<!-- tab -end -->
+
+
   <!-- Search Form END -->
   <!-- Search Result START -->
-  <div class="search-result" *ngIf="showResult">
 
-
+  <!-- <div class="search-result" *ngIf="showResult">
     <div class="m-t-20 uk-hidden@s" *ngIf="experts && experts?.length > 0">
       <p class="font-regular-15 font-weight-600">Search Results ({{expertsTotal}})
       </p>
@@ -42,8 +54,6 @@
         results
       </p>
     </div>
-
-
     <div class="uk-visible@s">
       <div uk-grid class="uk-grid-large uk-flex-left uk-text-center uk-child-width-1-3@m">
         <div *ngFor="let expert of experts">
@@ -57,11 +67,11 @@
     <div class="uk-text-center uk-text-bold pt-norec m-b-20" *ngIf="experts!==undefined && experts?.length == 0">
       No Records found
     </div>
-  </div>
+  </div> -->
   <!-- Search Result END -->
-</div>
 
-<div class="home-banner landing-bg">
+
+<!-- <div class="home-banner landing-bg">
   <div class="uk-child-width-1-2@s uk-padding" uk-grid>
     <div class="uk-text-left@s">
       <h1>Our team of experts are here to guide you!</h1>
@@ -71,8 +81,8 @@
       </p>
     </div>
   </div>
-</div>
-<div [ngClass]="{'uk-child-width-1-3': user?.userRoleId == 'EXPERT', 'uk-child-width-1-2': user==undefined || user==null || user.userRoleId != 'EXPERT'}" class="m-b-30" uk-grid>
+</div> -->
+<!-- <div [ngClass]="{'uk-child-width-1-3': user?.userRoleId == 'EXPERT', 'uk-child-width-1-2': user==undefined || user==null || user.userRoleId != 'EXPERT'}" class="m-b-30" uk-grid>
   <div class="uk-text-center">
     <div class="options-card">
       <img src="assets/images/experts.png" alt="No Image Found" />
@@ -100,7 +110,16 @@
       <span class="uk-float-right" uk-icon="chevron-right"></span>
     </div>
   </div>
-</div>
+</div> -->
+
+<!-- <div>
+<ul uk-tab uk-child-width-expand>
+  <li class="uk-active"><a href="#"> All Experts</a></li>
+  <li><a href="#">My Questions</a></li>
+  <li><a href="#"> Questions I need to answer </a></li>
+</ul>
+</div> -->
+
 <div id="searchResultList">
   <ask-question-experts *ngIf="showAllQues === 'showAllExperts'"></ask-question-experts>
   <expert-all-question *ngIf="showAllQues === 'showAllExpertQues'"></expert-all-question>

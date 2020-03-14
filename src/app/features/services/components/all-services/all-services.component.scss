@@ -9,7 +9,7 @@
   margin-top: 24px;
   margin-bottom: 48px;
   .logo {
-    background-color: #E8D9CC;
+    background-color: #e8d9cc;
     h3 {
       padding: 12px 0 12px 40px;
       font-weight: 600;
@@ -35,12 +35,25 @@
   }
 }
 
-.service-banner{
+.top-banner {
+  margin-top: 32px;
+  background: #eaeaeb;
+  border-radius: 4px;
+  .banner-text {
+    padding: 32px 40px;
+  }
+  .banner-img {
+    padding-top: 16px;
+    padding-left: 40px;
+  }
+}
+
+.service-banner {
   min-height: 224px;
   margin: 24px 0 48px 0;
   border-radius: 8px;
   font-family: $regular-font;
-  h1{
+  h1 {
     font-family: $regular-font;
     font-size: 32px;
     font-weight: 600;
@@ -78,9 +91,7 @@
 //     }
 // }
 
-
-// Banner ends here 
-
+// Banner ends here
 
 .uk-breadcrumb {
   font-family: "HKGroteskRegular";

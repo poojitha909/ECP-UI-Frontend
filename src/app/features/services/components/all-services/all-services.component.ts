@@ -85,6 +85,13 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     this.selectedValue = "";
   }
 
+  @HostListener('window:scroll', ['$event'])
+  hideBanner() {
+    if (window.scrollY > 380) {
+      document.getElementById('serviceBanner').style.display = 'none';
+    }
+  }
+
   ngOnInit() {
     this.searchTextChanged.pipe(
       debounceTime(500),
@@ -159,7 +166,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
 
             this.showShareBox = false;
             if (this.homeService.homeSearchtxt) {
-              this.getCategoryServices(this.homeService.homeSearchtxt, 0);  
+              this.getCategoryServices(this.homeService.homeSearchtxt, 0);
             } else {
               this.getAllService();
             }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
 import { EventService } from '../../services/events.service';
 import { DiscussionService } from '../../services/discussion.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -100,6 +100,13 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
 
     this.showEvents();
     this.showDiscussions();
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  hideBanner() {
+    if (window.scrollY > 380) {
+      document.getElementById('communityBanner').style.display = 'none';
+    }
   }
 
   showEvents() {

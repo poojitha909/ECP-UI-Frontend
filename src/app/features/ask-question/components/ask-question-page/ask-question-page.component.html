@@ -1,4 +1,21 @@
-<div class="uk-container search-container m-t-40">
+
+
+<div class="top-banner" id="askExpertBanner">
+  <div uk-grid>
+    <div class="uk-width-expand uk-flex uk-flex-middle">
+      <p class="banner-text font-regular">Our exclusive team of experts will provide honest, unblased answers to all
+        your queries and
+        guide you whenever
+        you need their help.</p>
+    </div>
+    <div class="uk-flex uk-flex-bottom uk-flex-center uk-width-auto@s">
+      <img class="banner-img" src="/assets/images/landing-img/expert-banner-updated.png" />
+    </div>
+  </div>
+</div>
+
+
+<div class="uk-container search-container">
   <!-- Search Form START -->
   <div class="search-form">
     <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
@@ -9,9 +26,9 @@
               <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
             </button>
           </span>
-          <input class="uk-search-input font-regular search-box sm-pr-150" aria-label="search" [(ngModel)]="searchParams.searchTxt"
-            (keyup)="onSearchChange($event)" required type="text" placeholder="Search here" name="search"
-            autocomplete='off' />
+          <input class="uk-search-input font-regular search-box sm-pr-150" aria-label="search"
+            [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required type="text"
+            placeholder="Search here" name="search" autocomplete='off' />
         </form>
       </div>
       <div>
@@ -61,7 +78,7 @@
   <!-- Search Result END -->
 </div>
 
-<div class="home-banner landing-bg">
+<!-- <div class="home-banner landing-bg">
   <div class="uk-child-width-1-2@s uk-padding" uk-grid>
     <div class="uk-text-left@s">
       <h1>Our team of experts are here to guide you!</h1>
@@ -71,8 +88,12 @@
       </p>
     </div>
   </div>
-</div>
-<div [ngClass]="{'uk-child-width-1-3': user?.userRoleId == 'EXPERT', 'uk-child-width-1-2': user==undefined || user==null || user.userRoleId != 'EXPERT'}" class="m-b-30" uk-grid>
+</div> -->
+
+
+<div
+  [ngClass]="{'uk-child-width-1-3': user?.userRoleId == 'EXPERT', 'uk-child-width-1-2': user==undefined || user==null || user.userRoleId != 'EXPERT'}"
+  class="m-b-30" uk-grid>
   <div class="uk-text-center">
     <div class="options-card">
       <img src="assets/images/discussion.png" alt="No Image Found" />
@@ -92,7 +113,7 @@
     </div>
   </div>
   <div class="uk-text-center" *ngIf="user?.userRoleId == 'EXPERT'">
-      <div class="options-card">
+    <div class="options-card">
       <img src="assets/images/events.png" alt="No Image Found" />
     </div>
     <div (click)="showAll('showAllExpertQues')" class="quote-line-card cursor-pointer">
@@ -102,9 +123,9 @@
   </div>
 </div>
 <router-outlet>
-<ask-question-experts *ngIf="showAllQues === 'showAllExperts'"></ask-question-experts>
-<expert-all-question *ngIf="showAllQues === 'showAllExpertQues'"></expert-all-question>
-<ask-question-myques *ngIf="showAllQues === 'showAllMyQues'"></ask-question-myques>
+  <ask-question-experts *ngIf="showAllQues === 'showAllExperts'"></ask-question-experts>
+  <expert-all-question *ngIf="showAllQues === 'showAllExpertQues'"></expert-all-question>
+  <ask-question-myques *ngIf="showAllQues === 'showAllMyQues'"></ask-question-myques>
 </router-outlet>
 <!-- Sample Implementation on 04-03-20 -->
 <!-- <div class="uk-container  dark" >
@@ -114,10 +135,3 @@
 <div class="uk-container  dark ">
   <app-featured-my-questions></app-featured-my-questions>
 </div> -->
-
-
-
-
-
-
-

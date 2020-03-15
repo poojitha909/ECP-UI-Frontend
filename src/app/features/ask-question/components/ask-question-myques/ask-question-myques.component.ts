@@ -94,13 +94,16 @@ export class AskQuestionMyQuesComponent implements OnInit, OnDestroy {
     if (this.route.snapshot.queryParams['pageQ'] !== undefined) {
       this.searchParamsQues.p = this.route.snapshot.queryParams['pageQ'];
     }
+    if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
+      this.searchParamsQues.searchTxt = this.route.snapshot.queryParams['searchTxt'];
+    }
 
     this.showQuestions();
   }
 
   changeQuesPage(page: number){
     this.searchParamsQues.p = page;
-    this.router.navigate(['/ask-question'], { queryParams: { pageQ: this.searchParamsQues.p} });
+    this.router.navigate(['/ask-question'], { queryParams: { pageQ: this.searchParamsQues.p, show: "ques"} });
   }
   
   showQuestions() {

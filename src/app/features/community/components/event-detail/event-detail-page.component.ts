@@ -26,7 +26,7 @@ export class EventDetailPageComponent implements OnInit {
     },
     {
       text: 'All Events',
-      link: '/community/events',
+      link: '/community',
       queryParams: {}
     }
   ];

@@ -22,7 +22,6 @@ export class ExpertDetailCardComponent implements OnInit {
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);  
-      console.log(this.user,this.expert)  
       if (this.user.id == this.expert.userId) {
         this.isSame = true;
       }
@@ -32,7 +31,7 @@ export class ExpertDetailCardComponent implements OnInit {
   onclick(e,experties){
     e.stopPropagation();
     this.route.navigate(['ask-question'],{
-     queryParams:{category:experties[0].id}
+     queryParams:{category:experties[0].id, show: "experts"}
     })
 } 
  

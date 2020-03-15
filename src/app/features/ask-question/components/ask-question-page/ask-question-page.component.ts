@@ -25,8 +25,7 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
   };
   user: any;
   paramsSubs: any;
- 
-  showAllQues: any;
+  show: string;
 
   constructor
     (private route: ActivatedRoute,
@@ -90,19 +89,24 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
       this.showReset = this.searchParams.searchTxt ? true : false;
       this.showExperts();
     }
-    if(this.route.snapshot.queryParams['show'] == "ques"){
-      this.showAllQues = "showAllMyQues";
-    }
-    else if(this.route.snapshot.queryParams['show'] == "expques"){
-      this.showAllQues = "showAllExpertQues";
+    if(this.route.snapshot.queryParams['show']){
+      this.show = this.route.snapshot.queryParams['show'];
+      this.showAll(this.show); // experts, ques, expques
     }
     else{
-      this.showAllQues = "showAllExperts";
+      this.showAll("experts"); 
     }
     if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
       this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
       this.showExperts();
+    }
+    if( this.route.snapshot.queryParams['searchTxt'] || 
+        this.route.snapshot.queryParams['category'] || 
+        this.route.snapshot.queryParams['page'] || 
+        this.route.snapshot.queryParams['pageQ'] ){
+      const elmnt = document.getElementById("searchResultList");
+      setTimeout( () => { elmnt.scrollIntoView(true); },700);
     }
   }
 
@@ -123,17 +127,9 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  showAll(i) {
-    this.showAllQues=i 
-
-    //this.router.navigate(['/ask-question/experts'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt } });
+  showAll(tab) {
+    this.show=tab;
   }
-  // showAllMyQues() {
-  //  // this.router.navigate(['/ask-question/myques']);
-  // }
-  // showAllExpertQues(){
-  //   this.router.navigate(['/ask-question/expertques']);
-  // }
 
   onSearchChange(event: any) {
     const value = event.target.value;
@@ -158,8 +154,7 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
   }
 
   onSearch() {
-    //this.showExperts();
-    this.router.navigate(['/ask-question'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt, show: "expert" } });
+    this.router.navigate(['/ask-question'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt, show: this.show } });
   }
 
   setSearchTxt(value: string) {

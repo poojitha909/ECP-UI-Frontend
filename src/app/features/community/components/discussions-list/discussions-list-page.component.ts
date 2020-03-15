@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DiscussionService } from '../../services/discussion.service';
 import { MenuService } from '../../services/menu.service';
-import { Breadcrumb, SEO } from 'src/app/core/interfaces';
+import { SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { HomeService } from 'src/app/features/home/home.service';
@@ -13,17 +13,6 @@ import { HomeService } from 'src/app/features/home/home.service';
   styleUrls: ['./discussions-list-page.component.scss']
 })
 export class DiscussionsListPageComponent implements OnInit, OnDestroy {
-  breadcrumbLinks: Breadcrumb[] = [
-    {
-      text: 'Home',
-      link: '/'
-    },
-    {
-      text: 'Engage with us',
-      link: '/community'
-    }
-  ];
-  showReset: boolean;
   discussionsList: any[];
   countData: number;
   selCategory: string;
@@ -82,21 +71,14 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
     this.discussionsList = [];
     this.categoryList = null;
     this.selCategory = "";
-    this.breadcrumbLinks = this.breadcrumbLinks.filter(val => val.link !== '/community/discussions');
     if (this.route.snapshot.queryParams['category']) {
-      this.breadcrumbLinks.push({
-        text: 'All Articles & Discussions',
-        link: '/community/discussions'
-      });
       this.selCategory = this.route.snapshot.queryParams['category'];
     }
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
-      this.showReset = this.searchParams.searchTxt ? true : false;
     }
     if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
       this.setSearchTxt(this.homeService.homeSearchtxt);
-      this.showReset = true;
     }
     if (this.route.snapshot.queryParams['page'] !== undefined) {
       this.searchParams.p = this.route.snapshot.queryParams['page'];
@@ -104,44 +86,26 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
     this.getAllCategories();
   }
 
-  onSearchChange(event: any) {
-    const value = event.target.value;
-    if (value !== "") {
-      this.showReset = true
-    } else {
-      this.showReset = false;
-    }
-    this.setSearchTxt(value);
-    if (event.key === "Enter") {
-      this.submitSearch();
-    }
-  }
-
-  changePage(page:number) {
+  changePage(page) {
     this.searchParams.p = page;
     this.submitSearch();
   }
 
   submitSearch() {
-    this.router.navigate(['/community'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
+    this.router.navigate(['/community'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p, show: "discss" } });
   }
 
   onTabChange(value) {
     this.selCategory = value;
     this.searchParams.p = 0;
-    this.router.navigate([], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt } });
+    this.router.navigate(['/community'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt, show: "discss" } });
   }
 
   resetSearch(event: any) {
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
       this.setSearchTxt("");
-      this.showReset = false;
       this.search();
     }
-  }
-
-  onSearch() {
-    // this.showExperts();
   }
 
   getAllCategories() {
@@ -182,7 +146,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
 
   clearSelection() {
     this.searchParams.tags = "";
-    this.router.navigate([]);
+    this.router.navigate(['/community'], { queryParams: { category: "", searchTxt: this.searchParams.searchTxt, show: "discss" } });
   }
 
   showDiscussions() {
@@ -206,8 +170,4 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
     this.searchParams.searchTxt = value;
     this.homeService.homeSearchtxt = value;
   }
-
-
-
-  
 }

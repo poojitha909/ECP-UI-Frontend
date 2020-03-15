@@ -1,12 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../services/events.service';
-import { Breadcrumb, SEO } from 'src/app/core/interfaces';
+import { SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { HomeService } from 'src/app/features/home/home.service';
-
-declare var UIkit;
 
 @Component({
   selector: 'app-events-list-page',
@@ -14,17 +12,6 @@ declare var UIkit;
   styleUrls: ['./events-list-page.component.scss']
 })
 export class EventsListPageComponent implements OnInit, OnDestroy {
-  breadcrumbLinks: Breadcrumb[] = [
-    {
-      text: 'Home',
-      link: '/'
-    },
-    {
-      text: 'Engage with us',
-      link: '/community'
-    }
-  ];
-  showReset: boolean;
   eventsList: any[];
   countData: { "all": 0, "outdoor": 0, "indoor": 0 };
   searchParams: {
@@ -90,11 +77,9 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
     }
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
-      this.showReset = this.searchParams.searchTxt ? true : false;
     }
     if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
       this.setSearchTxt(this.homeService.homeSearchtxt);
-      this.showReset = true;
     }
     if (this.route.snapshot.queryParams['page'] !== undefined) {
       this.searchParams.p = this.route.snapshot.queryParams['page'];
@@ -151,37 +136,16 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
   }
 
   onTabChange(value) {
-    this.router.navigate([], { queryParams: { past: value, searchTxt: this.searchParams.searchTxt } });
+    this.router.navigate(['/community'], { queryParams: { past: value, searchTxt: this.searchParams.searchTxt, show: "events" } });
   }
 
   clearSelection() {
     this.searchParams.pastEvents = -1;
-    this.router.navigate([], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt } });
-  }
-
-  onSearchChange(event: any) {
-    const value = event.target.value;
-    if (value !== "") {
-      this.showReset = true
-    } else {
-      this.showReset = false;
-    }
-    this.setSearchTxt(value);
-    if (event.key === "Enter") {
-      this.onSearch();
-    }
-  }
-
-  resetSearch(event: any) {
-    if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
-      this.setSearchTxt("");
-      this.showReset = false;
-      this.onSearch()
-    }
+    this.router.navigate(['/community'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, show: "events" } });
   }
 
   onSearch() {
-    this.router.navigate(['/community'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
+    this.router.navigate(['/community'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p, show: "events" } });
   }
 
   setSearchTxt(value: string){

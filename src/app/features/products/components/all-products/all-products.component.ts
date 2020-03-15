@@ -70,7 +70,6 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.searchParams.productCategory = '';
       }
     });
-
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -137,6 +136,10 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
       if (data.content) {
         this.productsList = data.content;
         this.totalRecords = data.total;
+      }
+      if(this.searchParams.searchTxt || this.searchParams.productCategory){
+        const elmnt = document.getElementById("searchResultList");
+        elmnt.scrollIntoView({ behavior: "smooth", block: "start"} );
       }
     });
   }

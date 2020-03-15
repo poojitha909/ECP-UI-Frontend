@@ -10,7 +10,7 @@
                     <div class="uk-width-expand">
                         <h3 class="uk-h4">Categories</h3>
                     </div>
-                    <div *ngIf="searchParams.pastEvents !== -1">
+                    <div *ngIf="searchParams.pastEvents == 1">
                         <a class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
             <app-pagination *ngIf="(eventsList && eventsList.length > 0)" [totalRecords]="totalRecords"
                 [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">
             </app-pagination>
-            <div class="m-t-20" *ngIf="(eventsList && eventsList.length == 0)">
+            <div class="m-t-20" *ngIf="eventsList==undefined|| (eventsList && eventsList.length == 0)">
                 <app-event-no-record></app-event-no-record>
             </div>
         </div>

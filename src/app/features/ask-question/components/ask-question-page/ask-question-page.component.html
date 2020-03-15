@@ -1,4 +1,21 @@
-<div class="uk-container search-container m-t-40">
+
+
+<div class="top-banner" id="askExpertBanner">
+  <div uk-grid>
+    <div class="uk-width-expand uk-flex uk-flex-middle">
+      <p class="banner-text font-regular">Our exclusive team of experts will provide honest, unblased answers to all
+        your queries and
+        guide you whenever
+        you need their help.</p>
+    </div>
+    <div class="uk-flex uk-flex-bottom uk-flex-center uk-width-auto@s">
+      <img class="banner-img" src="/assets/images/landing-img/expert-banner-updated.png" />
+    </div>
+  </div>
+</div>
+
+
+<div class="uk-container search-container">
   <!-- Search Form START -->
   <div class="search-form">
     <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
@@ -9,9 +26,9 @@
               <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
             </button>
           </span>
-          <input class="uk-search-input font-regular search-box sm-pr-150" aria-label="search" [(ngModel)]="searchParams.searchTxt"
-            (keyup)="onSearchChange($event)" required type="text" placeholder="Search here" name="search"
-            autocomplete='off' />
+          <input class="uk-search-input font-regular search-box sm-pr-150" aria-label="search"
+            [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required type="text"
+            placeholder="Search here" name="search" autocomplete='off' />
         </form>
       </div>
       <div>
@@ -31,16 +48,8 @@
 </div>
 <!-- tab -end -->
 <!-- Search Form END -->
-
 <div id="searchResultList">
   <ask-question-experts *ngIf="show === 'experts'"></ask-question-experts>
   <expert-all-question *ngIf="show === 'expques'"></expert-all-question>
   <ask-question-myques *ngIf="show === 'ques'"></ask-question-myques>
 </div>
-
-
-
-
-
-
-

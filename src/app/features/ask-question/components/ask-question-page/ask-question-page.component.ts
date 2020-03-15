@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
 import { AskQuestionService } from '../../services/ask-question.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageHelperService } from 'src/app/core/services/storage-helper.service';
@@ -56,6 +56,13 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  hideBanner() {
+    if (window.scrollY > 380) {
+      document.getElementById('askExpertBanner').style.display = 'none';
+    }
   }
 
   initiate() {

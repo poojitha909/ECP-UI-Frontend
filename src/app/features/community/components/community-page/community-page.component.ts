@@ -1,11 +1,12 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { EventService } from '../../services/events.service';
 import { DiscussionService } from '../../services/discussion.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MenuService } from '../../services/menu.service';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { SEO } from 'src/app/core/interfaces';
 import { HomeService } from 'src/app/features/home/home.service';
+// import 'rxjs/add/observable/timer';
+// import { Observable, observable } from 'rxjs';
 
 @Component({
   selector: 'app-community-page',
@@ -102,7 +103,14 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   showAll(tab) {
     this.show=tab
   }
-  
+
+  @HostListener('window:scroll', ['$event'])
+  hideBanner() {
+    if (window.scrollY > 380) {
+      document.getElementById('communityBanner').style.display = 'none';
+    }
+  }
+
   onSearchChange(event: any) {
     const value = event.target.value;
     if (value !== "") {

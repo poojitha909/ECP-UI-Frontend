@@ -45,6 +45,8 @@
 }
 
 .search-container {
+  margin-top: 32px;
+  margin-bottom: 24px;
   border: 1px solid #d7e0ef;
   h4.title {
     font-size: 24px;
@@ -111,7 +113,7 @@
   // }
 }
 .pt-norec {
-  padding-top: 19%;
+  padding-top: 0%;
 }
 .uk-button-default {
   border-radius: 4px;
@@ -303,11 +305,11 @@
 
 
 
-.community-page{
-  .search-container{
-    margin-top: 40px;
-  }
-}
+// .community-page{
+//   .search-container{
+//     margin-top: 40px;
+//   }
+// }
 
 // Sample Implementation on 05/03/20
 

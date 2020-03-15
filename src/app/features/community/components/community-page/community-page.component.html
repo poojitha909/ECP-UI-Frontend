@@ -1,4 +1,17 @@
 <div class="community-page">
+
+  <div class="top-banner" id="communityBanner">
+    <div uk-grid>
+      <div class="uk-width-expand uk-flex uk-flex-middle">
+        <p class="banner-text font-regular">Is there something you wish to discuss about? We are here! Let's start a
+          discussion or conversation, exchange views, arrive at a conclusion, or just talk!</p>
+      </div>
+      <div class="uk-flex uk-flex-bottom uk-flex-center uk-width-auto@s">
+        <img class="banner-img" src="/assets/images/landing-img/community-banner-updated.png" />
+      </div>
+    </div>
+  </div>
+
   <!-- Search Container starts -->
   <div class="uk-container search-container ">
     <!-- Search Form START -->
@@ -23,7 +36,6 @@
     </div>
     <!-- Search Form END -->
   </div>
-
   <div class= "tab">
     <ul class="uk-child-width-expand" uk-tab >
         <li [ngClass]="{'uk-active': show=='discss'}"><a x-no-tabbing (click)="showAll('discss')">All Articles & Discussions</a></li>

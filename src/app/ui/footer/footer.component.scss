@@ -13,21 +13,23 @@
   }
   .help-line {
     span {
-      margin-right: 1px;
+      margin-right: 3px;
     }
-    width: 50%;
-    height: 50px;
+    
     font-size: 15px;
     text-transform: none;
     background-color: $dark-blue-1;
     color: #ffffff;
     border: unset;
     border-radius: 4px;
-    padding: 7px 24px;
-    &:active,&:hover{
-      background-color: #ffffff;
-      color: $primary-btn;
+    padding: 32px;
+    p{
+      color: #929aa6;
     }
+    // &:active,&:hover{
+    //   background-color: #ffffff;
+    //   color: $primary-btn;
+    // }
   }
 
   .JoyofAge{
@@ -55,6 +57,14 @@
   
   .partners {
     background: #ffffff;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .partners-tata{
+    background: #ec1b21;
     border-radius: 4px;
     display: flex;
     justify-content: center;
@@ -157,6 +167,10 @@
   //       }
   //     }
   // }
+
+  .light-title{
+    color: #929aa6;
+  }
 }
 
 .uk-nav-parent-icon > .uk-parent > a::after {

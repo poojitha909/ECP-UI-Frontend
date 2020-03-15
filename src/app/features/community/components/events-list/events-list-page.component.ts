@@ -55,6 +55,7 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
+    this.router.navigate([], { queryParams: { past: -1, searchTxt: this.searchParams.searchTxt } });
   }
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();

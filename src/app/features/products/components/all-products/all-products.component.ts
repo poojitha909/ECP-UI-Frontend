@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/products.service';
 import { Breadcrumb, SEO } from 'src/app/core/interfaces';
@@ -70,6 +70,13 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.searchParams.productCategory = '';
       }
     });
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  hideBanner() {
+    if (window.scrollY > 380) {
+      document.getElementById('productBanner').style.display = 'none';
+    }
   }
 
   ngOnDestroy() {

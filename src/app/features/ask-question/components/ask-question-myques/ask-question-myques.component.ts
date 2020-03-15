@@ -94,6 +94,9 @@ export class AskQuestionMyQuesComponent implements OnInit, OnDestroy {
     if (this.route.snapshot.queryParams['pageQ'] !== undefined) {
       this.searchParamsQues.p = this.route.snapshot.queryParams['pageQ'];
     }
+    if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
+      this.searchParamsQues.searchTxt = this.route.snapshot.queryParams['searchTxt'];
+    }
 
     this.showQuestions();
   }

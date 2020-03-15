@@ -23,21 +23,16 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   paramsSubs: any;
   totalRecordsEvents: number;
   totalRecordsDiscussions: number;
-  showAllDiscussionsEventspage:any
+  show:string;
   searchParams: {
     p: number,
     s: number,
     searchTxt: string,
     eventType: number,
-    pastEvents: number
+    pastEvents: number,
+    category: string
   };
-  searchParamsDiscussions: {
-    p: number,
-    s: number,
-    tags: string,
-    searchTxt: string
-  }
-
+  
   constructor(private eventService: EventService, private discussionService: DiscussionService,
     private router: Router, private homeService: HomeService,
     private seoService: SeoService, private route: ActivatedRoute) {
@@ -71,86 +66,51 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
       s: 6,
       searchTxt: "",
       eventType: 0,
-      pastEvents: -1
-    }
-    this.searchParamsDiscussions = {
-      p: 0,
-      s: 6,
-      searchTxt: "",
-      tags: ""
+      pastEvents: -1,
+      category: ""
     }
     this.totalRecordsEvents = 0;
-    this.totalRecordsDiscussions = 0;
-    this.selDiscussCategory = "";
-    this.selEventCategory = "";
-
+    
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
       this.showReset = this.searchParams.searchTxt ? true : false;
     }
+    if (this.route.snapshot.queryParams['category'] !== undefined) {
+      this.searchParams.category = this.route.snapshot.queryParams['category'];
+    }
 
+    if (this.route.snapshot.queryParams['past'] !== undefined) {
+      this.searchParams.pastEvents = this.route.snapshot.queryParams['past'];
+      this.show = "events";
+    }
+    else{
+      this.show = "discss";
+    }
+    if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
+      this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
+      this.showReset = this.searchParams.searchTxt ? true : false;
+    }
     if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
       this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
     }
-
-    this.showEvents();
-    this.showDiscussions();
-  }
-
-  showEvents() {
-    this.showResult = false;
-    if (this.searchParams.searchTxt != "") {
-      this.showResult = true;
-      this.totalRecordsEvents = 0;
-      this.eventService.searchEvents(this.searchParams).subscribe((response: any) => {
-        const data = response.data;
-        this.eventsList = [];
-        if (data.content) {
-          this.eventsList = data.content;
-          this.totalRecordsEvents = data.total;
-        }
-      });
+    if(this.route.snapshot.queryParams['show']){
+      this.show = this.route.snapshot.queryParams['show'];
     }
   }
-
-  showDiscussions() {
-    this.showResult = false;
-    if (this.searchParamsDiscussions.searchTxt != "") {
-      this.showResult = true;
-      this.totalRecordsDiscussions = 0;
-      this.discussionService.searchDiscussions(this.searchParamsDiscussions).subscribe((response: any) => {
-        const data = response.data;
-        this.discussionsList = [];
-        if (data.content) {
-          this.discussionsList = data.content;
-          this.totalRecordsDiscussions = data.total;
-        }
-      });
-    }
+  
+  showAll(tab) {
+    this.show=tab
   }
-
-  showAll(i) {
-    console.log("showAll",i)
-    this.showAllDiscussionsEventspage=i
-    // this.router.navigate(['/community/discussions'], { queryParams: { category: this.selDiscussCategory, searchTxt: this.searchParamsDiscussions.searchTxt } });
-  }
-  // showAll(i) {
-  //   console.log("showAllEventspage",i)
-  //   this.showAllEventspage=i
-  //   // this.router.navigate(['/community/events'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt } });
-  // }
-
+  
   onSearchChange(event: any) {
     const value = event.target.value;
     if (value !== "") {
       this.showReset = true
     } else {
       this.showReset = false;
-      this.showResult = false;
     }
     this.setSearchTxt(value);
-
     if (event.key == "Enter") {
       this.onSearch();
     }
@@ -165,17 +125,14 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   }
 
   onSearch() {
-    this.showEvents();
-    this.showDiscussions();
-  }
-
-  onTabChange(tab: number) {
-
+    this.router.navigate(['/community'], { queryParams: { searchTxt: this.searchParams.searchTxt, 
+                                                category: this.searchParams.category,
+                                                past: this.searchParams.pastEvents,
+                                                show: this.show } });
   }
 
   setSearchTxt(value: string) {
     this.searchParams.searchTxt = value;
-    this.searchParamsDiscussions.searchTxt = value;
     this.homeService.homeSearchtxt = value;
   }
 }

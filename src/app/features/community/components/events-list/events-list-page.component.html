@@ -1,5 +1,4 @@
 <div class="uk-container events" *ngIf="eventsList!==undefined">
-    <!-- <hr class="m-b-30" /> -->
     <div class="grid-reverse-dir" uk-grid>
         <div class="uk-width-1-3@m">
             <div class="category-box bg-white">
@@ -16,9 +15,6 @@
                     </div>
                 </div>
                 <ul class="uk-list uk-list-large p-2">
-                    <!-- <li (click)="onTabChange(0)" [ngClass]="{'cat-active': 0 == searchParams.pastEvents}">
-                        All Events <span class="uk-badge uk-float-right">{{countData.all}}</span>
-                    </li> -->
                     <li (click)="onTabChange(-1)" [ngClass]="{'cat-active': -1 == searchParams.pastEvents}">
                         Upcoming Events <span class="uk-badge uk-float-right">{{countData.upcoming}}</span>
                     </li>

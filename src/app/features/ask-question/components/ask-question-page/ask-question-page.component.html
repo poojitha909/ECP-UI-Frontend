@@ -24,115 +24,19 @@
 
 <div class= "tab">
   <ul class="uk-child-width-expand" uk-tab>
-      <li class="uk-active"><a x-no-tabbing (click)="showAll('showAllExperts')">All Experts</a></li>
-      <li><a x-no-tabbing (click)="showAll('showAllMyQues')">My Questions</a></li>
-      <li><a x-no-tabbing (click)="showAll('showAllExpertQues')">Questions I need to answer</a></li>   
+      <li [ngClass]="{'uk-active': show=='experts'}"><a x-no-tabbing (click)="showAll('experts')">All Experts</a></li>
+      <li [ngClass]="{'uk-active': show=='ques'}"><a x-no-tabbing (click)="showAll('ques')">My Questions</a></li>
+      <li [ngClass]="{'uk-active': show=='expques'}" *ngIf="user?.role=='EXPERT'" ><a x-no-tabbing (click)="showAll('expques')">Questions I need to answer</a></li>   
   </ul>
 </div>
 <!-- tab -end -->
-
-
-  <!-- Search Form END -->
-  <!-- Search Result START -->
-
-  <!-- <div class="search-result" *ngIf="showResult">
-    <div class="m-t-20 uk-hidden@s" *ngIf="experts && experts?.length > 0">
-      <p class="font-regular-15 font-weight-600">Search Results ({{expertsTotal}})
-      </p>
-
-
-      <div class="m-t-20 uk-grid-small" uk-grid>
-        <div class="uk-width-1-1">
-          <div class="search-result-box cursor-pointer" routerLink="/ask-question/all"
-            [queryParams]="{ searchTxt:searchParams.searchTxt}">
-            <p>Expert ({{expertsTotal}})</p>
-          </div>
-        </div>
-      </div>
-      <p class="uk-text-center">
-        <fa-icon style="color:#1A73E8;" [icon]="['fas', 'info-circle']"></fa-icon> Tap on the card to see the full
-        results
-      </p>
-    </div>
-    <div class="uk-visible@s">
-      <div uk-grid class="uk-grid-large uk-flex-left uk-text-center uk-child-width-1-3@m">
-        <div *ngFor="let expert of experts">
-          <app-ask-expert-summary-card [expert]="expert"></app-ask-expert-summary-card>
-        </div>
-      </div>
-      <div class="m-t-30 m-b-20" *ngIf="experts!==undefined && experts?.length > 0">
-        <button class="uk-width-1-1 uk-button-default" (click)="showAllExperts()"> See All Experts </button>
-      </div>
-    </div>
-    <div class="uk-text-center uk-text-bold pt-norec m-b-20" *ngIf="experts!==undefined && experts?.length == 0">
-      No Records found
-    </div>
-  </div> -->
-  <!-- Search Result END -->
-
-
-<!-- <div class="home-banner landing-bg">
-  <div class="uk-child-width-1-2@s uk-padding" uk-grid>
-    <div class="uk-text-left@s">
-      <h1>Our team of experts are here to guide you!</h1>
-      <p class="font-regular">
-        Our exclusive team of experts will provide honest, unbiased answers to all your queries and guide you whenever
-        you need their help. Just post your queries and get expert guidance, privately with assured confidentiality!
-      </p>
-    </div>
-  </div>
-</div> -->
-<!-- <div [ngClass]="{'uk-child-width-1-3': user?.userRoleId == 'EXPERT', 'uk-child-width-1-2': user==undefined || user==null || user.userRoleId != 'EXPERT'}" class="m-b-30" uk-grid>
-  <div class="uk-text-center">
-    <div class="options-card">
-      <img src="assets/images/experts.png" alt="No Image Found" />
-    </div>
-    <div (click)="showAll('showAllExperts')" class="quote-line-card cursor-pointer">
-      All Experts
-      <span class="uk-float-right" uk-icon="chevron-right"></span>
-    </div>
-  </div>
-  <div class="uk-text-center">
-    <div class="options-card">
-      <img src="assets/images/my-questions.png" alt="No Image Found" />
-    </div>
-    <div (click)="showAll('showAllMyQues')" class="quote-line-card cursor-pointer">
-      My Questions
-      <span class="uk-float-right" uk-icon="chevron-right"></span>
-    </div>
-  </div>
-  <div class="uk-text-center" *ngIf="user?.userRoleId == 'EXPERT'">
-      <div class="options-card">
-      <img src="assets/images/asked.png" alt="No Image Found" />
-    </div>
-    <div (click)="showAll('showAllExpertQues')" class="quote-line-card cursor-pointer">
-      Questions I need to answer
-      <span class="uk-float-right" uk-icon="chevron-right"></span>
-    </div>
-  </div>
-</div> -->
-
-<!-- <div>
-<ul uk-tab uk-child-width-expand>
-  <li class="uk-active"><a href="#"> All Experts</a></li>
-  <li><a href="#">My Questions</a></li>
-  <li><a href="#"> Questions I need to answer </a></li>
-</ul>
-</div> -->
+<!-- Search Form END -->
 
 <div id="searchResultList">
-  <ask-question-experts *ngIf="showAllQues === 'showAllExperts'"></ask-question-experts>
-  <expert-all-question *ngIf="showAllQues === 'showAllExpertQues'"></expert-all-question>
-  <ask-question-myques *ngIf="showAllQues === 'showAllMyQues'"></ask-question-myques>
+  <ask-question-experts *ngIf="show === 'experts'"></ask-question-experts>
+  <expert-all-question *ngIf="show === 'expques'"></expert-all-question>
+  <ask-question-myques *ngIf="show === 'ques'"></ask-question-myques>
 </div>
-<!-- Sample Implementation on 04-03-20 -->
-<!-- <div class="uk-container  dark" >
-  <app-featured-ask-experts></app-featured-ask-experts>
-</div>
-
-<div class="uk-container  dark ">
-  <app-featured-my-questions></app-featured-my-questions>
-</div> -->
 
 
 

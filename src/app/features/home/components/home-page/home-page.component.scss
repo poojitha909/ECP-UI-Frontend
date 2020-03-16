@@ -1,7 +1,7 @@
 @import "src/assets/css/variables.scss";
 
 .banner {
-  background: url("/assets/images/bg.png");
+  background: url("/assets/images/home.png");
   padding-top: 24px;
   border-radius: 8px;
   font-family: $regular-font;
@@ -33,7 +33,13 @@
     }
   }
 }
-
+.home-banner{
+  border: none;
+}
+.banner-img{
+  width: 216px;
+  height: 104px;
+}
 .quote-line {
   background-color: #e4eefb;
   border-bottom-left-radius: 4px;
@@ -85,7 +91,7 @@
 
 @media (min-width: 1024px) {
   .landing-bg {
-    background-image: url("/assets/images/landing-img/Landing-1024.png");
+    background-image: url("/assets/images/landing-img/home.png");
   }
   .featured{
     display: block;

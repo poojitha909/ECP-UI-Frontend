@@ -70,7 +70,7 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
       },
       {
         text: 'Articles & Discussions',
-        link: '/community/discussions'
+        link: '/community'
       }
     ];
     this.categoryName = "";

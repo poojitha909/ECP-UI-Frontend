@@ -20,7 +20,7 @@ export class QuestionDetailCardComponent implements OnInit {
     e.stopPropagation();
     console.log(card)
     this.route.navigate(['/ask-question/'],{
-       queryParams:{category:card.id, show: "expert"}
+       queryParams:{category:card.id, show: "experts"}
     })
   }
 

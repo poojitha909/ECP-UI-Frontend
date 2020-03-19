@@ -96,6 +96,7 @@
       outline: none;
     }
   }
+  
 }
 
 .events {
@@ -111,8 +112,9 @@
   }
   .addevent{
     text-transform: capitalize;
-    margin-left: 100px;
     background-color: #D7E0EF;
+    width: 100%;
+    margin-top: 16px;
   }
   .uk-tab > .uk-active > a {
     font-weight: bold;
@@ -256,4 +258,20 @@
       padding: 0px;
     }
   }
+.createevent{
+  background: rgb(228, 238, 251);
+  border-radius: 3px;
+  margin-left: 0px;
+  font-size: 18px;
+  margin-top: 0px;
+  p{
+    text-align: center;
+    margin-left: -18px;
+    margin-right: 10px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    
+  }
+}
+  
 }

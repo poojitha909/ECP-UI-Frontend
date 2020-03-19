@@ -18,6 +18,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
   selCategory: string;
   categoryList: any;
   dropDownList: any[];
+  searchvalue:any;
   searchParams: {
     p: number,
     s: number,
@@ -167,6 +168,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
   }
 
   setSearchTxt(value: string){
+    this.searchvalue = value;
     this.searchParams.searchTxt = value;
     this.homeService.homeSearchtxt = value;
   }

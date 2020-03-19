@@ -1,6 +1,4 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { EventService } from '../../services/events.service';
-import { DiscussionService } from '../../services/discussion.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { SEO } from 'src/app/core/interfaces';
@@ -16,14 +14,7 @@ import { HomeService } from 'src/app/features/home/home.service';
 export class CommunityPageComponent implements OnInit, OnDestroy {
 
   showReset: boolean;
-  showResult: boolean;
-  eventsList: any[] = [];
-  discussionsList: any[] = [];
-  selDiscussCategory: string;
-  selEventCategory: string;
   paramsSubs: any;
-  totalRecordsEvents: number;
-  totalRecordsDiscussions: number;
   show:string;
   searchParams: {
     p: number,
@@ -34,8 +25,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     category: string
   };
   
-  constructor(private eventService: EventService, private discussionService: DiscussionService,
-    private router: Router, private homeService: HomeService,
+  constructor(private router: Router, private homeService: HomeService,
     private seoService: SeoService, private route: ActivatedRoute) {
 
     // Generate meta tag 
@@ -70,7 +60,6 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
       pastEvents: -1,
       category: ""
     }
-    this.totalRecordsEvents = 0;
     
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);

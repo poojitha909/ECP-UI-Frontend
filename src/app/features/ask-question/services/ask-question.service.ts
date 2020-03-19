@@ -90,7 +90,7 @@ export class AskQuestionService {
         return this.http.get<any[]>(`${this.askQuestionUrl}?${queryParams}`);
     }
     getAskQuesReplies(askQuesId: string,page:number,size:number): Observable<any[]> {
-        return this.http.get<any[]>(`${this.askQuestionUrl}/reply/page?p=${page}&s=${size}&dir=1&sort=createdAt&questionId=${askQuesId}`);
+        return this.http.get<any[]>(`${this.askQuestionUrl}/reply/page?p=${page}&s=${size}&dir=0&sort=createdAt&questionId=${askQuesId}`);
     }
 
     getUserProfile(profileId): Observable<any[]> {

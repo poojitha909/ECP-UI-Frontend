@@ -59,6 +59,7 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
   initiate() {
     this.discussionId = this.route.snapshot.params['id'];
     this.successMessage = "";
+    this.sortedReplies = [];
     this.breadcrumbLinks = [
       {
         text: 'Home',
@@ -209,11 +210,11 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
         if (response.data.discuss) {
           this.discussion = response.data.discuss;
           this.setSeoTags(this.discussion);
-          this.sortedReplies = response.data.sortedReplies;
-          this.commentsCount = 0;
-          if (this.sortedReplies) {
-            this.commentsCount = Object.keys(this.sortedReplies).length;
+          this.sortedReplies = [];
+          for(let i in response.data.sortedReplies){
+            this.sortedReplies[this.sortedReplies.length] = response.data.sortedReplies[i];
           }
+          this.commentsCount = this.sortedReplies.length;
         }
       });
     }

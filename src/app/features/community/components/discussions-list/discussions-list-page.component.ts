@@ -6,6 +6,7 @@ import { SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { HomeService } from 'src/app/features/home/home.service';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-discussions-list-page',
@@ -14,11 +15,9 @@ import { HomeService } from 'src/app/features/home/home.service';
 })
 export class DiscussionsListPageComponent implements OnInit, OnDestroy {
   discussionsList: any[];
-  countData: number;
   selCategory: string;
   categoryList: any;
   dropDownList: any[];
-  searchvalue:any;
   searchParams: {
     p: number,
     s: number,
@@ -29,6 +28,8 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
   totalRecords: number;
   currentUrl: string;
   whatsappUrl;
+  initial: number = 0
+  final: number = 6;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private discussionService: DiscussionService, private menuService: MenuService,
@@ -67,7 +68,6 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
       searchTxt: "",
       tags: ""
     }
-    this.countData = 0;
     this.totalRecords = 0;
     this.discussionsList = [];
     this.categoryList = null;
@@ -80,6 +80,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
     }
     if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
       this.setSearchTxt(this.homeService.homeSearchtxt);
+
     }
     if (this.route.snapshot.queryParams['page'] !== undefined) {
       this.searchParams.p = this.route.snapshot.queryParams['page'];
@@ -89,6 +90,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
 
   changePage(page) {
     this.searchParams.p = page;
+
     this.submitSearch();
   }
 
@@ -142,7 +144,6 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
       this.searchParams.tags = this.dropDownList[this.selCategory].tagIds.join(",");
     }
     this.showDiscussions();
-    this.showDiscussionsCount();
   }
 
   clearSelection() {
@@ -157,18 +158,13 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
       if (data.content) {
         this.discussionsList = data.content;
       }
+      this.initial = this.searchParams.p * this.searchParams.s + 1;
+      this.final = this.initial + this.discussionsList.length - 1
       this.totalRecords = data.total;
+
     });
   }
-
-  showDiscussionsCount() {
-    this.discussionService.searchDiscussionsCount({ "searchTxt": this.searchParams.searchTxt, "contentTypes": "total" }).subscribe((response: any) => {
-      this.countData = response.data.z;
-    });
-  }
-
-  setSearchTxt(value: string){
-    this.searchvalue = value;
+  setSearchTxt(value: string) {
     this.searchParams.searchTxt = value;
     this.homeService.homeSearchtxt = value;
   }

@@ -1,4 +1,4 @@
-<div class="uk-container discussions " *ngIf="categoryList!==undefined && dropDownList!==undefined"> 
+<div class="uk-container discussions " *ngIf="categoryList!==undefined && dropDownList!==undefined">
     <div class="grid-reverse-dir" uk-grid>
         <div class="uk-width-1-3@m">
             <div class="category-box bg-white">
@@ -24,8 +24,9 @@
                     </div>
                 </div>
                 <div>
-                <button routerLink="/community/discussion/add" class="uk-button uk-button-transparent adddiscuss"> Start a
-                    Discussion</button>
+                    <button routerLink="/community/discussion/add" class="uk-button uk-button-transparent adddiscuss">
+                        Start a
+                        Discussion</button>
                 </div>
             </div>
             <!-- <div class="m-t-30 category-box bg-white">
@@ -69,9 +70,16 @@
             </div>
         </div>
         <div class="uk-width-expand@m">
-            <!-- <div class="bg-white searchresult">
-                <div> <p>Showing {{searchParams.s}} of {{countData}} result for "{{searchvalue}}" </p></div>
-            </div> -->
+            <div *ngIf="searchParams.searchTxt" class="bg-white searchresult">
+                <div *ngIf="totalRecords<=searchParams.s; else elseBlock">
+                    <p> Showing <b>{{totalRecords}}</b> {{ totalRecords == 1 ?"result":"results" }} for <b>"{{searchParams.searchTxt}}"</b> </p>
+                </div>
+                <ng-template #elseBlock>
+                    <p> Showing <b>{{initial}}-{{final}}</b> of <b>{{totalRecords}}</b> results for <b>"{{searchParams.searchTxt}}"</b>
+                    </p>
+
+                </ng-template>
+            </div>
             <div *ngIf="discussionsList!==undefined && discussionsList.length > 0" class="m-b-30">
                 <div class="uk-flex-left uk-text-center uk-child-width-1-2@m" uk-grid>
                     <div *ngFor="let discussion of discussionsList">
@@ -80,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            <app-pagination *ngIf="(discussionsList.length > 0)" [totalRecords]="totalRecords"
+            <app-pagination *ngIf="(discussionsList.length >= 0)" [totalRecords]="totalRecords"
                 [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">
             </app-pagination>
             <div *ngIf=" discussionsList==undefined || discussionsList?.length === 0">

@@ -158,6 +158,19 @@
 
       <!-- Mobile filter END -->
 
+       
+
+      <div *ngIf="searchParams.searchTxt" class="bg-white searchresult">
+        <div *ngIf="totalRecords<=searchParams.s; else elseBlock">
+            <p> Showing <b>{{totalRecords}}</b> {{ totalRecords == 1 ?"result":"results" }} for <b>"{{searchParams.searchTxt}}"</b> </p>
+        </div>
+        <ng-template #elseBlock>
+            <p> Showing <b>{{initial}}-{{final}}</b> of <b>{{totalRecords}}</b> results for <b>"{{searchParams.searchTxt}}"</b>
+            </p>
+
+        </ng-template>
+    </div>
+
       <!-- Products list  -->
       <div *ngIf="productsList!==undefined && productsList.length > 0">
         <app-product-detail-card *ngFor="let proudct of productsList" [product]="proudct"

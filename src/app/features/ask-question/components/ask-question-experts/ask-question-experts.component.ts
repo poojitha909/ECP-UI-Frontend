@@ -40,6 +40,8 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
   totalRecords: number;
   currentUrl: string;
   whatsappUrl;
+  initial:number;
+  final:number
 
   constructor(private route: ActivatedRoute, private router: Router,
     private store: StorageHelperService, private askQuesService: AskQuestionService,
@@ -129,6 +131,12 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
       if (data.content) {
         this.experts = data.content;
         this.totalRecords = data.total;
+
+      this.initial = this.searchParams.p * this.searchParams.s + 1;
+      this.final = this.initial + this.experts.length - 1
+      
+
+
       }
     });
   }

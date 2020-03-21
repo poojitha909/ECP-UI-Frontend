@@ -56,6 +56,7 @@
       </div>
     </div>
     <div class="uk-width-expand@m">
+      
       <!-- Sample Implementation on 04-03-20 -->
       <!-- <div class="search-form">
         <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
@@ -76,6 +77,17 @@
           </div>
         </div>
       </div> -->
+      <div *ngIf="searchParams.searchTxt" class="bg-white searchresult">
+        <div *ngIf="totalRecords<=searchParams.s; else elseBlock">
+            <p> Showing <b>{{totalRecords}}</b> {{ totalRecords == 1 ?"result":"results" }} for <b>"{{searchParams.searchTxt}}"</b> </p>
+        </div>
+        <ng-template #elseBlock>
+            <p> Showing <b>{{initial}}-{{final}}</b> of <b>{{totalRecords}}</b> results for <b>"{{searchParams.searchTxt}}"</b>
+            </p>
+
+        </ng-template>
+    </div>
+
       <div *ngIf="experts && experts.length > 0">
         <app-expert-detail-card *ngFor="let expert of experts" [expert]="expert"></app-expert-detail-card>
       </div>

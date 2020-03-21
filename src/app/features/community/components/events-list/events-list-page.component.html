@@ -61,6 +61,18 @@
             </div>
         </div>
         <div class="uk-width-expand@m">
+            <div *ngIf="searchParams.searchTxt" class="bg-white searchresult">
+                <div *ngIf="totalRecords<=searchParams.s; else elseBlock">
+                    <p> Showing <b>{{totalRecords}}</b> {{ totalRecords == 1 ?"result":"results" }} for <b>"{{searchParams.searchTxt}}"</b> </p>
+                </div>
+                <ng-template #elseBlock>
+                    <p> Showing <b>{{initial}}-{{final}}</b> of <b>{{totalRecords}}</b> results for <b>"{{searchParams.searchTxt}}"</b>
+                    </p>
+
+                </ng-template>
+            </div>
+
+
             <!-- Events list  -->
             <div *ngIf="eventsList!==undefined && eventsList.length > 0">
                 <div class="uk-flex-left uk-text-center uk-child-width-1-2@m m-b-30" uk-grid>

@@ -26,6 +26,8 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
   totalRecords: number;
   currentUrl: string;
   whatsappUrl;
+  initial: number;
+  final: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -109,6 +111,9 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
       if (data.content) {
         this.eventsList = data.content;
         this.totalRecords = data.total;
+        this.initial = this.searchParams.p * this.searchParams.s + 1;
+        this.final = this.initial + this.eventsList.length - 1
+
       }
     });
   }

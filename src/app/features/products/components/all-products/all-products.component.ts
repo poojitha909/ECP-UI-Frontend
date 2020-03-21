@@ -39,6 +39,8 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   paramsSubs: any;
   totalRecords: number;
   slideConfig = { "slidesToShow": 3, "slidesToScroll": 1 };
+  initial:number;
+  final:number;
   constructor(private route: ActivatedRoute, private router: Router,
     private productService: ProductService, public sanitizer: DomSanitizer,
     private homeService: HomeService, public seoService: SeoService) {
@@ -136,6 +138,11 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
       if (data.content) {
         this.productsList = data.content;
         this.totalRecords = data.total;
+        this.initial = this.searchParams.p * this.searchParams.s + 1;
+      this.final = this.initial + this.productsList.length - 1
+  
+
+
       }
       if(this.searchParams.searchTxt || this.searchParams.productCategory){
         const elmnt = document.getElementById("searchResultList");

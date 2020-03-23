@@ -14,6 +14,49 @@ import { DiscussionNoRecordComponent } from './components/discussion-no-record/d
 import { EventNoRecordComponent } from './components/event-no-record/event-no-record.component';
 import { SharedModule } from '../../shared';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { NotifierModule,NotifierOptions} from "angular-notifier";
+import { NotifierContainerComponent } from './components/notifier-container/notifier-container.component';
+
+const customNotifierOptions: NotifierOptions = {
+  position: {
+		horizontal: {
+			position: 'left',
+			distance: 12
+		},
+		vertical: {
+			position: 'bottom',
+			distance: 12,
+			gap: 10
+		}
+	},
+  theme: 'material',
+  behaviour: {
+    autoHide: 5000,
+    onClick: 'hide',
+    onMouseover: 'pauseAutoHide',
+    showDismissButton: true,
+    stacking: 4
+  },
+  animations: {
+    enabled: true,
+    show: {
+      preset: 'slide',
+      speed: 300,
+      easing: 'ease'
+    },
+    hide: {
+      preset: 'fade',
+      speed: 300,
+      easing: 'ease',
+      offset: 50
+    },
+    shift: {
+      speed: 300,
+      easing: 'ease'
+    },
+    overlap: 150
+  }
+};
 
 @NgModule({
   declarations: [
@@ -26,14 +69,17 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     DiscussionSummaryComponent,
     EventNoRecordComponent,
     EventDetailPageComponent,
-    DiscussionsListPageComponent
+    DiscussionsListPageComponent,
+    NotifierContainerComponent
   ],
   imports: [
     CommonModule,
     CommunityRoutingModule,
     CoreModule,
     SharedModule,
-    EditorModule
+    EditorModule,
+    NotifierModule.withConfig(customNotifierOptions)
+  
   ]
 })
 export class CommunityModule { }

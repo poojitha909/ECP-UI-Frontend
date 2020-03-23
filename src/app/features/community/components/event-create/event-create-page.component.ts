@@ -4,6 +4,7 @@ import { StorageHelperService } from "../../../../core/services/storage-helper.s
 import { AuthService } from "../../../../core/auth/services/auth.service";
 import { Breadcrumb } from 'src/app/core/interfaces';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { NotifierService } from "angular-notifier";
 
 @Component({
   selector: 'app-event-create',
@@ -29,11 +30,14 @@ export class EventCreatePageComponent implements OnInit {
   eventForm: FormGroup;
   successMessage: string;
   user: any;
+  
 
   constructor(private router: Router, private store: StorageHelperService, 
-    private fb: FormBuilder, private authService: AuthService) { }
+    private fb: FormBuilder, private authService: AuthService, private notifier: NotifierService) { }
 
   ngOnInit() {
+    
+    this.notifier.notify("success", "You are awesome! I mean it!");
     this.categoryList = [];
     this.successMessage = "";
     this.user = this.store.retrieve("ECP-USER");
@@ -77,6 +81,8 @@ export class EventCreatePageComponent implements OnInit {
 
   onSubmit() {
     this.successMessage = "";
+    console.log("test123")
+   this.notifier.notify("success", "You are awesome! I mean it!");
     
     this.store.store("new-event", JSON.stringify( this.eventForm.value ));
     if (!this.user) {
@@ -100,6 +106,7 @@ export class EventCreatePageComponent implements OnInit {
     delete event.startTime;
 
     this.store.store("new-event-preview", JSON.stringify( event ));
+    
     this.router.navigate(['/community/event/preview']);
     // this.eventService.addEvents( event ).subscribe((response: any) => {
     //   if (response.data.id != "") {

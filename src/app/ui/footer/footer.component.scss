@@ -12,13 +12,14 @@
     margin: 0 0 12px 0;
   }
   .help-line {
+    width: 424px;
+    font-size: 18px;
     span {
       margin-right: 3px;
     }
     
     font-size: 15px;
     text-transform: none;
-    background-color: $dark-blue-1;
     color: #ffffff;
     border: unset;
     border-radius: 4px;
@@ -76,9 +77,12 @@
   }
 
   .uk-icon-button {
-    background: #e4eefb;
-    border-radius: 2px;
+    background: #FFFFFF;
     color: #585f70;
+    opacity: 0.7;
+    border-radius: 2px;
+    width: 24px;
+    height: 24px;
   }
 
   .font-small {
@@ -171,6 +175,37 @@
   .light-title{
     color: #929aa6;
   }
+
+.features{
+  margin-left: 22px;
+  margin-top: 12px;
+  .feature{
+    font-family: HK Grotesk;
+    font-style: normal;
+    font-size: 15px;
+    line-height: 0px;
+    display: flex;
+    color: #FFFFFF;
+  }
+}
+.logo{
+  width: 471px;
+    height: 210px;
+    background: #2A415E;
+    border: 1px solid #2A415E;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin-left: -60px;
+    .tata{
+      width: 135px;
+      height: 20px;
+      margin-top: -47px;
+      background: #ED1B24;
+      border-radius: 2px;
+      margin-left: 104px;
+    }
+}
+  
 }
 
 .uk-nav-parent-icon > .uk-parent > a::after {

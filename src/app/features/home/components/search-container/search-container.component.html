@@ -47,19 +47,19 @@
 
       <div class="m-t-20 uk-grid-small" uk-grid>
         <div class="uk-width-1-2">
-          <div class="search-result-box cursor-pointer" routerLink="/community/discussions"
+          <div class="search-result-box cursor-pointer" routerLink="/community"
             [queryParams]="{ searchTxt:searchPageParam.term}">
             <p>Discussion ({{searchData.totalDiscussions}})</p>
           </div>
         </div>
         <div class="uk-width-1-2">
-          <div class="search-result-box cursor-pointer" routerLink="/community/events"
-            [queryParams]="{ searchTxt:searchPageParam.term}">
+          <div class="search-result-box cursor-pointer" routerLink="/community"
+            [queryParams]="{ searchTxt:searchPageParam.term, past: -1}">
             <p>Events ({{searchData.totalEvents}})</p>
           </div>
         </div>
         <div class="uk-width-1-2">
-          <div class="search-result-box cursor-pointer" routerLink="/ask-question/all"
+          <div class="search-result-box cursor-pointer" routerLink="/ask-question"
             [queryParams]="{ searchTxt:searchPageParam.term}">
             <p>Experts ({{searchData.totalExperts}})</p>
           </div>
@@ -70,7 +70,7 @@
             <p>Services ({{searchData.totalServices}})</p>
           </div>
         </div>
-        <div class="uk-width-1-1" routerLink="/products/all" [queryParams]="{ searchTxt:searchPageParam.term}">
+        <div class="uk-width-1-1" routerLink="/products" [queryParams]="{ searchTxt:searchPageParam.term}">
           <div class="search-result-box cursor-pointer">
             <p>Products ({{searchData.totalProducts}})</p>
           </div>

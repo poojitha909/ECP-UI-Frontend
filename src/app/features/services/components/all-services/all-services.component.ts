@@ -40,7 +40,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     s: 4,
     term: ''
   };
-  autocompleteFields: Service[] = [];
+  autocompleteFields: any[] = [];
   // currentUrl: string;
   whatsappUrl;
   whatsMobileUrl;
@@ -269,8 +269,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
 
   onSearchChange(value) {
     if (value !== "") {
-      this.homeService.searchParam = this.searchPageParam;
-      this.homeService.getAutoCompleteServices().subscribe(
+      // this.homeService.searchParam = this.searchPageParam;
+      this.homeService.getAutoCompleteServices(this.searchPageParam.term).subscribe(
         response => {
           this.autocompleteFields = response;
         });

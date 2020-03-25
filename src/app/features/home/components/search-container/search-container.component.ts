@@ -27,7 +27,7 @@ export class SearchContainerComponent implements OnInit {
     term: ''
   };
 
-  autocompleteFields: Service[] = [];
+  autocompleteFields: any[] = [];
 
   searchData: any = {
     services: [],
@@ -70,8 +70,8 @@ export class SearchContainerComponent implements OnInit {
   onSearchChange(value) {
     if (value !== "") {
       this.showReset = true;
-      this.homeService.searchParam = this.searchPageParam;
-      this.homeService.getAutoCompleteServices().subscribe(
+      // this.homeService.searchParam = this.searchPageParam;
+      this.homeService.getAutoCompleteServices(this.searchPageParam.term).subscribe(
         response => {
           this.autocompleteFields = response;
         });
@@ -132,21 +132,22 @@ export class SearchContainerComponent implements OnInit {
 
   onSearch(field?: string) {
     if (field || this.selectedValue) {
-      let service: Service;
+      let service: any;
       if (this.selectedValue) {
         // this.searchPageParam.term = this.selectedValue;
-        service = this.autocompleteFields.find(service => {
-          if (service.name && service.name == this.selectedValue) {
-            return true
-          } else if (service.basicProfileInfo && service.basicProfileInfo.firstName == this.selectedValue) {
-            return true;
-          }
-        });
+        service = this.autocompleteFields.find(service => service.value == this.selectedValue);
 
-        if (service.hasOwnProperty('basicProfileInfo')) {
-          this.router.navigate([`/services/${service.basicProfileInfo.firstName}/${service.id}/${true}`]);
+        if (service && service.type) {
+          if (service.type == 2) {
+            this.router.navigate([`/services/${service.value}/${service.id}/${false}`]);
+          }
+
+          if (service.type == 1) {
+            this.router.navigate(['services'], { queryParams: { category: service.value, catid: service.id } });
+            // this.router.navigate([`/services/${service.value}/${service.id}/${false}`]);
+          }
         } else {
-          this.router.navigate([`/services/${service.name}/${service.docid}/${false}`]);
+          this.router.navigate([`/services/${service.value}/${service.id}/${true}`]);
         }
 
       } else {

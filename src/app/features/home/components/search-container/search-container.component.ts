@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener, ViewChild, ElementRef, Renderer2 } fro
 
 import { PageParam } from 'src/app/core';
 import { HomeService } from '../../home.service';
-import { Service } from 'src/app/core/interfaces';
+import { Service, AutoCompleteField } from 'src/app/core/interfaces';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -27,7 +27,7 @@ export class SearchContainerComponent implements OnInit {
     term: ''
   };
 
-  autocompleteFields: any[] = [];
+  autocompleteFields: AutoCompleteField[] = [];
 
   searchData: any = {
     services: [],
@@ -132,10 +132,10 @@ export class SearchContainerComponent implements OnInit {
 
   onSearch(field?: string) {
     if (field || this.selectedValue) {
-      let service: any;
+
       if (this.selectedValue) {
         // this.searchPageParam.term = this.selectedValue;
-        service = this.autocompleteFields.find(service => service.value == this.selectedValue);
+        const service = this.autocompleteFields.find(service => service.value == this.selectedValue);
 
         if (service && service.type) {
           if (service.type == 2) {
@@ -159,16 +159,17 @@ export class SearchContainerComponent implements OnInit {
     }
   }
 
-  onAutocompleteClick(service: Service) {
-    // this.searchPageParam.term = field;
-    // this.selectedValue = "";
-    // this.autocompleteFields = [];
-    if (service) {
-      if (service.hasOwnProperty('basicProfileInfo')) {
-        this.router.navigate([`/services/${service.basicProfileInfo.firstName}/${service.id}/${true}`]);
-      } else {
-        this.router.navigate([`/services/${service.name}/${service.docid}/${false}`]);
+  onAutocompleteClick(service: AutoCompleteField) {
+    if (service && service.type) {
+      if (service.type == 2) {
+        this.router.navigate([`/services/${service.value}/${service.id}/${false}`]);
       }
+
+      if (service.type == 1) {
+        this.router.navigate(['services'], { queryParams: { category: service.value, catid: service.id } });
+      }
+    } else {
+      this.router.navigate([`/services/${service.value}/${service.id}/${true}`]);
     }
   }
 

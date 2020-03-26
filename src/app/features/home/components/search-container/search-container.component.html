@@ -26,7 +26,7 @@
             class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto search-list" appKeyHandler
             (onItemSelected)="onItemSelected($event)">
             <li class="cursor-pointer" *ngFor="let field of autocompleteFields" (click)="onAutocompleteClick(field)">
-              {{field?.name ||  field?.basicProfileInfo?.firstName }}
+              {{field?.value}}
             </li>
           </ul>
         </div>

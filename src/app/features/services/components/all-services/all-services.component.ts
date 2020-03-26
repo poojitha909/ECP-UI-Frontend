@@ -40,7 +40,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     s: 4,
     term: ''
   };
-  autocompleteFields: Service[] = [];
+  autocompleteFields: any[] = [];
   // currentUrl: string;
   whatsappUrl;
   whatsMobileUrl;
@@ -141,16 +141,22 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
             this.ecpService.searchedService = queryCategory;
             if (catId) {
               this.ecpService.searchCatID = catId;
-              this.getCategoryServices(queryCategory, catId);
               //Set selected category
-              if (!this.selectedCategoryType) {
-                let category = null;
+              let category = null;
+              // if (!this.selectedCategoryType) {
                 this.selectedCategoryType = this.categoryTypes.find(value => {
                   category = this.categories[value].find(category => category.national_catid == catId);
                   if (category) {
+                    console.log("category", category);
                     return true;
                   }
                 });
+              // }
+
+              if (category) {
+                this.getCategoryServices(category.category_name, catId);
+              } else {
+                this.getCategoryServices(queryCategory, catId);
               }
 
             } else {
@@ -269,8 +275,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
 
   onSearchChange(value) {
     if (value !== "") {
-      this.homeService.searchParam = this.searchPageParam;
-      this.homeService.getAutoCompleteServices().subscribe(
+      // this.homeService.searchParam = this.searchPageParam;
+      this.homeService.getAutoCompleteServices(this.searchPageParam.term).subscribe(
         response => {
           this.autocompleteFields = response;
         });

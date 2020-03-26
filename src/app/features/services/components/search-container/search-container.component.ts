@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { HomeService } from 'src/app/features/home/home.service';
 import { PageParam } from 'src/app/core';
-import { Service } from 'src/app/core/interfaces';
+import { Service, AutoCompleteField } from 'src/app/core/interfaces';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
@@ -26,7 +26,7 @@ export class SearchContainerComponent implements OnInit {
   };
 
 
-  autocompleteFields: Service[] = [];
+  autocompleteFields: AutoCompleteField[] = [];
 
   constructor(private homeService: HomeService, private router: Router) { }
 
@@ -55,8 +55,8 @@ export class SearchContainerComponent implements OnInit {
   onSearchChange(value) {
     if (value !== "") {
       this.showReset = true;
-      this.homeService.searchParam = this.searchPageParam;
-      this.homeService.getAutoCompleteServices().subscribe(
+      // this.homeService.searchParam = this.searchPageParam;
+      this.homeService.getAutoCompleteServices(this.searchPageParam.term).subscribe(
         response => {
           this.autocompleteFields = response;
         });
@@ -83,21 +83,34 @@ export class SearchContainerComponent implements OnInit {
 
   onSearch(field?: string) {
     if (field || this.selectedValue) {
-      let service: Service;
       if (this.selectedValue) {
         // this.searchPageParam.term = this.selectedValue;
-        service = this.autocompleteFields.find(service => {
-          if (service.name && service.name == this.selectedValue) {
-            return true
-          } else if (service.basicProfileInfo && service.basicProfileInfo.firstName == this.selectedValue) {
-            return true;
-          }
-        });
+        // service = this.autocompleteFields.find(service => {
+        //   if (service.name && service.name == this.selectedValue) {
+        //     return true
+        //   } else if (service.basicProfileInfo && service.basicProfileInfo.firstName == this.selectedValue) {
+        //     return true;
+        //   }
+        // });
 
-        if (service.hasOwnProperty('basicProfileInfo')) {
-          this.router.navigate([`/services/${service.basicProfileInfo.firstName}/${service.id}/${true}`]);
+        // if (service.hasOwnProperty('basicProfileInfo')) {
+        //   this.router.navigate([`/services/${service.basicProfileInfo.firstName}/${service.id}/${true}`]);
+        // } else {
+        //   this.router.navigate([`/services/${service.name}/${service.docid}/${false}`]);
+        // }
+        const service = this.autocompleteFields.find(service => service.value == this.selectedValue);
+
+        if (service && service.type) {
+          if (service.type == 2) {
+            this.router.navigate([`/services/${service.value}/${service.id}/${false}`]);
+          }
+
+          if (service.type == 1) {
+            this.router.navigate(['services'], { queryParams: { category: service.value, catid: service.id } });
+            // this.router.navigate([`/services/${service.value}/${service.id}/${false}`]);
+          }
         } else {
-          this.router.navigate([`/services/${service.name}/${service.docid}/${false}`]);
+          this.router.navigate([`/services/${service.value}/${service.id}/${true}`]);
         }
 
       } else {
@@ -118,16 +131,17 @@ export class SearchContainerComponent implements OnInit {
   }
 
 
-  onAutocompleteClick(service: Service) {
-    // this.searchPageParam.term = field;
-    // this.selectedValue = "";
-    // this.autocompleteFields = [];
-    if (service) {
-      if (service.hasOwnProperty('basicProfileInfo')) {
-        this.router.navigate([`/services/${service.basicProfileInfo.firstName}/${service.id}/${true}`]);
-      } else {
-        this.router.navigate([`/services/${service.name}/${service.docid}/${false}`]);
+  onAutocompleteClick(service: AutoCompleteField) {
+    if (service && service.type) {
+      if (service.type == 2) {
+        this.router.navigate([`/services/${service.value}/${service.id}/${false}`]);
       }
+
+      if (service.type == 1) {
+        this.router.navigate(['services'], { queryParams: { category: service.value, catid: service.id } });
+      }
+    } else {
+      this.router.navigate([`/services/${service.value}/${service.id}/${true}`]);
     }
   }
 

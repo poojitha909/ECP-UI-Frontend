@@ -229,3 +229,10 @@ export interface Breadcrumb {
     link: string | any[];
     queryParams?: any;
 }
+
+export interface AutoCompleteField {
+    id: string;
+    value: string;
+    type: number;
+    areaname?: string;
+}

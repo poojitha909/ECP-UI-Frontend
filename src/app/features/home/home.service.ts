@@ -52,22 +52,22 @@ export class HomeService {
     return this.http.get(`${ApiConstants.GET_SERVICES}?${queryParams}`);
   }
 
-  getAutoCompleteServices(): Observable<any> {
-    let queryParams: string = '';
+  getAutoCompleteServices(search: String): Observable<any> {
+    // let queryParams: string = '';
 
-    Object.keys(this.searchParam)
-      .forEach((key, i) => {
-        if (i > 0) {
-          queryParams += `&${key}=${this.searchParam[key]}`;
-        } else {
-          queryParams += `${key}=${this.searchParam[key]}`;
-        }
-      });
+    // Object.keys(this.searchParam)
+    //   .forEach((key, i) => {
+    //     if (i > 0) {
+    //       queryParams += `&${key}=${this.searchParam[key]}`;
+    //     } else {
+    //       queryParams += `${key}=${this.searchParam[key]}`;
+    //     }
+    //   });
 
-    return this.http.get<any>(`${ApiConstants.GET_SERVICES}?${queryParams}`).pipe(
+    return this.http.get<any>(`${ApiConstants.GET_AUTOCOMPLETE_SERVICES}?search=${search}`).pipe(
       map(response => {
-        if (response && response.data) {
-          return response.data
+        if (response) {
+          return response
         }
       })
     );

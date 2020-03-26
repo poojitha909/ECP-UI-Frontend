@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { HomeService } from 'src/app/features/home/home.service';
 import { PageParam } from 'src/app/core';
-import { Service, AutoCompleteField } from 'src/app/core/interfaces';
+import { Service } from 'src/app/core/interfaces';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
@@ -118,17 +118,16 @@ export class SearchContainerComponent implements OnInit {
   }
 
 
-  onAutocompleteClick(service: AutoCompleteField) {
-    if (service && service.type) {
-      if (service.type == 2) {
-        this.router.navigate([`/services/${service.value}/${service.id}/${false}`]);
+  onAutocompleteClick(service: Service) {
+    // this.searchPageParam.term = field;
+    // this.selectedValue = "";
+    // this.autocompleteFields = [];
+    if (service) {
+      if (service.hasOwnProperty('basicProfileInfo')) {
+        this.router.navigate([`/services/${service.basicProfileInfo.firstName}/${service.id}/${true}`]);
+      } else {
+        this.router.navigate([`/services/${service.name}/${service.docid}/${false}`]);
       }
-
-      if (service.type == 1) {
-        this.router.navigate(['services'], { queryParams: { category: service.value, catid: service.id } });
-      }
-    } else {
-      this.router.navigate([`/services/${service.value}/${service.id}/${true}`]);
     }
   }
 

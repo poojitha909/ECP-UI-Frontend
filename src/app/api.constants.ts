@@ -32,5 +32,4 @@ export class ApiConstants {
     public static MENU_SERVICES: string = `/BY/api/v1/menu`;
     public static PRODUCTS_SERVICES: string = `/BY/api/v1/product`;
     public static ASK_QUESTION_SERVICES: string = `/BY/api/v1/ask`;
-    public static GET_AUTOCOMPLETE_SERVICES: string = `/BY/api/v1/search/autoComplete`;
 }

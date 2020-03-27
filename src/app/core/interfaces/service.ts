@@ -229,3 +229,14 @@ export interface Breadcrumb {
     link: string | any[];
     queryParams?: any;
 }
+
+export interface SubCategory {
+    name: string;
+    id: string;
+}
+
+export interface Category {
+    id: string;
+    name: string;
+    subCategories: SubCategory[];
+}

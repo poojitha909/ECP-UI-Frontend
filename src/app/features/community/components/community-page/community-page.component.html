@@ -30,13 +30,21 @@
           </form>
         </div>
         <div>
-          <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
+          <button class="uk-button uk-button-default search-btn" (click)="onSearch(searchPageParam.term)">Search</button>
         </div>
       </div>
     </div>
     <!-- Search Form END -->
+
+    <!-- Search Result -->
+    <div *ngIf="showOnSearch">
+        <app-community-search-result *ngIf="!noRecords && !isLoading && showResult" [searchData]="searchData"
+        [term]="searchPageParam.term"> </app-community-search-result>
+    </div>
+    <!-- Search Result End -->
+    
   </div>
-  <div class= "tab">
+  <div class= "tab" *ngIf="hideOnSearch">
     <ul class="uk-child-width-expand" uk-tab >
         <li [ngClass]="{'uk-active': show=='discss'}"><a x-no-tabbing (click)="showAll('discss')">All Articles & Discussions</a></li>
         <li [ngClass]="{'uk-active': show=='events'}"><a x-no-tabbing (click)="showAll('events')">All Events</a></li>
@@ -44,5 +52,8 @@
   </div>
   <!-- Search Container ends -->
 </div>
-<app-discussions-list-page *ngIf="show === 'discss'"></app-discussions-list-page>
-<app-events-list-page *ngIf="show === 'events'"></app-events-list-page>
+<div *ngIf="hideOnSearch">
+  <app-discussions-list-page *ngIf="show === 'discss'"></app-discussions-list-page>
+  <app-events-list-page *ngIf="show === 'events'"></app-events-list-page>
+</div>
+

@@ -9,7 +9,9 @@ export class SearchResultsComponent implements OnInit {
   @Input() searchData: any;
   @Input() term: string;
 
-  constructor() { }
+  constructor() {
+    console.log(this.searchData,'search component')
+   }
 
   ngOnInit() {
   }

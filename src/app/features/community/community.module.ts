@@ -14,6 +14,9 @@ import { DiscussionNoRecordComponent } from './components/discussion-no-record/d
 import { EventNoRecordComponent } from './components/event-no-record/event-no-record.component';
 import { SharedModule } from '../../shared';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { CommunitySearchResultComponent } from './components/community-search-result/community-search-result.component';
+import { DiscussionSearchListPageComponent } from './components/discussion-search-list-page/discussion-search-list-page.component';
+import { EventSearchListPageComponent } from './components/event-search-list-page/event-search-list-page.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     DiscussionSummaryComponent,
     EventNoRecordComponent,
     EventDetailPageComponent,
-    DiscussionsListPageComponent
+    DiscussionsListPageComponent,
+    CommunitySearchResultComponent,
+    DiscussionSearchListPageComponent,
+    EventSearchListPageComponent
   ],
   imports: [
     CommonModule,

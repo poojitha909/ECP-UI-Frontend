@@ -26,7 +26,7 @@
     <li activeMax [max]="searchData.maxResult == searchData.totalDiscussions">
       <!-- Discussions List ..... -->
       <!-- No search result START-->
-      <app-no-search-result *ngIf="searchData.discussions.length == 0" [viewLink]="'/community/discussions'"
+      <app-no-search-result *ngIf="searchData.discussions.length == 0" [viewLink]="'/community'"
         [tabName]="'Discussion'">
       </app-no-search-result>
       <!-- No search result END-->
@@ -39,7 +39,7 @@
       </div>
 
       <div *ngIf="searchData.totalDiscussions > 6">
-        <button routerLink="/community/discussions" [queryParams]="{ searchTxt:term}"
+        <button routerLink="/community" [queryParams]="{ searchTxt:term}"
           class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
           Results</button>
       </div>
@@ -60,7 +60,7 @@
       </div>
 
       <div *ngIf="searchData.totalEvents > 6">
-        <button routerLink="/community/events" [queryParams]="{ searchTxt:term}"
+        <button routerLink="/community" [queryParams]="{ searchTxt:term, past: -1}"
           class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
           Results</button>
       </div>
@@ -70,7 +70,7 @@
     <li activeMax [max]="searchData.maxResult == searchData.totalExperts">
       <!-- Experts lists ...... -->
       <!-- No search result START-->
-      <app-no-search-result *ngIf="searchData.experts.length == 0" [viewLink]="'/ask-question/all'"
+      <app-no-search-result *ngIf="searchData.experts.length == 0" [viewLink]="'/ask-question'"
         [tabName]="'Ask an Expert'">
       </app-no-search-result>
       <!-- No search result END-->
@@ -83,7 +83,7 @@
       </div>
 
       <div *ngIf="searchData.totalExperts > 6">
-        <button routerLink="/ask-question/all" [queryParams]="{ searchTxt:term}"
+        <button routerLink="/ask-question" [queryParams]="{ searchTxt:term}"
           class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
           Results</button>
       </div>
@@ -92,7 +92,7 @@
 
       <!-- Products List ..... -->
       <!-- No search result START-->
-      <app-no-search-result *ngIf="searchData.products.length == 0" [viewLink]="'/products/all'" [tabName]="'Products'">
+      <app-no-search-result *ngIf="searchData.products.length == 0" [viewLink]="'/products'" [tabName]="'Products'">
       </app-no-search-result>
       <!-- No search result END-->
 
@@ -104,7 +104,7 @@
       </div>
 
       <div *ngIf="searchData.totalProducts > 6">
-        <button routerLink="/products/all" [queryParams]="{ searchTxt:term}"
+        <button routerLink="/products" [queryParams]="{ searchTxt:term }"
           class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
           Results</button>
       </div>
@@ -123,7 +123,7 @@
         </div>
       </div>
 
-      <div *ngIf="searchData.totalServices > 6"><button routerLink="/services" [queryParams]="{ category:term}"
+      <div *ngIf="searchData.totalServices > 6"><button routerLink="/services" [queryParams]="{ category:term }"
           class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
           Results</button>
       </div>

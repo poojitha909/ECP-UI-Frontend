@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AskQuestionService } from '../../services/ask-question.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageHelperService } from 'src/app/core/services/storage-helper.service';
@@ -14,8 +14,6 @@ import { HomeService } from 'src/app/features/home/home.service';
 export class AskQuestionPageComponent implements OnInit, OnDestroy {
 
   showReset: boolean;
-  showResult: boolean;
-  experts: any[];
   expertsTotal: number;
   searchParams: {
     p: number,
@@ -58,20 +56,10 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
     this.paramsSubs.unsubscribe();
   }
 
-  @HostListener('window:scroll', ['$event'])
-  hideBanner() {
-    if (window.scrollY > 380) {
-      document.getElementById('askExpertBanner').style.display = 'none';
-    }
-  }
-
   initiate() {
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
-      // if (this.user.userRoleId == "EXPERT") {
-      //   this.router.navigate(['/ask-question/expert']);
-      // }
     }
     this.searchParams = {
       p: 0,
@@ -80,14 +68,12 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
       experties: ""
     }
     this.expertsTotal = 0;
-    this.showResult = false;
     if (this.route.snapshot.params['category']) {
       this.searchParams.experties = this.route.snapshot.params['category'];
     }
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
       this.showReset = this.searchParams.searchTxt ? true : false;
-      this.showExperts();
     }
     if(this.route.snapshot.queryParams['show']){
       this.show = this.route.snapshot.queryParams['show'];
@@ -99,31 +85,6 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
     if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
       this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
-      this.showExperts();
-    }
-    if( this.route.snapshot.queryParams['searchTxt'] || 
-        this.route.snapshot.queryParams['category'] || 
-        this.route.snapshot.queryParams['page'] || 
-        this.route.snapshot.queryParams['pageQ'] ){
-      const elmnt = document.getElementById("searchResultList");
-      setTimeout( () => { elmnt.scrollIntoView(true); },700);
-    }
-  }
-
-  showExperts() {
-    this.showResult = false;
-    if (this.searchParams.searchTxt != "") {
-      this.showResult = true;
-      let searchParams = JSON.parse(JSON.stringify(this.searchParams));
-      searchParams.experties = "";
-      this.askQuestionService.experts(searchParams).subscribe((response: any) => {
-        const data = response.data;
-        this.experts = [];
-        if (data.content) {
-          this.experts = data.content;
-          this.expertsTotal = data.total;
-        }
-      });
     }
   }
 
@@ -133,11 +94,11 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
 
   onSearchChange(event: any) {
     const value = event.target.value;
+    this.show = "experts";
     if (value !== "") {
       this.showReset = true
     } else {
       this.showReset = false;
-      this.showResult = false;
     }
     this.setSearchTxt(value);
     if (event.key == "Enter") {
@@ -160,5 +121,9 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
   setSearchTxt(value: string) {
     this.searchParams.searchTxt = value;
     this.homeService.homeSearchtxt = value;
+  }
+
+  showExpertCount(value: number){
+    this.expertsTotal = value;
   }
 }

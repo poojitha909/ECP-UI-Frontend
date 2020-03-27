@@ -19,7 +19,8 @@ const routes: Routes = [
   },
   {
     path: 'events',
-    component: EventsListPageComponent
+    redirectTo: '/community?past=-1' //this redirection is added to redirect no result found from home page to correct tab in community page
+    // component: EventsListPageComponent
   },
   {
     path: 'event/add',

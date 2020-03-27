@@ -14,7 +14,7 @@
   </div>
 </div>
 
-
+<div [ngClass]="{'all-blue': showReset}" class="mb-24">
 <div class="uk-container search-container">
   <!-- Search Form START -->
   <div class="search-form">
@@ -41,15 +41,16 @@
 
 <div class= "tab">
   <ul class="uk-child-width-expand" uk-tab>
-      <li [ngClass]="{'uk-active': show=='experts'}"><a x-no-tabbing (click)="showAll('experts')">All Experts</a></li>
-      <li [ngClass]="{'uk-active': show=='ques'}"><a x-no-tabbing (click)="showAll('ques')">My Questions</a></li>
-      <li [ngClass]="{'uk-active': show=='expques'}" *ngIf="user?.role=='EXPERT'" ><a x-no-tabbing (click)="showAll('expques')">Questions I need to answer</a></li>   
+      <li [ngClass]="{'uk-active': show=='experts'}"><a x-no-tabbing (click)="showAll('experts')">All Experts{{ showReset ? " (" + expertsTotal + ")" : "" }}</a></li>
+      <li [ngClass]="{'uk-active': show=='ques'}" *ngIf="!showReset"><a x-no-tabbing (click)="showAll('ques')">My Questions</a></li>
+      <li [ngClass]="{'uk-active': show=='expques'}" *ngIf="!showReset && user?.userRoleId =='EXPERT'" ><a x-no-tabbing (click)="showAll('expques')">Questions I need to answer</a></li>   
   </ul>
 </div>
 <!-- tab -end -->
 <!-- Search Form END -->
 <div id="searchResultList">
-  <ask-question-experts *ngIf="show === 'experts'"></ask-question-experts>
-  <expert-all-question *ngIf="show === 'expques'"></expert-all-question>
-  <ask-question-myques *ngIf="show === 'ques'"></ask-question-myques>
+  <ask-question-experts *ngIf="show === 'experts'" (showCount)="showExpertCount($event)"></ask-question-experts>
+  <expert-all-question *ngIf="show === 'expques' && !showReset"></expert-all-question>
+  <ask-question-myques *ngIf="show === 'ques' && !showReset"></ask-question-myques>
+</div>
 </div>

@@ -348,6 +348,27 @@ ngb-rating {
     padding: 32px 40px;
   }
 }
+.mb-24{
+  margin-bottom: 24px;
+}
+.all-blue{
+  background-color: #ecf4ff;
+  border: 1px solid #d7e0ef;
+  border-radius: 8px;
+  margin-top:32px;
+  div.search-container{
+    border: none;
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+  div.tab{
+    margin-top: 0px;
+    padding: 0 32px;
+  }
+  div#searchResultList{
+    padding: 0 32px;
+  }
+}
 
 @media (min-width: 640px){
   .banner-img{

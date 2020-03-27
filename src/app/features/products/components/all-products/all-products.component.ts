@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/products.service';
 import { Breadcrumb, SEO } from 'src/app/core/interfaces';
@@ -74,13 +74,6 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  @HostListener('window:scroll', ['$event'])
-  hideBanner() {
-    if (window.scrollY > 380) {
-      document.getElementById('productBanner').style.display = 'none';
-    }
-  }
-
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
     document.getElementById("product-mobile-category-modal").remove();
@@ -139,14 +132,7 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.productsList = data.content;
         this.totalRecords = data.total;
         this.initial = this.searchParams.p * this.searchParams.s + 1;
-      this.final = this.initial + this.productsList.length - 1
-  
-
-
-      }
-      if(this.searchParams.searchTxt || this.searchParams.productCategory){
-        const elmnt = document.getElementById("searchResultList");
-        elmnt.scrollIntoView({ behavior: "smooth", block: "start"} );
+        this.final = this.initial + this.productsList.length - 1;
       }
     });
   }
@@ -155,13 +141,13 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.productService.selectedCatId = null;
     this.productService.selectedCatname = null;
     this.searchParams.productCategory = '';
-    this.router.navigateByUrl('products/all');
+    this.router.navigateByUrl('products');
   }
 
   onTabChange(value, catName) {
     this.productService.selectedCatId = value;
     this.productService.selectedCatname = catName;
-    this.router.navigate(['/products/all'], { queryParams: { productCategory: value, searchTxt: this.searchParams.searchTxt } });
+    this.router.navigate(['/products'], { queryParams: { productCategory: value, searchTxt: this.searchParams.searchTxt } });
   }
 
   onSearchChange(event: any) {
@@ -199,7 +185,7 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   applyFilter() {
     UIkit.modal('#product-mobile-category-modal').hide();
     if (this.searchParams.productCategory) {
-      this.router.navigate(['/products/all'], { queryParams: { productCategory: this.searchParams.productCategory, searchTxt: this.searchParams.searchTxt } });
+      this.router.navigate(['/products'], { queryParams: { productCategory: this.searchParams.productCategory, searchTxt: this.searchParams.searchTxt } });
     } else {
       this.clearSelection();
     }

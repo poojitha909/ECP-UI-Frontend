@@ -171,6 +171,7 @@ export class SearchContainerComponent implements OnInit {
     }
   }
 
+
   searchEvent($event) {
     // console.log($event, "onSearch event");
     if ($event.keyCode !== 13) {

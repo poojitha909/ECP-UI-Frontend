@@ -56,38 +56,6 @@
       </div>
     </div>
     <div class="uk-width-expand@m">
-      
-      <!-- Sample Implementation on 04-03-20 -->
-      <!-- <div class="search-form">
-        <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
-          <div class="uk-margin uk-width-1-1 uk-width-expand@s">
-            <form class="uk-search uk-search-default">
-              <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
-                <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
-                  <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Clear Search
-                </button>
-              </span>
-              <input class="uk-input" [ngClass]="{ 'pr-150':showReset}" [(ngModel)]="searchParams.searchTxt"
-                (keyup)="onSearchChange($event)" required type="text" placeholder="Search for product here"
-                name="search" />
-            </form>
-          </div>
-          <div class="uk-width-1-1 uk-width-auto@s uk-margin-bottom">
-            <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
-          </div>
-        </div>
-      </div> -->
-      <div *ngIf="searchParams.searchTxt" class="bg-white searchresult">
-        <div *ngIf="totalRecords<=searchParams.s; else elseBlock">
-            <p> Showing <b>{{totalRecords}}</b> {{ totalRecords == 1 ?"result":"results" }} for <b>"{{searchParams.searchTxt}}"</b> </p>
-        </div>
-        <ng-template #elseBlock>
-            <p> Showing <b>{{initial}}-{{final}}</b> of <b>{{totalRecords}}</b> results for <b>"{{searchParams.searchTxt}}"</b>
-            </p>
-
-        </ng-template>
-    </div>
-
       <div *ngIf="experts && experts.length > 0">
         <app-expert-detail-card *ngFor="let expert of experts" [expert]="expert"></app-expert-detail-card>
       </div>

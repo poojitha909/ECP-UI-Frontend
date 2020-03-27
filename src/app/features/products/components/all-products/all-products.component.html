@@ -9,7 +9,7 @@
     </div>
   </div>
 </div>
-
+<div [ngClass]="{'all-blue': showReset}" class="mb-24">
 <div class="uk-container search-container">
   <!-- Search Form START -->
   <div class="search-form">
@@ -70,22 +70,6 @@
   </div>
   <!-- Search Result END -->
 </div>
-
-<!-- <div class="uk-container m-b-30">
-  <div class="home-banner landing-bg">
-    <div class="uk-child-width-1-2@s uk-padding" uk-grid>
-      <div class="uk-text-left@s">
-        <h1>Shop for Products easily!</h1>
-        <p class="font-regular">
-          Products & solutions crop up everyday to confuse you even more and so we are here to simplify things for you.
-          We have included every single best option available for you. Just pick what you want based on your need and
-          get them delivered home, from reputed online markets. It’s that easy!
-        </p>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <div class="uk-container products"  id="searchResultList">
   <div class="grid-reverse-dir" uk-grid>
     <div class="uk-width-1-3@m">
@@ -155,22 +139,7 @@
           </div>
         </div>
       </div>
-
       <!-- Mobile filter END -->
-
-       
-
-      <div *ngIf="searchParams.searchTxt" class="bg-white searchresult">
-        <div *ngIf="totalRecords<=searchParams.s; else elseBlock">
-            <p> Showing <b>{{totalRecords}}</b> {{ totalRecords == 1 ?"result":"results" }} for <b>"{{searchParams.searchTxt}}"</b> </p>
-        </div>
-        <ng-template #elseBlock>
-            <p> Showing <b>{{initial}}-{{final}}</b> of <b>{{totalRecords}}</b> results for <b>"{{searchParams.searchTxt}}"</b>
-            </p>
-
-        </ng-template>
-    </div>
-
       <!-- Products list  -->
       <div *ngIf="productsList!==undefined && productsList.length > 0">
         <app-product-detail-card *ngFor="let proudct of productsList" [product]="proudct"
@@ -185,4 +154,5 @@
     </div>
   </div>
 
+</div>
 </div>

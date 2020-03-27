@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AskQuestionService } from '../../services/ask-question.service';
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
@@ -16,16 +16,7 @@ declare var UIkit;
   styleUrls: ['./ask-question-experts.component.scss']
 })
 export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
-  // breadcrumbLinks: Breadcrumb[] = [
-  //   {
-  //     text: 'Home',
-  //     link: '/'
-  //   },
-  //   {
-  //     text: 'Ask an Expert',
-  //     link: '/ask-question'
-  //   }
-  // ];
+  @Output() showCount: EventEmitter<number> = new EventEmitter();
   showReset: boolean;
   experts: any[];
   catsList: any[];
@@ -131,6 +122,7 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
       if (data.content) {
         this.experts = data.content;
         this.totalRecords = data.total;
+        this.showCount.emit(this.totalRecords);
 
       this.initial = this.searchParams.p * this.searchParams.s + 1;
       this.final = this.initial + this.experts.length - 1

@@ -25,7 +25,7 @@
               </button>
             </span>
             <input class="uk-search-input font-regular search-box" aria-label="search" [ngClass]="{ 'pr-150':showReset}"
-              [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required type="text"
+              [(ngModel)]="searchPageParam.term" (keyup)="onSearchChange($event)" required type="text"
               placeholder="Search here" name="search" autocomplete='off' />
           </form>
         </div>

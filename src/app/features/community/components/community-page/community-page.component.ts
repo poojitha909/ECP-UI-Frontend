@@ -99,7 +99,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
-      this.showReset = this.searchParams.searchTxt ? true : false;
+      this.showReset = this.searchPageParam.term ? true : false;
     }
     if (this.route.snapshot.queryParams['category'] !== undefined) {
       this.searchParams.category = this.route.snapshot.queryParams['category'];
@@ -114,7 +114,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     }
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
-      this.showReset = this.searchParams.searchTxt ? true : false;
+      this.showReset = this.searchPageParam.term ? true : false;
     }
     if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
       this.setSearchTxt(this.homeService.homeSearchtxt);

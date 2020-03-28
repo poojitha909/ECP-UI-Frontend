@@ -72,18 +72,18 @@ export class SearchContainerComponent implements OnInit {
    * @param value 
    */
   onSearchChange(value) {
-    // if (value !== "") {
-    //   this.showReset = true;
-    //   this.homeService.searchParam = this.searchPageParam;
-    //   this.homeService.getAutoCompleteServices().subscribe(
-    //     response => {
-    //       this.autocompleteFields = response;
-    //     });
-    // } else {
-    //   this.autocompleteFields = [];
-    //   this.showReset = false;
-    //   this.showResult = false;
-    // }
+    if (value !== "") {
+      this.showReset = true;
+      this.homeService.searchParam = this.searchPageParam;
+      // this.homeService.getAutoCompleteServices().subscribe(
+      //   response => {
+      //     this.autocompleteFields = response;
+      //   });
+    } else {
+      this.autocompleteFields = [];
+      this.showReset = false;
+      this.showResult = false;
+    }
   }
 
 

@@ -161,16 +161,15 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
               this.selectedCategoryType = this.categories.find(category => {
                 subCategory = category.subCategories.find(subCat => subCat.id == catId);
                 if (subCategory) {
-                  console.log("category", subCategory);
                   return true;
                 }
               });
               if (subCategory) {
-                this.getCategoryServices(subCategory.name, subCategory.id);
+                this.getCategoryServices(subCategory.name, subCategory.id, this.homeService.homeSearchtxt);
               }
             } else {
               const selSubCat = this.selectedCategoryType.subCategories.find(subCategory => subCategory.id == catId);
-              this.getCategoryServices(selSubCat.name, selSubCat.id);
+              this.getCategoryServices(selSubCat.name, selSubCat.id, this.homeService.homeSearchtxt);
             }
 
             //  else {
@@ -183,14 +182,14 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
               this.selectedCategoryType = this.categories.find(type => type.name.trim().toLowerCase() == queryCategory.trim().toLowerCase());
             }
             this.ecpService.searchCatID = null;
-            this.getCategoryServices(queryCategory, 0);
+            this.getCategoryServices(queryCategory, 0, this.homeService.homeSearchtxt);
           }
           this.showShareBox = true;
         } else {
 
           this.showShareBox = false;
           if (this.homeService.homeSearchtxt) {
-            this.getCategoryServices(this.homeService.homeSearchtxt, 0);
+            this.getCategoryServices('', 0, this.homeService.homeSearchtxt);
           } else {
             this.getAllService();
           }
@@ -226,7 +225,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
       })
   }
 
-  getCategoryServices(category, catId) {
+  getCategoryServices(category, catId, searchTxt?) {
     if (catId) {
       this.showingCategory = category;
       this.selectedCategory = category;
@@ -236,12 +235,18 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     }
     !this.selectedCategoryType ? this.searchPageParam.term = category : '';
     this.isLoading = true;
-    const param: PageParam = {
+    let param: PageParam = {
       p: 0,
       s: 50,
       catid: catId,
-      catName: category
     };
+
+    if (category) {
+      param.catName = category;
+    }
+    if (searchTxt) {
+      param.term = searchTxt;
+    }
     // this.homeService.searchParam.s = 50;
     // this.homeService.searchParam.term = category;
     this.homeService.getCategoryServices(param).subscribe(

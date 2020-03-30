@@ -120,10 +120,16 @@
   }
 }
 .tata{
-  width: 94px;
-  height: 20px;
-  margin-top: -43px;
-  margin-left: 64px;
+  background: #ED1B24;
+  border-radius: 2px;
+  width: 152px;
+  margin-top: -22px;
+  text-align: center;
+  font-size: 16px;
+  color: #FFFFFF;
+  font-weight: bold;
+  font-family: -webkit-body;
+  line-height: 165%;
 }
 .logo{
   width: 470px;
@@ -131,6 +137,16 @@
       height: 244px;
       margin-left: -100px;
       margin-top: -20px;
+    }
+    .background{
+      background: #2A415E;
+      opacity: 0.2;
+      border: 1px solid #2A415E;
+      border-radius: 4px;
+      margin-left: -100px;
+      margin-right: 80px;
+      margin-top: -254px;
+      margin-bottom: 40px;
     }
 }
   

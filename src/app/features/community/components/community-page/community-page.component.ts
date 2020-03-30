@@ -1,12 +1,11 @@
-import { Component, OnInit, OnDestroy, HostListener, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SeoService } from 'src/app/core/services/seo.service';
-import { SEO, Service, PageParam } from 'src/app/core/interfaces';
+import { SEO, PageParam, Service } from 'src/app/core/interfaces';
 import { HomeService } from 'src/app/features/home/home.service';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-// import 'rxjs/add/observable/timer';
-// import { Observable, observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-community-page',
@@ -20,7 +19,6 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   show:string;
   hideOnSearch:boolean = true;
   showOnSearch:boolean = false;
-  selectedValue: string;
   noRecords: boolean;
   showResult: boolean;
   isLoading: boolean;
@@ -38,6 +36,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     s: 6,
     term: ''
   };
+  hide:any;
   searchData: any = {
     discussions: [],
     events: [],
@@ -99,7 +98,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
-      this.showReset = this.searchPageParam.term ? true : false;
+      this.showReset = this.searchParams.searchTxt ? true : false;
     }
     if (this.route.snapshot.queryParams['category'] !== undefined) {
       this.searchParams.category = this.route.snapshot.queryParams['category'];
@@ -114,7 +113,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     }
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
-      this.showReset = this.searchPageParam.term ? true : false;
+      this.showReset = this.searchParams.searchTxt? true : false;
     }
     if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
       this.setSearchTxt(this.homeService.homeSearchtxt);
@@ -189,19 +188,20 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   }
 
   resetSearch(event: any) {
+    this.hideOnSearch=true;  
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
       this.setSearchTxt("");
-      this.showReset = false;
-      this.hideOnSearch=true;
+      this.showReset = false; 
       this.showOnSearch=false;
-      // this.onSearch()
+      
     }
   }
 
-  onSearch(field?: string) {
+  onSearch() {
+    console.log("hideOnSearch")
     this.hideOnSearch=false;
     this.showOnSearch=true;
-    this.homeService.homeSearchtxt = field;
+    console.log("showOnSearch")
     this.communitySearchPages();
     this.router.navigate(['/community'], { queryParams: { searchTxt: this.searchParams.searchTxt, 
                                                 category: this.searchParams.category,
@@ -210,7 +210,6 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     
   }
   
-
   setSearchTxt(value: string) {
     this.searchParams.searchTxt = value;
     this.homeService.homeSearchtxt = value;

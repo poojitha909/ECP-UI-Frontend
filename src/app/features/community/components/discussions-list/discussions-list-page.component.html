@@ -17,7 +17,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="m-t-30 category-box bg-white">
+            <div class="m-t-30 category-box bg-white" *ngIf="hide">
                 <div class="discuss" uk-grid>
                     <div>
                         <p> Ask any question on senior care and ageing</p>
@@ -70,7 +70,7 @@
             </div>
         </div>
         <div class="uk-width-expand@m">
-            <div *ngIf="searchParams.searchTxt" class="bg-white searchresult">
+            <!-- <div *ngIf="searchParams.searchTxt" class="bg-white searchresult">
                 <div *ngIf="totalRecords<=searchParams.s; else elseBlock">
                     <p> Showing <b>{{totalRecords}}</b> {{ totalRecords == 1 ?"result":"results" }} for <b>"{{searchParams.searchTxt}}"</b> </p>
                 </div>
@@ -79,7 +79,7 @@
                     </p>
 
                 </ng-template>
-            </div>
+            </div> -->
             <div *ngIf="discussionsList!==undefined && discussionsList.length > 0" class="m-b-30">
                 <div class="uk-flex-left uk-text-center uk-child-width-1-2@m" uk-grid>
                     <div *ngFor="let discussion of discussionsList">

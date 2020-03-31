@@ -116,7 +116,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
         this.whatsMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
         const queryCategory = value.get("category");
         const catId = value.get("catid");
-        // const categoryLink = value.get("categoryLink");
+        // const searchTxt = value.get("searchTxt");
 
         // if (categoryLink) {
         //   this.ecpService.searchedService = categoryLink;
@@ -138,6 +138,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
 
 
         // } else {
+
+
         if (queryCategory) {
           this.ecpService.searchedService = queryCategory;
           if (catId) {
@@ -233,7 +235,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
       this.showingCategory = 'All ' + category;
       this.selectedCategory = 'All';
     }
-    !this.selectedCategoryType ? this.searchPageParam.term = category : '';
+    // !this.selectedCategoryType ? this.searchPageParam.term = category : '';
     this.isLoading = true;
     let param: PageParam = {
       p: 0,
@@ -271,7 +273,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
 
   onCategoryChanged(category, catId) {
     this.searchPageParam.term = '';
-    this.router.navigate(['services'], { queryParams: { category: category, catid: catId } });
+    this.router.navigate(['services'], { queryParams: { category: category, catid: catId, searchTxt: this.homeService.homeSearchtxt } });
   }
 
   clearSelection() {
@@ -279,6 +281,8 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     this.selectedCategoryType = null;
     this.selectedCatid = null;
     this.searchPageParam.term = '';
+    this.ecpService.searchedService = '';
+    this.ecpService.searchCatID = '';
     this.router.navigateByUrl('services');
   }
 
@@ -381,7 +385,7 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
   applyFilter() {
     UIkit.modal('#mobile-category-modal').hide();
     if (this.selectedCategoryType && this.selectedCategory == 'All') {
-      this.onCategoryChanged(this.selectedCategoryType, '');
+      this.onCategoryChanged(this.selectedCategoryType.name, '');
     } else if (this.selectedCategoryType && this.selectedCatid) {
       this.onCategoryChanged(this.selectedCategory, this.selectedCatid);
     } else {

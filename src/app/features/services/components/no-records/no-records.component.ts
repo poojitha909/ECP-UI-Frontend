@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { EpcServiceService } from '../../epc-service.service';
+import { HomeService } from 'src/app/features/home/home.service';
 
 @Component({
   selector: 'app-no-records',
@@ -8,7 +9,7 @@ import { EpcServiceService } from '../../epc-service.service';
 })
 export class NoRecordsComponent implements OnInit {
 
-  constructor(public ecpService: EpcServiceService) { }
+  constructor(public homeService:HomeService) { }
 
   ngOnInit() {
   }

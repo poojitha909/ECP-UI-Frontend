@@ -171,9 +171,9 @@
             <div *ngIf="!selectedCategoryType" class="uk-animation-slide-right-small">
               <ul class="uk-list uk-list-small">
                 <li *ngFor="let categoryType of categories"
-                  (click)="selectedCategoryType = categoryType.name;selectedCategory = 'All'"
+                  (click)="selectedCategoryType=categoryType;selectedCategory = 'All'"
                   class="cursor-pointer font-regular">
-                  {{ categoryType }}
+                  {{ categoryType.name }}
                   <div class="uk-float-right">
                     <span style="color: gray;" uk-icon="icon: chevron-right; ratio: 1.3"></span>
                   </div>
@@ -183,15 +183,15 @@
             <div *ngIf="selectedCategoryType" class="m-t-20  uk-animation-slide-left-small">
               <div class="font-weight-700 font-regular sel-type cursor-pointer" (click)=clearFilter()><span
                   style="color: gray;" uk-icon="icon: chevron-left; ratio: 1.3"></span>
-                {{selectedCategoryType}}
+                {{selectedCategoryType.name}}
               </div>
               <ul class="uk-list uk-list-small pl-15 sroll-category">
                 <li [ngClass]="{'cat-active': selectedCategory === 'All' }" (click)="selectedCategory = 'All'"
                   class="cursor-pointer font-regular">All</li>
-                <li [ngClass]="{'cat-active': category.category_name === selectedCategory}"
-                  (click)="selectedCategory = category.category_name;selectedCatid = category.national_catid;"
-                  *ngFor="let category of categories[selectedCategoryType]" class="cursor-pointer font-regular">
-                  {{category.category_name}}
+                <li [ngClass]="{'cat-active': subCategory.name === selectedCategory}"
+                  (click)="selectedCategory = subCategory.name;selectedCatid = subCategory.id;"
+                  *ngFor="let subCategory of selectedCategoryType.subCategories" class="cursor-pointer font-regular">
+                  {{subCategory.name}}
                 </li>
               </ul>
             </div>
@@ -252,7 +252,7 @@
         <app-no-records></app-no-records>
       </div>
       <!-- Service list  -->
-      <div *ngIf="services  && pageServices && pageServices.length > 0 && !isLoading">
+      <div *ngIf="services &&  services.length > 0 && pageServices && pageServices.length > 0 && !isLoading">
         <app-services-list [services]="pageServices"></app-services-list>
       </div>
       <!-- Service list  -->

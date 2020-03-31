@@ -1,10 +1,10 @@
 @import "../../../../../assets/css/variables.scss";
 
 .search-container {
-  background-color: #ecf4ff;
+  // background-color: #ecf4ff;
   font-family: $regular-font;
-  border-radius: 8px;
-  border: 1px solid #d7e0ef;
+ 
+  // border: 1px solid #d7e0ef;
   margin-top: 32px;
   margin-bottom: 24px;
   .header-label {
@@ -16,7 +16,6 @@
     }
   }
   .search-form {
-    padding: 32px 40px;
     .search-field {
       form {
         width: 100%;
@@ -49,8 +48,16 @@
       }
     }
   }
+
+  .search-bg{
+    padding: 32px 40px;
+    border-radius: 8px;
+    background-color: #ecf4ff;
+    border: 1px solid #d7e0ef;
+  }
+  
   @media (max-width: 640px) {
-    .search-form {
+    .search-bg {
       padding: 16px;
     }
   }

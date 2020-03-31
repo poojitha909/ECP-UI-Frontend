@@ -92,11 +92,12 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
     if (this.route.snapshot.queryParams['page'] !== undefined) {
       this.searchParams.p = this.route.snapshot.queryParams['page'];
     }
-    this.askQuesService.getCategoryList().subscribe((response: any) => {
+    this.askQuesService.getCategoryListFilter(this.searchParams.searchTxt).subscribe((response: any) => {
       const data = response.data;
       this.catsList = [];
       if (data.content) {
-        this.catsList = data.content.filter( c => (c.questionCount> 0));
+        //this.catsList = data.content.filter( c => (c.questionCount> 0));
+        this.catsList = data.content;
       }
     });
     

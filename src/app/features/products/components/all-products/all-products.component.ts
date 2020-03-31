@@ -103,7 +103,7 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.route.snapshot.queryParams['page'] !== undefined) {
       this.searchParams.p = this.route.snapshot.queryParams['page'];
     }
-    this.productService.getCategoryList().subscribe((response: any) => {
+    this.productService.getCategoryListFiltered(this.searchParams.searchTxt).subscribe((response: any) => {
       const data = response.data;
       this.catsList = [];
       if (data.content) {

@@ -126,7 +126,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
             tags[i] = data[i].id + "_" + this.categoryList[data[i].id].tagIds.join("_"); // this is just to pass extras key in tags which is menu item id
           }
         }
-        this.discussionService.summary(tags.join(",")).subscribe((response: any) => {
+        this.discussionService.summary(tags.join(","),this.searchParams.searchTxt).subscribe((response: any) => {
           for (let i in data) {
             this.categoryList[data[i].id].totalCount = response.data[data[i].id].totalCount;
           }

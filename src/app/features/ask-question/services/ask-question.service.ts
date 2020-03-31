@@ -49,6 +49,10 @@ export class AskQuestionService {
         return this.http.get<any[]>(`${this.askQuestionUrl}/category/page?p=0&s=10000`);
     }
 
+    getCategoryListFilter(searchTxt: string): Observable<any[]> {
+        return this.http.get<any[]>(`${this.askQuestionUrl}/category/page?p=0&s=10000&searchTxt=${searchTxt}`);
+    }
+
     addQuestion(question: any): Observable<any[]> {
         return this.http.post<any[]>(`${this.askQuestionUrl}`,{...question});
     }

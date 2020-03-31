@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../services/events.service';
 import { SEO } from 'src/app/core/interfaces';
@@ -12,6 +12,8 @@ import { HomeService } from 'src/app/features/home/home.service';
   styleUrls: ['./events-list-page.component.scss']
 })
 export class EventsListPageComponent implements OnInit, OnDestroy {
+  @Input() hide: true;
+  
   eventsList: any[];
   countData: { "all": 0, "outdoor": 0, "indoor": 0 };
   searchParams: {
@@ -58,6 +60,7 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
       this.initiate();
     });
     this.router.navigate([], { queryParams: { past: -1, searchTxt: this.searchParams.searchTxt } });
+    console.log()
   }
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();

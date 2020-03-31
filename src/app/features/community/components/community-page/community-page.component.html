@@ -35,8 +35,24 @@
       </div>
     </div>
     <!-- Search Form END -->
+
+    <!-- Search Result -->
+    <div class= "showOnSearchtab" *ngIf="showOnSearch" >
+      <ul uk-tab>
+        <li  activeMax ><a (click)="showAll('discss')" href="#" class="font-regular">Articles & Discussions({{searchData.totalDiscussions}})</a></li>
+        <li  activeMax ><a (click)="showAll('events')" href="#" class="font-regular">Events({{searchData.totalEvents}})</a></li>
+      </ul>
+
+      <hr style="border: 1px solid rgba(22, 28, 45, 0.16);margin-top: -22px;margin-left: 44px;margin-right: 44px;">
+      <div class="showOnSearch">
+        <app-discussions-list-page *ngIf="show === 'discss'" [hide]="hideStartButton"></app-discussions-list-page>
+        <app-events-list-page *ngIf="show === 'events'" [hide]="false"></app-events-list-page>
+      </div>
+    </div>
+    <!-- Search Result End -->
+    
   </div>
-  <div class= "tab">
+  <div class= "tab" *ngIf="hideOnSearch" >
     <ul class="uk-child-width-expand" uk-tab >
         <li [ngClass]="{'uk-active': show=='discss'}"><a x-no-tabbing (click)="showAll('discss')">All Articles & Discussions</a></li>
         <li [ngClass]="{'uk-active': show=='events'}"><a x-no-tabbing (click)="showAll('events')">All Events</a></li>
@@ -44,5 +60,8 @@
   </div>
   <!-- Search Container ends -->
 </div>
-<app-discussions-list-page *ngIf="show === 'discss'"></app-discussions-list-page>
-<app-events-list-page *ngIf="show === 'events'"></app-events-list-page>
+<div *ngIf="hideOnSearch">
+  <app-discussions-list-page *ngIf="show === 'discss'"></app-discussions-list-page>
+  <app-events-list-page *ngIf="show === 'events'"></app-events-list-page>
+</div>
+

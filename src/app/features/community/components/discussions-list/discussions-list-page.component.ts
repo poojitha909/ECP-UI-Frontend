@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DiscussionService } from '../../services/discussion.service';
 import { MenuService } from '../../services/menu.service';
@@ -14,6 +14,9 @@ import { ThrowStmt } from '@angular/compiler';
   styleUrls: ['./discussions-list-page.component.scss']
 })
 export class DiscussionsListPageComponent implements OnInit, OnDestroy {
+
+  @Input() hide: false;
+
   discussionsList: any[];
   selCategory: string;
   categoryList: any;

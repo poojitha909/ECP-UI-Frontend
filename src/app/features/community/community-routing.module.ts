@@ -9,6 +9,7 @@ import { EventCreatePageComponent } from './components/event-create/event-create
 import { DiscussionDetailPageComponent } from './components/discussion-detail/discussion-detail-page.component';
 import { DiscussionsListPageComponent } from './components/discussions-list/discussions-list-page.component'
 import { DiscussionCreatePageComponent } from './components/discussion-create/discussion-create-page.component'
+
 const routes: Routes = [
   {
     path: '',
@@ -50,7 +51,7 @@ const routes: Routes = [
   {
     path: 'discussion/:id/:category',
     component: DiscussionDetailPageComponent
-  },
+  }
 ];
 
 @NgModule({

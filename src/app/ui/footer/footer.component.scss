@@ -107,9 +107,9 @@
   }
 
 .features{
-  margin-left: 165px;
-    margin-top: 12px;
-    margin-right: -274px;
+  margin-left: -55px;
+  margin-top: 12px;
+  margin-right: -116px;
   .feature{
     font-family: HK Grotesk;
     font-style: normal;
@@ -120,26 +120,33 @@
   }
 }
 .tata{
-  width: 94px;
-  height: 20px;
-  margin-top: -43px;
-  margin-left: 64px;
+  background: #ED1B24;
+  border-radius: 2px;
+  width: 152px;
+  margin-top: -22px;
+  text-align: center;
+  font-size: 16px;
+  color: #FFFFFF;
+  font-weight: bold;
+  font-family: -webkit-body;
+  line-height: 165%;
 }
 .logo{
-  margin-left: -319px;
-  // height: 230px;
-  // background: #2A415E;
-  // border: 1px solid #2A415E;
-  // box-sizing: border-box;
-  // border-radius: 4px;
-  // margin-left: -90px;
-  // margin-right: -110px;
-  // opacity: 0.2;
-  // margin-top: -244px;
+  width: 470px;
     .img{
-      width: 454px;
-      height: 225px;
-      margin-left: 245px;
+      height: 244px;
+      margin-left: -100px;
+      margin-top: -20px;
+    }
+    .background{
+      background: #2A415E;
+      opacity: 0.2;
+      border: 1px solid #2A415E;
+      border-radius: 4px;
+      margin-left: -100px;
+      margin-right: 80px;
+      margin-top: -254px;
+      margin-bottom: 40px;
     }
 }
   

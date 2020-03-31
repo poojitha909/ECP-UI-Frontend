@@ -21,18 +21,17 @@
         {{ isDBService ? service?.basicProfileInfo.firstName :  service?.name}}
       </h3>
       <div>
-        <ngb-rating *ngIf="isDBService" [rate]="getDbServiceRating(service?.ratingPercentage)" [readonly]="true"
-          [max]="5">
+        <ngb-rating [rate]="getDbServiceRating(service?.ratingPercentage)" [readonly]="true" [max]="5">
           <ng-template let-fill="fill" let-index="index">
             <span class="star" [class.filled]="fill === 100">&#9733;</span>
           </ng-template>
         </ngb-rating>
 
-        <ngb-rating *ngIf="!isDBService" [rate]="service?.compRating" [readonly]="true" [max]="5">
+        <!-- <ngb-rating *ngIf="!isDBService" [rate]="service?.compRating" [readonly]="true" [max]="5">
           <ng-template let-fill="fill" let-index="index">
             <span class="star" [class.filled]="fill === 100">&#9733;</span>
           </ng-template>
-        </ngb-rating>
+        </ngb-rating> -->
 
         <span class="ml-15">{{isDBService ? service?.reviewCount : service?.totalReviews}} Reviews</span>
       </div>
@@ -45,11 +44,12 @@
     <div class="m-t-30">
       <p class="m-0"><span>{{isDBService ? service?.basicProfileInfo.primaryUserAddress.city :  service?.city}}</span>
       </p>
-      <p *ngIf="!isDBService" class="m-0 font-regular"><a routerLink="/services"
-          [queryParams]="{ categoryLink:service.type}">{{service?.type}}</a></p>
+      <p *ngIf="!isDBService" class="m-0 font-regular"><a>{{service?.type}}</a><a href="javascript:void(0)"
+          routerLink="/services" [queryParams]="{ category: service.categoryKey, catid:  service.categoryId}"
+          *ngIf="service.categoryId">
+          ({{service?.categoryKey}})</a></p>
       <p *ngIf="isDBService && service?.systemTags.length > 0" class="m-0 font-regular">
-        <a routerLink="/services"
-          [queryParams]="{ categoryLink:service.systemTags[0].name}">{{service?.systemTags[0].name}}</a></p>
+        <a href="javascript:void(0)">{{service?.systemTags[0].name}}</a></p>
     </div>
   </div>
 

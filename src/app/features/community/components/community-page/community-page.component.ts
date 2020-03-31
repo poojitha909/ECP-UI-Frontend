@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SeoService } from 'src/app/core/services/seo.service';
-import { SEO } from 'src/app/core/interfaces';
+import { SEO, PageParam, Service } from 'src/app/core/interfaces';
 import { HomeService } from 'src/app/features/home/home.service';
-// import 'rxjs/add/observable/timer';
-// import { Observable, observable } from 'rxjs';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-community-page',
@@ -12,10 +13,16 @@ import { HomeService } from 'src/app/features/home/home.service';
   styleUrls: ['./community-page.component.scss']
 })
 export class CommunityPageComponent implements OnInit, OnDestroy {
-
+  
   showReset: boolean;
   paramsSubs: any;
   show:string;
+  hideOnSearch:boolean = true;
+  showOnSearch:boolean = false;
+  noRecords: boolean;
+  showResult: boolean;
+  isLoading: boolean;
+  searchTextChanged = new Subject<string>();
   searchParams: {
     p: number,
     s: number,
@@ -24,7 +31,21 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     pastEvents: number,
     category: string
   };
-  
+  searchPageParam: PageParam = {
+    p: 0,
+    s: 6,
+    term: ''
+  };
+  hide:any;
+  searchData: any = {
+    discussions: [],
+    events: [],
+    maxResult: 0,
+    totalDiscussions: 0,
+    totalEvents: 0,
+  };
+
+  autocompleteFields: Service[] = [];
   constructor(private router: Router, private homeService: HomeService,
     private seoService: SeoService, private route: ActivatedRoute) {
 
@@ -45,6 +66,20 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
+
+    if (this.homeService.homeSearchtxt) {
+      this.searchPageParam.term = this.homeService.homeSearchtxt;
+      this.communitySearchPages();
+      this.showReset = true;
+      this.showResult = true;
+    }
+
+    this.searchTextChanged.pipe(
+      debounceTime(500),
+      distinctUntilChanged()
+    ).subscribe(() => {
+      this.onSearchChange(this.searchPageParam.term);
+    })
   }
 
   ngOnDestroy() {
@@ -78,7 +113,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     }
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
-      this.showReset = this.searchParams.searchTxt ? true : false;
+      this.showReset = this.searchParams.searchTxt? true : false;
     }
     if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
       this.setSearchTxt(this.homeService.homeSearchtxt);
@@ -89,6 +124,45 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     }
   }
   
+  communitySearchPages(){
+    this.isLoading = true;
+    this.homeService.searchParam = this.searchPageParam;
+    // Home search pages API
+    this.homeService.getHomeSearchPages().subscribe(response => {
+      this.isLoading = false;
+      if (response && response.servicePage) {
+        const servicePage = JSON.parse(response.servicePage);
+        this.searchData.services = servicePage.content.slice(0, 6);
+        this.searchData.totalServices = servicePage.total
+      }
+      this.searchData.products = response.productPage.content;
+      this.searchData.totalProducts = response.productPage.total;
+      this.searchData.discussions = response.discussPage.content;
+      this.searchData.totalDiscussions = response.discussPage.total;
+      this.searchData.events = response.eventPage.content;
+      this.searchData.experts = response.expertPage.content;
+      this.searchData.totalEvents = response.eventPage.total;
+      this.searchData.totalExperts = response.expertPage.total;
+      this.searchData.maxResult = Math.max(
+        this.searchData.totalServices,
+        this.searchData.totalProducts,
+        this.searchData.totalDiscussions,
+        this.searchData.totalExperts,
+        this.searchData.totalEvents
+       );
+      if (this.searchData.maxResult == 0) {
+        this.noRecords = true;
+      } else {
+        this.noRecords = false;
+      }
+      this.showResult = true;
+    },
+      error => {
+        this.isLoading = false;
+        console.log(error);
+      });
+  }
+
   showAll(tab) {
     this.show=tab
   }
@@ -114,20 +188,28 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   }
 
   resetSearch(event: any) {
+    this.hideOnSearch=true;  
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
       this.setSearchTxt("");
-      this.showReset = false;
-      this.onSearch()
+      this.showReset = false; 
+      this.showOnSearch=false;
+      
     }
   }
 
   onSearch() {
+    console.log("hideOnSearch")
+    this.hideOnSearch=false;
+    this.showOnSearch=true;
+    console.log("showOnSearch")
+    this.communitySearchPages();
     this.router.navigate(['/community'], { queryParams: { searchTxt: this.searchParams.searchTxt, 
                                                 category: this.searchParams.category,
                                                 past: this.searchParams.pastEvents,
                                                 show: this.show } });
+    
   }
-
+  
   setSearchTxt(value: string) {
     this.searchParams.searchTxt = value;
     this.homeService.homeSearchtxt = value;

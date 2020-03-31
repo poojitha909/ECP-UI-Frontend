@@ -86,12 +86,12 @@ export class AllServicesComponent implements OnInit, AfterViewInit {
     this.selectedValue = "";
   }
 
-  @HostListener('window:scroll', ['$event'])
-  hideBanner() {
-    if (window.scrollY > 380) {
-      document.getElementById('serviceBanner').style.display = 'none';
-    }
-  }
+  // @HostListener('window:scroll', ['$event'])
+  // hideBanner() {
+  //   if (window.scrollY > 380) {
+  //     document.getElementById('serviceBanner').style.display = 'none';
+  //   }
+  // }
 
   ngOnInit() {
     this.searchTextChanged.pipe(

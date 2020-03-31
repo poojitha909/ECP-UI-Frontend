@@ -6,6 +6,7 @@ import { PageParam } from 'src/app/core';
 import { Service } from 'src/app/core/interfaces';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { EpcServiceService } from '../../epc-service.service';
 
 @Component({
   selector: 'app-search-container',
@@ -28,7 +29,7 @@ export class SearchContainerComponent implements OnInit {
 
   autocompleteFields: Service[] = [];
 
-  constructor(private homeService: HomeService, private router: Router) { }
+  constructor(private homeService: HomeService, private router: Router, private ecpService: EpcServiceService) { }
 
   ngOnInit() {
     this.searchTextChanged.pipe(
@@ -66,6 +67,7 @@ export class SearchContainerComponent implements OnInit {
       //   });
     } else {
       this.autocompleteFields = [];
+      this.homeService.homeSearchtxt = "";
       this.showReset = false;
     }
   }
@@ -73,7 +75,7 @@ export class SearchContainerComponent implements OnInit {
   searchService() {
     // const param = this.searchPageParam.term;
     this.homeService.homeSearchtxt = this.searchPageParam.term;
-    this.router.navigate(['/services'], { queryParams: { category: this.searchPageParam.term } })
+    this.router.navigate(['/services'], { queryParams: { searchTxt: this.searchPageParam.term, category: this.ecpService.searchedService, catid: this.ecpService.searchCatID } })
     // this.homeService.searchParam = this.searchPageParam;
     // this.homeService.getServices().subscribe(response => {
     //   this.popullarService = response.data.slice(0, 6);

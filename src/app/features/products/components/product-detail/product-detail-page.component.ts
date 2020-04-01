@@ -61,6 +61,10 @@ export class ProductDetailPageComponent implements OnInit {
   ) {
 
     if (this.productService.selectedCatId && this.productService.selectedCatname) {
+      this.breadcrumbLinks[2] = {
+        text: '',
+        link: '/products'
+      };
       this.breadcrumbLinks[2].text = this.productService.selectedCatname;
       this.breadcrumbLinks[2].queryParams = { productCategory: this.productService.selectedCatId };
     }

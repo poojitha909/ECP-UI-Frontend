@@ -53,8 +53,8 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.currentUrl = window.location.href;
-    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
+    this.currentUrl = encodeURI(window.location.href);
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(this.currentUrl)}`);
     this.countData = { "all": 0, "outdoor": 0, "indoor": 0 };
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();

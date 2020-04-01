@@ -63,8 +63,8 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
   }
 
   initiate() {
-    this.currentUrl = window.location.href;
-    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
+    this.currentUrl = encodeURI(window.location.href);
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(this.currentUrl)}`);
     this.searchParams = {
       p: 0,
       s: 6,

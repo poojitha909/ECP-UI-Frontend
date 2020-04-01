@@ -96,8 +96,7 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
       const data = response.data;
       this.catsList = [];
       if (data.content) {
-        //this.catsList = data.content.filter( c => (c.questionCount> 0));
-        this.catsList = data.content;
+        this.catsList = data.content.filter( c => (c.show == true));
       }
     });
     

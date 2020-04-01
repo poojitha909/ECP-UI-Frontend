@@ -36,6 +36,8 @@ import { FeaturedMyQuestionsComponent } from './featured-my-questions/featured-m
 import { MyQuestionsSummaryCardComponent } from './my-questions-summary-card/my-questions-summary-card.component';
 import { UserTermsComponent } from './user-terms/user-terms.component';
 import { UserPolicyComponent } from './user-policy/user-policy.component';
+import { ServiceCategoriesComponent } from './service-categories/service-categories.component';
+import { ServicesResultComponent } from './services-result/services-result.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,9 @@ import { UserPolicyComponent } from './user-policy/user-policy.component';
     FeaturedMyQuestionsComponent,
     MyQuestionsSummaryCardComponent,
     UserTermsComponent,
-    UserPolicyComponent
+    UserPolicyComponent,
+    ServiceCategoriesComponent,
+    ServicesResultComponent
   ],
   imports: [
     CommonModule,
@@ -108,7 +112,9 @@ import { UserPolicyComponent } from './user-policy/user-policy.component';
     AskExpertSummaryCardComponent,
     ActiveMaxDirective,
     FeaturedMyQuestionsComponent,
-    MyQuestionsSummaryCardComponent
+    MyQuestionsSummaryCardComponent,
+    ServicesResultComponent
+    // ServiceCategoriesComponent
   ]
 })
 export class SharedModule { }

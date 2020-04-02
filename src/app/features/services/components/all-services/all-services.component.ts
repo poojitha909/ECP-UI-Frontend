@@ -1,15 +1,15 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { EpcServiceService } from '../../epc-service.service';
-import { Service, PageParam, SEO, Breadcrumb, Category } from 'src/app/core/interfaces';
-import { HomeService } from 'src/app/features/home/home.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { DomSanitizer } from '@angular/platform-browser';
+import { SEO } from 'src/app/core/interfaces';
+// import { HomeService } from 'src/app/features/home/home.service';
+// import { Router, ActivatedRoute } from '@angular/router';
+// import { Subject } from 'rxjs';
+// import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+// import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
-import { JdCategoryService } from 'src/app/core/services';
-declare var UIkit: any;
+// import { JdCategoryService } from 'src/app/core/services';
+// declare var UIkit: any;
 
 @Component({
   selector: 'app-all-services',

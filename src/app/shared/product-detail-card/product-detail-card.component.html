@@ -21,33 +21,15 @@
     <div class="category m-t-20">
       In: <span (click)="onclick($event,product)" class="category-text">{{product?.productCategory?.name}}</span>
     </div>
-    <!-- <div>
-      <div class="uk-label d-inline-flex uk-flex-middle p-verified">
-        <span class="verified-icon-w m-r-5"></span>
-        <span> VERIFIED</span>
-      </div>
-      <span class="uk-label uk-label-warning p-verified">
-        <fa-icon icon="exclamation-triangle"></fa-icon> UNVERIFIED
-      </span>
-
-      <span class="uk-label uk-label-danger p-verified ml-2">38% OFF</span>
-    </div> -->
   </div>
 
   <div class="uk-width-1-4@m uk-visible@s  price-border">
     <div class="prize-card">
-      <!-- <div>
-        <strike>Rs. {{product.price}}</strike>
-      </div> -->
       <div class="m-0 price">Rs. {{product?.price}}</div>
       <div class="font-regular">On {{product?.buyFrom | titlecase }}</div>
     </div>
   </div>
   <div class="p-16 uk-hidden@s">
-    <!-- <div>
-      In: <span class="category-text">{{product?.productCategory?.name}}</span>
-    </div> -->
     <div class="price-text-sm m-t-20">Rs. {{product?.price}}</div>
-    <!-- <span class="m-l-5 mrp">Rs 8000</span> -->
   </div>
 </div>

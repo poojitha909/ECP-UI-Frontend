@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class ProductDetailCardComponent implements OnInit {
   @Input() product: any;
   @Input() searchTxt: any;
+  @Output() categoryChange: EventEmitter<string> = new EventEmitter();
   constructor( private route:Router) { }
 
   ngOnInit() {
@@ -16,9 +17,7 @@ export class ProductDetailCardComponent implements OnInit {
 
   onclick(e,product){
     e.stopPropagation();
-    this.route.navigate(['products/all'],{
-     queryParams:{productCategory:product.productCategory.id,searchTxt: this.searchTxt}
-    })
+    this.categoryChange.emit(product.productCategory.id);
 } 
 
 

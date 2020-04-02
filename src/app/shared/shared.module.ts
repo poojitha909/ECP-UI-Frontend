@@ -36,7 +36,10 @@ import { FeaturedMyQuestionsComponent } from './featured-my-questions/featured-m
 import { MyQuestionsSummaryCardComponent } from './my-questions-summary-card/my-questions-summary-card.component';
 import { UserTermsComponent } from './user-terms/user-terms.component';
 import { UserPolicyComponent } from './user-policy/user-policy.component';
+import { ServiceCategoriesComponent } from './service-categories/service-categories.component';
+import { ServicesResultComponent } from './services-result/services-result.component';
 import { ProductResultsComponent } from './product-results/product-results.component';
+import { ProductNoRecordComponent } from './product-no-record/product-no-record.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +76,10 @@ import { ProductResultsComponent } from './product-results/product-results.compo
     MyQuestionsSummaryCardComponent,
     UserTermsComponent,
     UserPolicyComponent,
-    ProductResultsComponent
+    ServiceCategoriesComponent,
+    ServicesResultComponent,
+    ProductResultsComponent,
+    ProductNoRecordComponent
   ],
   imports: [
     CommonModule,
@@ -111,7 +117,10 @@ import { ProductResultsComponent } from './product-results/product-results.compo
     ActiveMaxDirective,
     FeaturedMyQuestionsComponent,
     MyQuestionsSummaryCardComponent,
-    ProductResultsComponent
+    ServicesResultComponent,
+    // ServiceCategoriesComponent
+    ProductResultsComponent,
+    ProductNoRecordComponent
   ]
 })
 export class SharedModule { }

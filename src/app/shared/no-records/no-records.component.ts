@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { EpcServiceService } from '../../epc-service.service';
 import { HomeService } from 'src/app/features/home/home.service';
 
 @Component({

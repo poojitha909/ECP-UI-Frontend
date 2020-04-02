@@ -73,15 +73,17 @@
                             Share
                             via Email</a>
                     </div>
-
                     <div>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{product.name}}"
-                            class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a>
-                        <a class="social-link"
-                            href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{product.name}}">
-                            Share via
-                            Facebook</a>
-                    </div>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{ service?.name || service?.basicProfileInfo?.firstName  }}"
+                          onclick="javascript:window.open(this.href,
+                                  '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
+                          class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a class="social-link"
+                          href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{ service?.name || service?.basicProfileInfo?.firstName  }}"
+                          onclick="javascript:window.open(this.href,
+                                  '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                          Share via
+                          Facebook</a>
+                      </div>
                 </div>
 
             </div>

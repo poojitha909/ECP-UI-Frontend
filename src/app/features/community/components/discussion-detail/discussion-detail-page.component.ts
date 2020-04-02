@@ -68,10 +68,6 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
       {
         text: 'Engage with us',
         link: '/community'
-      },
-      {
-        text: 'Articles & Discussions',
-        link: '/community'
       }
     ];
     this.categoryName = "";
@@ -189,7 +185,7 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
           if(found == 0){
             this.breadcrumbLinks.push({
               text: this.categoryName,
-              link: ['/community/discussions'],
+              link: ['/community'],
               queryParams: { category: this.category }
             });
           }

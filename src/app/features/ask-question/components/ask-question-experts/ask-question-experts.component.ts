@@ -53,8 +53,8 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.currentUrl = window.location.href;
-    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
+    this.currentUrl = this.currentUrl = encodeURI(window.location.href);
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(this.currentUrl)}`);
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
@@ -96,8 +96,7 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
       const data = response.data;
       this.catsList = [];
       if (data.content) {
-        //this.catsList = data.content.filter( c => (c.questionCount> 0));
-        this.catsList = data.content;
+        this.catsList = data.content.filter( c => (c.show == true));
       }
     });
     

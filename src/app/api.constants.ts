@@ -1,5 +1,3 @@
-import { environment } from 'src/environments/environment';
-
 export class ApiConstants {
 
     public static GET_SERVICES: string = `/BY/api/v1/search/servicePageSearch`;

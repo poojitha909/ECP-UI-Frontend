@@ -1,17 +1,17 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/products.service';
 import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { HomeService } from 'src/app/features/home/home.service';
-declare var UIkit: any;
+import { stringify } from 'querystring';
 @Component({
   selector: 'app-all-products',
   templateUrl: './all-products.component.html',
   styleUrls: ['./all-products.component.scss']
 })
-export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AllProductsComponent implements OnInit, OnDestroy {
 
   breadcrumbLinks: Breadcrumb[] = [
     {
@@ -23,26 +23,17 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
       link: '/products'
     }
   ];
-
-  showResult:boolean;
+  showSharing: boolean;
+  showPagination: boolean;
   showReset: boolean;
-  productsList: any[];
-  catsList: any[];
-  searchParams: {
-    p: number,
-    s: number,
-    searchTxt: string,
-    productCategory: string
-  };
+  searchTxt: string;
+  productCategory: string;
   currentUrl: string;
   showingProduct: string;
   paramsSubs: any;
   totalRecords: number;
-  slideConfig = { "slidesToShow": 3, "slidesToScroll": 1 };
-  initial:number;
-  final:number;
   constructor(private route: ActivatedRoute, private router: Router,
-    private productService: ProductService, public sanitizer: DomSanitizer,
+    public sanitizer: DomSanitizer,
     private homeService: HomeService, public seoService: SeoService) {
     // Generate meta tag 
     const config: SEO = {
@@ -52,9 +43,7 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
       author: `An Elder Spring Initiative by Tata Trusts`,
       image: `${window.location.origin}/assets/imgaes/landing-img/Product-320.png`,
     }
-
     this.seoService.generateTags(config);
-
   }
 
   ngOnInit() {
@@ -63,91 +52,28 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  ngAfterViewInit() {
-    UIkit.util.on('#product-mobile-category-modal', 'hidden', () => {
-      // do something
-      if (this.showingProduct && this.showingProduct !== 'All Products') {
-        this.searchParams.productCategory = this.catsList.find(cat => cat.name == this.showingProduct).id;
-      } else {
-        this.searchParams.productCategory = '';
-      }
-    });
-  }
-
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
-    document.getElementById("product-mobile-category-modal").remove();
   }
 
   initiate() {
     this.currentUrl = window.location.href;
-    this.searchParams = {
-      p: 0,
-      s: 4,
-      searchTxt: "",
-      productCategory: ""
-    }
+    this.showPagination = true;
+    this.showSharing = true;
+    this.searchTxt = "";
 
     this.totalRecords = 0;
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
-      this.showReset = this.searchParams.searchTxt ? true : false;
+      this.showReset = this.searchTxt ? true : false;
     }
-    if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
+    if (this.route.snapshot.queryParams['productCategory'] !== undefined) {
+      this.productCategory = this.route.snapshot.queryParams['productCategory'];
+    }
+    if (!this.searchTxt && this.homeService.homeSearchtxt) {
       this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
     }
-    if (this.route.snapshot.queryParams['productCategory'] !== undefined) {
-      this.searchParams.productCategory = this.route.snapshot.queryParams['productCategory'];
-    }
-    if (this.route.snapshot.queryParams['page'] !== undefined) {
-      this.searchParams.p = this.route.snapshot.queryParams['page'];
-    }
-    this.productService.getCategoryListFiltered(this.searchParams.searchTxt).subscribe((response: any) => {
-      const data = response.data;
-      this.catsList = [];
-      if (data.content) {
-        this.catsList = data.content;
-        if (this.searchParams.productCategory) {
-          this.showingProduct = this.catsList.find(cat => cat.id === this.searchParams.productCategory).name;
-        } else {
-          this.showingProduct = "All Products";
-        }
-      }
-    });
-    this.showProducts();
-  }
-
-  changePage(page: number) {
-    this.searchParams.p = page;
-    this.onSearch()
-  }
-
-  showProducts() {
-    this.showResult = false;
-    this.productService.searchProducts(this.searchParams).subscribe((response: any) => {
-      const data = response.data;
-      this.productsList = [];
-      if (data.content) {
-        this.productsList = data.content;
-        this.totalRecords = data.total;
-        this.initial = this.searchParams.p * this.searchParams.s + 1;
-        this.final = this.initial + this.productsList.length - 1;
-      }
-    });
-  }
-
-  clearSelection() {
-    this.productService.selectedCatId = null;
-    this.productService.selectedCatname = null;
-    this.searchParams.productCategory = '';
-    this.router.navigateByUrl('products');
-  }
-
-  onTabChange(value, catName) {
-    this.productService.selectedCatId = value;
-    this.productService.selectedCatname = catName;
-    this.router.navigate(['/products'], { queryParams: { productCategory: value, searchTxt: this.searchParams.searchTxt } });
   }
 
   onSearchChange(event: any) {
@@ -172,24 +98,11 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setSearchTxt(value: string) {
-    this.searchParams.searchTxt = value;
+    this.searchTxt = value;
     this.homeService.homeSearchtxt = value;
-    this.searchParams.p = 0;
   }
-
 
   onSearch() {
-    this.router.navigate(['/products/all'], { queryParams: { productCategory: this.searchParams.productCategory, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
+    this.router.navigate(['/products'], { queryParams: { productCategory: this.productCategory, searchTxt: this.searchTxt } });
   }
-
-  applyFilter() {
-    UIkit.modal('#product-mobile-category-modal').hide();
-    if (this.searchParams.productCategory) {
-      this.router.navigate(['/products'], { queryParams: { productCategory: this.searchParams.productCategory, searchTxt: this.searchParams.searchTxt } });
-    } else {
-      this.clearSelection();
-    }
-
-  }
-
 }

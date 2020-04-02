@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { SEO, PageParam, Service } from 'src/app/core/interfaces';
@@ -167,13 +167,6 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     this.show=tab
   }
 
-  @HostListener('window:scroll', ['$event'])
-  hideBanner() {
-    if (window.scrollY > 380) {
-      document.getElementById('communityBanner').style.display = 'none';
-    }
-  }
-
   onSearchChange(event: any) {
     const value = event.target.value;
     if (value !== "") {
@@ -198,10 +191,8 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   }
 
   onSearch() {
-    console.log("hideOnSearch")
     this.hideOnSearch=false;
     this.showOnSearch=true;
-    console.log("showOnSearch")
     this.communitySearchPages();
     this.router.navigate(['/community'], { queryParams: { searchTxt: this.searchParams.searchTxt, 
                                                 category: this.searchParams.category,

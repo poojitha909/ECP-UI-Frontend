@@ -1,0 +1,12 @@
+<div class="uk-container ask-question">
+  <div *ngIf="questions && questions.length > 0">
+    <app-question-detail-card *ngFor="let question of questions" [question]="question" (categoryChange)="onTabChange($event)">
+    </app-question-detail-card>
+  </div>
+  <app-pagination *ngIf="(questions && questions.length > 0)" [totalRecords]="totalRecords"
+    [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">
+  </app-pagination>
+  <div class="m-t-20" *ngIf="!questions || questions?.length == 0">
+    <app-question-no-record></app-question-no-record>
+  </div>
+</div>

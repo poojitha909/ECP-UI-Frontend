@@ -105,4 +105,8 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   onSearch() {
     this.router.navigate(['/products'], { queryParams: { productCategory: this.productCategory, searchTxt: this.searchTxt } });
   }
+
+  showProductCount(value){
+    this.totalRecords = value;
+  }
 }

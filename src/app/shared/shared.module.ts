@@ -40,6 +40,12 @@ import { ServiceCategoriesComponent } from './service-categories/service-categor
 import { ServicesResultComponent } from './services-result/services-result.component';
 import { ProductResultsComponent } from './product-results/product-results.component';
 import { ProductNoRecordComponent } from './product-no-record/product-no-record.component';
+import { QuestionNoRecordComponent } from './question-no-record/question-no-record.component';
+import { AskQuestionExpertsComponent }  from './ask-question-experts/ask-question-experts.component';
+import { AskQuestionMyQuesComponent } from './ask-question-myques/ask-question-myques.component';
+import { ExpertAllQuestionComponent } from './expert-all-question/expert-all-question.component';
+import { QuestionDetailCardComponent } from './question-detail-card/question-detail-card.component';
+import { ExpertDetailCardComponent } from './expert-detail-card/expert-detail-card.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +85,13 @@ import { ProductNoRecordComponent } from './product-no-record/product-no-record.
     ServiceCategoriesComponent,
     ServicesResultComponent,
     ProductResultsComponent,
-    ProductNoRecordComponent
+    ProductNoRecordComponent,
+    QuestionNoRecordComponent,
+    AskQuestionExpertsComponent,
+    AskQuestionMyQuesComponent,
+    ExpertAllQuestionComponent,
+    QuestionDetailCardComponent,
+    ExpertDetailCardComponent
   ],
   imports: [
     CommonModule,
@@ -120,7 +132,13 @@ import { ProductNoRecordComponent } from './product-no-record/product-no-record.
     ServicesResultComponent,
     // ServiceCategoriesComponent
     ProductResultsComponent,
-    ProductNoRecordComponent
+    ProductNoRecordComponent,
+    QuestionNoRecordComponent,
+    AskQuestionExpertsComponent,
+    AskQuestionMyQuesComponent,
+    ExpertAllQuestionComponent,
+    QuestionDetailCardComponent,
+    ExpertDetailCardComponent
   ]
 })
 export class SharedModule { }

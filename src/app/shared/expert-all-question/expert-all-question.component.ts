@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import {AskQuestionService} from '../../services/ask-question.service';
-import { StorageHelperService } from "../../../../core/services/storage-helper.service";
-import { UserService } from '../../../../features/user/services/user.service';
-declare var UIkit;
+import {AskQuestionService} from '../../features/ask-question/services/ask-question.service';
+import { StorageHelperService } from "../../core/services/storage-helper.service";
+import { UserService } from '../../features/user/services/user.service';
 
 @Component({
   selector: 'expert-all-question',
@@ -12,16 +11,21 @@ declare var UIkit;
 })
 export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
 
-  showReset: boolean;
   questions: any[];
   viewby: string;
   user: any;
+  @Input() searchTxt: string;
+  @Input() showPagination: boolean;
+  @Input() showSharing: boolean;
+  @Output() showCount: EventEmitter<number> = new EventEmitter();
+  
   searchParams: {
     p: number,
     s: number,
     askCategory: string,
     askedBy: string,
-    answeredBy: string
+    answeredBy: string,
+    searchTxt: string
   };
   paramsSubs: any;
   totalRecords: number;
@@ -32,14 +36,6 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
     private userService: UserService) { }
 
   ngOnInit() {
-    this.searchParams = {
-      p: 0,
-      s: 10,
-      askCategory: "",
-      askedBy: "",
-      answeredBy: ""
-    }
-  
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     }); 
@@ -57,7 +53,17 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
       s: 10000,
       askCategory: "",
       askedBy: "",
-      answeredBy: ""
+      answeredBy: "",
+      searchTxt: ""
+    }
+    if(this.searchTxt){
+      this.searchParams.searchTxt = this.searchTxt;
+    }
+    if (this.route.snapshot.queryParams['page'] !== undefined) {
+      this.searchParams.p = this.route.snapshot.queryParams['page'];
+    }
+    if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
+      this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
     }
 
     if(this.user){
@@ -65,11 +71,7 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
       this.userService.getUserProfile().subscribe(
         userProfie => {
           this.searchParams.answeredBy = userProfie.id;
-          
           this.totalRecords = 0;
-          // if(this.route.snapshot.queryParams['category'] !== undefined){
-          //   this.searchParams.askCategory = this.route.snapshot.queryParams['category'];
-          // }
           this.showQuestions();
         }
       );
@@ -78,7 +80,12 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
 
   changePage(page: number) {
     this.searchParams.p = page;
-    this.onSearch()
+    if(this.showPagination){
+      this.router.navigate(['/ask-question'], { queryParams: { page: this.searchParams.p, searchTxt: this.searchParams.searchTxt, show: "expques"} });
+    }
+    else{
+        this.showQuestions();
+    }
   }
 
 
@@ -93,7 +100,13 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
     });
   }
   
-  onSearch() {
-    this.router.navigate(['/ask-question'], { queryParams: { page: this.searchParams.p, show: "expques"} });
+  onTabChange(value) {
+    this.searchParams.askCategory = value;
+    if(this.showPagination){
+      this.router.navigate(['/ask-question'], { queryParams: { searchTxt: this.searchParams.searchTxt, show:"experts" } });
+    }
+    else{
+        //this.showExperts(); need to fix this
+    }
   }
 }

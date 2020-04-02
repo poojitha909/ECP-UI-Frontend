@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, OnDestroy, AfterViewInit, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../features/products/services/products.service';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -14,7 +14,8 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
 
   @Input() showPagination: boolean;
   @Input() showSharing: boolean;
-  
+  @Input() searchTxt: string;
+  @Output() showCount: EventEmitter<number> = new EventEmitter();
   searchParams: {
     p: number,
     s: number,
@@ -22,7 +23,7 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
     productCategory: string
   };
 
-  @Input() searchTxt: string;
+  
 
   showResult:boolean;
   productsList: any[];
@@ -123,6 +124,7 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
         if (data.content) {
           this.productsList = data.content;
           this.totalRecords = data.total;
+          this.showCount.emit(this.totalRecords);
         }
     });
   }

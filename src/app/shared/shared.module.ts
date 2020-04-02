@@ -46,6 +46,8 @@ import { AskQuestionMyQuesComponent } from './ask-question-myques/ask-question-m
 import { ExpertAllQuestionComponent } from './expert-all-question/expert-all-question.component';
 import { QuestionDetailCardComponent } from './question-detail-card/question-detail-card.component';
 import { ExpertDetailCardComponent } from './expert-detail-card/expert-detail-card.component';
+import { ExpertNoRecordComponent } from './expert-no-record/expert-no-record.component';
+import { QuestionExpertNoRecordComponent } from './question-expert-no-record/question-expert-no-record.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +93,9 @@ import { ExpertDetailCardComponent } from './expert-detail-card/expert-detail-ca
     AskQuestionMyQuesComponent,
     ExpertAllQuestionComponent,
     QuestionDetailCardComponent,
-    ExpertDetailCardComponent
+    ExpertDetailCardComponent,
+    ExpertNoRecordComponent,
+    QuestionExpertNoRecordComponent
   ],
   imports: [
     CommonModule,
@@ -138,7 +142,9 @@ import { ExpertDetailCardComponent } from './expert-detail-card/expert-detail-ca
     AskQuestionMyQuesComponent,
     ExpertAllQuestionComponent,
     QuestionDetailCardComponent,
-    ExpertDetailCardComponent
+    ExpertDetailCardComponent,
+    ExpertNoRecordComponent,
+    QuestionExpertNoRecordComponent
   ]
 })
 export class SharedModule { }

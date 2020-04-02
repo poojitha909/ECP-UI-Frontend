@@ -39,6 +39,7 @@ import { UserPolicyComponent } from './user-policy/user-policy.component';
 import { ServiceCategoriesComponent } from './service-categories/service-categories.component';
 import { ServicesResultComponent } from './services-result/services-result.component';
 import { ProductResultsComponent } from './product-results/product-results.component';
+import { NoRecordsComponent } from './no-records/no-records.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { ProductResultsComponent } from './product-results/product-results.compo
     UserPolicyComponent,
     ServiceCategoriesComponent,
     ServicesResultComponent,
-    ProductResultsComponent
+    ProductResultsComponent,
+    NoRecordsComponent
   ],
   imports: [
     CommonModule,
@@ -117,7 +119,8 @@ import { ProductResultsComponent } from './product-results/product-results.compo
     MyQuestionsSummaryCardComponent,
     ServicesResultComponent,
     // ServiceCategoriesComponent
-    ProductResultsComponent
+    ProductResultsComponent,
+    NoRecordsComponent
   ]
 })
 export class SharedModule { }

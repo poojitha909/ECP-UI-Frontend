@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { EpcServiceService } from 'src/app/features/services/epc-service.service';
 import { HomeService } from 'src/app/features/home/home.service';
+declare var UIkit: any;
 
 @Component({
   selector: 'app-services-result',
@@ -31,6 +32,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
   maxPages: number;
   verfiedCheck: boolean;
   pageSize = 4;
+  // selectedCatid: string;
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -249,22 +251,30 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
   /**
    * Mobile view Category filter
    */
-  // applyFilter() {
-  //   UIkit.modal('#mobile-category-modal').hide();
-  //   if (this.selectedCategoryType && this.selectedCategory == 'All') {
-  //     this.onCategoryChanged(this.selectedCategoryType.name, '');
-  //   } else if (this.selectedCategoryType && this.selectedCatid) {
-  //     this.onCategoryChanged(this.selectedCategory, this.selectedCatid);
-  //   } else {
-  //     this.clearSelection();
-  //   }
-  // }
+  applyFilter() {
+    UIkit.modal('#mobile-category-modal').hide();
+    if (this.selectedCategoryType && this.selectedCategory == 'All') {
+      const selectedData = {
+        catName: this.selectedCategoryType.name,
+        catId: ''
+      };
+      this.onCategoryChanged(selectedData);
+    } else if (this.selectedCategoryType && this.selectedCatid) {
+      const selectedData = {
+        catName: this.selectedCategoryType.name,
+        catId: this.selectedCatid
+      };
+      this.onCategoryChanged(selectedData);
+    } else {
+      this.clearSelection();
+    }
+  }
 
-  // clearFilter() {
-  //   this.selectedCategoryType = null;
-  //   this.selectedCatid = null;
-  //   this.selectedCategory = 'All';
-  //   // this.router.navigateByUrl('services/all');
-  // }
+  clearFilter() {
+    this.selectedCategoryType = null;
+    this.selectedCatid = null;
+    this.selectedCategory = 'All';
+    // this.router.navigateByUrl('services/all');
+  }
 
 }

@@ -21,11 +21,9 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
     searchTxt: string,
     productCategory: string
   };
-  @Input()  set searchTxt(value: string) {
-    this.searchParams.searchTxt = value;
-  };
 
-  
+  @Input() searchTxt: string;
+
   showResult:boolean;
   productsList: any[];
   catsList: any[];
@@ -64,12 +62,16 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   initiate() {
-      this.searchParams = {
-        p: 0,
-        s: 4,
-        searchTxt: "",
-        productCategory: ""
-      };
+    this.searchParams = {
+      p: 0,
+      s: 4,
+      searchTxt: "",
+      productCategory: ""
+    };
+
+    if(this.searchTxt){
+      this.searchParams.searchTxt = this.searchTxt;
+    }
 
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
         this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
@@ -119,8 +121,8 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
         const data = response.data;
         this.productsList = [];
         if (data.content) {
-        this.productsList = data.content;
-        this.totalRecords = data.total;
+          this.productsList = data.content;
+          this.totalRecords = data.total;
         }
     });
   }

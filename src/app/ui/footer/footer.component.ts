@@ -14,7 +14,7 @@ export class FooterComponent implements OnInit {
 
     this.router.events.pipe(filter((event: any) => event instanceof NavigationEnd)
     ).subscribe(event => {
-      if (event && (event.url === '/products/all' || event.url === '/services/all')) {
+      if (event && (event.url === '/products' || event.url === '/services/all')) {
         this.showInfoFooter = true;
       } else {
         this.showInfoFooter = false;

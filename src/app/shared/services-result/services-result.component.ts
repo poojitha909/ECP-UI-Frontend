@@ -106,6 +106,10 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
 
 
         });
+    } else {
+      if (this.homeService.homeSearchtxt) {
+        this.getCategoryServices('', 0, this.homeService.homeSearchtxt);
+      }
     }
 
   }

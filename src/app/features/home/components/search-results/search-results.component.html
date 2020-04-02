@@ -8,13 +8,11 @@
         ({{  searchData.totalServices }})</a></li> -->
 
     <!-- <li><a href="#" class="font-regular">Community</a></li> -->
-    <li activeMax [max]="false"><a href="#"
-        class="font-regular">Discussion
+    <li activeMax [max]="false"><a href="#" class="font-regular">Discussion
         ({{searchData.totalDiscussions}})</a></li>
     <li activeMax [max]="false"><a href="#" class="font-regular">Events
         ({{searchData.totalEvents}})</a></li>
-    <li activeMax [max]="false"><a href="#"
-        class="font-regular">Experts({{ searchData.totalExperts }})</a></li>
+    <li activeMax [max]="false"><a href="#" class="font-regular">Experts({{ searchData.totalExperts }})</a></li>
     <li activeMax [max]="false"><a href="#" class="font-regular">Products
         ({{  searchData.totalProducts  }})</a></li>
     <li activeMax [max]="true"><a href="#" class="font-regular">Services
@@ -96,17 +94,22 @@
       </app-no-search-result>
       <!-- No search result END-->
 
-
+      <!-- 
       <div *ngIf="searchData.products.length > 0" class="uk-child-width-1-3@m uk-grid-match m-t-20" uk-grid>
         <div *ngFor="let product of searchData.products">
           <app-product-search-card [product]="product"></app-product-search-card>
         </div>
-      </div>
+      </div> -->
+      <div class="m-t-40">
+        <app-product-results [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm">
+        </app-product-results>
 
-      <div *ngIf="searchData.totalProducts > 6">
-        <button routerLink="/products" [queryParams]="{ searchTxt:term }"
-          class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
-          Results</button>
+
+        <!-- <div *ngIf="searchData.totalProducts > 6">
+          <button routerLink="/products" [queryParams]="{ searchTxt:term }"
+            class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
+            Results</button>
+        </div> -->
       </div>
     </li>
     <li activeMax [max]="true">
@@ -118,7 +121,8 @@
         </app-no-search-result>
         <!-- No search result END-->
 
-        <app-services-result [searchTxt]="searchTerm" [internalProcessing]="true" (totalServices)="getTotalServices($event)">
+        <app-services-result [searchTxt]="searchTerm" [internalProcessing]="true"
+          (totalServices)="getTotalServices($event)">
         </app-services-result>
       </div>
       <!-- <div *ngIf="searchData.services.length > 0" class="uk-child-width-1-3@m uk-grid-match m-t-20" uk-grid>

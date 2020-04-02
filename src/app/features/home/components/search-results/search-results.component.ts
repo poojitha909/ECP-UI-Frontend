@@ -7,13 +7,17 @@ import { Component, OnInit, Input, ViewChild, ElementRef, ViewChildren } from '@
 })
 export class SearchResultsComponent implements OnInit {
   @Input() searchData: any;
-  @Input() term: string;
+  @Input() searchTerm: string;
 
+  servicesTotal: number;
   constructor() {
-    console.log(this.searchData,'search component')
-   }
+    console.log(this.searchData, 'search component')
+  }
 
   ngOnInit() {
   }
 
+  getTotalServices(tot: number) {
+    this.servicesTotal = tot;
+  }
 }

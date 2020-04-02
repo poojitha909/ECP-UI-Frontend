@@ -86,7 +86,7 @@
     <!-- Search Result START -->
     <div class="uk-visible@s">
       <app-search-results *ngIf="!noRecords && !isLoading && showResult" [searchData]="searchData"
-        [term]="searchPageParam.term">
+        [searchTerm]="searchPageParam.term">
       </app-search-results>
     </div>
     <!-- Search Result END -->

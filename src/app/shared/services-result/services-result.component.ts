@@ -38,7 +38,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     private cdr: ChangeDetectorRef,
     private jdCategoryService: JdCategoryService,
     public ecpService: EpcServiceService,
-    private homeService: HomeService,
+    public homeService: HomeService,
     private router: Router
   ) {
     this.categories = jdCategoryService.serviceCategories;
@@ -59,42 +59,14 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
           this.whatsMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
           const queryCategory = value.get("category");
           const catId = value.get("catid");
-          // const searchTxt = value.get("searchTxt");
+          const searchTxt = value.get("searchTxt");
+          if (!this.homeService.homeSearchtxt && searchTxt) {
+            this.homeService.homeSearchtxt = searchTxt;
+          }
 
           if (queryCategory) {
-            this.ecpService.searchedService = queryCategory;
-            if (catId) {
-              this.ecpService.searchCatID = catId;
-              //Set selected category
-
-              if (!this.selectedCategoryType) {
-                let subCategory = null;
-                this.selectedCategoryType = this.categories.find(category => {
-                  subCategory = category.subCategories.find(subCat => subCat.id == catId);
-                  if (subCategory) {
-                    return true;
-                  }
-                });
-                if (subCategory) {
-                  this.getCategoryServices(subCategory.name, subCategory.id, this.homeService.homeSearchtxt);
-                }
-              } else {
-                const selSubCat = this.selectedCategoryType.subCategories.find(subCategory => subCategory.id == catId);
-                this.getCategoryServices(selSubCat.name, selSubCat.id, this.homeService.homeSearchtxt);
-              }
-
-
-            } else {
-              //Set selected category
-              if (!this.selectedCategoryType) {
-                this.selectedCategoryType = this.categories.find(type => type.name.trim().toLowerCase() == queryCategory.trim().toLowerCase());
-              }
-              this.ecpService.searchCatID = null;
-              this.getCategoryServices(queryCategory, 0, this.homeService.homeSearchtxt);
-            }
-            this.showShareBox = true;
+            this.filterCategoryList(queryCategory, catId);
           } else {
-
             this.showShareBox = false;
             if (this.homeService.homeSearchtxt) {
               this.getCategoryServices('', 0, this.homeService.homeSearchtxt);
@@ -107,7 +79,10 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
 
         });
     } else {
+
       if (this.homeService.homeSearchtxt) {
+        this.ecpService.searchedService = '';
+        this.ecpService.searchCatID = '';
         this.getCategoryServices('', 0, this.homeService.homeSearchtxt);
       }
     }
@@ -137,7 +112,11 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     this.selectedCatid = null;
     this.ecpService.searchedService = '';
     this.ecpService.searchCatID = '';
-    this.router.navigateByUrl('services');
+    if (!this.internalProcessing) {
+      this.router.navigateByUrl('services');
+    } else {
+      this.getCategoryServices('', 0, this.homeService.homeSearchtxt);
+    }
   }
 
 
@@ -145,6 +124,8 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     if (categoryChanges) {
       if (!this.internalProcessing) {
         this.router.navigate(['services'], { queryParams: { category: categoryChanges.catName, catid: categoryChanges.catId, searchTxt: this.homeService.homeSearchtxt } });
+      } else {
+        this.filterCategoryList(categoryChanges.catName, categoryChanges.catId);
       }
     }
   }
@@ -177,6 +158,9 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
       response => {
         if (response && response.data) {
           this.services = response.data;
+          if (this.internalProcessing && this.services.length > 4) {
+            this.services = this.services.slice(0, 4);
+          }
           this.allService = this.services;
           this.maxPages = Math.round(this.services.length / this.pageSize);
           this.verfiedCheck = false;
@@ -228,7 +212,40 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     }
   }
 
+  filterCategoryList(queryCategory, catId) {
 
+    this.ecpService.searchedService = queryCategory;
+    if (catId) {
+      this.ecpService.searchCatID = catId;
+      //Set selected category
+
+      if (!this.selectedCategoryType) {
+        let subCategory = null;
+        this.selectedCategoryType = this.categories.find(category => {
+          subCategory = category.subCategories.find(subCat => subCat.id == catId);
+          if (subCategory) {
+            return true;
+          }
+        });
+        if (subCategory) {
+          this.getCategoryServices(subCategory.name, subCategory.id, this.homeService.homeSearchtxt);
+        }
+      } else {
+        const selSubCat = this.selectedCategoryType.subCategories.find(subCategory => subCategory.id == catId);
+        this.getCategoryServices(selSubCat.name, selSubCat.id, this.homeService.homeSearchtxt);
+      }
+
+
+    } else {
+      //Set selected category
+      if (!this.selectedCategoryType) {
+        this.selectedCategoryType = this.categories.find(type => type.name.trim().toLowerCase() == queryCategory.trim().toLowerCase());
+      }
+      this.ecpService.searchCatID = null;
+      this.getCategoryServices(queryCategory, 0, this.homeService.homeSearchtxt);
+    }
+    this.showShareBox = true;
+  }
   /**
    * Mobile view Category filter
    */

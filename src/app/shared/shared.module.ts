@@ -40,6 +40,11 @@ import { ServiceCategoriesComponent } from './service-categories/service-categor
 import { ServicesResultComponent } from './services-result/services-result.component';
 import { ProductResultsComponent } from './product-results/product-results.component';
 import { ProductNoRecordComponent } from './product-no-record/product-no-record.component';
+import { DiscussionResultsComponent } from './discussion-results/discussion-results.component';
+import { EventResultsComponent } from './event-results/event-results.component';
+import { NoDiscussionResultsComponent } from './no-discussion-results/no-discussion-results.component';
+import { NoEventResultsComponent } from './no-event-results/no-event-results.component';
+
 
 @NgModule({
   declarations: [
@@ -79,7 +84,11 @@ import { ProductNoRecordComponent } from './product-no-record/product-no-record.
     ServiceCategoriesComponent,
     ServicesResultComponent,
     ProductResultsComponent,
-    ProductNoRecordComponent
+    ProductNoRecordComponent,
+    DiscussionResultsComponent,
+    EventResultsComponent,
+    NoDiscussionResultsComponent,
+    NoEventResultsComponent
   ],
   imports: [
     CommonModule,
@@ -120,7 +129,9 @@ import { ProductNoRecordComponent } from './product-no-record/product-no-record.
     ServicesResultComponent,
     // ServiceCategoriesComponent
     ProductResultsComponent,
-    ProductNoRecordComponent
+    ProductNoRecordComponent,
+    DiscussionResultsComponent,
+    EventResultsComponent
   ]
 })
 export class SharedModule { }

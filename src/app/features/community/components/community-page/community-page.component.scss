@@ -337,10 +337,27 @@
   }
 }
 .showOnSearchtab{
-  margin-left: 44px;
+  margin-left: 25px;
 }
 .showOnSearch{
     padding: 40px;
     margin-left: -40px;
     margin-top: -16px;
+}
+
+
+// .all-blue .uk-tab  .uk-active > a {
+//   max-width: 250px;
+//   margin-left: 42px;
+// }
+
+// .all-blue .uk-tab > * > a{
+//   max-width: 250px;
+//   margin-left: -300px;
+// }
+
+
+
+.all-blue .showingSearchResult {
+  padding: 0 40px;
 }

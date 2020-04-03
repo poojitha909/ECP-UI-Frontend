@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 export class QuestionDetailCardComponent implements OnInit {
   @Input() question: any;
   @Input() viewby: string;
+  @Output() categoryChange: EventEmitter<string> = new EventEmitter();
+
   constructor(private route:Router) { }
 
   ngOnInit() {
@@ -18,10 +20,7 @@ export class QuestionDetailCardComponent implements OnInit {
   }
   cardClick(e,card){
     e.stopPropagation();
-    console.log(card)
-    this.route.navigate(['/ask-question/'],{
-       queryParams:{category:card.id, show: "experts"}
-    })
+    this.categoryChange.emit(card.id);
   }
 
 }

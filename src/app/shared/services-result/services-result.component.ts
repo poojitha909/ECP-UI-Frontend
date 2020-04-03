@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ChangeDetectorRef, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { JdCategoryService } from 'src/app/core/services';
 import { Category, Service, PageParam } from 'src/app/core/interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,6 +15,8 @@ declare var UIkit: any;
 export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() internalProcessing: boolean;
+  @Input() searchTxt: string;
+  @Output() totalServices: EventEmitter<number> = new EventEmitter();
 
   categories: Category[];
   mailUrl: string;
@@ -74,6 +76,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
               this.getCategoryServices('', 0, this.homeService.homeSearchtxt);
             } else {
               this.getAllService();
+              this.showingCategory = 'All Services';
             }
             this.selectedCategoryType = undefined;
           }
@@ -82,10 +85,10 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
         });
     } else {
 
-      if (this.homeService.homeSearchtxt) {
+      if (this.searchTxt) {
         this.ecpService.searchedService = '';
         this.ecpService.searchCatID = '';
-        this.getCategoryServices('', 0, this.homeService.homeSearchtxt);
+        this.getCategoryServices('', 0, this.searchTxt);
       }
     }
 
@@ -160,6 +163,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
       response => {
         if (response && response.data) {
           this.services = response.data;
+          this.totalServices.emit(this.services.length);
           if (this.internalProcessing && this.services.length > 4) {
             this.services = this.services.slice(0, 4);
           }

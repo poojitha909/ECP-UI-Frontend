@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { StorageHelperService } from 'src/app/core/services/storage-helper.service';
 import { Router } from '@angular/router';
 
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class ExpertDetailCardComponent implements OnInit {
   @Input() expert: any;
+  @Output() categoryChange: EventEmitter<string> = new EventEmitter();
   user:any;
   isSame: boolean;
 
@@ -30,9 +31,7 @@ export class ExpertDetailCardComponent implements OnInit {
   }
   onclick(e,experties){
     e.stopPropagation();
-    this.route.navigate(['ask-question'],{
-     queryParams:{category:experties[0].id, show: "experts"}
-    })
+    this.categoryChange.emit(experties[0].id);
 } 
  
 

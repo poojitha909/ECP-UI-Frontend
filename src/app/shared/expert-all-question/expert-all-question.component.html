@@ -2,7 +2,7 @@
   <div uk-grid>
     <div class="uk-width-expand@m">
       <div  *ngIf="questions!==undefined && questions.length > 0">
-        <app-question-detail-card *ngFor="let question of questions" [question]="question" [viewby]="viewby"></app-question-detail-card>
+        <app-question-detail-card *ngFor="let question of questions" [question]="question" [viewby]="viewby" (categoryChange)="onTabChange($event)"></app-question-detail-card>
       </div>
       <app-pagination *ngIf="(questions && questions.length > 0)" [totalRecords]="totalRecords" [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)"></app-pagination>
       <div class="m-t-20" *ngIf="questions==undefined || questions.length == 0">

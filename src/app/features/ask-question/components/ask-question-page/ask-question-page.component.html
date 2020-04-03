@@ -1,5 +1,3 @@
-
-
 <div class="top-banner" id="askExpertBanner">
   <div uk-grid>
     <div class="uk-width-expand uk-flex uk-flex-middle">
@@ -27,7 +25,7 @@
             </button>
           </span>
           <input class="uk-search-input font-regular search-box sm-pr-150" aria-label="search"
-            [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required type="text"
+            [(ngModel)]="searchTxt" (keyup)="onSearchChange($event)" required type="text"
             placeholder="Search here" name="search" autocomplete='off' />
         </form>
       </div>
@@ -49,8 +47,8 @@
 <!-- tab -end -->
 <!-- Search Form END -->
 <div id="searchResultList">
-  <ask-question-experts *ngIf="show === 'experts'" (showCount)="showExpertCount($event)"></ask-question-experts>
-  <expert-all-question *ngIf="show === 'expques' && !showReset"></expert-all-question>
-  <ask-question-myques *ngIf="show === 'ques' && !showReset"></ask-question-myques>
+  <ask-question-experts *ngIf="show === 'experts'" [searchTxt]="searchTxt" [showPagination]="showPagination" [showSharing]="showSharing" (showCount)="showExpertCount($event)"></ask-question-experts>
+  <expert-all-question *ngIf="show === 'expques' && !showReset"  [searchTxt]="searchTxt" [showPagination]="showPagination" [showSharing]="showSharing" (showCount)="showExpertQuesCount($event)"></expert-all-question>
+  <ask-question-myques *ngIf="show === 'ques' && !showReset"  [searchTxt]="searchTxt" [showPagination]="showPagination" [showSharing]="showSharing" (showCount)="showMyQuesCount($event)"></ask-question-myques>
 </div>
 </div>

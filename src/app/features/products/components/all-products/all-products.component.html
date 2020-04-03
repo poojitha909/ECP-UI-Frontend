@@ -33,5 +33,5 @@
     </div>
     <!-- Search Form END -->
   </div>
-  <app-product-results [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt"></app-product-results>
+  <app-product-results [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt" (showCount)="showProductCount($event)"></app-product-results>
 </div>

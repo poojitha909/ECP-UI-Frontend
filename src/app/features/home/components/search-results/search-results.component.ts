@@ -7,11 +7,23 @@ import { Component, OnInit, Input, ViewChild, ElementRef, ViewChildren } from '@
 })
 export class SearchResultsComponent implements OnInit {
   @Input() searchData: any;
-  @Input() term: string;
+  @Input() searchTerm: string;
 
-  constructor() {}
+  servicesTotal: number;
+  productTotal: number;
+
+  constructor() {
+    console.log(this.searchData, 'search component')
+  }
 
   ngOnInit() {
   }
 
+  getTotalServices(tot: number) {
+    this.servicesTotal = tot;
+  }
+
+  getTotalProducts(tot: number) {
+    this.productTotal = tot;
+  }
 }

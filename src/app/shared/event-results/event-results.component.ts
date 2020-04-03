@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../../app/features/community/services/events.service'
 import { SEO } from 'src/app/core/interfaces';
@@ -15,7 +15,7 @@ export class EventResultsComponent implements OnInit {
   @Input() searchTxt: string;
   @Input() showPagination: boolean;
   @Input() showSharing: boolean;
-
+  @Output() showCount: EventEmitter<number> = new EventEmitter();
   @Input() hide: true;
   
   eventsList: any[];
@@ -119,8 +119,8 @@ export class EventResultsComponent implements OnInit {
         this.eventsList = data.content;
         this.totalRecords = data.total;
         this.initial = this.searchParams.p * this.searchParams.s + 1;
-        this.final = this.initial + this.eventsList.length - 1
-
+        this.final = this.initial + this.eventsList.length - 1;
+        this.showCount.emit(this.totalRecords);
       }
     });
   }

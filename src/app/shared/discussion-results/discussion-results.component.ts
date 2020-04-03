@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MenuService } from '../../features/community/services/menu.service'
 import { DiscussionService } from '../../features/community/services/discussion.service'
@@ -18,7 +18,7 @@ export class DiscussionResultsComponent implements OnInit {
   @Input() searchTxt: string;
   @Input() showPagination: boolean;
   @Input() showSharing: boolean;
-
+  @Output() showCount: EventEmitter<number> = new EventEmitter();
   @Input() hide: false;
   discussionsList: any[];
   selCategory: string;
@@ -167,6 +167,7 @@ export class DiscussionResultsComponent implements OnInit {
       this.initial = this.searchParams.p * this.searchParams.s + 1;
       this.final = this.initial + this.discussionsList.length - 1
       this.totalRecords = data.total;
+      this.showCount.emit(this.totalRecords);
 
     });
   }

@@ -86,7 +86,7 @@
                 <!-- <app-product-no-record></app-product-no-record> -->
                 <app-no-records></app-no-records>
             </div>
-            <div *ngIf="showPagination == false">
+            <div *ngIf="showPagination == false && totalRecords > searchParams.s">
                 <button routerLink="/products"
                     [queryParams]="{ searchTxt:searchParams?.searchTxt, productCategory: searchParams?.productCategory }"
                     class="uk-button uk-button-default uk-width-1-1 m-t-30">View All Results</button>

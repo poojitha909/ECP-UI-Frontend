@@ -39,21 +39,8 @@ export class DiscussionResultsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router,
     private discussionService: DiscussionService, private menuService: MenuService,
-    public sanitizer: DomSanitizer, private homeService: HomeService,
-    private seoService: SeoService
+    public sanitizer: DomSanitizer
   ) {
-
-    // Generate meta tag 
-    const config: SEO = {
-      title: `All Discussions - An Elder Spring Initiative by Tata Trusts`,
-      keywords: 'products,services,events,dscussions',
-      description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
-      author: `An Elder Spring Initiative by Tata Trusts`,
-      image: `${window.location.origin}/assets/imgaes/landing-img/Community-320.png`,
-    }
-
-    this.seoService.generateTags(config);
-
   }
 
   ngOnInit() {
@@ -78,15 +65,11 @@ export class DiscussionResultsComponent implements OnInit {
     this.discussionsList = [];
     this.categoryList = null;
     this.selCategory = "";
+    if(this.searchTxt){
+      this.searchParams.searchTxt = this.searchTxt;
+    }
     if (this.route.snapshot.queryParams['category']) {
       this.selCategory = this.route.snapshot.queryParams['category'];
-    }
-    if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
-      this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
-    }
-    if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
-      this.setSearchTxt(this.homeService.homeSearchtxt);
-
     }
     if (this.route.snapshot.queryParams['page'] !== undefined) {
       this.searchParams.p = this.route.snapshot.queryParams['page'];
@@ -96,23 +79,21 @@ export class DiscussionResultsComponent implements OnInit {
 
   changePage(page) {
     this.searchParams.p = page;
-
-    this.submitSearch();
-  }
-
-  submitSearch() {
-    this.router.navigate(['/community'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p, show: "discss" } });
+    if(this.showPagination){
+        this.router.navigate(['/community'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p, show: "discss" } });
+    }
+    else{
+        this.search();
+    }
   }
 
   onTabChange(value) {
     this.selCategory = value;
     this.searchParams.p = 0;
-    this.router.navigate(['/community'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt, show: "discss" } });
-  }
-
-  resetSearch(event: any) {
-    if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
-      this.setSearchTxt("");
+    if(this.showPagination){
+      this.router.navigate(['/community'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt, show: "discss" } });
+    }
+    else{
       this.search();
     }
   }
@@ -154,7 +135,13 @@ export class DiscussionResultsComponent implements OnInit {
 
   clearSelection() {
     this.searchParams.tags = "";
-    this.router.navigate(['/community'], { queryParams: { category: "", searchTxt: this.searchParams.searchTxt, show: "discss" } });
+    this.searchParams.p = 0;
+    if(this.showPagination){
+      this.router.navigate(['/community'], { queryParams: { category: "", searchTxt: this.searchParams.searchTxt, show: "discss" } });
+    }
+    else{
+        this.search();
+    }
   }
 
   showDiscussions() {
@@ -171,9 +158,4 @@ export class DiscussionResultsComponent implements OnInit {
 
     });
   }
-  setSearchTxt(value: string) {
-    this.searchParams.searchTxt = value;
-    this.homeService.homeSearchtxt = value;
-  }
-
 }

@@ -32,28 +32,12 @@ export class EventResultsComponent implements OnInit {
   totalRecords: number;
   currentUrl: string;
   whatsappUrl;
-  initial: number;
-  final: number;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private eventService: EventService,
-    public sanitizer: DomSanitizer,
-    private homeService: HomeService,
-    private seoService: SeoService) {
-
-    // Generate meta tag 
-    const config: SEO = {
-      title: `All Events - An Elder Spring Initiative by Tata Trusts`,
-      keywords: 'products,services,events,dscussions',
-      description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
-      author: `An Elder Spring Initiative by Tata Trusts`,
-      image: `${window.location.origin}/assets/imgaes/landing-img/Community-320.png`,
-    }
-
-    this.seoService.generateTags(config);
-
+    public sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
@@ -63,8 +47,7 @@ export class EventResultsComponent implements OnInit {
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
-    this.router.navigate([], { queryParams: { past: -1, searchTxt: this.searchParams.searchTxt } });
-    console.log()
+    //this.router.navigate([], { queryParams: { past: -1, searchTxt: this.searchParams.searchTxt } });
   }
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
@@ -81,14 +64,14 @@ export class EventResultsComponent implements OnInit {
     }
 
     this.totalRecords = 0;
+    if(this.searchTxt){
+      this.searchParams.searchTxt = this.searchTxt;
+    }
     if (this.route.snapshot.queryParams['past'] !== undefined) {
       this.searchParams.pastEvents = this.route.snapshot.queryParams['past'];
     }
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
-      this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
-    }
-    if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
-      this.setSearchTxt(this.homeService.homeSearchtxt);
+      this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
     }
     if (this.route.snapshot.queryParams['page'] !== undefined) {
       this.searchParams.p = this.route.snapshot.queryParams['page'];
@@ -99,7 +82,12 @@ export class EventResultsComponent implements OnInit {
 
   changePage(page: number) {
     this.searchParams.p = page;
-    this.onSearch();
+    if(this.showPagination){
+      this.router.navigate(['/community'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
+    }
+    else{
+        this.showEvents();
+    }
   }
 
   showEvents() {
@@ -118,8 +106,6 @@ export class EventResultsComponent implements OnInit {
       if (data.content) {
         this.eventsList = data.content;
         this.totalRecords = data.total;
-        this.initial = this.searchParams.p * this.searchParams.s + 1;
-        this.final = this.initial + this.eventsList.length - 1;
         this.showCount.emit(this.totalRecords);
       }
     });
@@ -148,23 +134,23 @@ export class EventResultsComponent implements OnInit {
   }
 
   onTabChange(value) {
-    this.router.navigate(['/community'], { queryParams: { past: value, searchTxt: this.searchParams.searchTxt, show: "events" } });
+    this.searchParams.pastEvents = value;
+    if(this.showPagination){
+      this.router.navigate(['/community'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, show: "events" } });
+    }
+    else{
+        this.showEvents();
+    }
   }
 
   clearSelection() {
     this.searchParams.pastEvents = -1;
-    this.router.navigate(['/community'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, show: "events" } });
-  }
-
-  onSearch() {
-    this.router.navigate(['/community'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p, show: "events" } });
-  }
-
-  setSearchTxt(value: string){
-    this.searchParams.searchTxt = value;
-    this.homeService.homeSearchtxt = value;
     this.searchParams.p = 0;
+    if(this.showPagination){
+      this.router.navigate(['/community'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, show: "events" } });
+    }
+    else{
+        this.showEvents();
+    }
   }
-
-
 }

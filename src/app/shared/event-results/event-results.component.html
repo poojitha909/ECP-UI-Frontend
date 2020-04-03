@@ -82,11 +82,16 @@
                     </div>
                 </div>
             </div>
-            <app-pagination *ngIf="(eventsList && eventsList.length > 0)" [totalRecords]="totalRecords"
+            <app-pagination *ngIf="showPagination && (eventsList && eventsList.length > 0)" [totalRecords]="totalRecords"
                 [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">
             </app-pagination>
             <div class="m-t-20" *ngIf="eventsList==undefined|| (eventsList && eventsList.length == 0)">
                 <app-event-no-record></app-event-no-record>
+            </div>
+            <div *ngIf="showPagination == false && totalRecords > searchParams.s">
+                <button routerLink="/community"
+                    [queryParams]="{ searchTxt:searchParams?.searchTxt, past: searchParams?.pastEvents, show: 'events' }"
+                    class="uk-button uk-button-default uk-width-1-1 m-t-30">View All Results</button>
             </div>
         </div>
     </div>

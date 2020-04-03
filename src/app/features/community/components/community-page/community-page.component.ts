@@ -5,6 +5,7 @@ import { SEO, PageParam, Service } from 'src/app/core/interfaces';
 import { HomeService } from 'src/app/features/home/home.service';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { StorageHelperService } from 'src/app/core/services/storage-helper.service';
 
 
 @Component({
@@ -13,8 +14,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   styleUrls: ['./community-page.component.scss']
 })
 export class CommunityPageComponent implements OnInit, OnDestroy {
-  // @Input() searchData: any;
-
+  
   searchTxt:string;
   discussionCategory:string;
   pastEvents:string;
@@ -25,8 +25,6 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   showReset: boolean;
   paramsSubs: any;
   show:string;
-  hideOnSearch:boolean = true;
-  showOnSearch:boolean = false;
   noRecords: boolean;
   showResult: boolean;
   isLoading: boolean;
@@ -48,7 +46,8 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   };
 
   autocompleteFields: Service[] = [];
-  constructor(private router: Router, private homeService: HomeService,
+  user: any;
+  constructor(private router: Router, private homeService: HomeService,private store: StorageHelperService,
     private seoService: SeoService, private route: ActivatedRoute) {
 
     // Generate meta tag 
@@ -73,8 +72,6 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
       this.searchPageParam.term = this.homeService.homeSearchtxt;
       this.showReset = true;
       this.showResult = true;
-      this.showOnSearch= true;
-      this.hideOnSearch = false;
     }
 
     this.searchTextChanged.pipe(
@@ -90,6 +87,8 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   }
 
   initiate() {
+    this.user = this.store.retrieve("ECP-USER");
+    
     this.searchTxt = "";
     this.showPagination = true;
     this.showSharing = true;
@@ -135,20 +134,13 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
         this.searchData.services = servicePage.content.slice(0, 6);
         this.searchData.totalServices = servicePage.total
       }
-      // this.searchData.products = response.productPage.content;
-      // this.searchData.totalProducts = response.productPage.total;
       this.searchData.discussions = response.discussPage.content;
       this.searchData.totalDiscussions = response.discussPage.total;
       this.searchData.events = response.eventPage.content;
-      // this.searchData.experts = response.expertPage.content;
       this.searchData.totalEvents = response.eventPage.total;
-      // this.searchData.totalExperts = response.expertPage.total;
       this.searchData.maxResult = Math.max(
-        // this.searchData.totalServices,
-        // this.searchData.totalProducts,
         this.searchData.totalDiscussions,
         this.searchData.totalEvents,
-        // this.searchData.totalExperts
         );
       if (this.searchData.maxResult == 0) {
         this.noRecords = true;
@@ -170,37 +162,29 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   }
 
   onSearchChange(event: any) {
-    this.hideOnSearch=false;
-    this.showOnSearch= true;
     const value = event.target.value;
     if (value !== "") {
       this.showReset = true;
-      this.hideOnSearch=false; 
     } else {
       this.showReset = false;
     }
     this.setSearchTxt(value);
     if (event.key == "Enter") {
+      this.searchPageParam.term=this.searchTxt;
       this.onSearch();
     }
   }
 
   resetSearch(event: any) {
-    this.hideOnSearch=true; 
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
       this.setSearchTxt("");
       this.showReset = false;
-      this.showOnSearch=false;
-      this.router.navigate(['/community'], { queryParams: { searchTxt: this.searchTxt, 
-        category: this.discussionCategory,
-        past: this.pastEvents,
-        show: this.show } });
+     this.onSearch();
     }
   }
 
   onSearch() {
-    // this.hideOnSearch=false;
-    // this.showOnSearch=true;
+    this.searchPageParam.term=this.searchTxt;
     this.homeSearchPages();
     this.router.navigate(['/community'], { queryParams: { searchTxt: this.searchTxt, 
                                                 category: this.discussionCategory,

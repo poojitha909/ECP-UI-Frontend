@@ -196,4 +196,12 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     this.searchTxt = value;
     this.homeService.homeSearchtxt = value;
   }
+  
+  showDiscussionCount(value){
+    this.searchData.totalDiscussions = value;
+  }
+
+  showEventCount(value){
+    this.searchData.totalEvents = value;
+  }
 }

@@ -46,8 +46,8 @@
     <li [ngClass]="{'uk-active': show=='events'}"><a x-no-tabbing (click)="showAll('events')">All Events</a></li>
   </ul>
 <div class="showingSearchResult">
-  <app-discussion-results *ngIf="show === 'discss'" [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt" ></app-discussion-results>
-  <app-event-results *ngIf="show === 'events'" [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt"></app-event-results>
+  <app-discussion-results *ngIf="show === 'discss'" [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt" (showCount)="showDiscussionCount($event)" ></app-discussion-results>
+  <app-event-results *ngIf="show === 'events'" [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt" (showCount)="showEventCount($event)" ></app-event-results>
 </div>
   </div>
 </div>

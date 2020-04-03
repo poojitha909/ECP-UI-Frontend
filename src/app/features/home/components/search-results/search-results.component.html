@@ -14,7 +14,7 @@
         ({{searchData.totalEvents}})</a></li>
     <li activeMax [max]="false"><a href="#" class="font-regular">Experts({{ searchData.totalExperts }})</a></li>
     <li activeMax [max]="false"><a href="#" class="font-regular">Products
-        ({{  searchData.totalProducts  }})</a></li>
+        ({{  productTotal  }})</a></li>
     <li activeMax [max]="true"><a href="#" class="font-regular">Services
         ({{  servicesTotal }})</a></li>
     <!-- <li class="uk-disabled"><a>Disabled</a></li> -->
@@ -101,7 +101,8 @@
         </div>
       </div> -->
       <div class="m-t-40">
-        <app-product-results [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm">
+        <app-product-results [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm"
+          (showCount)="getTotalProducts($event)">
         </app-product-results>
 
 

@@ -41,13 +41,14 @@ import { ServicesResultComponent } from './services-result/services-result.compo
 import { ProductResultsComponent } from './product-results/product-results.component';
 import { ProductNoRecordComponent } from './product-no-record/product-no-record.component';
 import { QuestionNoRecordComponent } from './question-no-record/question-no-record.component';
-import { AskQuestionExpertsComponent }  from './ask-question-experts/ask-question-experts.component';
+import { AskQuestionExpertsComponent } from './ask-question-experts/ask-question-experts.component';
 import { AskQuestionMyQuesComponent } from './ask-question-myques/ask-question-myques.component';
 import { ExpertAllQuestionComponent } from './expert-all-question/expert-all-question.component';
 import { QuestionDetailCardComponent } from './question-detail-card/question-detail-card.component';
 import { ExpertDetailCardComponent } from './expert-detail-card/expert-detail-card.component';
 import { ExpertNoRecordComponent } from './expert-no-record/expert-no-record.component';
 import { QuestionExpertNoRecordComponent } from './question-expert-no-record/question-expert-no-record.component';
+import { NoRecordsComponent } from './no-records/no-records.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { QuestionExpertNoRecordComponent } from './question-expert-no-record/que
     QuestionDetailCardComponent,
     ExpertDetailCardComponent,
     ExpertNoRecordComponent,
-    QuestionExpertNoRecordComponent
+    QuestionExpertNoRecordComponent,
+    NoRecordsComponent
   ],
   imports: [
     CommonModule,
@@ -144,7 +146,8 @@ import { QuestionExpertNoRecordComponent } from './question-expert-no-record/que
     QuestionDetailCardComponent,
     ExpertDetailCardComponent,
     ExpertNoRecordComponent,
-    QuestionExpertNoRecordComponent
+    QuestionExpertNoRecordComponent,
+    NoRecordsComponent
   ]
 })
 export class SharedModule { }

@@ -10,6 +10,8 @@ export class SearchResultsComponent implements OnInit {
   @Input() searchTerm: string;
 
   servicesTotal: number;
+  productTotal: number;
+
   constructor() {
     console.log(this.searchData, 'search component')
   }
@@ -19,5 +21,9 @@ export class SearchResultsComponent implements OnInit {
 
   getTotalServices(tot: number) {
     this.servicesTotal = tot;
+  }
+
+  getTotalProducts(tot: number) {
+    this.productTotal = tot;
   }
 }

@@ -76,6 +76,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
               this.getCategoryServices('', 0, this.homeService.homeSearchtxt);
             } else {
               this.getAllService();
+              this.showingCategory = 'All Services';
             }
             this.selectedCategoryType = undefined;
           }

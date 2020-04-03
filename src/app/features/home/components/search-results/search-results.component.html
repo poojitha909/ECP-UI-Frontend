@@ -1,13 +1,6 @@
 <div class="search-result"
   *ngIf="searchData.services.length > 0 || searchData.products.length > 0  || searchData.discussions.length > 0 ">
   <ul uk-tab>
-    <!-- <li class="uk-active"><a href="#" class="font-regular">Product
-        ({{  searchData.totalProducts  }})</a></li>
-
-    <li><a href="#" class="font-regular">Services
-        ({{  searchData.totalServices }})</a></li> -->
-
-    <!-- <li><a href="#" class="font-regular">Community</a></li> -->
     <li activeMax [max]="false"><a href="#" class="font-regular">Discussion
         ({{ discussionTotal }})</a></li>
     <li activeMax [max]="false"><a href="#" class="font-regular">Events
@@ -17,137 +10,37 @@
         ({{  productTotal  }})</a></li>
     <li activeMax [max]="true"><a href="#" class="font-regular">Services
         ({{  servicesTotal }})</a></li>
-    <!-- <li class="uk-disabled"><a>Disabled</a></li> -->
   </ul>
   <ul class="uk-switcher uk-margin">
-
     <li activeMax [max]="false">
       <!-- Discussions List ..... -->
-      <!-- No search result START-->
-      <app-no-search-result *ngIf="searchData.discussions.length == 0" [viewLink]="'/community'"
-        [tabName]="'Discussion'">
-      </app-no-search-result>
-      <!-- No search result END-->
-
-
-      <!-- <div *ngIf="searchData.discussions.length > 0" class="uk-child-width-1-3@m uk-grid-match m-t-20" uk-grid>
-        <div *ngFor="let discussion of searchData.discussions">
-          <app-dicussion-summary-card [discussion]="discussion"></app-dicussion-summary-card>
-        </div>
-      </div> -->
-
       <app-discussion-results [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm" 
         (showCount)="getTotalDiscussions($event)">
       </app-discussion-results>
-
-      <!-- <div *ngIf="searchData.totalDiscussions > 6">
-        <button routerLink="/community" [queryParams]="{ searchTxt:term}"
-          class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
-          Results</button>
-      </div> -->
-
     </li>
     <li activeMax [max]="false">
       <!-- Events List ..... -->
-      <!-- No search result START-->
-      <app-no-search-result *ngIf="searchData.events.length == 0" [viewLink]="'/community/events'" [tabName]="'Events'">
-      </app-no-search-result>
-      <!-- No search result END-->
-
-
-      <!-- <div *ngIf="searchData.events.length > 0" class="uk-child-width-1-3@m uk-grid-match m-t-20" uk-grid>
-        <div *ngFor="let event of searchData.events">
-          <app-event-summary-card [event]="event" [isPast]="0"></app-event-summary-card>
-        </div>
-      </div> -->
-
       <app-event-results [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm" 
         (showCount)="getTotalEvents($event)">
       </app-event-results>
-
-      <!-- <div *ngIf="searchData.totalEvents > 6">
-        <button routerLink="/community" [queryParams]="{ searchTxt:term, past: -1}"
-          class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
-          Results</button>
-      </div> -->
-
-
     </li>
     <li activeMax [max]="false">
       <!-- Experts lists ...... -->
-      <!-- No search result START-->
-      <app-no-search-result *ngIf="searchData.experts.length == 0" [viewLink]="'/ask-question'"
-        [tabName]="'Ask an Expert'">
-      </app-no-search-result>
-      <!-- No search result END-->
-
-
-      <!-- <div *ngIf="searchData.experts.length > 0" class="uk-child-width-1-3@m uk-grid-match m-t-20" uk-grid>
-        <div *ngFor="let expert of searchData.experts">
-          <app-ask-expert-summary-card [expert]="expert"></app-ask-expert-summary-card>
-        </div>
-      </div> -->
       <ask-question-experts [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm" 
         (showCount)="getTotalExperts($event)">
       </ask-question-experts>
-      
-      <!-- <div *ngIf="searchData.totalExperts > 6">
-        <button routerLink="/ask-question" [queryParams]="{ searchTxt:term}"
-          class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
-          Results</button>
-      </div> -->
     </li>
     <li activeMax [max]="false">
-
       <!-- Products List ..... -->
-      <!-- No search result START-->
-      <app-no-search-result *ngIf="searchData.products.length == 0" [viewLink]="'/products'" [tabName]="'Products'">
-      </app-no-search-result>
-      <!-- No search result END-->
-
-      <!-- 
-      <div *ngIf="searchData.products.length > 0" class="uk-child-width-1-3@m uk-grid-match m-t-20" uk-grid>
-        <div *ngFor="let product of searchData.products">
-          <app-product-search-card [product]="product"></app-product-search-card>
-        </div>
-      </div> -->
-      <div class="m-t-40">
-        <app-product-results [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm"
-          (showCount)="getTotalProducts($event)">
-        </app-product-results>
-
-
-        <!-- <div *ngIf="searchData.totalProducts > 6">
-          <button routerLink="/products" [queryParams]="{ searchTxt:term }"
-            class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
-            Results</button>
-        </div> -->
-      </div>
+      <app-product-results [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm"
+        (showCount)="getTotalProducts($event)">
+      </app-product-results>
     </li>
     <li activeMax [max]="true">
-
       <!-- Services List -->
-      <div class="m-t-40">
-        <!-- No search result START-->
-        <app-no-search-result *ngIf="searchData.services.length == 0" [viewLink]="'/services'" [tabName]="'Services'">
-        </app-no-search-result>
-        <!-- No search result END-->
-
-        <app-services-result [searchTxt]="searchTerm" [internalProcessing]="true"
-          (totalServices)="getTotalServices($event)">
-        </app-services-result>
-      </div>
-      <!-- <div *ngIf="searchData.services.length > 0" class="uk-child-width-1-3@m uk-grid-match m-t-20" uk-grid>
-        <div *ngFor="let service of searchData.services">
-          <app-service-search-card [service]="service"></app-service-search-card>
-        </div>
-      </div> -->
-
-      <!-- <div *ngIf="searchData.totalServices > 6"><button routerLink="/services" [queryParams]="{ category:term }"
-          class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
-          Results</button>
-      </div> -->
+      <app-services-result [searchTxt]="searchTerm" [internalProcessing]="true"
+        (totalServices)="getTotalServices($event)">
+      </app-services-result>
     </li>
   </ul>
-
 </div>

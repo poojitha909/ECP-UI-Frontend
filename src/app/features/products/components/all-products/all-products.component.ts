@@ -92,6 +92,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   resetSearch(event: any) {
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
       this.setSearchTxt("");
+      this.productCategory="";
       this.showReset = false;
       this.onSearch()
     }

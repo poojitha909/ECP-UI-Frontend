@@ -34,6 +34,7 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
   showingProduct: string;
   paramsSubs: any;
   totalRecords: number;
+  whatsappUrl: any;
   
   constructor(private route: ActivatedRoute, private router: Router,
     private productService: ProductService, public sanitizer: DomSanitizer,
@@ -41,6 +42,8 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   ngOnInit() {
+    this.currentUrl = encodeURI(window.location.href);
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(this.currentUrl)}`);
     this.paramsSubs = this.route.queryParams.subscribe(params => {
         this.initiate();
     });

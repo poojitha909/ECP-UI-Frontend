@@ -19,7 +19,7 @@ export class DiscussionResultsComponent implements OnInit {
   @Input() showPagination: boolean;
   @Input() showSharing: boolean;
   @Output() showCount: EventEmitter<number> = new EventEmitter();
-  @Input() hide: false;
+  
   discussionsList: any[];
   selCategory: string;
   categoryList: any;

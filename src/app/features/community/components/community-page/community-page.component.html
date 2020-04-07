@@ -37,18 +37,22 @@
     </div>
 
   </div >
-  <ul uk-tab class= "showOnSearchtab" *ngIf="showReset">
-    <li  activeMax ><a x-no-tabbing (click)="showAll('discss')" href="#" class="font-regular" >Articles & Discussions({{searchData.totalDiscussions}})</a></li>
-    <li  activeMax ><a x-no-tabbing (click)="showAll('events')" href="#" class="font-regular">Events({{searchData.totalEvents}})</a></li>
+  <ul uk-tab class="showOnSearchtab" id="search-tab" *ngIf="showReset">
+    <li><a (click)="showAll('discss')" href="#" class="font-regular" >Articles & Discussions({{searchData.totalDiscussions}})</a></li>
+    <li><a (click)="showAll('events')" href="#" class="font-regular">Events({{searchData.totalEvents}})</a></li>
   </ul>
-  <ul class="uk-child-width-expand" uk-tab *ngIf="!showReset">
-    <li [ngClass]="{'uk-active': show=='discss'}"><a x-no-tabbing (click)="showAll('discss')">All Articles & Discussions</a></li>
-    <li [ngClass]="{'uk-active': show=='events'}"><a x-no-tabbing (click)="showAll('events')">All Events</a></li>
+  <ul class="uk-child-width-expand" id="search-tab" uk-tab *ngIf="!showReset">
+    <li><a (click)="showAll('discss')" href="#">All Articles & Discussions</a></li>
+    <li><a (click)="showAll('events')" href="#">All Events</a></li>
   </ul>
-<div class="showingSearchResult">
-  <app-discussion-results *ngIf="show === 'discss'" [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt" (showCount)="showDiscussionCount($event)" ></app-discussion-results>
-  <app-event-results *ngIf="show === 'events'" [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt" (showCount)="showEventCount($event)" ></app-event-results>
-</div>
+  <ul class="uk-switcher showingSearchResult">
+    <li>
+      <app-discussion-results [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt" (showCount)="showDiscussionCount($event)" ></app-discussion-results>
+    </li>
+    <li>
+      <app-event-results [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt" (showCount)="showEventCount($event)" ></app-event-results>
+    </li>
+  </ul>
   </div>
 </div>
 

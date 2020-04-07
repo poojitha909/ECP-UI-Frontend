@@ -6,7 +6,7 @@ import { HomeService } from 'src/app/features/home/home.service';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { StorageHelperService } from 'src/app/core/services/storage-helper.service';
-
+declare var UIkit: any;
 
 @Component({
   selector: 'app-community-page',
@@ -94,7 +94,6 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     this.showSharing = true;
     this.currentUrl = window.location.href;
 
-   
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
       this.showReset = this.searchTxt ? true : false;
@@ -122,39 +121,6 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
       this.show = this.route.snapshot.queryParams['show'];
     }
   }
-
-  homeSearchPages() {
-    this.isLoading = true;
-    this.homeService.searchParam = this.searchPageParam;
-    // Home search pages API
-    this.homeService.getHomeSearchPages().subscribe(response => {
-      this.isLoading = false;
-      if (response && response.servicePage) {
-        const servicePage = JSON.parse(response.servicePage);
-        this.searchData.services = servicePage.content.slice(0, 6);
-        this.searchData.totalServices = servicePage.total
-      }
-      this.searchData.discussions = response.discussPage.content;
-      this.searchData.totalDiscussions = response.discussPage.total;
-      this.searchData.events = response.eventPage.content;
-      this.searchData.totalEvents = response.eventPage.total;
-      this.searchData.maxResult = Math.max(
-        this.searchData.totalDiscussions,
-        this.searchData.totalEvents,
-        );
-      if (this.searchData.maxResult == 0) {
-        this.noRecords = true;
-      } else {
-        this.noRecords = false;
-      }
-      this.showResult = true;
-    },
-      error => {
-        this.isLoading = false;
-        console.log(error);
-      });
-  }
-  
 
 
   showAll(tab) {
@@ -187,7 +153,6 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
 
   onSearch() {
     this.searchPageParam.term=this.searchTxt;
-    this.homeSearchPages();
     this.router.navigate(['/community'], { queryParams: { searchTxt: this.searchTxt, 
                                                 category: this.discussionCategory,
                                                 past: this.pastEvents,
@@ -201,9 +166,39 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   
   showDiscussionCount(value){
     this.searchData.totalDiscussions = value;
+    this.getMaxCount();
   }
 
   showEventCount(value){
     this.searchData.totalEvents = value;
+    this.getMaxCount();
+  }
+
+  getMaxCount() {
+    const getelem = document.getElementById("search-tab");
+    if(this.show == 'discss'){
+      UIkit.tab(getelem).show(0);
+    }
+    else if(this.show == 'events'){
+      UIkit.tab(getelem).show(1);
+    }
+    else{
+      const maxTotal = Math.max(
+        this.searchData.totalEvents,
+        this.searchData.totalDiscussions);
+      switch (maxTotal) {
+        case this.searchData.totalEvents:
+          UIkit.tab(getelem).show(1);
+          break;
+        case this.searchData.totalDiscussions:
+  
+          UIkit.tab(getelem).show(0);
+          break;
+        default:
+          UIkit.tab(getelem).show(0);
+          break;
+      }
+    }
+    
   }
 }

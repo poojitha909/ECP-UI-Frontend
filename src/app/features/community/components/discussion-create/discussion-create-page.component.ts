@@ -24,7 +24,7 @@ export class DiscussionCreatePageComponent implements OnInit {
     },
     {
       text: 'Articles & Discussions',
-      link: '/community/discussions'
+      link: '/community'
     }
   ];
 

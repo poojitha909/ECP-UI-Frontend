@@ -11,7 +11,6 @@ import { EventDetailPageComponent } from './components/event-detail/event-detail
 import { EventCreatePageComponent } from './components/event-create/event-create-page.component';
 import { DiscussionDetailPageComponent } from './components/discussion-detail/discussion-detail-page.component';
 import { DiscussionNoRecordComponent } from './components/discussion-no-record/discussion-no-record.component';
-import { EventNoRecordComponent } from './components/event-no-record/event-no-record.component';
 import { SharedModule } from '../../shared';
 import { EditorModule } from '@tinymce/tinymce-angular';
 
@@ -24,7 +23,6 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     DiscussionDetailPageComponent,
     DiscussionCreatePageComponent,
     DiscussionSummaryComponent,
-    EventNoRecordComponent,
     EventDetailPageComponent,
     DiscussionsListPageComponent
   ],

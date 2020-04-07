@@ -101,21 +101,24 @@
                 </div>
             </div>
             <!-- Mobile filter END -->
+            <div *ngIf="isLoading" class="m-t-50 uk-text-center">
+                <span uk-spinner="ratio: 3"></span>
+            </div>
             <!-- Products list  -->
-            <div *ngIf="productsList!==undefined && productsList.length > 0">
+            <div *ngIf="productsList!==undefined && productsList.length > 0 && !isLoading">
                 <app-product-detail-card *ngFor="let proudct of productsList" [product]="proudct"
                     [searchTxt]="searchParams?.searchTxt" (categoryChange)="onTabChange($event)">
                 </app-product-detail-card>
             </div>
-            <app-pagination *ngIf="showPagination && (productsList && productsList.length > 0)"
+            <app-pagination *ngIf="showPagination && (productsList && productsList.length > 0) && !isLoading"
                 [totalRecords]="totalRecords" [currentPage]="searchParams?.p" [perPage]="searchParams?.s"
                 (pageChangeCall)="changePage($event)">
             </app-pagination>
-            <div class="m-t-20" *ngIf="productsList==undefined || productsList.length == 0">
+            <div class="m-t-20" *ngIf="(productsList==undefined || productsList.length == 0) && !isLoading">
                 <!-- <app-product-no-record></app-product-no-record> -->
                 <app-no-records></app-no-records>
             </div>
-            <div *ngIf="showPagination == false && totalRecords > searchParams.s">
+            <div *ngIf="showPagination == false && totalRecords > searchParams.s && !isLoading">
                 <button routerLink="/products"
                     [queryParams]="{ searchTxt:searchParams?.searchTxt, productCategory: searchParams?.productCategory }"
                     class="uk-button uk-button-default uk-width-1-1 m-t-30">View All Results</button>

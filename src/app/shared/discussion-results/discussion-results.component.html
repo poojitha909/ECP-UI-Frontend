@@ -60,7 +60,10 @@
             </div>
         </div>
         <div class="uk-width-expand@m">
-            <div *ngIf="discussionsList!==undefined && discussionsList.length > 0" class="m-b-30">
+            <div *ngIf="isLoading" class="m-t-50 uk-text-center">
+                <span uk-spinner="ratio: 3"></span>
+            </div>    
+            <div *ngIf="discussionsList!==undefined && discussionsList.length > 0 && !isLoading" class="m-b-30">
                 <div class="uk-flex-left uk-text-center uk-child-width-1-2@m" uk-grid>
                     <div *ngFor="let discussion of discussionsList">
                         <app-dicussion-summary-card [category]="selCategory" [discussion]="discussion">
@@ -68,13 +71,13 @@
                     </div>
                 </div>
             </div>
-            <app-pagination *ngIf="showPagination && (discussionsList.length >= 0)" [totalRecords]="totalRecords"
+            <app-pagination *ngIf="showPagination && discussionsList.length >= 0 && !isLoading" [totalRecords]="totalRecords"
                 [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">
             </app-pagination>
-            <div *ngIf=" discussionsList==undefined || discussionsList?.length === 0">
+            <div *ngIf="(discussionsList==undefined || discussionsList?.length === 0) && !isLoading">
                 <app-no-discussion-results></app-no-discussion-results>
             </div>
-            <div *ngIf="showPagination == false && totalRecords > searchParams.s">
+            <div *ngIf="showPagination == false && totalRecords > searchParams.s && !isLoading">
                 <button routerLink="/community"
                     [queryParams]="{ searchTxt:searchParams?.searchTxt, category: searchParams?.tags, show: 'discss' }"
                     class="uk-button uk-button-default uk-width-1-1 m-t-30">View All Results</button>

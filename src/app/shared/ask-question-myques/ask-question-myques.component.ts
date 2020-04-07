@@ -22,6 +22,7 @@ export class AskQuestionMyQuesComponent implements OnInit, OnDestroy {
   @Input() showPagination: boolean;
   @Input() showSharing: boolean;
   @Output() showCount: EventEmitter<number> = new EventEmitter();
+  isLoading: boolean;
   searchParams: {
     p: number,
     s: number,
@@ -91,6 +92,7 @@ export class AskQuestionMyQuesComponent implements OnInit, OnDestroy {
   }
   
   showQuestions() {
+    this.isLoading = true;
     this.askQuesService.questions(this.searchParams).subscribe((response: any) => {
       const data = response.data;
       this.questions = [];
@@ -98,6 +100,7 @@ export class AskQuestionMyQuesComponent implements OnInit, OnDestroy {
         this.questions = data.content;
         this.totalRecords = data.total;
         this.showCount.emit(this.totalRecords);
+        this.isLoading = false;
       }
     });
   }

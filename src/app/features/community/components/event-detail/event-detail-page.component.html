@@ -15,7 +15,7 @@
                             Organiser</button>
                     </div>
                     <p>
-                        <a style="cursor:pointer;" href="mailto:{{reportEmail}}"><img
+                        <a style="cursor:pointer;" href="mailto:{{reportEmail}}?subject=Report '{{event.title}}'"><img
                                 src="/assets/images/flag.svg">Report this Event/Organizer</a>
                     </p>
                 </div>
@@ -36,10 +36,10 @@
                             Whatsapp</a>
                     </div>
                     <div class="m-b-20">
-                        <a href="mailto:?subject=Regarding Event: {{event.title}}&body=Event URL: {{currentUrl}}"
+                        <a href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age%20for%20event:%20{{event.title}}&body=Event URL: {{currentUrl}}"
                         class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail">
                         </a> <a class="social-link"
-                        href="mailto:?subject=Regarding Event: {{event.title}}&body=&body=Event URL: {{currentUrl}}">
+                        href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age%20for%20event:%20{{event.title}}&body=&body=Event URL: {{currentUrl}}">
                         Share via
                         Email</a>
                     </div>

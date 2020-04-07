@@ -34,8 +34,7 @@ export class DiscussionResultsComponent implements OnInit {
   totalRecords: number;
   currentUrl: string;
   whatsappUrl;
-  initial: number = 0
-  final: number = 6;
+  isLoading: boolean;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private discussionService: DiscussionService, private menuService: MenuService,
@@ -99,11 +98,14 @@ export class DiscussionResultsComponent implements OnInit {
   }
 
   getAllCategories() {
+    this.isLoading = true;
     this.menuService.getMenus("564071623e60f5b66f62df27", "").subscribe((response: any) => {
       const data = response;
       let tags = [];
       this.categoryList = {};
+      this.isLoading = false;
       if (data.length > 0) {
+        this.isLoading = true;
         for (let i in data) {
           this.categoryList[data[i].id] = { id: data[i].id, label: data[i].displayMenuName, tagIds: [], totalCount: 0, discussionLatest: null };
           if (data[i].tags) {
@@ -145,17 +147,16 @@ export class DiscussionResultsComponent implements OnInit {
   }
 
   showDiscussions() {
+    this.isLoading = true;
     this.discussionService.searchDiscussions(this.searchParams).subscribe((response: any) => {
       const data = response.data;
       this.discussionsList = [];
       if (data.content) {
         this.discussionsList = data.content;
       }
-      this.initial = this.searchParams.p * this.searchParams.s + 1;
-      this.final = this.initial + this.discussionsList.length - 1
       this.totalRecords = data.total;
       this.showCount.emit(this.totalRecords);
-
+      this.isLoading = false;
     });
   }
 }

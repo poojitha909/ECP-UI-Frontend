@@ -15,6 +15,7 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
   @Input() showPagination: boolean;
   @Input() showSharing: boolean;
   @Input() searchTxt: string;
+  isLoading: boolean;
   @Output() showCount: EventEmitter<number> = new EventEmitter();
   searchParams: {
     p: number,
@@ -34,6 +35,7 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
   showingProduct: string;
   paramsSubs: any;
   totalRecords: number;
+  whatsappUrl: any;
   
   constructor(private route: ActivatedRoute, private router: Router,
     private productService: ProductService, public sanitizer: DomSanitizer,
@@ -41,6 +43,8 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   ngOnInit() {
+    this.currentUrl = encodeURI(window.location.href);
+    this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(this.currentUrl)}`);
     this.paramsSubs = this.route.queryParams.subscribe(params => {
         this.initiate();
     });
@@ -91,6 +95,7 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
     if (this.route.snapshot.queryParams['page'] !== undefined) {
         this.searchParams.p = this.route.snapshot.queryParams['page'];
     }
+    this.isLoading = true;
     this.productService.getCategoryListFiltered(this.searchParams.searchTxt).subscribe((response: any) => {
         const data = response.data;
         this.catsList = [];
@@ -102,6 +107,7 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
         this.showingProduct = "All Products";
         }
         }
+        this.isLoading = false;
     });
     this.showProducts();
   }
@@ -118,6 +124,7 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
 
   showProducts() {
     this.showResult = false;
+    this.isLoading = true;
     this.productService.searchProducts(this.searchParams).subscribe((response: any) => {
         const data = response.data;
         this.productsList = [];
@@ -125,6 +132,7 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
           this.productsList = data.content;
           this.totalRecords = data.total;
           this.showCount.emit(this.totalRecords);
+          this.isLoading = false;
         }
     });
   }

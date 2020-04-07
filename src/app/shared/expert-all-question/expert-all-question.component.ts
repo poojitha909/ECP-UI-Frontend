@@ -18,7 +18,7 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
   @Input() showPagination: boolean;
   @Input() showSharing: boolean;
   @Output() showCount: EventEmitter<number> = new EventEmitter();
-  
+  isLoading: boolean;
   searchParams: {
     p: number,
     s: number,
@@ -68,6 +68,7 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
 
     if(this.user){
       this.user = JSON.parse(this.user);
+      this.isLoading = true;
       this.userService.getUserProfile().subscribe(
         userProfie => {
           this.searchParams.answeredBy = userProfie.id;
@@ -90,12 +91,14 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
 
 
   showQuestions(){
+    this.isLoading = true;
     this.askQuesService.questions(this.searchParams).subscribe( (response:any) =>{
       const data = response.data;
       this.questions = [];
       if(data.content){
         this.questions = data.content;
         this.totalRecords = data.total;
+        this.isLoading = false;
       }
     });
   }

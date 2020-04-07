@@ -34,12 +34,17 @@
 .uk-pagination > * > * {
   display: inline-block;
 }
-.uk-pagination > li:first-child {
-  width: 115px;
+.uk-pagination .pg-align-1 {
+  width: 75px;
   line-height: 50px;
+  padding-left:0px;
+  padding-right:0px;
 }
-.uk-pagination > li:last-child {
+.uk-pagination .pg-align-2 {
+  width: 75px;
   line-height: 50px;
+  padding-left:0px;
+  padding-right:0px;
 }
 
 

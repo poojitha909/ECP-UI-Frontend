@@ -33,10 +33,10 @@
                             Whatsapp</a>
                     </div>
                     <div class="m-b-20">
-                        <a href="mailto:?subject=This is regarding discussion '{{discussion.title}}' from An Elder Spring Initiative by Tata Trusts&body= Discussion URL: {{currentUrl}}"
+                        <a href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age&body= Discussion URL: {{currentUrl}}"
                         class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail">
                         </a> <a class="social-link"
-                        href="mailto:?subject=This is regarding discussion '{{discussion.title}}' from An Elder Spring Initiative by Tata Trusts&body= Discussion URL: {{currentUrl}}">
+                        href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age&body= Discussion URL: {{currentUrl}}">
                         Share via
                         Email</a>
                     </div>
@@ -103,7 +103,7 @@
                         <div [innerHTML]="repliesGroup[0].text">
                         </div>
                         <div class="uk-grid-collapse uk-child-width-expand@s" uk-grid>
-                            <div *ngIf="repliesGroup.userId != user?.id" class="like-container">
+                            <div *ngIf="repliesGroup[0].userId != user?.id" class="like-container">
                                 <img class="img" 
                                     src="/assets/images/like-outline.svg" alt="No Image Found" (click)="likeReply(repliesGroup[0])">
                                 <span
@@ -111,13 +111,13 @@
                                     {{repliesGroup[0].likeCount}}
                                 </span>
                             </div>
-                            <div *ngIf="repliesGroup.userId == user?.id" class="like-container">
+                            <div *ngIf="repliesGroup[0].userId == user?.id" class="like-container">
                                 <a class="font-regular uk-text-primary" href="#reply-modal-discussion" uk-toggle
                                     (click)="editReply('',repliesGroup[0])">
                                     Edit
                                 </a>
                             </div>
-                            <div class="reply-container" uk-toggle="target: #reply-modal-discussion" (click)="setParentReplyId(repliesGroup.id)">
+                            <div class="reply-container" uk-toggle="target: #reply-modal-discussion" (click)="setParentReplyId(repliesGroup[0].id)">
                                 <img class="img" src="/assets/images/reply.svg" alt="No Image Found"> <label class="reply" for="commentarea">
                                     Reply</label>
                             </div>

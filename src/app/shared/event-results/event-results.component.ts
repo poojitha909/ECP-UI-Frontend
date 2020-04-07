@@ -17,6 +17,7 @@ export class EventResultsComponent implements OnInit {
   @Input() showSharing: boolean;
   @Output() showCount: EventEmitter<number> = new EventEmitter();
   @Input() hide: true;
+  isLoading: boolean;
   
   eventsList: any[];
   countData: { "all": 0, "outdoor": 0, "indoor": 0 };
@@ -100,6 +101,7 @@ export class EventResultsComponent implements OnInit {
     else if(this.searchParams.pastEvents==0){
       this.searchParams.dir = 0;
     }
+    this.isLoading = true;
     this.eventService.searchEvents(this.searchParams).subscribe((response: any) => {
       const data = response.data;
       this.eventsList = [];
@@ -108,12 +110,15 @@ export class EventResultsComponent implements OnInit {
         this.totalRecords = data.total;
         this.showCount.emit(this.totalRecords);
       }
+      this.isLoading = false;
     });
   }
 
   showEventsCount() {
+    this.isLoading = true;
     this.eventService.searchEventsCount({ "searchTxt": this.searchParams.searchTxt, "eventType": 0 }).subscribe((response: any) => {
       this.countData = response.data;
+      this.isLoading = false;
     });
   }
 

@@ -23,6 +23,7 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
   @Input() searchTxt: string;
   @Input() showPagination: boolean;
   @Input() showSharing: boolean;
+  isLoading: boolean;
   searchParams: {
     p: number,
     s: number,
@@ -77,6 +78,7 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
     if (this.route.snapshot.queryParams['page'] !== undefined) {
       this.searchParams.p = this.route.snapshot.queryParams['page'];
     }
+    this.isLoading = true;
     this.askQuesService.getCategoryListFilter(this.searchParams.searchTxt).subscribe((response: any) => {
       const data = response.data;
       this.catsList = [];
@@ -110,6 +112,7 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
   }
 
   showExperts() {
+    this.isLoading = true;
     this.askQuesService.experts(this.searchParams).subscribe((response: any) => {
       const data = response.data;
       this.experts = [];
@@ -117,6 +120,7 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
         this.experts = data.content;
         this.totalRecords = data.total;
         this.showCount.emit(this.totalRecords);
+        this.isLoading = false;
       }
     });
   }

@@ -58,7 +58,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
       this.activeRoute.queryParamMap.subscribe(
         value => {
           // this.currentUrl = encodeURI(window.location.href);
-          this.mailUrl = `mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20${encodeURI(window.location.href)}`;
+          this.mailUrl = `mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age&body=%0AService%2DURL:%20${encodeURI(window.location.href)}`;
           this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(window.location.href)}`);
           this.whatsMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
           const queryCategory = value.get("category");

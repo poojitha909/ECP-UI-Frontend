@@ -3,6 +3,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {AskQuestionService} from '../../features/ask-question/services/ask-question.service';
 import { StorageHelperService } from "../../core/services/storage-helper.service";
 import { UserService } from '../../features/user/services/user.service';
+import { Breadcrumb } from 'src/app/core/interfaces';
 
 @Component({
   selector: 'expert-all-question',
@@ -10,10 +11,21 @@ import { UserService } from '../../features/user/services/user.service';
   styleUrls: ['./expert-all-question.component.scss']
 })
 export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
-
+  breadcrumbLinks: Breadcrumb[] = [
+    {
+      text: 'Home',
+      link: '/'
+    },
+    {
+      text: 'All Experts',
+      link: '/ask-question'
+    }    
+  ];
+  
   questions: any[];
   viewby: string;
   user: any;
+  hideBreadcrumb:boolean
   @Input() searchTxt: string;
   @Input() showPagination: boolean;
   @Input() showSharing: boolean;
@@ -88,9 +100,8 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
         this.showQuestions();
     }
   }
-
-
   showQuestions(){
+    this.hideBreadcrumb=false;
     this.isLoading = true;
     this.askQuesService.questions(this.searchParams).subscribe( (response:any) =>{
       const data = response.data;

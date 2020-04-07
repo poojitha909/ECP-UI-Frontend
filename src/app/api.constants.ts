@@ -19,6 +19,7 @@ export class ApiConstants {
     public static ADD_DB_SERVICE_REPORT: string = `/BY/api/v1/userProfile/reportService`;
     public static ADD_SERVICE_RATEING: string = `/BY/api/v1/reviewRate/addServiceRating`;
     public static GET_SERVICE_RATEINGS: string = `/BY/api/v1/reviewRate/serviceRatings`;
+    public static ADD_EVENT_REPORT: string = `/BY/api/v1/event/reportEvent`;
     public static EVENTS_SERVICES: string = `/BY/api/v1/event`;
     public static SEND_OTP: string = `/BY/api/v1/users/sendOtp`;
     public static RESEND_OTP: string = `/BY/api/v1/users/resendOtp`;

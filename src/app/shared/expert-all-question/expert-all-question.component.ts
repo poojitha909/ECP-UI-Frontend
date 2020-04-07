@@ -25,7 +25,7 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
   questions: any[];
   viewby: string;
   user: any;
-  hideBreadcrumb:boolean
+  breadcrumb:boolean
   @Input() searchTxt: string;
   @Input() showPagination: boolean;
   @Input() showSharing: boolean;
@@ -49,6 +49,7 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.paramsSubs = this.route.queryParams.subscribe(params => {
+      this.breadcrumb=params.breadcrumb
       this.initiate();
     }); 
   }
@@ -101,7 +102,6 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
     }
   }
   showQuestions(){
-    this.hideBreadcrumb=false;
     this.isLoading = true;
     this.askQuesService.questions(this.searchParams).subscribe( (response:any) =>{
       const data = response.data;

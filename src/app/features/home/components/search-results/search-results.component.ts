@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, ViewChildren } from '@angular/core';
+declare var UIkit: any;
 
 @Component({
   selector: 'app-search-results',
@@ -9,12 +10,12 @@ export class SearchResultsComponent implements OnInit {
   @Input() searchData: any;
   @Input() searchTerm: string;
 
-  servicesTotal: number;
-  productTotal: number;
-  expertTotal: number;
-  eventTotal: number;
-  discussionTotal: number;
-
+  servicesTotal: number = 0;
+  productTotal: number = 0;
+  expertTotal: number = 0;
+  eventTotal: number = 0;
+  discussionTotal: number = 0;
+  maxTotal: number;
   constructor() {
     console.log(this.searchData, 'search component')
   }
@@ -24,18 +25,55 @@ export class SearchResultsComponent implements OnInit {
 
   getTotalServices(tot: number) {
     this.servicesTotal = tot;
+    this.getMaxCount();
   }
 
   getTotalProducts(tot: number) {
     this.productTotal = tot;
+    this.getMaxCount();
   }
-  getTotalExperts(tot: number){
+  getTotalExperts(tot: number) {
     this.expertTotal = tot;
+    this.getMaxCount();
   }
-  getTotalEvents(tot: number){
+  getTotalEvents(tot: number) {
     this.eventTotal = tot;
+    this.getMaxCount();
   }
-  getTotalDiscussions(tot: number){
+  getTotalDiscussions(tot: number) {
     this.discussionTotal = tot;
+    this.getMaxCount();
+  }
+
+  getMaxCount() {
+    this.maxTotal = Math.max(
+      this.servicesTotal,
+      this.productTotal,
+      this.expertTotal,
+      this.eventTotal,
+      this.discussionTotal);
+
+    const getelem = document.getElementById("search-tab");
+    switch (this.maxTotal) {
+      case this.eventTotal:
+        UIkit.tab(getelem).show(1);
+        break;
+      case this.expertTotal:
+
+        UIkit.tab(getelem).show(2);
+        break;
+      case this.productTotal:
+
+        UIkit.tab(getelem).show(3);
+        break;
+      case this.servicesTotal:
+
+        UIkit.tab(getelem).show(4);
+        break;
+      default:
+        UIkit.tab(getelem).show(0);
+        break;
+    }
+
   }
 }

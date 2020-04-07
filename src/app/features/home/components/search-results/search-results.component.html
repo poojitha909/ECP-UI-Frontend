@@ -1,42 +1,42 @@
 <div class="search-result"
   *ngIf="searchData.services.length > 0 || searchData.products.length > 0  || searchData.discussions.length > 0 ">
-  <ul uk-tab>
-    <li activeMax [max]="false"><a href="#" class="font-regular">Discussion
+  <ul id="search-tab" uk-tab>
+    <li><a href="#" class="font-regular">Discussion
         ({{ discussionTotal }})</a></li>
-    <li activeMax [max]="false"><a href="#" class="font-regular">Events
+    <li><a href="#" class="font-regular">Events
         ({{ eventTotal }})</a></li>
-    <li activeMax [max]="false"><a href="#" class="font-regular">Experts({{ expertTotal }})</a></li>
-    <li activeMax [max]="false"><a href="#" class="font-regular">Products
+    <li><a href="#" class="font-regular">Experts({{ expertTotal }})</a></li>
+    <li><a href="#" class="font-regular">Products
         ({{  productTotal  }})</a></li>
-    <li activeMax [max]="true"><a href="#" class="font-regular">Services
+    <li><a href="#" class="font-regular">Services
         ({{  servicesTotal }})</a></li>
   </ul>
   <ul class="uk-switcher uk-margin">
-    <li activeMax [max]="false">
+    <li>
       <!-- Discussions List ..... -->
-      <app-discussion-results [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm" 
+      <app-discussion-results [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm"
         (showCount)="getTotalDiscussions($event)">
       </app-discussion-results>
     </li>
-    <li activeMax [max]="false">
+    <li>
       <!-- Events List ..... -->
-      <app-event-results [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm" 
+      <app-event-results [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm"
         (showCount)="getTotalEvents($event)">
       </app-event-results>
     </li>
-    <li activeMax [max]="false">
+    <li>
       <!-- Experts lists ...... -->
-      <ask-question-experts [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm" 
+      <ask-question-experts [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm"
         (showCount)="getTotalExperts($event)">
       </ask-question-experts>
     </li>
-    <li activeMax [max]="false">
+    <li>
       <!-- Products List ..... -->
       <app-product-results [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm"
         (showCount)="getTotalProducts($event)">
       </app-product-results>
     </li>
-    <li activeMax [max]="true">
+    <li>
       <!-- Services List -->
       <app-services-result [searchTxt]="searchTerm" [internalProcessing]="true"
         (totalServices)="getTotalServices($event)">

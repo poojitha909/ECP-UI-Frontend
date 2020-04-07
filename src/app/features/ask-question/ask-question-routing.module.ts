@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AskQuestionPageComponent } from './components/ask-question-page/ask-question-page.component';
-import { AllAskQuestionComponent } from './components/all-ask-question/all-ask-question.component';
+import { AskQuestionExpertsComponent } from '../../shared/ask-question-experts/ask-question-experts.component';
+import { AskQuestionMyQuesComponent } from '../../shared/ask-question-myques/ask-question-myques.component';
 import { AskQuestionCreatePageComponent } from './components/ask-question-create/ask-question-create-page.component';
 import { AskQuestionDetailPageComponent } from './components/ask-question-detail/ask-question-detail-page.component';
 import { LayoutComponent } from 'src/app/ui';
-import { ExpertAllQuestionComponent } from './components/expert-all-question/expert-all-question.component';
+import { ExpertAllQuestionComponent } from '../../shared/expert-all-question/expert-all-question.component';
 
 const routes: Routes = [
 
@@ -15,15 +16,19 @@ const routes: Routes = [
     component: AskQuestionPageComponent
   },
   {
-    path: 'all',
-    component: AllAskQuestionComponent
+    path: 'experts',
+    component: AskQuestionExpertsComponent
+  },
+  {
+    path: 'myques',
+    component: AskQuestionMyQuesComponent
   },
   {
     path: 'add',
     component: AskQuestionCreatePageComponent
   },
   {
-    path: 'expert',
+    path: 'expertques',
     component: ExpertAllQuestionComponent
   },
   {

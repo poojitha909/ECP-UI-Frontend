@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-detail-card',
@@ -7,10 +8,17 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ProductDetailCardComponent implements OnInit {
   @Input() product: any;
-  constructor() { }
+  @Input() searchTxt: any;
+  @Output() categoryChange: EventEmitter<string> = new EventEmitter();
+  constructor( private route:Router) { }
 
   ngOnInit() {
   }
+
+  onclick(e,product){
+    e.stopPropagation();
+    this.categoryChange.emit(product.productCategory.id);
+} 
 
 
   getDbServiceRating(percent): number {

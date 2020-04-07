@@ -67,14 +67,18 @@ export class SearchContainerComponent implements OnInit {
     this.selectedValue = "";
   }
 
+  /**
+   * Get Autocomplete data
+   * @param value 
+   */
   onSearchChange(value) {
     if (value !== "") {
       this.showReset = true;
       this.homeService.searchParam = this.searchPageParam;
-      this.homeService.getAutoCompleteServices().subscribe(
-        response => {
-          this.autocompleteFields = response;
-        });
+      // this.homeService.getAutoCompleteServices().subscribe(
+      //   response => {
+      //     this.autocompleteFields = response;
+      //   });
     } else {
       this.autocompleteFields = [];
       this.showReset = false;
@@ -170,6 +174,7 @@ export class SearchContainerComponent implements OnInit {
       }
     }
   }
+
 
   searchEvent($event) {
     // console.log($event, "onSearch event");

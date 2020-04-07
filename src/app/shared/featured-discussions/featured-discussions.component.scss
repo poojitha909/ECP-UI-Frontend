@@ -56,3 +56,59 @@
         color: $font-light-black;
     }
 }
+
+@media(max-width:640px){
+    .featured-tab{
+        height: 552px;
+        margin-top: -16px;
+        .letimg{
+            margin-left: -16px;
+        }
+
+        .uk-divider{
+            width: 300px;
+            margin-left: 16px;
+            margin-top: 16px;
+            margin-bottom: -17px;
+        }
+        .class{
+            height: 152px;
+        }
+        .content{
+            height: 326px;
+            .uk-slider-container{
+                margin-top: -21px;
+            }
+            .slidenav-next{
+                width: 48px;
+                height: 48px;
+            }
+            .slidenav-pervious{
+                width: 48px;
+                height: 48px;
+            }
+        }
+        .block-footer{
+            height: 72px;
+            margin-bottom: 16px;
+            border: 1px solid #ecf4ff;
+            .cardfooter{
+                display: none;
+            }
+            .uk-button{
+                margin-top: -10px;
+                width: 118%;
+                margin-left: -27px;
+            }
+        }
+        .title{
+            height: 152px;
+            .searchoption{
+                margin-top: -16px;
+                .searchoptionlist{
+                    border-radius: 4px;
+                }
+            }
+        }
+    }
+}

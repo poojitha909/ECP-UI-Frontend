@@ -1,0 +1,64 @@
+@import "src/assets/css/variables.scss";
+a{
+    color: #1A72E8;
+}
+.p-16{
+    padding: 16px;
+}
+.fname{
+    color: #161C2D;
+    font-size:18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.image-user{
+    height: 116px;
+    max-width: 100%;
+}
+.expertdetial{
+    font-size:18px;
+    color: rgba(22, 28, 45, 0.68);
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+.category{
+    font-size: $font-small;
+}
+.askques{
+    position: relative;
+}
+.askques button{
+    display: block;
+    bottom: 20px;
+    left: 0px;
+    position: absolute;
+    width: 164px;
+    max-width: 100%;
+    font-size: 14px;
+}
+.category span{
+    font-size: $font-small;
+}
+.cursor{
+    cursor: pointer;
+}
+.uk-card-default {
+    background: #fff;
+    color: #666;
+    /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); */
+    border: 1px solid #D7E0EF;
+    border-radius: 4px;
+}
+.reply-card{
+    text-align: center;
+    margin-top: 20px;
+    background-color: #ECF4FF;
+    border-radius: 4px;
+    line-height: 56px;
+    font-size: 15px;
+    width: 164px;
+    max-width: 100%;
+}
+.category-text{
+    color:#1a72e8
+}

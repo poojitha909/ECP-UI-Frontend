@@ -1,0 +1,86 @@
+<div class="uk-container discussions " *ngIf="categoryList!==undefined && dropDownList!==undefined">
+    <div class="grid-reverse-dir" uk-grid>
+        <div class="uk-width-1-3@m">
+            <div class="category-box bg-white">
+                <div uk-grid>
+                    <div class="uk-width-expand">
+                        <h3 class="uk-h4">Categories</h3>
+                    </div>
+                    <div *ngIf="searchParams.tags !== ''">
+                        <a class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
+                    </div>
+                </div>
+                <ul class="uk-list uk-list-large p-2" *ngIf="dropDownList!==undefined">
+                    <li *ngFor="let cat of dropDownList | keyvalue" (click)="onTabChange(cat.key)"
+                        class="cursor-pointer" [ngClass]="{'cat-active': cat.key === selCategory}">{{cat.value.label}}
+                        <span class="uk-badge uk-float-right">{{cat.value.totalCount}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="m-t-30 category-box bg-white" >
+                <div class="discuss" uk-grid>
+                    <div>
+                        <p>Ask a Question / Start a Discussion / Write an Article</p>
+                    </div>
+                </div>
+                <div>
+                    <button routerLink="/community/discussion/add" class="uk-button uk-button-transparent adddiscuss">
+                        Start</button>
+                </div>
+            </div>
+            <div class="m-t-30 bg-white category-box bg-white">
+                <div class="m-b-20">
+                    <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon"
+                        uk-icon="whatsapp" target="_blank"> </a>
+                    <a class="social-link" [href]="whatsappUrl" target="_blank">
+                        Share via
+                        Whatsapp</a>
+                </div>
+                <div class="m-b-20">
+                    <a href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age&body=%0AService%2DURL:%20{{currentUrl}}"
+                        class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail">
+                    </a> <a class="social-link"
+                        href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age&body=%0AService%2DURL:%20{{currentUrl}}">
+                        Share via
+                        Email</a>
+                </div>
+                <div>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services"
+                        onclick="javascript:window.open(this.href,
+                            '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
+                        class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a
+                        class="social-link"
+                        href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services"
+                        onclick="javascript:window.open(this.href,
+                            '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                        Share via
+                        Facebook</a>
+                </div>
+            </div>
+        </div>
+        <div class="uk-width-expand@m">
+            <div *ngIf="isLoading" class="m-t-50 uk-text-center">
+                <span uk-spinner="ratio: 3"></span>
+            </div>    
+            <div *ngIf="discussionsList!==undefined && discussionsList.length > 0 && !isLoading" class="m-b-30">
+                <div class="uk-flex-left uk-text-center uk-child-width-1-2@m" uk-grid>
+                    <div *ngFor="let discussion of discussionsList">
+                        <app-dicussion-summary-card [category]="selCategory" [discussion]="discussion">
+                        </app-dicussion-summary-card>
+                    </div>
+                </div>
+            </div>
+            <app-pagination *ngIf="showPagination && discussionsList.length >= 0 && !isLoading" [totalRecords]="totalRecords"
+                [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">
+            </app-pagination>
+            <div *ngIf="(discussionsList==undefined || discussionsList?.length === 0) && !isLoading">
+                <app-no-discussion-results></app-no-discussion-results>
+            </div>
+            <div *ngIf="showPagination == false && totalRecords > searchParams.s && !isLoading">
+                <button routerLink="/community"
+                    [queryParams]="{ searchTxt:searchParams?.searchTxt, category: searchParams?.tags, show: 'discss' }"
+                    class="uk-button uk-button-default uk-width-1-1 m-t-30">View All Results</button>
+            </div>
+        </div>
+    </div>
+</div>

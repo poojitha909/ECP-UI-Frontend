@@ -49,6 +49,10 @@ export class AskQuestionService {
         return this.http.get<any[]>(`${this.askQuestionUrl}/category/page?p=0&s=10000`);
     }
 
+    getCategoryListFilter(searchTxt: string): Observable<any[]> {
+        return this.http.get<any[]>(`${this.askQuestionUrl}/category/page?p=0&s=10000&searchTxt=${searchTxt}`);
+    }
+
     addQuestion(question: any): Observable<any[]> {
         return this.http.post<any[]>(`${this.askQuestionUrl}`,{...question});
     }
@@ -90,7 +94,7 @@ export class AskQuestionService {
         return this.http.get<any[]>(`${this.askQuestionUrl}?${queryParams}`);
     }
     getAskQuesReplies(askQuesId: string,page:number,size:number): Observable<any[]> {
-        return this.http.get<any[]>(`${this.askQuestionUrl}/reply/page?p=${page}&s=${size}&dir=1&sort=createdAt&questionId=${askQuesId}`);
+        return this.http.get<any[]>(`${this.askQuestionUrl}/reply/page?p=${page}&s=${size}&dir=0&sort=createdAt&questionId=${askQuesId}`);
     }
 
     getUserProfile(profileId): Observable<any[]> {

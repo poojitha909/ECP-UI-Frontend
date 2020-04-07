@@ -22,11 +22,6 @@ export class AskQuestionCreatePageComponent implements OnInit {
     {
       text: 'Ask an Expert',
       link: '/ask-question'
-    },
-    {
-      text: 'All Experts',
-      link: '/ask-question/all',
-      queryParams: { category: '', tab:0}
     }
   ];
   category: string;
@@ -121,7 +116,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
   }
 
   redirectToQuestions(){
-    this.router.navigate(['/ask-question/all'], { queryParams: { tab: 1 } });
+    this.router.navigate(['/ask-question/myques']);
   }
 
   setSeoTags(expert: any) {

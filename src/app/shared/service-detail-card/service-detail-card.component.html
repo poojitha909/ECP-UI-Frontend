@@ -1,6 +1,6 @@
 <div class="uk-card uk-card-hover uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin cursor-pointer"
-  (click)="navigate()" tabindex=0 uk-grid>
-  <div class="uk-card-media-left uk-width-1-4@m uk-width-1-3@s p-16">
+  tabindex=0 uk-grid>
+  <div (click)="navigate()" class="uk-card-media-left uk-width-1-4@m uk-width-1-3@s p-16">
     <!-- <img [imageHandler] *ngIf="isDBService" [src]="service?.basicProfileInfo?.profileImage?.thumbnailImage" width="152"
       height="152" alt="No Image">
     <img [imageHandler] *ngIf="!isDBService" [src]="service?.thumbnail" width="152" height="152" alt=""> -->
@@ -16,25 +16,27 @@
   </div>
 
   <div class="uk-card-body uk-text-center uk-text-left@s uk-width-expand p-16">
-    <h3 class="font-regular font-weight-600 m-0">{{ isDBService ? service?.basicProfileInfo.firstName :  service?.name}}
-    </h3>
-    <div>
-      <ngb-rating *ngIf="isDBService" [rate]="getDbServiceRating(service?.ratingPercentage)" [readonly]="true"
-        [max]="5">
-        <ng-template let-fill="fill" let-index="index">
-          <span class="star" [class.filled]="fill === 100">&#9733;</span>
-        </ng-template>
-      </ngb-rating>
+    <div (click)="navigate()">
+      <h3 class="font-regular font-weight-600 m-0">
+        {{ isDBService ? service?.basicProfileInfo.firstName :  service?.name}}
+      </h3>
+      <div>
+        <ngb-rating [rate]="getDbServiceRating(service?.ratingPercentage)" [readonly]="true" [max]="5">
+          <ng-template let-fill="fill" let-index="index">
+            <span class="star" [class.filled]="fill === 100">&#9733;</span>
+          </ng-template>
+        </ngb-rating>
 
-      <ngb-rating *ngIf="!isDBService" [rate]="service?.compRating" [readonly]="true" [max]="5">
-        <ng-template let-fill="fill" let-index="index">
-          <span class="star" [class.filled]="fill === 100">&#9733;</span>
-        </ng-template>
-      </ngb-rating>
+        <!-- <ngb-rating *ngIf="!isDBService" [rate]="service?.compRating" [readonly]="true" [max]="5">
+          <ng-template let-fill="fill" let-index="index">
+            <span class="star" [class.filled]="fill === 100">&#9733;</span>
+          </ng-template>
+        </ngb-rating> -->
 
-      <span class="ml-15">{{isDBService ? service?.reviewCount : service?.totalReviews}} Reviews</span>
+        <span class="ml-15">{{isDBService ? service?.reviewCount : service?.totalReviews}} Reviews</span>
+      </div>
+      <p class="m-t-0 m-b-10">Source: {{isDBService ? 'Elder spring' : 'Justdial' }}</p>
     </div>
-    <p class="m-t-0 m-b-10">Source: {{isDBService ? 'Elder spring' : 'Justdial' }}</p>
     <!-- <div *ngIf="service?.verified == '1'" class="uk-label uk-flex uk-flex-middle fit-inline-size p-verified">
       <span class="verified-icon-w m-r-5"></span>
       <span> VERIFIED BY {{isDBService ? 'ELDER SPRING' : 'JUSTDIAL' }}</span>
@@ -42,9 +44,12 @@
     <div class="m-t-30">
       <p class="m-0"><span>{{isDBService ? service?.basicProfileInfo.primaryUserAddress.city :  service?.city}}</span>
       </p>
-      <p *ngIf="!isDBService" class="m-0 font-regular"><a href="javascript:void(0)" class="">{{service?.type}}</a></p>
-      <p *ngIf="isDBService && service?.systemTags.length > 0" class="m-0 font-regular"><a href="javascript:void(0)"
-          class="">{{service?.systemTags[0].name}}</a></p>
+      <p *ngIf="!isDBService" class="m-0 font-regular"><a>{{service?.type}}</a><a href="javascript:void(0)"
+          routerLink="/services" [queryParams]="{ category: service.categoryKey, catid:  service.categoryId}"
+          *ngIf="service.categoryId">
+          ({{service?.categoryKey}})</a></p>
+      <p *ngIf="isDBService && service?.systemTags.length > 0" class="m-0 font-regular">
+        <a href="javascript:void(0)">{{service?.systemTags[0].name}}</a></p>
     </div>
   </div>
 

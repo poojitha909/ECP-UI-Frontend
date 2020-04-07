@@ -1,57 +1,37 @@
-<div class="uk-container products">
-  <div class="breadcrumbs">
-    <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
-  </div>
-  <h1 class="uk-h2">All Products</h1>
-  <hr class="m-b-30" />
-  <div class="grid-reverse-dir" uk-grid>
-    <div class="uk-width-1-3@m">
-      <div class="category-box bg-white">
-        <div uk-grid>
-          <div class="uk-width-expand">
-            <h3 class="uk-h4">Categories</h3>
-          </div>
-          <div *ngIf="searchParams.productCategory !== ''">
-            <a class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
-          </div>
-        </div>
-        <ul class="uk-list uk-list-large p-2" *ngIf="catsList!==undefined">
-          <li *ngFor="let cat of catsList" (click)="onTabChange(cat.id,cat.name)" class="cursor-pointer"
-            [ngClass]="{'cat-active': cat.id === searchParams.productCategory}">{{cat.name}} <span
-              class="uk-badge uk-float-right">{{cat.productCount}}</span></li>
-        </ul>
-      </div>
+<div class="top-banner" id="productBanner">
+  <div uk-grid>
+    <div class="uk-width-expand uk-flex uk-flex-middle">
+      <p class="banner-text font-regular">Product & solutions crop up everyday to confuse you even more and so we are
+        here to simplify things for you. We have included every single best option avaliable for you.</p>
     </div>
-    <div class="uk-width-expand@m">
-      <div class="search-form">
-        <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
-          <div class="uk-margin uk-width-expand">
-            <form class="uk-search uk-search-default">
-              <span class="uk-search-icon-flip" [ngClass]="{ 'w-sm-150':showReset}" uk-search-icon>
-                <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
-                  <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
-                </button>
-              </span>
-              <input class="uk-input sm-pr-150" [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)"
-                required type="text" placeholder="Search for product here" name="search" />
-            </form>
-          </div>
-          <div class="uk-width-auto uk-margin-bottom">
-            <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
-          </div>
-        </div>
-      </div>
-      <!-- Products list  -->
-      <div *ngIf="productsList!==undefined && productsList.length > 0">
-        <app-product-detail-card *ngFor="let proudct of productsList" [product]="proudct"></app-product-detail-card>
-      </div>
-      <app-pagination *ngIf="(productsList && productsList.length > 0)" [totalRecords]="totalRecords"
-        [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">
-      </app-pagination>
-      <div class="m-t-20" *ngIf="productsList==undefined || productsList.length == 0">
-        <app-product-no-record></app-product-no-record>
-      </div>
+    <div class="uk-flex uk-flex-bottom uk-flex-center uk-width-auto@s">
+      <img class="banner-img" src="/assets/images/landing-img/product-banner-updated.png" />
     </div>
   </div>
-
+</div>
+<div [ngClass]="{'all-blue': showReset}" class="mb-24">
+  <div class="uk-container search-container">
+    <!-- Search Form START -->
+    <div class="search-form">
+      <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
+        <div class="uk-width-expand">
+          <form class="uk-search uk-search-default" autocomplete='off'>
+            <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
+              <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
+                <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
+              </button>
+            </span>
+            <input class="uk-search-input font-regular search-box sm-pr-150" aria-label="search"
+              [(ngModel)]="searchTxt" (keyup)="onSearchChange($event)" required type="text"
+              placeholder="Search here" name="search" autocomplete='off' />
+          </form>
+        </div>
+        <div>
+          <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
+        </div>
+      </div>
+    </div>
+    <!-- Search Form END -->
+  </div>
+  <app-product-results [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt" (showCount)="showProductCount($event)"></app-product-results>
 </div>

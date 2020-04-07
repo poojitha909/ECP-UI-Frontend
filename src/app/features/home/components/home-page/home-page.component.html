@@ -1,91 +1,60 @@
-<!-- <div class="uk-container banner">
-  <div class="logo">
-    <h3>ABCD</h3>
-  </div>
-  <div class="uk-child-width-expand@s uk-child-width-1-1" uk-grid>
-    <div class="para-info uk-text-center uk-text-left@s">
-      <p>
-        An unique trusted community that seeks elder related contributions through online discussions & articles, enables confidential access to experts and easily find relavent events, products & services for elders.
-      </p>
+<div class="home-banner ">
+  <div uk-grid class="m-b-30">
+    <div class="uk-width-expand uk-flex uk-flex-middle">
+      <p class="banner-text font-regular">We are your exclusive trusted online community with answers to all your needs. Join us to interact, pursue
+        interests, share articles, talk to experts, discover products and know about events happening around you.</p>
     </div>
-    <div class="couple-img uk-width-1-2@s uk-width-1-1">
-      <img
-        data-src="assets/images/indian_couple-_slide1-300x206.png"
-        alt=""
-        uk-img
-        class="uk-align-right@s uk-align-center"
-      />
+    <div class="uk-flex uk-flex-bottom uk-flex-center uk-width-auto@s">
+      <img class="banner-img" src="/assets/images/landing-img/home.png">
     </div>
   </div>
-</div> -->
+</div>
 
 <!-- Search Container starts -->
 <app-search-container></app-search-container>
 <!-- Search Container ends -->
 
+<div class="m-b-30">
 
-<div class="home-banner landing-bg">
-  <!-- <div class="uk-child-width-1-2@s uk-padding" uk-grid>
-    
-  </div> -->
-  <div class="uk-text-left@s uk-padding uk-width-1-2@s">
-    <h1>Joy of Age</h1>
-    <p class="font-regular mb-0">
-      We are your exclusive trusted online community with answers to all your needs. Join us to interact, pursue
-      interests, share articles, talk to experts, discover products, know about events happening around you.
-    </p>
-  </div>
-</div>
+  <div class="uk-child-width-1-4@m uk-child-width-1-2" uk-grid>
+    <div class="uk-text-center options">
+      <div class="options-card">
+        <img src="assets/images/community.png" alt="No Image Found" />
+      </div>
+      <div routerLink="/community" class="quote-line cursor-pointer">
+        Engage with us
+        <span class="uk-float-right" uk-icon="chevron-right"></span>
+      </div>
+    </div>
 
-<div class="uk-child-width-1-4@s uk-child-width-1-2 m-b-30" uk-grid>
-  <div class="uk-text-center">
-    <div class="options-card">
-      <img src="assets/images/community.png" alt="No Image Found" />
+    <div class="uk-text-center options">
+      <div class="options-card">
+        <img src="assets/images/experts.png" alt="No Image Found" />
+      </div>
+      <div routerLink="/ask-question" class="quote-line cursor-pointer">
+        Ask our Experts
+        <span class="uk-float-right" uk-icon="chevron-right"></span>
+      </div>
     </div>
-    <div routerLink="/community" class="quote-line cursor-pointer">
-      Engage with Us
-      <span class="uk-float-right" uk-icon="chevron-right"></span>
-    </div>
-  </div>
 
-  <div class="uk-text-center">
-    <div class="options-card">
-      <img src="assets/images/experts.png" alt="No Image Found" />
+    <div class="uk-text-center options">
+      <div class="options-card">
+        <img src="assets/images/products.png" alt="No Image Found" />
+      </div>
+      <div routerLink="/products" class="quote-line cursor-pointer">
+        Products for you
+        <span class="uk-float-right" uk-icon="chevron-right"></span>
+      </div>
     </div>
-    <div routerLink="/ask-question" class="quote-line cursor-pointer">
-      Ask our Experts
-      <span class="uk-float-right" uk-icon="chevron-right"></span>
-    </div>
-  </div>
 
-  <div class="uk-text-center">
-    <div class="options-card">
-      <img src="assets/images/products.png" alt="No Image Found" />
-    </div>
-    <div routerLink="/products" class="quote-line cursor-pointer">
-      Products for You
-      <span class="uk-float-right" uk-icon="chevron-right"></span>
-    </div>
-  </div>
-
-  <div class="uk-text-center">
-    <div class="options-card">
-      <img src="assets/images/services.png" alt="No Image Found" />
-    </div>
-    <div routerLink="/services" class="quote-line cursor-pointer">
-      Services for You
-      <span class="uk-float-right" uk-icon="chevron-right"></span>
+    <div class="uk-text-center options">
+      <div class="options-card">
+        <img src="assets/images/services.png" alt="No Image Found" />
+      </div>
+      <div routerLink="/services" class="quote-line cursor-pointer">
+        Services for you
+        <span class="uk-float-right" uk-icon="chevron-right"></span>
+      </div>
     </div>
   </div>
 </div>
-
-
-<app-featured-discussions></app-featured-discussions>
-
-<app-featured-events></app-featured-events>
-
-<app-featured-ask-experts></app-featured-ask-experts>
-
-<app-featured-products></app-featured-products>
-
-<app-featured-services></app-featured-services>

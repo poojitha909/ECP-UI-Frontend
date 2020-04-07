@@ -12,15 +12,16 @@
         <div class="time">
             <b>Time</b>: {{event?.datetime | date: 'h:mm a'}}
         </div>
-        <div class="time">
+        <div class="location">
             <b>Location</b>: {{event?.address}}
         </div>
-        <hr />
-        <div class="detail">
+    </div>
+    <div class="event-summary-footer uk-grid uk-grid-collapse" *ngIf="isShow">
+       
+        <div class="detail" > 
+            <hr  style="margin-bottom: 20px;" />
             {{event?.description | striphtml | ellipsis: 75}}
         </div>
-    </div>
-    <div class="event-summary-footer uk-grid uk-grid-collapse">
         <div class="left-text uk-width-1-1">
             <hr />
             <span *ngIf="event?.entryFee <= 0" class="green">Free Entry</span>

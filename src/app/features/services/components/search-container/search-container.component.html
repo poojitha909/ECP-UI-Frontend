@@ -1,10 +1,10 @@
-<div class="search-container m-t-40">
+<div class="search-container">
   <!-- <div class="header-label">
     <h3>Search for services and service providers</h3>
   </div> -->
 
   <!-- Search Form START -->
-  <div class="search-form">
+  <div class="search-form" [ngClass]="{'search-bg': !showReset}">
     <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
 
       <div class="uk-width-expand uk-position-relative">
@@ -17,15 +17,16 @@
               </button>
 
             </span>
-            <input class="uk-search-input search-box font-regular sm-pr-150" aria-label="search" aria-autocomplete=”both” [(ngModel)]="searchPageParam.term"
-              (keyup)="searchEvent($event)" (keydown.enter)="onSearch($event.target.value)" required type="text"
-              placeholder="Search here" name="search" autocomplete='off' />
+            <input class="uk-search-input search-box font-regular sm-pr-150" aria-label="search"
+              aria-autocomplete=”both” [(ngModel)]="searchPageParam.term" (keyup)="searchEvent($event)"
+              (keydown.enter)="onSearch($event.target.value)" required type="text" placeholder="Search here"
+              name="search" autocomplete='off' />
           </form>
           <ul *ngIf="autocompleteFields.length > 0"
             class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto search-list" appKeyHandler
             (onItemSelected)="onItemSelected($event)">
             <li class="cursor-pointer" *ngFor="let field of autocompleteFields" (click)="onAutocompleteClick(field)">
-              {{field.name ||  field.basicProfileInfo.firstName }}
+              {{field?.name ||  field?.basicProfileInfo?.firstName }}
             </li>
           </ul>
         </div>
@@ -44,7 +45,7 @@
 
       <div class="m-t-20 uk-grid-small" uk-grid>
         <div class="uk-width-1-1">
-          <div class="search-result-box cursor-pointer" routerLink="/services/all"
+          <div class="search-result-box cursor-pointer" routerLink="/services"
             [queryParams]="{ category:searchPageParam.term}">
             <p>Services ({{totalService}})</p>
           </div>
@@ -71,7 +72,7 @@
 
 
         <div class="m-t-30">
-          <button routerLink="/services/all" [queryParams]="{ category:searchPageParam.term}"
+          <button routerLink="/services" [queryParams]="{ category:searchPageParam.term}"
             class="uk-button uk-button-default uk-width-1-1">View All</button>
         </div>
       </div>

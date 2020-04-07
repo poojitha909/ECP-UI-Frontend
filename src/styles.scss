@@ -158,9 +158,9 @@ ngb-rating {
 }
 
 @media (max-width: 640px) {
-  .home-banner {
-    min-height: 504px;
-  }
+  // .home-banner {
+  //   min-height: 504px;
+  // }
   .m-t-20\@s {
     margin-top: 20px !important;
   }
@@ -274,14 +274,13 @@ ngb-rating {
   &:focus {
     color: #1a73e8;
     background: transparent;
-    border: 1px solid #1a73e8;  
+    border: 1px solid #1a73e8;
   }
   &:disabled {
     color: #c7c9cd;
     border: 1px solid #c7c9cd;
     background-color: transparent;
   }
- 
 }
 
 @media screen and (max-width: 640px) {
@@ -300,14 +299,13 @@ ngb-rating {
   }
 }
 
-
 .uk-search-input {
   &:focus {
     outline: -webkit-focus-ring-color auto 5px;
   }
 }
 .see-all-card {
-  color: #1A73E8;
+  color: #1a73e8;
   text-align: center;
   width: 100%;
 }
@@ -319,16 +317,61 @@ ngb-rating {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  display:none;
+  display: none;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #c1c1c1; 
+  background: #c1c1c1;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background:#a09e9e;
+  background: #a09e9e;
+}
+
+.light-text {
+  color: #c4c4c4;
+}
+
+.bg-filter-header {
+  background: #2a415e;
+}
+
+/* New Banner */
+.top-banner {
+  margin-top: 32px;
+  background: #eaeaeb;
+  border-radius: 4px;
+  .banner-text {
+    padding: 32px 40px;
+  }
+}
+.mb-24{
+  margin-bottom: 24px;
+}
+.all-blue{
+  background-color: #ecf4ff;
+  border: 1px solid #d7e0ef;
+  border-radius: 8px;
+  margin-top:32px;
+  div.search-container{
+    border: none;
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+  div.tab{
+    margin-top: 0px;
+    padding: 0 32px;
+  }
+  div#searchResultList{
+    padding: 0 32px;
+  }
+}
+
+@media (min-width: 640px){
+  .banner-img{
+    padding-right: 40px;
+  }
 }

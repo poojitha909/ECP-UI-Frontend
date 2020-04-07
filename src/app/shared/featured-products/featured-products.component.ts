@@ -59,7 +59,7 @@ export class FeaturedProductsComponent implements OnInit {
 
   seeAllProducts() {
     this.storageHelper.storeSession(AppConstants.FEATURED_PRODUCT, this.searchParams.productCategory);
-    this.router.navigate(["/products/all"], { queryParams: { productCategory: this.searchParams.productCategory } });
+    this.router.navigate(["/products"], { queryParams: { productCategory: this.searchParams.productCategory } });
   }
 
 }

@@ -45,6 +45,8 @@
 }
 
 .search-container {
+  margin-top: 32px;
+  margin-bottom: 24px;
   border: 1px solid #d7e0ef;
   h4.title {
     font-size: 24px;
@@ -92,26 +94,26 @@
     }
   }
 
-  .uk-tab {
-    &::before {
-      border-bottom: none;
-    }
+  // .uk-tab {
+  //   &::before {
+  //     border-bottom: none;
+  //   }
 
-    & > * > a {
-      border-bottom: 3px solid #161c2d3d;
-      font-size: 18px;
-      line-height: 165%;
-      text-transform: unset;
-    }
+  //   & > * > a {
+  //     border-bottom: 3px solid #161c2d3d;
+  //     font-size: 18px;
+  //     line-height: 165%;
+  //     text-transform: unset;
+  //   }
 
-    & > .uk-active > a {
-      color: #1a73e8;
-      border-color: #1e87f0;
-    }
-  }
+  //   & > .uk-active > a {
+  //     color: #1a73e8;
+  //     border-color: #1e87f0;
+  //   }
+  // }
 }
 .pt-norec {
-  padding-top: 19%;
+  padding-top: 0%;
 }
 .uk-button-default {
   border-radius: 4px;
@@ -213,7 +215,9 @@
   .slidenav-next {
     left: 92% !important;
   }
+
   .search-container {
+    
     .title-border {
       border-bottom: 1px solid #e5e5e5;
     }
@@ -242,6 +246,23 @@
     .pr-150 {
       padding-right: 50px !important;
     }
+  }
+  .home-banner{
+    margin-bottom: 16px;
+    margin-top: 16px;
+  }
+  .cards1{
+    width: 214px;
+  }
+  .cards2{
+    width: 214px;
+    margin-left: -16px;
+  }
+
+  .m-seprator{
+    height: 552px;
+    margin-top:16px;
+    margin-bottom: 16px;
   }
 }
 
@@ -280,4 +301,63 @@
   .landing-bg {
     background-image: url("/assets/images/landing-img/Community-1440.png");
   }
+}
+
+
+
+// .community-page{
+//   .search-container{
+//     margin-top: 40px;
+//   }
+// }
+
+// Sample Implementation on 05/03/20
+
+@media(min-width:1024px){
+  .m-seprator{
+    display: none;
+  }
+}
+
+.uk-tab {
+  &::before {
+    border-bottom: none;
+  }
+
+  & > * > a {
+    border-bottom: 3px solid #161c2d3d;
+    font-size: 18px;
+    line-height: 165%;
+    text-transform: unset;
+  }
+
+  & > .uk-active > a {
+    color: #1a73e8;
+    border-color: #1e87f0;
+  }
+}
+.showOnSearchtab{
+  margin-left: 25px;
+}
+.showOnSearch{
+    padding: 40px;
+    margin-left: -40px;
+    margin-top: -16px;
+}
+
+
+// .all-blue .uk-tab  .uk-active > a {
+//   max-width: 250px;
+//   margin-left: 42px;
+// }
+
+// .all-blue .uk-tab > * > a{
+//   max-width: 250px;
+//   margin-left: -300px;
+// }
+
+
+
+.all-blue .showingSearchResult {
+  padding: 0 40px;
 }

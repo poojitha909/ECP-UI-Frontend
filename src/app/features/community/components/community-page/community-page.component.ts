@@ -1,11 +1,12 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2 } from '@angular/core';
-import { EventService } from '../../services/events.service';
-import { DiscussionService } from '../../services/discussion.service';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MenuService } from '../../services/menu.service';
 import { SeoService } from 'src/app/core/services/seo.service';
-import { SEO } from 'src/app/core/interfaces';
+import { SEO, PageParam, Service } from 'src/app/core/interfaces';
 import { HomeService } from 'src/app/features/home/home.service';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { StorageHelperService } from 'src/app/core/services/storage-helper.service';
+declare var UIkit: any;
 
 @Component({
   selector: 'app-community-page',
@@ -13,32 +14,40 @@ import { HomeService } from 'src/app/features/home/home.service';
   styleUrls: ['./community-page.component.scss']
 })
 export class CommunityPageComponent implements OnInit, OnDestroy {
+  
+  searchTxt:string;
+  discussionCategory:string;
+  pastEvents:string;
+  showPagination: boolean;
+  showSharing: boolean;
+  currentUrl: string;
 
   showReset: boolean;
-  showResult: boolean;
-  eventsList: any[] = [];
-  discussionsList: any[] = [];
-  selDiscussCategory: string;
-  selEventCategory: string;
   paramsSubs: any;
-  totalRecordsEvents: number;
-  totalRecordsDiscussions: number;
-  searchParams: {
-    p: number,
-    s: number,
-    searchTxt: string,
-    eventType: number,
-    pastEvents: number
-  };
-  searchParamsDiscussions: {
-    p: number,
-    s: number,
-    tags: string,
-    searchTxt: string
-  }
+  show:string;
+  noRecords: boolean;
+  showResult: boolean;
+  isLoading: boolean;
+  searchTextChanged = new Subject<string>();
+ 
 
-  constructor(private eventService: EventService, private discussionService: DiscussionService,
-    private router: Router, private homeService: HomeService,
+  searchPageParam: PageParam = {
+    p: 0,
+    s: 6,
+    term: ''
+  };
+  hide:any;
+  searchData: any = {
+    discussions: [],
+    events: [],
+    maxResult: 0,
+    totalDiscussions: 0,
+    totalEvents: 0,
+  };
+
+  autocompleteFields: Service[] = [];
+  user: any;
+  constructor(private router: Router, private homeService: HomeService,private store: StorageHelperService,
     private seoService: SeoService, private route: ActivatedRoute) {
 
     // Generate meta tag 
@@ -58,6 +67,19 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
+
+    if (this.homeService.homeSearchtxt) {
+      this.searchPageParam.term = this.homeService.homeSearchtxt;
+      this.showReset = true;
+      this.showResult = true;
+    }
+
+    this.searchTextChanged.pipe(
+      debounceTime(500),
+      distinctUntilChanged()
+    ).subscribe(() => {
+      this.onSearchChange(this.searchPageParam.term);
+    })
   }
 
   ngOnDestroy() {
@@ -65,112 +87,118 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   }
 
   initiate() {
-    this.searchParams = {
-      p: 0,
-      s: 6,
-      searchTxt: "",
-      eventType: 0,
-      pastEvents: -1
-    }
-    this.searchParamsDiscussions = {
-      p: 0,
-      s: 6,
-      searchTxt: "",
-      tags: ""
-    }
-    this.totalRecordsEvents = 0;
-    this.totalRecordsDiscussions = 0;
-    this.selDiscussCategory = "";
-    this.selEventCategory = "";
+    this.user = this.store.retrieve("ECP-USER");
+    
+    this.searchTxt = "";
+    this.showPagination = true;
+    this.showSharing = true;
+    this.currentUrl = window.location.href;
 
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
-      this.showReset = this.searchParams.searchTxt ? true : false;
+      this.showReset = this.searchTxt ? true : false;
+    }
+    if (this.route.snapshot.queryParams['category'] !== undefined) {
+      this.discussionCategory = this.route.snapshot.queryParams['category'];
     }
 
-    if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
+    if (this.route.snapshot.queryParams['past'] !== undefined) {
+      this.pastEvents = this.route.snapshot.queryParams['past'];
+      this.show = "events";
+    }
+    else{
+      this.show = "discss";
+    }
+    if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
+      this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
+      this.showReset = this.searchTxt? true : false;
+    }
+    if (!this.searchTxt && this.homeService.homeSearchtxt) {
       this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
     }
-
-    this.showEvents();
-    this.showDiscussions();
-  }
-
-  showEvents() {
-    this.showResult = false;
-    if (this.searchParams.searchTxt != "") {
-      this.showResult = true;
-      this.totalRecordsEvents = 0;
-      this.eventService.searchEvents(this.searchParams).subscribe((response: any) => {
-        const data = response.data;
-        this.eventsList = [];
-        if (data.content) {
-          this.eventsList = data.content;
-          this.totalRecordsEvents = data.total;
-        }
-      });
+    if(this.route.snapshot.queryParams['show']){
+      this.show = this.route.snapshot.queryParams['show'];
     }
   }
 
-  showDiscussions() {
-    this.showResult = false;
-    if (this.searchParamsDiscussions.searchTxt != "") {
-      this.showResult = true;
-      this.totalRecordsDiscussions = 0;
-      this.discussionService.searchDiscussions(this.searchParamsDiscussions).subscribe((response: any) => {
-        const data = response.data;
-        this.discussionsList = [];
-        if (data.content) {
-          this.discussionsList = data.content;
-          this.totalRecordsDiscussions = data.total;
-        }
-      });
-    }
-  }
 
-  showAllDiscussions() {
-    this.router.navigate(['/community/discussions'], { queryParams: { category: this.selDiscussCategory, searchTxt: this.searchParamsDiscussions.searchTxt } });
-  }
-  showAllEvents() {
-    this.router.navigate(['/community/events'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt } });
+  showAll(tab) {
+    this.show=tab
   }
 
   onSearchChange(event: any) {
     const value = event.target.value;
     if (value !== "") {
-      this.showReset = true
+      this.showReset = true;
     } else {
       this.showReset = false;
-      this.showResult = false;
     }
     this.setSearchTxt(value);
-
     if (event.key == "Enter") {
+      this.searchPageParam.term=this.searchTxt;
       this.onSearch();
     }
   }
 
   resetSearch(event: any) {
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
-      this.setSearchTxt("");
+      this.setSearchTxt(""); 
+      this.discussionCategory="";
+      this.pastEvents=""; 
       this.showReset = false;
-      this.onSearch()
+     this.onSearch();
     }
   }
 
   onSearch() {
-    this.showEvents();
-    this.showDiscussions();
+    this.searchPageParam.term=this.searchTxt;
+    this.router.navigate(['/community'], { queryParams: { searchTxt: this.searchTxt, 
+                                                category: this.discussionCategory,
+                                                past: this.pastEvents,
+                                                show: this.show } });
   }
-
-  onTabChange(tab: number) {
-
-  }
-
+  
   setSearchTxt(value: string) {
-    this.searchParams.searchTxt = value;
-    this.searchParamsDiscussions.searchTxt = value;
+    this.searchTxt = value;
     this.homeService.homeSearchtxt = value;
+  }
+  
+  showDiscussionCount(value){
+    this.searchData.totalDiscussions = value;
+    this.getMaxCount();
+  }
+
+  showEventCount(value){
+    this.searchData.totalEvents = value;
+    this.getMaxCount();
+  }
+
+  getMaxCount() {
+    const getelem = document.getElementById("search-tab");
+    if(this.show == 'discss'){
+      UIkit.tab(getelem).show(0);
+    }
+    else if(this.show == 'events'){
+      UIkit.tab(getelem).show(1);
+    }
+    else{
+      const maxTotal = Math.max(
+        this.searchData.totalEvents,
+        this.searchData.totalDiscussions);
+      switch (maxTotal) {
+        case this.searchData.totalEvents:
+          UIkit.tab(getelem).show(1);
+          break;
+        case this.searchData.totalDiscussions:
+  
+          UIkit.tab(getelem).show(0);
+          break;
+        default:
+          UIkit.tab(getelem).show(0);
+          break;
+      }
+    }
+    
   }
 }

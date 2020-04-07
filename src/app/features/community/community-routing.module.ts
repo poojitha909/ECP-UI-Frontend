@@ -9,6 +9,7 @@ import { EventCreatePageComponent } from './components/event-create/event-create
 import { DiscussionDetailPageComponent } from './components/discussion-detail/discussion-detail-page.component';
 import { DiscussionsListPageComponent } from './components/discussions-list/discussions-list-page.component'
 import { DiscussionCreatePageComponent } from './components/discussion-create/discussion-create-page.component'
+
 const routes: Routes = [
   {
     path: '',
@@ -16,7 +17,8 @@ const routes: Routes = [
   },
   {
     path: 'events',
-    component: EventsListPageComponent
+    redirectTo: '/community?past=-1' //this redirection is added to redirect no result found from home page to correct tab in community page
+    // component: EventsListPageComponent
   },
   {
     path: 'event/add',
@@ -49,7 +51,7 @@ const routes: Routes = [
   {
     path: 'discussion/:id/:category',
     component: DiscussionDetailPageComponent
-  },
+  }
 ];
 
 @NgModule({

@@ -1,11 +1,9 @@
-import { environment } from 'src/environments/environment';
-
 export class ApiConstants {
 
     public static GET_SERVICES: string = `/BY/api/v1/search/servicePageSearch`;
     public static GET_ALL_JD_SERVICES: string = `/BY/api/v1/search/justdialService`;
     public static GET_ALL_SERVICES: string = `/BY/api/v1/userProfile/allServiceList`;
-    public static GET_JD_CATEGORIES: string = `/BY/api/v1/search/justdailCategories`;
+    public static GET_SERVICE_CATEGORIES: string = `/BY/api/v1/search/serviceCategories`;
     public static GET_JD_SERVICES_DETAIL: string = `/BY/api/v1/search/justdialServiceDetail`;
     public static GET_HOME_SEARCH_PAGES: string = `/BY/api/v1/homesearch/page`;
     public static USER_LOGIN: string = `/BY/api/v1/users/login`;
@@ -21,6 +19,7 @@ export class ApiConstants {
     public static ADD_DB_SERVICE_REPORT: string = `/BY/api/v1/userProfile/reportService`;
     public static ADD_SERVICE_RATEING: string = `/BY/api/v1/reviewRate/addServiceRating`;
     public static GET_SERVICE_RATEINGS: string = `/BY/api/v1/reviewRate/serviceRatings`;
+    public static ADD_EVENT_REPORT: string = `/BY/api/v1/event/reportEvent`;
     public static EVENTS_SERVICES: string = `/BY/api/v1/event`;
     public static SEND_OTP: string = `/BY/api/v1/users/sendOtp`;
     public static RESEND_OTP: string = `/BY/api/v1/users/resendOtp`;

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AskQuestionService } from '../../services/ask-question.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageHelperService } from 'src/app/core/services/storage-helper.service';
@@ -14,23 +14,21 @@ import { HomeService } from 'src/app/features/home/home.service';
 export class AskQuestionPageComponent implements OnInit, OnDestroy {
 
   showReset: boolean;
-  showResult: boolean;
-  experts: any[];
   expertsTotal: number;
-  searchParams: {
-    p: number,
-    s: number,
-    searchTxt: string,
-    experties: string
-  };
+  myQuesTotal: number;
+  expertsQuesTotal: number;
+  searchTxt: string;
+  expertCategory: string;
+  showSharing: boolean;
+  showPagination: boolean;
   user: any;
   paramsSubs: any;
+  show: string;
 
   constructor
     (private route: ActivatedRoute,
       private router: Router,
       private store: StorageHelperService,
-      private askQuestionService: AskQuestionService,
       private homeService: HomeService,
       private seoService: SeoService
     ) {
@@ -42,9 +40,7 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
       author: `An Elder Spring Initiative by Tata Trusts`,
       image: `${window.location.origin}/assets/imgaes/landing-img/Ask-320.png`,
     }
-
     this.seoService.generateTags(config);
-
   }
 
   ngOnInit() {
@@ -58,63 +54,45 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
   }
 
   initiate() {
+    this.showPagination = true;
+    this.showSharing = true;
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
-      // if (this.user.userRoleId == "EXPERT") {
-      //   this.router.navigate(['/ask-question/expert']);
-      // }
     }
-    this.searchParams = {
-      p: 0,
-      s: 6,
-      searchTxt: "",
-      experties: ""
-    }
+    this.searchTxt =  "";
     this.expertsTotal = 0;
-    this.showResult = false;
-    if (this.route.snapshot.params['category']) {
-      this.searchParams.experties = this.route.snapshot.params['category'];
+    if (this.route.snapshot.params['expertCategory']) {
+      this.expertCategory = this.route.snapshot.params['expertCategory'];
     }
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
-      this.showReset = this.searchParams.searchTxt ? true : false;
+      this.showReset = this.searchTxt ? true : false;
     }
-    if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
+    if(this.route.snapshot.queryParams['show']){
+      this.show = this.route.snapshot.queryParams['show'];
+      this.showAll(this.show); // experts, ques, expques
+    }
+    else{
+      this.showAll("experts"); 
+    }
+    if (!this.searchTxt && this.homeService.homeSearchtxt) {
       this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
     }
-    this.showExperts();
   }
 
-  showExperts() {
-    this.showResult = false;
-    if (this.searchParams.searchTxt != "") {
-      this.showResult = true;
-      let searchParams = JSON.parse(JSON.stringify(this.searchParams));
-      searchParams.experties = "";
-      this.askQuestionService.experts(searchParams).subscribe((response: any) => {
-        const data = response.data;
-        this.experts = [];
-        if (data.content) {
-          this.experts = data.content;
-          this.expertsTotal = data.total;
-        }
-      });
-    }
-  }
-
-  showAllExperts() {
-    this.router.navigate(['/ask-question/all'], { queryParams: { category: this.searchParams.experties, searchTxt: this.searchParams.searchTxt, tab: 0 } });
+  showAll(tab) {
+    this.show=tab;
   }
 
   onSearchChange(event: any) {
     const value = event.target.value;
+    this.show = "experts";
     if (value !== "") {
       this.showReset = true
     } else {
       this.showReset = false;
-      this.showResult = false;
     }
     this.setSearchTxt(value);
     if (event.key == "Enter") {
@@ -131,11 +109,21 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
   }
 
   onSearch() {
-    this.showExperts();
+    this.router.navigate(['/ask-question'], { queryParams: { expertCategory: this.expertCategory, searchTxt: this.searchTxt, show: this.show } });
   }
 
   setSearchTxt(value: string) {
-    this.searchParams.searchTxt = value;
+    this.searchTxt = value;
     this.homeService.homeSearchtxt = value;
+  }
+
+  showExpertCount(value: number){
+    this.expertsTotal = value;
+  }
+  showMyQuesCount(value: number){
+    this.myQuesTotal = value;
+  }
+  showExpertQuesCount(value: number){
+    this.expertsQuesTotal = value;
   }
 }

@@ -103,7 +103,7 @@
                         <div [innerHTML]="repliesGroup[0].text">
                         </div>
                         <div class="uk-grid-collapse uk-child-width-expand@s" uk-grid>
-                            <div *ngIf="repliesGroup.userId != user?.id" class="like-container">
+                            <div *ngIf="repliesGroup[0].userId != user?.id" class="like-container">
                                 <img class="img" 
                                     src="/assets/images/like-outline.svg" alt="No Image Found" (click)="likeReply(repliesGroup[0])">
                                 <span
@@ -111,13 +111,13 @@
                                     {{repliesGroup[0].likeCount}}
                                 </span>
                             </div>
-                            <div *ngIf="repliesGroup.userId == user?.id" class="like-container">
+                            <div *ngIf="repliesGroup[0].userId == user?.id" class="like-container">
                                 <a class="font-regular uk-text-primary" href="#reply-modal-discussion" uk-toggle
                                     (click)="editReply('',repliesGroup[0])">
                                     Edit
                                 </a>
                             </div>
-                            <div class="reply-container" uk-toggle="target: #reply-modal-discussion" (click)="setParentReplyId(repliesGroup.id)">
+                            <div class="reply-container" uk-toggle="target: #reply-modal-discussion" (click)="setParentReplyId(repliesGroup[0].id)">
                                 <img class="img" src="/assets/images/reply.svg" alt="No Image Found"> <label class="reply" for="commentarea">
                                     Reply</label>
                             </div>

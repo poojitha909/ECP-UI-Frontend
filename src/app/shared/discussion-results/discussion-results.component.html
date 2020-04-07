@@ -20,13 +20,12 @@
             <div class="m-t-30 category-box bg-white" >
                 <div class="discuss" uk-grid>
                     <div>
-                        <p> Ask any question on senior care and ageing</p>
+                        <p>Ask a Question / Start a Discussion / Write an Article</p>
                     </div>
                 </div>
                 <div>
                     <button routerLink="/community/discussion/add" class="uk-button uk-button-transparent adddiscuss">
-                        Start a
-                        Discussion</button>
+                        Start</button>
                 </div>
             </div>
             <div class="m-t-30 bg-white category-box bg-white">
@@ -59,7 +58,9 @@
                 </div>
             </div>
         </div>
-        <div class="uk-width-expand@m">
+
+
+        <div class="uk-width-expand@m" >
             <div *ngIf="discussionsList!==undefined && discussionsList.length > 0" class="m-b-30">
                 <div class="uk-flex-left uk-text-center uk-child-width-1-2@m" uk-grid>
                     <div *ngFor="let discussion of discussionsList">
@@ -71,7 +72,7 @@
             <app-pagination *ngIf="showPagination && (discussionsList.length >= 0)" [totalRecords]="totalRecords"
                 [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">
             </app-pagination>
-            <div *ngIf=" discussionsList==undefined || discussionsList?.length === 0">
+            <div *ngIf=" discussionsList==undefined || discussionsList?.length === 0 ">
                 <app-no-discussion-results></app-no-discussion-results>
             </div>
             <div *ngIf="showPagination == false && totalRecords > searchParams.s">

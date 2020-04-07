@@ -15,8 +15,8 @@
                             Organiser</button>
                     </div>
                     <p>
-                        <a style="cursor:pointer;" href="mailto:{{reportEmail}}?subject=Report '{{event.title}}'"><img
-                                src="/assets/images/flag.svg">Report this Event/Organizer</a>
+                        <a style="cursor:pointer;" (click)="reportFormToggle()"><img
+                                src="/assets/images/flag.svg">{{ authService.isAuthenticate ? 'Report this Event/Organizer': 'Join us to Report Event/Organizer'}}</a>
                     </p>
                 </div>
 
@@ -167,5 +167,31 @@
             </div>
           </div>
           <!-- Contact Model END -->
+          <!-- Report Form Model Start -->
+          <div id="event-report-modal" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body">
+                <h3 class="uk-modal-title">Report</h3>
+                <!-- Success box START-->
+                <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
+                <p>{{ successMessage }}</p>
+                </div>
+                <!-- Success box END-->
+                <form [formGroup]="eventReportForm" (ngSubmit)="onSubmitReport()" class="uk-form-stacked review-form">
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="comment">Message</label>
+                        <div class="uk-form-controls">
+                        <textarea formControlName="comment" id="comment" class="uk-input min-h-200" id="form-stacked-text"
+                            placeholder="Enter your comment here"></textarea>
+                        </div>
+                    </div>
+                    <p class="uk-text-right">
+                        <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
+                        <button class="m-l-10 uk-button uk-button-default" type="submit"
+                        [disabled]="eventReportForm.invalid">Submit</button>
+                    </p>
+                </form>
+            </div>
+          </div>
+        <!-- Report Form Model End -->
     </div>
 </div>

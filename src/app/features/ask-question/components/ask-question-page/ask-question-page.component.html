@@ -39,9 +39,9 @@
 
 <div class= "tab">
   <ul class="uk-child-width-expand" uk-tab>
-      <li [ngClass]="{'uk-active': show=='experts'}"><a x-no-tabbing (click)="showAll('experts')">All Experts{{ showReset ? " (" + expertsTotal + ")" : "" }}</a></li>
-      <li [ngClass]="{'uk-active': show=='ques'}" *ngIf="!showReset"><a x-no-tabbing (click)="showAll('ques')">My Questions</a></li>
-      <li [ngClass]="{'uk-active': show=='expques'}" *ngIf="!showReset && user?.userRoleId =='EXPERT'" ><a x-no-tabbing (click)="showAll('expques')">Questions I need to answer</a></li>   
+      <li [ngClass]="{'uk-active': show=='experts', 'uk-width-1-2': !user?.id}"><a x-no-tabbing (click)="showAll('experts')">All Experts{{ showReset ? " (" + expertsTotal + ")" : "" }}</a></li>
+      <li [ngClass]="{'uk-active': show=='ques'}" *ngIf="user?.id && !showReset"><a x-no-tabbing (click)="showAll('ques')">My Questions</a></li>
+      <li [ngClass]="{'uk-active': show=='expques'}" *ngIf="user?.id && !showReset && user?.userRoleId =='EXPERT'" ><a x-no-tabbing (click)="showAll('expques')">Questions I need to answer</a></li>   
   </ul>
 </div>
 <!-- tab -end -->

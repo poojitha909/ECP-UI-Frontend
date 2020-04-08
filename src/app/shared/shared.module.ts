@@ -55,6 +55,7 @@ import { ExpertNoRecordComponent } from './expert-no-record/expert-no-record.com
 import { QuestionExpertNoRecordComponent } from './question-expert-no-record/question-expert-no-record.component';
 import { NoRecordsComponent } from './no-records/no-records.component';
 import { EventNoRecordComponent } from './event-no-record/event-no-record.component';
+import { ShareViaMediaComponent } from './share-via-media/share-via-media.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import { EventNoRecordComponent } from './event-no-record/event-no-record.compon
     ExpertNoRecordComponent,
     QuestionExpertNoRecordComponent,
     NoRecordsComponent,
-    EventNoRecordComponent
+    EventNoRecordComponent,
+    ShareViaMediaComponent
   ],
   imports: [
     CommonModule,
@@ -161,7 +163,8 @@ import { EventNoRecordComponent } from './event-no-record/event-no-record.compon
     ExpertNoRecordComponent,
     QuestionExpertNoRecordComponent,
     NoRecordsComponent,
-    EventNoRecordComponent
+    EventNoRecordComponent,
+    ShareViaMediaComponent
   ]
 })
 export class SharedModule { }

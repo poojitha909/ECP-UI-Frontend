@@ -16,35 +16,7 @@
                             class="uk-badge uk-float-right">{{cat.productCount}}</span></li>
                 </ul>
             </div>
-            <div class="m-t-30 bg-white category-box bg-white">
-                <div class="m-b-20">
-                    <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon"
-                        uk-icon="whatsapp" target="_blank"> </a>
-                    <a class="social-link" [href]="whatsappUrl" target="_blank">
-                        Share via
-                        Whatsapp</a>
-                </div> 
-                <div class="m-b-20">
-                    <a href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age&body=%0AService%2DURL:%20{{currentUrl}}"
-                        class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail">
-                    </a> <a class="social-link"
-                        href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age&body=%0AService%2DURL:%20{{currentUrl}}">
-                        Share via
-                        Email</a>
-                </div>
-                <div>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services"
-                        onclick="javascript:window.open(this.href,
-                        '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
-                        class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a
-                        class="social-link"
-                        href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services"
-                        onclick="javascript:window.open(this.href,
-                        '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-                        Share via
-                        Facebook</a>
-                </div>
-            </div>
+            <app-share-via-media></app-share-via-media>
         </div>
         <div class="uk-width-expand@m">
             <!-- Sample Implementation on 04-03-20 -->

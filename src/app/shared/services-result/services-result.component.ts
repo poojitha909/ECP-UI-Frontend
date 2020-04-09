@@ -149,8 +149,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     // !this.selectedCategoryType ? this.searchPageParam.term = category : '';
     this.isLoading = true;
     let param: serviceParam = {
-      pageNo: 0,
-      max: 50,
+      pageNo: 0
     };
 
     if (catId) {
@@ -228,8 +227,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
 
 
     let param: serviceParam = {
-      pageNo: 0,
-      max: 50,
+      pageNo: 0
     };
 
     if (catId) {

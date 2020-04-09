@@ -85,6 +85,8 @@ export class SearchResultsComponent implements OnInit {
         UIkit.tab(getelem).show(0);
         break;
     }
-    this.hasMaxCal = true;
+    setTimeout(() => {
+      this.hasMaxCal = true;
+    }, 5000);
   }
 }

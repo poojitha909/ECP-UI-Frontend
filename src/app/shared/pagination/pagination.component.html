@@ -1,34 +1,26 @@
 <!-- Pagination start -->
 <div class="uk-container pagination" *ngIf="items.length > 1">
   <ul class="uk-pagination" uk-margin>
-    <li class="cursor-pointer pg-align-1">
-      <div *ngIf="currentPage>0" (click)="callParent(0)">
-        <div class="pagePrev">
+    <li class="cursor-pointer pg-align-1 first" *ngIf="currentPage>0" (click)="callParent(0)">
+      <div class="pagePrev">
         <span uk-pagination-previous></span> First
       </div>
-      </div>
     </li>
-    <li class="cursor-pointer pg-align-1">
-      <div *ngIf="currentPage>0" (click)="callParent(currentPage-1)">
-        <div class="pagePrev">
+    <li class="cursor-pointer pg-align-1" *ngIf="currentPage>0" (click)="callParent(currentPage-1)">
+      <div class="pagePrev">
         <span uk-pagination-previous></span> Previous
-      </div>
       </div>
     </li>
     <li class="pagenum" *ngFor="let i of items" [ngClass]="{'uk-active': i==currentPage}" (click)="callParent(i)">
       {{i+1}}</li>
-    <li class="cursor-pointer pg-align-2">
-      <div *ngIf="currentPage<lastPage" (click)="callParent(currentPage -- 1)">
-        <div class="pageNext">
+    <li class="cursor-pointer pg-align-2" *ngIf="currentPage<lastPage" (click)="callParent(currentPage -- 1)">
+      <div class="pageNext">
         Next <span uk-pagination-next></span>
       </div>
-      </div>
     </li>
-    <li class="cursor-pointer pg-align-2">
-      <div *ngIf="currentPage<lastPage" (click)="callParent(lastPage)">
-        <div class="pageNext">
+    <li class="cursor-pointer pg-align-2" *ngIf="currentPage<lastPage" (click)="callParent(lastPage)">
+      <div class="pageNext">
         Last <span uk-pagination-next></span>
-      </div>
       </div>
     </li>
   </ul>

@@ -35,16 +35,19 @@
   display: inline-block;
 }
 .uk-pagination .pg-align-1 {
-  width: 75px;
+  width: 78px;
   line-height: 50px;
   padding-left:0px;
   padding-right:0px;
+  &.first {
+    width: 55px;
+  }
 }
 .uk-pagination .pg-align-2 {
-  width: 75px;
+  width: 56px;
   line-height: 50px;
-  padding-left:0px;
-  padding-right:0px;
+  padding-left: 5px;
+  padding-right: 0px;
 }
 
 

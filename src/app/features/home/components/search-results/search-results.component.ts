@@ -16,6 +16,7 @@ export class SearchResultsComponent implements OnInit {
   eventTotal: number = 0;
   discussionTotal: number = 0;
   maxTotal: number;
+  hasMaxCal: boolean;
   constructor() {
     console.log(this.searchData, 'search component')
   }
@@ -25,24 +26,34 @@ export class SearchResultsComponent implements OnInit {
 
   getTotalServices(tot: number) {
     this.servicesTotal = tot;
-    this.getMaxCount();
+    if (!this.hasMaxCal) {
+      this.getMaxCount();
+    }
   }
 
   getTotalProducts(tot: number) {
     this.productTotal = tot;
-    this.getMaxCount();
+    if (!this.hasMaxCal) {
+      this.getMaxCount();
+    }
   }
   getTotalExperts(tot: number) {
     this.expertTotal = tot;
-    this.getMaxCount();
+    if (!this.hasMaxCal) {
+      this.getMaxCount();
+    }
   }
   getTotalEvents(tot: number) {
     this.eventTotal = tot;
-    this.getMaxCount();
+    if (!this.hasMaxCal) {
+      this.getMaxCount();
+    }
   }
   getTotalDiscussions(tot: number) {
     this.discussionTotal = tot;
-    this.getMaxCount();
+    if (!this.hasMaxCal) {
+      this.getMaxCount();
+    }
   }
 
   getMaxCount() {
@@ -74,6 +85,6 @@ export class SearchResultsComponent implements OnInit {
         UIkit.tab(getelem).show(0);
         break;
     }
-
+    this.hasMaxCal = true;
   }
 }

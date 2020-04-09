@@ -50,7 +50,7 @@
             </div>
             <div *ngIf="showPagination == false && totalRecords > searchParams.s && !isLoading">
                 <button routerLink="/community"
-                    [queryParams]="{ searchTxt:searchParams?.searchTxt, category: searchParams?.tags, show: 'discss' }"
+                    [queryParams]="{ searchTxt:searchParams?.searchTxt, category: selCategory, show: 'discss' }"
                     class="uk-button uk-button-default uk-width-1-1 m-t-30">View All Results</button>
             </div>
         </div>

@@ -37,13 +37,9 @@
     </div>
 
   </div >
-  <ul uk-tab class="showOnSearchtab" id="search-tab" *ngIf="showReset">
-    <li><a (click)="showAll('discss')" href="#" class="font-regular" >Articles & Discussions({{searchData.totalDiscussions}})</a></li>
-    <li><a (click)="showAll('events')" href="#" class="font-regular">Events({{searchData.totalEvents}})</a></li>
-  </ul>
-  <ul class="uk-child-width-expand" id="search-tab" uk-tab *ngIf="!showReset">
-    <li><a (click)="showAll('discss')" href="#">All Articles & Discussions</a></li>
-    <li><a (click)="showAll('events')" href="#">All Events</a></li>
+  <ul [ngClass]="{'uk-child-width-expand': !showReset, 'showOnSearchtab': showReset }" id="search-tab" uk-tab>
+    <li><a (click)="showAll('discss')" href="#">All Articles & Discussions{{ showReset ? " (" + searchData.totalDiscussions + ")" : "" }}</a></li>
+    <li><a (click)="showAll('events')" href="#">All Events{{ showReset ? " (" + searchData.totalEvents + ")" : "" }}</a></li>
   </ul>
   <ul class="uk-switcher showingSearchResult">
     <li>

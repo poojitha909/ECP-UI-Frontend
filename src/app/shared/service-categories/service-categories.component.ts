@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { JdCategoryService } from 'src/app/core/services';
-import { Category } from 'src/app/core/interfaces';
+import { Category, categorySources } from 'src/app/core/interfaces';
 
 @Component({
   selector: 'app-service-categories',
@@ -29,7 +29,11 @@ export class ServiceCategoriesComponent implements OnInit {
     this.onClearSelection.emit();
   }
 
-  onCategoryChanged(ParentCatid: string, catId: string) {
+  onCategoryChanged(ParentCatid: string, catId: string, source: categorySources[]) {
+
+    if (source && source.length > 1) {
+      catId = `${source[0].catid},${source[1].catid}`;
+    }
     const selectedData = {
       ParentCatid: ParentCatid,
       catId: catId

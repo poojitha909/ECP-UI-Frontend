@@ -68,7 +68,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
             this.homeService.homeSearchtxt = searchTxt;
           }
 
-          if (queryCategory) {
+          if (queryCategory || catId) {
             this.filterCategoryList(queryCategory, catId, this.homeService.homeSearchtxt);
           } else {
             this.showShareBox = false;
@@ -121,7 +121,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     this.ecpService.searchedService = '';
     this.ecpService.searchCatID = '';
     if (!this.internalProcessing) {
-      this.router.navigateByUrl('services');
+      this.router.navigate(['services'], { queryParams: { category: '', catid: '', searchTxt: this.homeService.homeSearchtxt } });
     } else {
       this.getCategoryServices('', 0, this.homeService.homeSearchtxt);
     }
@@ -140,8 +140,17 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
 
   getCategoryServices(category, catId, searchTxt?) {
     if (catId) {
+      const selSubCat = this.selectedCategoryType.subCategories.find(subCat => {
+        if (subCat.source.find(source => source.catid == catId)) {
+          return true
+        }
+      });
       this.showingCategory = category;
-      this.selectedCategory = category;
+      this.selectedCategory = selSubCat.name;
+      if (selSubCat.source && selSubCat.source.length > 1) {
+        catId = `${selSubCat.source[0].catid},${selSubCat.source[1].catid}`;
+      }
+
     } else {
       this.showingCategory = 'All ' + category;
       this.selectedCategory = 'All';
@@ -225,7 +234,6 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
 
   filterCategoryList(queryCategory, catId, searchTxt) {
 
-
     let param: serviceParam = {
       pageNo: 0
     };
@@ -244,41 +252,37 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     this.jdCategoryService.fetchAllCategories(param).subscribe(
       response => {
         this.categories = response;
-        //  filter category
         this.ecpService.searchedService = queryCategory;
+
+        //  filter category
         if (catId) {
           this.ecpService.searchCatID = catId;
+
+          if (catId.includes(",")) {
+            const catIds = catId.split(",")
+            catId = catIds[0];
+          }
           //Set selected category
-          if (!this.selectedCategoryType) {
-            let subCategory = null;
-            this.selectedCategoryType = this.categories.find(category => {
-              subCategory = category.subCategories.find(subCat => {
-                if (subCat.source.find(source => source.catid == catId)) {
-                  return true
-                }
-              });
-              if (subCategory) {
-                return true;
-              }
-            });
-            if (subCategory) {
-              this.getCategoryServices(this.selectedCategoryType.id, subCategory.source[0].catid, this.homeService.homeSearchtxt);
-            }
-          } else {
-            const selSubCat = this.selectedCategoryType.subCategories.find(subCat => {
+          // if (!this.selectedCategoryType) {
+          let subCategory = null;
+          this.selectedCategoryType = this.categories.find(category => {
+            subCategory = category.subCategories.find(subCat => {
               if (subCat.source.find(source => source.catid == catId)) {
                 return true
               }
             });
-            this.getCategoryServices(this.selectedCategoryType.id, selSubCat.source[0].catid, this.homeService.homeSearchtxt);
+            if (subCategory) {
+              return true;
+            }
+          });
+          if (subCategory) {
+            this.getCategoryServices(this.selectedCategoryType.id, subCategory.source[0].catid, this.homeService.homeSearchtxt);
           }
-
-
         } else if (queryCategory) {
           //Set selected category
-          if (!this.selectedCategoryType) {
-            this.selectedCategoryType = this.categories.find(category => category.id == queryCategory);
-          }
+          // if (!this.selectedCategoryType) {
+          this.selectedCategoryType = this.categories.find(category => category.id == queryCategory);
+          // }
           this.ecpService.searchCatID = null;
           this.getCategoryServices(this.selectedCategoryType.id, 0, this.homeService.homeSearchtxt);
         }

@@ -28,10 +28,14 @@
         </div>
         <ul class="uk-list uk-list-small pl-15 sroll-category">
             <li [ngClass]="{'cat-active': selectedCategory === 'All' }"
-                (click)="onCategoryChanged(selectedCategoryType.id,'')" class="cursor-pointer font-regular">All</li>
+                (click)="onCategoryChanged(selectedCategoryType.id,'')" class="cursor-pointer font-regular">All
+                <div class="uk-float-right">
+                    <span class="uk-badge">{{selectedCategoryType.totalServices}}</span>
+                </div>
+            </li>
             <li *ngFor="let subCategory of selectedCategoryType.subCategories"
                 [ngClass]="{'cat-active': subCategory.name === selectedCategory}"
-                (click)="onCategoryChanged(selectedCategoryType.id,subCategory.source[0].catid)"
+                (click)="onCategoryChanged(selectedCategoryType.id,subCategory.source[0].catid,source)"
                 class="cursor-pointer font-regular">
                 {{subCategory.name}}
                 <div class="uk-float-right">

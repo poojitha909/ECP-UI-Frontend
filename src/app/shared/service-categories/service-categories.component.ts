@@ -29,15 +29,13 @@ export class ServiceCategoriesComponent implements OnInit {
     this.onClearSelection.emit();
   }
 
-  onCategoryChanged(ParentCatid: string, catId: string, source: categorySources[]) {
+  onCategoryChanged(ParentCatid: string, catId: string) {
 
-    if (source && source.length > 1) {
-      catId = `${source[0].catid},${source[1].catid}`;
-    }
     const selectedData = {
       ParentCatid: ParentCatid,
       catId: catId
     }
+    console.log(selectedData);
     this.onCategoryChange.emit(selectedData);
   }
 

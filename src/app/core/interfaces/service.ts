@@ -59,6 +59,10 @@ export interface Service {
     id?: string;
     facilities?: any[];
     reviewedByUser?: boolean;
+    catName?: string;
+    categoryId?: string;
+    categoryKey?: string;
+
 }
 
 export interface PrimaryUserAddress {
@@ -118,6 +122,8 @@ export interface ServiceProviderInfo {
     homeVisits: boolean;
     yearsExperience: number;
     services: string[];
+    catid: string[];
+    source: string
 }
 
 export interface SystemTag {

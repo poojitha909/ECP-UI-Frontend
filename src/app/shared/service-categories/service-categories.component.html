@@ -35,7 +35,7 @@
             </li>
             <li *ngFor="let subCategory of selectedCategoryType.subCategories"
                 [ngClass]="{'cat-active': subCategory.name === selectedCategory}"
-                (click)="onCategoryChanged(selectedCategoryType.id,subCategory.source[0].catid,source)"
+                (click)="onCategoryChanged(selectedCategoryType.id,subCategory.source[0].catid)"
                 class="cursor-pointer font-regular">
                 {{subCategory.name}}
                 <div class="uk-float-right">

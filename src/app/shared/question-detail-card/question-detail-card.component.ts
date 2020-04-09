@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class QuestionDetailCardComponent implements OnInit {
   @Input() question: any;
   @Input() viewby: string;
+  @Input() pageParam: Object;
   @Output() categoryChange: EventEmitter<string> = new EventEmitter();
 
   constructor(private route:Router) { }

@@ -23,7 +23,9 @@
         <span uk-spinner="ratio: 3"></span>
       </div>
       <div *ngIf="experts && experts.length > 0 && !isLoading">
-        <app-expert-detail-card *ngFor="let expert of experts" [expert]="expert" (categoryChange)="onTabChange($event)"></app-expert-detail-card>
+        <app-expert-detail-card *ngFor="let expert of experts" [expert]="expert"
+          [pageParam]="{expertCategory: searchParams.experties, answeredBy: expert.id, page: searchParams.p, searchTxt: searchParams.searchTxt, show: 'experts'}"
+          (categoryChange)="onTabChange($event)"></app-expert-detail-card>
       </div>
       <app-pagination *ngIf="showPagination && experts && experts.length > 0 && !isLoading" [totalRecords]="totalRecords"
         [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">

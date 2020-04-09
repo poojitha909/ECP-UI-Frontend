@@ -53,6 +53,7 @@ export class AskQuestionDetailPageComponent implements OnInit {
     if (this.route.snapshot.params['category']) {
       this.category = this.route.snapshot.params['category'];
     }
+    this.breadcrumbLinks[1].queryParams = this.route.snapshot.queryParams;
     this.commentTxt = "";
     this.replyId = "";
     this.replyParentText = "";

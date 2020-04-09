@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class ExpertDetailCardComponent implements OnInit {
   @Input() expert: any;
+  @Input() pageParam: Object;
   @Output() categoryChange: EventEmitter<string> = new EventEmitter();
   user:any;
   isSame: boolean;

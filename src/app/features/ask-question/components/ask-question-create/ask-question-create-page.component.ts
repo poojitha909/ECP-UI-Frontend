@@ -60,7 +60,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
       askedBy: "",
       answeredBy: ""
     }
-
+    this.breadcrumbLinks[1].queryParams = this.route.snapshot.queryParams;
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);

@@ -230,13 +230,20 @@ export interface Breadcrumb {
     queryParams?: any;
 }
 
+export interface categorySources {
+    name: string,
+    catid: string
+}
+
 export interface SubCategory {
     name: string;
-    id: string;
+    totalServices: number;
+    source: categorySources[];
 }
 
 export interface Category {
     id: string;
     name: string;
+    totalServices: number;
     subCategories: SubCategory[];
 }

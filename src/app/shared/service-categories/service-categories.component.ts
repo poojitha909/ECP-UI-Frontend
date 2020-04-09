@@ -9,27 +9,29 @@ import { Category } from 'src/app/core/interfaces';
 })
 export class ServiceCategoriesComponent implements OnInit {
 
+  @Input() categories: Category[];
   @Input() selectedCategoryType: Category;
   @Input() selectedCategory: string;
   @Output() onCategoryChange: EventEmitter<any> = new EventEmitter();
   @Output() onClearSelection: EventEmitter<any> = new EventEmitter();
 
-  categories: Category[];
+  // categories: Category[];
 
-  constructor(private jdCategoryService: JdCategoryService) {
-    this.categories = jdCategoryService.serviceCategories;
+  constructor() {
+
   }
 
   ngOnInit() {
+
   }
 
   clearSelection() {
     this.onClearSelection.emit();
   }
 
-  onCategoryChanged(catName: string, catId: string) {
+  onCategoryChanged(ParentCatid: string, catId: string) {
     const selectedData = {
-      catName: catName,
+      ParentCatid: ParentCatid,
       catId: catId
     }
     this.onCategoryChange.emit(selectedData);

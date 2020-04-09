@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, Input, ChangeDetectorRef, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { JdCategoryService } from 'src/app/core/services';
-import { Category, Service, PageParam } from 'src/app/core/interfaces';
+import { Category, Service, serviceParam } from 'src/app/core/interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { EpcServiceService } from 'src/app/features/services/epc-service.service';
@@ -45,7 +45,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     public homeService: HomeService,
     private router: Router
   ) {
-    this.categories = jdCategoryService.serviceCategories;
+    // this.categories = jdCategoryService.serviceCategories;
   }
 
   ngOnInit() {
@@ -69,16 +69,18 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
           }
 
           if (queryCategory) {
-            this.filterCategoryList(queryCategory, catId);
+            this.filterCategoryList(queryCategory, catId, this.homeService.homeSearchtxt);
           } else {
             this.showShareBox = false;
+            this.selectedCategoryType = undefined;
             if (this.homeService.homeSearchtxt) {
+              this.filterCategoryList('', 0, this.homeService.homeSearchtxt);
               this.getCategoryServices('', 0, this.homeService.homeSearchtxt);
             } else {
+              this.filterCategoryList('', 0, '');
               this.getAllService();
               this.showingCategory = 'All Services';
             }
-            this.selectedCategoryType = undefined;
           }
 
 
@@ -88,6 +90,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
       if (this.searchTxt) {
         this.ecpService.searchedService = '';
         this.ecpService.searchCatID = '';
+        this.filterCategoryList('', 0, this.searchTxt);
         this.getCategoryServices('', 0, this.searchTxt);
       }
     }
@@ -128,9 +131,9 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
   onCategoryChanged(categoryChanges: any) {
     if (categoryChanges) {
       if (!this.internalProcessing) {
-        this.router.navigate(['services'], { queryParams: { category: categoryChanges.catName, catid: categoryChanges.catId, searchTxt: this.homeService.homeSearchtxt } });
+        this.router.navigate(['services'], { queryParams: { category: categoryChanges.ParentCatid, catid: categoryChanges.catId, searchTxt: this.homeService.homeSearchtxt } });
       } else {
-        this.filterCategoryList(categoryChanges.catName, categoryChanges.catId);
+        this.filterCategoryList(categoryChanges.ParentCatid, categoryChanges.catId, this.homeService.homeSearchtxt);
       }
     }
   }
@@ -145,14 +148,17 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     }
     // !this.selectedCategoryType ? this.searchPageParam.term = category : '';
     this.isLoading = true;
-    let param: PageParam = {
-      p: 0,
-      s: 50,
-      catid: catId,
+    let param: serviceParam = {
+      pageNo: 0,
+      max: 50,
     };
 
+    if (catId) {
+      param.catId = catId;
+    }
+
     if (category) {
-      param.catName = category;
+      param.parentCatid = category;
     }
     if (searchTxt) {
       param.term = searchTxt;
@@ -218,39 +224,71 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     }
   }
 
-  filterCategoryList(queryCategory, catId) {
+  filterCategoryList(queryCategory, catId, searchTxt) {
 
-    this.ecpService.searchedService = queryCategory;
+
+    let param: serviceParam = {
+      pageNo: 0,
+      max: 50,
+    };
+
     if (catId) {
-      this.ecpService.searchCatID = catId;
-      //Set selected category
-
-      if (!this.selectedCategoryType) {
-        let subCategory = null;
-        this.selectedCategoryType = this.categories.find(category => {
-          subCategory = category.subCategories.find(subCat => subCat.id == catId);
-          if (subCategory) {
-            return true;
-          }
-        });
-        if (subCategory) {
-          this.getCategoryServices(subCategory.name, subCategory.id, this.homeService.homeSearchtxt);
-        }
-      } else {
-        const selSubCat = this.selectedCategoryType.subCategories.find(subCategory => subCategory.id == catId);
-        this.getCategoryServices(selSubCat.name, selSubCat.id, this.homeService.homeSearchtxt);
-      }
-
-
-    } else {
-      //Set selected category
-      if (!this.selectedCategoryType) {
-        this.selectedCategoryType = this.categories.find(type => type.name.trim().toLowerCase() == queryCategory.trim().toLowerCase());
-      }
-      this.ecpService.searchCatID = null;
-      this.getCategoryServices(queryCategory, 0, this.homeService.homeSearchtxt);
+      param.catId = catId;
     }
-    this.showShareBox = true;
+
+    if (queryCategory) {
+      param.parentCatid = queryCategory;
+    }
+    if (searchTxt) {
+      param.term = searchTxt;
+    }
+
+    this.jdCategoryService.fetchAllCategories(param).subscribe(
+      response => {
+        this.categories = response;
+        //  filter category
+        this.ecpService.searchedService = queryCategory;
+        if (catId) {
+          this.ecpService.searchCatID = catId;
+          //Set selected category
+          if (!this.selectedCategoryType) {
+            let subCategory = null;
+            this.selectedCategoryType = this.categories.find(category => {
+              subCategory = category.subCategories.find(subCat => {
+                if (subCat.source.find(source => source.catid == catId)) {
+                  return true
+                }
+              });
+              if (subCategory) {
+                return true;
+              }
+            });
+            if (subCategory) {
+              this.getCategoryServices(this.selectedCategoryType.id, subCategory.source[0].catid, this.homeService.homeSearchtxt);
+            }
+          } else {
+            const selSubCat = this.selectedCategoryType.subCategories.find(subCat => {
+              if (subCat.source.find(source => source.catid == catId)) {
+                return true
+              }
+            });
+            this.getCategoryServices(this.selectedCategoryType.id, selSubCat.source[0].catid, this.homeService.homeSearchtxt);
+          }
+
+
+        } else if (queryCategory) {
+          //Set selected category
+          if (!this.selectedCategoryType) {
+            this.selectedCategoryType = this.categories.find(category => category.id == queryCategory);
+          }
+          this.ecpService.searchCatID = null;
+          this.getCategoryServices(this.selectedCategoryType.id, 0, this.homeService.homeSearchtxt);
+        }
+        this.showShareBox = true;
+      },
+      error => {
+        console.log(error);
+      });
   }
   /**
    * Mobile view Category filter

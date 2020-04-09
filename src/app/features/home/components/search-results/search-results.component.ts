@@ -9,12 +9,14 @@ declare var UIkit: any;
 export class SearchResultsComponent implements OnInit {
   @Input() searchData: any;
   @Input() searchTerm: string;
+  allCount = {
+    servicesTotal: null,
+    productTotal: null,
+    expertTotal: null,
+    eventTotal: null,
+    discussionTotal: null
+  }
 
-  servicesTotal: number = 0;
-  productTotal: number = 0;
-  expertTotal: number = 0;
-  eventTotal: number = 0;
-  discussionTotal: number = 0;
   maxTotal: number;
   hasMaxCal: boolean;
   constructor() {
@@ -25,59 +27,61 @@ export class SearchResultsComponent implements OnInit {
   }
 
   getTotalServices(tot: number) {
-    this.servicesTotal = tot;
+    this.allCount.servicesTotal = tot;
     if (!this.hasMaxCal) {
       this.getMaxCount();
     }
   }
 
   getTotalProducts(tot: number) {
-    this.productTotal = tot;
+    this.allCount.productTotal = tot;
+
     if (!this.hasMaxCal) {
       this.getMaxCount();
     }
   }
   getTotalExperts(tot: number) {
-    this.expertTotal = tot;
+    this.allCount.expertTotal = tot;
     if (!this.hasMaxCal) {
       this.getMaxCount();
     }
   }
   getTotalEvents(tot: number) {
-    this.eventTotal = tot;
+    this.allCount.eventTotal = tot;
     if (!this.hasMaxCal) {
       this.getMaxCount();
     }
   }
   getTotalDiscussions(tot: number) {
-    this.discussionTotal = tot;
+    this.allCount.discussionTotal = tot;
     if (!this.hasMaxCal) {
       this.getMaxCount();
     }
   }
 
   getMaxCount() {
+
     this.maxTotal = Math.max(
-      this.servicesTotal,
-      this.productTotal,
-      this.expertTotal,
-      this.eventTotal,
-      this.discussionTotal);
+      this.allCount.servicesTotal,
+      this.allCount.productTotal,
+      this.allCount.expertTotal,
+      this.allCount.eventTotal,
+      this.allCount.discussionTotal);
 
     const getelem = document.getElementById("search-tab");
     switch (this.maxTotal) {
-      case this.eventTotal:
+      case this.allCount.eventTotal:
         UIkit.tab(getelem).show(1);
         break;
-      case this.expertTotal:
+      case this.allCount.expertTotal:
 
         UIkit.tab(getelem).show(2);
         break;
-      case this.productTotal:
+      case this.allCount.productTotal:
 
         UIkit.tab(getelem).show(3);
         break;
-      case this.servicesTotal:
+      case this.allCount.servicesTotal:
 
         UIkit.tab(getelem).show(4);
         break;
@@ -85,8 +89,11 @@ export class SearchResultsComponent implements OnInit {
         UIkit.tab(getelem).show(0);
         break;
     }
-    setTimeout(() => {
+
+    const checkMax: any[] = Object.values(this.allCount).filter(value => value === null);
+
+    if (checkMax.length == 0) {
       this.hasMaxCal = true;
-    }, 5000);
+    }
   }
 }

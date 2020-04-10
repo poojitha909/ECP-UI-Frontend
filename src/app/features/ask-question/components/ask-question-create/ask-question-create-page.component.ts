@@ -67,8 +67,8 @@ export class AskQuestionCreatePageComponent implements OnInit {
       this.searchParams.askedBy = this.user.id;
     }
     this.rUrl="?";
-    if (this.route.snapshot.queryParams['category']) {
-      this.category = this.route.snapshot.queryParams['category'];
+    if (this.route.snapshot.queryParams['expertCategory']) {
+      this.category = this.route.snapshot.queryParams['expertCategory'];
       this.rUrl= this.rUrl + "category=" + this.category + "&";
     }
     if (this.route.snapshot.queryParams['answeredBy']) {

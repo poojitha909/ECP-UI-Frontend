@@ -111,13 +111,15 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     // update current page of items
     this.pageServices = pageData.services;
     this.ecpService.activePage = pageData.currentPage;
-    this.router.navigate(
-      [],
-      {
-        relativeTo: this.activeRoute,
-        queryParams: { page: pageData.currentPage },
-        queryParamsHandling: 'merge'
-      });
+    if (pageData.currentPage !== 1) {
+      this.router.navigate(
+        [],
+        {
+          relativeTo: this.activeRoute,
+          queryParams: { page: pageData.currentPage },
+          queryParamsHandling: 'merge'
+        });
+    }
     this.cdr.detectChanges();
     const elmnt = document.getElementById("serviceList");
     elmnt.scrollIntoView();

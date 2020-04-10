@@ -95,6 +95,9 @@ export class AskQuestionCreatePageComponent implements OnInit {
       if (response.data.id != "") {
         this.expert = response.data;
         this.setSeoTags(this.expert);
+        if(!this.category && this.expert.experties[0]){
+          this.category = this.expert.experties[0].id;
+        }
       }
       else {
         alert("Oops! something wrong happen, please try again.");

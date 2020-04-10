@@ -75,6 +75,9 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
     if (this.route.snapshot.queryParams['page'] !== undefined) {
       this.searchParams.p = this.route.snapshot.queryParams['page'];
     }
+    if(this.route.snapshot.queryParams['show'] != 'expques'){
+      this.searchParams.p = 0;
+    }
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
     }

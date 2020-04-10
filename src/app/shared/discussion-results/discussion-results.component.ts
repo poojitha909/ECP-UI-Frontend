@@ -19,7 +19,6 @@ export class DiscussionResultsComponent implements OnInit {
   @Input() showPagination: boolean;
   @Input() showSharing: boolean;
   @Output() showCount: EventEmitter<number> = new EventEmitter();
-  
   discussionsList: any[];
   selCategory: string;
   categoryList: any;
@@ -72,6 +71,9 @@ export class DiscussionResultsComponent implements OnInit {
     }
     if (this.route.snapshot.queryParams['page'] !== undefined) {
       this.searchParams.p = this.route.snapshot.queryParams['page'];
+    }
+    if(this.route.snapshot.queryParams['show'] != 'discss'){
+      this.searchParams.p = 0;
     }
     this.getAllCategories();
   }

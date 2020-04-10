@@ -60,15 +60,15 @@ export class AskQuestionCreatePageComponent implements OnInit {
       askedBy: "",
       answeredBy: ""
     }
-
+    this.breadcrumbLinks[1].queryParams = this.route.snapshot.queryParams;
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
       this.searchParams.askedBy = this.user.id;
     }
     this.rUrl="?";
-    if (this.route.snapshot.queryParams['category']) {
-      this.category = this.route.snapshot.queryParams['category'];
+    if (this.route.snapshot.queryParams['expertCategory']) {
+      this.category = this.route.snapshot.queryParams['expertCategory'];
       this.rUrl= this.rUrl + "category=" + this.category + "&";
     }
     if (this.route.snapshot.queryParams['answeredBy']) {
@@ -95,6 +95,9 @@ export class AskQuestionCreatePageComponent implements OnInit {
       if (response.data.id != "") {
         this.expert = response.data;
         this.setSeoTags(this.expert);
+        if(!this.category && this.expert.experties[0]){
+          this.category = this.expert.experties[0].id;
+        }
       }
       else {
         alert("Oops! something wrong happen, please try again.");

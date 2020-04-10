@@ -24,7 +24,8 @@ export class ProductDetailPageComponent implements OnInit {
     },
     {
       text: 'Products',
-      link: '/products'
+      link: '/products',
+      queryParams: {}
     }
   ];
 
@@ -59,7 +60,6 @@ export class ProductDetailPageComponent implements OnInit {
     private fb: FormBuilder,
     public auth: AuthService
   ) {
-
     if (this.productService.selectedCatId && this.productService.selectedCatname) {
       this.breadcrumbLinks[2] = {
         text: '',
@@ -68,16 +68,14 @@ export class ProductDetailPageComponent implements OnInit {
       this.breadcrumbLinks[2].text = this.productService.selectedCatname;
       this.breadcrumbLinks[2].queryParams = { productCategory: this.productService.selectedCatId };
     }
-
     if (this.auth.isAuthenticate && this.auth.user) {
       this.userId = this.auth.user.id;
     }
-
     this.reviwePaginate = {
       p: 0,
       s: 2
     }
-
+    this.breadcrumbLinks[1].queryParams = this.route.snapshot.queryParams;
   }
   reviewForm: FormGroup;
   successMessage: String;

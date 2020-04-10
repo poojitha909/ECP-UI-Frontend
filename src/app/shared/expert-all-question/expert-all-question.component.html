@@ -10,7 +10,7 @@
         <span uk-spinner="ratio: 3"></span>
       </div>    
       <div  *ngIf="questions!==undefined && questions.length > 0 && !isLoading">
-        <app-question-detail-card *ngFor="let question of questions" [question]="question" [viewby]="viewby" (categoryChange)="onTabChange($event)"></app-question-detail-card>
+        <app-question-detail-card *ngFor="let question of questions" [question]="question" [viewby]="viewby"  [pageParam]="{page:searchParams.p, searchTxt:searchParams.searchTxt, show:'expques'}" (categoryChange)="onTabChange($event)"></app-question-detail-card>
       </div>
       <app-pagination *ngIf="questions && questions.length > 0 && !isLoading" [totalRecords]="totalRecords" [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)"></app-pagination>
       <div class="m-t-20" *ngIf="(questions==undefined || questions.length == 0) && !isLoading">

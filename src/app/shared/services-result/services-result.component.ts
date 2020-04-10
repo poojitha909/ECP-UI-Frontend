@@ -34,6 +34,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
   maxPages: number;
   verfiedCheck: boolean;
   pageSize = 4;
+  activePage: number = 1;
   // selectedCatid: string;
 
   constructor(
@@ -64,6 +65,10 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
           const queryCategory = value.get("category");
           const catId = value.get("catid");
           const searchTxt = value.get("searchTxt");
+          const page = value.get("page");
+
+          this.activePage = (page) ? +page : 1;
+
           if (!this.homeService.homeSearchtxt && searchTxt) {
             this.homeService.homeSearchtxt = searchTxt;
           }
@@ -102,9 +107,19 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
 
   }
 
-  onChangePage(services: any[]) {
+  onChangePage(pageData: any) {
     // update current page of items
-    this.pageServices = services;
+    this.pageServices = pageData.services;
+    this.ecpService.activePage = pageData.currentPage;
+    if (pageData.currentPage !== 1) {
+      this.router.navigate(
+        [],
+        {
+          relativeTo: this.activeRoute,
+          queryParams: { page: pageData.currentPage },
+          queryParamsHandling: 'merge'
+        });
+    }
     this.cdr.detectChanges();
     const elmnt = document.getElementById("serviceList");
     elmnt.scrollIntoView();

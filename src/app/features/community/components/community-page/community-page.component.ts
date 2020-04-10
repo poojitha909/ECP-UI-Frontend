@@ -104,10 +104,6 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
 
     if (this.route.snapshot.queryParams['past'] !== undefined) {
       this.pastEvents = this.route.snapshot.queryParams['past'];
-      this.show = "events";
-    }
-    else{
-      this.show = "discss";
     }
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
@@ -119,6 +115,9 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     }
     if(this.route.snapshot.queryParams['show']){
       this.show = this.route.snapshot.queryParams['show'];
+    }
+    else{
+      this.show = "discss";
     }
   }
 

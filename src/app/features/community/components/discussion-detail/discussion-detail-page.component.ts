@@ -70,6 +70,7 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
         link: '/community'
       }
     ];
+    this.breadcrumbLinks[1].queryParams = this.route.snapshot.queryParams;
     this.categoryName = "";
     if (this.route.snapshot.params['category']) {
       this.category = this.route.snapshot.params['category'];

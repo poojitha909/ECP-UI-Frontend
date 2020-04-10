@@ -13,6 +13,7 @@ export class EpcServiceService {
 
   searchedService: string;
   searchCatID: string;
+  activePage: number;
   showBg: boolean;
   serviceParam: JDserviceParam = {
     max: 50,

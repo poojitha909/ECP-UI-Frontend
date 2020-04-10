@@ -37,7 +37,7 @@
             <div *ngIf="discussionsList!==undefined && discussionsList.length > 0 && !isLoading" class="m-b-30">
                 <div class="uk-flex-left uk-text-center uk-child-width-1-2@m" uk-grid>
                     <div *ngFor="let discussion of discussionsList">
-                        <app-dicussion-summary-card [category]="selCategory" [discussion]="discussion">
+                        <app-dicussion-summary-card [category]="selCategory" [pageParam]="{category:selCategory, searchTxt:searchParams.searchTxt, page:searchParams.p, show:'discss'}" [discussion]="discussion">
                         </app-dicussion-summary-card>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
             </div>
             <div *ngIf="showPagination == false && totalRecords > searchParams.s && !isLoading">
                 <button routerLink="/community"
-                    [queryParams]="{ searchTxt:searchParams?.searchTxt, category: searchParams?.tags, show: 'discss' }"
+                    [queryParams]="{ searchTxt:searchParams?.searchTxt, category: selCategory, show: 'discss' }"
                     class="uk-button uk-button-default uk-width-1-1 m-t-30">View All Results</button>
             </div>
         </div>

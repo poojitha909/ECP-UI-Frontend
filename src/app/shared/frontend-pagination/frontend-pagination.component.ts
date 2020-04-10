@@ -15,6 +15,7 @@ export class FrontendPaginationComponent implements OnInit, OnChanges, AfterView
   @Input() pageSize = 10;
   @Input() maxPages = 10;
 
+
   pager: any = {};
 
   constructor() { }
@@ -48,7 +49,11 @@ export class FrontendPaginationComponent implements OnInit, OnChanges, AfterView
       const pageOfItems = this.items.slice(this.pager.startIndex, this.pager.endIndex + 1);
 
       // call change page function in parent component
-      this.changePage.emit(pageOfItems);
+      const pageData = {
+        services: pageOfItems,
+        currentPage: page
+      }
+      this.changePage.emit(pageData);
     }
   }
 

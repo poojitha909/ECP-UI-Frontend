@@ -22,10 +22,6 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     {
       text: 'Services',
       link: '/services'
-    },
-    {
-      text: 'All Services',
-      link: '/services/all'
     }
   ];
   service: ServiceDetail;
@@ -75,10 +71,13 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
     if (this.ecpService.searchedService && this.ecpService.searchCatID) {
 
-      this.breadcrumbLinks[2].queryParams = { category: this.ecpService.searchedService, catid: this.ecpService.searchCatID };
+      this.breadcrumbLinks[1].queryParams = { category: this.ecpService.searchedService, catid: this.ecpService.searchCatID, page: this.ecpService.activePage };
     } else if (this.ecpService.searchedService) {
-      this.breadcrumbLinks[2].queryParams = { category: this.ecpService.searchedService };
+      this.breadcrumbLinks[1].queryParams = { category: this.ecpService.searchedService, page: this.ecpService.activePage };
+    } else {
+      this.breadcrumbLinks[1].queryParams = { page: this.ecpService.activePage };
     }
+
 
     this.service = this.route.snapshot.data.detail;
 

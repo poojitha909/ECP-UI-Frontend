@@ -104,7 +104,7 @@
                 <li [ngClass]="{'cat-active': selectedCategory === 'All' }" (click)="selectedCategory = 'All'"
                   class="cursor-pointer font-regular">All</li>
                 <li [ngClass]="{'cat-active': subCategory.name === selectedCategory}"
-                  (click)="selectedCategory = subCategory.name;selectedCatid = subCategory.id;"
+                  (click)="selectedCategory = subCategory.name;selectedCatid = subCategory.source[0].catid;"
                   *ngFor="let subCategory of selectedCategoryType.subCategories" class="cursor-pointer font-regular">
                   {{subCategory.name}}
                 </li>

@@ -299,13 +299,13 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     UIkit.modal('#mobile-category-modal').hide();
     if (this.selectedCategoryType && this.selectedCategory == 'All') {
       const selectedData = {
-        catName: this.selectedCategoryType.name,
+        ParentCatid: this.selectedCategoryType.id,
         catId: ''
       };
       this.onCategoryChanged(selectedData);
     } else if (this.selectedCategoryType && this.selectedCatid) {
       const selectedData = {
-        catName: this.selectedCategoryType.name,
+        ParentCatid: this.selectedCategoryType.id,
         catId: this.selectedCatid
       };
       this.onCategoryChanged(selectedData);

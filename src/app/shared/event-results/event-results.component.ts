@@ -18,7 +18,6 @@ export class EventResultsComponent implements OnInit {
   @Output() showCount: EventEmitter<number> = new EventEmitter();
   @Input() hide: true;
   isLoading: boolean;
-  
   eventsList: any[];
   countData: { "all": 0, "outdoor": 0, "indoor": 0 };
   searchParams: {
@@ -77,6 +76,9 @@ export class EventResultsComponent implements OnInit {
     if (this.route.snapshot.queryParams['page'] !== undefined) {
       this.searchParams.p = this.route.snapshot.queryParams['page'];
     }
+    if(this.route.snapshot.queryParams['show'] != 'events'){
+      this.searchParams.p = 0;
+    }
     this.showEvents();
     this.showEventsCount();
   }
@@ -84,7 +86,7 @@ export class EventResultsComponent implements OnInit {
   changePage(page: number) {
     this.searchParams.p = page;
     if(this.showPagination){
-      this.router.navigate(['/community'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
+      this.router.navigate(['/community'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p, show: 'events' } });
     }
     else{
         this.showEvents();

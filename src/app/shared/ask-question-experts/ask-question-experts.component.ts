@@ -78,6 +78,9 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
     if (this.route.snapshot.queryParams['page'] !== undefined) {
       this.searchParams.p = this.route.snapshot.queryParams['page'];
     }
+    if(this.route.snapshot.queryParams['show'] != 'experts'){
+      this.searchParams.p = 0;
+    }
     this.isLoading = true;
     this.askQuesService.getCategoryListFilter(this.searchParams.searchTxt).subscribe((response: any) => {
       const data = response.data;
@@ -93,7 +96,14 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
   changePage(page: number) {
     this.searchParams.p = page;
     if(this.showPagination){
-        this.router.navigate(['/ask-question'], { queryParams: { expertCategory: this.searchParams.experties, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
+        this.router.navigate(['/ask-question'], 
+          { queryParams: { 
+            expertCategory: this.searchParams.experties, 
+            searchTxt: this.searchParams.searchTxt, 
+            page: this.searchParams.p, 
+            show: "experts" 
+          } }
+        );
     }
     else{
         this.showExperts();

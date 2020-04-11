@@ -1,5 +1,4 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-detail-card',
@@ -8,11 +7,12 @@ import { Router } from '@angular/router';
 })
 export class ProductDetailCardComponent implements OnInit {
   @Input() product: any;
-  @Input() searchTxt: any;
+  @Input() pageParam:Object;
   @Output() categoryChange: EventEmitter<string> = new EventEmitter();
-  constructor( private route:Router) { }
+  constructor() { }
 
   ngOnInit() {
+
   }
 
   onclick(e,product){

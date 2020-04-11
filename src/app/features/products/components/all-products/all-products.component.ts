@@ -27,6 +27,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   showPagination: boolean;
   showReset: boolean;
   searchTxt: string;
+  tempSearchTxt: string;
   productCategory: string;
   currentUrl: string;
   showingProduct: string;
@@ -83,8 +84,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     } else {
       this.showReset = false;
     }
-    this.setSearchTxt(value);
-    if (event.key === "Enter") {
+    if (event.key === "Enter" || value == "") {
       this.onSearch();
     }
   }
@@ -100,10 +100,12 @@ export class AllProductsComponent implements OnInit, OnDestroy {
 
   setSearchTxt(value: string) {
     this.searchTxt = value;
+    this.tempSearchTxt = value;
     this.homeService.homeSearchtxt = value;
   }
 
   onSearch() {
+    this.setSearchTxt(this.tempSearchTxt);
     this.router.navigate(['/products'], { queryParams: { productCategory: this.productCategory, searchTxt: this.searchTxt } });
   }
 

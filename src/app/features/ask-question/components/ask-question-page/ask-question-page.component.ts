@@ -18,6 +18,7 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
   myQuesTotal: number;
   expertsQuesTotal: number;
   searchTxt: string;
+  tempSearchTxt: string;
   expertCategory: string;
   showSharing: boolean;
   showPagination: boolean;
@@ -94,8 +95,9 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
     } else {
       this.showReset = false;
     }
-    this.setSearchTxt(value);
-    if (event.key == "Enter") {
+    
+    if (event.key == "Enter" || value=="") {
+      this.setSearchTxt(value);
       this.onSearch();
     }
   }
@@ -109,11 +111,13 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
   }
 
   onSearch() {
+    this.setSearchTxt(this.tempSearchTxt);
     this.router.navigate(['/ask-question'], { queryParams: { expertCategory: this.expertCategory, searchTxt: this.searchTxt, show: this.show } });
   }
 
   setSearchTxt(value: string) {
     this.searchTxt = value;
+    this.tempSearchTxt = value;
     this.homeService.homeSearchtxt = value;
   }
 

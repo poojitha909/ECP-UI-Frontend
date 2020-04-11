@@ -66,6 +66,9 @@ export class DiscussionResultsComponent implements OnInit {
     if(this.searchTxt){
       this.searchParams.searchTxt = this.searchTxt;
     }
+    if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
+      this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
+    }
     if (this.route.snapshot.queryParams['category']) {
       this.selCategory = this.route.snapshot.queryParams['category'];
     }

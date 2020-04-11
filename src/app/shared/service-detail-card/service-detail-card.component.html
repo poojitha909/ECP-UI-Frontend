@@ -45,11 +45,12 @@
       <p class="m-0"><span>{{isDBService ? service?.basicProfileInfo.primaryUserAddress.city :  service?.city}}</span>
       </p>
       <p *ngIf="!isDBService" class="m-0 font-regular"><a>{{service?.type}}</a><a href="javascript:void(0)"
-          routerLink="/services" [queryParams]="{ category: service.categoryKey, catid:  service.categoryId}"
-          *ngIf="service.categoryId">
+          routerLink="/services" [queryParams]="{ catid:  service.categoryId}" *ngIf="service.categoryId">
           ({{service?.categoryKey}})</a></p>
-      <p *ngIf="isDBService && service?.systemTags.length > 0" class="m-0 font-regular">
-        <a href="javascript:void(0)">{{service?.systemTags[0].name}}</a></p>
+      <p *ngIf="isDBService && service.catName" class="m-0 font-regular">
+        <a routerLink="/services"
+          [queryParams]="{ catid:  service.serviceProviderInfo.catid[0]}">{{service.catName}}</a>
+      </p>
     </div>
   </div>
 

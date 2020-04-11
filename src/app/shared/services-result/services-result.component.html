@@ -5,8 +5,9 @@
 
     <!-- Catgory filter START -->
 
-    <app-service-categories [selectedCategoryType]="selectedCategoryType" [selectedCategory]="selectedCategory"
-      (onCategoryChange)="onCategoryChanged($event)" (onClearSelection)="clearSelection($event)">
+    <app-service-categories [categories]="categories" [selectedCategoryType]="selectedCategoryType"
+      [selectedCategory]="selectedCategory" (onCategoryChange)="onCategoryChanged($event)"
+      (onClearSelection)="clearSelection($event)">
     </app-service-categories>
 
     <!-- Catgory filter END -->

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApiConstants } from 'src/app/api.constants';
-import { PageParam } from 'src/app/core';
+import { PageParam, serviceParam } from 'src/app/core';
 import { map } from 'rxjs/operators';
 import { StorageHelperService } from 'src/app/core/services';
 import { AppConstants } from 'src/app/app.constants';
@@ -37,7 +37,7 @@ export class HomeService {
     return this.http.get(`${ApiConstants.GET_SERVICES}?${queryParams}`);
   }
 
-  getCategoryServices(param: PageParam): Observable<any> {
+  getCategoryServices(param: serviceParam): Observable<any> {
     let queryParams: string = '';
 
     Object.keys(param)
@@ -49,7 +49,7 @@ export class HomeService {
         }
       });
 
-    return this.http.get(`${ApiConstants.GET_SERVICES}?${queryParams}`);
+    return this.http.get(`${ApiConstants.GET_ALL_SERVICES}?${queryParams}`);
   }
 
   getAutoCompleteServices(): Observable<any> {

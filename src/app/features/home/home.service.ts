@@ -114,6 +114,31 @@ export class HomeService {
 
   }
 
+  get productCategory(): string{
+    return this.storageHelper.retrieveSession(AppConstants.PRODUCT_CATEGORY) ? this.storageHelper.retrieveSession(AppConstants.PRODUCT_CATEGORY) : undefined;
+  }
+  set productCategory(productCategory: string) {
+    this.storageHelper.storeSession(AppConstants.PRODUCT_CATEGORY, productCategory);
+  }
+  get discussCategory(): string{
+    return this.storageHelper.retrieveSession(AppConstants.DISCUSS_CATEGORY) ? this.storageHelper.retrieveSession(AppConstants.DISCUSS_CATEGORY) : undefined;
+  }
+  set discussCategory(discussCategory: string) {
+    this.storageHelper.storeSession(AppConstants.DISCUSS_CATEGORY, discussCategory);
+  }
+  get eventIsPastEvents(): number{
+    return this.storageHelper.retrieveSession(AppConstants.EVENT_IS_PAST_EVENTS) ? parseInt(this.storageHelper.retrieveSession(AppConstants.EVENT_IS_PAST_EVENTS)) : undefined;
+  }
+  set eventIsPastEvents(eventIsPastEvents: number) {
+    this.storageHelper.storeSession(AppConstants.EVENT_IS_PAST_EVENTS, eventIsPastEvents.toString());
+  }
+  get expertCategory(): string{
+    return this.storageHelper.retrieveSession(AppConstants.EXPERT_CATEGORY) ? this.storageHelper.retrieveSession(AppConstants.EXPERT_CATEGORY) : undefined;
+  }
+  set expertCategory(expertCategory: string) {
+    this.storageHelper.storeSession(AppConstants.EXPERT_CATEGORY, expertCategory);
+  }
+
   // clearHomepageSearch() {
   //   this.storageHelper.clearSession(AppConstants.HOME_SEARCH);
   //   this.storageHelper.clearSession(AppConstants.HOME_SEARCH_RESULT);

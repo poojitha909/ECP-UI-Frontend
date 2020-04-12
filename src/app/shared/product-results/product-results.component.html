@@ -16,7 +16,7 @@
                             class="uk-badge uk-float-right">{{cat.productCount}}</span></li>
                 </ul>
             </div>
-            <app-share-via-media></app-share-via-media>
+            <app-share-via-media *ngIf="showSharing"></app-share-via-media>
         </div>
         <div class="uk-width-expand@m">
             <!-- Sample Implementation on 04-03-20 -->

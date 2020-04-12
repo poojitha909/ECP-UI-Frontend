@@ -105,6 +105,7 @@ export class AskQuestionPageComponent implements OnInit, OnDestroy {
   resetSearch(event: any) {
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
       this.setSearchTxt("");
+      this.homeService.expertCategory="";
       this.showReset = false;
       this.onSearch()
     }

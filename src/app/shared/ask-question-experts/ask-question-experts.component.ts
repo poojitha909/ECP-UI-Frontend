@@ -2,11 +2,8 @@ import { Component, OnInit, OnDestroy, EventEmitter, Input, Output } from '@angu
 import { Router, ActivatedRoute } from '@angular/router';
 import { AskQuestionService } from '../../features/ask-question/services/ask-question.service';
 import { StorageHelperService } from "../../core/services/storage-helper.service";
-import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
-import { SeoService } from 'src/app/core/services/seo.service';
 import { HomeService } from 'src/app/features/home/home.service';
-import { UserService } from '../../features/user/services/user.service';
 
 declare var UIkit;
 
@@ -72,6 +69,9 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
     if (this.route.snapshot.queryParams['expertCategory'] !== undefined) {
       this.searchParams.experties = this.route.snapshot.queryParams['expertCategory'];
     }
+    else if (this.homeService.expertCategory){
+      this.searchParams.experties = this.homeService.expertCategory
+    }
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
     }
@@ -113,6 +113,7 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
   clearSelection() {
     this.searchParams.experties = '';
     this.searchParams.p = 0;
+    this.homeService.expertCategory = '';
     if(this.showPagination){
       this.router.navigate(['/ask-question'], { queryParams: { searchTxt: this.searchParams.searchTxt, show:"experts" } });
     }
@@ -137,6 +138,7 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
   
   onTabChange(value) {
     this.searchParams.experties = value;
+    this.homeService.expertCategory = value;
     if(this.showPagination){
       this.router.navigate(['/ask-question'], { queryParams: { expertCategory: this.searchParams.experties, searchTxt: this.searchParams.searchTxt, show:"experts" } });
     }

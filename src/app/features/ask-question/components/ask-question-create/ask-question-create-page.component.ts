@@ -119,7 +119,8 @@ export class AskQuestionCreatePageComponent implements OnInit {
   }
 
   redirectToQuestions(){
-    this.router.navigate(['/ask-question/myques']);
+    this.router.navigate(['/ask-question/'],{ queryParams: { 
+    show: "ques"}});
   }
 
   setSeoTags(expert: any) {

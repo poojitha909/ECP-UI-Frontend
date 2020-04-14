@@ -148,7 +148,7 @@ export class EventDetailPageComponent implements OnInit {
       if (response.data.id != "") {
         this.store.clear("new-event");
         this.store.clear("new-event-preview");
-        this.router.navigate(['/community/events']);
+        this.router.navigate(['/community', {tab:'events'}]);
         //this.successMessage = "Event submittted successfully for review, once reviewed it will start appearing on site."
       }
       else {

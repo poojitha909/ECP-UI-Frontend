@@ -165,7 +165,6 @@ export class EventDetailPageComponent implements OnInit {
   //   });
   // }
   onPublish() {
-    this.publish=true;
     if (!this.user) {
       this.authService.redirectUrl = "community/event/preview";
       this.router.navigate(['/user/signin']);
@@ -199,7 +198,7 @@ export class EventDetailPageComponent implements OnInit {
      this.router.navigate(['/community'],{ queryParams: { 
     show: "events"}});
   },4500)
-  
+
   }
 
   //   this.eventService.addEvents(this.event).subscribe((response: any) => {

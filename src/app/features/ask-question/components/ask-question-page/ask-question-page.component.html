@@ -1,83 +1,63 @@
-<div class="uk-container search-container m-t-40">
-  <!-- Search Form START -->
-  <div class="search-form" role=“search”>
-    <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
-      <div class="uk-width-expand">
-        <form class="uk-search uk-search-default" autocomplete='off'>
-          <input id="askSearch" class="uk-search-input font-regular search-box sm-pr-150" aria-label="search experts"
-            [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required type="text"
-            placeholder="Search here" name="search" autocomplete='off' />
-          <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
-            <button class="uk-button-link" style="visibility: hidden"></button>
-            <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
-              <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
-            </button>
-          </span>
-        </form>
-      </div>
-      <div>
-        <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
+<div class="top-banner" id="askExpertBanner">
+  <div uk-grid>
+    <div class="uk-width-expand uk-flex uk-flex-middle">
+      <p class="banner-text font-regular">Our exclusive team of experts will provide honest, unblased answers to all
+        your queries and
+        guide you whenever
+        you need their help.</p>
+    </div>
+    <div class="uk-flex uk-flex-bottom uk-flex-center uk-width-auto@s">
+      <img class="banner-img" src="/assets/images/landing-img/expert-banner-updated.png" />
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'all-blue': searchTxt!=''}" class="mb-24">
+  <div class="uk-container search-container">
+    <!-- Search Form START -->
+    <div class="search-form" role=“search”>
+      <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
+        <div class="uk-width-expand">
+          <form class="uk-search uk-search-default" autocomplete='off'>
+            <input class="uk-search-input font-regular search-box sm-pr-150" aria-label="search"
+              [(ngModel)]="tempSearchTxt" (keyup)="onSearchChange($event)" required type="text"
+              placeholder="Search here" name="search" autocomplete='off' />
+            <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
+              <button class="uk-button-link" style="visibility: hidden"></button>
+              <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
+                <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
+              </button>
+            </span>
+          </form>
+        </div>
+        <div>
+          <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
+        </div>
       </div>
     </div>
   </div>
+  <!-- tab start -->
+
+  <div class="tab">
+    <ul class="uk-child-width-expand" uk-tab>
+      <li [ngClass]="{'uk-active': show=='experts', 'uk-width-1-2': !user?.id}"><a x-no-tabbing
+          (click)="showAll('experts')">All Experts{{ searchTxt!='' ? " (" + expertsTotal + ")" : "" }}</a></li>
+      <li [ngClass]="{'uk-active': show=='ques'}" *ngIf="user?.id && searchTxt==''"><a x-no-tabbing
+          (click)="showAll('ques')">My Questions</a></li>
+      <li [ngClass]="{'uk-active': show=='expques'}" *ngIf="user?.id && searchTxt=='' && user?.userRoleId =='EXPERT'"><a
+          x-no-tabbing (click)="showAll('expques')">Questions I need to answer</a></li>
+    </ul>
+  </div>
+  <!-- tab -end -->
   <!-- Search Form END -->
-  <!-- Search Result START -->
-  <div class="search-result" *ngIf="showResult">
-
-
-    <div class="m-t-20 uk-hidden@s" *ngIf="experts && experts?.length > 0">
-      <p class="font-regular-15 font-weight-600">Search Results ({{expertsTotal}})
-      </p>
-
-
-      <div class="m-t-20 uk-grid-small" uk-grid>
-        <div class="uk-width-1-1">
-          <div class="search-result-box cursor-pointer" routerLink="/ask-question/all"
-            [queryParams]="{ searchTxt:searchParams.searchTxt}">
-            <p>Expert ({{expertsTotal}})</p>
-          </div>
-        </div>
-      </div>
-      <p class="uk-text-center">
-        <fa-icon style="color:#1A73E8;" [icon]="['fas', 'info-circle']"></fa-icon> Tap on the card to see the full
-        results
-      </p>
-    </div>
-
-
-    <div class="uk-visible@s">
-      <div uk-grid class="uk-grid-large uk-flex-left uk-text-center uk-child-width-1-3@m">
-        <div *ngFor="let expert of experts;let i=index" role="group" [attr.aria-label]="'Expert ' + i">
-          <app-ask-expert-summary-card [expert]="expert"></app-ask-expert-summary-card>
-        </div>
-      </div>
-      <div class="m-t-30 m-b-20" *ngIf="experts!==undefined && experts?.length > 0">
-        <button class="uk-width-1-1 uk-button-default" (click)="showAllExperts()"> See All Experts </button>
-      </div>
-    </div>
-    <div class="uk-text-center uk-text-bold pt-norec m-b-20" *ngIf="experts!==undefined && experts?.length == 0">
-      No Records found
-    </div>
+  <div id="searchResultList">
+    <ask-question-experts *ngIf="show === 'experts'" [searchTxt]="searchTxt" [showPagination]="showPagination"
+      [showSharing]="showSharing" (showCount)="showExpertCount($event)"></ask-question-experts>
+    <expert-all-question *ngIf="show === 'expques' && searchTxt==''" [searchTxt]="searchTxt"
+      [showPagination]="showPagination" [showSharing]="showSharing" (showCount)="showExpertQuesCount($event)">
+    </expert-all-question>
+    <ask-question-myques *ngIf="show === 'ques' && searchTxt==''" [searchTxt]="searchTxt"
+      [showPagination]="showPagination" [showSharing]="showSharing" (showCount)="showMyQuesCount($event)">
+    </ask-question-myques>
   </div>
-  <!-- Search Result END -->
-</div>
-
-<div class="home-banner landing-bg">
-  <div class="uk-child-width-1-2@s uk-padding" role="banner" uk-grid>
-    <div class="uk-text-left@s">
-      <h1 id="expertHeader" tabindex=0>Our team of experts are here to guide you</h1>
-      <p class="font-regular">
-        Our exclusive team of experts will provide honest, unbiased answers to all your queries and guide you whenever
-        you need their help. Just post your queries and get expert guidance, privately with assured confidentiality!
-      </p>
-    </div>
-  </div>
-</div>
-
-<div class="uk-container  dark">
-  <app-featured-ask-experts></app-featured-ask-experts>
-</div>
-
-<div class="uk-container  dark ">
-  <app-featured-my-questions></app-featured-my-questions>
 </div>

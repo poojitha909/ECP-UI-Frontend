@@ -1,6 +1,6 @@
 <!-- Contact detail from -->
 <div class="category-box m-t-40 bg-white">
-    <h3>Address Details</h3>
+    <h3>Address</h3>
     <hr />
     <!-- Error box START-->
     <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
@@ -81,7 +81,7 @@
             <button class="uk-button uk-button-transparent uk-modal-close" type="button"
                 (click)="onCancel()">Cancel</button>
             <button class="m-l-10 uk-button uk-button-default" type="submit"
-                [disabled]="contactForm.invalid">Save</button>
+                [disabled]="contactForm.invalid">Save Changes</button>
         </p>
     </form>
 </div>

@@ -1,0 +1,185 @@
+@import "src/assets/css/variables.scss";
+
+
+
+
+
+
+
+// @media(min-width:640px){
+//     .home-banner{
+//       margin-top: 16px;
+//     }
+// }
+
+// Banner ends here
+
+
+
+h1 {
+  color: $font-light-black;
+  font-family: $regular-font;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.bg-card-peach {
+  background-color: #ffcaa4;
+  color: #c83f3f;
+}
+
+.bg-card-yellow {
+  background-color: #ffe5a4;
+  color: #e8b24a;
+}
+
+.bg-card-green {
+  background-color: #8dd38b;
+  color: #2f7f4a;
+}
+
+.service-type {
+  a {
+    color: #1a73e8;
+  }
+  padding: 20px 40px;
+}
+
+.category-box {
+  border: 1px solid #d7e0ef;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 16px;
+  .uk-badge {
+    background: #d9dadc;
+    color: #000;
+    border-radius: 5px;
+  }
+}
+
+.uk-checkbox {
+  height: 30px;
+  width: 30px;
+}
+
+.whatapp-icon {
+  background: #009487;
+  color: #fff;
+}
+
+.fb-icon {
+  background: #2a415e;
+  color: #fff;
+}
+
+.email-icon {
+  background: #1772eb;
+  color: #fff;
+}
+
+.uk-button-group {
+  button:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+  button:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+}
+
+@media (max-width: 640px) {
+  .text-center-xs {
+    text-align: center;
+  }
+}
+.regular-link {
+  a {
+    color: #000000;
+  }
+}
+.cat-active {
+  font-weight: 400;
+  background-color: #d7e0ef;
+  border-radius: 4px;
+  // color: #1A73E8;
+}
+
+.m-t-b-0 {
+  margin: 0;
+  padding: 0;
+}
+.uk-list {
+  background-color: #ffffff;
+  a {
+    color: #000;
+  }
+  & > li {
+    padding: 10px 5px;
+    &:hover {
+      background-color: #d7e0ef;
+      border-radius: 4px;
+      font-weight: 400;
+    }
+  }
+}
+
+.uk-z-index {
+  z-index: 100;
+}
+.search-list {
+  box-shadow: 2px 5px 17px 4px rgba(193, 191, 191, 0.5);
+}
+
+.social-link {
+  color: #000;
+}
+
+.sroll-category {
+  max-height: 358px;
+  overflow-y: auto;
+}
+
+.sel-type {
+  padding: 10px 5px;
+  &:hover {
+    background-color: #d7e0ef;
+    border-radius: 4px;
+  }
+}
+
+.reset-link {
+  background: none;
+  border: none;
+  width: unset;
+  color: #c83f3f;
+  margin-right: 35px;
+}
+
+.uk-button-default {
+  border-radius: 4px;
+  font-size: 18px;
+  border: none;
+  //   min-width: 150px;
+  text-transform: none;
+  padding: 0px;
+}
+
+.uk-form-icon-flip {
+  & ~ .uk-input {
+    padding-right: 58px !important;
+  }
+}
+
+@media (min-width: 640px) {
+  .uk-form-icon-flip {
+    & ~ .uk-input {
+      padding-right: 150px !important;
+    }
+  }
+
+  .uk-button-default {
+    padding: 1px 30px;
+  }
+}

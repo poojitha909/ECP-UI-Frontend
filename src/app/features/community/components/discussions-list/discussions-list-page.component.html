@@ -1,20 +1,4 @@
-<div class="uk-container discussions" *ngIf="categoryList!==undefined && dropDownList!==undefined">
-    <!-- Bread crumbs Start -->
-    <div class="breadcrumbs">
-        <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
-    </div>
-    <!-- Bread crumbs End -->
-    <div class="uk-grid uk-grid-large uk-flex-left">
-        <div class="uk-width-2-3">
-            <h1 id="discussionListHeader" tabindex=0 class="heading">
-                {{selCategory=='' ? 'All' : dropDownList[selCategory].label}} Articles & Discussions</h1>
-        </div>
-        <div class="uk-width-1-3">
-            <button routerLink="/community/discussion/add" class="uk-button uk-button-transparent adddiscuss"> Start a
-                Discussion +</button>
-        </div>
-    </div>
-    <hr class="m-b-30" />
+<div class="uk-container discussions " *ngIf="categoryList!==undefined && dropDownList!==undefined">
     <div class="grid-reverse-dir" uk-grid>
         <div class="uk-width-1-3@m">
             <div class="category-box bg-white">
@@ -35,22 +19,41 @@
                     </li>
                 </ul>
             </div>
+            <div class="m-t-30 category-box bg-white">
+                <div class="discuss" uk-grid>
+                    <div>
+                        <p> Ask any question on senior care and ageing</p>
+                    </div>
+                </div>
+                <div>
+                    <button routerLink="/community/discussion/add" class="uk-button uk-button-transparent adddiscuss">
+                        Start a
+                        Discussion</button>
+                </div>
+            </div>
+            <!-- <div class="m-t-30 category-box bg-white">
+                <div class="discuss" uk-grid>
+                    <div>
+                        <p> Post your tips and stories about senior care and ageing</p>
+                    </div>
+                </div>
+                <div>
+                <button routerLink="/community" class="uk-button uk-button-transparent adddiscuss"> Share with Community</button>
+                </div>
+            </div> -->
             <div class="m-t-30 bg-white category-box bg-white">
                 <div class="m-b-20">
-                    <a aria-label="Share via Whatsapp" [href]="whatsappUrl"
-                        class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"
-                        aria-label="Share via Whatsapp"> </a>
-                    <a class="social-link" [href]="whatsappUrl">
+                    <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon"
+                        uk-icon="whatsapp" target="_blank"  aria-label="Share via Whatsapp"> </a>
+                    <a class="social-link" [href]="whatsappUrl" target="_blank">
                         Share via
                         Whatsapp</a>
                 </div>
                 <div class="m-b-20">
-                    <a aria-label="Share via Email"
-                        href="mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20{{currentUrl}}"
-                        class="uk-icon-button  uk-margin-small-right fb-icon" aria-label="Share via Email"
-                        uk-icon="mail">
+                    <a href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age&body=%0AService%2DURL:%20{{currentUrl}}"
+                        class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail" aria-label="Share via Email">
                     </a> <a class="social-link"
-                        href="mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20{{currentUrl}}">
+                        href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age&body=%0AService%2DURL:%20{{currentUrl}}">
                         Share via
                         Email</a>
                 </div>
@@ -70,26 +73,16 @@
             </div>
         </div>
         <div class="uk-width-expand@m">
-            <div class="search-form">
-                <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
-                    <div class="uk-margin uk-width-1-1 uk-width-expand@s">
-                        <form class="uk-search uk-search-default">
-                            <input class="uk-search-input font-regular search-box" [ngClass]="{ 'pr-150':showReset}"
-                                [(ngModel)]="searchParams.searchTxt" (keyup)="onSearchChange($event)" required
-                                type="text" placeholder="Search here" id="discussion-searchtxt" name="search" />
-                            <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
-                                <button *ngIf="showReset" class="reset-link" (keyup.enter)="resetSearch($event)"
-                                    (click)="resetSearch($event)">
-                                    <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> Clear Search
-                                </button>
-                            </span>
-                        </form>
-                    </div>
-                    <div class="uk-width-1-s1 uk-width-auto@s uk-margin-bottom">
-                        <button class="uk-button uk-button-default search-btn" (click)="submitSearch()">Search</button>
-                    </div>
+            <!-- <div *ngIf="searchParams.searchTxt" class="bg-white searchresult">
+                <div *ngIf="totalRecords<=searchParams.s; else elseBlock">
+                    <p> Showing <b>{{totalRecords}}</b> {{ totalRecords == 1 ?"result":"results" }} for <b>"{{searchParams.searchTxt}}"</b> </p>
                 </div>
-            </div>
+                <ng-template #elseBlock>
+                    <p> Showing <b>{{initial}}-{{final}}</b> of <b>{{totalRecords}}</b> results for <b>"{{searchParams.searchTxt}}"</b>
+                    </p>
+
+                </ng-template>
+            </div> -->
             <div *ngIf="discussionsList!==undefined && discussionsList.length > 0" class="m-b-30">
                 <div class="uk-flex-left uk-text-center uk-child-width-1-2@m" uk-grid>
                     <div *ngFor="let discussion of discussionsList;let i=index" role="group"
@@ -99,10 +92,10 @@
                     </div>
                 </div>
             </div>
-            <app-pagination *ngIf="(discussionsList.length > 0)" [totalRecords]="totalRecords"
+            <app-pagination *ngIf="(discussionsList.length >= 0)" [totalRecords]="totalRecords"
                 [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">
             </app-pagination>
-            <div *ngIf="discussionsList?.length === 0">
+            <div *ngIf=" discussionsList==undefined || discussionsList?.length === 0">
                 <app-discussion-no-record></app-discussion-no-record>
             </div>
         </div>

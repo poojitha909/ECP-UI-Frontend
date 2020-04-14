@@ -59,6 +59,6 @@ export class FeaturedAskExpertsComponent implements OnInit {
 
   seeAllExperts() {
     this.storageHelper.storeSession(AppConstants.FEATURED_EXPERT, this.searchParams.experties);
-    this.router.navigate(["/ask-question/all"], { queryParams: { category: this.searchParams.experties } });
+    this.router.navigate(["/ask-question/experts"], { queryParams: { category: this.searchParams.experties } });
   }
 }

@@ -37,6 +37,26 @@ import { FeaturedMyQuestionsComponent } from './featured-my-questions/featured-m
 import { MyQuestionsSummaryCardComponent } from './my-questions-summary-card/my-questions-summary-card.component';
 import { UserTermsComponent } from './user-terms/user-terms.component';
 import { UserPolicyComponent } from './user-policy/user-policy.component';
+import { ServiceCategoriesComponent } from './service-categories/service-categories.component';
+import { ServicesResultComponent } from './services-result/services-result.component';
+import { ProductResultsComponent } from './product-results/product-results.component';
+import { ProductNoRecordComponent } from './product-no-record/product-no-record.component';
+import { DiscussionResultsComponent } from './discussion-results/discussion-results.component';
+import { EventResultsComponent } from './event-results/event-results.component';
+import { NoDiscussionResultsComponent } from './no-discussion-results/no-discussion-results.component';
+import { NoEventResultsComponent } from './no-event-results/no-event-results.component';
+
+import { QuestionNoRecordComponent } from './question-no-record/question-no-record.component';
+import { AskQuestionExpertsComponent } from './ask-question-experts/ask-question-experts.component';
+import { AskQuestionMyQuesComponent } from './ask-question-myques/ask-question-myques.component';
+import { ExpertAllQuestionComponent } from './expert-all-question/expert-all-question.component';
+import { QuestionDetailCardComponent } from './question-detail-card/question-detail-card.component';
+import { ExpertDetailCardComponent } from './expert-detail-card/expert-detail-card.component';
+import { ExpertNoRecordComponent } from './expert-no-record/expert-no-record.component';
+import { QuestionExpertNoRecordComponent } from './question-expert-no-record/question-expert-no-record.component';
+import { NoRecordsComponent } from './no-records/no-records.component';
+import { EventNoRecordComponent } from './event-no-record/event-no-record.component';
+import { ShareViaMediaComponent } from './share-via-media/share-via-media.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +93,26 @@ import { UserPolicyComponent } from './user-policy/user-policy.component';
     FeaturedMyQuestionsComponent,
     MyQuestionsSummaryCardComponent,
     UserTermsComponent,
-    UserPolicyComponent
+    UserPolicyComponent,
+    ServiceCategoriesComponent,
+    ServicesResultComponent,
+    ProductResultsComponent,
+    ProductNoRecordComponent,
+    DiscussionResultsComponent,
+    EventResultsComponent,
+    NoDiscussionResultsComponent,
+    NoEventResultsComponent,
+    QuestionNoRecordComponent,
+    AskQuestionExpertsComponent,
+    AskQuestionMyQuesComponent,
+    ExpertAllQuestionComponent,
+    QuestionDetailCardComponent,
+    ExpertDetailCardComponent,
+    ExpertNoRecordComponent,
+    QuestionExpertNoRecordComponent,
+    NoRecordsComponent,
+    EventNoRecordComponent,
+    ShareViaMediaComponent
   ],
   imports: [
     CommonModule,
@@ -111,7 +150,24 @@ import { UserPolicyComponent } from './user-policy/user-policy.component';
     ActiveMaxDirective,
     FocusInvalidInputDirective,
     FeaturedMyQuestionsComponent,
-    MyQuestionsSummaryCardComponent
+    MyQuestionsSummaryCardComponent,
+    ServicesResultComponent,
+    // ServiceCategoriesComponent
+    ProductResultsComponent,
+    ProductNoRecordComponent,
+    DiscussionResultsComponent,
+    EventResultsComponent,
+    QuestionNoRecordComponent,
+    AskQuestionExpertsComponent,
+    AskQuestionMyQuesComponent,
+    ExpertAllQuestionComponent,
+    QuestionDetailCardComponent,
+    ExpertDetailCardComponent,
+    ExpertNoRecordComponent,
+    QuestionExpertNoRecordComponent,
+    NoRecordsComponent,
+    EventNoRecordComponent,
+    ShareViaMediaComponent
   ]
 })
 export class SharedModule { }

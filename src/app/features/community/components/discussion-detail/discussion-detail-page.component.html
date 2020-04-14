@@ -37,12 +37,11 @@
                             Whatsapp</a>
                     </div>
                     <div class="m-b-20">
-                        <a aria-label="Share via Email"
-                            href="mailto:?subject=This is regarding discussion '{{discussion.title}}' from An Elder Spring Initiative by Tata Trusts&body= Discussion URL: {{currentUrl}}"
+                        <a href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age&body= Discussion URL: {{currentUrl}}"
                             class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail"
                             aria-label="Share via Email">
                         </a> <a class="social-link"
-                            href="mailto:?subject=This is regarding discussion '{{discussion.title}}' from An Elder Spring Initiative by Tata Trusts&body= Discussion URL: {{currentUrl}}">
+                            href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age&body= Discussion URL: {{currentUrl}}">
                             Share via
                             Email</a>
                     </div>
@@ -85,104 +84,90 @@
                                 <h4>Comments ({{commentsCount}})</h4>
                             </div>
                             <div class="comments-add uk-width-1-3@s">
-                                <button id="btnAddComment" class="uk-button uk-button-transparent adddiscuss"
-                                    (click)="setParentReplyId('',$event.target)"> Add Comment </button>
+                                <button class="uk-button uk-button-transparent adddiscuss"
+                                    (click)="setParentReplyId('')" uk-toggle="target: #reply-modal-discussion"> Add
+                                    Comment </button>
                             </div>
                         </div>
                     </div>
-                    <!-- Success box START-->
-                    <div aria-live="polite" aria-atomic="true" *ngIf="successMessage" class="uk-alert-success" uk-alert>
-                        <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ successMessage }}</p>
-                    </div>
-                    <!-- Success box END-->
-                    <div class="uk-card uk-card-default p-bottom-24"
-                        *ngFor="let repliesGroup of sortedReplies | keyvalue">
+                    <div class="uk-card uk-card-default p-bottom-24" *ngFor="let repliesGroup of sortedReplies">
                         <div class="uk-card-header">
                             <div class="uk-grid-small uk-flex-middle" uk-grid>
                                 <div class="uk-width-auto">
                                     <img class="uk-border-circle" width="40" height="40" (error)="setDefaultPic($event)"
-                                        alt="replies user profile image"
-                                        src="{{repliesGroup.value[0].userProfile?.basicProfileInfo?.profileImage?.thumbnailImage}}">
+                                        alt="No Image Found"
+                                        src="{{repliesGroup[0].userProfile?.basicProfileInfo?.profileImage?.thumbnailImage}}">
                                 </div>
                                 <div class="uk-width-expand">
                                     <h3 class="uk-card-title uk-margin-remove-bottom">
-                                        {{repliesGroup.value[0]?.userProfile?.basicProfileInfo?.firstName}}</h3>
-                                    <p class="uk-text-meta uk-margin-remove-top"
-                                        *ngIf="repliesGroup.value[0].userProfile"> Joined:
-                                        {{ repliesGroup.value[0]?.userProfile?.createdAt | date:"MMM yyyy" }}</p>
+                                        {{repliesGroup[0]?.userProfile?.basicProfileInfo?.firstName}}</h3>
+                                    <p class="uk-text-meta uk-margin-remove-top" *ngIf="repliesGroup.userProfile">
+                                        Joined:
+                                        {{ repliesGroup[0]?.userProfile?.createdAt | date:"MMM yyyy" }}</p>
                                 </div>
                                 <div class="uk-width-auto">
-                                    <p class="uk-text-meta">{{ repliesGroup.value[0]?.createdAt | timeago }}</p>
+                                    <p class="uk-text-meta">{{ repliesGroup[0]?.createdAt | timeago }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="uk-card-body">
-                            <div [innerHTML]="repliesGroup.value[0].text">
+                            <div [innerHTML]="repliesGroup[0].text">
                             </div>
                             <div class="uk-grid-collapse uk-child-width-expand@s" uk-grid>
-                                <div *ngIf="repliesGroup.value[0].userId != user?.id" class="like-container">
-                                    <img class="img" src="/assets/images/like-outline.svg" alt="like icon"
-                                        (click)="likeReply(repliesGroup.value[0])">
-                                    <span class="like" (click)="likeReply(repliesGroup.value[0])">
-                                        {{repliesGroup.value[0].likeCount}}
+                                <div *ngIf="repliesGroup[0].userId != user?.id" class="like-container">
+                                    <img class="img" src="/assets/images/like-outline.svg" alt="No Image Found"
+                                        (click)="likeReply(repliesGroup[0])">
+                                    <span class="like" (click)="likeReply(repliesGroup[0])">
+                                        {{repliesGroup[0].likeCount}}
                                     </span>
                                 </div>
-                                <div *ngIf="repliesGroup.value[0].userId == user?.id" class="like-container">
+                                <div *ngIf="repliesGroup[0].userId == user?.id" class="like-container">
                                     <a class="font-regular uk-text-primary" href="#reply-modal-discussion" uk-toggle
-                                        (click)="editReply('',repliesGroup.value[0])">
+                                        (click)="editReply('',repliesGroup[0])">
                                         Edit
                                     </a>
                                 </div>
                                 <div class="reply-container" uk-toggle="target: #reply-modal-discussion"
-                                    (click)="setParentReplyId(repliesGroup.value[0].id)">
-                                    <img class="img" src="/assets/images/reply.svg" alt="reply icon"> <label
+                                    (click)="setParentReplyId(repliesGroup[0].id)">
+                                    <img class="img" src="/assets/images/reply.svg" alt="No Image Found"> <label
                                         class="reply" for="commentarea">
                                         Reply</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="uk-card-footer" *ngIf="repliesGroup.value.length > 1">
+                        <div class="uk-card-footer" *ngIf="repliesGroup.length > 1">
                             <hr />
                             <ul uk-accordion>
                                 <li>
-                                    <a class="uk-accordion-title" href="#">Replies
-                                        ({{repliesGroup.value.length - 1}})</a>
+                                    <a class="uk-accordion-title" href="#">Replies ({{repliesGroup.length - 1}})</a>
                                     <div class="uk-accordion-content">
-                                        <div *ngFor="let rep of repliesGroup.value; index as i">
+                                        <div *ngFor="let rep of repliesGroup; index as i">
                                             <div class="uk-card uk-card-default noborder" *ngIf="i != 0">
                                                 <div class="uk-card-header">
                                                     <div class="uk-grid-small uk-flex-middle" uk-grid>
                                                         <div class="uk-width-auto">
-                                                            <img class="uk-border-circle"
-                                                                alt="replies user profile image"
+                                                            <img class="uk-border-circle" alt="No Image Found"
                                                                 (error)="setDefaultPic($event)" width="40" height="40"
                                                                 [src]="rep.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage">
                                                         </div>
-                                                        <div class="uk-width-expand">
-                                                            <h3 class="heading2 uk-margin-remove-bottom">
-                                                                {{rep.userProfile?.basicProfileInfo?.firstName}}</h3>
+                                                    </div>
+                                                    <div class="uk-card-body borderleft">
+                                                        <div [innerHTML]="rep.text">
                                                         </div>
-                                                        <div class="uk-width-auto">
-                                                            <p class="uk-text-meta">{{ rep.createdAt | timeago }}</p>
+                                                        <div *ngIf="rep.userId != user?.id" class="like-container">
+                                                            <img class="img" src="/assets/images/like-outline.svg"
+                                                                alt="like icon" (click)="likeReply(rep)">
+                                                            <span class="like" (click)="likeReply(rep)">
+                                                                {{rep.likeCount}}
+                                                            </span>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="uk-card-body borderleft">
-                                                    <div [innerHTML]="rep.text">
-                                                    </div>
-                                                    <div *ngIf="rep.userId != user?.id" class="like-container">
-                                                        <img class="img" src="/assets/images/like-outline.svg"
-                                                            alt="like icon" (click)="likeReply(rep)">
-                                                        <span class="like" (click)="likeReply(rep)">
-                                                            {{rep.likeCount}}
-                                                        </span>
-                                                    </div>
-                                                    <div *ngIf="rep.userId == user?.id" class="like-container">
-                                                        <a class="font-regular uk-text-primary"
-                                                            href="#reply-modal-discussion" uk-toggle
-                                                            (click)="editReply('',rep)">
-                                                            Edit
-                                                        </a>
+                                                        <div *ngIf="rep.userId == user?.id" class="like-container">
+                                                            <a class="font-regular uk-text-primary"
+                                                                href="#reply-modal-discussion" uk-toggle
+                                                                (click)="editReply('',rep)">
+                                                                Edit
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -209,13 +194,14 @@
                                 </div>
                             </div>
 
-                        <div class="uk-text-right">
-                        <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
-                        <button class="uk-button uk-button-primary m-l-5" type="submit">
-                            {{!!user ? 'Post' : 'Join Us to Comment'}}
-                        </button>
-                        </div>
-                    </form>
+                            <div class="uk-text-right">
+                                <button class="uk-button uk-button-transparent uk-modal-close"
+                                    type="button">Cancel</button>
+                                <button class="uk-button uk-button-primary m-l-5" type="submit">
+                                    {{!!user ? 'Post' : 'Sign In to Comment'}}
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
 

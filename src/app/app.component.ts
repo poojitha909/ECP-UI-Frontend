@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { JdCategoryService } from './core/services';
 
 
 @Component({
@@ -9,5 +10,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'ecp-ui-frontend';
 
-  constructor() { }
+  constructor() {
+    //Fetch service categories
+  }
 }

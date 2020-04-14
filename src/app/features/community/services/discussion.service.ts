@@ -17,8 +17,8 @@ export class DiscussionService {
 
     constructor(private http: HttpClient, private storage: StorageHelperService) { }
 
-    summary(tags: string): Observable<any[]> {
-        return this.http.get<any[]>(`${this.discussionUrl}/summary?tagsData=${tags}`);
+    summary(tags: string,searchTxt: string): Observable<any[]> {
+        return this.http.get<any[]>(`${this.discussionUrl}/summary?tagsData=${tags}&searchTxt=${searchTxt}`);
     }
 
     addDiscussion(discussType: string, text: string, title: string, userId: string, username:string,

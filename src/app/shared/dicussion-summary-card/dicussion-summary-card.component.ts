@@ -9,6 +9,7 @@ export class DicussionSummaryCardComponent implements OnInit {
 
   @Input() discussion: any;
   @Input() category: string;
+  @Input() pageParam: Object;
 
   constructor() { }
 

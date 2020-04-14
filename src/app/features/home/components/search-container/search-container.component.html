@@ -1,4 +1,4 @@
-<div class="search-container m-t-40">
+<div class="search-container ">
   <!-- <div class="header-label">
     <h3>Search for Events, Articles, Experts, Products & Services</h3>
   </div> -->
@@ -25,9 +25,8 @@
           <ul aria-live="polite" aria-atomic="true" *ngIf="autocompleteFields.length > 0"
             class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto search-list" appKeyHandler
             (onItemSelected)="onItemSelected($event)">
-            <li role="option" class="cursor-pointer" *ngFor="let field of autocompleteFields"
-              (click)="onAutocompleteClick(field)">
-              {{field.name ||  field.basicProfileInfo.firstName }}
+            <li role="option" class="cursor-pointer" *ngFor="let field of autocompleteFields" (click)="onAutocompleteClick(field)">
+              {{field?.name ||  field?.basicProfileInfo?.firstName }}
             </li>
           </ul>
         </div>
@@ -49,30 +48,30 @@
 
       <div class="m-t-20 uk-grid-small" uk-grid>
         <div class="uk-width-1-2">
-          <div class="search-result-box cursor-pointer" routerLink="/community/discussions"
+          <div class="search-result-box cursor-pointer" routerLink="/community"
             [queryParams]="{ searchTxt:searchPageParam.term}">
             <p>Discussion ({{searchData.totalDiscussions}})</p>
           </div>
         </div>
         <div class="uk-width-1-2">
-          <div class="search-result-box cursor-pointer" routerLink="/community/events"
-            [queryParams]="{ searchTxt:searchPageParam.term}">
+          <div class="search-result-box cursor-pointer" routerLink="/community"
+            [queryParams]="{ searchTxt:searchPageParam.term, past: -1}">
             <p>Events ({{searchData.totalEvents}})</p>
           </div>
         </div>
         <div class="uk-width-1-2">
-          <div class="search-result-box cursor-pointer" routerLink="/ask-question/all"
+          <div class="search-result-box cursor-pointer" routerLink="/ask-question"
             [queryParams]="{ searchTxt:searchPageParam.term}">
             <p>Experts ({{searchData.totalExperts}})</p>
           </div>
         </div>
         <div class="uk-width-1-2">
-          <div class="search-result-box cursor-pointer" routerLink="/services/all"
+          <div class="search-result-box cursor-pointer" routerLink="/services"
             [queryParams]="{ category:searchPageParam.term}">
             <p>Services ({{searchData.totalServices}})</p>
           </div>
         </div>
-        <div class="uk-width-1-1" routerLink="/products/all" [queryParams]="{ searchTxt:searchPageParam.term}">
+        <div class="uk-width-1-1" routerLink="/products" [queryParams]="{ searchTxt:searchPageParam.term}">
           <div class="search-result-box cursor-pointer">
             <p>Products ({{searchData.totalProducts}})</p>
           </div>
@@ -88,7 +87,7 @@
     <!-- Search Result START -->
     <div class="uk-visible@s">
       <app-search-results *ngIf="!noRecords && !isLoading && showResult" [searchData]="searchData"
-        [term]="searchPageParam.term">
+        [searchTerm]="searchPageParam.term">
       </app-search-results>
     </div>
     <!-- Search Result END -->

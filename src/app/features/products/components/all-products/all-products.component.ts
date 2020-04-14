@@ -5,7 +5,7 @@ import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { HomeService } from 'src/app/features/home/home.service';
-
+import { stringify } from 'querystring';
 @Component({
   selector: 'app-all-products',
   templateUrl: './all-products.component.html',
@@ -23,22 +23,16 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
       link: '/products'
     }
   ];
-
+  showSharing: boolean;
+  showPagination: boolean;
   showReset: boolean;
-  productsList: any[];
-  catsList: any[];
-  searchParams: {
-    p: number,
-    s: number,
-    searchTxt: string,
-    productCategory: string
-  };
+  searchTxt: string;
+  tempSearchTxt: string;
+  productCategory: string;
   currentUrl: string;
-
-
+  showingProduct: string;
   paramsSubs: any;
   totalRecords: number;
-  slideConfig = { "slidesToShow": 3, "slidesToScroll": 1 };
   constructor(private route: ActivatedRoute, private router: Router,
     private productService: ProductService, public sanitizer: DomSanitizer,
     private homeService: HomeService, public seoService: SeoService) {
@@ -50,9 +44,7 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
       author: `An Elder Spring Initiative by Tata Trusts`,
       image: `${window.location.origin}/assets/imgaes/landing-img/Product-320.png`,
     }
-
     this.seoService.generateTags(config);
-
   }
 
   ngOnInit() {
@@ -71,66 +63,22 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   initiate() {
     this.currentUrl = window.location.href;
-    this.searchParams = {
-      p: 0,
-      s: 4,
-      searchTxt: "",
-      productCategory: ""
-    }
+    this.showPagination = true;
+    this.showSharing = true;
+    this.searchTxt = "";
 
     this.totalRecords = 0;
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
-      this.showReset = this.searchParams.searchTxt ? true : false;
+      this.showReset = this.searchTxt ? true : false;
     }
-    if (!this.searchParams.searchTxt && this.homeService.homeSearchtxt) {
+    if (this.route.snapshot.queryParams['productCategory'] !== undefined) {
+      this.productCategory = this.route.snapshot.queryParams['productCategory'];
+    }
+    if (!this.searchTxt && this.homeService.homeSearchtxt) {
       this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
     }
-    if (this.route.snapshot.queryParams['productCategory'] !== undefined) {
-      this.searchParams.productCategory = this.route.snapshot.queryParams['productCategory'];
-    }
-    if (this.route.snapshot.queryParams['page'] !== undefined) {
-      this.searchParams.p = this.route.snapshot.queryParams['page'];
-    }
-    this.productService.getCategoryList().subscribe((response: any) => {
-      const data = response.data;
-      this.catsList = [];
-      if (data.content) {
-        this.catsList = data.content;
-      }
-    });
-    this.showProducts();
-  }
-
-  changePage(page: number) {
-    this.searchParams.p = page;
-    this.onSearch()
-  }
-
-  showProducts() {
-    this.productService.searchProducts(this.searchParams).subscribe((response: any) => {
-      const data = response.data;
-      this.productsList = [];
-      if (data.content) {
-        this.productsList = data.content;
-        this.totalRecords = data.total;
-      }
-    });
-  }
-
-  clearSelection() {
-    this.productService.selectedCatId = null;
-    this.productService.selectedCatname = null;
-    this.searchParams.productCategory = '';
-    this.router.navigateByUrl('products/all');
-    document.getElementById("allproduct-searchtxt").focus();
-  }
-
-  onTabChange(value, catName) {
-    this.productService.selectedCatId = value;
-    this.productService.selectedCatname = catName;
-    this.router.navigate(['/products/all'], { queryParams: { productCategory: value, searchTxt: this.searchParams.searchTxt } });
   }
 
   onSearchChange(event: any) {
@@ -140,8 +88,7 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       this.showReset = false;
     }
-    this.setSearchTxt(value);
-    if (event.key === "Enter") {
+    if (event.key === "Enter" || value == "") {
       this.onSearch();
     }
   }
@@ -149,21 +96,26 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   resetSearch(event: any) {
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
       this.setSearchTxt("");
+      this.productCategory="";
+      this.homeService.productCategory = '';
       this.showReset = false;
       this.onSearch()
     }
   }
 
   setSearchTxt(value: string) {
-    this.searchParams.searchTxt = value;
+    this.searchTxt = value;
+    this.tempSearchTxt = value;
     this.homeService.homeSearchtxt = value;
-    this.searchParams.p = 0;
   }
 
-
   onSearch() {
-    this.router.navigate(['/products/all'], { queryParams: { productCategory: this.searchParams.productCategory, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
+    this.setSearchTxt(this.tempSearchTxt);
+    this.router.navigate(['/products'], { queryParams: { productCategory: this.productCategory, searchTxt: this.searchTxt } });
     document.getElementById("allproduct-searchtxt").focus();
   }
 
+  showProductCount(value){
+    this.totalRecords = value;
+  }
 }

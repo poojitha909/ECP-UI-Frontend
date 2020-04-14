@@ -6,9 +6,8 @@
                 [src]="expert.basicProfileInfo?.profileImage?.thumbnailImage" alt="expert user profile image">
         </div>
         <div class="uk-card-body p-10">
-            <h3 tabindex=0 class="font-regular font-weight-600 uk-text-center m-0">{{expert.basicProfileInfo.firstName}}
-            </h3>
-            <p>{{ expert.age ? expert.age : "0" }} Years</p>
+            <h3 tabindex=0 class="font-regular font-weight-600 uk-text-center m-0">{{expert.basicProfileInfo.firstName}}</h3>
+            <!-- <p>{{ expert.age ? expert.age : "0" }} Years</p> -->
             <p>
                 <span class="experties" *ngFor="let ex of expert.experties; let idx = index;">
                     {{ex.name}}

@@ -1,133 +1,46 @@
 <div class="search-result"
   *ngIf="searchData.services.length > 0 || searchData.products.length > 0  || searchData.discussions.length > 0 ">
-  <ul uk-tab>
-    <!-- <li class="uk-active"><a href="#" class="font-regular">Product
-        ({{  searchData.totalProducts  }})</a></li>
-
+  <ul id="search-tab" uk-tab>
+    <li><a href="#" class="font-regular">Discussion
+        ({{ allCount.discussionTotal }})</a></li>
+    <li><a href="#" class="font-regular">Events
+        ({{ allCount.eventTotal }})</a></li>
+    <li><a href="#" class="font-regular">Experts({{ allCount.expertTotal }})</a></li>
+    <li><a href="#" class="font-regular">Products
+        ({{  allCount.productTotal  }})</a></li>
     <li><a href="#" class="font-regular">Services
-        ({{  searchData.totalServices }})</a></li> -->
-
-    <!-- <li><a href="#" class="font-regular">Community</a></li> -->
-    <li activeMax [max]="searchData.maxResult == searchData.totalDiscussions"><a href="#"
-        class="font-regular">Discussion
-        ({{searchData.totalDiscussions}})</a></li>
-    <li activeMax [max]="searchData.maxResult == searchData.totalEvents"><a href="#" class="font-regular">Events
-        ({{searchData.totalEvents}})</a></li>
-    <li activeMax [max]="searchData.maxResult == searchData.totalExperts"><a href="#"
-        class="font-regular">Experts({{ searchData.totalExperts }})</a></li>
-    <li activeMax [max]="searchData.maxResult == searchData.totalProducts"><a href="#" class="font-regular">Products
-        ({{  searchData.totalProducts  }})</a></li>
-    <li activeMax [max]="searchData.maxResult == searchData.totalServices"><a href="#" class="font-regular">Services
-        ({{  searchData.totalServices }})</a></li>
-    <!-- <li class="uk-disabled"><a>Disabled</a></li> -->
+        ({{  allCount.servicesTotal }})</a></li>
   </ul>
   <ul class="uk-switcher uk-margin">
-
-    <li activeMax [max]="searchData.maxResult == searchData.totalDiscussions">
+    <li>
       <!-- Discussions List ..... -->
-      <!-- No search result START-->
-      <app-no-search-result *ngIf="searchData.discussions.length == 0" [viewLink]="'/community/discussions'"
-        [tabName]="'Discussion'">
-      </app-no-search-result>
-      <!-- No search result END-->
-
-
-      <div *ngIf="searchData.discussions.length > 0" class="uk-child-width-1-3@m uk-grid-match m-t-20" uk-grid>
-        <div *ngFor="let discussion of searchData.discussions;let i= index" role="group" [attr.aria-label]="'Discussion ' + i">
-          <app-dicussion-summary-card [discussion]="discussion"></app-dicussion-summary-card>
-        </div>
-      </div>
-
-      <div *ngIf="searchData.totalDiscussions > 6">
-        <button routerLink="/community/discussions" [queryParams]="{ searchTxt:term}"
-          class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
-          Results</button>
-      </div>
-
+      <app-discussion-results [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm"
+        (showCount)="getTotalDiscussions($event)">
+      </app-discussion-results>
     </li>
-    <li activeMax [max]="searchData.maxResult  == searchData.totalEvents">
+    <li>
       <!-- Events List ..... -->
-      <!-- No search result START-->
-      <app-no-search-result *ngIf="searchData.events.length == 0" [viewLink]="'/community/events'" [tabName]="'Events'">
-      </app-no-search-result>
-      <!-- No search result END-->
-
-
-      <div *ngIf="searchData.events.length > 0" class="uk-child-width-1-3@m uk-grid-match m-t-20" uk-grid>
-        <div *ngFor="let event of searchData.events;let i=index" role="group" [attr.aria-label]="'Event ' + i">
-          <app-event-summary-card [event]="event" [isPast]="0"></app-event-summary-card>
-        </div>
-      </div>
-
-      <div *ngIf="searchData.totalEvents > 6">
-        <button routerLink="/community/events" [queryParams]="{ searchTxt:term}"
-          class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
-          Results</button>
-      </div>
-
-
+      <app-event-results [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm"
+        (showCount)="getTotalEvents($event)">
+      </app-event-results>
     </li>
-    <li activeMax [max]="searchData.maxResult == searchData.totalExperts">
+    <li>
       <!-- Experts lists ...... -->
-      <!-- No search result START-->
-      <app-no-search-result *ngIf="searchData.experts.length == 0" [viewLink]="'/ask-question/all'"
-        [tabName]="'Ask an Expert'">
-      </app-no-search-result>
-      <!-- No search result END-->
-
-
-      <div *ngIf="searchData.experts.length > 0" class="uk-child-width-1-3@m uk-grid-match m-t-20" uk-grid>
-        <div *ngFor="let expert of searchData.experts;let i=index" role="group" [attr.aria-label]="'Expert ' + i">
-          <app-ask-expert-summary-card [expert]="expert"></app-ask-expert-summary-card>
-        </div>
-      </div>
-
-      <div *ngIf="searchData.totalExperts > 6">
-        <button routerLink="/ask-question/all" [queryParams]="{ searchTxt:term}"
-          class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
-          Results</button>
-      </div>
+      <ask-question-experts [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm"
+        (showCount)="getTotalExperts($event)">
+      </ask-question-experts>
     </li>
-    <li activeMax [max]="searchData.maxResult == searchData.totalProducts">
-
+    <li>
       <!-- Products List ..... -->
-      <!-- No search result START-->
-      <app-no-search-result *ngIf="searchData.products.length == 0" [viewLink]="'/products/all'" [tabName]="'Products'">
-      </app-no-search-result>
-      <!-- No search result END-->
-
-
-      <div *ngIf="searchData.products.length > 0" class="uk-child-width-1-3@m uk-grid-match m-t-20" uk-grid>
-        <div *ngFor="let product of searchData.products;let i=index" role="group" [attr.aria-label]="'Product ' + i">
-          <app-product-search-card [product]="product"></app-product-search-card>
-        </div>
-      </div>
-
-      <div *ngIf="searchData.totalProducts > 6">
-        <button routerLink="/products/all" [queryParams]="{ searchTxt:term}"
-          class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
-          Results</button>
-      </div>
+      <app-product-results [showPagination]="false" [showSharing]="false" [searchTxt]="searchTerm"
+        (showCount)="getTotalProducts($event)">
+      </app-product-results>
     </li>
-    <li activeMax [max]="searchData.maxResult == searchData.totalServices">
-
+    <li>
       <!-- Services List -->
-      <!-- No search result START-->
-      <app-no-search-result *ngIf="searchData.services.length == 0" [viewLink]="'/services/all'" [tabName]="'Services'">
-      </app-no-search-result>
-      <!-- No search result END-->
-
-      <div *ngIf="searchData.services.length > 0" class="uk-child-width-1-3@m uk-grid-match m-t-20" uk-grid>
-        <div *ngFor="let service of searchData.services;let i=index" role="group" [attr.aria-label]="'Service ' + i">
-          <app-service-search-card [service]="service"></app-service-search-card>
-        </div>
-      </div>
-
-      <div *ngIf="searchData.totalServices > 6"><button routerLink="/services/all" [queryParams]="{ category:term}"
-          class="uk-button uk-button-default uk-width-1-1 m-t-30">View All
-          Results</button>
-      </div>
+      <app-services-result [searchTxt]="searchTerm" [internalProcessing]="true"
+        (totalServices)="getTotalServices($event)">
+      </app-services-result>
     </li>
   </ul>
-
 </div>

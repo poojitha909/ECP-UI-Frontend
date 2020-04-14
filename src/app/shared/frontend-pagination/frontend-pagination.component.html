@@ -17,43 +17,43 @@
 </ul> -->
 
 <div *ngIf="pager.pages && pager.pages.length" class="uk-container f-pagination uk-flex">
-    <div class="uk-flex uk-flex-middle cursor-pointer">
+    <!-- <div class="uk-flex uk-flex-middle cursor-pointer pagePrev">
         <div *ngIf="pager.currentPage !== 1" (click)="setPage(pager.currentPage - 1)">
             <span uk-pagination-previous></span> <a class="pagePrev" aria-label="Previous page"
                 href="javascript:void(0)"> Previous</a>
         </div>
-    </div>
+    </div> -->
     <ul class="uk-pagination cursor-pointer" uk-margin>
-        <!-- <li class="first uk-visible@s">
-            <div *ngIf="pager.currentPage !== 1" (click)="setPage(1)">
-                First
+        <li class="first uk-visible@s">
+            <div class="pagePrev" *ngIf="pager.currentPage !== 1" (click)="setPage(1)">
+                <span uk-pagination-previous></span> First
             </div>
         </li>
         <li class="first pr@s">
-            <div *ngIf="pager.currentPage !== 1" (click)="setPage(pager.currentPage - 1)">
+            <div class="pagePrev" *ngIf="pager.currentPage !== 1" (click)="setPage(pager.currentPage - 1)">
                 <span uk-pagination-previous></span> Previous
             </div>
-        </li> -->
+        </li>
         <li class="p-l-0" *ngFor="let page of getpages()" (click)="setPage(page)">
             <div class="pagenum" [ngClass]="{'uk-active':pager.currentPage === page, 'pagenum-rm': page === '...'}">
                 <a href="javascript:void(0)" [attr.aria-label]="'page ' + page">{{page}}</a>
             </div>
         </li>
-        <!-- <li class="last">
-            <div *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(pager.currentPage + 1)">
+        <li class="last">
+            <div class="pageNext" *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(pager.currentPage + 1)">
                 Next <span uk-pagination-next></span>
             </div>
         </li>
         <li class="last uk-visible@s">
-            <div *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(pager.totalPages)">
-                Last
+            <div class="pageNext" *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(pager.totalPages)">
+                Last <span uk-pagination-next></span>
             </div>
-        </li> -->
+        </li>
     </ul>
-    <div class="uk-flex uk-flex-middle cursor-pointer">
+    <!-- <div class="uk-flex uk-flex-middle cursor-pointer pageNext">
         <div *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(pager.currentPage + 1)">
             <a class="pageNext" href="javascript:void(0)" aria-label="Next page">Next </a> <span
                 uk-pagination-next></span>
         </div>
-    </div>
+    </div> -->
 </div>

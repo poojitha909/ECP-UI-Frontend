@@ -62,6 +62,10 @@ export class ProductService {
         return this.http.get<any[]>(`${this.productUrl}/category/page?p=0&s=10000`);
     }
 
+    getCategoryListFiltered(searchTxt): Observable<any[]> {
+      return this.http.get<any[]>(`${this.productUrl}/category/page?p=0&s=10000&searchTxt=${searchTxt}`);
+    }
+
     addReview(review: any) {
         return this.http.post<any[]>(`${this.productUrl}/review`, review);
     }

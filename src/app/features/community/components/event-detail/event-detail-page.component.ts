@@ -7,6 +7,7 @@ import { AuthService } from "../../../../core/auth/services/auth.service";
 import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 declare var UIkit: any;
 
 @Component({
@@ -22,18 +23,17 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
       link: '/'
     },
     {
-      text: 'Community',
+      text: 'Engage with us',
       link: '/community'
     },
     {
       text: 'All Events',
-      link: '/community/events',
+      link: '/community',
       queryParams: {}
     }
   ];
   eventId: string;
   event: any;
-  reportEmail: string;
   showOrg: boolean;
   user: any;
   markIt: boolean;
@@ -41,12 +41,15 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
   currentUrl: string;
   whatsappUrl;
   whatsappMobileUrl;
-  currentModelLink: string;
+  eventReportForm: FormGroup;
+  successMessage: string;
+
 
   constructor(private router: Router, private route: ActivatedRoute,
     private eventService: EventService, private store: StorageHelperService,
     private authService: AuthService, public sanitizer: DomSanitizer,
-    private seoService: SeoService) { }
+    private seoService: SeoService, private fb: FormBuilder) { 
+    }
 
   ngOnInit() {
     this.paramsSubs = this.route.params.subscribe(params => {
@@ -67,12 +70,17 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
     this.whatsappMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(this.currentUrl)}`);
     this.eventId = this.route.snapshot.params['id'];
     this.getEvent()
-    this.reportEmail = "admin@joyofage.org";
     this.user = this.store.retrieve("ECP-USER");
     this.markIt = false;
     if (this.user) {
       this.user = JSON.parse(this.user);
     }
+    this.eventReportForm = this.fb.group({
+      eventId: this.eventId,
+      userId: this.user ? this.user.id : "",
+      comment: ["", Validators.required],
+    });
+    
     this.breadcrumbLinks[2].queryParams = this.route.snapshot.queryParams;
   }
 
@@ -162,27 +170,33 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
     });
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
-  onEscapeKeyHandler(event: KeyboardEvent) {
-    this.onCloseModel();
+  reportFormToggle(){
+    if (this.user) {
+      UIkit.modal('#event-report-modal').show();
+    } else {
+      this.authService.redirectUrl = this.router.url;
+      this.router.navigateByUrl('/user/signin');
+    }
   }
-
-  onCloseModel() {
-    document.getElementsByClassName("main-container")[0].removeAttribute("aria-hidden");
-    document.getElementById(this.currentModelLink).focus();
+  onSubmitReport() {
+    if (this.user) {
+      this.eventService.reportEvent(this.eventReportForm.value).subscribe(
+        response => {
+          if (response) {
+            this.eventReportForm.reset();
+            this.successMessage = "Event report was sent to site admin successfully."
+            setTimeout(() => {
+              UIkit.modal('#event-report-modal').hide();
+            }, 5000);
+          }
+        },
+        error => {
+          console.log(error);
+        });
+      console.log(this.eventReportForm.value);
+    } else {
+      this.authService.redirectUrl = this.router.url;
+      this.router.navigateByUrl('/user/signin');
+    }
   }
-
-  onOpenModel() {
-    document.getElementsByClassName("main-container")[0].setAttribute("aria-hidden", "true");
-  }
-
-  openContactModel(element: any) {
-    this.onOpenModel();
-    UIkit.modal('#modal-sections-events').show();
-    document.getElementById("eventContactitle").focus();
-    this.currentModelLink = element.id;
-  }
-
-
-
 }

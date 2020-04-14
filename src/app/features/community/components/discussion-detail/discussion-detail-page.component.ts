@@ -63,20 +63,18 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
   initiate() {
     this.discussionId = this.route.snapshot.params['id'];
     this.successMessage = "";
+    this.sortedReplies = [];
     this.breadcrumbLinks = [
       {
         text: 'Home',
         link: '/'
       },
       {
-        text: 'Community',
+        text: 'Engage with us',
         link: '/community'
-      },
-      {
-        text: 'All Articles & Discussions',
-        link: '/community/discussions'
       }
     ];
+    this.breadcrumbLinks[1].queryParams = this.route.snapshot.queryParams;
     this.categoryName = "";
     if (this.route.snapshot.params['category']) {
       this.category = this.route.snapshot.params['category'];
@@ -193,7 +191,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
           if (found == 0) {
             this.breadcrumbLinks.push({
               text: this.categoryName,
-              link: ['/community/discussions'],
+              link: ['/community'],
               queryParams: { category: this.category }
             });
           }
@@ -219,11 +217,11 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
         if (response.data.discuss) {
           this.discussion = response.data.discuss;
           this.setSeoTags(this.discussion);
-          this.sortedReplies = response.data.sortedReplies;
-          this.commentsCount = 0;
-          if (this.sortedReplies) {
-            this.commentsCount = Object.keys(this.sortedReplies).length;
+          this.sortedReplies = [];
+          for(let i in response.data.sortedReplies){
+            this.sortedReplies[this.sortedReplies.length] = response.data.sortedReplies[i];
           }
+          this.commentsCount = this.sortedReplies.length;
         }
       });
     }

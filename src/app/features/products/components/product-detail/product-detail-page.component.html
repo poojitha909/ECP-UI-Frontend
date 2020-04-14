@@ -68,24 +68,24 @@
                     </div>
 
                     <div class="m-b-20">
-                        <a href="mailto:?subject=Regarding Product '{{product.name}}' from An Elder Spring Initiative by Tata Trusts&body=Product URL: {{currentUrl}}"
-                            class="uk-icon-button  uk-margin-small-right fb-icon" aria-label="Share via Email"
-                            uk-icon="mail"> </a>
+                        <a href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age%20for%20product%20'{{product.name}}'&body=Product URL: {{currentUrl}}"
+                            class="uk-icon-button  uk-margin-small-right fb-icon" aria-label="Share via Email" uk-icon="mail"> </a>
                         <a class="social-link"
-                            href="mailto:?subject=Regarding Product '{{product.name}}' from An Elder Spring Initiative by Tata Trusts&body=Product URL: {{currentUrl}}">
+                            href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age%20for%20product%20'{{product.name}}'&body=Product URL: {{currentUrl}}">
                             Share
                             via Email</a>
                     </div>
-
                     <div>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{product.name}}"
-                            class="uk-icon-button  uk-margin-small-right email-icon" aria-label="Share via Facebook"
-                            uk-icon="facebook"> </a>
-                        <a class="social-link"
-                            href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{product.name}}">
-                            Share via
-                            Facebook</a>
-                    </div>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{ service?.name || service?.basicProfileInfo?.firstName  }}"
+                          onclick="javascript:window.open(this.href,
+                                  '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
+                          class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"  aria-label="Share via Facebook"> </a> <a class="social-link"
+                          href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{ service?.name || service?.basicProfileInfo?.firstName  }}"
+                          onclick="javascript:window.open(this.href,
+                                  '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                          Share via
+                          Facebook</a>
+                      </div>
                 </div>
 
             </div>
@@ -101,7 +101,7 @@
                             <tr>
                                 <td><button type="button" (click)="redirectConfirm()"
                                         class="uk-button uk-button-primary">{{ auth.isAuthenticate ? 'Buy
-                                        On ' + product?.buyFrom : 'Join Us to get details'}}</button></td>
+                                        On ' + product?.buyFrom : 'Join us to get details'}}</button></td>
                                 <td><span class="price"> Rs. {{product?.price}}</span></td>
                             </tr>
                         </table>
@@ -128,7 +128,7 @@
                                         class="required">*</span></label>
                                 <div class="uk-form-controls">
                                     <input class="uk-input" id="review-title" formControlName="title" type="text"
-                                        placeholder="Enter your name">
+                                        placeholder="Write a title for review">
                                 </div>
                             </div>
 
@@ -145,8 +145,8 @@
                                 <button class="uk-button uk-button-transparent uk-modal-close"
                                     type="button">Cancel</button>
                                 <button class="uk-button uk-button-default m-l-5 uk-modal-close"
-                                    (click)="onReviewSubmit()"
-                                    type="button">{{ auth.isAuthenticate ? 'Post Review': 'Join Us to Review'}}</button>
+                                    (click)="onReviewSubmit()" type="button"
+                                    >{{ auth.isAuthenticate ? 'Post review': 'Join us to review'}}</button>
                             </div>
                         </form>
                     </div>

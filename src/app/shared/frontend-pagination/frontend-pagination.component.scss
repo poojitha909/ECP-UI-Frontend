@@ -7,9 +7,13 @@
   margin: 30px auto 30px auto;
   .first {
     line-height: 50px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
   .last {
     line-height: 50px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 }
 .uk-pagination > li {
@@ -88,9 +92,9 @@
 }
 
 .pageNext{
-  color: #1a73e8;
+  color: #1a73e8 !important;
 }
 
 .pagePrev{
-  color: #616570;
+  color: #1a73e8 !important; /*#616570*/
 }

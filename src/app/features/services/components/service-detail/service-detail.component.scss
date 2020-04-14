@@ -5,10 +5,11 @@
   padding: 0;
 }
 h1 {
-  margin: 0px;
-  font-family: "HKGroteskRegular";
-  font-size: 32px;
-  color: #151c2c;
+  color: $font-light-black;
+  font-family: $regular-font;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .category-box {

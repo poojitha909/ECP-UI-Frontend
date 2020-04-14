@@ -1,1 +1,39 @@
-  
+@import "src/assets/css/variables.scss";
+
+@media(max-width:640px){
+    .featured-tab{
+        height: 552px;
+        .title{
+            height: 152px;
+            .titlename{
+                margin-left: -16px;
+            }
+            .selectoptions{
+                margin-top: -16px;
+                .uk-select{
+                    border-radius: 4px;
+                }
+            }
+        }
+        .content{
+            height: 328px;
+            margin-bottom: -2px;
+            .uk-slider-container{
+                margin-top: -16px;
+                margin-bottom: -2px
+            }
+            .uk-position-relative{
+                margin-top: -39px
+            }
+        }
+        .block-footer{
+            height: 72px;
+            .sidetext{
+                display: none;
+            }
+            .uk-button{
+                margin-top: -8px;
+            }
+        }
+    }
+}

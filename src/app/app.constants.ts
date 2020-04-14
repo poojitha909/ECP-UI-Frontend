@@ -11,7 +11,10 @@ export class AppConstants {
     public static FEATURED_EVENT = 'featuredEventResult';
     public static FEATURED_DISCUSSION = 'featuredDiscussionResult';
     public static FEATURED_EXPERT = 'featuredExpertResult';
-
-
-
+    public static PRODUCT_CATEGORY = 'productCategory';
+    public static DISCUSS_CATEGORY = 'dicsussCategory';
+    public static EVENT_IS_PAST_EVENTS = 'eventIsPastEvents';
+    public static EXPERT_CATEGORY = 'expertCategory';
+    public static SERVICE_CATEGORY = 'serviceCategory';
+    public static SERVICE_SUB_CATEGORY = 'serviceSubCategory';
 }

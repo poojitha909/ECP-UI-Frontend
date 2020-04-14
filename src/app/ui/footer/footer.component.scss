@@ -12,34 +12,60 @@
     margin: 0 0 12px 0;
   }
   .help-line {
+    width: 424px;
+    font-size: 18px;
     span {
-      margin-right: 1px;
+      margin-right: 3px;
     }
-    width: 50%;
-    height: 50px;
+    
     font-size: 15px;
     text-transform: none;
-    background-color: $dark-blue-1;
     color: #ffffff;
     border: unset;
     border-radius: 4px;
-    padding: 7px 24px;
-    &:active,&:hover{
-      background-color: #ffffff;
-      color: $primary-btn;
+    padding: 32px;
+    p{
+      color: #929aa6;
     }
+    // &:active,&:hover{
+    //   background-color: #ffffff;
+    //   color: $primary-btn;
+    // }
   }
 
   .JoyofAge{
     margin-right: -160px;
-  }
-  .ourpartners{
-    margin-right: 100px
-    
+    .response{
+      margin-right: -64px;
+      margin-top: 31px
+    }
   }
 
+  .ourpartners{
+    margin-right: 47px;
+    
+    .partners-logo{
+      margin-left: 0px;  
+    }
+  }
+  
+    
+    .links{
+      margin-left: 40px;
+    }
+  
+  
+  
   .partners {
     background: #ffffff;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .partners-tata{
+    background: #ec1b21;
     border-radius: 4px;
     display: flex;
     justify-content: center;
@@ -51,9 +77,12 @@
   }
 
   .uk-icon-button {
-    background: #e4eefb;
-    border-radius: 2px;
+    background: #FFFFFF;
     color: #585f70;
+    opacity: 0.7;
+    border-radius: 2px;
+    width: 24px;
+    height: 24px;
   }
 
   .font-small {
@@ -71,77 +100,56 @@
       padding-left: 100px;
     }
   }
-  // .footer-upper {
-  //   padding-top: 44px;
-  //   .upper-grid {
-  //     .logo-tagline {
-  //       .logo {
-  //         h1 {
-  //           margin-bottom: 0;
-  //           color: #ffffff;
-  //           font-size: 32px;
-  //           font-weight: 600;
-  //         }
-  //       }
-  //       .tagline {
-  //         color: $default-font-color;
-  //         font-size: $font-small;
-  //         line-height: 24px;
-  //       }
-  //     }
+  
 
-  //   }
-  // }
-  // .footer-lower {
-  //   padding-top: 54px;
-  //   padding-bottom: 60px;
-  //   .column-grid {
-  //     .col-link {
-  //       h4 {
-  //         font-size: 18px;
-  //         color: $default-font-color;
-  //         font-weight: 900;
-  //       }
-  //       ul {
-  //         padding: 0;
-  //         li {
-  //           list-style-type: none;
-  //           margin-bottom: 16px;
-  //           a {
-  //             color: #ffffff;
-  //             font-size: 18px;
-  //             text-decoration: underline $default-font-color;
-  //             &:hover,
-  //             &focus {
-  //               text-decoration: unset;
-  //               color: $primary-btn;
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+  .light-title{
+    color: #929aa6;
+  }
 
-  // .uk-nav-default {
-  //       & > li > a{
-  //         font-size: 18px;
-  //         color: $default-font-color;
-  //         font-weight: 900;
-  //     }
-  //     .uk-nav-sub{
-  //         a{
-  //           color: #ffffff;
-  //           font-size: 18px;
-  //           text-decoration: underline $default-font-color;
-  //           &:hover,
-  //           &focus {
-  //             text-decoration: unset;
-  //             color: $primary-btn;
-  //           }
-  //       }
-  //     }
-  // }
+.features{
+  margin-left: -55px;
+  margin-top: 12px;
+  margin-right: -116px;
+  .feature{
+    font-family: HK Grotesk;
+    font-style: normal;
+    font-size: 15px;
+    line-height: 0px;
+    display: flex;
+    color: #FFFFFF;
+  }
+}
+.tata{
+  background: #ED1B24;
+  border-radius: 2px;
+  width: 152px;
+  margin-top: -22px;
+  text-align: center;
+  color: #FFFFFF;
+  font-weight: bold;
+  font-family: -webkit-body;
+  line-height: 165%;
+  height: 20px;
+}
+.logo{
+  width: 470px;
+    .img{
+      height: 244px;
+      margin-left: -100px;
+      margin-top: -20px;
+    }
+    .background{
+      background: #2A415E;
+      opacity: 0.2;
+      border: 1px solid #2A415E;
+      border-radius: 4px;
+      margin-left: -100px;
+      margin-right: 80px;
+      margin-top: -254px;
+      margin-bottom: 40px;
+    }
+}
+  
 }
 
 .uk-nav-parent-icon > .uk-parent > a::after {
@@ -172,5 +180,37 @@
     .divider {
       border-right: 1px solid #161c2dad;
     }
+  }
+}
+
+@media(min-width:414px){
+  .footer{
+    .JoyofAge{
+      margin-top: 9px;
+      margin-bottom: -16px;
+      .response{
+        margin-top: 10px;
+        margin-bottom: 40px;
+      }
+    }
+   
+    .ourpartners{
+      margin-right: 0px;
+      .partners-logo
+      {
+        margin-right: 0px;
+        margin-top: 16px;
+        margin-left: 0px;
+        width: 286px;
+      }
+    }
+      
+      .links{
+        margin-left: 0px;
+        
+      }
+      .socialicons{
+        width: 184px;
+      }
   }
 }

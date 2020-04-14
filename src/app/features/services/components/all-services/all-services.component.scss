@@ -1,3 +1,106 @@
+@import "src/assets/css/variables.scss";
+
+// Banner starts here
+.banner {
+  background: url("/assets/images/bg-service.png");
+  padding-top: 24px;
+  border-radius: 8px;
+  font-family: $regular-font;
+  margin-top: 24px;
+  margin-bottom: 48px;
+  .logo {
+    background-color: #e8d9cc;
+    h3 {
+      padding: 12px 0 12px 40px;
+      font-weight: 600;
+      margin: 0;
+    }
+  }
+  .para-info {
+    margin: 24px 40px 0;
+    padding-bottom: 24px;
+    font-size: 18px;
+    color: rgba(22, 28, 45, 0.87);
+  }
+  .couple-img {
+    margin-right: 36px;
+    margin-top: -70px;
+    img {
+      height: 100%;
+      // width: 100%;
+    }
+    @media (min-width: 320px) and (max-width: 640px) {
+      margin: 0 !important;
+    }
+  }
+}
+
+.top-banner {
+  margin-top: 32px;
+  border-radius: 4px;
+  .banner-text {
+    padding: 32px 40px;
+  }
+  .banner-img {
+    padding-top: 16px;
+    padding-left: 40px;
+  }
+}
+
+.blue-bg {
+  padding: 0px 40px 40px 40px;
+  margin-top: 32px;
+  margin-bottom: 48px;
+  border-radius: 8px;
+  background-color: #ecf4ff;
+  border: 1px solid #d7e0ef;
+}
+
+.service-banner {
+  min-height: 224px;
+  margin: 24px 0 48px 0;
+  border-radius: 8px;
+  font-family: $regular-font;
+  h1 {
+    font-family: $regular-font;
+    font-size: 32px;
+    font-weight: 600;
+  }
+}
+
+.landing-bg {
+  background-image: url("/assets/images/landing-img/mobile/service-bg.png");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media (min-width: 641px) {
+  .landing-bg {
+    background-image: url("/assets/images/landing-img/Services-768.png");
+  }
+}
+
+@media (min-width: 1024px) {
+  .landing-bg {
+    background-image: url("/assets/images/landing-img/Services-1024.png");
+  }
+}
+
+@media (min-width: 1440px) {
+  .landing-bg {
+    background-image: url("/assets/images/landing-img/Services-1440.png");
+  }
+}
+
+// @media(min-width:640px){
+//     .home-banner{
+//       margin-top: 16px;
+//     }
+// }
+
+// Banner ends here
+
 .uk-breadcrumb {
   font-family: "HKGroteskRegular";
   & > :nth-child(n + 2):not(.uk-first-column)::before {
@@ -13,10 +116,11 @@
 }
 
 h1 {
-  margin: 0px;
-  font-family: "HKGroteskRegular";
-  font-size: 32px;
-  color: #151c2c;
+  color: $font-light-black;
+  font-family: $regular-font;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .bg-card-peach {
@@ -147,11 +251,9 @@ h1 {
   }
 }
 
-.light-text {
-  color: #c4c4c4;
-}
-
 .reset-link {
+  background: none;
+  border: none;
   width: unset;
   color: #c83f3f;
   margin-right: 35px;

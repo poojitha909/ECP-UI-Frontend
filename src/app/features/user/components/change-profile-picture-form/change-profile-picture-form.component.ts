@@ -42,6 +42,15 @@ export class ChangeProfilePictureFormComponent implements OnInit {
 
   ngOnInit() {
 
+    this.basicProfile.get("firstName").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+     });
+     this.basicProfile.get("primaryEmail").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+     });
+     this.basicProfile.get("primaryPhoneNo").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+     });
   }
 
 

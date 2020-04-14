@@ -7,6 +7,6 @@ export class CategoryResolverService implements Resolve<any> {
   constructor(private jdCategoryService: JdCategoryService) { }
 
   resolve() {
-    return this.jdCategoryService.fetchAllCategories();
+    // return this.jdCategoryService.fetchAllCategories();
   }
 }

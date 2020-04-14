@@ -19,12 +19,12 @@ export class DiscussionCreatePageComponent implements OnInit {
       link: '/'
     },
     {
-      text: 'Community',
+      text: 'Engage with us',
       link: '/community'
     },
     {
-      text: 'All Articles & Discussions',
-      link: '/community/discussions'
+      text: 'Articles & Discussions',
+      link: '/community'
     }
   ];
 
@@ -75,7 +75,7 @@ export class DiscussionCreatePageComponent implements OnInit {
 
   onReset() {
     this.discussForm.reset();
-    this.router.navigate(['/community/discussions']);
+    this.router.navigate(['/community']);
   }
 
   onSubmit() {

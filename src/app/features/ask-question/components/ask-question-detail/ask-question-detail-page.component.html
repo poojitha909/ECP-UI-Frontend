@@ -13,11 +13,10 @@
                             [src]="question?.answeredBy?.basicProfileInfo?.profileImage?.thumbnailImage" alt="Answered By user image">
                     </div>
                     <div class="body p-10">
-                        <p><b>{{question?.answeredBy?.basicProfileInfo.firstName}}</b></p>
+                        <p><b>{{question?.answeredBy?.basicProfileInfo?.firstName}}</b></p>
                         <p>{{question?.answeredBy?.workTitle}}</p>
-                        <p>{{question?.answeredBy?.age}}</p>
                         <p>
-                            <span *ngFor="let ex of question?.answeredBy?.experties; let idx = index;">
+                            <span *ngFor="let ex of question?.answeredBy?.experties; let idx = index;" routerLink="/ask-question" [queryParams]="{category: ex.id }">
                                 {{ex.name}}
                                 {{ (idx == (question?.answeredBy?.experties.length -1)) ? "": "," }}
                             </span>
@@ -48,7 +47,7 @@
                         <button class="uk-button uk-button-primary" (click)="onPublish()">{{!!user ? 'Publish' : 'Signin to Post'}}</button>
                     </div>
                 </div>
-                <div class="comments-head">
+                <div *ngIf="questionId !== 'preview'" class="comments-head">
                     <div class="uk-grid-collapse" uk-grid>
                         <div class="comments-count uk-width-2-3@s">
                             <h4>
@@ -59,7 +58,7 @@
                             <button class="uk-button uk-button-default add-reply"
                             (click)="addComment()"
                             uk-toggle="target: #reply-modal"
-                            > Add a Reply </button>
+                            > {{isExpert? 'Add Reply':'Add Comment'}} </button>
                         </div>
                     </div>
                 </div>
@@ -108,14 +107,14 @@
                 <app-pagination *ngIf="(replies && replies.length > 0)" [totalRecords]="totalRecordsReplies"
                     [currentPage]="replyPage" [perPage]="replyPageSize" (pageChangeCall)="changeReplyPage($event)">
                 </app-pagination>
-                <app-no-expert-reply *ngIf="replies?.length <= 0"></app-no-expert-reply>
+                <app-no-expert-reply *ngIf="replies?.length <= 0 && questionId !== 'preview'" [isExpert]="isExpert" ></app-no-expert-reply>
             </div>
         </div>
     </div>
 
     <div id="reply-modal" uk-modal>
         <div class="uk-modal-dialog uk-modal-body">
-        <h1 class="font-regular-24 font-weight-600">Add a Reply</h1>
+        <h1 class="font-regular-24 font-weight-600">{{isExpert? 'Add a Reply':'Add a Comment'}}</h1>
         <hr />
         <!-- Success box START-->
         <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
@@ -133,7 +132,7 @@
 
             <div class="uk-text-right">
                 <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
-                <button class="uk-button uk-button-primary m-l-5" type="submit">
+                <button class="uk-button uk-button-primary m-l-5" value="submit" >
                     {{!!user ? 'Post' : 'Join Us to Comment'}}
                 </button>
             </div>

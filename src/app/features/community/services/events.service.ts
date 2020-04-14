@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiConstants } from 'src/app/api.constants';
 import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class EventService {
@@ -56,4 +57,13 @@ export class EventService {
     markFav(userId,eventId,markIt): Observable<any[]> {
         return this.http.get<any[]>(`${this.eventUrl}/markfav?userId=${userId}&eventId=${eventId}&markIt=${markIt}`);
     }
+
+    reportEvent(reportData: any): Observable<any> {
+        return this.http.post<any>(`${ApiConstants.ADD_EVENT_REPORT}`, reportData).pipe(
+          map(response => {
+            if (response) {
+              return response.data;
+            }
+          }));
+      }
 }

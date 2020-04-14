@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-product-detail-card',
@@ -7,10 +7,18 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ProductDetailCardComponent implements OnInit {
   @Input() product: any;
+  @Input() pageParam:Object;
+  @Output() categoryChange: EventEmitter<string> = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
+
   }
+
+  onclick(e,product){
+    e.stopPropagation();
+    this.categoryChange.emit(product.productCategory.id);
+} 
 
 
   getDbServiceRating(percent): number {

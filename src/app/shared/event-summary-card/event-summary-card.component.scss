@@ -37,6 +37,11 @@
         padding: 0 15px 10px;
         font-size: 15px;
         align-items: center;
+        .detail{
+            font-size: 18px;
+            margin-bottom: 16px;
+            margin-top: -30px;
+        }
         span{
             cursor: pointer;
         }
@@ -66,4 +71,31 @@
         right: -35px;
     }
     
+}
+@media(max-width:640px){
+    .event-summary{
+        height: 295px;
+        margin-top: 16px;
+        .event-summary-head{
+            margin-bottom: -10px;
+        }
+        .event-summary-body{
+            // .date{
+            //     margin-top: -16px;
+            // }
+            // .time{
+            //     margin-bottom: -16px;
+            // }
+            .location{
+                margin-bottom: -16px;
+            }
+            .detail{
+                margin-top: -16px;
+                margin-bottom: -16px;
+            }
+        }
+        .evevnt.event-summary-footer{
+            margin-top: -10px;
+        }
+    }
 }

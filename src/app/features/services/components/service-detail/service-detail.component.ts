@@ -69,11 +69,8 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
     this.docId = this.route.snapshot.params['docId'];
 
-    if (this.ecpService.searchedService && this.ecpService.searchCatID) {
-
+    if (this.ecpService.searchedService || this.ecpService.searchCatID) {
       this.breadcrumbLinks[1].queryParams = { category: this.ecpService.searchedService, catid: this.ecpService.searchCatID, page: this.ecpService.activePage };
-    } else if (this.ecpService.searchedService) {
-      this.breadcrumbLinks[1].queryParams = { category: this.ecpService.searchedService, page: this.ecpService.activePage };
     } else {
       this.breadcrumbLinks[1].queryParams = { page: this.ecpService.activePage };
     }
@@ -169,7 +166,6 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
       response => {
         if (response) {
           this.dbRating = response;
-          console.log(this.dbRating);
           if (this.auth.user) {
             // const userId = this.auth.user.id;
             this.userRating = this.dbRating.find(val => val.userId == this.userId);
@@ -225,7 +221,6 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
           ratingData.rating = this.getRatingValue(ratingData.rating);
           this.ecpService.addServiceRating(ratingData).subscribe(
             response => {
-              console.log(response);
               this.userRating = response;
               this.dbRating.push(response);
               this.getDetailRating();
@@ -295,7 +290,6 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
         error => {
           console.log(error);
         });
-      console.log(this.reportForm.value);
     } else {
       this.auth.redirectUrl = this.router.url;
       this.router.navigateByUrl('/user/signin');
@@ -420,7 +414,6 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     this.reviewSuccessMessage = null;
     this.reviewForm.patchValue(review);
     this.reviewTitle = "Edit";
-    console.log(review);
     UIkit.modal('#review-modal').show();
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { JdCategoryService } from 'src/app/core/services';
 import { Category, categorySources } from 'src/app/core/interfaces';
+import { HomeService } from 'src/app/features/home/home.service';
 
 @Component({
   selector: 'app-service-categories',
@@ -17,7 +18,7 @@ export class ServiceCategoriesComponent implements OnInit {
 
   // categories: Category[];
 
-  constructor() {
+  constructor(private homeService: HomeService) {
 
   }
 
@@ -27,15 +28,17 @@ export class ServiceCategoriesComponent implements OnInit {
 
   clearSelection() {
     this.onClearSelection.emit();
+    this.homeService.serviceCategory = "";
+    this.homeService.serviceSubCategory = "";
   }
 
   onCategoryChanged(ParentCatid: string, catId: string) {
-
+    this.homeService.serviceCategory = ParentCatid;
+    this.homeService.serviceSubCategory = catId;
     const selectedData = {
       ParentCatid: ParentCatid,
       catId: catId
     }
-    console.log(selectedData);
     this.onCategoryChange.emit(selectedData);
   }
 

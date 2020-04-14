@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { UserProfile } from 'src/app/core/interfaces';
 import { AuthService } from 'src/app/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from '../modal-component';
 
 @Component({
   selector: 'app-user-page',
@@ -11,15 +14,20 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class UserPageComponent implements OnInit {
 
+  @Output() editProfile = new EventEmitter<{ obj: any, action: "" }>();
+
   selectedTab: string = 'viewprofile';
   eventEmitted: any;
   ViewEventEmitted: any;
+  messages:any;
+  subscription: Subscription;
 
   constructor(
     private userService: UserService,
     private auth: AuthService,
     private router: Router,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private modalService:NgbModal
   ) {
     this.userService.userProfile = this.activeRoute.snapshot.data.userData;
   }
@@ -30,13 +38,19 @@ export class UserPageComponent implements OnInit {
         this.router.navigateByUrl('/');
       }
     })
+
+    this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
+      console.log(message,"message from contact detial component")
+      this.messages=message;
+    })
 }
 
 
   viewEditProfile(event) {
-      console.log(event)
-      this.eventEmitted = event;
-      this.selectedTab = 'editprofile';
+    console.log(event)
+    this.eventEmitted = event;
+    this.selectedTab = 'editprofile';
+    this.editProfile.emit(event)
   }
 
   viewUserProfile(event) {
@@ -44,4 +58,5 @@ export class UserPageComponent implements OnInit {
     this.selectedTab = 'viewprofile';
   }
   
+ 
 }

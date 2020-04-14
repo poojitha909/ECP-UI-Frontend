@@ -193,12 +193,13 @@ export class EventDetailPageComponent implements OnInit {
     }
   })
 
-},2200)
+  },2200)
 
-setTimeout(()=>{
-  this.router.navigate(['/community'],{ queryParams: { 
+  setTimeout(()=>{
+     this.router.navigate(['/community'],{ queryParams: { 
     show: "events"}});
-},4500)
+  },4500)
+  
   }
 
   //   this.eventService.addEvents(this.event).subscribe((response: any) => {

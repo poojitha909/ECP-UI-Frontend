@@ -48,7 +48,24 @@ export class GeneralInfoFormComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.generalInfoForm.get("gender").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+     });
+     this.generalInfoForm.get("maritalStatus").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+     });
+     this.generalInfoForm.get("occupation").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+     });
+     this.generalInfoForm.get("day").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+     });
+     this.generalInfoForm.get("month").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+     });
+     this.generalInfoForm.get("year").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+     });
   }
 
   onSubmit() {

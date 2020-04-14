@@ -114,25 +114,42 @@ export class HomeService {
 
   }
 
-  get productCategory(): string{
+  get serviceCategory(): string {
+    return this.storageHelper.retrieveSession(AppConstants.SERVICE_CATEGORY) ? this.storageHelper.retrieveSession(AppConstants.SERVICE_CATEGORY) : undefined;
+  }
+
+  set serviceCategory(serviceCategory: string) {
+    this.storageHelper.storeSession(AppConstants.SERVICE_CATEGORY, serviceCategory);
+
+  }
+
+  get serviceSubCategory(): string {
+    return this.storageHelper.retrieveSession(AppConstants.SERVICE_SUB_CATEGORY) ? this.storageHelper.retrieveSession(AppConstants.SERVICE_SUB_CATEGORY) : undefined;
+  }
+
+  set serviceSubCategory(serviceSubCategory: string) {
+    this.storageHelper.storeSession(AppConstants.SERVICE_SUB_CATEGORY, serviceSubCategory);
+  }
+
+  get productCategory(): string {
     return this.storageHelper.retrieveSession(AppConstants.PRODUCT_CATEGORY) ? this.storageHelper.retrieveSession(AppConstants.PRODUCT_CATEGORY) : undefined;
   }
   set productCategory(productCategory: string) {
     this.storageHelper.storeSession(AppConstants.PRODUCT_CATEGORY, productCategory);
   }
-  get discussCategory(): string{
+  get discussCategory(): string {
     return this.storageHelper.retrieveSession(AppConstants.DISCUSS_CATEGORY) ? this.storageHelper.retrieveSession(AppConstants.DISCUSS_CATEGORY) : undefined;
   }
   set discussCategory(discussCategory: string) {
     this.storageHelper.storeSession(AppConstants.DISCUSS_CATEGORY, discussCategory);
   }
-  get eventIsPastEvents(): number{
+  get eventIsPastEvents(): number {
     return this.storageHelper.retrieveSession(AppConstants.EVENT_IS_PAST_EVENTS) ? parseInt(this.storageHelper.retrieveSession(AppConstants.EVENT_IS_PAST_EVENTS)) : undefined;
   }
   set eventIsPastEvents(eventIsPastEvents: number) {
     this.storageHelper.storeSession(AppConstants.EVENT_IS_PAST_EVENTS, eventIsPastEvents.toString());
   }
-  get expertCategory(): string{
+  get expertCategory(): string {
     return this.storageHelper.retrieveSession(AppConstants.EXPERT_CATEGORY) ? this.storageHelper.retrieveSession(AppConstants.EXPERT_CATEGORY) : undefined;
   }
   set expertCategory(expertCategory: string) {

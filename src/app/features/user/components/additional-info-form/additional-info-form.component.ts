@@ -33,7 +33,15 @@ export class AdditionalInfoFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.userform.get("firstName").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+     });
+     this.userform.get("primaryEmail").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+     });
+     this.userform.get("primaryPhoneNo").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+     });
   }
 
   onSubmit() {

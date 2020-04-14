@@ -91,6 +91,29 @@ export class AboutYouFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.aboutForm.get("shortDescription").valueChanges.subscribe(selectedValue=>{
+     this.userService.formEditMessage("editForm")
+    });
+    this.aboutForm.get("emotionalIssues").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+     });
+     this.aboutForm.get("medicalIssues").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+     });
+     this.aboutForm.get("otherIssues").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+     });
+     this.aboutForm.get("language").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+     });
+     this.aboutForm.get("hobbies").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+     });
+     this.aboutForm.get("otherInterests").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+     });
+   
+
   }
 
   addTagFn(name) {

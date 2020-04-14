@@ -15,4 +15,6 @@ export class AppConstants {
     public static DISCUSS_CATEGORY = 'dicsussCategory';
     public static EVENT_IS_PAST_EVENTS = 'eventIsPastEvents';
     public static EXPERT_CATEGORY = 'expertCategory';
+    public static SERVICE_CATEGORY = 'serviceCategory';
+    public static SERVICE_SUB_CATEGORY = 'serviceSubCategory';
 }

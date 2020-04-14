@@ -78,9 +78,9 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
           } else {
             this.showShareBox = false;
             this.selectedCategoryType = undefined;
-            if (this.homeService.homeSearchtxt) {
-              this.filterCategoryList('', 0, this.homeService.homeSearchtxt);
-              this.getCategoryServices('', 0, this.homeService.homeSearchtxt);
+            if (this.homeService.homeSearchtxt || this.homeService.serviceCategory || this.homeService.serviceSubCategory) {
+              this.filterCategoryList(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.homeService.homeSearchtxt);
+              // this.getCategoryServices(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.homeService.homeSearchtxt);
             } else {
               this.filterCategoryList('', 0, '');
               this.getAllService();
@@ -95,8 +95,8 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
       if (this.searchTxt) {
         this.ecpService.searchedService = '';
         this.ecpService.searchCatID = '';
-        this.filterCategoryList('', 0, this.searchTxt);
-        this.getCategoryServices('', 0, this.searchTxt);
+        this.filterCategoryList(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.searchTxt);
+        // this.getCategoryServices(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.searchTxt);
       }
     }
 
@@ -104,8 +104,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes) {
-      console.log(changes);
-      console.log("this.internalProcessing", this.internalProcessing);
+      
     }
 
   }
@@ -115,13 +114,13 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     this.pageServices = pageData.services;
     this.ecpService.activePage = pageData.currentPage;
     // if (pageData.currentPage !== 1) {
-      this.router.navigate(
-        [],
-        {
-          relativeTo: this.activeRoute,
-          queryParams: { page: pageData.currentPage },
-          queryParamsHandling: 'merge'
-        });
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.activeRoute,
+        queryParams: { page: pageData.currentPage },
+        queryParamsHandling: 'merge'
+      });
     // }
     this.cdr.detectChanges();
     const elmnt = document.getElementById("serviceList");
@@ -300,6 +299,8 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
           // }
           this.ecpService.searchCatID = null;
           this.getCategoryServices(this.selectedCategoryType.id, 0, this.homeService.homeSearchtxt);
+        } else if (searchTxt) {
+          this.getCategoryServices('', '', searchTxt);
         }
         this.showShareBox = true;
       },

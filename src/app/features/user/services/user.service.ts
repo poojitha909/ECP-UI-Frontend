@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { ApiConstants } from 'src/app/api.constants';
-import { Observable } from 'rxjs';
+import { Observable,Subject } from 'rxjs';
 import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { UserProfile, User } from 'src/app/core/interfaces';
 import { AuthService } from 'src/app/core';
@@ -18,7 +18,7 @@ export class UserService {
 
   userProfile: UserProfile;
   config: any;
-
+  private subject = new Subject<any>();
   constructor(
     private http: HttpClient,
     private configServ: ConfigurationService,
@@ -27,6 +27,15 @@ export class UserService {
     this.configServ.loadConfigurations().subscribe((c) => {
       this.config = c;
     })
+  }
+
+  formEditMessage(message){
+    console.log(message)
+    this.subject.next(message);
+  }
+
+  getFormEditMessage():Observable<any>{
+    return this.subject.asObservable();
   }
 
   createUserProfile(userData: UserProfile): Observable<UserProfile> {

@@ -1,10 +1,10 @@
 <div class="category-box bg-white">
     <div uk-grid>
         <div class="uk-width-expand">
-            <h3>User Details</h3>
+            <h3>Your Details</h3>
         </div>
         <div class="uk-width-auto uk-flex uk-flex-middle">
-            <a href="javascript:void(0)" uk-toggle="target: #modal-sections">Edit</a>
+            <a href="javascript:void(0)" (click)="edit('USER_DETAILS')" class="edit font-regular">Edit</a>
         </div>
          <!-- Edit Model START -->
          <div id="modal-sections" class="uk-modal-container" uk-modal>

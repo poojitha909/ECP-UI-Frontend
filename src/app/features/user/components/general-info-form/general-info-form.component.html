@@ -1,6 +1,6 @@
 <!-- General info form -->
 <div class="category-box m-t-40 bg-white">
-    <h3>General Info</h3>
+    <h3>Basic Information</h3>
     <hr />
     <!-- Error box START-->
     <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
@@ -64,7 +64,7 @@
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="Birthday">Birthday</label>
+            <label class="uk-form-label" for="Birthday">Date of Birth</label>
             <div class="uk-child-width-expand@s uk-grid-small" uk-grid>
 
                 <div>
@@ -99,7 +99,7 @@
         <p class="uk-text-right">
             <button class="uk-button uk-button-transparent uk-modal-close" type="button"
                 (click)="onCancel()">Cancel</button>
-            <button class="m-l-10 uk-button uk-button-default" type="submit">Save</button>
+            <button class="m-l-10 uk-button uk-button-default" type="submit">Save Changes</button>
         </p>
     </form>
 </div>

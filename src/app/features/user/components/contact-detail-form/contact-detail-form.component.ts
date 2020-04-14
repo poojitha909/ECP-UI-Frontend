@@ -19,8 +19,7 @@ export class ContactDetailFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService
-  ) {
-
+    ) {
     this.contactForm = this.fb.group({
       // primaryEmail: [this.userService.userProfile.basicProfileInfo.primaryEmail || '', Validators.required],
       // primaryPhoneNo: [this.userService.userProfile.basicProfileInfo.primaryPhoneNo || '', Validators.required],
@@ -37,6 +36,16 @@ export class ContactDetailFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.contactForm.get("streetAddress").valueChanges.subscribe(selectedValue=>{
+      console.log('streetAddress',selectedValue)
+      this.userService.formEditMessage("editForm")
+    });
+    this.contactForm.get("zip").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+    });
+    this.contactForm.get("city").valueChanges.subscribe(selectedValue=>{
+      this.userService.formEditMessage("editForm")
+    })
 
   }
 

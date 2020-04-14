@@ -2,15 +2,15 @@
 <div >
     
     <app-change-profile-picture-form *ngIf="eventEmitted.action === 'USER_DETAILS'" (cancelForm)="onCancel($event)"></app-change-profile-picture-form>
-    <app-view-user-details *ngIf="eventEmitted.action !== 'USER_DETAILS'"></app-view-user-details>
+    <app-view-user-details *ngIf="eventEmitted.action !== 'USER_DETAILS'" (editProfile)="viewEditProfile($event)"></app-view-user-details>
     
 
     <app-general-info-form *ngIf="eventEmitted.action === 'GENERAL_INFO'" (cancelForm)="onCancel()"></app-general-info-form>
-    <app-view-general-info *ngIf="eventEmitted.action !== 'GENERAL_INFO'"></app-view-general-info>
+    <app-view-general-info *ngIf="eventEmitted.action !== 'GENERAL_INFO'" (editProfile)="viewEditProfile($event)"></app-view-general-info>
 
     <app-contact-detail-form  *ngIf="eventEmitted.action === 'ADDRESS_DETAILS'" (cancelForm)="onCancel()"></app-contact-detail-form>
-    <app-view-address-details *ngIf="eventEmitted.action !== 'ADDRESS_DETAILS'"></app-view-address-details>
+    <app-view-address-details *ngIf="eventEmitted.action !== 'ADDRESS_DETAILS'" (editProfile)="viewEditProfile($event)"></app-view-address-details>
 
     <app-about-you-form *ngIf="eventEmitted.action === 'PERSONAL_INFORMATION'" (cancelForm)="onCancel($event)" ></app-about-you-form>
-    <app-view-personal-information *ngIf="eventEmitted.action !== 'PERSONAL_INFORMATION'"></app-view-personal-information>
+    <app-view-personal-information *ngIf="eventEmitted.action !== 'PERSONAL_INFORMATION'" (editProfile)="viewEditProfile($event)"></app-view-personal-information>
 </div>

@@ -28,9 +28,9 @@ export class FrontendPaginationComponent implements OnInit, OnChanges, AfterView
   }
 
   ngAfterViewInit() {
-    if (this.items && this.items.length) {
-      this.setPage(this.initialPage);
-    }
+    // if (this.items && this.items.length) {
+    //   this.setPage(this.initialPage);
+    // }
   }
 
   ngOnChanges(changes: SimpleChanges) {

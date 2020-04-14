@@ -1,10 +1,8 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SeoService } from 'src/app/core/services/seo.service';
-import { SEO, PageParam, Service } from 'src/app/core/interfaces';
+import { SEO, Service } from 'src/app/core/interfaces';
 import { HomeService } from 'src/app/features/home/home.service';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { StorageHelperService } from 'src/app/core/services/storage-helper.service';
 declare var UIkit: any;
 
@@ -16,6 +14,7 @@ declare var UIkit: any;
 export class CommunityPageComponent implements OnInit, OnDestroy {
   
   searchTxt:string;
+  tempSearchTxt: string;
   discussionCategory:string;
   pastEvents:string;
   showPagination: boolean;
@@ -28,14 +27,6 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   noRecords: boolean;
   showResult: boolean;
   isLoading: boolean;
-  searchTextChanged = new Subject<string>();
- 
-
-  searchPageParam: PageParam = {
-    p: 0,
-    s: 6,
-    term: ''
-  };
   hide:any;
   searchData: any = {
     discussions: [],
@@ -69,17 +60,10 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     });
 
     if (this.homeService.homeSearchtxt) {
-      this.searchPageParam.term = this.homeService.homeSearchtxt;
+      this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
       this.showResult = true;
     }
-
-    this.searchTextChanged.pipe(
-      debounceTime(500),
-      distinctUntilChanged()
-    ).subscribe(() => {
-      this.onSearchChange(this.searchPageParam.term);
-    })
   }
 
   ngOnDestroy() {
@@ -133,9 +117,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     } else {
       this.showReset = false;
     }
-    this.setSearchTxt(value);
-    if (event.key == "Enter") {
-      this.searchPageParam.term=this.searchTxt;
+    if (event.key == "Enter" || value=="") {
       this.onSearch();
     }
   }
@@ -145,13 +127,15 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
       this.setSearchTxt(""); 
       this.discussionCategory="";
       this.pastEvents=""; 
+      this.homeService.eventIsPastEvents=0;
+      this.homeService.discussCategory=""
       this.showReset = false;
      this.onSearch();
     }
   }
 
   onSearch() {
-    this.searchPageParam.term=this.searchTxt;
+    this.setSearchTxt(this.tempSearchTxt);
     this.router.navigate(['/community'], { queryParams: { searchTxt: this.searchTxt, 
                                                 category: this.discussionCategory,
                                                 past: this.pastEvents,
@@ -160,6 +144,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   
   setSearchTxt(value: string) {
     this.searchTxt = value;
+    this.tempSearchTxt = value;
     this.homeService.homeSearchtxt = value;
   }
   

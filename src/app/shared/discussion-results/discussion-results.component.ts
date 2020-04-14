@@ -2,11 +2,8 @@ import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angu
 import { Router, ActivatedRoute } from '@angular/router';
 import { MenuService } from '../../features/community/services/menu.service'
 import { DiscussionService } from '../../features/community/services/discussion.service'
-import { SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
-import { SeoService } from 'src/app/core/services/seo.service';
 import { HomeService } from 'src/app/features/home/home.service';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-discussion-results',
@@ -37,7 +34,7 @@ export class DiscussionResultsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router,
     private discussionService: DiscussionService, private menuService: MenuService,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer, private homeService: HomeService
   ) {
   }
 
@@ -66,8 +63,14 @@ export class DiscussionResultsComponent implements OnInit {
     if(this.searchTxt){
       this.searchParams.searchTxt = this.searchTxt;
     }
+    if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
+      this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
+    }
     if (this.route.snapshot.queryParams['category']) {
       this.selCategory = this.route.snapshot.queryParams['category'];
+    }
+    else if(this.homeService.discussCategory){
+      this.selCategory = this.homeService.discussCategory;
     }
     if (this.route.snapshot.queryParams['page'] !== undefined) {
       this.searchParams.p = this.route.snapshot.queryParams['page'];
@@ -91,6 +94,7 @@ export class DiscussionResultsComponent implements OnInit {
   onTabChange(value) {
     this.selCategory = value;
     this.searchParams.p = 0;
+    this.homeService.discussCategory = this.selCategory;
     if(this.showPagination){
       this.router.navigate(['/community'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt, show: "discss" } });
     }
@@ -140,6 +144,8 @@ export class DiscussionResultsComponent implements OnInit {
   clearSelection() {
     this.searchParams.tags = "";
     this.searchParams.p = 0;
+    this.selCategory = "";
+    this.homeService.discussCategory = this.selCategory;
     if(this.showPagination){
       this.router.navigate(['/community'], { queryParams: { category: "", searchTxt: this.searchParams.searchTxt, show: "discss" } });
     }

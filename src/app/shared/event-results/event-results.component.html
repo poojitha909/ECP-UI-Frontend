@@ -30,7 +30,7 @@
                         </button>
                 </div>
             </div>
-           <app-share-via-media></app-share-via-media>
+           <app-share-via-media *ngIf="showSharing"></app-share-via-media>
         </div>
         <div class="uk-width-expand@m">
             <!-- <div *ngIf="searchParams.searchTxt" class="bg-white searchresult">

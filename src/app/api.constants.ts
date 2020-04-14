@@ -2,8 +2,8 @@ export class ApiConstants {
 
     public static GET_SERVICES: string = `/BY/api/v1/search/servicePageSearch`;
     public static GET_ALL_JD_SERVICES: string = `/BY/api/v1/search/justdialService`;
-    public static GET_ALL_SERVICES: string = `/BY/api/v1/userProfile/allServiceList`;
-    public static GET_SERVICE_CATEGORIES: string = `/BY/api/v1/search/serviceCategories`;
+    public static GET_ALL_SERVICES: string = `/BY/api/v1/userProfile/services`;
+    public static GET_SERVICE_CATEGORIES: string = `/BY/api/v1/userProfile/serviceCategories`;
     public static GET_JD_SERVICES_DETAIL: string = `/BY/api/v1/search/justdialServiceDetail`;
     public static GET_HOME_SEARCH_PAGES: string = `/BY/api/v1/homesearch/page`;
     public static USER_LOGIN: string = `/BY/api/v1/users/login`;

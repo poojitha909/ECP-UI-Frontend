@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PageParam, JDserviceParam } from 'src/app/core';
+import { PageParam, serviceParam } from 'src/app/core';
 import { Observable } from 'rxjs';
 import { ApiConstants } from 'src/app/api.constants';
 import { map } from 'rxjs/operators';
@@ -15,7 +15,7 @@ export class EpcServiceService {
   searchCatID: string;
   activePage: number;
   showBg: boolean;
-  serviceParam: JDserviceParam = {
+  serviceParam: serviceParam = {
     max: 50,
     pageNo: 0
   }

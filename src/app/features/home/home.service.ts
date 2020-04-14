@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApiConstants } from 'src/app/api.constants';
-import { PageParam } from 'src/app/core';
+import { PageParam, serviceParam } from 'src/app/core';
 import { map } from 'rxjs/operators';
 import { StorageHelperService } from 'src/app/core/services';
 import { AppConstants } from 'src/app/app.constants';
@@ -37,7 +37,7 @@ export class HomeService {
     return this.http.get(`${ApiConstants.GET_SERVICES}?${queryParams}`);
   }
 
-  getCategoryServices(param: PageParam): Observable<any> {
+  getCategoryServices(param: serviceParam): Observable<any> {
     let queryParams: string = '';
 
     Object.keys(param)
@@ -49,7 +49,7 @@ export class HomeService {
         }
       });
 
-    return this.http.get(`${ApiConstants.GET_SERVICES}?${queryParams}`);
+    return this.http.get(`${ApiConstants.GET_ALL_SERVICES}?${queryParams}`);
   }
 
   getAutoCompleteServices(): Observable<any> {
@@ -112,6 +112,31 @@ export class HomeService {
   set homeSearchtxt(searchParam: string) {
     this.storageHelper.storeSession(AppConstants.HOME_SEARCH, searchParam);
 
+  }
+
+  get productCategory(): string{
+    return this.storageHelper.retrieveSession(AppConstants.PRODUCT_CATEGORY) ? this.storageHelper.retrieveSession(AppConstants.PRODUCT_CATEGORY) : undefined;
+  }
+  set productCategory(productCategory: string) {
+    this.storageHelper.storeSession(AppConstants.PRODUCT_CATEGORY, productCategory);
+  }
+  get discussCategory(): string{
+    return this.storageHelper.retrieveSession(AppConstants.DISCUSS_CATEGORY) ? this.storageHelper.retrieveSession(AppConstants.DISCUSS_CATEGORY) : undefined;
+  }
+  set discussCategory(discussCategory: string) {
+    this.storageHelper.storeSession(AppConstants.DISCUSS_CATEGORY, discussCategory);
+  }
+  get eventIsPastEvents(): number{
+    return this.storageHelper.retrieveSession(AppConstants.EVENT_IS_PAST_EVENTS) ? parseInt(this.storageHelper.retrieveSession(AppConstants.EVENT_IS_PAST_EVENTS)) : undefined;
+  }
+  set eventIsPastEvents(eventIsPastEvents: number) {
+    this.storageHelper.storeSession(AppConstants.EVENT_IS_PAST_EVENTS, eventIsPastEvents.toString());
+  }
+  get expertCategory(): string{
+    return this.storageHelper.retrieveSession(AppConstants.EXPERT_CATEGORY) ? this.storageHelper.retrieveSession(AppConstants.EXPERT_CATEGORY) : undefined;
+  }
+  set expertCategory(expertCategory: string) {
+    this.storageHelper.storeSession(AppConstants.EXPERT_CATEGORY, expertCategory);
   }
 
   // clearHomepageSearch() {

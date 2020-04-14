@@ -38,7 +38,8 @@ export class AskQuestionDetailPageComponent implements OnInit {
   isExpert: boolean;
   totalRecordsReplies: number;
   replyPage: number;
-  replyPageSize: number
+  replyPageSize: number;
+  show:boolean = true;
 
   constructor(private router: Router, private route: ActivatedRoute,
     private askQuesService: AskQuestionService,
@@ -49,6 +50,7 @@ export class AskQuestionDetailPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // this.show=false
     this.questionId = this.route.snapshot.params['id'];
     if (this.route.snapshot.params['category']) {
       this.category = this.route.snapshot.params['category'];
@@ -104,7 +106,7 @@ export class AskQuestionDetailPageComponent implements OnInit {
     if (!this.user) {
       this.store.store("new-ques-comment", JSON.stringify({ questionId: this.questionId, commentTxt: comment.commentTxt, category: this.category }));
       this.authService.redirectUrl = "ask-question/detail/" + this.questionId;
-      UIkit.modal("#reply-modal").hide();
+      UIkit.modal("#reply-modal.uk-open").hide();
       this.replyForm.reset();
       this.router.navigate(['/user/signin']);
       return;
@@ -113,7 +115,7 @@ export class AskQuestionDetailPageComponent implements OnInit {
       this.askQuesService.addComment(this.questionId, comment.commentTxt, this.user).subscribe((response: any) => {
         if (response.data.reply) {
           this.commentTxt = "";
-          UIkit.modal("#reply-modal").hide();
+          UIkit.modal("#reply-modal.uk-open").hide();
           this.askQuesService.getAskQuesReplies(this.question.id,this.replyPage,this.replyPageSize).subscribe((response: any) => {
             if (response.data) {
               this.replyForm.reset();
@@ -238,7 +240,8 @@ export class AskQuestionDetailPageComponent implements OnInit {
       if (response.data.id != "") {
         this.store.clear("new-question");
         this.store.clear("new-question-preview");
-        this.router.navigate(['/ask-question']);
+        this.router.navigate(['/ask-question'],{ queryParams: { 
+          show: "ques"}});
       }
       else {
         alert("Oops! something wrong happen, please try again.");

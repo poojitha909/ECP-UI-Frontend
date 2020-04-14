@@ -13,6 +13,50 @@ import { DiscussionDetailPageComponent } from './components/discussion-detail/di
 import { DiscussionNoRecordComponent } from './components/discussion-no-record/discussion-no-record.component';
 import { SharedModule } from '../../shared';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { NotifierModule,NotifierOptions} from "angular-notifier";
+
+
+const customNotifierOptions: NotifierOptions = {
+  position: {
+      horizontal: {
+          position: "left",
+          distance: 524
+      },
+      vertical: {
+          position: "top",
+          distance: 330,
+          gap: 10
+      }
+  },
+  theme: "material",
+  behaviour: {
+      autoHide: 200000,
+      onClick: false,
+      onMouseover: "pauseAutoHide",
+      showDismissButton: true,
+      stacking: 4
+  },
+  animations: {
+      enabled: true,
+      show: {
+          preset: "slide",
+          speed: 300,
+          easing: "ease"
+      },
+      hide: {
+          preset: "fade",
+          speed: 300,
+          easing: "ease",
+          offset: 50
+      },
+      shift: {
+          speed: 300,
+          easing: "ease"
+      },
+      overlap: 150
+  }
+};
+
 
 @NgModule({
   declarations: [
@@ -31,7 +75,8 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     CommunityRoutingModule,
     CoreModule,
     SharedModule,
-    EditorModule
+    EditorModule,
+    NotifierModule.withConfig(customNotifierOptions)
   ]
 })
 export class CommunityModule { }

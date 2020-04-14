@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild } from '@angular/core';
 import { AskQuestionService } from '../../services/ask-question.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
@@ -6,6 +6,7 @@ import { AuthService } from "../../../../core/auth/services/auth.service";
 import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { SeoService } from 'src/app/core/services/seo.service';
+import { NotifierService } from "angular-notifier";
 declare var UIkit;
 @Component({
   selector: 'app-ask-question-detail-page',
@@ -40,14 +41,19 @@ export class AskQuestionDetailPageComponent implements OnInit {
   replyPage: number;
   replyPageSize: number;
   show:boolean = true;
+  private readonly notifier: NotifierService;
+  @ViewChild("customNotification", { static: true }) customNotificationTmpl;
+  @ViewChild("customNotification1", { static: true }) customNotificationTmpl1;
 
   constructor(private router: Router, private route: ActivatedRoute,
     private askQuesService: AskQuestionService,
     private store: StorageHelperService,
     private fb: FormBuilder,
     private authService: AuthService,
-    private seoService: SeoService
-  ) { }
+    private seoService: SeoService,notifierService: NotifierService
+  ) { 
+    this.notifier=notifierService
+  }
 
   ngOnInit() {
     // this.show=false
@@ -121,6 +127,21 @@ export class AskQuestionDetailPageComponent implements OnInit {
               this.replyForm.reset();
               this.totalRecordsReplies = response.data.total;
               this.setReplies(response.data.content);
+              if(this.isExpert){
+                this.notifier.show({
+                  message: "Your reply is successfully submitted",
+                  type: "success",
+                  template: this.customNotificationTmpl1
+                   });
+                  }
+                  else{
+                    this.notifier.show({
+                      message: "Your comment is successfully submitted",
+                      type: "success",
+                      template: this.customNotificationTmpl1
+                       });
+                  }
+
             }
           });
         }
@@ -229,6 +250,12 @@ export class AskQuestionDetailPageComponent implements OnInit {
       this.router.navigate(['/user/signin']);
       return;
     }
+    this.notifier.show({
+      message: "Please wait, we are submitting your Question to Expert",
+      type: "info",
+      template: this.customNotificationTmpl
+       });  
+  setTimeout(()=>{
     this.askQuesService.addQuestion({
       question: this.question.question,
       answered: this.question.answered,
@@ -238,14 +265,23 @@ export class AskQuestionDetailPageComponent implements OnInit {
       askedBy: { id: this.question.askedBy.id }
     }).subscribe((response: any) => {
       if (response.data.id != "") {
+        this.notifier.show({
+          message: "Thank you for your Question. Our Expert will get back you at the earliest",
+          type: "success",
+          template: this.customNotificationTmpl1
+           });
         this.store.clear("new-question");
         this.store.clear("new-question-preview");
-        this.router.navigate(['/ask-question'],{ queryParams: { 
-          show: "ques"}});
-      }
+            }
       else {
         alert("Oops! something wrong happen, please try again.");
       }
     });
+  },1100)
+  setTimeout(()=>{
+    this.router.navigate(['/ask-question'],{ queryParams: { 
+      show: "ques"}});
+  },2200)
+    
   }
 }

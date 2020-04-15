@@ -104,6 +104,9 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     if(this.route.snapshot.paramMap.get('tab')=='events'){
       this.show = "events"
     }
+    if(this.route.snapshot.queryParams.get('tab')=='events'){
+      this.show="events"
+    }
     else{
       this.show = "discss";
     }

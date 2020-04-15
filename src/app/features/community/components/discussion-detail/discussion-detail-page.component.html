@@ -19,6 +19,19 @@
                 
             </div>
             <div class="uk-width-2-3@m">
+                <div *ngIf = "discussionId == 'preview'" class= "previewTop">
+                    <div class="info">
+                        <img class = "imgInformation" src="/assets/images/information.png">
+                        <span class = "para">You are on <b>Preview Screen</b> now. Scroll down and <b>click on "publish"</b>
+                       to publish this discussion.</span>
+                    </div>
+                </div>
+                <!-- <div *ngIf = "afterPublish" class= "previewTop">
+                    <div class="info">
+                        <img class = "imgInformation" src="/assets/images/information.png">
+                        <span class = "para">This discussion is <b>under review</b> process and will be online after a while.Please wait!</span>
+                    </div>
+                </div> -->
                 <div class="bg-white category-box">
                     <h4 class="publish-on">Published On: {{discussion.createdAt | date:'dd MMM yyyy' }} at {{discussion?.createdAt | date:'shortTime' }}</h4>
                     <h1 class="heading">{{discussion.title}}</h1>
@@ -189,3 +202,16 @@
         </div>
     </div>
 </div>
+<notifier-container></notifier-container>
+<ng-template #customNotification let-notificationData="notification">
+    <my-custom-alert type="notificationData.type">
+        <img class="icon" src="assets/images/loading5.gif">
+        <span class="message">{{ notificationData.message }}</span>
+    </my-custom-alert>
+</ng-template>
+<ng-template #customNotification1 let-notificationData="notification">
+    <my-custom-alert type="notificationData.type">
+        <img class="icon" src="assets/images/verifiedtoast.png">
+        <span class="message">{{ notificationData.message }}</span>
+    </my-custom-alert>
+</ng-template>

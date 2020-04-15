@@ -148,10 +148,14 @@
 
     </div>
     <!-- Pagination component START -->
-    <app-frontend-pagination *ngIf="services && services.length > 0 && !isLoading && !internalProcessing"
+    <!-- <app-frontend-pagination *ngIf="services && services.length > 0 && !isLoading && !internalProcessing"
       [items]="services" [pageSize]="pageSize" [maxPages]="maxPages" [initialPage]="activePage"
       (changePage)="onChangePage($event)">
-    </app-frontend-pagination>
+    </app-frontend-pagination> -->
+    <app-pagination *ngIf="services && services.length > 0 && !isLoading && !internalProcessing"
+      [totalRecords]="services.length" [currentPage]="activePage" [perPage]="pageSize"
+      (pageChangeCall)="changePage($event)">
+    </app-pagination>
     <!-- Pagination component END -->
 
     <!-- Service list  Home Page without pagination-->

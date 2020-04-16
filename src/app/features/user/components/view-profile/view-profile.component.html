@@ -1,7 +1,7 @@
 <div class="category-box bg-white">
     <div uk-grid>
         <div class="uk-width-expand">
-            <h3>User Details</h3>
+            <h3>Your Details</h3>
         </div>
         <div class="uk-width-auto uk-flex uk-flex-middle">
             <a href="javascript:void(0)" (click)="edit('USER_DETAILS')" class="edit font-regular">Edit</a>
@@ -37,7 +37,7 @@
 
     <div uk-grid>
         <div class="uk-width-expand">
-            <h3>General Info</h3>
+            <h3>Basic Information</h3>
         </div>
         <div class="uk-width-auto uk-flex uk-flex-middle">
             <a href="javascript:void(0)" (click)="edit('GENERAL_INFO')" class="edit font-regular">Edit</a>
@@ -54,7 +54,7 @@
             <p class="font-regular m-t-0">{{ userService.userProfile?.individualInfo?.occupation  || '-'}}</p>
         </div>
         <div>
-            <p class="font-regular-15 m-b-10 lable">Birthday</p>
+            <p class="font-regular-15 m-b-10 lable">Date of Birth</p>
             <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.dob | date : 'longDate' || '-'}}
             </p>
         </div>
@@ -72,7 +72,7 @@
 
     <div uk-grid>
         <div class="uk-width-expand">
-            <h3>Address Details</h3>
+            <h3>Address</h3>
         </div>
         <div class="uk-width-auto uk-flex uk-flex-middle">
             <a href="javascript:void(0)" (click)="edit('ADDRESS_DETAILS')" class="edit font-regular">Edit</a>
@@ -112,7 +112,7 @@
 <div class="category-box bg-white m-t-40">
     <div uk-grid>
         <div class="uk-width-expand">
-            <h3>Personal information</h3>
+            <h3>Personal Details</h3>
         </div>
         <div class="uk-width-auto uk-flex uk-flex-middle">
             <a href="javascript:void(0)" (click)="edit('PERSONAL_INFORMATION')" class="edit font-regular">Edit</a>

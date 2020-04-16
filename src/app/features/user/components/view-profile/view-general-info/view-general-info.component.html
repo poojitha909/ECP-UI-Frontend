@@ -3,10 +3,10 @@
 
     <div uk-grid>
         <div class="uk-width-expand">
-            <h3>General Info</h3>
+            <h3>Basic Information</h3>
         </div>
         <div class="uk-width-auto uk-flex uk-flex-middle">
-            <a href="javascript:void(0)" uk-toggle="target: #modal-sections">Edit</a>
+            <a href="javascript:void(0)" (click)="edit('GENERAL_INFO')" class="edit font-regular">Edit</a>
         </div>
          <!-- Edit Model START -->
          <div id="modal-sections" class="uk-modal-container" uk-modal>

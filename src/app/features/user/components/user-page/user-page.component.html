@@ -38,7 +38,7 @@
         </div> -->
 
         <div class="uk-animation-fade uk-animation-fast" *ngSwitchCase="'editprofile'">
-          <app-edit-profile-form [eventEmitted]="eventEmitted" (cancelForm)="viewUserProfile()"></app-edit-profile-form>
+          <app-edit-profile-form [eventEmitted]="eventEmitted" (editProfile)="viewEditProfile($event)" (cancelForm)="viewUserProfile()" ></app-edit-profile-form>
         </div>
 
         <div class="uk-animation-fade uk-animation-fast" *ngSwitchCase="'viewprofile'">
@@ -51,5 +51,5 @@
       </ng-container>
 
     </div>
-  </div>
+  </div> 
 </div>

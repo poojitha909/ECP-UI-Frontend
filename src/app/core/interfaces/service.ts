@@ -59,6 +59,10 @@ export interface Service {
     id?: string;
     facilities?: any[];
     reviewedByUser?: boolean;
+    catName?: string;
+    categoryId?: string;
+    categoryKey?: string;
+
 }
 
 export interface PrimaryUserAddress {
@@ -118,6 +122,8 @@ export interface ServiceProviderInfo {
     homeVisits: boolean;
     yearsExperience: number;
     services: string[];
+    catid: string[];
+    source: string
 }
 
 export interface SystemTag {
@@ -230,13 +236,20 @@ export interface Breadcrumb {
     queryParams?: any;
 }
 
+export interface categorySources {
+    name: string,
+    catid: string
+}
+
 export interface SubCategory {
     name: string;
-    id: string;
+    totalServices: number;
+    source: categorySources[];
 }
 
 export interface Category {
     id: string;
     name: string;
+    totalServices: number;
     subCategories: SubCategory[];
 }

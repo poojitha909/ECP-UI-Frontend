@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { EpcServiceService } from '../../epc-service.service';
 import { SEO } from 'src/app/core/interfaces';
-// import { HomeService } from 'src/app/features/home/home.service';
+import { HomeService } from 'src/app/features/home/home.service';
 // import { Router, ActivatedRoute } from '@angular/router';
 // import { Subject } from 'rxjs';
 // import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -59,6 +59,7 @@ export class AllServicesComponent implements OnInit {
   constructor(
     public ecpService: EpcServiceService,
     private seoService: SeoService,
+    private homeService: HomeService
   ) {
     // this.categories = jdCategoryService.serviceCategories;
     // this.categories = this.activeRoute.snapshot.data.categories;
@@ -91,6 +92,13 @@ export class AllServicesComponent implements OnInit {
   // }
 
   ngOnInit() {
+    if (this.homeService.homeSearchtxt) {
+      this.ecpService.showBg = true;
+    }
+    else{
+      this.ecpService.showBg = false;
+    }
+
     // this.searchTextChanged.pipe(
     //   debounceTime(500),
     //   distinctUntilChanged()

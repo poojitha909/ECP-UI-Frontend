@@ -1,9 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../../app/features/community/services/events.service'
-import { SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
-import { SeoService } from 'src/app/core/services/seo.service';
 import { HomeService } from 'src/app/features/home/home.service';
 
 @Component({
@@ -37,6 +35,7 @@ export class EventResultsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private eventService: EventService,
+    private homeService: HomeService,
     public sanitizer: DomSanitizer) {
   }
 
@@ -69,6 +68,9 @@ export class EventResultsComponent implements OnInit {
     }
     if (this.route.snapshot.queryParams['past'] !== undefined) {
       this.searchParams.pastEvents = this.route.snapshot.queryParams['past'];
+    }
+    else if(this.homeService.eventIsPastEvents){
+      this.searchParams.pastEvents = this.homeService.eventIsPastEvents;
     }
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
@@ -142,6 +144,7 @@ export class EventResultsComponent implements OnInit {
 
   onTabChange(value) {
     this.searchParams.pastEvents = value;
+    this.homeService.eventIsPastEvents = value;
     if(this.showPagination){
       this.router.navigate(['/community'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, show: "events" } });
     }
@@ -153,6 +156,7 @@ export class EventResultsComponent implements OnInit {
   clearSelection() {
     this.searchParams.pastEvents = -1;
     this.searchParams.p = 0;
+    this.homeService.eventIsPastEvents = this.searchParams.pastEvents;
     if(this.showPagination){
       this.router.navigate(['/community'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, show: "events" } });
     }

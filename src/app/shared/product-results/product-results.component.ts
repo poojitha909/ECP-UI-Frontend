@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, OnDestroy, AfterViewInit, EventEmitte
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../features/products/services/products.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { SeoService } from 'src/app/core/services/seo.service';
 import { HomeService } from 'src/app/features/home/home.service';
 declare var UIkit: any;
 @Component({
@@ -39,7 +38,7 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
   
   constructor(private route: ActivatedRoute, private router: Router,
     private productService: ProductService, public sanitizer: DomSanitizer,
-    private homeService: HomeService, public seoService: SeoService) {
+    private homeService: HomeService) {
   }
 
   ngOnInit() {
@@ -77,24 +76,21 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
     if(this.searchTxt){
       this.searchParams.searchTxt = this.searchTxt;
     }
-
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
-        this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
+      this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
     }
     if (this.route.snapshot.queryParams['productCategory'] !== undefined) {
-        this.searchParams.productCategory = this.route.snapshot.queryParams['productCategory'];
+      this.searchParams.productCategory = this.route.snapshot.queryParams['productCategory']; 
+      this.homeService.productCategory = this.route.snapshot.queryParams['productCategory']; 
+    }
+    else if(this.homeService.productCategory){
+      this.searchParams.productCategory = this.homeService.productCategory;
     }
     if (this.route.snapshot.queryParams['page'] !== undefined) {
-        this.searchParams.p = this.route.snapshot.queryParams['page'];
+      this.searchParams.p = this.route.snapshot.queryParams['page'];
     }
     this.currentUrl = window.location.href;
     this.totalRecords = 0;
-    if (this.route.snapshot.queryParams['productCategory'] !== undefined) {
-        this.searchParams.productCategory = this.route.snapshot.queryParams['productCategory'];
-    }
-    if (this.route.snapshot.queryParams['page'] !== undefined) {
-        this.searchParams.p = this.route.snapshot.queryParams['page'];
-    }
     this.isLoading = true;
     this.productService.getCategoryListFiltered(this.searchParams.searchTxt).subscribe((response: any) => {
         const data = response.data;
@@ -139,6 +135,7 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
 
   onTabChange(value) {
     this.searchParams.productCategory = value;
+    this.homeService.productCategory = value;
     if(this.showPagination){
         this.router.navigate(['/products'], { queryParams: { productCategory: value, searchTxt: this.searchParams.searchTxt } });
     }
@@ -149,9 +146,10 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
 
   clearSelection() {
     this.searchParams.productCategory = '';
+    this.homeService.productCategory = '';
     this.searchParams.p = 0;
     if(this.showPagination){
-        this.router.navigate(['/products'], { queryParams: { searchTxt: this.searchParams.searchTxt } });
+        this.router.navigate(['/products'], { queryParams: { searchTxt: this.searchParams.searchTxt, productCategory: this.searchParams.productCategory } });
     }
     else{
         this.showProducts();

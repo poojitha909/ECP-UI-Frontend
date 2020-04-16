@@ -10,10 +10,7 @@ import { JdCategoryService } from './core/services';
 export class AppComponent {
   title = 'ecp-ui-frontend';
 
-  constructor(private jdCategoryService: JdCategoryService) {
+  constructor() {
     //Fetch service categories
-    this.jdCategoryService.fetchAllCategories().subscribe(data => {
-
-    });
   }
 }

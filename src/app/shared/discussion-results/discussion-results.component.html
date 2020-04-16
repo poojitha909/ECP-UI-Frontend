@@ -28,7 +28,7 @@
                         Start</button>
                 </div>
             </div>
-            <app-share-via-media></app-share-via-media>
+            <app-share-via-media *ngIf="showSharing"></app-share-via-media>
         </div>
         <div class="uk-width-expand@m">
             <div *ngIf="isLoading" class="m-t-50 uk-text-center">

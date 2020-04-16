@@ -9,12 +9,13 @@
             <a *ngIf="selectedCategoryType" class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
         </div>
     </div>
-    <div *ngIf="!selectedCategoryType" class="m-t-20 m-b-20 uk-animation-slide-right-small">
+    <div *ngIf="!selectedCategoryType && categories" class="m-t-20 m-b-20 uk-animation-slide-right-small">
         <ul class="uk-list uk-list-small">
-            <li *ngFor="let categoryType of categories" (click)="onCategoryChanged(categoryType.name,'')"
+            <li *ngFor="let categoryType of categories" (click)="onCategoryChanged(categoryType.id,'')"
                 class="cursor-pointer font-regular">
                 {{ categoryType.name }}
                 <div class="uk-float-right">
+                    <span class="uk-badge">{{categoryType.totalServices}}</span>
                     <span style="color: gray;" uk-icon="icon: chevron-right; ratio: 1.3"></span>
                 </div>
             </li>
@@ -27,11 +28,19 @@
         </div>
         <ul class="uk-list uk-list-small pl-15 sroll-category">
             <li [ngClass]="{'cat-active': selectedCategory === 'All' }"
-                (click)="onCategoryChanged(selectedCategoryType.name,'')" class="cursor-pointer font-regular">All</li>
+                (click)="onCategoryChanged(selectedCategoryType.id,'')" class="cursor-pointer font-regular">All
+                <div class="uk-float-right">
+                    <span class="uk-badge">{{selectedCategoryType.totalServices}}</span>
+                </div>
+            </li>
             <li *ngFor="let subCategory of selectedCategoryType.subCategories"
                 [ngClass]="{'cat-active': subCategory.name === selectedCategory}"
-                (click)="onCategoryChanged(subCategory.name,subCategory.id)" class="cursor-pointer font-regular">
+                (click)="onCategoryChanged(selectedCategoryType.id,subCategory.source[0].catid)"
+                class="cursor-pointer font-regular">
                 {{subCategory.name}}
+                <div class="uk-float-right">
+                    <span class="uk-badge">{{subCategory.totalServices}}</span>
+                </div>
             </li>
         </ul>
     </div>

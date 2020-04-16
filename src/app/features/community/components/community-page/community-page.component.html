@@ -13,7 +13,7 @@
   </div>
 
   <!-- Search Container starts -->
-  <div [ngClass]="{'all-blue': showReset}" class="mb-24">
+  <div [ngClass]="{'all-blue': searchTxt!=''}" class="mb-24">
   <div class="showingResult" class="uk-container search-container ">
     <!-- Search Form START -->
     <div class="search-form">
@@ -26,7 +26,7 @@
               </button>
             </span>
             <input class="uk-search-input font-regular search-box" aria-label="search" [ngClass]="{ 'pr-150':showReset}"
-              [(ngModel)]="searchTxt" (keyup)="onSearchChange($event)" required type="text"
+              [(ngModel)]="tempSearchTxt" (keyup)="onSearchChange($event)" required type="text"
               placeholder="Search here" name="search" autocomplete='off' />
           </form>
         </div>
@@ -37,9 +37,9 @@
     </div>
 
   </div >
-  <ul [ngClass]="{'uk-child-width-expand': !showReset, 'showOnSearchtab': showReset }" id="search-tab" uk-tab>
-    <li><a (click)="showAll('discss')" href="#">All Articles & Discussions{{ showReset ? " (" + searchData.totalDiscussions + ")" : "" }}</a></li>
-    <li><a (click)="showAll('events')" href="#">All Events{{ showReset ? " (" + searchData.totalEvents + ")" : "" }}</a></li>
+  <ul [ngClass]="{'uk-child-width-expand': searchTxt=='', 'showOnSearchtab': searchTxt!='' }" id="search-tab" uk-tab>
+    <li><a (click)="showAll('discss')" href="#">All Articles & Discussions{{ searchTxt!='' ? " (" + searchData.totalDiscussions + ")" : "" }}</a></li>
+    <li><a (click)="showAll('events')" href="#">All Events{{ searchTxt!='' ? " (" + searchData.totalEvents + ")" : "" }}</a></li>
   </ul>
   <ul class="uk-switcher showingSearchResult">
     <li>

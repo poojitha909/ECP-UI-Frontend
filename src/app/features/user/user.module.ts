@@ -19,7 +19,7 @@ import { ViewUserDetailsComponent } from './components/view-profile/view-user-de
 import { ViewGeneralInfoComponent } from './components/view-profile/view-general-info/view-general-info.component';
 import { ViewAddressDetailsComponent } from './components/view-profile/view-address-details/view-address-details.component';
 import { ViewPersonalInformationComponent } from './components/view-profile/view-personal-information/view-personal-information.component';
-
+import { ModalComponent } from './components/modal-component';
 
 
 
@@ -40,7 +40,8 @@ import { ViewPersonalInformationComponent } from './components/view-profile/view
     ViewUserDetailsComponent, 
     ViewGeneralInfoComponent, 
     ViewAddressDetailsComponent, 
-    ViewPersonalInformationComponent],
+    ViewPersonalInformationComponent,ModalComponent],
+    
   imports: [
     CommonModule,
     CoreModule,

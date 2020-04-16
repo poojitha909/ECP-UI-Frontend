@@ -14,10 +14,13 @@ export class EditProfileFormComponent implements OnInit {
   editOption:string;
 
   ngOnInit() {
-    
   }
 
   onCancel() {
     this.cancelForm.emit();
+  }
+  viewEditProfile(event){
+    console.log(event)
+    this.eventEmitted = event;
   }
 }

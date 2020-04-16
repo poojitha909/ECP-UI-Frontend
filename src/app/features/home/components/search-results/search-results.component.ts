@@ -20,7 +20,6 @@ export class SearchResultsComponent implements OnInit {
   maxTotal: number;
   hasMaxCal: boolean;
   constructor() {
-    console.log(this.searchData, 'search component')
   }
 
   ngOnInit() {

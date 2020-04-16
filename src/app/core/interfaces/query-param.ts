@@ -4,12 +4,13 @@ export interface PageParam {
     s: number,
     term?: string,
     catid?: number,
-    catName?:string
+    parentCatid?:string
 }
 
-export interface JDserviceParam {
-    category?: string;
-    catID?: string;
+export interface serviceParam {
+    term?: string,
+    parentCatid?:string
+    catId?: string;
     max?: number;
     pageNo?: number;
     isFeatured?: boolean;

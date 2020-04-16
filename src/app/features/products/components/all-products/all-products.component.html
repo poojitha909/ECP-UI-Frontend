@@ -9,7 +9,7 @@
     </div>
   </div>
 </div>
-<div [ngClass]="{'all-blue': showReset}" class="mb-24">
+<div [ngClass]="{'all-blue': searchTxt!='' }" class="mb-24">
   <div class="uk-container search-container">
     <!-- Search Form START -->
     <div class="search-form">
@@ -22,7 +22,7 @@
               </button>
             </span>
             <input class="uk-search-input font-regular search-box sm-pr-150" aria-label="search"
-              [(ngModel)]="searchTxt" (keyup)="onSearchChange($event)" required type="text"
+              [(ngModel)]="tempSearchTxt" (keyup)="onSearchChange($event)" required type="text"
               placeholder="Search here" name="search" autocomplete='off' />
           </form>
         </div>

@@ -29,6 +29,16 @@ export class ServiceDetailCardComponent implements OnInit {
     }
   }
 
+  filterCategory(e) {
+    e.stopPropagation();
+    if (this.isDBService) {
+      this.router.navigate(['services'], { queryParams: { catid: this.service.serviceProviderInfo.catid[0] } });
+    } else {
+      this.router.navigate(['services'], { queryParams: { catid: this.service.categoryId } });
+    }
+
+  }
+
   getDbServiceRating(percent): number {
     if (percent == 0) {
       return 0;

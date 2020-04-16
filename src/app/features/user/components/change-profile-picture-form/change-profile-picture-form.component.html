@@ -1,6 +1,11 @@
 <!-- Change picture form -->
 <div class="category-box bg-white">
-    <h3>User Details</h3>
+    <h3>Your Details</h3>
+    <div class="uk-width-expand@s">
+        <label class="private-checkbox" for="private-imformation"><input class="uk-checkbox"
+                id="private-imformation" type="checkbox" checked> This information is
+            private</label>
+    </div>
     <hr />
     <!-- Error box START-->
     <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
@@ -22,6 +27,7 @@
                         <input type="file" (change)="fileChange($event)" accept="image/*">
                         <button class="uk-button uk-button-default w-100" type="button" tabindex="-1">Select a
                             picture</button>
+                            <span style="font-size: 14px;">(Visible to others)</span>
                     </div>
                 </div>
             </div>
@@ -32,7 +38,7 @@
                 <div class="uk-margin">
                     <label class="uk-form-label"
                         [ngClass]="{'uk-text-danger' : formControl.firstName.invalid && ( formControl.firstName.dirty ||  formControl.firstName.touched) }"
-                        for="firstName">Name<span class="required">*</span></label>
+                        for="firstName">Name<span class="required">*</span> <span>(Visible to others)</span> </label>
                     <div class="uk-form-controls">
                         <input class="uk-input"
                             [ngClass]="{'uk-form-danger' : formControl.firstName.invalid && ( formControl.firstName.dirty ||  formControl.firstName.touched) }"
@@ -84,7 +90,7 @@
         <button class="uk-button uk-button-transparent uk-modal-close" type="button"
             (click)="onCancel()">Cancel</button>
         <button class="m-l-10 uk-button uk-button-default" (click)="onSubmit('SUBMIT_USER_DETAILS')"
-            [disabled]="basicProfile.invalid || isLoading">Submit</button>
+            [disabled]="basicProfile.invalid || isLoading">Save Changes</button>
     </p>
 </div>
 <!-- Change picture form END-->

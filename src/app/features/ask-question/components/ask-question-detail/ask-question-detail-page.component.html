@@ -33,6 +33,13 @@
                 </div>
             </div>
             <div class="uk-width-2-3@m">
+                <div *ngIf = "questionId == 'preview'" class= "previewTop">
+                    <div class="info">
+                        <img class = "imgInformation" src="/assets/images/information.png">
+                        <span class = "para">You are on <b>Preview Screen</b> now. Scroll down and <b>click on "publish"</b>
+                       to publish this question.</span>
+                    </div>
+                </div>
                 <div class="inner-container bg-white" *ngIf="question!==undefined">
                     <h1 class="heading">{{question.question}}</h1>
                     <hr class="m-b-30" />
@@ -47,7 +54,7 @@
                         <button class="uk-button uk-button-primary" (click)="onPublish()">{{!!user ? 'Publish' : 'Signin to Post'}}</button>
                     </div>
                 </div>
-                <div class="comments-head">
+                <div *ngIf="questionId !== 'preview'" class="comments-head">
                     <div class="uk-grid-collapse" uk-grid>
                         <div class="comments-count uk-width-2-3@s">
                             <h4>
@@ -58,7 +65,7 @@
                             <button class="uk-button uk-button-default add-reply"
                             (click)="addComment()"
                             uk-toggle="target: #reply-modal"
-                            > Add a Reply </button>
+                            > {{isExpert? 'Add Reply':'Add Comment'}} </button>
                         </div>
                     </div>
                 </div>
@@ -107,14 +114,14 @@
                 <app-pagination *ngIf="(replies && replies.length > 0)" [totalRecords]="totalRecordsReplies"
                     [currentPage]="replyPage" [perPage]="replyPageSize" (pageChangeCall)="changeReplyPage($event)">
                 </app-pagination>
-                <app-no-expert-reply *ngIf="replies?.length <= 0" [isExpert]="isExpert" ></app-no-expert-reply>
+                <app-no-expert-reply *ngIf="replies?.length <= 0 && questionId !== 'preview'" [isExpert]="isExpert" ></app-no-expert-reply>
             </div>
         </div>
     </div>
 
     <div id="reply-modal" uk-modal>
         <div class="uk-modal-dialog uk-modal-body">
-        <h1 class="font-regular-24 font-weight-600">Add a Reply</h1>
+        <h1 class="font-regular-24 font-weight-600">{{isExpert? 'Add a Reply':'Add a Comment'}}</h1>
         <hr />
         <!-- Success box START-->
         <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
@@ -132,7 +139,7 @@
 
             <div class="uk-text-right">
                 <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
-                <button class="uk-button uk-button-primary m-l-5" type="submit">
+                <button class="uk-button uk-button-primary m-l-5" value="submit" >
                     {{!!user ? 'Post' : 'Join Us to Comment'}}
                 </button>
             </div>
@@ -140,3 +147,18 @@
         </div>
     </div>
 </div>
+<notifier-container></notifier-container>
+<ng-template #customNotification let-notificationData="notification">
+    <my-custom-alert type="notificationData.type">
+        <img class="icon" src="assets/images/loading5.gif">
+
+        <span class="message">{{ notificationData.message }}</span>
+    </my-custom-alert>
+</ng-template>
+<ng-template #customNotification1 let-notificationData="notification">
+    <my-custom-alert type="notificationData.type">
+        <img class="icon" src="assets/images/verifiedtoast.png">
+
+        <span class="message">{{ notificationData.message }}</span>
+    </my-custom-alert>
+</ng-template>

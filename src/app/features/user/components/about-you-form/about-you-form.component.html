@@ -1,6 +1,10 @@
 <!-- About You form START-->
 <div class="category-box m-t-40 bg-white">
-    <h3>Personal information </h3>
+    <h3>Personal Details </h3>
+    
+    <label class="private-checkbox" for="private-imformation"><input class="uk-checkbox"
+        id="private-imformation" type="checkbox" checked> This information is
+    private</label>
     <p>(Note to Content Writer: Add text here explaining how this information will be used)</p>
     <hr />
 
@@ -88,11 +92,6 @@
 
         <hr class="m-t-75" />
         <div uk-grid>
-            <div class="uk-width-expand@s">
-                <label class="private-checkbox" for="private-imformation"><input class="uk-checkbox"
-                        id="private-imformation" type="checkbox" checked> This information is
-                    private</label>
-            </div>
             <button class="uk-button uk-button-transparent uk-modal-close" type="button"
                 (click)="onCancel()">Cancel</button>
             <div>

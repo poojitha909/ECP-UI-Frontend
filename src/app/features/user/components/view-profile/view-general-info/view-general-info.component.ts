@@ -2,6 +2,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { Gender } from 'src/app/core/interfaces';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
+import { ModalComponent } from '../../modal-component';
 
 @Component({
   selector: 'app-view-general-info',
@@ -9,23 +12,31 @@ import { Gender } from 'src/app/core/interfaces';
   styleUrls: ['./view-general-info.component.scss']
 })
 export class ViewGeneralInfoComponent implements OnInit {
-
+  @Output() editProfile = new EventEmitter<{ obj: any, action: "" }>();
   
-  
+  messages:any;
+  subscription: Subscription;
   gender: string;
   constructor(
     public userService: UserService,
-    public auth: AuthService
+    public auth: AuthService,
+    private modalService:NgbModal
   ) { }
 
   ngOnInit() {
-    this.gender = Object.keys(Gender).find(key => Gender[key] === this.userService.userProfile.individualInfo.gender);
-    console.log(this.gender);
+    this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
+      console.log(message,"message from contact detial component")
+      this.messages=message;
+     
+    })
   }
 
-  edit(modal_general){
-    alert("Please Submit or Cancel before edit");
-    console.log('modal_general')
-    
+  edit(actionName){
+    if(this.messages=='editForm'){
+      const modalRef = this.modalService.open(ModalComponent);
+    }else{
+      console.log(actionName)
+      this.editProfile.emit({obj: "", action: actionName})
+    }
   }
 }

@@ -50,7 +50,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   ngOnInit() {
-
+    this.showShareBox = false;
   }
 
   ngAfterViewInit() {
@@ -67,7 +67,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
           const searchTxt = value.get("searchTxt");
           const page = value.get("page");
 
-          this.activePage = (page) ? +page : 1;
+          this.activePage = (page ? parseInt(page) : 0);
 
           if (!this.homeService.homeSearchtxt && searchTxt) {
             this.homeService.homeSearchtxt = searchTxt;
@@ -76,7 +76,6 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
           if (queryCategory || catId) {
             this.filterCategoryList(queryCategory, catId, this.homeService.homeSearchtxt);
           } else {
-            this.showShareBox = false;
             this.selectedCategoryType = undefined;
             if (this.homeService.homeSearchtxt || this.homeService.serviceCategory || this.homeService.serviceSubCategory) {
               this.filterCategoryList(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.homeService.homeSearchtxt);
@@ -109,24 +108,49 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
 
   }
 
-  onChangePage(pageData: any) {
-    // update current page of items
-    this.pageServices = pageData.services;
-    this.ecpService.activePage = pageData.currentPage;
-    // if (pageData.currentPage !== 1) {
-    this.router.navigate(
-      [],
-      {
-        relativeTo: this.activeRoute,
-        queryParams: { page: pageData.currentPage },
-        queryParamsHandling: 'merge'
-      });
-    // }
+  showServices(){
+    this.ecpService.activePage = this.activePage;
+    const start = this.activePage * this.pageSize;
+    const end = start + this.pageSize;
+    this.pageServices = this.allService.slice( start, end);
     this.cdr.detectChanges();
     const elmnt = document.getElementById("serviceList");
     elmnt.scrollIntoView();
-    // UIkit.scroll('#serviceList').scrollTo('#serviceList');
   }
+
+  changePage(page: number) {
+    if(!this.internalProcessing){
+      this.router.navigate(
+        [],
+        {
+          relativeTo: this.activeRoute,
+          queryParams: { page: page },
+          queryParamsHandling: 'merge'
+        });
+    }
+    else{
+      this.activePage = page;
+      this.showServices();
+    }
+  }
+  // onChangePage(pageData: any) {
+  //   // update current page of items
+  //   this.pageServices = pageData.services;
+  //   this.ecpService.activePage = pageData.currentPage;
+  //   // if (pageData.currentPage !== 1) {
+  //   this.router.navigate(
+  //     [],
+  //     {
+  //       relativeTo: this.activeRoute,
+  //       queryParams: { page: pageData.currentPage },
+  //       queryParamsHandling: 'merge'
+  //     });
+  //   // }
+  //   this.cdr.detectChanges();
+  //   const elmnt = document.getElementById("serviceList");
+  //   elmnt.scrollIntoView();
+  //   // UIkit.scroll('#serviceList').scrollTo('#serviceList');
+  // }
 
   clearSelection() {
     this.selectedCategory = 'All';
@@ -199,6 +223,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
           this.maxPages = Math.round(this.services.length / this.pageSize);
           this.verfiedCheck = false;
           this.isLoading = false;
+          this.showServices();
           // this.searchPageParam.term = category;
         }
       },
@@ -224,8 +249,10 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
           this.maxPages = Math.round(this.services.length / this.pageSize);
           this.verfiedCheck = false;
           this.isLoading = false;
+          this.showServices();
           // this.router.navigateByUrl('services/all');
         }
+        
       },
       error => {
         this.services = [];

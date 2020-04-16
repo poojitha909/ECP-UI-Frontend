@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit,ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router";
 import { ProductService } from '../../services/products.service';
@@ -8,6 +8,7 @@ import { Breadcrumb, SEO, DBReviews, DBRating } from 'src/app/core/interfaces';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { NotifierService } from "angular-notifier";
 declare var UIkit;
 
 @Component({
@@ -47,7 +48,10 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit {
   reviewSuccessMessage: string;
   reviewTitle: string = 'Add';
   detailReview: any;
-  userRating: DBRating;
+  userRating:DBRating;
+  private readonly notifier: NotifierService;
+  @ViewChild("customNotification", { static: true }) customNotificationTmpl;
+  @ViewChild("customNotification1", { static: true }) customNotificationTmpl1;
 
   constructor(
     private router: Router,
@@ -58,8 +62,10 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit {
     private seoService: SeoService,
     public sanitizer: DomSanitizer,
     private fb: FormBuilder,
-    public auth: AuthService
+    public auth: AuthService,
+    notifierService: NotifierService
   ) {
+    this.notifier=notifierService;
     if (this.productService.selectedCatId && this.productService.selectedCatname) {
       this.breadcrumbLinks[2] = {
         text: '',
@@ -289,26 +295,32 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit {
   * Add review
   */
   onReviewSubmit() {
-    if (this.auth.isAuthenticate) {
-      this.reviewSuccessMessage = null;
-      this.reviewForm.controls.productId.setValue(this.productId);
-      this.productService.addReview(this.reviewForm.value).subscribe(
-        response => {
-          if (response) {
-            this.getReviews();
-            this.reviewForm.reset();
-            this.reviewSuccessMessage = "Review successfully posted.";
-          }
-        },
-        error => {
-          console.log(error);
-        });
-    } else {
-      console.log(this.reviewForm.value);
-      this.store.store("new-p-review", JSON.stringify(this.reviewForm.value));
-      this.authService.redirectUrl = "products/" + this.productId;
-      this.router.navigate(['/user/signin']);
-    }
+      if (this.auth.isAuthenticate) {
+        this.reviewSuccessMessage = null;
+        this.reviewForm.controls.productId.setValue(this.productId);
+        this.productService.addReview(this.reviewForm.value).subscribe(
+          response => {
+            if (response) {
+              this.getReviews();
+              this.reviewForm.reset();
+              this.notifier.show({
+                message: "Your review successfully submitted",
+                type: "success",
+                template: this.customNotificationTmpl1
+            });
+
+              this.reviewSuccessMessage = "Review successfully posted.";
+            }
+          },
+          error => {
+            console.log(error);
+          });
+      } else {
+        console.log(this.reviewForm.value);
+        this.store.store("new-p-review", JSON.stringify(this.reviewForm.value));
+        this.authService.redirectUrl = "products/" + this.productId;
+        this.router.navigate(['/user/signin']);
+      }
   }
 
   // likeReply(reply) {

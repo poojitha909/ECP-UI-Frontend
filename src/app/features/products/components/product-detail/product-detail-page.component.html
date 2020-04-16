@@ -241,3 +241,12 @@
     </div>
     <!-- Contact Model END -->
 </div>
+<notifier-container></notifier-container>
+
+<ng-template #customNotification1 let-notificationData="notification">
+    <my-custom-alert type="notificationData.type">
+        <img class="icon" src="assets/images/verifiedtoast.png">
+
+        <span class="message">{{ notificationData.message }}</span>
+    </my-custom-alert>
+</ng-template>

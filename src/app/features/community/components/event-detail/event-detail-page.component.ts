@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router";
 import { EventService } from '../../services/events.service';
@@ -8,6 +8,7 @@ import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NotifierService } from "angular-notifier";
 declare var UIkit: any;
 
 @Component({
@@ -29,7 +30,7 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
     {
       text: 'All Events',
       link: '/community',
-      queryParams: {}
+      queryParams: {tab:'events'}
     }
   ];
   eventId: string;
@@ -43,18 +44,25 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
   whatsappMobileUrl;
   eventReportForm: FormGroup;
   successMessage: string;
+  publish:boolean=false;
+  private readonly notifier: NotifierService;
+  @ViewChild("customNotification", { static: true }) customNotificationTmpl;
+  @ViewChild("customNotification1", { static: true }) customNotificationTmpl1;
 
 
   constructor(private router: Router, private route: ActivatedRoute,
     private eventService: EventService, private store: StorageHelperService,
     private authService: AuthService, public sanitizer: DomSanitizer,
-    private seoService: SeoService, private fb: FormBuilder) { 
+    private seoService: SeoService, private fb: FormBuilder,notifierService: NotifierService) { 
+      this.notifier=notifierService
     }
 
   ngOnInit() {
     this.paramsSubs = this.route.params.subscribe(params => {
       this.initiate();
+      
     });
+    
   }
 
   ngAfterViewInit() {
@@ -151,24 +159,74 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
     this.router.navigate(["community/event/add"]);
   }
 
+  // onPublish() {
+  //   if (!this.user) {
+  //     this.authService.redirectUrl = "community/event/preview";
+  //     this.router.navigate(['/user/signin']);
+  //     return;
+  //   }
+  //   this.eventService.addEvents(this.event).subscribe((response: any) => {
+  //     if (response.data.id != "") {
+  //       this.store.clear("new-event");
+  //       this.store.clear("new-event-preview");
+  //       this.router.navigate(['/community/events']);
+  //       //this.successMessage = "Event submittted successfully for review, once reviewed it will start appearing on site."
+  //     }
+  //     else {
+  //       alert("Oops! something wrong happen, please try again.");
+  //     }
+  //   });
+  // }
   onPublish() {
     if (!this.user) {
       this.authService.redirectUrl = "community/event/preview";
       this.router.navigate(['/user/signin']);
       return;
     }
+    this.notifier.show({
+      message: "Please wait, we are submitting your event to Admin",
+      type: "info",
+      template: this.customNotificationTmpl
+  });
+
+  setTimeout(()=>{
     this.eventService.addEvents(this.event).subscribe((response: any) => {
       if (response.data.id != "") {
-        this.store.clear("new-event");
-        this.store.clear("new-event-preview");
-        this.router.navigate(['/community/events']);
-        //this.successMessage = "Event submittted successfully for review, once reviewed it will start appearing on site."
-      }
-      else {
-        alert("Oops! something wrong happen, please try again.");
-      }
-    });
+        this.notifier.show({
+          message: "Your event has created successfully submitted for the review process",
+          type: "success",
+          template: this.customNotificationTmpl1
+      });
+      this.store.clear("new-event");
+      this.store.clear("new-event-preview");
+    }
+    else {
+      alert("Oops! something wrong happen, please try again.");
+    }
+  })
+
+  },2200)
+
+  setTimeout(()=>{
+     this.router.navigate(['/community'],{ queryParams: { 
+    show: "events"}});
+  },4500)
+
   }
+
+  //   this.eventService.addEvents(this.event).subscribe((response: any) => {
+  //     if (response.data.id != "") {
+  //       this.store.clear("new-event");
+  //       this.store.clear("new-event-preview");
+  //       this.router.navigate(['/community/events']);
+  //       //this.successMessage = "Event submittted successfully for review, once reviewed it will start appearing on site."
+  //     }
+  //     else {
+  //       alert("Oops! something wrong happen, please try again.");
+  //     }
+  //   });
+  // }
+
 
   reportFormToggle(){
     if (this.user) {

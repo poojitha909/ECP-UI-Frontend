@@ -17,6 +17,7 @@
 // @import url("https://fontlibrary.org/face/hk-grotesk");
 @import "assets/css/suedo.css";
 @import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~angular-notifier/styles";
 // =============================================================================
 // Font Face
 // =============================================================================
@@ -386,3 +387,38 @@ ngb-rating {
   background:#187700;
   border-radius: 4px;
 }
+.notifier__notification--success {
+	color: $notifier-success-font-color;
+	background-color: #187700;
+	box-sizing: 0px opx 16px;
+	border-radius: 4px;
+	position:fixed;
+	width:417px;
+	height:128px;
+	left:368px;
+	top:330px;
+
+	.notifier__notification-button-icon { // 16x16 fixed size
+		fill: $notifier-success-icon-color;
+	}
+
+}
+.notifier__notification--info {
+	color: $notifier-info-font-color;
+	background-color: #2A415E;
+	box-sizing: 0px opx 16px;
+	border-radius: 4px;
+	position:fixed;
+	width:417px;
+	height:128px;
+	left:368px;
+	top:330px;
+
+	.notifier__notification-button-icon { // 16x16 fixed size
+		fill: $notifier-info-icon-color;
+	}
+
+}
+
+
+

@@ -29,7 +29,9 @@ export class SearchContainerComponent implements OnInit {
 
   autocompleteFields: Service[] = [];
 
-  constructor(private homeService: HomeService, private router: Router, private ecpService: EpcServiceService) { this.ecpService.showBg = false }
+  constructor(private homeService: HomeService, private router: Router, private ecpService: EpcServiceService) { 
+    //this.ecpService.showBg = false 
+  }
 
   ngOnInit() {
     this.searchTextChanged.pipe(
@@ -42,7 +44,8 @@ export class SearchContainerComponent implements OnInit {
     if (this.homeService.homeSearchtxt) {
       this.searchPageParam.term = this.homeService.homeSearchtxt;
       this.showReset = true;
-      this.ecpService.showBg = true;
+      //this.ecpService.showBg = true;
+      
       // this.searchService();
     }
     document.getElementById("serviceSearch").focus();

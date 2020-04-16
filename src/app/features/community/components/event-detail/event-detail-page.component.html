@@ -23,43 +23,7 @@
                     </p>
                 </div>
 
-                <div class="m-t-30 bg-white category-box">
-                    <div class="m-b-20 uk-visible@s">
-                        <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon"
-                            aria-label="Share via Whatsapp" uk-icon="whatsapp" target="_blank"> </a>
-                        <a class="social-link" [href]="whatsappUrl" target="_blank">
-                            Share via
-                            Whatsapp</a>
-                    </div>
-                    <div class="m-b-20 uk-hidden@s">
-                        <a [href]="whatsappMobileUrl" aria-label="Share via Whatsapp"
-                            class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp">
-                        </a>
-                        <a class="social-link" [href]="whatsappMobileUrl">
-                            Share via
-                            Whatsapp</a>
-                    </div>
-                    <div class="m-b-20">
-                        <a href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age%20for%20event:%20{{event.title}}&body=Event URL: {{currentUrl}}"
-                        class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail" aria-label="Share via Email">
-                        </a> <a class="social-link"
-                        href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age%20for%20event:%20{{event.title}}&body=&body=Event URL: {{currentUrl}}">
-                        Share via
-                        Email</a>
-                    </div>
-                    <div>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services"
-                            onclick="javascript:window.open(this.href,
-                                '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
-                            class="uk-icon-button  uk-margin-small-right email-icon" aria-label="Share via Facebook"
-                            uk-icon="facebook"> </a> <a class="social-link"
-                            href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services"
-                            onclick="javascript:window.open(this.href,
-                                '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-                            Share via
-                            Facebook</a>
-                    </div>
-                </div>
+                
                 <!-- <div class="m-t-30 category-box favourite" *ngIf="user!=undefined && user!=null">
                     <div *ngIf="!markIt" (click)="markFavourite()">
                         <a class="uk-icon-button  uk-margin-small-right favourite-icon" uk-icon="heart"></a>
@@ -76,6 +40,13 @@
                 </div> -->
             </div>
             <div class="uk-width-2-3@m">
+                <div *ngIf = "eventId == 'preview'" class= "previewTop">
+                    <div class="info">
+                        <img class = "imgInformation" src="/assets/images/information.png">
+                        <span class = "para">You are on <b>Preview Screen</b> now. Scroll down and <b>click on "publish"</b>
+                       to publish this event.</span>
+                    </div>
+                </div>
                 <div class="bg-white category-box">
                     <h4 class="publish-on">Published on: <span>{{event.createdAt | date:'dd MMM yyyy' }} at
                             {{event?.datetime | date:'shortTime' }}</span></h4>
@@ -214,3 +185,18 @@
         <!-- Report Form Model End -->
     </div>
 </div>
+<notifier-container></notifier-container>
+<ng-template #customNotification let-notificationData="notification">
+    <my-custom-alert type="notificationData.type">
+        <img class="icon" src="assets/images/loading5.gif">
+
+        <span class="message">{{ notificationData.message }}</span>
+    </my-custom-alert>
+</ng-template>
+<ng-template #customNotification1 let-notificationData="notification">
+    <my-custom-alert type="notificationData.type">
+        <img class="icon" src="assets/images/verifiedtoast.png">
+
+        <span class="message">{{ notificationData.message }}</span>
+    </my-custom-alert>
+</ng-template>

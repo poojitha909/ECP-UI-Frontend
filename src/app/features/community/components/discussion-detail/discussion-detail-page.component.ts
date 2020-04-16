@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, HostListener, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router"
 import { DiscussionService } from '../../services/discussion.service';
@@ -9,6 +9,7 @@ import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
+import { NotifierService } from "angular-notifier";
 
 declare var UIkit;
 
@@ -37,12 +38,18 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
   whatsappUrl;
   whatsappMobileUrl;
   currentModelLink: string;
+  afterPublish: boolean = false;
+  private readonly notifier: NotifierService;
+  @ViewChild("customNotification", { static: true }) customNotificationTmpl;
+  @ViewChild("customNotification1", { static: true }) customNotificationTmpl1;
 
   constructor(private router: Router, private route: ActivatedRoute,
     private discussionService: DiscussionService, private menuService: MenuService,
     private fb: FormBuilder, private store: StorageHelperService,
     private authService: AuthService, public sanitizer: DomSanitizer,
-    private seoService: SeoService) { }
+    private seoService: SeoService, notifierService: NotifierService) {
+    this.notifier = notifierService
+  }
 
   ngOnInit() {
     this.currentUrl = window.location.href;
@@ -144,6 +151,11 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
           this.getDiscussion();
           this.successMessage = "Reply Submitted successfully.";
           UIkit.modal("#reply-modal-discussion.uk-open").hide();
+          this.notifier.show({
+            message: "Your comment is successfully submitted",
+            type: "success",
+            template: this.customNotificationTmpl1
+          });
         }
       });
     }
@@ -218,7 +230,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
           this.discussion = response.data.discuss;
           this.setSeoTags(this.discussion);
           this.sortedReplies = [];
-          for(let i in response.data.sortedReplies){
+          for (let i in response.data.sortedReplies) {
             this.sortedReplies[this.sortedReplies.length] = response.data.sortedReplies[i];
           }
           this.commentsCount = this.sortedReplies.length;
@@ -273,27 +285,43 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
   }
 
   onPublish() {
+
     if (!this.user) {
       this.authService.redirectUrl = "community/discussion/preview";
       this.router.navigate(['/user/signin']);
       return;
     }
-    this.discussionService.addDiscussion("P", this.discussion.description, this.discussion.title,
-      this.discussion.userId,
-      this.user.userName,
-      this.discussion.tags,
-      this.discussion.categories,
-      this.discussion.contentType)
-      .subscribe((response: any) => {
-        if (response.data.id != "") {
-          this.store.clear("new-discuss");
-          this.store.clear("new-discuss-preview");
-          this.router.navigate(['/community/discussion', response.data.id]);
-        }
-        else {
-          alert("Oops! something wrong happen, please try again.");
-        }
-      });
+    this.notifier.show({
+      message: "Please wait, we are submitting your discussion to Admin",
+      type: "info",
+      template: this.customNotificationTmpl
+    });
+    setTimeout(() => {
+      this.discussionService.addDiscussion("P", this.discussion.description, this.discussion.title,
+        this.discussion.userId,
+        this.user.userName,
+        this.discussion.tags,
+        this.discussion.categories,
+        this.discussion.contentType)
+        .subscribe((response: any) => {
+          if (response.data.id != "") {
+            this.notifier.show({
+              message: "Your discussion has created successfully.",
+              type: "success",
+              template: this.customNotificationTmpl1
+            });
+            this.store.clear("new-discuss");
+            this.store.clear("new-discuss-preview");
+            setTimeout(() => {
+              // this.afterPublish=true
+              this.router.navigate(['/community/discussion', response.data.id]);
+            }, 4200)
+          }
+          else {
+            alert("Oops! something wrong happen, please try again.");
+          }
+        });
+    }, 2100)
   }
 
   @HostListener('document:keydown.escape', ['$event'])
@@ -309,8 +337,6 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
   onOpenModel() {
     document.getElementsByClassName("main-container")[0].setAttribute("aria-hidden", "true");
   }
-
-
 
   get formControl() {
     return this.replyForm.controls;

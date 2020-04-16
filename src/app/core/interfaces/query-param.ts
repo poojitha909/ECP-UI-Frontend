@@ -15,4 +15,5 @@ export interface serviceParam {
     pageNo?: number;
     isFeatured?: boolean;
     dir?: number;
+    isVerified?:boolean;
 }

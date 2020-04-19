@@ -83,6 +83,7 @@ export class SearchContainerComponent implements OnInit {
       this.autocompleteFields = [];
       this.showReset = false;
       this.showResult = false;
+      this.homeService.homeSearchtxt = "";
     }
   }
 

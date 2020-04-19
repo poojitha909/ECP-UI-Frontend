@@ -94,6 +94,10 @@ export class SearchContainerComponent implements OnInit {
     this.showReset = false;
     this.showResult = false;
     this.homeService.homeSearchtxt = "";
+    this.homeService.eventIsPastEvents=0;
+    this.homeService.discussCategory="";
+    this.homeService.expertCategory="";
+    this.homeService.productCategory = '';
   }
 
   homeSearchPages() {

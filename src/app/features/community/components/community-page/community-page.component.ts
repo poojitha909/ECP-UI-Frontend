@@ -137,7 +137,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
       this.homeService.eventIsPastEvents=0;
       this.homeService.discussCategory=""
       this.showReset = false;
-     this.onSearch();
+      this.onSearch();
     }
   }
 

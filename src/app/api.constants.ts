@@ -6,7 +6,6 @@ export class ApiConstants {
     public static GET_SERVICE_CATEGORIES: string = `/BY/api/v1/userProfile/serviceCategories`;
     public static GET_JD_SERVICES_DETAIL: string = `/BY/api/v1/search/justdialServiceDetail`;
     public static GET_HOME_SEARCH_PAGES: string = `/BY/api/v1/homesearch/page`;
-    public static USER_LOGIN: string = `/BY/api/v1/users/login`;
     public static USER_SIGNUP: string = `/BY/api/v1/users`;
     public static USER_LOGOUT: string = `/BY/api/v1/users/logout`;
     public static USER_PROFILE: string = `/BY/api/v1/userProfile`;
@@ -23,7 +22,8 @@ export class ApiConstants {
     public static EVENTS_SERVICES: string = `/BY/api/v1/event`;
     public static SEND_OTP: string = `/BY/api/v1/users/sendOtp`;
     public static RESEND_OTP: string = `/BY/api/v1/users/resendOtp`;
-    public static VERIFY_OTP: string = `/BY/api/v1/users/verifyOtp`;
+    public static LOGIN_OTP: string = `/BY/api/v1/users/otpLogin`;
+    public static LOGIN_SOCIAL_USER: string = `/BY/api/v1/users/socialLogin`;
     public static DISCUSSIONS_SERVICES: string = `/BY/api/v1/discuss`;
     public static DISCUSSION_DETAIL: string = `/BY/api/v1/discussDetail`;
     public static DISCUSSION_LIKE: string = `/BY/api/v1/discussLike`;

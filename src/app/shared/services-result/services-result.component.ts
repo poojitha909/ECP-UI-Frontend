@@ -103,23 +103,23 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes) {
-      
+
     }
 
   }
 
-  showServices(){
+  showServices() {
     this.ecpService.activePage = this.activePage;
     const start = this.activePage * this.pageSize;
     const end = start + this.pageSize;
-    this.pageServices = this.allService.slice( start, end);
+    this.pageServices = this.allService.slice(start, end);
     this.cdr.detectChanges();
     const elmnt = document.getElementById("serviceList");
     elmnt.scrollIntoView();
   }
 
   changePage(page: number) {
-    if(!this.internalProcessing){
+    if (!this.internalProcessing) {
       this.router.navigate(
         [],
         {
@@ -128,7 +128,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
           queryParamsHandling: 'merge'
         });
     }
-    else{
+    else {
       this.activePage = page;
       this.showServices();
     }
@@ -209,6 +209,10 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     if (searchTxt) {
       param.term = searchTxt;
     }
+
+    if (this.verfiedCheck) {
+      param.isVerified = this.verfiedCheck
+    }
     // this.homeService.searchParam.s = 50;
     // this.homeService.searchParam.term = category;
     this.homeService.getCategoryServices(param).subscribe(
@@ -221,7 +225,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
           }
           this.allService = this.services;
           this.maxPages = Math.round(this.services.length / this.pageSize);
-          this.verfiedCheck = false;
+          // this.verfiedCheck = false;
           this.isLoading = false;
           this.showServices();
           // this.searchPageParam.term = category;
@@ -241,18 +245,24 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     this.ecpService.searchedService = null;
     this.ecpService.searchCatID = null;
 
+    if (this.verfiedCheck) {
+      this.ecpService.serviceParam.isVerified = this.verfiedCheck
+    } else {
+      this.ecpService.serviceParam.isVerified = false;
+    }
+
     this.ecpService.getAllServices().subscribe(
       response => {
         if (response) {
           this.services = response;
           this.allService = this.services;
           this.maxPages = Math.round(this.services.length / this.pageSize);
-          this.verfiedCheck = false;
+          // this.verfiedCheck = false;
           this.isLoading = false;
           this.showServices();
           // this.router.navigateByUrl('services/all');
         }
-        
+
       },
       error => {
         this.services = [];
@@ -263,13 +273,13 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   onCheckVerified(checked) {
-    if (checked) {
-      this.services = this.allService.filter(service => {
-        if (service.verified === '1' || service.verified === checked)
-          return service
-      });
+
+    if (this.homeService.homeSearchtxt || this.homeService.serviceCategory || this.homeService.serviceSubCategory) {
+      this.filterCategoryList(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.homeService.homeSearchtxt);
+      // this.getCategoryServices(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.homeService.homeSearchtxt);
     } else {
-      this.services = this.allService;
+      this.filterCategoryList('', 0, '');
+      this.getAllService();
     }
   }
 
@@ -288,6 +298,10 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     }
     if (searchTxt) {
       param.term = searchTxt;
+    }
+
+    if (this.verfiedCheck) {
+      param.isVerified = this.verfiedCheck
     }
 
     this.jdCategoryService.fetchAllCategories(param).subscribe(

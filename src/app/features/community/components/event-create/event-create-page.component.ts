@@ -77,7 +77,6 @@ export class EventCreatePageComponent implements OnInit {
 
   onSubmit() {
     this.successMessage = "";
-    
     this.store.store("new-event", JSON.stringify( this.eventForm.value ));
     if (!this.user) {
       this.authService.redirectUrl = "/community/event/add";
@@ -100,7 +99,7 @@ export class EventCreatePageComponent implements OnInit {
     delete event.startTime;
 
     this.store.store("new-event-preview", JSON.stringify( event ));
-    this.router.navigate(['/community/event/preview']);
+    this.router.navigate(['/community/event/preview',{id:'preview'}]);
     // this.eventService.addEvents( event ).subscribe((response: any) => {
     //   if (response.data.id != "") {
     //     //this.router.navigate(['/community/events']);

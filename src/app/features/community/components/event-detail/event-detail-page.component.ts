@@ -45,6 +45,7 @@ export class EventDetailPageComponent implements OnInit {
   eventReportForm: FormGroup;
   successMessage: string;
   publish:boolean=false;
+  ShowReportEvent:boolean=true;
   private readonly notifier: NotifierService;
   @ViewChild("customNotification", { static: true }) customNotificationTmpl;
   @ViewChild("customNotification1", { static: true }) customNotificationTmpl1;
@@ -60,7 +61,9 @@ export class EventDetailPageComponent implements OnInit {
   ngOnInit() {
     this.paramsSubs = this.route.params.subscribe(params => {
       this.initiate();
-      
+      if(this.route.snapshot.params['id']=='preview'){
+        this.ShowReportEvent=false;
+      }
     });
     
   }

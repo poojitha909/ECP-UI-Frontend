@@ -14,7 +14,7 @@
                         <button class="uk-button uk-button-default cont-org" uk-toggle="target: #modal-sections-events"> Contact
                             Organiser</button>
                     </div>
-                    <p>
+                    <p *ngIf="ShowReportEvent">
                         <a style="cursor:pointer;" (click)="reportFormToggle()"><img
                                 src="/assets/images/flag.svg">{{ authService.isAuthenticate ? 'Report this Event/Organizer': 'Join us to Report Event/Organizer'}}</a>
                     </p>

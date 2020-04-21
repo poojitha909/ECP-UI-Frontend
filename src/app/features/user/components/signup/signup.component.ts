@@ -46,7 +46,6 @@ export class SignupComponent implements OnInit {
       this.activeroute.queryParams.subscribe(({ state }) => {
         if (state === this.config.facebook.urlState) {
           if (loginCred.access_token) {
-            // localStorage.setItem('loginCredential', loginResponse.access_token);
             this.getFbUserData(loginCred.access_token);
           }
         } else {
@@ -64,13 +63,17 @@ export class SignupComponent implements OnInit {
   getFbUserData(token) {
     this.isLoading = true;
     this.auth.getFbUserData(token).subscribe(data => {
-      if (data) {
-        this.userSignup(data, SocialAccount.FACEBOOK);
-      }
+      this.user = data.user;
+      this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
+      this.welcomeText =true;
+      this.getUserProfile();
+      console.log("google login response", this.user);
     },
       error => {
-        console.log(error)
+        console.log(error);
         this.isLoading = false;
+        this.errorMessage = error.error.error.errorMsg;
+        this.isOtpGenerated = false;
       });
   }
 
@@ -78,48 +81,17 @@ export class SignupComponent implements OnInit {
   getGoogleUserData(token) {
     this.isLoading = true;
     this.auth.getGoogleUserData(token).subscribe(data => {
-      if (data) {
-        this.userSignup(data, SocialAccount.GOOGLE);
-      }
+      this.user = data.user;
+      this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
+      this.welcomeText =true;
+      this.getUserProfile();
+      console.log("google login response", this.user);
     },
       error => {
-        console.log(error)
-        this.isLoading = false;
-      });
-  }
-
-  //Signup using api 
-  userSignup(userData, socialPlatform) {
-    this.errorMessage = null;
-    const user: User = {
-      email: userData.email,
-      userName: userData.name,
-      userIdType: UserIdType.EMAIL,
-      userRegType: UserIdType.EMAIL,
-      socialSignOnId: userData.id,
-      socialSignOnPlatform: socialPlatform
-    }
-
-    if (userData.phoneNumber) {
-      user.phoneNumber = userData.phoneNumber;
-      user.userRegType = UserIdType.EMAIL;
-      user.userIdType = UserIdType.MOBILE;
-    }
-
-    this.auth.login(user).subscribe(
-      userData => {
-        this.user = userData;
-        this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
-        this.welcomeText =true;
-        // this.isLoading = false;
-        this.getUserProfile();
-        console.log("signup response", userData)
-      },
-      error => {
+        console.log(error);
         this.isLoading = false;
         this.errorMessage = error.error.error.errorMsg;
         this.isOtpGenerated = false;
-        console.log(error);
       });
   }
 
@@ -148,14 +120,12 @@ export class SignupComponent implements OnInit {
     this.errorMessage = null;
     this.auth.verfiyOtp(verification.number, verification.code).subscribe(response => {
       console.log(response);
-      if (response.type === "success") {
-        const user = {
-          email: "",
-          name: verification.number,
-          id: verification.number,
-          phoneNumber: verification.number
-        }
-        this.userSignup(user, SocialAccount.MOBILE);
+      if (response.sessionId && response.user) {
+        this.user = response.user;
+        this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
+        this.welcomeText =true;
+        // this.isLoading = false;
+        this.getUserProfile();
       } else {
         this.isLoading = false;
         if (response.message == OtpErrorMessage.otpNotVerified) {
@@ -168,6 +138,9 @@ export class SignupComponent implements OnInit {
     },
       error => {
         console.log(error);
+        this.isLoading = false;
+        this.errorMessage = error.error.error.errorMsg;
+        this.isOtpGenerated = false;
       });
   }
 

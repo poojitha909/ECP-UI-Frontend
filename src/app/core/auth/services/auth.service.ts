@@ -19,21 +19,25 @@ export class AuthService {
   constructor(private http: HttpClient, private storage: StorageHelperService) { }
 
   getFbUserData(token): Observable<any> {
-    // const accessToken = localStorage.getItem("loginCredential");
-    const url = `https://graph.facebook.com/me?fields=id,name,email&access_token=${token}`;
+    const url = `${ApiConstants.LOGIN_SOCIAL_USER}?token=${token}&platform=facebook`;// https://graph.facebook.com/me?fields=id,name,email&access_token=${token}`
     return this.http.get<any>(url).pipe(
       map((response) => {
-        return response;
+        this.user$.next(response.data.user);
+        this.user = response.data.user;
+        this.userSession = response.data.sessionId;
+        return response.data;
       })
     );
   }
 
   getGoogleUserData(token): Observable<any> {
-    // const accessToken = localStorage.getItem("loginCredential");
-    const url = `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`;
+    const url = `${ApiConstants.LOGIN_SOCIAL_USER}?token=${token}&platform=google`;// `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`
     return this.http.get<any>(url).pipe(
       map((response) => {
-        return response;
+        this.user$.next(response.data.user);
+        this.user = response.data.user;
+        this.userSession = response.data.sessionId;
+        return response.data;
       })
     );
   }
@@ -57,32 +61,13 @@ export class AuthService {
   }
 
   verfiyOtp(mobileNo, code): Observable<any> {
-    const url = `${ApiConstants.VERIFY_OTP}?mobile=${mobileNo}&otp=${code}`;
+    const url = `${ApiConstants.LOGIN_OTP}?mobile=${mobileNo}&otp=${code}`;
     return this.http.get<any>(url).pipe(
-      map((response) => {
-        return JSON.parse(response.data);
-      })
-    );
-  }
-
-  // signup(userData: User): Observable<User> {
-  //   return this.http.post<any>(ApiConstants.USER_SIGNUP, userData).pipe(
-  //     map((response) => {
-  //       this.user$.next(response.data.user);
-  //       this.storage.store(AppConstants.USER, JSON.stringify(response.data.user));
-  //       this.storage.store(AppConstants.AUTH_SESSION, response.data.sessionId);
-  //       return response.data.user;
-  //     })
-  //   );
-  // }
-
-  login(userCredentail: User): Observable<User> {
-    return this.http.post<any>(ApiConstants.USER_LOGIN, userCredentail).pipe(
       map((response) => {
         this.user$.next(response.data.user);
         this.user = response.data.user;
         this.userSession = response.data.sessionId;
-        return response.data.user;
+        return response.data;
       })
     );
   }

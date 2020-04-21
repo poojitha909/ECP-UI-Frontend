@@ -89,7 +89,7 @@ export class SearchResultsComponent implements OnInit {
     }
 
     const checkMax: any[] = Object.values(this.allCount).filter(value => value === null);
-    console.log(checkMax);
+
     if (checkMax.length == 0) {
       this.hasMaxCal = true;
     }

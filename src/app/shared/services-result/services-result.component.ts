@@ -114,8 +114,8 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     const end = start + this.pageSize;
     this.pageServices = this.allService.slice(start, end);
     this.cdr.detectChanges();
-    const elmnt = document.getElementById("serviceList");
-    elmnt.scrollIntoView();
+    // const elmnt = document.getElementById("serviceList");
+    // elmnt.scrollIntoView();
   }
 
   changePage(page: number) {

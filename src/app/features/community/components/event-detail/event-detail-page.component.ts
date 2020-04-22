@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router";
 import { EventService } from '../../services/events.service';
@@ -16,7 +16,7 @@ declare var UIkit: any;
   templateUrl: './event-detail-page.component.html',
   styleUrls: ['./event-detail-page.component.scss']
 })
-export class EventDetailPageComponent implements OnInit, AfterViewInit {
+export class EventDetailPageComponent implements OnInit {
 
   breadcrumbLinks: Breadcrumb[] = [
     {
@@ -30,7 +30,7 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
     {
       text: 'All Events',
       link: '/community',
-      queryParams: {tab:'events'}
+      queryParams: { tab: 'events' }
     }
   ];
   eventId: string;
@@ -44,7 +44,8 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
   whatsappMobileUrl;
   eventReportForm: FormGroup;
   successMessage: string;
-  publish:boolean=false;
+  publish: boolean = false;
+  ShowReportEvent: boolean = true;
   private readonly notifier: NotifierService;
   @ViewChild("customNotification", { static: true }) customNotificationTmpl;
   @ViewChild("customNotification1", { static: true }) customNotificationTmpl1;
@@ -53,19 +54,18 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
   constructor(private router: Router, private route: ActivatedRoute,
     private eventService: EventService, private store: StorageHelperService,
     private authService: AuthService, public sanitizer: DomSanitizer,
-    private seoService: SeoService, private fb: FormBuilder,notifierService: NotifierService) { 
-      this.notifier=notifierService
-    }
+    private seoService: SeoService, private fb: FormBuilder, notifierService: NotifierService) {
+    this.notifier = notifierService
+  }
 
   ngOnInit() {
     this.paramsSubs = this.route.params.subscribe(params => {
       this.initiate();
-      
+      if (this.route.snapshot.params['id'] == 'preview') {
+        this.ShowReportEvent = false;
+      }
     });
-    
-  }
 
-  ngAfterViewInit() {
   }
 
   ngOnDestroy() {
@@ -88,7 +88,7 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
       userId: this.user ? this.user.id : "",
       comment: ["", Validators.required],
     });
-    
+
     this.breadcrumbLinks[2].queryParams = this.route.snapshot.queryParams;
   }
 
@@ -187,30 +187,33 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
       message: "Please wait, we are submitting your event to Admin",
       type: "info",
       template: this.customNotificationTmpl
-  });
+    });
 
-  setTimeout(()=>{
-    this.eventService.addEvents(this.event).subscribe((response: any) => {
-      if (response.data.id != "") {
-        this.notifier.show({
-          message: "Your event has created successfully submitted for the review process",
-          type: "success",
-          template: this.customNotificationTmpl1
+    setTimeout(() => {
+      this.eventService.addEvents(this.event).subscribe((response: any) => {
+        if (response.data.id != "") {
+          this.notifier.show({
+            message: "Your event has created successfully submitted for the review process",
+            type: "success",
+            template: this.customNotificationTmpl1
+          });
+          this.store.clear("new-event");
+          this.store.clear("new-event-preview");
+        }
+        else {
+          alert("Oops! something wrong happen, please try again.");
+        }
+      })
+
+    }, 2200)
+
+    setTimeout(() => {
+      this.router.navigate(['/community'], {
+        queryParams: {
+          show: "events"
+        }
       });
-      this.store.clear("new-event");
-      this.store.clear("new-event-preview");
-    }
-    else {
-      alert("Oops! something wrong happen, please try again.");
-    }
-  })
-
-  },2200)
-
-  setTimeout(()=>{
-     this.router.navigate(['/community'],{ queryParams: { 
-    show: "events"}});
-  },4500)
+    }, 4500)
 
   }
 
@@ -228,7 +231,7 @@ export class EventDetailPageComponent implements OnInit, AfterViewInit {
   // }
 
 
-  reportFormToggle(){
+  reportFormToggle() {
     if (this.user) {
       UIkit.modal('#event-report-modal').show();
     } else {

@@ -29,7 +29,7 @@ export class SearchContainerComponent implements OnInit {
 
   autocompleteFields: Service[] = [];
 
-  constructor(private homeService: HomeService, private router: Router, private ecpService: EpcServiceService) { 
+  constructor(private homeService: HomeService, private router: Router, private ecpService: EpcServiceService) {
     //this.ecpService.showBg = false 
   }
 
@@ -45,7 +45,6 @@ export class SearchContainerComponent implements OnInit {
       this.searchPageParam.term = this.homeService.homeSearchtxt;
       this.showReset = true;
       //this.ecpService.showBg = true;
-      
       // this.searchService();
     }
     document.getElementById("serviceSearch").focus();
@@ -75,6 +74,7 @@ export class SearchContainerComponent implements OnInit {
       this.homeService.homeSearchtxt = "";
       this.showReset = false;
       this.ecpService.showBg = false;
+      this.router.navigate(['/services'], { queryParams: { searchTxt: this.searchPageParam.term, category: this.ecpService.searchedService, catid: this.ecpService.searchCatID } })
     }
   }
 
@@ -129,6 +129,8 @@ export class SearchContainerComponent implements OnInit {
     this.popullarService = undefined;
     this.homeService.homeSearchtxt = "";
     document.getElementById("serviceSearch").focus();
+    this.homeService.serviceCategory = "";
+    this.homeService.serviceSubCategory = "";
     this.router.navigate(['services'], { queryParams: { searchTxt: this.searchPageParam.term } });
   }
 

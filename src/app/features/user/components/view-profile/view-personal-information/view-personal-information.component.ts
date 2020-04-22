@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { Subscription } from 'rxjs';
@@ -13,9 +13,12 @@ import { ModalComponent } from '../../modal-component';
 export class ViewPersonalInformationComponent implements OnInit{
 
   @Output() editProfile = new EventEmitter<{ obj: any, action: "" }>();
-
+ 
   messages:any;
   subscription: Subscription;
+  public formSection={  
+    name:'personal'
+  }
   constructor(
     public userService: UserService,
     public auth: AuthService,
@@ -32,6 +35,7 @@ export class ViewPersonalInformationComponent implements OnInit{
   edit(actionName){
     if(this.messages=='editForm'){
       const modalRef = this.modalService.open(ModalComponent);
+      modalRef.componentInstance.user = this.formSection;
     }else{
       console.log(actionName)
       this.editProfile.emit({obj: "", action: actionName})

@@ -40,8 +40,7 @@
     <!-- Search Form END -->
     <!-- Mobile view card -->
 
-    <div aria-live="polite" aria-atomic="true" class="m-t-20 uk-hidden@s"
-      *ngIf="!noRecords && !isLoading && showResult">
+    <!-- <div class="m-t-20 uk-hidden@s" *ngIf="!noRecords && !isLoading && showResult">
       <p class="font-regular-15 font-weight-600">Search Results
         ({{searchData.totalServices + searchData.totalProducts + searchData.totalDiscussions + searchData.totalEvents + searchData.totalExperts}})
       </p>
@@ -82,12 +81,11 @@
         <fa-icon style="color:#1A73E8;" [icon]="['fas', 'info-circle']"></fa-icon> Tap on any card to see the full
         results
       </p>
-    </div>
+    </div> -->
 
     <!-- Search Result START -->
     <div class="uk-visible@s">
-      <app-search-results *ngIf="!noRecords && !isLoading && showResult" [searchData]="searchData"
-        [searchTerm]="searchPageParam.term">
+      <app-search-results *ngIf="showResult" [searchTerm]="searchPageParam.term">
       </app-search-results>
     </div>
     <!-- Search Result END -->

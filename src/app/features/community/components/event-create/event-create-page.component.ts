@@ -57,12 +57,12 @@ export class EventCreatePageComponent implements OnInit {
       //orgEmail:  [event ? event.orgEmail : "", [Validators.required,Validators.email]],
       orgEmail: [event ? event.orgEmail : ""],
       //orgPhone:  [event ? event.orgPhone : "", [Validators.required,Validators.pattern(/^\+?\d{1,2}[- ]?\d{2}[- ]?\d{4}[- ]?\d{4}$/)] ],
-      orgPhone: [event ? event.orgPhone : "", [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      capacity: [event ? event.capacity : "", Validators.required],
-      eventType: [event ? event.eventType : "", Validators.required],
-      entryFee: [event ? event.entryFee : "", Validators.required],
-      languages: [event ? event.languages : "", Validators.required],
-      organiser: [event ? event.organiser : "", Validators.required]
+      orgPhone:  [event ? event.orgPhone : "", [Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
+      capacity:  [event ? event.capacity : "", Validators.required],
+      eventType:  [event ? event.eventType : "", Validators.required],
+      entryFee:  [event ? event.entryFee : "", Validators.required],
+      languages:  [event ? event.languages : "",[Validators.pattern('^[a-zA-Z \-\']+'),Validators.required]],
+      organiser:  [event ? event.organiser : "", [Validators.required,Validators.pattern('^[a-zA-Z \-\']+')]]
     });
   }
 
@@ -78,8 +78,7 @@ export class EventCreatePageComponent implements OnInit {
 
   onSubmit() {
     this.successMessage = "";
-
-    this.store.store("new-event", JSON.stringify(this.eventForm.value));
+    this.store.store("new-event", JSON.stringify( this.eventForm.value ));
     if (!this.user) {
       this.authService.redirectUrl = "/community/event/add";
       this.router.navigate(['/user/signin']);
@@ -100,8 +99,8 @@ export class EventCreatePageComponent implements OnInit {
     delete event.date;
     delete event.startTime;
 
-    this.store.store("new-event-preview", JSON.stringify(event));
-    this.router.navigate(['/community/event/preview']);
+    this.store.store("new-event-preview", JSON.stringify( event ));
+    this.router.navigate(['/community/event/preview',{id:'preview'}]);
     // this.eventService.addEvents( event ).subscribe((response: any) => {
     //   if (response.data.id != "") {
     //     //this.router.navigate(['/community/events']);

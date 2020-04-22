@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from 'src/app/core';
 import { UserService } from '../../services/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,7 +9,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./change-profile-picture-form.component.scss']
 })
 export class ChangeProfilePictureFormComponent implements OnInit {
+
   @Output() cancelForm = new EventEmitter();
+  
   EditUser: string;
   eventEmitted: any;
   imageData: FormData;

@@ -285,7 +285,6 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
   }
 
   onPublish() {
-
     if (!this.user) {
       this.authService.redirectUrl = "community/discussion/preview";
       this.router.navigate(['/user/signin']);

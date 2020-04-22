@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { SignupComponent } from './components/signup/signup.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { UserResolverService } from './services/user-resolver.service';

@@ -7,7 +7,6 @@ declare var UIkit: any;
   styleUrls: ['./search-results.component.scss']
 })
 export class SearchResultsComponent implements OnInit {
-  @Input() searchData: any;
   @Input() searchTerm: string;
   allCount = {
     servicesTotal: null,

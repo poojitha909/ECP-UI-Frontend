@@ -15,7 +15,9 @@
     <!-- Show only Verified Profiles -->
     <div *ngIf="!internalProcessing" class="m-t-40 m-b-30 bg-white category-box uk-flex-middle uk-flex">
       <label class="m-0" for="Verified-Profiles"><input id="Verified-Profiles" class="uk-checkbox m-r-10"
-          type="checkbox" [(ngModel)]="verfiedCheck" (change)="onCheckVerified($event.target.checked)"> Show
+          type="checkbox" [(ngModel)]="verfiedCheck"
+          (keydown.enter)="verfiedCheck = !verfiedCheck;onCheckVerified($event.target.checked)"
+          (change)="onCheckVerified($event.target.checked)"> Show
         only
         Verified Profiles</label>
     </div>

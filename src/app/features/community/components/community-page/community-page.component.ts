@@ -136,15 +136,16 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   }
 
   resetSearch(event: any) {
-    if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
-      this.setSearchTxt("");
-      this.discussionCategory = "";
-      this.pastEvents = "";
-      this.homeService.eventIsPastEvents = 0;
-      this.homeService.discussCategory = ""
-      this.showReset = false;
-      this.onSearch();
-    }
+    // if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
+    this.setSearchTxt("");
+    this.discussionCategory = "";
+    this.pastEvents = "";
+    this.homeService.eventIsPastEvents = 0;
+    this.homeService.discussCategory = ""
+    this.showReset = false;
+    document.getElementById("communitySearch").focus();
+    this.onSearch();
+    // }
   }
 
   onSearch() {

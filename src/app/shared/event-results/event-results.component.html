@@ -11,11 +11,14 @@
                     </div>
                 </div>
                 <ul class="uk-list uk-list-large p-2">
-                    <li (click)="onTabChange(-1)" [ngClass]="{'cat-active': -1 == searchParams.pastEvents}">
-                        Upcoming Events <span class="uk-badge uk-float-right">{{countData.upcoming}}</span>
+                    <li [ngClass]="{'cat-active': -1 == searchParams.pastEvents}">
+                        <a href="javascript:void(0)" (click)="onTabChange(-1)">Upcoming Events </a><span
+                            class="uk-badge uk-float-right">{{countData.upcoming}}</span>
                     </li>
-                    <li (click)="onTabChange(1)" [ngClass]="{'cat-active': 1 == searchParams.pastEvents}">
-                        Past Events <span class="uk-badge uk-float-right">{{countData.past}}</span>
+                    <li [ngClass]="{'cat-active': 1 == searchParams.pastEvents}">
+                        <a href="javascript:void(0)" (click)="onTabChange(1)">Past Events </a> <span
+                            class="uk-badge uk-float-right">
+                            {{countData.past}}</span>
                     </li>
                 </ul>
             </div>
@@ -26,11 +29,12 @@
                     </div>
                 </div>
                 <div>
-                    <button routerLink="/community/event/add" class="uk-button uk-button-transparent addevent"> Create an Event
-                        </button>
+                    <button routerLink="/community/event/add" class="uk-button uk-button-transparent addevent"> Create
+                        an Event
+                    </button>
                 </div>
             </div>
-           <app-share-via-media *ngIf="showSharing"></app-share-via-media>
+            <app-share-via-media *ngIf="showSharing"></app-share-via-media>
         </div>
         <div class="uk-width-expand@m">
             <!-- <div *ngIf="searchParams.searchTxt" class="bg-white searchresult">
@@ -51,16 +55,19 @@
             <div *ngIf="eventsList!==undefined && eventsList.length > 0 && !isLoading">
                 <div class="uk-flex-left uk-text-center uk-child-width-1-2@m m-b-30" uk-grid>
                     <div *ngFor="let event of eventsList">
-                        <app-event-summary-card [event]="event" [pageParam]="{ past:this.searchParams.pastEvents, searchTxt:this.searchParams.searchTxt, page:this.searchParams.p, show:'events' }"
+                        <app-event-summary-card [event]="event"
+                            [pageParam]="{ past:this.searchParams.pastEvents, searchTxt:this.searchParams.searchTxt, page:this.searchParams.p, show:'events' }"
                             [isPast]="searchParams.pastEvents">
                         </app-event-summary-card>
                     </div>
                 </div>
             </div>
-            <app-pagination *ngIf="showPagination && eventsList && eventsList.length > 0 && !isLoading" [totalRecords]="totalRecords"
-                [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">
+            <app-pagination *ngIf="showPagination && eventsList && eventsList.length > 0 && !isLoading"
+                [totalRecords]="totalRecords" [currentPage]="searchParams.p" [perPage]="searchParams.s"
+                (pageChangeCall)="changePage($event)">
             </app-pagination>
-            <div class="m-t-20" *ngIf="( eventsList==undefined || (eventsList && eventsList.length == 0) ) && !isLoading">
+            <div class="m-t-20"
+                *ngIf="( eventsList==undefined || (eventsList && eventsList.length == 0) ) && !isLoading">
                 <app-event-no-record></app-event-no-record>
             </div>
             <div *ngIf="showPagination == false && totalRecords > searchParams.s && !isLoading">

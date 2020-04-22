@@ -54,7 +54,7 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    document.getElementById("allproductHeader").focus();
+    document.getElementById("productSearch").focus();
   }
 
   ngOnDestroy() {
@@ -94,13 +94,13 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   resetSearch(event: any) {
-    if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
-      this.setSearchTxt("");
-      this.productCategory="";
-      this.homeService.productCategory = '';
-      this.showReset = false;
-      this.onSearch()
-    }
+    // if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
+    this.setSearchTxt("");
+    this.productCategory = "";
+    this.homeService.productCategory = '';
+    this.showReset = false;
+    this.onSearch()
+    // }
   }
 
   setSearchTxt(value: string) {
@@ -111,11 +111,11 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onSearch() {
     this.setSearchTxt(this.tempSearchTxt);
+    document.getElementById("productSearch").focus();
     this.router.navigate(['/products'], { queryParams: { productCategory: this.productCategory, searchTxt: this.searchTxt } });
-    document.getElementById("allproduct-searchtxt").focus();
   }
 
-  showProductCount(value){
+  showProductCount(value) {
     this.totalRecords = value;
   }
 }

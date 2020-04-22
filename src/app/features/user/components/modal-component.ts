@@ -14,19 +14,22 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
       <p>Please Save or Cancel your changes before editing new section.</p>
     </div>
     <div class="modal-footer">
-      <button type="submit" class="btn btn-outline-dark"  (click)="activeModal.close('Close click')">Close</button>
+      <button type="button" class="btn btn-outline-dark"  (click)="activeModal.close('Close click')">Close</button>
     </div>
   `
 })
 export class ModalComponent implements OnInit{
 
-  @Input() public formSection;
+  // @Input() public formSection;
 
   constructor(public activeModal: NgbActiveModal) {}
 
   ngOnInit(){
-    const data=this.formSection
-    console.log(data);
+    // const data=this.formSection
+    // console.log(data);
+  }
+  close(){
+
   }
 }
 

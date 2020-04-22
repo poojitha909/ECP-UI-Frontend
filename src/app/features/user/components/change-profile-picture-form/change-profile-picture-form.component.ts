@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/core';
 import { UserService } from '../../services/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -43,7 +43,6 @@ export class ChangeProfilePictureFormComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.basicProfile.get("firstName").valueChanges.subscribe(selectedValue=>{
       this.userService.formEditMessage("editForm")
      });

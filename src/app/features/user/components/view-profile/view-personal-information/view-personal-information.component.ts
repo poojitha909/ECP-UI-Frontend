@@ -16,9 +16,9 @@ export class ViewPersonalInformationComponent implements OnInit{
  
   messages:any;
   subscription: Subscription;
-  public formSection={  
-    name:'personal'
-  }
+  // public formSection={  
+  //   name:'personal'
+  // }
   constructor(
     public userService: UserService,
     public auth: AuthService,
@@ -35,7 +35,7 @@ export class ViewPersonalInformationComponent implements OnInit{
   edit(actionName){
     if(this.messages=='editForm'){
       const modalRef = this.modalService.open(ModalComponent);
-      modalRef.componentInstance.user = this.formSection;
+      // modalRef.componentInstance.user = this.formSection;
     }else{
       console.log(actionName)
       this.editProfile.emit({obj: "", action: actionName})

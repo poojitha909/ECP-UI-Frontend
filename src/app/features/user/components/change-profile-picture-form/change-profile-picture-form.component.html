@@ -33,12 +33,12 @@
             </div>
         </div>
         <div class="uk-width-expand@s">
-            <form class="uk-form-stacked" focusInvalidInput [formGroup]="basicProfile">
+            <form class="uk-form-stacked"  [formGroup]="basicProfile">
 
                 <div class="uk-margin">
                     <label class="uk-form-label"
                         [ngClass]="{'uk-text-danger' : formControl.firstName.invalid && ( formControl.firstName.dirty ||  formControl.firstName.touched) }"
-                        for="firstName" #name>Name<span class="required">*</span> <span>(Visible to others)</span> </label>
+                        for="firstName" >Name<span class="required">*</span> <span>(Visible to others)</span> </label>
                     <div class="uk-form-controls">
                         <input class="uk-input"
                             [ngClass]="{'uk-form-danger' : formControl.firstName.invalid && ( formControl.firstName.dirty ||  formControl.firstName.touched) }"

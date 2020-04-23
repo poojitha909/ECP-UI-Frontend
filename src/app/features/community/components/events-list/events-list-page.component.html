@@ -12,10 +12,12 @@
                 </div>
                 <ul class="uk-list uk-list-large p-2">
                     <li (click)="onTabChange(-1)" [ngClass]="{'cat-active': -1 == searchParams.pastEvents}">
-                        Upcoming Events <span class="uk-badge uk-float-right">{{countData.upcoming}}</span>
+                        <a (click)="onTabChange(-1)" href="javascript:void(0)">Upcoming Events <span
+                                class="uk-badge uk-float-right">{{countData.upcoming}}</span></a>
                     </li>
                     <li (click)="onTabChange(1)" [ngClass]="{'cat-active': 1 == searchParams.pastEvents}">
-                        Past Events <span class="uk-badge uk-float-right">{{countData.past}}</span>
+                        <a (click)="onTabChange(1)" href="javascript:void(0)">Past Events <span
+                                class="uk-badge uk-float-right">{{countData.past}}</span></a>
                     </li>
                 </ul>
             </div>
@@ -33,14 +35,14 @@
             <div class="m-t-30 bg-white category-box bg-white">
                 <div class="m-b-20">
                     <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon"
-                        uk-icon="whatsapp" target="_blank"> </a>
+                        uk-icon="whatsapp" target="_blank" aria-label="Share via Whatsapp"> </a>
                     <a class="social-link" [href]="whatsappUrl" target="_blank">
                         Share via
                         Whatsapp</a>
                 </div>
                 <div class="m-b-20">
                     <a href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age&body=%0AService%2DURL:%20{{currentUrl}}"
-                        class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail">
+                        class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail" aria-label="Share via Email">
                     </a> <a class="social-link"
                         href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age&body=%0AService%2DURL:%20{{currentUrl}}">
                         Share via
@@ -50,8 +52,8 @@
                     <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services"
                         onclick="javascript:window.open(this.href,
                         '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
-                        class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a
-                        class="social-link"
+                        class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"
+                        aria-label="Share via Facebook"> </a> <a class="social-link"
                         href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services"
                         onclick="javascript:window.open(this.href,
                         '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
@@ -76,8 +78,10 @@
             <!-- Events list  -->
             <div *ngIf="eventsList!==undefined && eventsList.length > 0">
                 <div class="uk-flex-left uk-text-center uk-child-width-1-2@m m-b-30" uk-grid>
-                    <div *ngFor="let event of eventsList">
-                        <app-event-summary-card [event]="event" [pageParam]={past:this.searchParams.pastEvents,searchTxt:this.searchParams.searchTxt,page:this.searchParams.p} [isPast]="searchParams.pastEvents">
+                    <div *ngFor="let event of eventsList;let i=index" role="group" [attr.aria-label]="'Event ' + i">
+                        <app-event-summary-card [event]="event"
+                            [pageParam]={past:this.searchParams.pastEvents,searchTxt:this.searchParams.searchTxt,page:this.searchParams.p}
+                            [isPast]="searchParams.pastEvents">
                         </app-event-summary-card>
                     </div>
                 </div>

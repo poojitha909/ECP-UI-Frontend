@@ -30,8 +30,9 @@ export class SearchContainerComponent implements OnInit {
   constructor(private homeService: HomeService, private router: Router) { }
 
   ngOnInit() {
+    document.getElementById("homeSearch").focus();
     this.searchTextChanged.pipe(
-      debounceTime(500),
+      debounceTime(200),
       distinctUntilChanged()
     ).subscribe(() => {
       this.onSearchChange(this.searchPageParam.term);
@@ -80,6 +81,7 @@ export class SearchContainerComponent implements OnInit {
     this.showReset = false;
     this.showResult = false;
     this.homeService.homeSearchtxt = "";
+    document.getElementById("homeSearch").focus();
     this.homeService.eventIsPastEvents = 0;
     this.homeService.discussCategory = "";
     this.homeService.expertCategory = "";
@@ -152,6 +154,7 @@ export class SearchContainerComponent implements OnInit {
       }
       this.selectedValue = "";
       this.autocompleteFields = [];
+      document.getElementById("homeSearch").focus();
     }
   }
 

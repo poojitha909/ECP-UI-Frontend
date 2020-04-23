@@ -114,9 +114,25 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     const end = start + this.pageSize;
     this.pageServices = this.allService.slice(start, end);
     this.cdr.detectChanges();
-    // const elmnt = document.getElementById("serviceList");
-    // elmnt.scrollIntoView();
   }
+  // onChangePage(pageData: any) {
+  //   // update current page of items
+  //   this.pageServices = pageData.services;
+  //   this.ecpService.activePage = pageData.currentPage;
+  //   // if (pageData.currentPage !== 1) {
+  //   this.router.navigate(
+  //     [],
+  //     {
+  //       relativeTo: this.activeRoute,
+  //       queryParams: { page: pageData.currentPage },
+  //       queryParamsHandling: 'merge'
+  //     });
+  //   // }
+  //   this.cdr.detectChanges();
+  //   const elmnt = document.getElementById("serviceList");
+  //   elmnt.scrollIntoView();
+  //   // UIkit.scroll('#serviceList').scrollTo('#serviceList');
+  // }
 
   changePage(page: number) {
     if (!this.internalProcessing) {
@@ -262,7 +278,6 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
           this.showServices();
           // this.router.navigateByUrl('services/all');
         }
-
       },
       error => {
         this.services = [];

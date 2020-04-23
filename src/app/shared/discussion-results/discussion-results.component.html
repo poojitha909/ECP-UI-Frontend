@@ -7,17 +7,19 @@
                         <h3 class="uk-h4">Categories</h3>
                     </div>
                     <div *ngIf="searchParams.tags !== ''">
-                        <a class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
+                        <a href="javascript:void(0)" class="uk-text-danger" (click)="clearSelection()">Clear
+                            Selection</a>
                     </div>
                 </div>
                 <ul class="uk-list uk-list-large p-2" *ngIf="dropDownList!==undefined">
-                    <li *ngFor="let cat of dropDownList | keyvalue" (click)="onTabChange(cat.key)"
-                        class="cursor-pointer" [ngClass]="{'cat-active': cat.key === selCategory}">{{cat.value.label}}
+                    <li *ngFor="let cat of dropDownList | keyvalue" class="cursor-pointer"
+                        [ngClass]="{'cat-active': cat.key === selCategory}" (click)="onTabChange(cat.key)">
+                        <a href="javascript:void(0)" (click)="onTabChange(cat.key)">{{cat.value.label}}</a>
                         <span class="uk-badge uk-float-right">{{cat.value.totalCount}}</span>
                     </li>
                 </ul>
             </div>
-            <div class="m-t-30 category-box bg-white" >
+            <div class="m-t-30 category-box bg-white">
                 <div class="discuss" uk-grid>
                     <div>
                         <p>Ask a Question / Start a Discussion / Write an Article</p>
@@ -33,17 +35,20 @@
         <div class="uk-width-expand@m">
             <div *ngIf="isLoading" class="m-t-50 uk-text-center">
                 <span uk-spinner="ratio: 3"></span>
-            </div>    
+            </div>
             <div *ngIf="discussionsList!==undefined && discussionsList.length > 0 && !isLoading" class="m-b-30">
                 <div class="uk-flex-left uk-text-center uk-child-width-1-2@m" uk-grid>
                     <div *ngFor="let discussion of discussionsList">
-                        <app-dicussion-summary-card [category]="selCategory" [pageParam]="{category:selCategory, searchTxt:searchParams.searchTxt, page:searchParams.p, show:'discss'}" [discussion]="discussion">
+                        <app-dicussion-summary-card [category]="selCategory"
+                            [pageParam]="{category:selCategory, searchTxt:searchParams.searchTxt, page:searchParams.p, show:'discss'}"
+                            [discussion]="discussion">
                         </app-dicussion-summary-card>
                     </div>
                 </div>
             </div>
-            <app-pagination *ngIf="showPagination && discussionsList.length >= 0 && !isLoading" [totalRecords]="totalRecords"
-                [currentPage]="searchParams.p" [perPage]="searchParams.s" (pageChangeCall)="changePage($event)">
+            <app-pagination *ngIf="showPagination && discussionsList.length >= 0 && !isLoading"
+                [totalRecords]="totalRecords" [currentPage]="searchParams.p" [perPage]="searchParams.s"
+                (pageChangeCall)="changePage($event)">
             </app-pagination>
             <div *ngIf="(discussionsList==undefined || discussionsList?.length === 0) && !isLoading">
                 <app-no-discussion-results></app-no-discussion-results>

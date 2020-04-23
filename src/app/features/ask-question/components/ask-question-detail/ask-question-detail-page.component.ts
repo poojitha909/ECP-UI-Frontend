@@ -206,7 +206,7 @@ export class AskQuestionDetailPageComponent implements OnInit {
 
   setSeoTags(question: any) {
     let config: SEO = {
-      title: `Question - ${question.question} - An Elder Spring Initiative by Tata Trusts`,
+      title: `Question - ${question.question}`,
       keywords: 'products,services,events,dscussions',
       description: `${question.description}`,
       author: `An Elder Spring Initiative by Tata Trusts`,

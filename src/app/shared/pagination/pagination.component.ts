@@ -19,7 +19,7 @@ export class PaginationComponent implements OnChanges {
     this.activeItem = this.currentPage;
   }
 
-  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
     this.update();
   }
 
@@ -37,6 +37,10 @@ export class PaginationComponent implements OnChanges {
     for (let i = 0; i < end-start; i++) {
       this.items[i] = start + i;
     }
-    this.lastPage = pages - 1 ;
+    this.lastPage = pages - 1;
+  }
+
+  getPageLabel(n: number): string {
+    return `Page ${n + 1}`;
   }
 }

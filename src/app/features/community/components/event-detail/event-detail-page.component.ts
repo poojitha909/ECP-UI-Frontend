@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router";
 import { EventService } from '../../services/events.service';
@@ -45,8 +45,8 @@ export class EventDetailPageComponent implements OnInit {
   whatsappMobileUrl;
   eventReportForm: FormGroup;
   successMessage: string;
-  publish:boolean=false;
-  ShowReportEvent:boolean=true;
+  publish: boolean = false;
+  ShowReportEvent: boolean = true;
   private readonly notifier: NotifierService;
   @ViewChild("customNotification", { static: true }) customNotificationTmpl;
   @ViewChild("customNotification1", { static: true }) customNotificationTmpl1;
@@ -55,19 +55,20 @@ export class EventDetailPageComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute,
     private eventService: EventService, private store: StorageHelperService,
     private authService: AuthService, public sanitizer: DomSanitizer,
-    private seoService: SeoService, private fb: FormBuilder,notifierService: NotifierService) { 
-      this.notifier=notifierService
-    }
+    private seoService: SeoService, private fb: FormBuilder, notifierService: NotifierService) {
+    this.notifier = notifierService
+  }
 
   ngOnInit() {
     this.paramsSubs = this.route.params.subscribe(params => {
       this.initiate();
-      if(this.route.snapshot.params['id']=='preview'){
-        this.ShowReportEvent=false;
+      if (this.route.snapshot.params['id'] == 'preview') {
+        this.ShowReportEvent = false;
       }
     });
-    
+
   }
+
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
   }
@@ -88,7 +89,7 @@ export class EventDetailPageComponent implements OnInit {
       userId: this.user ? this.user.id : "",
       comment: ["", Validators.required],
     });
-    
+
     this.breadcrumbLinks[2].queryParams = this.route.snapshot.queryParams;
   }
 
@@ -96,6 +97,9 @@ export class EventDetailPageComponent implements OnInit {
     if (this.eventId == "preview") {
       this.event = this.store.retrieve("new-event-preview");
       this.event = JSON.parse(this.event);
+      setTimeout(() => {
+        document.getElementById("eventHeader").focus();
+      }, 500);
     }
     else {
       this.eventService.getEvent(this.eventId).subscribe((response: any) => {
@@ -103,13 +107,19 @@ export class EventDetailPageComponent implements OnInit {
         if (data) {
           this.setSeoTags(data);
           this.event = data;
-          const fav = this.user.favEvents.filter(elem => elem == this.event.id);
-          if (fav) {
-            this.markIt = true;
+          if (this.user) {
+            const fav = this.user.favEvents.filter(elem => elem == this.event.id);
+            if (fav) {
+              this.markIt = true;
+            }
+            else {
+              this.markIt = false;
+            }
           }
-          else {
-            this.markIt = false;
-          }
+
+          setTimeout(() => {
+            document.getElementById("eventHeader").focus();
+          }, 500);
         }
       });
     }
@@ -117,7 +127,7 @@ export class EventDetailPageComponent implements OnInit {
 
   setSeoTags(event: any) {
     const config: SEO = {
-      title: `Event - ${event.title} - An Elder Spring Initiative by Tata Trusts`,
+      title: `Event Details- ${event.title}`,
       keywords: 'products,services,events,dscussions',
       description: `${event.description}`,
       author: `An Elder Spring Initiative by Tata Trusts`,
@@ -178,30 +188,33 @@ export class EventDetailPageComponent implements OnInit {
       message: "Please wait, we are submitting your event to Admin",
       type: "info",
       template: this.customNotificationTmpl
-  });
+    });
 
-  setTimeout(()=>{
-    this.eventService.addEvents(this.event).subscribe((response: any) => {
-      if (response.data.id != "") {
-        this.notifier.show({
-          message: "Your event has created successfully submitted for the review process",
-          type: "success",
-          template: this.customNotificationTmpl1
+    setTimeout(() => {
+      this.eventService.addEvents(this.event).subscribe((response: any) => {
+        if (response.data.id != "") {
+          this.notifier.show({
+            message: "Your event has created successfully submitted for the review process",
+            type: "success",
+            template: this.customNotificationTmpl1
+          });
+          this.store.clear("new-event");
+          this.store.clear("new-event-preview");
+        }
+        else {
+          alert("Oops! something wrong happen, please try again.");
+        }
+      })
+
+    }, 2200)
+
+    setTimeout(() => {
+      this.router.navigate(['/community'], {
+        queryParams: {
+          show: "events"
+        }
       });
-      this.store.clear("new-event");
-      this.store.clear("new-event-preview");
-    }
-    else {
-      alert("Oops! something wrong happen, please try again.");
-    }
-  })
-
-  },2200)
-
-  setTimeout(()=>{
-     this.router.navigate(['/community'],{ queryParams: { 
-    show: "events"}});
-  },4500)
+    }, 4500)
 
   }
 
@@ -219,7 +232,7 @@ export class EventDetailPageComponent implements OnInit {
   // }
 
 
-  reportFormToggle(){
+  reportFormToggle() {
     if (this.user) {
       UIkit.modal('#event-report-modal').show();
     } else {

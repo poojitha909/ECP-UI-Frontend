@@ -1,4 +1,4 @@
-<div class="header">
+<div class="header" role="navigation">
   <div class="uk-container">
     <div class="uk-grid-small" uk-grid>
       <div class="uk-width-auto">
@@ -83,21 +83,25 @@
     </div>
 
     <nav class="uk-container ecp-navbar uk-visible@s">
-      <ul class="uk-child-width-expand" uk-tab>
-        <li #homeLink routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home
+      <ul (click)="removeAttr()" #navLinks class="uk-child-width-expand" uk-tab>
+        <li #homeLink routerLinkActive="uk-active" #link1="routerLinkActive" [routerLinkActiveOptions]="{exact: true}">
+          <a [attr.aria-current]="link1.isActive ? 'page':false" routerLink="/">Home
           </a>
         </li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/community">Engage
-            with us
-          </a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/ask-question">Ask
+        <li routerLinkActive="uk-active" #link2="routerLinkActive" [routerLinkActiveOptions]="{exact: false}"><a
+            [attr.aria-current]="link2.isActive ? 'page':false" routerLink="/community">Engage
+            with Us</a></li>
+        <li routerLinkActive="uk-active" #link3="routerLinkActive" [routerLinkActiveOptions]="{exact: false}"><a
+            [attr.aria-current]="link3.isActive ? 'page':false" routerLink="/ask-question">Ask
             our
             Experts</a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/products">Products
-            for you
-          </a></li>
-        <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/services">
-            Services for you</a></li>
+        <li routerLinkActive="uk-active" #link4="routerLinkActive" [routerLinkActiveOptions]="{exact: false}"><a
+            [attr.aria-current]="link4.isActive ? 'page':false" routerLink="/products">Products
+            for You</a></li>
+        <li routerLinkActive="uk-active" #link5="routerLinkActive" [routerLinkActiveOptions]="{exact: false}"><a
+            [attr.aria-current]="link5.isActive ? 'page':false" routerLink="/services">Services for You</a></li>
+        <!-- <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a
+            routerLink="/articles">Articles</a></li> -->
       </ul>
     </nav>
   </div>

@@ -5,13 +5,13 @@
     </div>
     <!-- Bread crumbs End -->
     <div class="uk-container">
-        <h2 class="heading">Create an Event</h2>
+        <h1 tabindex=0 id="addEventHeading" class="heading">Create an Event</h1>
         <hr />
         <div class="inner-container bg-white">
-            <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
-                <p>{{ successMessage }}</p>
+            <div aria-live="polite" aria-atomic="true" *ngIf="successMessage" class="uk-alert-success" uk-alert>
+                <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ successMessage }}</p>
             </div>
-            <form [formGroup]="eventForm" class="uk-form">
+            <form [formGroup]="eventForm" focusInvalidInput (ngSubmit)="onSubmit()" class="uk-form">
                 <div class="uk-margin">
                     <label
                         [ngClass]="{'uk-text-danger' : formControl.title.invalid && ( formControl.title.dirty ||  formControl.title.touched) }"
@@ -21,6 +21,9 @@
                             [ngClass]="{'uk-form-danger' : formControl.title.invalid && ( formControl.title.dirty ||  formControl.title.touched) }"
                             class="uk-input" id="Title" formControlName="title" type="text"
                             placeholder="What’s the title of your event?">
+                        <small aria-describedby="Title"
+                            *ngIf="formControl.title.invalid && ( formControl.title.dirty ||  formControl.title.touched)"
+                            class="uk-text-danger">Error: Title can't be empty.</small>
                     </div>
                 </div>
                 <div class="uk-margin">
@@ -35,6 +38,9 @@
                             <option value="1">Outdoor</option>
                             <option value="2">Indoor</option>
                         </select>
+                        <small aria-describedby="Event-Type"
+                            *ngIf="formControl.eventType.invalid && ( formControl.eventType.dirty ||  formControl.eventType.touched)"
+                            class="uk-text-danger">Error: Select a category.</small>
                     </div>
                 </div>
                 <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
@@ -47,6 +53,10 @@
                                 [ngClass]="{'uk-form-danger' : formControl.date.invalid && ( formControl.date.dirty ||  formControl.date.touched) }"
                                 class="uk-input" id="Date" type="date" formControlName="date" min=""
                                 placeholder="yyyy-mm-dd" />
+                            <small aria-describedby="Date"
+                                *ngIf="formControl.date.invalid && ( formControl.date.dirty ||  formControl.date.touched)"
+                                class="uk-text-danger">Error: Please enter correct date with dd/mm/yyyy
+                                format.</small>
                         </div>
                     </div>
                     <div>
@@ -109,6 +119,9 @@
                                         <option value="23:00">11:00 pm</option>
                                         <option value="23:30">11:30 pm</option>
                                     </select>
+                                    <small aria-describedby="Start-Time"
+                                        *ngIf="formControl.startTime.invalid && ( formControl.startTime.dirty ||  formControl.startTime.touched)"
+                                        class="uk-text-danger">Error: Start time can't be empty.</small>
                                 </div>
                             </div>
                             <div>
@@ -138,6 +151,9 @@
                                         <option value="720">12 hours</option>
                                         <option value="1440">Full Day</option>
                                     </select>
+                                    <small aria-describedby="Duration"
+                                        *ngIf="formControl.duration.invalid && ( formControl.duration.dirty ||  formControl.duration.touched)"
+                                        class="uk-text-danger">Error: Duration can't be empty.</small>
                                 </div>
                             </div>
                         </div>
@@ -153,6 +169,9 @@
                             formControlName="description" id="Description"
                             [init]="{menubar:false, statusbar: false, base_url: '/tinymce', plugins: 'lists advlist', content_css : '/assets/css/mce_editor.css'}">
                         </editor>
+                        <small aria-describedby="Description"
+                            *ngIf="formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched)"
+                            class="uk-text-danger">Error: Description can't be empty.</small>
                     </div>
                 </div>
                 <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
@@ -164,6 +183,10 @@
                             <input id="Address"
                                 [ngClass]="{'uk-form-danger' : formControl.address.invalid && ( formControl.address.dirty ||  formControl.address.touched) }"
                                 class="uk-input" formControlName="address" placeholder="Eg.: HSR layout, sector 6" />
+                            <small aria-describedby="Address"
+                                *ngIf="formControl.address.invalid && ( formControl.address.dirty ||  formControl.address.touched)"
+                                class="uk-text-danger">Error: Address can't be empty.</small>
+
                         </div>
                     </div>
                     <div>
@@ -185,6 +208,10 @@
                             <input id="organiser-name"
                                 [ngClass]="{'uk-form-danger' : formControl.organiser.invalid && ( formControl.organiser.dirty ||  formControl.organiser.touched) }"
                                 class="uk-input" formControlName="organiser" placeholder="Organiser Name" />
+                            <small aria-describedby="organiser-name"
+                                *ngIf="formControl.organiser.invalid && ( formControl.organiser.dirty ||  formControl.organiser.touched)"
+                                class="uk-text-danger">Error: Organiser Name can't be empty.</small>
+
                         </div>
                     </div>
                     <div>
@@ -195,6 +222,10 @@
                             <input id="Languages"
                                 [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
                                 class="uk-input" formControlName="languages" placeholder="Eg.: Hindi, Punjabi, Tamil" />
+                            <small aria-describedby="Languages"
+                                *ngIf="formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched)"
+                                class="uk-text-danger">Error: Languages can't be empty.</small>
+
                         </div>
                     </div>
                 </div>
@@ -207,6 +238,9 @@
                             <input id="Organiser-Email"
                                 [ngClass]="{'uk-form-danger' : formControl.orgEmail.invalid && ( formControl.orgEmail.dirty ||  formControl.orgEmail.touched) }"
                                 class="uk-input" formControlName="orgEmail" placeholder="abcd@xyz.com" />
+                            <small aria-describedby="Organiser-Email"
+                                *ngIf="formControl.orgEmail.invalid && ( formControl.orgEmail.dirty ||  formControl.orgEmail.touched)"
+                                class="uk-text-danger">Error: Please Enter valid Email address.</small>
                         </div>
                     </div>
                     <div>
@@ -217,6 +251,9 @@
                             <input id="Organiser-Phone"
                                 [ngClass]="{'uk-form-danger' : formControl.orgPhone.invalid && ( formControl.orgPhone.dirty ||  formControl.orgPhone.touched) }"
                                 class="uk-input" formControlName="orgPhone" placeholder="9999999999" />
+                            <small aria-describedby="Organiser-Phone"
+                                *ngIf="formControl.orgPhone.invalid && ( formControl.orgPhone.dirty ||  formControl.orgPhone.touched)"
+                                class="uk-text-danger">Error: Please Enter valid Organiser Phone number.</small>
                         </div>
                     </div>
                 </div>
@@ -229,6 +266,9 @@
                             <input id="Event-Capacity"
                                 [ngClass]="{'uk-form-danger' : formControl.capacity.invalid && ( formControl.capacity.dirty ||  formControl.capacity.touched) }"
                                 class="uk-input" formControlName="capacity" placeholder="Eg. 75 People" />
+                            <small aria-describedby="Event-Capacity"
+                                *ngIf="formControl.capacity.invalid && ( formControl.capacity.dirty ||  formControl.capacity.touched)"
+                                class="uk-text-danger">Error: Event Capacity can't be empty.</small>
                         </div>
                     </div>
                     <div>
@@ -240,6 +280,10 @@
                                 [ngClass]="{'uk-form-danger' : formControl.entryFee.invalid && ( formControl.entryFee.dirty ||  formControl.entryFee.touched) }"
                                 class="uk-input" type="number" formControlName="entryFee"
                                 placeholder="Entry Fees (just place 0 in case of free entries)" />
+                            <small aria-describedby="Event-Fees"
+                                *ngIf=" formControl.entryFee.invalid && ( formControl.entryFee.dirty ||  formControl.entryFee.touched)"
+                                class="uk-text-danger">Error: Event Fees (in Rupees) can't be empty.</small>
+
                         </div>
                     </div>
                 </div>

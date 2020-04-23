@@ -34,7 +34,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
     p: number,
     s: number,
     askedBy: string,
-		answeredBy: string
+    answeredBy: string
   };
   questions: any[];
   totalRecords: number;
@@ -48,6 +48,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
+    document.getElementById("askExpertHeading").focus();
   }
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
@@ -76,7 +77,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
       this.searchParams.answeredBy = this.route.snapshot.queryParams['answeredBy'];
       this.rUrl= this.rUrl + "answeredBy=" + this.answeredBy + "&";
     }
-    if(this.searchParams.askedBy && this.searchParams.answeredBy){
+    if (this.searchParams.askedBy && this.searchParams.answeredBy) {
       this.showQuestions();
     }
 
@@ -103,15 +104,15 @@ export class AskQuestionCreatePageComponent implements OnInit {
         alert("Oops! something wrong happen, please try again.");
       }
     });
-    
+
   }
 
-  showQuestions(){
-    this.askQuesService.questions(this.searchParams).subscribe( (response:any) =>{
+  showQuestions() {
+    this.askQuesService.questions(this.searchParams).subscribe((response: any) => {
       this.totalRecords = 0;
       const data = response.data;
       this.questions = [];
-      if(data.content){
+      if (data.content) {
         this.questions = data.content;
         this.totalRecords = data.total;
       }
@@ -132,7 +133,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
       experties = experties.substring(0, experties.lastIndexOf(","));
     }
     const config: SEO = {
-      title: `Ask our expert - ${expert.basicProfileInfo.firstName} - An Elder Spring Initiative by Tata Trusts`,
+      title: `Ask our expert - ${expert.basicProfileInfo.firstName}`,
       keywords: 'products,services,events,dscussions',
       description: `Experties in ${experties}`,
       author: `An Elder Spring Initiative by Tata Trusts`,

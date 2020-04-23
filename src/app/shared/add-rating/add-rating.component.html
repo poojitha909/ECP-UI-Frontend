@@ -5,13 +5,13 @@
   </div>
   <form class="review-form" [formGroup]="ratingForm" (ngSubmit)="onRatingSubmit()">
     <div class="uk-flex uk-flex-center p-25">
-      <ngb-rating *ngIf="!userRating" formControlName="rating" [max]="5">
+      <ngb-rating *ngIf="!userRating" [attr.aria-label]="'Rate this ' + ratingOf" formControlName="rating" [max]="5">
         <ng-template let-fill="fill" let-index="index">
           <span class="add-star" [class.add-filled]="fill === 100">&#9733;</span>
         </ng-template>
       </ngb-rating>
 
-      <ngb-rating *ngIf="userRating" [readonly]="true" [rate]="getDbServiceRating(userRating.rating)"
+      <ngb-rating *ngIf="userRating" [readonly]="true" aria-label="Your Ratings" [rate]="getDbServiceRating(userRating.rating)"
         [max]="getDbServiceRating(userRating.rating)">
         <ng-template let-fill="fill" let-index="index">
           <span class="add-star" [class.add-filled]="fill === 100">&#9733;</span>

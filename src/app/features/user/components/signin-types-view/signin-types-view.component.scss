@@ -1,4 +1,9 @@
 @import "src/assets/css/variables.scss";
+h2{
+        font-size: 24px;
+        font-family:"HKGroteskRegular";
+}
+
 .uk-input{
     border-radius: 4px;
     height: 48px;
@@ -17,14 +22,14 @@
 }
 
 .google-btn{
-    background-color: #EA4335;
+    background-color: #E32816;
     color: #ffffff;
     border-radius: 4px;
     text-transform: unset;
     width: 100%;
     &:active,&:hover{
         background-color: #ffffff;
-        color: #EA4335;
+        color: #E32816;
     }
 }
 
@@ -57,7 +62,10 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     -webkit-appearance: none;
     margin: 0;
 }
-.uk-button {
-    
-    font-size: 17px;
+
+.category-box {
+    border: 1px solid #d7e0ef;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 16px;
 }

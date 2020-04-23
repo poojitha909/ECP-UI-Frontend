@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild} from '@angular/core';
+import { Component, OnInit, AfterViewInit,ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router";
 import { ProductService } from '../../services/products.service';
@@ -16,7 +16,7 @@ declare var UIkit;
   templateUrl: './product-detail-page.component.html',
   styleUrls: ['./product-detail-page.component.scss']
 })
-export class ProductDetailPageComponent implements OnInit {
+export class ProductDetailPageComponent implements OnInit, AfterViewInit {
 
   breadcrumbLinks: Breadcrumb[] = [
     {
@@ -109,12 +109,16 @@ export class ProductDetailPageComponent implements OnInit {
       title: [review ? review.title : "", Validators.required],
       id: [""]
     });
-    if(review){
+    if (review) {
       this.store.clear("new-p-review");
-      setTimeout( () => {
+      setTimeout(() => {
         UIkit.modal("#review-modal").show();
-      },500);
+      }, 500);
     }
+
+  }
+
+  ngAfterViewInit() {
 
   }
 
@@ -126,13 +130,16 @@ export class ProductDetailPageComponent implements OnInit {
         this.getReviews();
         this.getProductRating();
         this.setSeoTags(this.product);
+        setTimeout(() => {
+          document.getElementById("productHeader").focus();
+        }, 500);
       }
     });
   }
 
   setSeoTags(product: any) {
     const config: SEO = {
-      title: `Shop Easy - ${product.name} - An Elder Spring Initiative by Tata Trusts`,
+      title: `Shop Easy - ${product.name}`,
       keywords: 'products,services,events,dscussions',
       description: `${product.description}`,
       author: `An Elder Spring Initiative by Tata Trusts`,
@@ -142,14 +149,14 @@ export class ProductDetailPageComponent implements OnInit {
     this.seoService.generateTags(config);
   }
 
-  redirectToSite(){
+  redirectToSite() {
     window.open(this.product.buyLink);
   }
-  redirectConfirm(){
-    if(this.user){
+  redirectConfirm() {
+    if (this.user) {
       UIkit.modal("#modal-product-leaving").show();
     }
-    else{
+    else {
       this.authService.redirectUrl = "/products/" + this.product.id;
       this.router.navigate(['/user/signin']);
     }
@@ -172,7 +179,7 @@ export class ProductDetailPageComponent implements OnInit {
       response => {
         if (response) {
           this.dbRating = response;
-           if (this.auth.user) {
+          if (this.auth.user) {
             this.userRating = this.dbRating.find(val => val.userId == this.userId);
           }
           this.getDetailRating();
@@ -180,9 +187,9 @@ export class ProductDetailPageComponent implements OnInit {
       });
   }
 
-    /**
-   * Add rating 
-   */
+  /**
+ * Add rating 
+ */
   onRatingSubmit(ratingData: any) {
     ratingData["productId"] = this.productId;
     if (this.auth.isAuthenticate) {

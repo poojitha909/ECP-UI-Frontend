@@ -10,7 +10,7 @@
             <!--TODO: apply imageHandler directive-->
             <img [imageHandler] *ngIf="question?.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage"
                 [src]="question?.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage"
-                style="max-width:90px;max-height:90px;" alt="No Image Found" />
+                style="max-width:90px;max-height:90px;" alt="question user profile images" />
         </div>
         <div class="uk-width-2-3">
             <p class="author">Answered by <span>{{question.username}}</span></p>
@@ -21,7 +21,7 @@
     <div class="questions-summary-footer uk-child-width-1-1" >
         <div>
             <p class="comments left"><img src="/assets/images/comments.svg"
-                    style="height:30px;display:inline-block;" alt="No Image Found" />{{question.aggrReplyCount}} Replies</p>
+                    style="height:30px;display:inline-block;" alt="comments icon" />{{question.aggrReplyCount}} Replies</p>
         </div>
         <!-- <div>
             <p class="comments right"><img src="/assets/images/view.svg"

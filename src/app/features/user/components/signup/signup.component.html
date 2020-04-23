@@ -2,7 +2,7 @@
     <div class="uk-container uk-container-large">
         <div class="signup-title" uk-grid>
             <div class="uk-flex uk-flex-middle uk-width-expand">
-                <h1>{{welcomeText? 'Welcome to Joy of Age Community':'Join the Joy of Age Community'}}</h1>
+                <h1 id="signin-header" tabindex=0>{{welcomeText? 'Welcome to Joy of Age Community':'Join the Joy of Age Community'}}</h1>
             </div>
             <div class="uk-width-auto">
                 <a routerLink="/"><span class="close-icon" data-uk-tooltip title="Cancel Join Us"></span></a>
@@ -10,8 +10,8 @@
         </div>
         <hr>
         <div class="uk-child-width-1-2@s uk-padding-small" uk-grid>
-            <div class="uk-visible@s uk-flex">
-                <img src=" assets/images/illustration.png" alt="No Image Found" />
+            <div class="uk-visible@s uk-flex" role="banner">
+                <img src=" assets/images/illustration.png" alt="illustration icon" />
             </div>
             <div class="uk-hidden@s">
                 <img src=" assets/images/illustration-mobile.png" alt="No Image Found" />
@@ -25,12 +25,13 @@
                 <!-- SignIn types View START -->
                 <ng-container *ngIf="!isLoading && !user">
                     <!-- Error box START-->
-                    <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
-                        <p>{{ errorMessage }}</p>
+                    <div *ngIf="!isLoading && errorMessage" role="alert" aria-live="polite" aria-atomic="true"
+                        class="uk-alert-danger uk-animation-fade" uk-alert>
+                        <p><span class="uk-icon mr-5" uk-icon="warning"></span> {{ errorMessage }}</p>
                     </div>
                     <!-- Error box END-->
                     <app-signin-types-view [otpGenerated]="isOtpGenerated" (requestForOtp)="requestForOtp($event)"
-                        (verfiyOtp)="verfiyOtp($event)" (resendOtp)="resendOtp($event)">
+                        (verfiyOtp)="verfiyOtp($event)" (resendOtp)="resendOtp($event)" [otpFailed]="otpFailedNumber">
                     </app-signin-types-view>
                 </ng-container>
 
@@ -41,7 +42,7 @@
 
                 <!-- Signup discription link START-->
                 <div *ngIf="!user" class="signup-detail uk-text-center">
-                    <div class="list uk-padding">
+                    <div class="list uk-padding" role="banner">
                         <h3>Join the Joy of Age Community</h3>
                         <ul class="uk-list">
                             <li>

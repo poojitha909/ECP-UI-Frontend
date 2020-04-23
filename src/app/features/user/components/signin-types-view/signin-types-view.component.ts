@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { ConfigurationService } from 'src/app/core/services/configuration.service';
@@ -8,8 +8,9 @@ import { ConfigurationService } from 'src/app/core/services/configuration.servic
   templateUrl: './signin-types-view.component.html',
   styleUrls: ['./signin-types-view.component.scss']
 })
-export class SigninTypesViewComponent implements OnInit {
+export class SigninTypesViewComponent implements OnInit, OnChanges {
   @Input() otpGenerated: boolean;
+  @Input() otpFailed: string;
   @Output() requestForOtp = new EventEmitter();
   @Output() verfiyOtp = new EventEmitter();
   @Output() resendOtp = new EventEmitter();
@@ -24,13 +25,27 @@ export class SigninTypesViewComponent implements OnInit {
     private router: Router,
     private configServ: ConfigurationService
   ) {
-    this.configServ.loadConfigurations().subscribe( (c) => {
+    this.configServ.loadConfigurations().subscribe((c) => {
       this.config = c;
     })
   }
 
   ngOnInit() {
     console.log(this.router.url);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes && changes.otpGenerated && changes.otpGenerated.currentValue) {
+      console.log(changes);
+      setTimeout(() => {
+        document.getElementById("opttxt").focus();
+      }, 500);
+    }
+
+    if (changes && changes.otpFailed && changes.otpFailed.currentValue) {
+      this.mobileNumber = changes.otpFailed.currentValue
+    }
+
   }
 
   //Signin with facebook
@@ -70,6 +85,9 @@ export class SigninTypesViewComponent implements OnInit {
     this.mobileNumber = null;
     this.otpResend = false;
     this.requestForOtp.emit(this.mobileNumber);
+    setTimeout(() => {
+      document.getElementById("Phone-Number").focus();
+    }, 500);
   }
 
   requestResendOtp() {

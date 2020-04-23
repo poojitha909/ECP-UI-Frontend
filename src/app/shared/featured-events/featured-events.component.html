@@ -1,5 +1,5 @@
 <!-- Service Featured START tabs -->
-<div class="featured-tab">
+<div class="featured-tab" role='region' aria-labelledby="Featured-events">
     <div class="title">
         <div uk-grid>
             <div class="uk-width-expand@s titlename">
@@ -10,7 +10,7 @@
             <div class="uk-width-1-3@m">
                 <div uk-grid class="selectoptions">
                     <div class="uk-flex uk-flex-middle">
-                        <small>Showing</small>
+                        <label class="uk-form-label" for="Showing-Events">Showing:</label>
                     </div>
                     <div class="uk-width-expand">
                         <select class="uk-select" [(ngModel)]="searchParams.pastEvents" id="Showing-Events"
@@ -25,11 +25,11 @@
     </div>
     <div class="content">
         <!-- Featured Service card  -->
-        <div uk-slider *ngIf="events && events.length > 0">
+        <div uk-slider="finite: true" *ngIf="events && events.length > 0">
             <div class="uk-position-relative">
                 <div class="uk-slider-container">
                     <ul class="uk-slider-items uk-grid-match uk-child-width-1-3@m uk-grid">
-                        <li *ngFor="let event of events">
+                        <li *ngFor="let event of events;let i=index" role="group" [attr.aria-label]="'Event ' + i">
                             <app-event-summary-card [event]="event" [isPast]="searchParams.pastEvents">
                             </app-event-summary-card>
                         </li>
@@ -43,10 +43,12 @@
                     </ul>
                 </div>
                 <div>
-                    <a class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
-                        uk-slidenav-previous uk-slider-item="previous"></a>
-                    <a class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
-                        uk-slidenav-next uk-slider-item="next"></a>
+                    <a role='button'
+                        class="uk-position-center-left-out uk-position-small button-slidenav slidenav-pervious" href="#"
+                        uk-slidenav-previous uk-slider-item="previous" aria-label="previous event cards"></a>
+                    <a role='button'
+                        class="uk-position-center-right-out uk-position-small button-slidenav slidenav-next" href="#"
+                        uk-slidenav-next uk-slider-item="next" aria-label="next event cards"></a>
                 </div>
             </div>
         </div>
@@ -54,7 +56,7 @@
     <div class="block-footer">
         <div uk-grid>
             <div class="uk-width-expand@s sidetext">
-                <img src="assets/images/verified.png" alt="No Image Found" /> <span class="m-l-5">Events happening around you</span>
+                <img src="assets/images/verified.png" alt="verified icon" /> <span class="m-l-5">Events happening around you</span>
             </div>
             <div class="uk-width-auto@s uk-width-1-1">
                 <button (click)="seeAllEvetns()" class="uk-button uk-button-default w-100">See

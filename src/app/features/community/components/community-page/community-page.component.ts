@@ -64,7 +64,6 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
       this.showReset = true;
       this.showResult = true;
     }
-    this.route.snapshot.paramMap.get('tab')
   }
 
   ngOnDestroy() {
@@ -100,12 +99,6 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     }
     if(this.route.snapshot.queryParams['show']){
       this.show = this.route.snapshot.queryParams['show'];
-    }
-    if(this.route.snapshot.paramMap.get('tab')=='events'){
-      this.show = "events"
-    }
-    if(this.route.snapshot.queryParams.get('tab')=='events'){
-      this.show="events"
     }
     else{
       this.show = "discss";

@@ -30,7 +30,8 @@ export class EventDetailPageComponent implements OnInit {
     {
       text: 'All Events',
       link: '/community',
-      queryParams: {tab:'events'}
+      queryParams: { 
+        show: "events"}
     }
   ];
   eventId: string;

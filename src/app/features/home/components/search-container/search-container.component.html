@@ -25,7 +25,8 @@
           <ul aria-live="polite" aria-atomic="true" *ngIf="autocompleteFields.length > 0"
             class="uk-list uk-list-large p-10 m-0 max-h-200 uk-overflow-auto search-list" appKeyHandler
             (onItemSelected)="onItemSelected($event)">
-            <li role="option" class="cursor-pointer" *ngFor="let field of autocompleteFields" (click)="onAutocompleteClick(field)">
+            <li role="option" class="cursor-pointer" *ngFor="let field of autocompleteFields"
+              (click)="onAutocompleteClick(field)">
               {{field?.name ||  field?.basicProfileInfo?.firstName }}
             </li>
           </ul>
@@ -82,10 +83,15 @@
         results
       </p>
     </div> -->
+    <div *ngIf="searchTxt" class="result-bar m-t-20">
+      <p class="font-regular-15 uk-margin-remove">Showing <b>{{totalRecords}}</b> results for
+        <b>"{{searchTxt}}"</b></p>
+    </div>
+
 
     <!-- Search Result START -->
     <div class="uk-visible@s">
-      <app-search-results *ngIf="showResult" [searchTerm]="searchPageParam.term">
+      <app-search-results (showCount)="getRecordsCount($event)" *ngIf=" searchTxt" [searchTerm]="searchTxt">
       </app-search-results>
     </div>
     <!-- Search Result END -->

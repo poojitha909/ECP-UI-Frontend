@@ -92,19 +92,23 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
         });
     } else {
 
-      if (this.searchTxt) {
-        this.ecpService.searchedService = '';
-        this.ecpService.searchCatID = '';
-        this.filterCategoryList(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.searchTxt);
-        // this.getCategoryServices(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.searchTxt);
-      }
+      // if (this.searchTxt) {
+      //   this.ecpService.searchedService = '';
+      //   this.ecpService.searchCatID = '';
+      //   this.filterCategoryList(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.searchTxt);
+      //   // this.getCategoryServices(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.searchTxt);
+      // }
     }
 
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes) {
-
+      if (this.searchTxt) {
+        this.ecpService.searchedService = '';
+        this.ecpService.searchCatID = '';
+        this.filterCategoryList(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.searchTxt);
+      }
     }
 
   }

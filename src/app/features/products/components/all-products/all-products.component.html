@@ -34,6 +34,17 @@
     </div>
     <!-- Search Form END -->
   </div>
+
+  <div *ngIf="searchTxt" class="result-bar m-l-40 m-r-40 m-b-20">
+    <p class="font-regular-15 uk-margin-remove">Showing <b>{{totalRecords}}</b> results for <b>"{{searchTxt}}"</b></p>
+  </div>
+
+  <div *ngIf="searchTxt" class="search-tab m-t-0 p-l-40 p-r-40">
+    <ul uk-tab>
+      <li><a href="#" class="font-regular">Products ({{ totalRecords }})</a></li>
+    </ul>
+  </div>
+
   <app-product-results [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt"
     (showCount)="showProductCount($event)"></app-product-results>
 </div>

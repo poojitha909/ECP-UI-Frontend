@@ -18,7 +18,7 @@ import { SeoService } from 'src/app/core/services/seo.service';
 })
 export class AllServicesComponent implements OnInit {
 
-  totalServicesCount: number;
+  totalRecords: number;
   // breadcrumbLinks: Breadcrumb[] = [
   //   {
   //     text: 'Home',
@@ -61,7 +61,7 @@ export class AllServicesComponent implements OnInit {
   constructor(
     public ecpService: EpcServiceService,
     private seoService: SeoService,
-    private homeService: HomeService
+    public homeService: HomeService
   ) {
     // this.categories = jdCategoryService.serviceCategories;
     // this.categories = this.activeRoute.snapshot.data.categories;
@@ -100,21 +100,21 @@ export class AllServicesComponent implements OnInit {
     else {
       this.ecpService.showBg = false;
     }
-
-    // this.searchTextChanged.pipe(
-    //   debounceTime(500),
-    //   distinctUntilChanged()
-    // ).subscribe(() => {
-    //   this.onSearchChange(this.searchPageParam.term);
-    // });
-    // this.currentUrl = encodeURI(window.location.href);
-    // this.mailUrl = `mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20${encodeURI(window.location.href)}`
-    // this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(window.location.href)}`);
-    // this.whatsMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
   }
+  // this.searchTextChanged.pipe(
+  //   debounceTime(500),
+  //   distinctUntilChanged()
+  // ).subscribe(() => {
+  //   this.onSearchChange(this.searchPageParam.term);
+  // });
+  // this.currentUrl = encodeURI(window.location.href);
+  // this.mailUrl = `mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20${encodeURI(window.location.href)}`
+  // this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(window.location.href)}`);
+  // this.whatsMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
+
 
   getTotalCount(counts) {
-    this.totalServicesCount = counts;
+    this.totalRecords = counts;
   }
 
   // ngAfterViewInit() {

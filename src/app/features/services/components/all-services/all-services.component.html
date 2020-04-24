@@ -44,10 +44,15 @@
     All Services
   </h1>
   <hr class="m-b-30" /> -->
+    <div *ngIf="ecpService.showBg" class="result-bar">
+      <p class="font-regular-15 uk-margin-remove">Showing <b>{{totalRecords}}</b> results for
+        <b>"{{homeService.homeSearchtxt}}"</b></p>
+    </div>
+
 
     <div *ngIf="ecpService.showBg" class="search-tab">
       <ul uk-tab>
-        <li><a href="#" class="font-regular">Services ({{ totalServicesCount }})</a></li>
+        <li><a href="#" class="font-regular">Services ({{ totalRecords }})</a></li>
       </ul>
     </div>
 

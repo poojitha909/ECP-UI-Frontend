@@ -4,6 +4,7 @@ import { AskQuestionService } from '../../features/ask-question/services/ask-que
 import { StorageHelperService } from "../../core/services/storage-helper.service";
 import { DomSanitizer } from '@angular/platform-browser';
 import { HomeService } from 'src/app/features/home/home.service';
+import { MenuService } from 'src/app/features/community/services/menu.service';
 
 declare var UIkit;
 
@@ -33,7 +34,7 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
   whatsappUrl;
   
   constructor(private route: ActivatedRoute, private router: Router,
-    private store: StorageHelperService, private askQuesService: AskQuestionService,
+    private store: StorageHelperService, private askQuesService: AskQuestionService, private shareMedia:MenuService,
     public sanitizer: DomSanitizer, private homeService: HomeService) {
   }
 
@@ -134,6 +135,7 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }
     });
+    this.shareMedia.setsharemedia(window.location.href)
   }
   
   onTabChange(value) {

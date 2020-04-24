@@ -32,7 +32,7 @@ export class SearchContainerComponent implements OnInit {
   ngOnInit() {
     document.getElementById("homeSearch").focus();
     this.searchTextChanged.pipe(
-      debounceTime(200),
+      debounceTime(10),
       distinctUntilChanged()
     ).subscribe(() => {
       this.onSearchChange(this.searchPageParam.term);
@@ -129,6 +129,7 @@ export class SearchContainerComponent implements OnInit {
   // }
 
   onSearch(field?: string) {
+    this.showResult = false;
     if (field || this.selectedValue) {
       let service: Service;
       if (this.selectedValue) {

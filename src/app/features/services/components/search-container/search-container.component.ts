@@ -35,7 +35,7 @@ export class SearchContainerComponent implements OnInit {
 
   ngOnInit() {
     this.searchTextChanged.pipe(
-      debounceTime(200),
+      debounceTime(10),
       distinctUntilChanged()
     ).subscribe(() => {
       this.onSearchChange(this.searchPageParam.term);

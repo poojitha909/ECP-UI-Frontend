@@ -10,7 +10,7 @@
                 <div class="category-box p-0 bg-white" *ngIf="question?.answeredBy!==undefined">
                     <div class="uk-card-media-top">
                         <img class="thumb-100" [imageHandler]
-                            [src]="question?.answeredBy?.basicProfileInfo?.profileImage?.thumbnailImage" alt="No Image Found">
+                            [src]="question?.answeredBy?.basicProfileInfo?.profileImage?.thumbnailImage" alt="Answered By user image">
                     </div>
                     <div class="body p-10">
                         <p><b>{{question?.answeredBy?.basicProfileInfo?.firstName}}</b></p>
@@ -26,7 +26,7 @@
                 <div class="category-box info">
                     <div>
                         <a class="uk-margin-small-right">
-                            <img src="/assets/images/secure.png" alt="No Image Found" />
+                            <img src="/assets/images/secure.png" alt="secure icon" />
                         </a>
                         <a> All conversations are private</a>
                     </div>
@@ -76,7 +76,7 @@
                         <div *ngIf="reply.user.id === question.askedBy.id" class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-auto">
                                 <img class="uk-border-circle" width="40" height="40"
-                                    src="{{askedByProfile?.basicProfileInfo?.profileImage?.thumbnailImage}}" alt="No Image Found">
+                                    src="{{askedByProfile?.basicProfileInfo?.profileImage?.thumbnailImage}}" alt="Asked By user image">
                             </div>
                             <div class="uk-width-expand">
                                 <h3 class="uk-card-title uk-margin-remove-bottom">{{reply.user.userName}}</h3>
@@ -89,7 +89,7 @@
                             uk-grid>
                             <div class="uk-width-auto">
                                 <img class="uk-border-circle" width="40" height="40"
-                                    src="{{question?.answeredBy?.basicProfileInfo?.profileImage?.thumbnailImage}}" alt="No Image Found">
+                                    src="{{question?.answeredBy?.basicProfileInfo?.profileImage?.thumbnailImage}}" alt="Answered By user image">
                             </div>
                             <div class="uk-width-expand">
                                 <h3 class="uk-card-title uk-margin-remove-bottom">
@@ -125,7 +125,7 @@
         <hr />
         <!-- Success box START-->
         <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
-            <p>{{ successMessage }}</p>
+            <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ successMessage }}</p>
         </div>
         <!-- Success box END-->
         <form [formGroup]="replyForm" (ngSubmit)="addComment()" class="uk-form-stacked reply-form">

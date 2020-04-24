@@ -32,6 +32,7 @@ import { DicussionSummaryCardComponent } from './dicussion-summary-card/dicussio
 import { EventSummaryCardComponent } from './event-summary-card/event-summary-card.component';
 import { AskExpertSummaryCardComponent } from './ask-expert-summary-card/ask-expert-summary-card.component';
 import { ActiveMaxDirective } from './directives/active-max.directive';
+import { FocusInvalidInputDirective } from './directives/focus-invalid-input.directive';
 import { FeaturedMyQuestionsComponent } from './featured-my-questions/featured-my-questions.component';
 import { MyQuestionsSummaryCardComponent } from './my-questions-summary-card/my-questions-summary-card.component';
 import { UserTermsComponent } from './user-terms/user-terms.component';
@@ -88,6 +89,7 @@ import { ShareViaMediaComponent } from './share-via-media/share-via-media.compon
     EventSummaryCardComponent,
     AskExpertSummaryCardComponent,
     ActiveMaxDirective,
+    FocusInvalidInputDirective,
     FeaturedMyQuestionsComponent,
     MyQuestionsSummaryCardComponent,
     UserTermsComponent,
@@ -146,6 +148,7 @@ import { ShareViaMediaComponent } from './share-via-media/share-via-media.compon
     EventSummaryCardComponent,
     AskExpertSummaryCardComponent,
     ActiveMaxDirective,
+    FocusInvalidInputDirective,
     FeaturedMyQuestionsComponent,
     MyQuestionsSummaryCardComponent,
     ServicesResultComponent,

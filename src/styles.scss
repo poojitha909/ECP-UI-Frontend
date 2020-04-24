@@ -34,9 +34,9 @@
 @include font-face("HKGroteskRegular", "assets/font/hk-grotesk/HKGrotesk-Regular.ttf", normal, normal);
 @include font-face("HKGroteskRegular", "assets/font/hk-grotesk/HKGrotesk-SemiBold.ttf", bold, normal);
 
-html {
-  scroll-behavior: smooth;
-}
+// html {
+//   scroll-behavior: smooth;
+// }
 .font-regular {
   font-size: 18px;
   font-family: "HKGroteskRegular";
@@ -374,6 +374,18 @@ ngb-rating {
   .banner-img{
     padding-right: 40px;
   }
+}
+
+.uk-alert-danger{
+  color: #fff;
+  background:#C83F3F;
+  border-radius: 4px;
+}
+
+.uk-alert-success{
+  color: #fff;
+  background:#187700;
+  border-radius: 4px;
 }
 .notifier__notification--success {
 	color: $notifier-success-font-color;

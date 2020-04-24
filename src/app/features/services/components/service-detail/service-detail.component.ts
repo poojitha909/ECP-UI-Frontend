@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceDetail, DBReviews, SEO, Breadcrumb, DBRating } from 'src/app/core/interfaces';
 import { EpcServiceService } from '../../epc-service.service';
@@ -28,6 +28,7 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   dbReview: DBReviews[] = [];
   reviewForm: FormGroup;
   reportForm: FormGroup;
+  currentModelLink: string;
   // ratingForm: FormGroup;
   successMessage: string;
   reviewSuccessMessage: string;
@@ -95,7 +96,7 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
 
     let config: SEO = {
-      title: `Service - ${this.isDBService ? this.service.basicProfileInfo.firstName : this.service.name} - An Elder Spring Initiative by Tata Trusts`,
+      title: `Service - ${this.isDBService ? this.service.basicProfileInfo.firstName : this.service.name}`,
       keywords: 'products,services,events,dscussions',
       description: `${this.isDBService ? this.service.basicProfileInfo.description : 'Just Dail Service'}`,
       author: `An Elder Spring Initiative by Tata Trusts`,
@@ -133,9 +134,11 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     if (this.auth.serviceReviewForm) {
       this.reviewForm.patchValue(this.auth.serviceReviewForm);
       this.auth.removeServiceReviewForm();
+      this.onOpenModel();
       UIkit.modal('#review-modal').show();
+      document.getElementById("reviewTitle").focus();
     }
-
+    document.getElementById("serviceHeader").focus();
   }
 
   get isDBService(): boolean {
@@ -284,6 +287,7 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
             this.successMessage = "Service report was sent to site admin successfully."
             setTimeout(() => {
               UIkit.modal('#report-modal').hide();
+              this.onCloseModel();
             }, 5000);
           }
         },
@@ -296,9 +300,12 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     }
   }
 
-  reportFormToggle() {
+  reportFormToggle(element: any) {
     if (this.auth.isAuthenticate) {
+      this.onOpenModel();
       UIkit.modal('#report-modal').show();
+      document.getElementById("reportTitle").focus();
+      this.currentModelLink = element.id;
     } else {
       this.auth.redirectUrl = this.router.url;
       this.router.navigateByUrl('/user/signin');
@@ -410,19 +417,24 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
 
 
-  editReview(review: DBReviews) {
+  editReview(editData: any) {
     this.reviewSuccessMessage = null;
-    this.reviewForm.patchValue(review);
+    this.reviewForm.patchValue(editData.review);
     this.reviewTitle = "Edit";
     UIkit.modal('#review-modal').show();
+    document.getElementById("reviewTitle").focus();
+    this.currentModelLink = editData.elementId;
   }
 
-  writeNewReview() {
+  writeNewReview(element: any) {
     if (this.auth.isAuthenticate) {
       this.reviewForm.reset();
       this.reviewSuccessMessage = null;
       this.reviewTitle = 'Add';
+      this.onOpenModel();
       UIkit.modal('#review-modal').show();
+      document.getElementById("reviewTitle").focus();
+      this.currentModelLink = element.id;
     } else {
       this.auth.redirectUrl = this.router.url;
       this.router.navigateByUrl('/user/signin');
@@ -445,10 +457,33 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     this.getDBserviceReview(this.docId);
   }
 
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscapeKeyHandler(event: KeyboardEvent) {
+    this.onCloseModel();
+  }
+
+  onCloseModel() {
+    document.getElementsByClassName("main-container")[0].removeAttribute("aria-hidden");
+    document.getElementById(this.currentModelLink).focus();
+  }
+
+  onOpenModel() {
+    document.getElementsByClassName("main-container")[0].setAttribute("aria-hidden", "true");
+  }
+
+  openContactModel(element: any) {
+    this.onOpenModel();
+    this.currentModelLink = element.id;
+    UIkit.modal('#contact-sections').show();
+    document.getElementById("contactModalTitle").focus();
+  }
+
+
+
   ngOnDestroy() {
     document.getElementById("review-modal").remove();
     document.getElementById("report-modal").remove();
-    document.getElementById("modal-sections").remove();
+    document.getElementById("contact-sections").remove();
 
   }
 

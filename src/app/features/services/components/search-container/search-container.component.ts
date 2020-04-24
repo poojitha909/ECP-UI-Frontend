@@ -35,7 +35,7 @@ export class SearchContainerComponent implements OnInit {
 
   ngOnInit() {
     this.searchTextChanged.pipe(
-      debounceTime(500),
+      debounceTime(200),
       distinctUntilChanged()
     ).subscribe(() => {
       this.onSearchChange(this.searchPageParam.term);
@@ -45,10 +45,9 @@ export class SearchContainerComponent implements OnInit {
       this.searchPageParam.term = this.homeService.homeSearchtxt;
       this.showReset = true;
       //this.ecpService.showBg = true;
-
       // this.searchService();
     }
-
+    document.getElementById("serviceSearch").focus();
   }
 
   @HostListener('window:click', ['$event.target'])
@@ -118,6 +117,7 @@ export class SearchContainerComponent implements OnInit {
       }
       this.selectedValue = "";
       this.autocompleteFields = [];
+      document.getElementById("serviceSearch").focus();
     }
   }
 
@@ -128,6 +128,7 @@ export class SearchContainerComponent implements OnInit {
     this.ecpService.showBg = false;
     this.popullarService = undefined;
     this.homeService.homeSearchtxt = "";
+    document.getElementById("serviceSearch").focus();
     this.homeService.serviceCategory = "";
     this.homeService.serviceSubCategory = "";
     this.router.navigate(['services'], { queryParams: { searchTxt: this.searchPageParam.term } });

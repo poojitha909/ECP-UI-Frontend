@@ -10,12 +10,12 @@
 
     <!-- Error box START-->
     <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
-        <p>{{ errorMessage }}</p>
+        <p><span class="uk-icon mr-5" uk-icon="warning"></span> {{ errorMessage }}</p>
     </div>
     <!-- Error box END-->
     <!-- Success box START-->
     <div *ngIf="!isLoading && successMessage" class="uk-alert-success" uk-alert>
-        <p>{{ successMessage }}</p>
+        <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ successMessage }}</p>
     </div>
     <!-- Success box END-->
 

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/core';
 import { User, SocialAccount, UserIdType, OtpErrorMessage } from 'src/app/core/interfaces';
 import { UserService } from '../../services/user.service';
+import { Title } from '@angular/platform-browser';
 import { ConfigurationService } from 'src/app/core/services/configuration.service';
 
 
@@ -13,10 +14,11 @@ import { ConfigurationService } from 'src/app/core/services/configuration.servic
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, AfterViewInit {
 
-  welcomeText:boolean;
+  welcomeText: boolean;
   isOtpGenerated: boolean;
+  otpFailedNumber: string
   isLoading: boolean;
   verifiedString: string;
   errorMessage: string;
@@ -27,13 +29,15 @@ export class SignupComponent implements OnInit {
     private activeroute: ActivatedRoute,
     private auth: AuthService,
     private userService: UserService,
-    private configServ: ConfigurationService,
-    private router: Router) {
+    private router: Router,
+    private titleService: Title,
+    private configServ: ConfigurationService) {
 
     this.configServ.loadConfigurations().subscribe((c) => {
       this.config = c;
     })
     this.user = this.auth.user;
+    this.titleService.setTitle("Sign In - Joy of Age");
   }
 
   ngOnInit() {
@@ -56,6 +60,10 @@ export class SignupComponent implements OnInit {
       });
     }
 
+  }
+
+  ngAfterViewInit() {
+    document.getElementById("signin-header").focus();
   }
 
 
@@ -129,11 +137,10 @@ export class SignupComponent implements OnInit {
       } else {
         this.isLoading = false;
         if (response.message == OtpErrorMessage.otpNotVerified) {
-          this.errorMessage = "Invalid Otp, Please Enter a Valid OTP Number !";
-        } else {
-          this.errorMessage = response.message;
+          this.errorMessage = "Invalid Otp, Please try again!";
         }
-        this.isOtpGenerated = false;
+        this.otpFailedNumber = verification.number;
+        // this.isOtpGenerated = false;
       }
     },
       error => {
@@ -147,14 +154,14 @@ export class SignupComponent implements OnInit {
   resendOtp(number) {
     if (number) {
       // this.isLoading = true;
+      this.otpFailedNumber = null;
+      this.errorMessage = null;
       this.auth.resendOtp(number).subscribe(response => {
         console.log(response);
         if (response.type === "success") {
         } else {
           if (response.message == OtpErrorMessage.maxRetry) {
             this.errorMessage = "Max resend otp count exceeded";
-          } else {
-            this.errorMessage = response.message;
           }
           this.isOtpGenerated = false;
         }

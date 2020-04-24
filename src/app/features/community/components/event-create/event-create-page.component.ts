@@ -32,10 +32,11 @@ export class EventCreatePageComponent implements OnInit {
   successMessage: string;
   user: any;
 
-  constructor(private router: Router, private store: StorageHelperService, 
+  constructor(private router: Router, private store: StorageHelperService,
     private fb: FormBuilder, private authService: AuthService) { }
 
   ngOnInit() {
+    document.getElementById("addEventHeading").focus();
     this.categoryList = [];
     this.successMessage = "";
     this.user = this.store.retrieve("ECP-USER");
@@ -48,15 +49,15 @@ export class EventCreatePageComponent implements OnInit {
       this.store.clear("new-event");
     }
     this.eventForm = this.fb.group({
-      title:  [event ? event.title : "", Validators.required],
-      date:  [event ? event.date : "", Validators.required],
-      startTime:  [event ? event.startTime : "", Validators.required],
-      duration:  [event ? event.duration : "", Validators.required],
-      description:  [event ? event.description : "", Validators.required],
-      address:  [event ? event.address : "", Validators.required],
-      landmark:  [event ? event.landmark : ""],
+      title: [event ? event.title : "", Validators.required],
+      date: [event ? event.date : "", Validators.required],
+      startTime: [event ? event.startTime : "", Validators.required],
+      duration: [event ? event.duration : "", Validators.required],
+      description: [event ? event.description : "", Validators.required],
+      address: [event ? event.address : "", Validators.required],
+      landmark: [event ? event.landmark : ""],
       //orgEmail:  [event ? event.orgEmail : "", [Validators.required,Validators.email]],
-      orgEmail:  [event ? event.orgEmail : ""],
+      orgEmail: [event ? event.orgEmail : ""],
       //orgPhone:  [event ? event.orgPhone : "", [Validators.required,Validators.pattern(/^\+?\d{1,2}[- ]?\d{2}[- ]?\d{4}[- ]?\d{4}$/)] ],
       orgPhone:  [event ? event.orgPhone : "", [Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
       capacity:  [event ? event.capacity : "", Validators.required],
@@ -66,7 +67,7 @@ export class EventCreatePageComponent implements OnInit {
       organiser:  [event ? event.organiser : "", [Validators.required,Validators.pattern('^[a-zA-Z \-\']+')]]
     });
   }
-  
+
   get formControl() {
     return this.eventForm.controls;
   }
@@ -93,7 +94,7 @@ export class EventCreatePageComponent implements OnInit {
     if (!this.eventForm.valid) {
       return;
     }
-    
+
     let event = { ...this.eventForm.value };
     event.datetime = event.date + "T" + event.startTime + "+05:30";
     event.status = 1;

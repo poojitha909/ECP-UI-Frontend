@@ -8,7 +8,7 @@
     <li><a routerLink="/services/all">All Services</a></li>
     <li><span> {{ service?.name || service?.basicProfileInfo?.firstName  }}</span></li>
   </ul> -->
-  <h1 class="uk-h2">
+  <h1 tabindex=0 id="serviceHeader" class="uk-h2">
     {{ service?.name || service?.basicProfileInfo?.firstName  }}
   </h1>
   <hr class="m-b-30" />
@@ -21,9 +21,9 @@
       <div class="details-box bg-white">
 
         <div class="verified">
-          <img [imageHandler] *ngIf="!isDBService" [src]="service?.disp_pic" alt="No Image Found" />
+          <img [imageHandler] *ngIf="!isDBService" [src]="service?.disp_pic" alt="Service image" />
           <img [imageHandler] *ngIf="isDBService" [src]="service?.basicProfileInfo?.profileImage?.original"
-            alt="No Image Found" />
+            alt="service image" />
           <button *ngIf="service?.verified == '1'"><span class="verified-icon-w"></span></button>
         </div>
         <div class="uk-text-center">
@@ -36,116 +36,24 @@
           <p *ngIf="isDBService && service?.systemTags.length > 0" class="m-t-0">
             {{service?.systemTags[0].name}}</p>
 
+          <!-- <button class="uk-button uk-button-default" id="btnContactProvider"
+            aria-label="Service contact detail in popup" (click)="openContactModel($event.target)">Contact Service
+            Provider</button> -->
           <!-- <button class="uk-button uk-button-default" uk-toggle="target: #modal-sections">Contact Service
             Provider</button> -->
-            <a class="uk-button uk-button-default color-white" uk-toggle="target: #modal-sections">Contact Service
-              Provider</a>
-
-          <!-- Contact Model START -->
-          <div id="modal-sections" class="uk-modal-container" uk-modal>
-            <div class="uk-modal-dialog">
-              <button class="uk-modal-close-default" type="button" uk-close></button>
-              <div class="uk-modal-header">
-                <h3 class="uk-modal-title">Contact Details</h3>
-              </div>
-              <div class="uk-modal-body">
-                <div class="uk-child-width-1-2@s uk-grid-small" uk-grid>
-                  <div>
-
-                    <p class="font-regular-15 m-b-10 lable">Email</p>
-                    <p class="font-regular m-t-0">
-                      {{ service?.email || service?.basicProfileInfo?.primaryEmail || '-'}}</p>
-
-                    <p class="font-regular-15 m-b-10 lable">Organisation</p>
-                    <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.seo_dt?.title}}
-                    </p>
-                    <p *ngIf="isDBService && service?.systemTags.length > 0" class="font-regular m-t-0">
-                      <ng-container *ngFor="let tag of service?.systemTags">
-                        {{ tag.description}}
-                      </ng-container>
-                    </p>
+          <a href="javascript:void(0)" class="uk-button uk-button-default" id="btnContactProvider"
+            aria-label="Opens popup with service contact detail" (click)="openContactModel($event.target)">Contact
+            Service
+            Provider</a>
 
 
-
-                  </div>
-
-                  <div>
-                    <p class="font-regular-15 m-b-10 lable">Phone Number</p>
-                    <p *ngIf="!isDBService" class="font-regular m-t-0">
-                      {{service?.contact || service?.mobile }}</p>
-                    <p *ngIf="isDBService" class="font-regular m-t-0">
-                      {{ service?.basicProfileInfo?.primaryPhoneNo  }}
-                    </p>
-
-
-                    <p class="font-regular-15 m-b-10 lable">Location</p>
-                    <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.address}}</p>
-                    <p *ngIf="isDBService" class="font-regular m-t-0">
-                      {{service?.basicProfileInfo?.primaryUserAddress.streetAddress}}
-                      {{service?.basicProfileInfo?.primaryUserAddress.zip}}
-                      {{service?.basicProfileInfo?.primaryUserAddress.country}}
-                    </p>
-                  </div>
-
-                </div>
-              </div>
-              <div class="uk-modal-footer uk-text-right review-form">
-                <button class="uk-button uk-button-default uk-modal-close" type="button">Close</button>
-              </div>
-            </div>
-          </div>
-          <!-- Contact Model END -->
 
           <div class="m-t-10 m-b-20">
-            <a (click)="reportFormToggle()">
+            <a class="link-black" href="javascript:void(0)" id="reportFormLink"
+              (click)="reportFormToggle($event.target)">
               <fa-icon [icon]="['far', 'flag']" class="m-r-5"></fa-icon>
               {{ auth.isAuthenticate ? 'Report service provider': 'Join us to Report service provider'}}
             </a>
-
-            <!-- Report Form MOdel Start -->
-
-            <!-- This is the modal -->
-            <div id="report-modal" uk-modal>
-              <div class="uk-modal-dialog uk-modal-body">
-                <h3 class="uk-modal-title">Report</h3>
-                <!-- Success box START-->
-                <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
-                  <p>{{ successMessage }}</p>
-                </div>
-                <!-- Success box END-->
-                <form [formGroup]="reportForm" (ngSubmit)="onSubmitReport()" class="uk-form-stacked review-form">
-                  <div class="uk-margin">
-                    <label class="uk-form-label" for="reporting-cause">Cause of
-                      Reporting</label>
-                    <div class="uk-form-controls">
-                      <select formControlName="cause" class="uk-select" id="reporting-cause">
-                        <option disabled selected hidden value="">Select your cause of reporting
-                        </option>
-                        <option>Information provided is incorrect</option>
-                        <option>Service Provider is unreachable</option>
-                        <option>Service Provider no longer exists</option>
-                        <option>Other reasons</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="uk-margin">
-                    <label class="uk-form-label" for="comment">Comment (optional)</label>
-                    <div class="uk-form-controls">
-                      <textarea formControlName="comment" id="comment" class="uk-input min-h-200" id="form-stacked-text"
-                        placeholder="Enter your comment here"></textarea>
-                    </div>
-                  </div>
-
-                  <p class="uk-text-right">
-                    <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
-                    <button class="m-l-10 uk-button uk-button-default" type="submit"
-                      [disabled]="reportForm.invalid">Submit</button>
-                  </p>
-                </form>
-              </div>
-            </div>
-            <!-- Report Form MOdel End -->
           </div>
         </div>
       </div>
@@ -190,7 +98,8 @@
         </div>
 
         <div class="m-b-20 uk-hidden@s">
-          <a [href]="whatsappMobileUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp">
+          <a [href]="whatsappMobileUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon"
+            aria-label="Share via Whatsapp" uk-icon="whatsapp">
           </a>
           <a class="social-link" [href]="whatsappMobileUrl">
             Share via
@@ -198,7 +107,7 @@
         </div>
         <div class="m-b-20">
           <a href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age&body=Service URL: {{currentUrl}}"
-            class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail">
+            class="uk-icon-button  uk-margin-small-right fb-icon" aria-label="Share via Email" uk-icon="mail">
           </a> <a class="social-link"
             href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age&body=Service URL: {{currentUrl}}">
             Share via
@@ -208,7 +117,8 @@
           <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{ service?.name || service?.basicProfileInfo?.firstName  }}"
             onclick="javascript:window.open(this.href,
                     '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
-            class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a class="social-link"
+            class="uk-icon-button  uk-margin-small-right email-icon" aria-label="Share via Facebook" uk-icon="facebook">
+          </a> <a class="social-link"
             href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{ service?.name || service?.basicProfileInfo?.firstName  }}"
             onclick="javascript:window.open(this.href,
                     '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
@@ -287,66 +197,6 @@
       </div>
       <!-- service informations END-->
 
-      <!-- Write Review Form START-->
-      <!-- This is review modal -->
-      <div id="review-modal" uk-modal>
-        <div class="uk-modal-dialog uk-modal-body">
-          <h4 class="font-regular-24 font-weight-600">{{reviewTitle}} Review</h4>
-          <hr />
-          <!-- Success box START-->
-          <div *ngIf="reviewSuccessMessage" class="uk-alert-success" uk-alert>
-            <p>{{ reviewSuccessMessage }}</p>
-          </div>
-          <!-- Success box END-->
-          <form [formGroup]="reviewForm" class="uk-form-stacked review-form">
-
-
-            <div class="uk-margin">
-              <label class="uk-form-label" for="review-title">Title<span class="required">*</span></label>
-              <div class="uk-form-controls">
-                <input class="uk-input" id="review-title" formControlName="title" type="text"
-                  placeholder="Enter your title">
-              </div>
-            </div>
-
-            <!-- <div class="uk-child-width-1-2@s" uk-grid> -->
-            <!-- <div>
-                <div class="uk-margin">
-                  <label class="uk-form-label" for="form-stacked-select">Your Rating<span
-                      class="required">*</span></label>
-                  <div class="uk-form-controls">
-                    <select class="uk-select" formControlName="rating" id="form-stacked-select">
-                      <option disabled selected hidden value="0">Select your rating</option>
-                      <option value="90">5 Star</option>
-                      <option value="80">4 Star</option>
-                      <option value="60">3 Star</option>
-                      <option value="40">2 Star</option>
-                      <option value="20">1 Star</option>
-                    </select>
-                  </div>
-                </div>
-
-              </div> -->
-
-            <!-- </div> -->
-
-            <div class="uk-margin">
-              <label class="uk-form-label" for="review">Your Review<span class="required">*</span></label>
-              <div class="uk-form-controls">
-                <textarea formControlName="review" class="uk-input min-h-200" id="review"
-                  placeholder="Enter your review here"></textarea>
-              </div>
-            </div>
-
-            <div class="uk-text-right">
-              <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
-              <button class="uk-button uk-button-default m-l-5 uk-modal-close" (click)="onReviewSubmit()" type="button"
-                [disabled]="reviewForm.invalid">{{ auth.isAuthenticate ? 'Post Review': 'Join us to Review'}}</button>
-            </div>
-          </form>
-        </div>
-      </div>
-      <!-- Write Review Form END-->
 
       <!-- Delete review confirmation modal -->
       <!-- <div id="delete-modal" class="uk-flex-top" uk-modal>
@@ -368,6 +218,11 @@
       <div class="m-t-30">
 
         <!-- <h1 *ngIf="isDBService" class="font-regular-24 font-weight-600"> Reviews ({{dbReview.length}})</h1> -->
+        <!-- Success box START-->
+        <div aria-live="polite" aria-atomic="true" *ngIf="reviewSuccessMessage" class="uk-alert-success" uk-alert>
+          <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ reviewSuccessMessage }}</p>
+        </div>
+        <!-- Success box END-->
         <ul class="uk-switcher switcher-container">
           <li>
             <!--DB Reviews START-->
@@ -385,7 +240,7 @@
                 </div>
                 <div class="uk-width-auto">
                   <button class="uk-button uk-button-transparent review-btn-transparent"
-                    (click)="writeNewReview()">{{  auth.isAuthenticate ? 'Write Review': 'Join us to Review'  }}</button>
+                    (click)="writeNewReview()" id="btnWriteReview">{{  auth.isAuthenticate ? 'Write Review': 'Join Us to Review'  }}</button>
                 </div>
               </div>
 
@@ -413,7 +268,7 @@
                   <p class="lable font-regular m-0"> No user has left review for this service.</p>
                 </div>
                 <div class="uk-text-right">
-                  <img src="/assets/images/norecord.svg" alt="No Image Found" />
+                  <img src="/assets/images/norecord.svg" alt="No record icon" />
                 </div>
               </div>
             </ng-container>
@@ -492,7 +347,7 @@
                   <div class="uk-width-expand">
                     <div class="child-width-auto" uk-grid>
                       <div>
-                        <img class="review-avatar" [src]="review.reviewer_photo" alt="No Image Found" />
+                        <img class="review-avatar" [src]="review.reviewer_photo" alt="review user image" />
                       </div>
                       <div class="p-l-20">
                         <p class="font-regular m-0">{{ review.reviewer_name}}</p>
@@ -552,3 +407,165 @@
     </div>
   </div>
 </div>
+
+<!-- Contact Model START -->
+<div id="contact-sections" role="dialog" aria-labelledby="contactModalTitle" aria-modal="true"
+  aria-describedby="contactBody" class="uk-modal-container" uk-modal="bg-close:false;container:false;">
+  <div class="uk-modal-dialog">
+    <button class="uk-modal-close-default" aria-label="Close popup" type="button" (click)="onCloseModel()"
+      uk-close></button>
+    <div class="uk-modal-header">
+      <h3 id="contactModalTitle" tabindex=0 class="uk-modal-title">Contact Details</h3>
+    </div>
+    <div class="uk-modal-body" id="contactBody">
+      <div class="uk-child-width-1-2@s uk-grid-small" uk-grid>
+        <div>
+
+          <p class="font-regular-15 m-b-10 lable">Email</p>
+          <p class="font-regular m-t-0">
+            {{ service?.email || service?.basicProfileInfo?.primaryEmail || '-'}}</p>
+
+          <p class="font-regular-15 m-b-10 lable">Organisation</p>
+          <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.seo_dt?.title}}
+          </p>
+          <p *ngIf="isDBService && service?.systemTags.length > 0" class="font-regular m-t-0">
+            <ng-container *ngFor="let tag of service?.systemTags">
+              {{ tag.description}}
+            </ng-container>
+          </p>
+
+
+
+        </div>
+
+        <div>
+          <p class="font-regular-15 m-b-10 lable">Phone Number</p>
+          <p *ngIf="!isDBService" class="font-regular m-t-0">
+            {{service?.contact || service?.mobile }}</p>
+          <p *ngIf="isDBService" class="font-regular m-t-0">
+            {{ service?.basicProfileInfo?.primaryPhoneNo  }}
+          </p>
+
+
+          <p class="font-regular-15 m-b-10 lable">Location</p>
+          <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.address}}</p>
+          <p *ngIf="isDBService" class="font-regular m-t-0">
+            {{service?.basicProfileInfo?.primaryUserAddress.streetAddress}}
+            {{service?.basicProfileInfo?.primaryUserAddress.zip}}
+            {{service?.basicProfileInfo?.primaryUserAddress.country}}
+          </p>
+        </div>
+
+      </div>
+    </div>
+    <div class="uk-modal-footer uk-text-right review-form">
+      <button class="uk-button uk-button-default uk-modal-close" (click)="onCloseModel();" type="button">Close</button>
+    </div>
+  </div>
+</div>
+<!-- Contact Model END -->
+
+
+<!-- Write Review Form START-->
+<!-- This is review modal -->
+<div id="review-modal" role="dialog" aria-labelledby="reviewTitle" aria-modal="true" aria-describedby="reviewForm"
+  uk-modal="bg-close:false;container:false;">
+  <div class="uk-modal-dialog uk-modal-body">
+    <h4 id="reviewTitle" tabindex=0 class="font-regular-24 font-weight-600">{{reviewTitle}} Review</h4>
+    <hr />
+
+    <form [formGroup]="reviewForm" id="reviewForm" class="uk-form-stacked review-form">
+
+
+      <div class="uk-margin">
+        <label class="uk-form-label" for="review-title">Title<span class="required">*</span></label>
+        <div class="uk-form-controls">
+          <input class="uk-input" id="review-title" formControlName="title" type="text" placeholder="Enter your title">
+        </div>
+      </div>
+
+      <!-- <div class="uk-child-width-1-2@s" uk-grid> -->
+      <!-- <div>
+                <div class="uk-margin">
+                  <label class="uk-form-label" for="form-stacked-select">Your Rating<span
+                      class="required">*</span></label>
+                  <div class="uk-form-controls">
+                    <select class="uk-select" formControlName="rating" id="form-stacked-select">
+                      <option disabled selected hidden value="0">Select your rating</option>
+                      <option value="90">5 Star</option>
+                      <option value="80">4 Star</option>
+                      <option value="60">3 Star</option>
+                      <option value="40">2 Star</option>
+                      <option value="20">1 Star</option>
+                    </select>
+                  </div>
+                </div>
+
+              </div> -->
+
+      <!-- </div> -->
+
+      <div class="uk-margin">
+        <label class="uk-form-label" for="review">Your Review<span class="required">*</span></label>
+        <div class="uk-form-controls">
+          <textarea formControlName="review" class="uk-input min-h-200" id="review"
+            placeholder="Enter your review here"></textarea>
+        </div>
+      </div>
+
+      <div class="uk-text-right">
+        <button class="uk-button uk-button-transparent uk-modal-close" (click)="onCloseModel()"
+          type="button">Cancel</button>
+        <button class="uk-button uk-button-default m-l-5 uk-modal-close" (click)="onReviewSubmit()" type="button"
+          [disabled]="reviewForm.invalid">{{ auth.isAuthenticate ? 'Post Review': 'Signin to Review'}}</button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Write Review Form END-->
+
+<!-- Report Form MOdel Start -->
+
+<!-- This is the modal -->
+<div id="report-modal" role="dialog" aria-labelledby="reportTitle" aria-modal="true" aria-describedby="reportForm"
+  uk-modal="bg-close:false;container:false;">
+  <div class="uk-modal-dialog uk-modal-body">
+    <h3 id="reportTitle" tabindex=0 class="uk-modal-title">Report</h3>
+    <!-- Success box START-->
+    <div aria-live="polite" aria-atomic="true" *ngIf="successMessage" class="uk-alert-success" uk-alert>
+      <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ successMessage }}</p>
+    </div>
+    <!-- Success box END-->
+    <form [formGroup]="reportForm" id="reportForm" (ngSubmit)="onSubmitReport()" class="uk-form-stacked review-form">
+      <div class="uk-margin">
+        <label class="uk-form-label" for="reporting-cause">Cause of
+          Reporting</label>
+        <div class="uk-form-controls">
+          <select formControlName="cause" class="uk-select" id="reporting-cause">
+            <option disabled selected hidden value="">Select your cause of reporting
+            </option>
+            <option>Information provided is incorrect</option>
+            <option>Service Provider is unreachable</option>
+            <option>Service Provider no longer exists</option>
+            <option>Other reasons</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="uk-margin">
+        <label class="uk-form-label" for="comment">Comment (optional)</label>
+        <div class="uk-form-controls">
+          <textarea formControlName="comment" id="comment" class="uk-input min-h-200" id="form-stacked-text"
+            placeholder="Enter your comment here"></textarea>
+        </div>
+      </div>
+
+      <p class="uk-text-right">
+        <button class="uk-button uk-button-transparent uk-modal-close" (click)="onCloseModel()"
+          type="button">Cancel</button>
+        <button class="m-l-10 uk-button uk-button-default" type="submit" [disabled]="reportForm.invalid">Submit</button>
+      </p>
+    </form>
+  </div>
+</div>
+<!-- Report Form MOdel End -->

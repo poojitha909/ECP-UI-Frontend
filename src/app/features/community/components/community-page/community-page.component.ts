@@ -12,22 +12,22 @@ declare var UIkit: any;
   styleUrls: ['./community-page.component.scss']
 })
 export class CommunityPageComponent implements OnInit, OnDestroy {
-  
-  searchTxt:string;
+
+  searchTxt: string;
   tempSearchTxt: string;
-  discussionCategory:string;
-  pastEvents:string;
+  discussionCategory: string;
+  pastEvents: string;
   showPagination: boolean;
   showSharing: boolean;
   currentUrl: string;
 
   showReset: boolean;
   paramsSubs: any;
-  show:string;
+  show: string;
   noRecords: boolean;
   showResult: boolean;
   isLoading: boolean;
-  hide:any;
+  hide: any;
   searchData: any = {
     discussions: [],
     events: [],
@@ -38,12 +38,12 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
 
   autocompleteFields: Service[] = [];
   user: any;
-  constructor(private router: Router, private homeService: HomeService,private store: StorageHelperService,
+  constructor(private router: Router, private homeService: HomeService, private store: StorageHelperService,
     private seoService: SeoService, private route: ActivatedRoute) {
 
     // Generate meta tag 
     const config: SEO = {
-      title: `Community Let's Talk - An Elder Spring Initiative by Tata Trusts`,
+      title: `Let us Engage`,
       keywords: 'products,services,events,dscussions',
       description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
       author: `An Elder Spring Initiative by Tata Trusts`,
@@ -51,6 +51,8 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     }
 
     this.seoService.generateTags(config);
+
+
   }
 
 
@@ -66,13 +68,17 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  ngAfterViewInit() {
+    document.getElementById("communitySearch").focus();
+  }
+
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
   }
 
   initiate() {
     this.user = this.store.retrieve("ECP-USER");
-    
+
     this.searchTxt = "";
     this.showPagination = true;
     this.showSharing = true;
@@ -91,13 +97,13 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     }
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
-      this.showReset = this.searchTxt? true : false;
+      this.showReset = this.searchTxt ? true : false;
     }
     if (!this.searchTxt && this.homeService.homeSearchtxt) {
       this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
     }
-    if(this.route.snapshot.queryParams['show']){
+    if (this.route.snapshot.queryParams['show']) {
       this.show = this.route.snapshot.queryParams['show'];
     }
     else{
@@ -107,7 +113,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
 
 
   showAll(tab) {
-    this.show=tab
+    this.show = tab
   }
 
   onSearchChange(event: any) {
@@ -117,56 +123,61 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     } else {
       this.showReset = false;
     }
-    if (event.key == "Enter" || value=="") {
+    if (event.key == "Enter" || value == "") {
       this.onSearch();
     }
   }
 
   resetSearch(event: any) {
-    if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
-      this.setSearchTxt(""); 
-      this.discussionCategory="";
-      this.pastEvents=""; 
-      this.homeService.eventIsPastEvents=0;
-      this.homeService.discussCategory=""
-      this.showReset = false;
-      this.onSearch();
-    }
+    // if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
+    this.setSearchTxt("");
+    this.discussionCategory = "";
+    this.pastEvents = "";
+    this.homeService.eventIsPastEvents = 0;
+    this.homeService.discussCategory = ""
+    this.showReset = false;
+    document.getElementById("communitySearch").focus();
+    this.onSearch();
+    // }
   }
 
   onSearch() {
     this.setSearchTxt(this.tempSearchTxt);
-    this.router.navigate(['/community'], { queryParams: { searchTxt: this.searchTxt, 
-                                                category: this.discussionCategory,
-                                                past: this.pastEvents,
-                                                show: this.show } });
+    this.router.navigate(['/community'], {
+      queryParams: {
+        searchTxt: this.searchTxt,
+        category: this.discussionCategory,
+        past: this.pastEvents,
+        show: this.show
+      }
+    });
   }
-  
+
   setSearchTxt(value: string) {
     this.searchTxt = value;
     this.tempSearchTxt = value;
     this.homeService.homeSearchtxt = value;
   }
-  
-  showDiscussionCount(value){
+
+  showDiscussionCount(value) {
     this.searchData.totalDiscussions = value;
     this.getMaxCount();
   }
 
-  showEventCount(value){
+  showEventCount(value) {
     this.searchData.totalEvents = value;
     this.getMaxCount();
   }
 
   getMaxCount() {
     const getelem = document.getElementById("search-tab");
-    if(this.show == 'discss'){
+    if (this.show == 'discss') {
       UIkit.tab(getelem).show(0);
     }
-    else if(this.show == 'events'){
+    else if (this.show == 'events') {
       UIkit.tab(getelem).show(1);
     }
-    else{
+    else {
       const maxTotal = Math.max(
         this.searchData.totalEvents,
         this.searchData.totalDiscussions);
@@ -175,7 +186,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
           UIkit.tab(getelem).show(1);
           break;
         case this.searchData.totalDiscussions:
-  
+
           UIkit.tab(getelem).show(0);
           break;
         default:
@@ -183,6 +194,6 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
           break;
       }
     }
-    
+
   }
 }

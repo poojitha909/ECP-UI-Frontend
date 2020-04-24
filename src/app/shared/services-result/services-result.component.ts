@@ -45,7 +45,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     private jdCategoryService: JdCategoryService,
     public ecpService: EpcServiceService,
     public homeService: HomeService,
-    private router: Router, private shareMedia:MenuService
+    private router: Router, private shareMedia: MenuService
   ) {
     // this.categories = jdCategoryService.serviceCategories;
   }
@@ -255,7 +255,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
         // this.searchPageParam.term = category;
         this.isLoading = false;
       });
-      this.shareMedia.setsharemedia(window.location.href)
+    this.shareMedia.setsharemedia(window.location.href)
   }
 
   getAllService() {
@@ -272,8 +272,9 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     this.ecpService.getAllServices().subscribe(
       response => {
         if (response) {
-          this.services = response;
+          this.services = response.data;
           this.allService = this.services;
+          this.totalServices.emit(response.total);
           this.maxPages = Math.round(this.services.length / this.pageSize);
           // this.verfiedCheck = false;
           this.isLoading = false;

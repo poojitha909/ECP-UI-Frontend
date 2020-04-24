@@ -80,16 +80,13 @@ export class SearchContainerComponent implements OnInit {
 
   searchService() {
     // const param = this.searchPageParam.term;
+    this.ecpService.searchedService = "";
+    this.ecpService.searchCatID = "";
+    this.homeService.serviceCategory = "";
+    this.homeService.serviceSubCategory = "";
     this.homeService.homeSearchtxt = this.searchPageParam.term;
-    this.router.navigate(['/services'], { queryParams: { searchTxt: this.searchPageParam.term, category: this.ecpService.searchedService, catid: this.ecpService.searchCatID } })
-    // this.homeService.searchParam = this.searchPageParam;
-    // this.homeService.getServices().subscribe(response => {
-    //   this.popullarService = response.data.slice(0, 6);
-    //   this.totalService = response.total;
-    // },
-    //   error => {
-    //     console.log(error);
-    //   });
+    this.router.navigate(['/services'], { queryParams: { searchTxt: this.searchPageParam.term } })
+
   }
 
 

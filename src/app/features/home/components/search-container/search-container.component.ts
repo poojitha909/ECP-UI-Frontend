@@ -82,6 +82,10 @@ export class SearchContainerComponent implements OnInit {
     this.showResult = false;
     this.homeService.homeSearchtxt = "";
     document.getElementById("homeSearch").focus();
+    this.clearCategoriesFilter();
+  }
+
+  clearCategoriesFilter() {
     this.homeService.eventIsPastEvents = 0;
     this.homeService.discussCategory = "";
     this.homeService.expertCategory = "";
@@ -149,6 +153,7 @@ export class SearchContainerComponent implements OnInit {
         }
 
       } else {
+        this.clearCategoriesFilter();
         this.homeService.homeSearchtxt = field;
         this.showResult = true;
         // this.homeSearchPages();

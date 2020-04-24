@@ -45,10 +45,14 @@
   </h1>
   <hr class="m-b-30" /> -->
 
-
+    <div *ngIf="ecpService.showBg" class="search-tab">
+      <ul uk-tab>
+        <li><a href="#" class="font-regular">Services ({{ totalServicesCount }})</a></li>
+      </ul>
+    </div>
 
     <!-- Category Slider END-->
-    <app-services-result></app-services-result>
+    <app-services-result (totalServices)="getTotalCount($event)"></app-services-result>
 
   </div>
   <!-- <div> -->

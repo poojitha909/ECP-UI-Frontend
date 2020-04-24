@@ -17,6 +17,8 @@ import { SeoService } from 'src/app/core/services/seo.service';
   styleUrls: ['./all-services.component.scss']
 })
 export class AllServicesComponent implements OnInit {
+
+  totalServicesCount: number;
   // breadcrumbLinks: Breadcrumb[] = [
   //   {
   //     text: 'Home',
@@ -95,7 +97,7 @@ export class AllServicesComponent implements OnInit {
     if (this.homeService.homeSearchtxt) {
       this.ecpService.showBg = true;
     }
-    else{
+    else {
       this.ecpService.showBg = false;
     }
 
@@ -109,6 +111,10 @@ export class AllServicesComponent implements OnInit {
     // this.mailUrl = `mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20${encodeURI(window.location.href)}`
     // this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(window.location.href)}`);
     // this.whatsMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
+  }
+
+  getTotalCount(counts) {
+    this.totalServicesCount = counts;
   }
 
   // ngAfterViewInit() {

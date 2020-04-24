@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { EpcServiceService } from 'src/app/features/services/epc-service.service';
 import { HomeService } from 'src/app/features/home/home.service';
+import { MenuService } from 'src/app/features/community/services/menu.service';
 declare var UIkit: any;
 
 @Component({
@@ -44,7 +45,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     private jdCategoryService: JdCategoryService,
     public ecpService: EpcServiceService,
     public homeService: HomeService,
-    private router: Router
+    private router: Router, private shareMedia:MenuService
   ) {
     // this.categories = jdCategoryService.serviceCategories;
   }
@@ -254,6 +255,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
         // this.searchPageParam.term = category;
         this.isLoading = false;
       });
+      this.shareMedia.setsharemedia(window.location.href)
   }
 
   getAllService() {

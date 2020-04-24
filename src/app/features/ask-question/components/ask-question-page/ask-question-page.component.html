@@ -1,10 +1,7 @@
 <div class="top-banner" id="askExpertBanner">
   <div uk-grid>
     <div class="uk-width-expand uk-flex uk-flex-middle">
-      <p class="banner-text font-regular">Our exclusive team of experts will provide honest, unbiased answers to all
-        your queries and
-        guide you whenever
-        you need their help.</p>
+      <p class="banner-text font-regular">Our distinguished experts provide honest, unbiased answers to your questions.  All your questions and conversations with an expert remains private between the expert and you.</p>
     </div>
     <div class="uk-flex uk-flex-bottom uk-flex-center uk-width-auto@s">
       <img class="banner-img" src="/assets/images/landing-img/expert-banner-updated.png" />
@@ -38,26 +35,18 @@
   </div>
   <!-- tab start -->
 
-  <div class="tab">
-    <ul class="uk-child-width-expand" uk-tab>
-      <li [ngClass]="{'uk-active': show=='experts', 'uk-width-1-2': !user?.id}"><a x-no-tabbing
-          (click)="showAll('experts')">All Experts{{ searchTxt!='' ? " (" + expertsTotal + ")" : "" }}</a></li>
-      <li [ngClass]="{'uk-active': show=='ques'}" *ngIf="user?.id && searchTxt==''"><a x-no-tabbing
-          (click)="showAll('ques')">My Questions</a></li>
-      <li [ngClass]="{'uk-active': show=='expques'}" *ngIf="user?.id && searchTxt=='' && user?.userRoleId =='EXPERT'"><a
-          x-no-tabbing (click)="showAll('expques')">Questions I need to answer</a></li>
-    </ul>
-  </div>
-  <!-- tab -end -->
-  <!-- Search Form END -->
-  <div id="searchResultList">
-    <ask-question-experts *ngIf="show === 'experts'" [searchTxt]="searchTxt" [showPagination]="showPagination"
-      [showSharing]="showSharing" (showCount)="showExpertCount($event)"></ask-question-experts>
-    <expert-all-question *ngIf="show === 'expques' && searchTxt==''" [searchTxt]="searchTxt"
-      [showPagination]="showPagination" [showSharing]="showSharing" (showCount)="showExpertQuesCount($event)">
-    </expert-all-question>
-    <ask-question-myques *ngIf="show === 'ques' && searchTxt==''" [searchTxt]="searchTxt"
-      [showPagination]="showPagination" [showSharing]="showSharing" (showCount)="showMyQuesCount($event)">
-    </ask-question-myques>
-  </div>
+<div class= "tab">
+  <ul class="uk-child-width-expand" uk-tab>
+      <li [ngClass]="{'uk-active': show=='experts', 'uk-width-1-2': !user?.id}"><a x-no-tabbing (click)="showAll('experts')">Experts{{ searchTxt!='' ? " (" + expertsTotal + ")" : "" }}</a></li>
+      <li [ngClass]="{'uk-active': show=='ques'}" *ngIf="user?.id && searchTxt==''"><a x-no-tabbing (click)="showAll('ques')">Questions for me</a></li>
+      <li [ngClass]="{'uk-active': show=='expques'}" *ngIf="user?.id && searchTxt=='' && user?.userRoleId =='EXPERT'" ><a x-no-tabbing (click)="showAll('expques')">My Questions</a></li>   
+  </ul>
+</div>
+<!-- tab -end -->
+<!-- Search Form END -->
+<div id="searchResultList">
+  <ask-question-experts *ngIf="show === 'experts'" [searchTxt]="searchTxt" [showPagination]="showPagination" [showSharing]="showSharing" (showCount)="showExpertCount($event)"></ask-question-experts>
+  <expert-all-question *ngIf="show === 'expques' && searchTxt==''"  [searchTxt]="searchTxt" [showPagination]="showPagination" [showSharing]="showSharing" (showCount)="showExpertQuesCount($event)"></expert-all-question>
+  <ask-question-myques *ngIf="show === 'ques' && searchTxt==''"  [searchTxt]="searchTxt" [showPagination]="showPagination" [showSharing]="showSharing" (showCount)="showMyQuesCount($event)"></ask-question-myques>
+</div>
 </div>

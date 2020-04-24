@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../features/products/services/products.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HomeService } from 'src/app/features/home/home.service';
+import { MenuService } from 'src/app/features/community/services/menu.service';
 declare var UIkit: any;
 @Component({
   selector: 'app-product-results',
@@ -37,7 +38,7 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
   whatsappUrl: any;
   
   constructor(private route: ActivatedRoute, private router: Router,
-    private productService: ProductService, public sanitizer: DomSanitizer,
+    private productService: ProductService, public sanitizer: DomSanitizer,private shareMedia:MenuService,
     private homeService: HomeService) {
   }
 
@@ -131,6 +132,7 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnDestroy
           this.isLoading = false;
         }
     });
+    this.shareMedia.setsharemedia(window.location.href)
   }
 
   onTabChange(value) {

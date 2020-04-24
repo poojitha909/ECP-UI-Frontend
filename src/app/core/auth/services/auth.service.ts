@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { User, DBReviews } from '../../interfaces';
@@ -43,8 +43,10 @@ export class AuthService {
   }
 
   sendOtp(mobileNo): Observable<any> {
-    const url = `${ApiConstants.SEND_OTP}?mobile=${mobileNo}`;
-    return this.http.get<any>(url).pipe(
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    };
+    return this.http.post<any>(ApiConstants.SEND_OTP, `mobile=${mobileNo}`, options).pipe(
       map((response) => {
         return JSON.parse(response.data);
       })
@@ -52,8 +54,10 @@ export class AuthService {
   }
 
   resendOtp(mobileNo): Observable<any> {
-    const url = `${ApiConstants.RESEND_OTP}?mobile=${mobileNo}`;
-    return this.http.get<any>(url).pipe(
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    };
+    return this.http.post<any>(ApiConstants.RESEND_OTP, `mobile=${mobileNo}`, options).pipe(
       map((response) => {
         return JSON.parse(response.data);
       })
@@ -61,8 +65,10 @@ export class AuthService {
   }
 
   verfiyOtp(mobileNo, code): Observable<any> {
-    const url = `${ApiConstants.LOGIN_OTP}?mobile=${mobileNo}&otp=${code}`;
-    return this.http.get<any>(url).pipe(
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    };
+    return this.http.post<any>(ApiConstants.LOGIN_OTP, `mobile=${mobileNo}&otp=${code}`, options).pipe(
       map((response) => {
         this.user$.next(response.data.user);
         this.user = response.data.user;

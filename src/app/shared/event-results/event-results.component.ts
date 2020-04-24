@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../../app/features/community/services/events.service'
 import { DomSanitizer } from '@angular/platform-browser';
 import { HomeService } from 'src/app/features/home/home.service';
+import { MenuService } from 'src/app/features/community/services/menu.service';
 
 @Component({
   selector: 'app-event-results',
@@ -36,7 +37,7 @@ export class EventResultsComponent implements OnInit {
     private router: Router,
     private eventService: EventService,
     private homeService: HomeService,
-    public sanitizer: DomSanitizer) {
+    public sanitizer: DomSanitizer,private shareMedia:MenuService) {
   }
 
   ngOnInit() {
@@ -116,6 +117,7 @@ export class EventResultsComponent implements OnInit {
       }
       this.isLoading = false;
     });
+    this.shareMedia.setsharemedia(window.location.href)
   }
 
   showEventsCount() {

@@ -16,10 +16,11 @@ import { Router } from '@angular/router';
 export class SearchContainerComponent implements OnInit {
 
   showReset: boolean;
-  showResult: boolean
   searchTextChanged = new Subject<string>();
   selectedValue: string;
   noRecords: boolean;
+  searchTxt: string;
+  totalRecords: number;
   searchPageParam: PageParam = {
     p: 0,
     s: 6,
@@ -32,7 +33,7 @@ export class SearchContainerComponent implements OnInit {
   ngOnInit() {
     document.getElementById("homeSearch").focus();
     this.searchTextChanged.pipe(
-      debounceTime(200),
+      debounceTime(10),
       distinctUntilChanged()
     ).subscribe(() => {
       this.onSearchChange(this.searchPageParam.term);
@@ -43,7 +44,7 @@ export class SearchContainerComponent implements OnInit {
       this.searchPageParam.term = this.homeService.homeSearchtxt;
       // this.homeSearchPages();
       this.showReset = true;
-      this.showResult = true;
+      this.searchTxt = this.searchPageParam.term;
     }
   }
 
@@ -68,7 +69,7 @@ export class SearchContainerComponent implements OnInit {
     } else {
       this.autocompleteFields = [];
       this.showReset = false;
-      this.showResult = false;
+      this.searchTxt = "";
       this.homeService.homeSearchtxt = "";
     }
   }
@@ -79,9 +80,13 @@ export class SearchContainerComponent implements OnInit {
     this.searchPageParam.term = "";
     this.autocompleteFields = [];
     this.showReset = false;
-    this.showResult = false;
+    this.searchTxt = "";
     this.homeService.homeSearchtxt = "";
     document.getElementById("homeSearch").focus();
+    this.clearCategoriesFilter();
+  }
+
+  clearCategoriesFilter() {
     this.homeService.eventIsPastEvents = 0;
     this.homeService.discussCategory = "";
     this.homeService.expertCategory = "";
@@ -148,9 +153,9 @@ export class SearchContainerComponent implements OnInit {
         }
 
       } else {
+        this.clearCategoriesFilter();
         this.homeService.homeSearchtxt = field;
-        this.showResult = true;
-        // this.homeSearchPages();
+        this.searchTxt = field;
       }
       this.selectedValue = "";
       this.autocompleteFields = [];
@@ -182,6 +187,15 @@ export class SearchContainerComponent implements OnInit {
   onItemSelected(value) {
     this.selectedValue = value;
     // this.searchPageParam.term = value;
+  }
+
+  getRecordsCount(allCounts) {
+    this.totalRecords = 0;
+    Object.values(allCounts).forEach((value: number) => {
+      if (value) {
+        this.totalRecords += value;
+      }
+    });
   }
 
 }

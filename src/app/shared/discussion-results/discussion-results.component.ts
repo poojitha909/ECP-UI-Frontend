@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MenuService } from '../../features/community/services/menu.service'
 import { DiscussionService } from '../../features/community/services/discussion.service'
@@ -10,8 +10,8 @@ import { HomeService } from 'src/app/features/home/home.service';
   templateUrl: './discussion-results.component.html',
   styleUrls: ['./discussion-results.component.scss']
 })
-export class DiscussionResultsComponent implements OnInit {
-  
+export class DiscussionResultsComponent implements OnInit, OnChanges {
+
   @Input() searchTxt: string;
   @Input() showPagination: boolean;
   @Input() showSharing: boolean;
@@ -43,6 +43,13 @@ export class DiscussionResultsComponent implements OnInit {
       this.initiate();
     });
   }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes.searchTxt.firstChange) {
+      this.initiate();
+    }
+  }
+
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
   }
@@ -60,7 +67,7 @@ export class DiscussionResultsComponent implements OnInit {
     this.discussionsList = [];
     this.categoryList = null;
     this.selCategory = "";
-    if(this.searchTxt){
+    if (this.searchTxt) {
       this.searchParams.searchTxt = this.searchTxt;
     }
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
@@ -69,13 +76,13 @@ export class DiscussionResultsComponent implements OnInit {
     if (this.route.snapshot.queryParams['category']) {
       this.selCategory = this.route.snapshot.queryParams['category'];
     }
-    else if(this.homeService.discussCategory){
+    else if (this.homeService.discussCategory) {
       this.selCategory = this.homeService.discussCategory;
     }
     if (this.route.snapshot.queryParams['page'] !== undefined) {
       this.searchParams.p = this.route.snapshot.queryParams['page'];
     }
-    if(this.route.snapshot.queryParams['show'] != 'discss'){
+    if (this.route.snapshot.queryParams['show'] != 'discss') {
       this.searchParams.p = 0;
     }
     this.getAllCategories();
@@ -83,11 +90,11 @@ export class DiscussionResultsComponent implements OnInit {
 
   changePage(page) {
     this.searchParams.p = page;
-    if(this.showPagination){
-        this.router.navigate(['/community'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p, show: "discss" } });
+    if (this.showPagination) {
+      this.router.navigate(['/community'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p, show: "discss" } });
     }
-    else{
-        this.search();
+    else {
+      this.search();
     }
   }
 
@@ -95,10 +102,10 @@ export class DiscussionResultsComponent implements OnInit {
     this.selCategory = value;
     this.searchParams.p = 0;
     this.homeService.discussCategory = this.selCategory;
-    if(this.showPagination){
+    if (this.showPagination) {
       this.router.navigate(['/community'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt, show: "discss" } });
     }
-    else{
+    else {
       this.search();
     }
   }
@@ -121,7 +128,7 @@ export class DiscussionResultsComponent implements OnInit {
             tags[i] = data[i].id + "_" + this.categoryList[data[i].id].tagIds.join("_"); // this is just to pass extras key in tags which is menu item id
           }
         }
-        this.discussionService.summary(tags.join(","),this.searchParams.searchTxt).subscribe((response: any) => {
+        this.discussionService.summary(tags.join(","), this.searchParams.searchTxt).subscribe((response: any) => {
           for (let i in data) {
             this.categoryList[data[i].id].totalCount = response.data[data[i].id].totalCount;
           }
@@ -146,11 +153,11 @@ export class DiscussionResultsComponent implements OnInit {
     this.searchParams.p = 0;
     this.selCategory = "";
     this.homeService.discussCategory = this.selCategory;
-    if(this.showPagination){
+    if (this.showPagination) {
       this.router.navigate(['/community'], { queryParams: { category: "", searchTxt: this.searchParams.searchTxt, show: "discss" } });
     }
-    else{
-        this.search();
+    else {
+      this.search();
     }
   }
 

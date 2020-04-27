@@ -33,15 +33,15 @@ export class AdditionalInfoFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userform.get("firstName").valueChanges.subscribe(selectedValue=>{
+    this.userform.get("firstName").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.userform.get("primaryEmail").valueChanges.subscribe(selectedValue=>{
+    });
+    this.userform.get("primaryEmail").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.userform.get("primaryPhoneNo").valueChanges.subscribe(selectedValue=>{
+    });
+    this.userform.get("primaryPhoneNo").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
+    });
   }
 
   onSubmit() {
@@ -54,8 +54,15 @@ export class AdditionalInfoFormComponent implements OnInit {
 
       this.userService.createUserProfile(userData).subscribe(
         response => {
-          console.log(response);
-          this.router.navigateByUrl("/");
+          if (response) {
+            if (this.auth.redirectUrl) {
+              const redirect = this.auth.redirectUrl;
+              this.auth.removeRedirectUrl();
+              this.router.navigateByUrl(redirect);
+            } else {
+              this.router.navigateByUrl("/");
+            }
+          }
         },
         error => {
           console.log(error);

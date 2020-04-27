@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, ViewChildren } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, ViewChildren, Output, EventEmitter } from '@angular/core';
 declare var UIkit: any;
 
 @Component({
@@ -8,6 +8,8 @@ declare var UIkit: any;
 })
 export class SearchResultsComponent implements OnInit {
   @Input() searchTerm: string;
+  @Output() showCount: EventEmitter<any> = new EventEmitter();
+
   allCount = {
     servicesTotal: null,
     productTotal: null,
@@ -26,6 +28,7 @@ export class SearchResultsComponent implements OnInit {
 
   getTotalServices(tot: number) {
     this.allCount.servicesTotal = tot;
+    this.showCount.emit(this.allCount);
     if (!this.hasMaxCal) {
       this.getMaxCount();
     }
@@ -33,25 +36,28 @@ export class SearchResultsComponent implements OnInit {
 
   getTotalProducts(tot: number) {
     this.allCount.productTotal = tot;
-
+    this.showCount.emit(this.allCount);
     if (!this.hasMaxCal) {
       this.getMaxCount();
     }
   }
   getTotalExperts(tot: number) {
     this.allCount.expertTotal = tot;
+    this.showCount.emit(this.allCount);
     if (!this.hasMaxCal) {
       this.getMaxCount();
     }
   }
   getTotalEvents(tot: number) {
     this.allCount.eventTotal = tot;
+    this.showCount.emit(this.allCount);
     if (!this.hasMaxCal) {
       this.getMaxCount();
     }
   }
   getTotalDiscussions(tot: number) {
     this.allCount.discussionTotal = tot;
+    this.showCount.emit(this.allCount);
     if (!this.hasMaxCal) {
       this.getMaxCount();
     }

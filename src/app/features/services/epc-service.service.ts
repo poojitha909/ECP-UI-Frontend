@@ -56,7 +56,7 @@ export class EpcServiceService {
     return this.http.get<any>(`${ApiConstants.GET_ALL_SERVICES}?${queryParams}`).pipe(
       map(response => {
         if (response) {
-          return response.data;
+          return response;
         }
       }));
   }

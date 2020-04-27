@@ -11,10 +11,7 @@
                     <h3>{{event.organiser}}</h3>
                     <p>Organiser</p>
                     <div>
-                        <button class="uk-button uk-button-default cont-org" id="btnContactOrganiser"
-                            aria-label="Opens popup with organizer details"
-                            (click)="openContactModel($event.target)">
-                            Contact
+                        <button class="uk-button uk-button-default cont-org" uk-toggle="target: #modal-sections-events"> Contact
                             Organiser</button>
                     </div>
                     <p *ngIf="ShowReportEvent">

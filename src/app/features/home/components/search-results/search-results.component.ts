@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, ViewChildren, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, ViewChildren, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 declare var UIkit: any;
 
 @Component({
@@ -6,7 +6,7 @@ declare var UIkit: any;
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss']
 })
-export class SearchResultsComponent implements OnInit {
+export class SearchResultsComponent implements OnInit, OnChanges {
   @Input() searchTerm: string;
   @Output() showCount: EventEmitter<any> = new EventEmitter();
 
@@ -24,6 +24,19 @@ export class SearchResultsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(change: SimpleChanges) {
+    if (!change.searchTerm.firstChange) {
+      this.allCount = {
+        servicesTotal: null,
+        productTotal: null,
+        expertTotal: null,
+        eventTotal: null,
+        discussionTotal: null
+      }
+      this.hasMaxCal = false;
+    }
   }
 
   getTotalServices(tot: number) {

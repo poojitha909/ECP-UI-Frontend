@@ -31,6 +31,7 @@ export class DiscussionResultsComponent implements OnInit, OnChanges {
   currentUrl: string;
   whatsappUrl;
   isLoading: boolean;
+  totalPages: number;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private discussionService: DiscussionService, private menuService: MenuService,
@@ -80,7 +81,7 @@ export class DiscussionResultsComponent implements OnInit, OnChanges {
       this.selCategory = this.homeService.discussCategory;
     }
     if (this.route.snapshot.queryParams['page'] !== undefined) {
-      this.searchParams.p = this.route.snapshot.queryParams['page'];
+      this.searchParams.p = +this.route.snapshot.queryParams['page'];
     }
     if (this.route.snapshot.queryParams['show'] != 'discss') {
       this.searchParams.p = 0;
@@ -170,6 +171,7 @@ export class DiscussionResultsComponent implements OnInit, OnChanges {
         this.discussionsList = data.content;
       }
       this.totalRecords = data.total;
+      this.totalPages = Math.ceil(this.totalRecords / this.searchParams.s);
       this.showCount.emit(this.totalRecords);
       this.isLoading = false;
     });

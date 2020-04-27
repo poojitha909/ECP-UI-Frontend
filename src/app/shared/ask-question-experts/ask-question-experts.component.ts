@@ -30,6 +30,7 @@ export class AskQuestionExpertsComponent implements OnInit, OnChanges, OnDestroy
   };
   paramsSubs: any;
   totalRecords: number;
+  totalPages: number;
   currentUrl: string;
   whatsappUrl;
 
@@ -83,7 +84,7 @@ export class AskQuestionExpertsComponent implements OnInit, OnChanges, OnDestroy
       this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
     }
     if (this.route.snapshot.queryParams['page'] !== undefined) {
-      this.searchParams.p = this.route.snapshot.queryParams['page'];
+      this.searchParams.p = +this.route.snapshot.queryParams['page'];
     }
     if (this.route.snapshot.queryParams['show'] != 'experts') {
       this.searchParams.p = 0;
@@ -139,6 +140,7 @@ export class AskQuestionExpertsComponent implements OnInit, OnChanges, OnDestroy
       if (data.content) {
         this.experts = data.content;
         this.totalRecords = data.total;
+        this.totalPages = Math.ceil(this.totalRecords / this.searchParams.s);
         this.showCount.emit(this.totalRecords);
         this.isLoading = false;
       }

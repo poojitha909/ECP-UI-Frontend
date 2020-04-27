@@ -63,6 +63,11 @@
 
   <div class="uk-width-expand@m">
 
+    <!-- pagination info bar -->
+    <div class="page-info-bar" *ngIf="!internalProcessing && totalPages">
+      <p class="font-regular-15 uk-margin-remove">Page <b>{{activePage+1}}</b> of <b>{{totalPages}}</b></p>
+    </div>
+
     <!-- Mobile view category START-->
     <div class="bg-white category-box m-b-20 uk-hidden@s">
       <div class="uk-grid-small" uk-grid>

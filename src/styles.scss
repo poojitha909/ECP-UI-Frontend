@@ -447,3 +447,14 @@ ngb-rating {
   background: #d7e0ef;
   border-radius: 4px;
 }
+
+.page-info-bar {
+  padding: 14px 16px;
+  background: #fff;
+  border-radius: 4px;
+  margin-bottom: 24px;
+  border: 1px solid #d7e0ef;
+  p {
+    color: $font-color-black;
+  }
+}

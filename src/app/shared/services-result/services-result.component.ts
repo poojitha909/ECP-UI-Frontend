@@ -107,6 +107,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
       if (this.searchTxt) {
         this.ecpService.searchedService = '';
         this.ecpService.searchCatID = '';
+        this.selectedCategoryType = undefined;
         this.filterCategoryList(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.searchTxt);
       }
     }

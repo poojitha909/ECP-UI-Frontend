@@ -278,7 +278,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
         if (response) {
           this.services = response.data;
           this.allService = this.services;
-          this.totalServices.emit(response.total);
+          // this.totalServices.emit(response.total);
           this.maxPages = Math.round(this.services.length / this.pageSize);
           // this.verfiedCheck = false;
           this.isLoading = false;

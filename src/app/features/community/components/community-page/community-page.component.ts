@@ -106,7 +106,7 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     if (this.route.snapshot.queryParams['show']) {
       this.show = this.route.snapshot.queryParams['show'];
     }
-    else{
+    else {
       this.show = "discss";
     }
   }
@@ -143,11 +143,11 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
 
   onSearch() {
     this.setSearchTxt(this.tempSearchTxt);
+    this.homeService.eventIsPastEvents = 0;
+    this.homeService.discussCategory = "";
     this.router.navigate(['/community'], {
       queryParams: {
         searchTxt: this.searchTxt,
-        category: this.discussionCategory,
-        past: this.pastEvents,
         show: this.show
       }
     });

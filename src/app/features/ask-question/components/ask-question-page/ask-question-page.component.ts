@@ -66,7 +66,7 @@ export class AskQuestionPageComponent implements OnInit, AfterViewInit, OnDestro
     if (this.user) {
       this.user = JSON.parse(this.user);
     }
-    this.searchTxt =  "";
+    this.searchTxt = "";
     this.expertsTotal = 0;
     if (this.route.snapshot.params['expertCategory']) {
       this.expertCategory = this.route.snapshot.params['expertCategory'];
@@ -75,12 +75,12 @@ export class AskQuestionPageComponent implements OnInit, AfterViewInit, OnDestro
       this.setSearchTxt(this.route.snapshot.queryParams['searchTxt']);
       this.showReset = this.searchTxt ? true : false;
     }
-    if(this.route.snapshot.queryParams['show']){
+    if (this.route.snapshot.queryParams['show']) {
       this.show = this.route.snapshot.queryParams['show'];
       this.showAll(this.show); // experts, ques, expques
     }
-    else{
-      this.showAll("experts"); 
+    else {
+      this.showAll("experts");
     }
     if (!this.searchTxt && this.homeService.homeSearchtxt) {
       this.setSearchTxt(this.homeService.homeSearchtxt);
@@ -89,7 +89,7 @@ export class AskQuestionPageComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   showAll(tab) {
-    this.show=tab;
+    this.show = tab;
   }
 
   onSearchChange(event: any) {
@@ -100,8 +100,8 @@ export class AskQuestionPageComponent implements OnInit, AfterViewInit, OnDestro
     } else {
       this.showReset = false;
     }
-    
-    if (event.key == "Enter" || value=="") {
+
+    if (event.key == "Enter" || value == "") {
       this.setSearchTxt(value);
       this.onSearch();
     }
@@ -110,16 +110,17 @@ export class AskQuestionPageComponent implements OnInit, AfterViewInit, OnDestro
   resetSearch(event: any) {
     console.log("reset");
     // if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
-      this.setSearchTxt("");
-      this.homeService.expertCategory="";
-      this.showReset = false;
-      this.onSearch()
+    this.setSearchTxt("");
+    this.homeService.expertCategory = "";
+    this.showReset = false;
+    this.onSearch()
     // }
   }
 
   onSearch() {
     this.setSearchTxt(this.tempSearchTxt);
-    this.router.navigate(['/ask-question'], { queryParams: { expertCategory: this.expertCategory, searchTxt: this.searchTxt, show: this.show } });
+    this.homeService.expertCategory = "";
+    this.router.navigate(['/ask-question'], { queryParams: { searchTxt: this.searchTxt, show: this.show } });
     document.getElementById("askSearch").focus();
   }
 
@@ -129,13 +130,13 @@ export class AskQuestionPageComponent implements OnInit, AfterViewInit, OnDestro
     this.homeService.homeSearchtxt = value;
   }
 
-  showExpertCount(value: number){
+  showExpertCount(value: number) {
     this.expertsTotal = value;
   }
-  showMyQuesCount(value: number){
+  showMyQuesCount(value: number) {
     this.myQuesTotal = value;
   }
-  showExpertQuesCount(value: number){
+  showExpertQuesCount(value: number) {
     this.expertsQuesTotal = value;
   }
 }

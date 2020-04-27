@@ -29,7 +29,7 @@ export class SearchContainerComponent implements OnInit {
 
   autocompleteFields: Service[] = [];
 
-  constructor(private homeService: HomeService, private router: Router, private ecpService: EpcServiceService) {
+  constructor(private homeService: HomeService, private router: Router, public ecpService: EpcServiceService) {
     //this.ecpService.showBg = false 
   }
 
@@ -63,7 +63,6 @@ export class SearchContainerComponent implements OnInit {
   onSearchChange(value) {
     if (value !== "") {
       this.showReset = true;
-      this.ecpService.showBg = true;
       this.homeService.searchParam = this.searchPageParam;
       // this.homeService.getAutoCompleteServices().subscribe(
       //   response => {
@@ -85,6 +84,7 @@ export class SearchContainerComponent implements OnInit {
     this.homeService.serviceCategory = "";
     this.homeService.serviceSubCategory = "";
     this.homeService.homeSearchtxt = this.searchPageParam.term;
+    this.ecpService.showBg = true;
     this.router.navigate(['/services'], { queryParams: { searchTxt: this.searchPageParam.term } })
 
   }

@@ -18,7 +18,7 @@ import { SeoService } from 'src/app/core/services/seo.service';
 })
 export class AllServicesComponent implements OnInit {
 
-  totalRecords: number;
+  totalRecords: number = 0;
   // breadcrumbLinks: Breadcrumb[] = [
   //   {
   //     text: 'Home',

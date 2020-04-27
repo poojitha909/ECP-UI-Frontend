@@ -429,15 +429,26 @@ ngb-rating {
     }
 
     & > * > a {
-      border-bottom: 3px solid #161c2d3d;
+      border-bottom: 2px solid $font-light-black;
       font-size: 18px;
+      font-weight: bold;
       line-height: 165%;
       text-transform: unset;
+      color: $font-light-black;
+      &:hover {
+        color: #161c2d;
+        border-bottom: 2px solid #161c2d;
+      }
+      &:focus:active {
+        border-radius: 4px;
+        border-bottom: 4px solid $font-light-black;
+      }
     }
 
     & > .uk-active > a {
+      border-bottom: 4px solid #1a73e8;
+      border-radius: 4px;
       color: #1a73e8;
-      border-color: #1e87f0;
     }
   }
 }

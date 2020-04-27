@@ -45,21 +45,26 @@
         <b>"{{searchTxt}}"</b></p>
     </div>
 
-    <ul [ngClass]="{'uk-child-width-expand': searchTxt=='', 'showOnSearchtab': searchTxt!='' }" id="search-tab" uk-tab>
-      <li><a (click)="showAll('discss')" href="#">All Articles &
-          Discussions{{ searchTxt!='' ? " (" + searchData.totalDiscussions + ")" : "" }}</a></li>
-      <li><a (click)="showAll('events')" href="#">All
-          Events{{ searchTxt!='' ? " (" + searchData.totalEvents + ")" : "" }}</a></li>
-    </ul>
-    <ul class="uk-switcher showingSearchResult">
-      <li>
-        <app-discussion-results [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt"
-          (showCount)="showDiscussionCount($event)"></app-discussion-results>
-      </li>
-      <li>
-        <app-event-results [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt"
-          (showCount)="showEventCount($event)"></app-event-results>
-      </li>
-    </ul>
+    <div class="search-tab">
+      <ul [ngClass]="{'uk-child-width-expand': searchTxt=='', 'showOnSearchtab': searchTxt!='' }" id="search-tab"
+        uk-tab>
+        <li><a (click)="showAll('discss')" href="#">All Articles &
+            Discussions{{ searchTxt!='' ? " (" + searchData.totalDiscussions + ")" : "" }}</a></li>
+        <li><a (click)="showAll('events')" href="#">All
+            Events{{ searchTxt!='' ? " (" + searchData.totalEvents + ")" : "" }}</a></li>
+      </ul>
+
+
+      <ul class="uk-switcher showingSearchResult">
+        <li>
+          <app-discussion-results [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt"
+            (showCount)="showDiscussionCount($event)"></app-discussion-results>
+        </li>
+        <li>
+          <app-event-results [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt"
+            (showCount)="showEventCount($event)"></app-event-results>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

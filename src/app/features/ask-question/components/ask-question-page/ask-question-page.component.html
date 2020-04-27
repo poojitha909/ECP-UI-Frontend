@@ -42,8 +42,8 @@
   </div>
 
 
-  <div class="tab">
-    <ul class="uk-child-width-expand" uk-tab>
+  <div class="search-tab m-t-0 p-r-40" [ngClass]="{'p-l-40' :searchTxt }">
+    <ul class=" uk-child-width-expand" uk-tab>
       <li [ngClass]="{'uk-active': show=='experts', 'uk-width-1-2': !user?.id}"><a x-no-tabbing
           (click)="showAll('experts')">Experts{{ searchTxt!='' ? " (" + expertsTotal + ")" : "" }}</a></li>
       <li [ngClass]="{'uk-active': show=='ques'}" *ngIf="user?.id && searchTxt==''"><a x-no-tabbing

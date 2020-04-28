@@ -63,9 +63,9 @@
                         </div>
                         <div class="comments-add uk-width-1-3@s">
                             <button class="uk-button uk-button-default add-reply"
-                            (click)="addComment()"
+                            (click)="replyModalDisplay()"
                             uk-toggle="target: #reply-modal"
-                            > {{isExpert? 'Add Reply':'Add Comment'}} </button>
+                            > {{isExpert? 'Add Reply':'Add more details'}} </button>
                         </div>
                     </div>
                 </div>
@@ -119,9 +119,9 @@
         </div>
     </div>
 
-    <div id="reply-modal" uk-modal>
+    <div id="reply-modal" uk-modal="bg-close:false;container:false;">
         <div class="uk-modal-dialog uk-modal-body">
-        <h1 class="font-regular-24 font-weight-600">{{isExpert? 'Add a Reply':'Add a Comment'}}</h1>
+        <h1 class="font-regular-24 font-weight-600">{{isExpert? 'Add a Reply':'Add Details'}}</h1>
         <hr />
         <!-- Success box START-->
         <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
@@ -132,7 +132,7 @@
             <div class="uk-margin">
             <label class="uk-form-label" for="Description">Description<span class="required">*</span></label>
             <div class="uk-form-controls">
-                <textarea formControlName="commentTxt" class="uk-input min-h-200" id="Description"
+                <textarea formControlName="commentTxt" class="uk-input min-h-200" id="Description" #Description
                 placeholder="Enter your comment here"></textarea>
             </div>
             </div>

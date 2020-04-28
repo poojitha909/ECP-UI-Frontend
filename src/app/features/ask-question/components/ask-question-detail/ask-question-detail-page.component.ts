@@ -265,8 +265,9 @@ export class AskQuestionDetailPageComponent implements OnInit {
         askedBy: { id: this.question.askedBy.id }
       }).subscribe((response: any) => {
         if (response.data.id != "") {
+          this.notifier.hideOldest();
           this.notifier.show({
-            message: "Thank you for your Question. Our Expert will get back you at the earliest.",
+            message: "Your question has been shared with the expert.  Typically our experts respond within 2 working days.  Please come back here to check the response from the expert to your question.",
             type: "success",
             template: this.customNotificationTmpl1
             });
@@ -274,7 +275,7 @@ export class AskQuestionDetailPageComponent implements OnInit {
           this.store.clear("new-question-preview");
           setTimeout(()=>{
             this.router.navigate(['/ask-question'],{ queryParams: { show: "ques"}});
-          },3000)
+          },4000)
         }
         else {
           alert("Oops! something wrong happen, please try again.");

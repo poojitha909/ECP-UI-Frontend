@@ -1,6 +1,9 @@
 <!-- Contact detail from -->
 <div class="category-box m-t-40 bg-white">
     <h3>Address</h3>
+    <label class="private-checkbox" for="private-imformation"><input class="uk-checkbox"
+        id="private-imformation" type="checkbox" checked> This information is
+    private</label>
     <hr />
     <!-- Error box START-->
     <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>

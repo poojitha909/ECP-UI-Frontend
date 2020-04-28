@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contact-detail-form',
@@ -14,7 +15,7 @@ export class ContactDetailFormComponent implements OnInit {
   errorMessage;
   successMessage;
   isLoading;
-
+  subscription:Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -37,7 +38,6 @@ export class ContactDetailFormComponent implements OnInit {
 
   ngOnInit() {
     this.contactForm.get("streetAddress").valueChanges.subscribe(selectedValue=>{
-      console.log('streetAddress',selectedValue)
       this.userService.formEditMessage("editForm")
     });
     this.contactForm.get("zip").valueChanges.subscribe(selectedValue=>{
@@ -46,7 +46,11 @@ export class ContactDetailFormComponent implements OnInit {
     this.contactForm.get("city").valueChanges.subscribe(selectedValue=>{
       this.userService.formEditMessage("editForm")
     })
-
+    this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
+      if(message=="closeModal"){
+        document.getElementById("city").focus();
+      }    
+    })
   }
 
   onSubmit() {

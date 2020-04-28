@@ -1,7 +1,7 @@
 <div class="category-box bg-white">
     <div uk-grid>
         <div class="uk-width-expand">
-            <h3>Your Details</h3>
+            <h3>Key Profile Information</h3>
         </div>
         <div class="uk-width-auto uk-flex uk-flex-middle">
             <a href="javascript:void(0)" (click)="edit('USER_DETAILS')" class="edit font-regular">Edit</a>
@@ -120,28 +120,6 @@
     </div>
 
     <hr>
-
-    <div class="m-t-40">
-        <p class="font-regular-15 m-b-10 lable">Something about yourself</p>
-        <p class="font-regular m-t-0">{{ userService?.userProfile?.basicProfileInfo?.shortDescription || '-' }}</p>
-
-    </div>
-
-    <div class="m-t-30">
-        <p class="font-regular-15 m-b-10 lable">Emotional Challenges</p>
-        <p class="font-regular m-t-0">{{userService?.userProfile?.individualInfo?.emotionalIssues || '-'}}</p>
-    </div>
-
-    <div class="m-t-30">
-        <p class="font-regular-15 m-b-10 lable">Medical Issues</p>
-        <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.medicalIssues || '-' }}</p>
-    </div>
-
-    <div class="m-t-30">
-        <p class="font-regular-15 m-b-10 lable">Other Difficulties</p>
-        <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.otherIssues || '-' }}</p>
-    </div>
-
     <div class="m-t-30">
         <p class="font-regular-15 m-b-10 lable">Language</p>
         <p class="font-regular m-t-0">
@@ -164,5 +142,26 @@
     <div class="m-t-30">
         <p class="font-regular-15 m-b-10 lable">Topic of Interests</p>
         <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.otherInterests || '-'}}</p>
+    </div>
+
+    <div class="m-t-30">
+        <p class="font-regular-15 m-b-10 lable">Medical Issues</p>
+        <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.medicalIssues || '-' }}</p>
+    </div>
+
+    <div class="m-t-30">
+        <p class="font-regular-15 m-b-10 lable">Emotional Challenges</p>
+        <p class="font-regular m-t-0">{{userService?.userProfile?.individualInfo?.emotionalIssues || '-'}}</p>
+    </div>
+
+    <div class="m-t-30">
+        <p class="font-regular-15 m-b-10 lable">Other Difficulties</p>
+        <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.otherIssues || '-' }}</p>
+    </div>
+
+    <div class="m-t-40">
+        <p class="font-regular-15 m-b-10 lable">Something about yourself</p>
+        <p class="font-regular m-t-0">{{ userService?.userProfile?.basicProfileInfo?.shortDescription || '-' }}</p>
+
     </div>
 </div>

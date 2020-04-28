@@ -26,18 +26,14 @@ export class ViewPersonalInformationComponent implements OnInit{
 
   ngOnInit() {
     this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
-      console.log(message,"message from contact detial component")
       this.messages=message;
-     
     })
   }
 
   edit(actionName){
     if(this.messages=='editForm'){
       const modalRef = this.modalService.open(ModalComponent);
-      // modalRef.componentInstance.user = this.formSection;
     }else{
-      console.log(actionName)
       this.editProfile.emit({obj: "", action: actionName})
     }
   }

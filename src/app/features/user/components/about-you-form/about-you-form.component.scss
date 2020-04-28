@@ -40,20 +40,21 @@ h3{
 }
 
 .uk-button-transparent{
-    margin-left: 450px;
+    margin-left: 485px;
     border-radius: 4px;
     font-size: 18px;
     text-transform: none;
     padding: 0px 30px;
+    
   }
 
   .uk-button-default{ 
         border-radius: 4px;
         font-size: 18px;
         border: none;
-   
         text-transform: none;
         padding: 2px 30px;
+        
   }
 
   .display-picture{
@@ -81,6 +82,9 @@ h3{
     background: #D7E0EF;
     padding: 10px;
     border-radius: 4px;
+    .uk-checkbox{
+        margin-right: 10px;
+    }
 }
 
 .uk-checkbox{

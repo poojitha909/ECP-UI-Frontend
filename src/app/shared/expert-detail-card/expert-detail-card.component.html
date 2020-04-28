@@ -27,7 +27,7 @@
       {{ expert?.answersCount }} Queries Answered
     </div>
     <button *ngIf="isSame==false" class="uk-button uk-button-primary" style="text-overflow: ellipsis;">Ask
-      {{ (expertfullName.length>6)? (expertfullName | slice:0:8)+' '+'..':(expertfullName) }}</button>
+      {{ (expertfullName.length>7)? (expertfullName | slice:0:7)+' '+'..':(expertfullName) }}</button>
     <button *ngIf="isSame==true" class="uk-button uk-button-primary" style="font-size: 0.8em;">Questions for
       you</button>
   </div>

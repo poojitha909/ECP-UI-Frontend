@@ -29,7 +29,7 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnChanges
   showResult: boolean;
   productsList: any[];
   catsList: any[];
-
+  totalPages: number;
 
   currentUrl: string;
   showingProduct: string;
@@ -95,7 +95,7 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnChanges
       this.searchParams.productCategory = this.homeService.productCategory;
     }
     if (this.route.snapshot.queryParams['page'] !== undefined) {
-      this.searchParams.p = this.route.snapshot.queryParams['page'];
+      this.searchParams.p = +this.route.snapshot.queryParams['page'];
     }
     this.currentUrl = window.location.href;
     this.totalRecords = 0;
@@ -117,6 +117,7 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   changePage(page: number) {
+    console.log(page);
     this.searchParams.p = page;
     if (this.showPagination) {
       this.router.navigate(['/products'], { queryParams: { productCategory: this.searchParams.productCategory, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p } });
@@ -135,6 +136,7 @@ export class ProductResultsComponent implements OnInit, AfterViewInit, OnChanges
       if (data.content) {
         this.productsList = data.content;
         this.totalRecords = data.total;
+        this.totalPages = Math.ceil(this.totalRecords / this.searchParams.s);
         this.showCount.emit(this.totalRecords);
         this.isLoading = false;
       }

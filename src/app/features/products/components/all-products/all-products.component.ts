@@ -112,7 +112,8 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   onSearch() {
     this.setSearchTxt(this.tempSearchTxt);
     document.getElementById("productSearch").focus();
-    this.router.navigate(['/products'], { queryParams: { productCategory: this.productCategory, searchTxt: this.searchTxt } });
+    this.homeService.productCategory = '';
+    this.router.navigate(['/products'], { queryParams: { searchTxt: this.searchTxt } });
   }
 
   showProductCount(value) {

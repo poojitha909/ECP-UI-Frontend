@@ -322,23 +322,23 @@
   }
 }
 
-.uk-tab {
-  &::before {
-    border-bottom: none;
-  }
+// .uk-tab {
+//   &::before {
+//     border-bottom: none;
+//   }
 
-  & > * > a {
-    border-bottom: 3px solid #161c2d3d;
-    font-size: 18px;
-    line-height: 165%;
-    text-transform: unset;
-  }
+//   & > * > a {
+//     border-bottom: 3px solid #161c2d3d;
+//     font-size: 18px;
+//     line-height: 165%;
+//     text-transform: unset;
+//   }
 
-  & > .uk-active > a {
-    color: #1a73e8;
-    border-color: #1e87f0;
-  }
-}
+//   & > .uk-active > a {
+//     color: #1a73e8;
+//     border-color: #1e87f0;
+//   }
+// }
 .showOnSearchtab{
   margin-left: 25px;
 }

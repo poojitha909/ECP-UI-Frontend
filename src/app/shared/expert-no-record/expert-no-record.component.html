@@ -7,7 +7,7 @@
                 Would you like to ask about anything related to legal, health, travel etc.? <br/>
                 Why don’t you try asking a question from one of our expert?
             </p> -->
-            <button class="submit uk-button uk-button-primary" routerLink="/ask-question">View All Experts</button>
+            <button class="submit uk-button uk-button-primary" routerLink="/ask-question" [queryParams]="{expertCategory:'', searchTxt:'', show:'experts'}">View All Experts</button>
         </div>
         <div class="uk-width-1-3">
                 <img src="/assets/images/norecord.svg" alt="no record icon" />                    

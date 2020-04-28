@@ -22,6 +22,13 @@
             <app-share-via-media *ngIf="showSharing"></app-share-via-media>
         </div>
         <div class="uk-width-expand@m">
+
+            <!-- pagination info bar -->
+            <div class="page-info-bar" *ngIf="showPagination && totalPages">
+                <p class="font-regular-15 uk-margin-remove">Page <b>{{searchParams.p +1}}</b> of <b>{{totalPages}}</b>
+                </p>
+            </div>
+
             <!-- Sample Implementation on 04-03-20 -->
             <!-- Mobile filter START -->
             <div class="bg-white category-box m-b-20 uk-hidden@s">

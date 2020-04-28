@@ -237,9 +237,9 @@
     background-image: url("/assets/images/landing-img/Ask-1440.png");
   }
 }
-.tab{
-  margin-top: 24px;
-}
+// .tab{
+//   margin-top: 24px;
+// }
 
 // Sample Implementation on 05/03/20
 
@@ -249,23 +249,23 @@
 //   }
 // }
 
-.uk-tab {
-  &::before {
-    border-bottom: none;
-  }
+// .uk-tab {
+//   &::before {
+//     border-bottom: none;
+//   }
 
-  & > * > a {
-    border-bottom: 3px solid #161c2d3d;
-    font-size: 18px;
-    line-height: 165%;
-    text-transform: unset;
-  }
+//   & > * > a {
+//     border-bottom: 3px solid #161c2d3d;
+//     font-size: 18px;
+//     line-height: 165%;
+//     text-transform: unset;
+//   }
 
-  & > .uk-active > a {
-    color: #1a73e8;
-    border-color: #1e87f0;
-  }
-}
+//   & > .uk-active > a {
+//     color: #1a73e8;
+//     border-color: #1e87f0;
+//   }
+// }
 .all-blue .uk-tab  .uk-active > a {
   max-width: 250px;
 }

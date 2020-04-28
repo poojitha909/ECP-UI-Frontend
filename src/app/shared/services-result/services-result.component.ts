@@ -32,10 +32,10 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
   selectedCatid: string;
   showingCategory: string = 'All Services';
   isLoading: boolean;
-  maxPages: number;
+  totalPages: number;
   verfiedCheck: boolean;
   pageSize = 4;
-  activePage: number = 1;
+  activePage: number = 0;
   // selectedCatid: string;
 
   constructor(
@@ -107,6 +107,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
       if (this.searchTxt) {
         this.ecpService.searchedService = '';
         this.ecpService.searchCatID = '';
+        this.selectedCategoryType = undefined;
         this.filterCategoryList(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.searchTxt);
       }
     }
@@ -245,7 +246,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
             this.services = this.services.slice(0, 4);
           }
           this.allService = this.services;
-          this.maxPages = Math.round(this.services.length / this.pageSize);
+          this.totalPages = Math.ceil(this.services.length / this.pageSize);
           // this.verfiedCheck = false;
           this.isLoading = false;
           this.showServices();
@@ -278,8 +279,8 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
         if (response) {
           this.services = response.data;
           this.allService = this.services;
-          this.totalServices.emit(response.total);
-          this.maxPages = Math.round(this.services.length / this.pageSize);
+          // this.totalServices.emit(response.total);
+          this.totalPages = Math.ceil(this.services.length / this.pageSize);
           // this.verfiedCheck = false;
           this.isLoading = false;
           this.showServices();

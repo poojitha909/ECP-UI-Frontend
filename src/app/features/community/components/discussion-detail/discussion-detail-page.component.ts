@@ -39,6 +39,8 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
   whatsappMobileUrl;
   currentModelLink: string;
   afterPublish: boolean = false;
+  showMedia:boolean=true;
+
   private readonly notifier: NotifierService;
   @ViewChild("customNotification", { static: true }) customNotificationTmpl;
   @ViewChild("customNotification1", { static: true }) customNotificationTmpl1;
@@ -58,6 +60,10 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.paramsSubs = this.route.params.subscribe(params => {
       this.initiate();
     });
+    if (this.route.snapshot.params['id'] == 'preview') {
+      this.showMedia=false;
+    }
+    
   }
 
   ngAfterViewInit() {

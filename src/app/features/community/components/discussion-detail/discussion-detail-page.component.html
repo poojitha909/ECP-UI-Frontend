@@ -18,7 +18,10 @@
                         {{discussion.username}}
                     </div>
                 </div>
-                <app-share-via-media></app-share-via-media>
+                <div *ngIf="showMedia">
+                    <app-share-via-media></app-share-via-media>
+                </div>
+                
             </div>
             
 

@@ -46,10 +46,11 @@
     <ul class=" uk-child-width-expand" uk-tab>
       <li [ngClass]="{'uk-active': show=='experts', 'uk-width-1-2': !user?.id}"><a x-no-tabbing
           (click)="showAll('experts')">Experts{{ searchTxt!='' ? " (" + expertsTotal + ")" : "" }}</a></li>
-      <li [ngClass]="{'uk-active': show=='ques'}" *ngIf="user?.id && searchTxt==''"><a x-no-tabbing
-          (click)="showAll('ques')"> My Questions</a></li>
       <li [ngClass]="{'uk-active': show=='expques'}" *ngIf="user?.id && searchTxt=='' && user?.userRoleId =='EXPERT'"><a
           x-no-tabbing (click)="showAll('expques')">Questions for me</a></li>
+      <li [ngClass]="{'uk-active': show=='ques'}" *ngIf="user?.id && searchTxt==''"><a x-no-tabbing
+          (click)="showAll('ques')"> My Questions</a></li>
+      
     </ul>
   </div>
   <!-- tab -end -->

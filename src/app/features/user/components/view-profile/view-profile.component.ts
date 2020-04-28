@@ -27,14 +27,8 @@ export class ViewProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.gender = Object.keys(Gender).find(key => Gender[key] === this.userService.userProfile.individualInfo.gender);
     console.log(this.gender);
-    // this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
-    //   console.log(message,"message from contact detial component")
-    //   this.messages=message;
-     
-    // })
   }
 
   edit(actionName) {

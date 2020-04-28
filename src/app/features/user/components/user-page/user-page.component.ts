@@ -44,7 +44,6 @@ export class UserPageComponent implements OnInit, AfterViewInit {
     })
 
     this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
-      console.log(message,"message from contact detial component")
       this.messages=message;
     })
 }

@@ -1,10 +1,9 @@
 <!-- Change picture form -->
 <div class="category-box bg-white">
-    <h3>Your Details</h3>
+    <h3>Key Profile Information</h3>
     <div class="uk-width-expand@s">
         <label class="private-checkbox" for="private-imformation"><input class="uk-checkbox"
-                id="private-imformation" type="checkbox" checked> This information is
-            private</label>
+                id="private-imformation" type="checkbox" checked>This information is private unless marked “Visible to users / visitors on site”</label>
     </div>
     <hr />
     <!-- Error box START-->
@@ -27,18 +26,18 @@
                         <input type="file" (change)="fileChange($event)" accept="image/*">
                         <button class="uk-button uk-button-default w-100" type="button" tabindex="-1">Select a
                             picture</button>
-                            <span style="font-size: 14px;">(Visible to others)</span>
+                            <span style="font-size: 12px;">(Visible to users / visitors on site)</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="uk-width-expand@s">
-            <form class="uk-form-stacked"  [formGroup]="basicProfile">
+            <form class="uk-form-stacked" [formGroup]="basicProfile">
 
                 <div class="uk-margin">
                     <label class="uk-form-label"
                         [ngClass]="{'uk-text-danger' : formControl.firstName.invalid && ( formControl.firstName.dirty ||  formControl.firstName.touched) }"
-                        for="firstName" >Name<span class="required">*</span> <span>(Visible to others)</span> </label>
+                        for="firstName" >Name<span class="required">*</span> <span>(Visible to users / visitors on site)</span> </label>
                     <div class="uk-form-controls">
                         <input class="uk-input"
                             [ngClass]="{'uk-form-danger' : formControl.firstName.invalid && ( formControl.firstName.dirty ||  formControl.firstName.touched) }"

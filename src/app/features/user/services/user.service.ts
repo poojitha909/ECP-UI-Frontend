@@ -30,12 +30,15 @@ export class UserService {
   }
 
   formEditMessage(message){
-    console.log(message)
     this.subject.next(message);
   }
 
   getFormEditMessage():Observable<any>{
     return this.subject.asObservable();
+  }
+
+  modalClose(closeModal){
+    this.subject.next(closeModal)
   }
 
   createUserProfile(userData: UserProfile): Observable<UserProfile> {

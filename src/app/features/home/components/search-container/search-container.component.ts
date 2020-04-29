@@ -16,11 +16,11 @@ import { Router } from '@angular/router';
 export class SearchContainerComponent implements OnInit {
 
   showReset: boolean;
-  showResult: boolean
   searchTextChanged = new Subject<string>();
   selectedValue: string;
   noRecords: boolean;
-  isLoading: boolean;
+  searchTxt: string;
+  totalRecords: number;
   searchPageParam: PageParam = {
     p: 0,
     s: 6,
@@ -28,25 +28,12 @@ export class SearchContainerComponent implements OnInit {
   };
 
   autocompleteFields: Service[] = [];
-
-  searchData: any = {
-    services: [],
-    products: [],
-    discussions: [],
-    experts: [],
-    events: [],
-    maxResult: 0,
-    totalServices: 0,
-    totalProducts: 0,
-    totalDiscussions: 0,
-    totalEvents: 0,
-    totalExperts: 0
-  };
   constructor(private homeService: HomeService, private router: Router) { }
 
   ngOnInit() {
+    document.getElementById("homeSearch").focus();
     this.searchTextChanged.pipe(
-      debounceTime(500),
+      debounceTime(10),
       distinctUntilChanged()
     ).subscribe(() => {
       this.onSearchChange(this.searchPageParam.term);
@@ -55,9 +42,9 @@ export class SearchContainerComponent implements OnInit {
 
     if (this.homeService.homeSearchtxt) {
       this.searchPageParam.term = this.homeService.homeSearchtxt;
-      this.homeSearchPages();
+      // this.homeSearchPages();
       this.showReset = true;
-      this.showResult = true;
+      this.searchTxt = this.searchPageParam.term;
     }
   }
 
@@ -74,7 +61,7 @@ export class SearchContainerComponent implements OnInit {
   onSearchChange(value) {
     if (value !== "") {
       this.showReset = true;
-      this.homeService.searchParam = this.searchPageParam;
+      // this.homeService.searchParam = this.searchPageParam;
       // this.homeService.getAutoCompleteServices().subscribe(
       //   response => {
       //     this.autocompleteFields = response;
@@ -82,7 +69,8 @@ export class SearchContainerComponent implements OnInit {
     } else {
       this.autocompleteFields = [];
       this.showReset = false;
-      this.showResult = false;
+      this.searchTxt = "";
+      this.homeService.homeSearchtxt = "";
     }
   }
 
@@ -92,47 +80,58 @@ export class SearchContainerComponent implements OnInit {
     this.searchPageParam.term = "";
     this.autocompleteFields = [];
     this.showReset = false;
-    this.showResult = false;
+    this.searchTxt = "";
     this.homeService.homeSearchtxt = "";
+    document.getElementById("homeSearch").focus();
+    this.clearCategoriesFilter();
   }
 
-  homeSearchPages() {
-    this.isLoading = true;
-    this.homeService.searchParam = this.searchPageParam;
-    // Home search pages API
-    this.homeService.getHomeSearchPages().subscribe(response => {
-      this.isLoading = false;
-      if (response && response.servicePage) {
-        const servicePage = JSON.parse(response.servicePage);
-        this.searchData.services = servicePage.content.slice(0, 6);
-        this.searchData.totalServices = servicePage.total
-      }
-      this.searchData.products = response.productPage.content;
-      this.searchData.totalProducts = response.productPage.total;
-      this.searchData.discussions = response.discussPage.content;
-      this.searchData.totalDiscussions = response.discussPage.total;
-      this.searchData.events = response.eventPage.content;
-      this.searchData.experts = response.expertPage.content;
-      this.searchData.totalEvents = response.eventPage.total;
-      this.searchData.totalExperts = response.expertPage.total;
-      this.searchData.maxResult = Math.max(
-        this.searchData.totalServices,
-        this.searchData.totalProducts,
-        this.searchData.totalDiscussions,
-        this.searchData.totalEvents,
-        this.searchData.totalExperts);
-      if (this.searchData.maxResult == 0) {
-        this.noRecords = true;
-      } else {
-        this.noRecords = false;
-      }
-      this.showResult = true;
-    },
-      error => {
-        this.isLoading = false;
-        console.log(error);
-      });
+  clearCategoriesFilter() {
+    this.homeService.eventIsPastEvents = 0;
+    this.homeService.discussCategory = "";
+    this.homeService.expertCategory = "";
+    this.homeService.productCategory = '';
+    this.homeService.serviceCategory = "";
+    this.homeService.serviceSubCategory = "";
   }
+
+  // homeSearchPages() {
+  //   this.isLoading = true;
+  //   this.homeService.searchParam = this.searchPageParam;
+  //   // Home search pages API
+  //   this.homeService.getHomeSearchPages().subscribe(response => {
+  //     this.isLoading = false;
+  //     if (response && response.servicePage) {
+  //       const servicePage = JSON.parse(response.servicePage);
+  //       this.searchData.services = servicePage.content.slice(0, 6);
+  //       this.searchData.totalServices = servicePage.total
+  //     }
+  //     this.searchData.products = response.productPage.content;
+  //     this.searchData.totalProducts = response.productPage.total;
+  //     this.searchData.discussions = response.discussPage.content;
+  //     this.searchData.totalDiscussions = response.discussPage.total;
+  //     this.searchData.events = response.eventPage.content;
+  //     this.searchData.experts = response.expertPage.content;
+  //     this.searchData.totalEvents = response.eventPage.total;
+  //     this.searchData.totalExperts = response.expertPage.total;
+  //     this.searchData.maxResult = Math.max(
+  //       this.searchData.totalServices,
+  //       this.searchData.totalProducts,
+  //       this.searchData.totalDiscussions,
+  //       this.searchData.totalEvents,
+  //       this.searchData.totalExperts);
+  //     if (this.searchData.maxResult == 0) {
+  //       this.noRecords = true;
+  //     } else {
+  //       this.noRecords = false;
+  //     }
+  //     this.showResult = true;
+  //   },
+  //     error => {
+  //       this.isLoading = false;
+  //       console.log(error);
+  //     });
+  // }
 
   onSearch(field?: string) {
     if (field || this.selectedValue) {
@@ -154,11 +153,13 @@ export class SearchContainerComponent implements OnInit {
         }
 
       } else {
+        this.clearCategoriesFilter();
         this.homeService.homeSearchtxt = field;
-        this.homeSearchPages();
+        this.searchTxt = field;
       }
       this.selectedValue = "";
       this.autocompleteFields = [];
+      document.getElementById("homeSearch").focus();
     }
   }
 
@@ -186,6 +187,15 @@ export class SearchContainerComponent implements OnInit {
   onItemSelected(value) {
     this.selectedValue = value;
     // this.searchPageParam.term = value;
+  }
+
+  getRecordsCount(allCounts) {
+    this.totalRecords = 0;
+    Object.values(allCounts).forEach((value: number) => {
+      if (value) {
+        this.totalRecords += value;
+      }
+    });
   }
 
 }

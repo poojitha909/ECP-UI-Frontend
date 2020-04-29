@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { EpcServiceService } from 'src/app/features/services/epc-service.service';
 import { HomeService } from 'src/app/features/home/home.service';
+import { MenuService } from 'src/app/features/community/services/menu.service';
 declare var UIkit: any;
 
 @Component({
@@ -31,10 +32,10 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
   selectedCatid: string;
   showingCategory: string = 'All Services';
   isLoading: boolean;
-  maxPages: number;
+  totalPages: number;
   verfiedCheck: boolean;
   pageSize = 4;
-  activePage: number = 1;
+  activePage: number = 0;
   // selectedCatid: string;
 
   constructor(
@@ -44,7 +45,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     private jdCategoryService: JdCategoryService,
     public ecpService: EpcServiceService,
     public homeService: HomeService,
-    private router: Router
+    private router: Router, private shareMedia: MenuService
   ) {
     // this.categories = jdCategoryService.serviceCategories;
   }
@@ -91,19 +92,24 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
         });
     } else {
 
-      if (this.searchTxt) {
-        this.ecpService.searchedService = '';
-        this.ecpService.searchCatID = '';
-        this.filterCategoryList(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.searchTxt);
-        // this.getCategoryServices(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.searchTxt);
-      }
+      // if (this.searchTxt) {
+      //   this.ecpService.searchedService = '';
+      //   this.ecpService.searchCatID = '';
+      //   this.filterCategoryList(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.searchTxt);
+      //   // this.getCategoryServices(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.searchTxt);
+      // }
     }
 
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes) {
-
+      if (this.searchTxt) {
+        this.ecpService.searchedService = '';
+        this.ecpService.searchCatID = '';
+        this.selectedCategoryType = undefined;
+        this.filterCategoryList(this.homeService.serviceCategory, this.homeService.serviceSubCategory, this.searchTxt);
+      }
     }
 
   }
@@ -114,9 +120,25 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     const end = start + this.pageSize;
     this.pageServices = this.allService.slice(start, end);
     this.cdr.detectChanges();
-    const elmnt = document.getElementById("serviceList");
-    elmnt.scrollIntoView();
   }
+  // onChangePage(pageData: any) {
+  //   // update current page of items
+  //   this.pageServices = pageData.services;
+  //   this.ecpService.activePage = pageData.currentPage;
+  //   // if (pageData.currentPage !== 1) {
+  //   this.router.navigate(
+  //     [],
+  //     {
+  //       relativeTo: this.activeRoute,
+  //       queryParams: { page: pageData.currentPage },
+  //       queryParamsHandling: 'merge'
+  //     });
+  //   // }
+  //   this.cdr.detectChanges();
+  //   const elmnt = document.getElementById("serviceList");
+  //   elmnt.scrollIntoView();
+  //   // UIkit.scroll('#serviceList').scrollTo('#serviceList');
+  // }
 
   changePage(page: number) {
     if (!this.internalProcessing) {
@@ -224,7 +246,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
             this.services = this.services.slice(0, 4);
           }
           this.allService = this.services;
-          this.maxPages = Math.round(this.services.length / this.pageSize);
+          this.totalPages = Math.ceil(this.services.length / this.pageSize);
           // this.verfiedCheck = false;
           this.isLoading = false;
           this.showServices();
@@ -238,6 +260,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
         // this.searchPageParam.term = category;
         this.isLoading = false;
       });
+    this.shareMedia.setsharemedia(window.location.href)
   }
 
   getAllService() {
@@ -254,15 +277,15 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
     this.ecpService.getAllServices().subscribe(
       response => {
         if (response) {
-          this.services = response;
+          this.services = response.data;
           this.allService = this.services;
-          this.maxPages = Math.round(this.services.length / this.pageSize);
+          // this.totalServices.emit(response.total);
+          this.totalPages = Math.ceil(this.services.length / this.pageSize);
           // this.verfiedCheck = false;
           this.isLoading = false;
           this.showServices();
           // this.router.navigateByUrl('services/all');
         }
-
       },
       error => {
         this.services = [];

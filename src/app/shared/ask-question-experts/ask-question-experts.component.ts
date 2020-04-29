@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AskQuestionService } from '../../features/ask-question/services/ask-question.service';
 import { StorageHelperService } from "../../core/services/storage-helper.service";
 import { DomSanitizer } from '@angular/platform-browser';
 import { HomeService } from 'src/app/features/home/home.service';
+import { MenuService } from 'src/app/features/community/services/menu.service';
 
 declare var UIkit;
 
@@ -12,7 +13,7 @@ declare var UIkit;
   templateUrl: './ask-question-experts.component.html',
   styleUrls: ['./ask-question-experts.component.scss']
 })
-export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
+export class AskQuestionExpertsComponent implements OnInit, OnChanges, OnDestroy {
   @Output() showCount: EventEmitter<number> = new EventEmitter();
   experts: any[];
   catsList: any[];
@@ -29,11 +30,12 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
   };
   paramsSubs: any;
   totalRecords: number;
+  totalPages: number;
   currentUrl: string;
   whatsappUrl;
-  
+
   constructor(private route: ActivatedRoute, private router: Router,
-    private store: StorageHelperService, private askQuesService: AskQuestionService,
+    private store: StorageHelperService, private askQuesService: AskQuestionService, private shareMedia: MenuService,
     public sanitizer: DomSanitizer, private homeService: HomeService) {
   }
 
@@ -49,6 +51,12 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
     this.paramsSubs.unsubscribe();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes.searchTxt.firstChange) {
+      this.initiate();
+    }
+  }
+
   initiate() {
     this.searchParams = {
       p: 0,
@@ -61,24 +69,24 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
     if (this.user) {
       this.user = JSON.parse(this.user);
     }
-    
+
     this.totalRecords = 0;
-    if(this.searchTxt){
+    if (this.searchTxt) {
       this.searchParams.searchTxt = this.searchTxt;
     }
     if (this.route.snapshot.queryParams['expertCategory'] !== undefined) {
       this.searchParams.experties = this.route.snapshot.queryParams['expertCategory'];
     }
-    else if (this.homeService.expertCategory){
+    else if (this.homeService.expertCategory) {
       this.searchParams.experties = this.homeService.expertCategory
     }
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
     }
     if (this.route.snapshot.queryParams['page'] !== undefined) {
-      this.searchParams.p = this.route.snapshot.queryParams['page'];
+      this.searchParams.p = +this.route.snapshot.queryParams['page'];
     }
-    if(this.route.snapshot.queryParams['show'] != 'experts'){
+    if (this.route.snapshot.queryParams['show'] != 'experts') {
       this.searchParams.p = 0;
     }
     this.isLoading = true;
@@ -86,27 +94,29 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
       const data = response.data;
       this.catsList = [];
       if (data.content) {
-        this.catsList = data.content.filter( c => (c.show == true));
+        this.catsList = data.content.filter(c => (c.show == true));
       }
     });
     this.showExperts();
   }
 
-  
+
   changePage(page: number) {
     this.searchParams.p = page;
-    if(this.showPagination){
-        this.router.navigate(['/ask-question'], 
-          { queryParams: { 
-            expertCategory: this.searchParams.experties, 
-            searchTxt: this.searchParams.searchTxt, 
-            page: this.searchParams.p, 
-            show: "experts" 
-          } }
-        );
+    if (this.showPagination) {
+      this.router.navigate(['/ask-question'],
+        {
+          queryParams: {
+            expertCategory: this.searchParams.experties,
+            searchTxt: this.searchParams.searchTxt,
+            page: this.searchParams.p,
+            show: "experts"
+          }
+        }
+      );
     }
-    else{
-        this.showExperts();
+    else {
+      this.showExperts();
     }
   }
 
@@ -114,11 +124,11 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
     this.searchParams.experties = '';
     this.searchParams.p = 0;
     this.homeService.expertCategory = '';
-    if(this.showPagination){
-      this.router.navigate(['/ask-question'], { queryParams: { searchTxt: this.searchParams.searchTxt, show:"experts" } });
+    if (this.showPagination) {
+      this.router.navigate(['/ask-question'], { queryParams: { searchTxt: this.searchParams.searchTxt, show: "experts" } });
     }
-    else{
-        this.showExperts();
+    else {
+      this.showExperts();
     }
   }
 
@@ -130,20 +140,22 @@ export class AskQuestionExpertsComponent implements OnInit, OnDestroy {
       if (data.content) {
         this.experts = data.content;
         this.totalRecords = data.total;
+        this.totalPages = Math.ceil(this.totalRecords / this.searchParams.s);
         this.showCount.emit(this.totalRecords);
         this.isLoading = false;
       }
     });
+    this.shareMedia.setsharemedia(window.location.href)
   }
-  
+
   onTabChange(value) {
     this.searchParams.experties = value;
     this.homeService.expertCategory = value;
-    if(this.showPagination){
-      this.router.navigate(['/ask-question'], { queryParams: { expertCategory: this.searchParams.experties, searchTxt: this.searchParams.searchTxt, show:"experts" } });
+    if (this.showPagination) {
+      this.router.navigate(['/ask-question'], { queryParams: { expertCategory: this.searchParams.experties, searchTxt: this.searchParams.searchTxt, show: "experts" } });
     }
-    else{
-        this.showExperts();
+    else {
+      this.showExperts();
     }
   }
 }

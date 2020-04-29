@@ -1,54 +1,91 @@
 <div>
   <!-- Error box START-->
-  <div *ngIf="numberError" class="uk-alert-danger uk-animation-fade" uk-alert>
-    <p>{{ numberError }}</p>
+  <div *ngIf="numberError" role="alert" aria-live="polite" aria-atomic="true" class="uk-alert-danger uk-animation-fade"
+    uk-alert>
+    <p><span class="uk-icon mr-5" uk-icon="warning"></span> {{ numberError }}</p>
   </div>
-  <!-- Error box END-->
-  <div class="uk-form-stacked">
-    <div class="uk-margin">
-      <label class="uk-form-label" for="Phone-Number">Mobile Number</label>
-      <div class="uk-form-controls">
 
-        <div class="uk-inline mobile-number">
-          <a *ngIf="mobileNumber" class="uk-form-icon uk-form-icon-flip" (click)="changeNumber()">Change Number</a>
-          <input class="uk-input otpnumber"
-            [ngClass]="{'uk-form-danger' : mobile.invalid && (mobile.dirty || mobile.touched) }" id="Phone-Number"
-            type="number" [(ngModel)]="mobileNumber" (keydown.enter)="requestOtp()" placeholder="Enter Mobile Number..."
-            required #mobile="ngModel" />
+  <div *ngIf="otpGenerated" role="alert" aria-live="polite" aria-atomic="true"
+    class="uk-alert-success uk-animation-fade" uk-alert>
+    <p><span class="uk-icon mr-5" uk-icon="info"></span> OTP {{ otpResend ? 'resent': 'sent' }} successfully to <b>{{mobileNumber}}</b></p>
+  </div>
+
+  <!-- Error box END-->
+  <div class="category-box bg-white" role="region" aria-labelledby="mobile-signi">
+
+    <h2 class="m-0" id="mobile-signin">Sign In With Phone Number</h2>
+    <hr class="mt-10" />
+    <div class="uk-form-stacked">
+      <div class="uk-margin">
+        <label class="uk-form-label" for="Phone-Number">Phone Number</label>
+        <div class="uk-form-controls">
+
+          <!-- <div class="uk-inline mobile-number">
+            <input class="uk-input otpnumber"
+              [ngClass]="{'uk-form-danger' : mobile.invalid && (mobile.dirty || mobile.touched) }" id="Phone-Number"
+              type="number" [(ngModel)]="mobileNumber" (keydown.enter)="requestOtp()"
+              placeholder="Enter Phone Number..." required #mobile="ngModel" />
+            <a href="javascript:void(0)" *ngIf="mobileNumber" aria-live="polite" aria-atomic="true"
+              class="uk-form-icon uk-form-icon-flip" (click)="changeNumber()">Change Number</a>
+          </div> -->
+
+
+          <input class="uk-input" [ngClass]="{'uk-form-danger' : mobile.invalid && (mobile.dirty || mobile.touched) }"
+            id="Phone-Number" type="number" [(ngModel)]="mobileNumber" (keydown.enter)="requestOtp()"
+            placeholder="Enter Phone Number..." required #mobile="ngModel" [disabled]="otpGenerated" />
+
+        </div>
+      </div>
+      <div *ngIf="otpGenerated" class="uk-margin">
+        <label class="uk-form-label" for="opttxt">OTP</label>
+        <div class="uk-form-controls">
+          <div class="uk-inline mobile-number">
+            <input id="opttxt" class="uk-input" aria-label="otpcode input" type="number" name="otpcode"
+              [(ngModel)]="OtpCode" placeholder="Enter OTP" (keydown.enter)="requestOtp()" />
+            <a (click)="requestResendOtp()" href="javascript:void(0)" class="uk-form-icon uk-form-icon-flip"> Resend
+              OTP</a>
+
+          </div>
         </div>
       </div>
     </div>
-    <div class="uk-margin">
-      <div class="uk-form-controls">
-        <input class="uk-input" aria-label="otpcode" type="number" name="otpcode" [(ngModel)]="OtpCode"
-          placeholder="Enter OTP..." (keydown.enter)="requestOtp()" [disabled]="!otpGenerated" />
-        <a *ngIf="otpGenerated" (click)="requestResendOtp()" href="javascript:void(0)" class="resend-otp"> Resend
-          OTP</a>
+
+    <div class="uk-flex uk-flex-right" uk-grid>
+      <!-- <div *ngIf="!otpGenerated" class="uk-width-expand uk-flex uk-flex-middle">- An OTP will be sent to the above
+        number.
+      </div>
+      <div *ngIf="otpGenerated" aria-describedby="otp-input" aria-live="polite" aria-atomic="true"
+        class="uk-width-expand uk-flex uk-flex-middle">-
+        4-digit OTP was
+        {{ otpResend ? 'resent': 'sent' }} to
+        {{ mobileNumber }}.</div> -->
+      <div *ngIf="mobileNumber && otpGenerated" class="uk-width-auto">
+        <button class="uk-button uk-button-transparent" (click)="changeNumber()">Change
+          Number</button>
+      </div>
+
+      <div class="uk-width-auto"> <button class="uk-button uk-button-default" (click)="requestOtp()"
+          [disabled]="!mobileNumber">{{ otpGenerated ?  'Sign In' :'Send OTP to Sign In'}}</button>
       </div>
     </div>
+
   </div>
-  <div class="m-b-40" uk-grid>
-    <div *ngIf="!otpGenerated" class="uk-width-expand uk-flex uk-flex-middle">Please enter the OTP sent to the above number.
-    </div>
-    <div *ngIf="otpGenerated" class="uk-width-expand uk-flex uk-flex-middle">- 4-digit OTP was
-      {{ otpResend ? 'resent': 'sent' }} to
-      {{ mobileNumber }}.</div>
-    <div class="uk-width-auto"> <button class="uk-button uk-button-default otp-btn"
-        (click)="requestOtp()">{{ otpGenerated ?  'Verify OTP' :'Request OTP'}}</button></div>
-  </div>
-  <hr>
-  <div class="uk-child-width-1-2@l m-t-30" uk-grid>
+
+  <hr class="mt-50 mb-50" />
+
+
+  <div class="uk-child-width-1-2@l" uk-grid>
     <div>
       <button class="fb-btn uk-button uk-button-default font-regular" (click)="signinWithFacebook()">
-        <fa-icon [icon]="['fab', 'facebook-square']" [style]="{'float': 'left'}"></fa-icon>
-        Join Us with Facebook
+        Login with Facebook
+        <fa-icon [icon]="['fab', 'facebook']" [style]="{'float': 'right'}"></fa-icon>
       </button>
     </div>
 
     <div>
       <button class="google-btn uk-button uk-button-default font-regular" (click)="signinWithGoogle()">
-        <fa-icon [icon]="['fab','google']" [style]="{'float': 'left'}"></fa-icon>
-        Join Us with Google
+        Login with Google
+        <fa-icon [icon]="['fab','google']" [style]="{'float': 'right'}"></fa-icon>
       </button>
     </div>
   </div>

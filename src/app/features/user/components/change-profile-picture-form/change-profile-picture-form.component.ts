@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/core';
 import { UserService } from '../../services/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-change-profile-picture-form',
@@ -9,7 +10,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./change-profile-picture-form.component.scss']
 })
 export class ChangeProfilePictureFormComponent implements OnInit {
+
   @Output() cancelForm = new EventEmitter();
+  
   EditUser: string;
   eventEmitted: any;
   imageData: FormData;
@@ -19,6 +22,7 @@ export class ChangeProfilePictureFormComponent implements OnInit {
   errorMessage;
   successMessage;
   isLoading;
+  subscription: Subscription;
 
 
 
@@ -41,7 +45,6 @@ export class ChangeProfilePictureFormComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.basicProfile.get("firstName").valueChanges.subscribe(selectedValue=>{
       this.userService.formEditMessage("editForm")
      });
@@ -51,6 +54,11 @@ export class ChangeProfilePictureFormComponent implements OnInit {
      this.basicProfile.get("primaryPhoneNo").valueChanges.subscribe(selectedValue=>{
       this.userService.formEditMessage("editForm")
      });
+     this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
+       if(message=="closeModal"){
+        document.getElementById("Phone-number").focus();
+       }
+    })
   }
 
 

@@ -106,6 +106,6 @@ export class DiscussionCreatePageComponent implements OnInit {
       tags: discuss.category ? this.categoryList[discuss.category].tags : [],
       categories: discuss.category ? [this.categoryList[discuss.category].id] : [],
       contentType: 0}));
-    this.router.navigate(['/community/discussion/preview']);
+    this.router.navigate(['/community/discussion/preview',{id:'preview'}]);
   }
 }

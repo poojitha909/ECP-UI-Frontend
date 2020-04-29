@@ -48,8 +48,12 @@ export class ReviewsListComponent implements OnInit {
     this.likeReview.emit(reviewId);
   }
 
-  editReview(review: any) {
-    this.submitEditForm.emit(review);
+  editReview(review: any, element: any) {
+    const editData = {
+      review: review,
+      elementId: element.id
+    }
+    this.submitEditForm.emit(editData);
 
   }
 

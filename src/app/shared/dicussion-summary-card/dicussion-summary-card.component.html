@@ -1,8 +1,10 @@
-<div class="discussion-summary uk-card-hover bg-white uk-height-1-1 cursor-pointer uk-flex uk-flex uk-flex-column uk-flex-between"
+<div tabindex=-1 class="discussion-summary uk-card-hover bg-white uk-height-1-1 cursor-pointer uk-flex uk-flex uk-flex-column uk-flex-between"
     [routerLink]="['/community/discussion', discussion.id, category ]" [queryParams]="pageParam">
     <div class="discussion-summary-head uk-grid uk-grid-collapse">
         <h3 class="discussion-title">
-            {{discussion.title | ellipsis:65}}
+            <a [routerLink]="['/community/discussion', discussion.id, category ]">
+                {{discussion.title | ellipsis:65}}
+            </a>
         </h3>
     </div>
     <div class="discussion-summary-body uk-grid uk-grid-collapse">
@@ -10,7 +12,7 @@
             <!--TODO: apply imageHandler directive-->
             <img [imageHandler] *ngIf="discussion?.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage"
                 [src]="discussion?.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage"
-                style="max-width:90px;max-height:90px;" alt="No Image Found" />
+                style="max-width:90px;max-height:90px;" alt="discussion user profile image" />
         </div>
         <div class="uk-width-2-3">
             <p class="author">by <span>{{discussion.username}}</span></p>
@@ -20,12 +22,12 @@
     </div>
     <div class="discussion-summary-footer uk-child-width-1-2" uk-grid>
         <div>
-            <p class="comments left"><img src="/assets/images/comments.svg"
-                    style="height:30px;display:inline-block;" alt="No Image Found" />{{discussion.aggrReplyCount}} Replies</p>
+            <p class="comments left"><img src="/assets/images/comments.svg" style="height:30px;display:inline-block;"
+                    alt="comments icon" />{{discussion.aggrReplyCount}} Replies</p>
         </div>
         <div>
-            <p class="comments right"><img src="/assets/images/view.svg"
-                    style="height:30px;display:inline-block;" alt="No Image Found" />{{ discussion.viewCount ? discussion.viewCount : 0 }}
+            <p class="comments right"><img src="/assets/images/view.svg" style="height:30px;display:inline-block;"
+                    alt="view count icon" />{{ discussion.viewCount ? discussion.viewCount : 0 }}
                 Views</p>
         </div>
     </div>

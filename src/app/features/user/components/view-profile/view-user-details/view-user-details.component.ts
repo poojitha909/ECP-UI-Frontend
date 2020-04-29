@@ -24,7 +24,6 @@ export class ViewUserDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
-      console.log(message,"message from contact detial component")
       this.messages=message;
     })
   }
@@ -33,7 +32,6 @@ export class ViewUserDetailsComponent implements OnInit {
     if(this.messages=='editForm'){
       const modalRef = this.modalService.open(ModalComponent);
     }else{
-      console.log(actionName)
       this.editProfile.emit({obj: "", action: actionName})
     }
   }

@@ -29,13 +29,13 @@ export class SearchContainerComponent implements OnInit {
 
   autocompleteFields: Service[] = [];
 
-  constructor(private homeService: HomeService, private router: Router, private ecpService: EpcServiceService) { 
+  constructor(private homeService: HomeService, private router: Router, public ecpService: EpcServiceService) {
     //this.ecpService.showBg = false 
   }
 
   ngOnInit() {
     this.searchTextChanged.pipe(
-      debounceTime(500),
+      debounceTime(10),
       distinctUntilChanged()
     ).subscribe(() => {
       this.onSearchChange(this.searchPageParam.term);
@@ -45,10 +45,9 @@ export class SearchContainerComponent implements OnInit {
       this.searchPageParam.term = this.homeService.homeSearchtxt;
       this.showReset = true;
       //this.ecpService.showBg = true;
-      
       // this.searchService();
     }
-
+    document.getElementById("serviceSearch").focus();
   }
 
   @HostListener('window:click', ['$event.target'])
@@ -64,7 +63,6 @@ export class SearchContainerComponent implements OnInit {
   onSearchChange(value) {
     if (value !== "") {
       this.showReset = true;
-      this.ecpService.showBg = true;
       this.homeService.searchParam = this.searchPageParam;
       // this.homeService.getAutoCompleteServices().subscribe(
       //   response => {
@@ -75,21 +73,20 @@ export class SearchContainerComponent implements OnInit {
       this.homeService.homeSearchtxt = "";
       this.showReset = false;
       this.ecpService.showBg = false;
+      this.router.navigate(['/services'], { queryParams: { searchTxt: this.searchPageParam.term, category: this.ecpService.searchedService, catid: this.ecpService.searchCatID } })
     }
   }
 
   searchService() {
     // const param = this.searchPageParam.term;
+    this.ecpService.searchedService = "";
+    this.ecpService.searchCatID = "";
+    this.homeService.serviceCategory = "";
+    this.homeService.serviceSubCategory = "";
     this.homeService.homeSearchtxt = this.searchPageParam.term;
-    this.router.navigate(['/services'], { queryParams: { searchTxt: this.searchPageParam.term, category: this.ecpService.searchedService, catid: this.ecpService.searchCatID } })
-    // this.homeService.searchParam = this.searchPageParam;
-    // this.homeService.getServices().subscribe(response => {
-    //   this.popullarService = response.data.slice(0, 6);
-    //   this.totalService = response.total;
-    // },
-    //   error => {
-    //     console.log(error);
-    //   });
+    this.ecpService.showBg = true;
+    this.router.navigate(['/services'], { queryParams: { searchTxt: this.searchPageParam.term } })
+
   }
 
 
@@ -117,6 +114,7 @@ export class SearchContainerComponent implements OnInit {
       }
       this.selectedValue = "";
       this.autocompleteFields = [];
+      document.getElementById("serviceSearch").focus();
     }
   }
 
@@ -127,6 +125,9 @@ export class SearchContainerComponent implements OnInit {
     this.ecpService.showBg = false;
     this.popullarService = undefined;
     this.homeService.homeSearchtxt = "";
+    document.getElementById("serviceSearch").focus();
+    this.homeService.serviceCategory = "";
+    this.homeService.serviceSubCategory = "";
     this.router.navigate(['services'], { queryParams: { searchTxt: this.searchPageParam.term } });
   }
 

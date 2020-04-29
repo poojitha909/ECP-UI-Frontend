@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { SEO } from 'src/app/core/interfaces';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-services-page',
   templateUrl: './services-page.component.html',
   styleUrls: ['./services-page.component.scss']
 })
-export class ServicesPageComponent implements OnInit {
+export class ServicesPageComponent implements OnInit, AfterViewInit {
 
   constructor(private seoService: SeoService) {
 
     // Generate meta tag 
     const config: SEO = {
-      title: `At your service - An Elder Spring Initiative by Tata Trusts`,
+      title: `Services`,
       keywords: 'products,services,events,dscussions',
       description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
       author: `An Elder Spring Initiative by Tata Trusts`,
@@ -21,10 +22,13 @@ export class ServicesPageComponent implements OnInit {
     }
 
     this.seoService.generateTags(config);
+
   }
 
   ngOnInit() {
 
   }
 
+  ngAfterViewInit() {
+  }
 }

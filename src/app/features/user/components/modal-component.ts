@@ -1,5 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EditProfileFormComponent } from './edit-profile-form/edit-profile-form.component';
+import { ElementSchemaRegistry } from '@angular/compiler';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-modal-component',
@@ -14,13 +17,23 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
       <p>Please Save or Cancel your changes before editing new section.</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+      <button type="button" class="btn btn-outline-dark"  (click)="close()">Close</button>
     </div>
   `
 })
-export class ModalComponent {
-  @Input() name;
+export class ModalComponent implements OnInit{
 
-  constructor(public activeModal: NgbActiveModal) {}
+  // @Input() public formSection;
+
+  constructor(public activeModal: NgbActiveModal,private userservice:UserService) {}
+
+  ngOnInit(){
+    // const data=this.formSection
+    // console.log(data);
+  }
+  close(){
+    this.activeModal.close('Close click')
+    this.userservice.modalClose("closeModal")
+  }
 }
 

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/core';
 import { User, SocialAccount, UserIdType, OtpErrorMessage } from 'src/app/core/interfaces';
 import { UserService } from '../../services/user.service';
+import { Title } from '@angular/platform-browser';
 import { ConfigurationService } from 'src/app/core/services/configuration.service';
 
 
@@ -13,10 +14,11 @@ import { ConfigurationService } from 'src/app/core/services/configuration.servic
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, AfterViewInit {
 
-  welcomeText:boolean;
+  welcomeText: boolean;
   isOtpGenerated: boolean;
+  otpFailedNumber: string
   isLoading: boolean;
   verifiedString: string;
   errorMessage: string;
@@ -27,13 +29,15 @@ export class SignupComponent implements OnInit {
     private activeroute: ActivatedRoute,
     private auth: AuthService,
     private userService: UserService,
-    private configServ: ConfigurationService,
-    private router: Router) {
+    private router: Router,
+    private titleService: Title,
+    private configServ: ConfigurationService) {
 
     this.configServ.loadConfigurations().subscribe((c) => {
       this.config = c;
     })
     this.user = this.auth.user;
+    this.titleService.setTitle("Sign In - Joy of Age");
   }
 
   ngOnInit() {
@@ -46,7 +50,6 @@ export class SignupComponent implements OnInit {
       this.activeroute.queryParams.subscribe(({ state }) => {
         if (state === this.config.facebook.urlState) {
           if (loginCred.access_token) {
-            // localStorage.setItem('loginCredential', loginResponse.access_token);
             this.getFbUserData(loginCred.access_token);
           }
         } else {
@@ -59,18 +62,26 @@ export class SignupComponent implements OnInit {
 
   }
 
+  ngAfterViewInit() {
+    document.getElementById("signin-header").focus();
+  }
+
 
   //Get Facebook user details
   getFbUserData(token) {
     this.isLoading = true;
     this.auth.getFbUserData(token).subscribe(data => {
-      if (data) {
-        this.userSignup(data, SocialAccount.FACEBOOK);
-      }
+      this.user = data.user;
+      this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
+      this.welcomeText =true;
+      this.getUserProfile();
+      console.log("google login response", this.user);
     },
       error => {
-        console.log(error)
+        console.log(error);
         this.isLoading = false;
+        this.errorMessage = error.error.error.errorMsg;
+        this.isOtpGenerated = false;
       });
   }
 
@@ -78,48 +89,17 @@ export class SignupComponent implements OnInit {
   getGoogleUserData(token) {
     this.isLoading = true;
     this.auth.getGoogleUserData(token).subscribe(data => {
-      if (data) {
-        this.userSignup(data, SocialAccount.GOOGLE);
-      }
+      this.user = data.user;
+      this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
+      this.welcomeText =true;
+      this.getUserProfile();
+      console.log("google login response", this.user);
     },
       error => {
-        console.log(error)
-        this.isLoading = false;
-      });
-  }
-
-  //Signup using api 
-  userSignup(userData, socialPlatform) {
-    this.errorMessage = null;
-    const user: User = {
-      email: userData.email,
-      userName: userData.name,
-      userIdType: UserIdType.EMAIL,
-      userRegType: UserIdType.EMAIL,
-      socialSignOnId: userData.id,
-      socialSignOnPlatform: socialPlatform
-    }
-
-    if (userData.phoneNumber) {
-      user.phoneNumber = userData.phoneNumber;
-      user.userRegType = UserIdType.EMAIL;
-      user.userIdType = UserIdType.MOBILE;
-    }
-
-    this.auth.login(user).subscribe(
-      userData => {
-        this.user = userData;
-        this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
-        this.welcomeText =true;
-        // this.isLoading = false;
-        this.getUserProfile();
-        console.log("signup response", userData)
-      },
-      error => {
+        console.log(error);
         this.isLoading = false;
         this.errorMessage = error.error.error.errorMsg;
         this.isOtpGenerated = false;
-        console.log(error);
       });
   }
 
@@ -148,40 +128,40 @@ export class SignupComponent implements OnInit {
     this.errorMessage = null;
     this.auth.verfiyOtp(verification.number, verification.code).subscribe(response => {
       console.log(response);
-      if (response.type === "success") {
-        const user = {
-          email: "",
-          name: verification.number,
-          id: verification.number,
-          phoneNumber: verification.number
-        }
-        this.userSignup(user, SocialAccount.MOBILE);
+      if (response.sessionId && response.user) {
+        this.user = response.user;
+        this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
+        this.welcomeText =true;
+        // this.isLoading = false;
+        this.getUserProfile();
       } else {
         this.isLoading = false;
         if (response.message == OtpErrorMessage.otpNotVerified) {
-          this.errorMessage = "Invalid Otp, Please Enter a Valid OTP Number !";
-        } else {
-          this.errorMessage = response.message;
+          this.errorMessage = "Invalid Otp, Please try again!";
         }
-        this.isOtpGenerated = false;
+        this.otpFailedNumber = verification.number;
+        // this.isOtpGenerated = false;
       }
     },
       error => {
         console.log(error);
+        this.isLoading = false;
+        this.errorMessage = error.error.error.errorMsg;
+        this.isOtpGenerated = false;
       });
   }
 
   resendOtp(number) {
     if (number) {
       // this.isLoading = true;
+      this.otpFailedNumber = null;
+      this.errorMessage = null;
       this.auth.resendOtp(number).subscribe(response => {
         console.log(response);
         if (response.type === "success") {
         } else {
           if (response.message == OtpErrorMessage.maxRetry) {
             this.errorMessage = "Max resend otp count exceeded";
-          } else {
-            this.errorMessage = response.message;
           }
           this.isOtpGenerated = false;
         }

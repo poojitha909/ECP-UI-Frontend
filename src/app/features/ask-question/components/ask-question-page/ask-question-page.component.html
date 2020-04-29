@@ -1,10 +1,8 @@
 <div class="top-banner" id="askExpertBanner">
   <div uk-grid>
     <div class="uk-width-expand uk-flex uk-flex-middle">
-      <p class="banner-text font-regular">Our exclusive team of experts will provide honest, unblased answers to all
-        your queries and
-        guide you whenever
-        you need their help.</p>
+      <p class="banner-text font-regular">Our distinguished experts provide honest, unbiased answers to your questions.
+        All your questions and conversations with an expert remains private between the expert and you.</p>
     </div>
     <div class="uk-flex uk-flex-bottom uk-flex-center uk-width-auto@s">
       <img class="banner-img" src="/assets/images/landing-img/expert-banner-updated.png" />
@@ -13,42 +11,58 @@
 </div>
 
 <div [ngClass]="{'all-blue': searchTxt!=''}" class="mb-24">
-<div class="uk-container search-container">
-  <!-- Search Form START -->
-  <div class="search-form">
-    <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
-      <div class="uk-width-expand">
-        <form class="uk-search uk-search-default" autocomplete='off'>
-          <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
-            <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
-              <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
-            </button>
-          </span>
-          <input class="uk-search-input font-regular search-box sm-pr-150" aria-label="search"
-            [(ngModel)]="tempSearchTxt" (keyup)="onSearchChange($event)" required type="text"
-            placeholder="Search here" name="search" autocomplete='off' />
-        </form>
-      </div>
-      <div>
-        <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
+  <div class="uk-container search-container">
+    <!-- Search Form START -->
+    <div class="search-form" role=“search”>
+      <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
+        <div class="uk-width-expand">
+          <form class="uk-search uk-search-default" autocomplete='off'>
+            <input id="askSearch" class="uk-search-input font-regular search-box sm-pr-150" aria-label="search"
+              [(ngModel)]="tempSearchTxt" (keyup)="onSearchChange($event)" required type="text"
+              placeholder="Search here" name="search" autocomplete='off' />
+            <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
+              <button class="uk-button-link" style="visibility: hidden"></button>
+              <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
+                <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
+              </button>
+            </span>
+          </form>
+        </div>
+        <div>
+          <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-     <!-- tab start -->
+  <!-- tab start -->
 
-<div class= "tab">
-  <ul class="uk-child-width-expand" uk-tab>
-      <li [ngClass]="{'uk-active': show=='experts', 'uk-width-1-2': !user?.id}"><a x-no-tabbing (click)="showAll('experts')">All Experts{{ searchTxt!='' ? " (" + expertsTotal + ")" : "" }}</a></li>
-      <li [ngClass]="{'uk-active': show=='ques'}" *ngIf="user?.id && searchTxt==''"><a x-no-tabbing (click)="showAll('ques')">My Questions</a></li>
-      <li [ngClass]="{'uk-active': show=='expques'}" *ngIf="user?.id && searchTxt=='' && user?.userRoleId =='EXPERT'" ><a x-no-tabbing (click)="showAll('expques')">Questions I need to answer</a></li>   
-  </ul>
-</div>
-<!-- tab -end -->
-<!-- Search Form END -->
-<div id="searchResultList">
-  <ask-question-experts *ngIf="show === 'experts'" [searchTxt]="searchTxt" [showPagination]="showPagination" [showSharing]="showSharing" (showCount)="showExpertCount($event)"></ask-question-experts>
-  <expert-all-question *ngIf="show === 'expques' && searchTxt==''"  [searchTxt]="searchTxt" [showPagination]="showPagination" [showSharing]="showSharing" (showCount)="showExpertQuesCount($event)"></expert-all-question>
-  <ask-question-myques *ngIf="show === 'ques' && searchTxt==''"  [searchTxt]="searchTxt" [showPagination]="showPagination" [showSharing]="showSharing" (showCount)="showMyQuesCount($event)"></ask-question-myques>
-</div>
+  <div *ngIf="searchTxt" class="result-bar m-l-40 m-r-40 m-b-20">
+    <p class="font-regular-15 uk-margin-remove">Showing <b>{{expertsTotal}}</b> results for
+      <b>"{{searchTxt}}"</b></p>
+  </div>
+
+
+  <div class="search-tab m-t-0 p-r-40" [ngClass]="{'p-l-40' :searchTxt }">
+    <ul class=" uk-child-width-expand" uk-tab>
+      <li [ngClass]="{'uk-active': show=='experts', 'uk-width-1-2': !user?.id}"><a x-no-tabbing
+          (click)="showAll('experts')">Experts{{ searchTxt!='' ? " (" + expertsTotal + ")" : "" }}</a></li>
+      <li [ngClass]="{'uk-active': show=='expques'}" *ngIf="user?.id && searchTxt=='' && user?.userRoleId =='EXPERT'"><a
+          x-no-tabbing (click)="showAll('expques')">Questions for me</a></li>
+      <li [ngClass]="{'uk-active': show=='ques'}" *ngIf="user?.id && searchTxt==''"><a x-no-tabbing
+          (click)="showAll('ques')"> My Questions</a></li>
+      
+    </ul>
+  </div>
+  <!-- tab -end -->
+  <!-- Search Form END -->
+  <div id="searchResultList">
+    <ask-question-experts *ngIf="show === 'experts'" [searchTxt]="searchTxt" [showPagination]="showPagination"
+      [showSharing]="showSharing" (showCount)="showExpertCount($event)"></ask-question-experts>
+    <expert-all-question *ngIf="show === 'expques' && searchTxt==''" [searchTxt]="searchTxt"
+      [showPagination]="showPagination" [showSharing]="showSharing" (showCount)="showExpertQuesCount($event)">
+    </expert-all-question>
+    <ask-question-myques *ngIf="show === 'ques' && searchTxt==''" [searchTxt]="searchTxt"
+      [showPagination]="showPagination" [showSharing]="showSharing" (showCount)="showMyQuesCount($event)">
+    </ask-question-myques>
+  </div>
 </div>

@@ -1,8 +1,9 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, AfterViewInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { UserProfile } from 'src/app/core/interfaces';
 import { AuthService } from 'src/app/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../modal-component';
@@ -12,7 +13,7 @@ import { ModalComponent } from '../modal-component';
   templateUrl: './user-page.component.html',
   styleUrls: ['./user-page.component.scss']
 })
-export class UserPageComponent implements OnInit {
+export class UserPageComponent implements OnInit, AfterViewInit {
 
   @Output() editProfile = new EventEmitter<{ obj: any, action: "" }>();
 
@@ -27,9 +28,12 @@ export class UserPageComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private activeRoute: ActivatedRoute,
+    private titleService: Title,
     private modalService:NgbModal
   ) {
     this.userService.userProfile = this.activeRoute.snapshot.data.userData;
+    this.titleService.setTitle("User Profile - Elderly Care Platform");
+
   }
 
   ngOnInit() {
@@ -40,10 +44,13 @@ export class UserPageComponent implements OnInit {
     })
 
     this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
-      console.log(message,"message from contact detial component")
       this.messages=message;
     })
 }
+
+  ngAfterViewInit() {
+    document.getElementById("myprofileHeader").focus();
+  }
 
 
   viewEditProfile(event) {

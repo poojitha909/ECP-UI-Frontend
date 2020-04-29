@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApiConstants } from 'src/app/api.constants';
@@ -33,8 +33,11 @@ export class HomeService {
           queryParams += `${key}=${this.searchParam[key]}`;
         }
       });
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    };
 
-    return this.http.get(`${ApiConstants.GET_SERVICES}?${queryParams}`);
+    return this.http.post(ApiConstants.GET_SERVICES, queryParams, options);
   }
 
   getCategoryServices(param: serviceParam): Observable<any> {
@@ -64,7 +67,10 @@ export class HomeService {
         }
       });
 
-    return this.http.get<any>(`${ApiConstants.GET_SERVICES}?${queryParams}`).pipe(
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    };
+    return this.http.post<any>(ApiConstants.GET_SERVICES, queryParams, options).pipe(
       map(response => {
         if (response && response.data) {
           return response.data
@@ -173,7 +179,10 @@ export class HomeService {
         }
       });
 
-    return this.http.get(`${ApiConstants.GET_SERVICES}?${queryParams}`);
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    };
+    return this.http.post(ApiConstants.GET_SERVICES, queryParams, options);
   }
 
 }

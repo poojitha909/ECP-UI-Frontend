@@ -1,52 +1,63 @@
 <!-- General info form -->
 <div class="category-box m-t-40 bg-white">
     <h3>Basic Information</h3>
+    <label class="private-checkbox" for="private-imformation"><input class="uk-checkbox"
+        id="private-imformation" type="checkbox" checked> This information is
+    private</label>
     <hr />
     <!-- Error box START-->
     <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
-        <p>{{ errorMessage }}</p>
+        <p><span class="uk-icon mr-5" uk-icon="warning"></span> {{ errorMessage }}</p>
     </div>
     <!-- Error box END-->
     <!-- Success box START-->
     <div *ngIf="!isLoading && successMessage" class="uk-alert-success" uk-alert>
-        <p>{{ successMessage }}</p>
+        <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ successMessage }}</p>
     </div>
     <!-- Success box END-->
 
     <form class="uk-form-stacked" [formGroup]="generalInfoForm" (ngSubmit)="onSubmit()">
 
         <div class="uk-margin">
-            <label class="uk-form-label">Gender</label>
-            <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                <label for="Male"><input class="uk-radio" id="Male" type="radio" formControlName="gender" [value]="1">
-                    Male</label>
-                <label for="Female"><input class="uk-radio" id="Female" type="radio" formControlName="gender"
-                        [value]="0"> Female</label>
-                <label for="Trans"><input class="uk-radio" id="Trans" type="radio" formControlName="gender" [value]="2">
-                    Trans</label>
-                <label for="prefer-not-say"><input class="uk-radio" id="prefer-not-say" type="radio"
-                        formControlName="gender" [value]="3"> Prefer not to
-                    say</label>
-            </div>
+            <fieldset>
+                <legend class="uk-form-label m-0">Gender</legend>
+                <!-- <label class="uk-form-label">Gender</label> -->
+                <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                    <label for="Male"><input class="uk-radio" id="Male" type="radio" formControlName="gender"
+                            [value]="1">
+                        Male</label>
+                    <label for="Female"><input class="uk-radio" id="Female" type="radio" formControlName="gender"
+                            [value]="0"> Female</label>
+                    <label for="Trans"><input class="uk-radio" id="Trans" type="radio" formControlName="gender"
+                            [value]="2">
+                        Trans</label>
+                    <label for="prefer-not-say"><input class="uk-radio" id="prefer-not-say" type="radio"
+                            formControlName="gender" [value]="3"> Prefer not to
+                        say</label>
+                </div>
+            </fieldset>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-stacked-text">Marital Status</label>
-            <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                <label for="Married"><input class="uk-radio" id="Married" type="radio" formControlName="maritalStatus"
-                        value="Married">
-                    Married</label>
-                <label for="Unmarried"><input class="uk-radio" id="Unmarried" type="radio"
-                        formControlName="maritalStatus" value="Unmarried">
-                    Unmarried</label>
-                <label for="Widowed"><input class="uk-radio" id="Widowed" type="radio" formControlName="maritalStatus"
-                        value="Widowed">
-                    Widowed</label>
-                <label for="Prefer-not"><input class="uk-radio" id="Prefer-not" type="radio"
-                        formControlName="maritalStatus" value="Prefer not to say">
-                    Prefer not to
-                    say</label>
-            </div>
+            <fieldset>
+                <legend class="uk-form-label m-0">Marital Status</legend>
+                <!-- <label class="uk-form-label" for="form-stacked-text">Marital Status</label> -->
+                <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                    <label for="Married"><input class="uk-radio" id="Married" type="radio"
+                            formControlName="maritalStatus" value="Married">
+                        Married</label>
+                    <label for="Unmarried"><input class="uk-radio" id="Unmarried" type="radio"
+                            formControlName="maritalStatus" value="Unmarried">
+                        Unmarried</label>
+                    <label for="Widowed"><input class="uk-radio" id="Widowed" type="radio"
+                            formControlName="maritalStatus" value="Widowed">
+                        Widowed</label>
+                    <label for="Prefer-not"><input class="uk-radio" id="Prefer-not" type="radio"
+                            formControlName="maritalStatus" value="Prefer not to say">
+                        Prefer not to
+                        say</label>
+                </div>
+            </fieldset>
         </div>
 
         <div class="uk-margin">

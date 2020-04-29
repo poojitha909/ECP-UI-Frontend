@@ -1,15 +1,16 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../../app/features/community/services/events.service'
 import { DomSanitizer } from '@angular/platform-browser';
 import { HomeService } from 'src/app/features/home/home.service';
+import { MenuService } from 'src/app/features/community/services/menu.service';
 
 @Component({
   selector: 'app-event-results',
   templateUrl: './event-results.component.html',
   styleUrls: ['./event-results.component.scss']
 })
-export class EventResultsComponent implements OnInit {
+export class EventResultsComponent implements OnInit, OnChanges {
   @Input() searchTxt: string;
   @Input() showPagination: boolean;
   @Input() showSharing: boolean;
@@ -24,19 +25,20 @@ export class EventResultsComponent implements OnInit {
     searchTxt: string,
     eventType: number,
     pastEvents: number,
-    dir:number
+    dir: number
   };
   paramsSubs: any;
   totalRecords: number;
   currentUrl: string;
   whatsappUrl;
+  totalPages: number;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private eventService: EventService,
     private homeService: HomeService,
-    public sanitizer: DomSanitizer) {
+    public sanitizer: DomSanitizer, private shareMedia: MenuService) {
   }
 
   ngOnInit() {
@@ -48,6 +50,13 @@ export class EventResultsComponent implements OnInit {
     });
     //this.router.navigate([], { queryParams: { past: -1, searchTxt: this.searchParams.searchTxt } });
   }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes.searchTxt.firstChange) {
+      this.initiate();
+    }
+  }
+
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
   }
@@ -59,26 +68,26 @@ export class EventResultsComponent implements OnInit {
       searchTxt: "",
       eventType: 0,
       pastEvents: 0,
-      dir:0
+      dir: 0
     }
 
     this.totalRecords = 0;
-    if(this.searchTxt){
+    if (this.searchTxt) {
       this.searchParams.searchTxt = this.searchTxt;
     }
     if (this.route.snapshot.queryParams['past'] !== undefined) {
       this.searchParams.pastEvents = this.route.snapshot.queryParams['past'];
     }
-    else if(this.homeService.eventIsPastEvents){
+    else if (this.homeService.eventIsPastEvents) {
       this.searchParams.pastEvents = this.homeService.eventIsPastEvents;
     }
     if (this.route.snapshot.queryParams['searchTxt'] !== undefined) {
       this.searchParams.searchTxt = this.route.snapshot.queryParams['searchTxt'];
     }
     if (this.route.snapshot.queryParams['page'] !== undefined) {
-      this.searchParams.p = this.route.snapshot.queryParams['page'];
+      this.searchParams.p = +this.route.snapshot.queryParams['page'];
     }
-    if(this.route.snapshot.queryParams['show'] != 'events'){
+    if (this.route.snapshot.queryParams['show'] != 'events') {
       this.searchParams.p = 0;
     }
     this.showEvents();
@@ -87,22 +96,22 @@ export class EventResultsComponent implements OnInit {
 
   changePage(page: number) {
     this.searchParams.p = page;
-    if(this.showPagination){
+    if (this.showPagination) {
       this.router.navigate(['/community'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p, show: 'events' } });
     }
-    else{
-        this.showEvents();
+    else {
+      this.showEvents();
     }
   }
 
   showEvents() {
-    if(this.searchParams.pastEvents==-1){
+    if (this.searchParams.pastEvents == -1) {
       this.searchParams.dir = 1;
     }
-    else if(this.searchParams.pastEvents==1){
+    else if (this.searchParams.pastEvents == 1) {
       this.searchParams.dir = 0;
     }
-    else if(this.searchParams.pastEvents==0){
+    else if (this.searchParams.pastEvents == 0) {
       this.searchParams.dir = 0;
     }
     this.isLoading = true;
@@ -112,10 +121,12 @@ export class EventResultsComponent implements OnInit {
       if (data.content) {
         this.eventsList = data.content;
         this.totalRecords = data.total;
+        this.totalPages = Math.ceil(this.totalRecords / this.searchParams.s);
         this.showCount.emit(this.totalRecords);
       }
       this.isLoading = false;
     });
+    this.shareMedia.setsharemedia(window.location.href)
   }
 
   showEventsCount() {
@@ -145,11 +156,11 @@ export class EventResultsComponent implements OnInit {
   onTabChange(value) {
     this.searchParams.pastEvents = value;
     this.homeService.eventIsPastEvents = value;
-    if(this.showPagination){
+    if (this.showPagination) {
       this.router.navigate(['/community'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, show: "events" } });
     }
-    else{
-        this.showEvents();
+    else {
+      this.showEvents();
     }
   }
 
@@ -157,11 +168,11 @@ export class EventResultsComponent implements OnInit {
     this.searchParams.pastEvents = -1;
     this.searchParams.p = 0;
     this.homeService.eventIsPastEvents = this.searchParams.pastEvents;
-    if(this.showPagination){
+    if (this.showPagination) {
       this.router.navigate(['/community'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, show: "events" } });
     }
-    else{
-        this.showEvents();
+    else {
+      this.showEvents();
     }
   }
 }

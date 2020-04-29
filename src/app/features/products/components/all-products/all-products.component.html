@@ -16,14 +16,15 @@
       <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
         <div class="uk-width-expand">
           <form class="uk-search uk-search-default" autocomplete='off'>
+            <input id="productSearch" class="uk-search-input font-regular search-box sm-pr-150" aria-label="search"
+              [(ngModel)]="tempSearchTxt" (keyup)="onSearchChange($event)" required type="text"
+              placeholder="Search here" name="search" autocomplete='off' />
             <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
+              <button class="uk-button-link" style="visibility: hidden"></button>
               <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
                 <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
               </button>
             </span>
-            <input class="uk-search-input font-regular search-box sm-pr-150" aria-label="search"
-              [(ngModel)]="tempSearchTxt" (keyup)="onSearchChange($event)" required type="text"
-              placeholder="Search here" name="search" autocomplete='off' />
           </form>
         </div>
         <div>
@@ -33,5 +34,17 @@
     </div>
     <!-- Search Form END -->
   </div>
-  <app-product-results [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt" (showCount)="showProductCount($event)"></app-product-results>
+
+  <div *ngIf="searchTxt" class="result-bar m-l-40 m-r-40 m-b-20">
+    <p class="font-regular-15 uk-margin-remove">Showing <b>{{totalRecords}}</b> results for <b>"{{searchTxt}}"</b></p>
+  </div>
+
+  <div *ngIf="searchTxt" class="search-tab m-t-0 p-l-40 p-r-40">
+    <ul uk-tab>
+      <li><a href="#" class="font-regular">Products ({{ totalRecords }})</a></li>
+    </ul>
+  </div>
+
+  <app-product-results [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt"
+    (showCount)="showProductCount($event)"></app-product-results>
 </div>

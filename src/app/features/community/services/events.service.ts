@@ -55,7 +55,10 @@ export class EventService {
     }
 
     markFav(userId,eventId,markIt): Observable<any[]> {
-        return this.http.get<any[]>(`${this.eventUrl}/markfav?userId=${userId}&eventId=${eventId}&markIt=${markIt}`);
+        let options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+        };
+        return this.http.post<any[]>(`${this.eventUrl}/markfav`,`userId=${userId}&eventId=${eventId}&markIt=${markIt}`, options);
     }
 
     reportEvent(reportData: any): Observable<any> {

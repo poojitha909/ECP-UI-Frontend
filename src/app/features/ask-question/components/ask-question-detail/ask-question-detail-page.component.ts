@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewChild } from '@angular/core';
+import { Component, OnInit ,ViewChild, ElementRef } from '@angular/core';
 import { AskQuestionService } from '../../services/ask-question.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
@@ -206,7 +206,7 @@ export class AskQuestionDetailPageComponent implements OnInit {
 
   setSeoTags(question: any) {
     let config: SEO = {
-      title: `Question - ${question.question} - An Elder Spring Initiative by Tata Trusts`,
+      title: `Question - ${question.question}`,
       keywords: 'products,services,events,dscussions',
       description: `${question.description}`,
       author: `An Elder Spring Initiative by Tata Trusts`,
@@ -255,33 +255,37 @@ export class AskQuestionDetailPageComponent implements OnInit {
       type: "info",
       template: this.customNotificationTmpl
        });  
-  setTimeout(()=>{
-    this.askQuesService.addQuestion({
-      question: this.question.question,
-      answered: this.question.answered,
-      description: this.question.description,
-      askCategory: { id: this.question.askCategory.id },
-      answeredBy: { id: this.question.answeredBy.id },
-      askedBy: { id: this.question.askedBy.id }
-    }).subscribe((response: any) => {
-      if (response.data.id != "") {
-        this.notifier.show({
-          message: "Thank you for your Question. Our Expert will get back you at the earliest",
-          type: "success",
-          template: this.customNotificationTmpl1
-           });
-        this.store.clear("new-question");
-        this.store.clear("new-question-preview");
-            }
-      else {
-        alert("Oops! something wrong happen, please try again.");
-      }
-    });
-  },1100)
-  setTimeout(()=>{
-    this.router.navigate(['/ask-question'],{ queryParams: { 
-      show: "ques"}});
-  },2200)
-    
+    setTimeout(()=>{
+      this.askQuesService.addQuestion({
+        question: this.question.question,
+        answered: this.question.answered,
+        description: this.question.description,
+        askCategory: { id: this.question.askCategory.id },
+        answeredBy: { id: this.question.answeredBy.id },
+        askedBy: { id: this.question.askedBy.id }
+      }).subscribe((response: any) => {
+        if (response.data.id != "") {
+          this.notifier.hideOldest();
+          this.notifier.show({
+            message: "Your question has been shared with the expert.  Typically our experts respond within 2 working days.  Please come back here to check the response from the expert to your question.",
+            type: "success",
+            template: this.customNotificationTmpl1
+            });
+          this.store.clear("new-question");
+          this.store.clear("new-question-preview");
+          setTimeout(()=>{
+            this.router.navigate(['/ask-question'],{ queryParams: { show: "ques"}});
+          },4000)
+        }
+        else {
+          alert("Oops! something wrong happen, please try again.");
+        }
+      });
+    },1100)
+  }
+
+  replyModalDisplay(){
+    this.replyForm.reset();
+    setTimeout( () => {document.getElementById("Description").focus();},100);
   }
 }

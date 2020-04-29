@@ -54,9 +54,17 @@ h3{
         text-transform: none;
         padding: 2px 30px;
   }
+  .private-checkbox{
+    background: #D7E0EF;
+    padding: 10px;
+    border-radius: 4px;
+    .uk-checkbox{
+        margin-right: 10px;
+    }
+  }
 
   .display-picture{
-     height: 240px;
+     height: 270px;
      width: 223px;
      border-radius: 4px;
      background-color: #ECF4FF;

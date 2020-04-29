@@ -13,7 +13,7 @@ import { HomeService } from 'src/app/features/home/home.service';
 })
 export class EventsListPageComponent implements OnInit, OnDestroy {
   @Input() hide: true;
-  
+
   eventsList: any[];
   countData: { "all": 0, "outdoor": 0, "indoor": 0 };
   searchParams: {
@@ -22,7 +22,7 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
     searchTxt: string,
     eventType: number,
     pastEvents: number,
-    dir:number
+    dir: number
   };
   paramsSubs: any;
   totalRecords: number;
@@ -41,7 +41,7 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
 
     // Generate meta tag 
     const config: SEO = {
-      title: `All Events - An Elder Spring Initiative by Tata Trusts`,
+      title: `All Events`,
       keywords: 'products,services,events,dscussions',
       description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
       author: `An Elder Spring Initiative by Tata Trusts`,
@@ -62,6 +62,12 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
     this.router.navigate([], { queryParams: { past: -1, searchTxt: this.searchParams.searchTxt } });
     console.log()
   }
+
+  ngAfterViewInit() {
+    document.getElementById("allEventsHeader").focus();
+
+  }
+
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
   }
@@ -73,7 +79,7 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
       searchTxt: "",
       eventType: 0,
       pastEvents: 0,
-      dir:0
+      dir: 0
     }
 
     this.totalRecords = 0;
@@ -99,13 +105,13 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
   }
 
   showEvents() {
-    if(this.searchParams.pastEvents==-1){
+    if (this.searchParams.pastEvents == -1) {
       this.searchParams.dir = 1;
     }
-    else if(this.searchParams.pastEvents==1){
+    else if (this.searchParams.pastEvents == 1) {
       this.searchParams.dir = 0;
     }
-    else if(this.searchParams.pastEvents==0){
+    else if (this.searchParams.pastEvents == 0) {
       this.searchParams.dir = 0;
     }
     this.eventService.searchEvents(this.searchParams).subscribe((response: any) => {
@@ -118,7 +124,15 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
         this.final = this.initial + this.eventsList.length - 1
 
       }
-    });
+    },
+      error => {
+
+      },
+      () => {
+        // setTimeout(() => {
+        //   document.getElementById("allEventsHeader").focus();
+        // }, 500);
+      });
   }
 
   showEventsCount() {
@@ -154,9 +168,10 @@ export class EventsListPageComponent implements OnInit, OnDestroy {
 
   onSearch() {
     this.router.navigate(['/community'], { queryParams: { past: this.searchParams.pastEvents, searchTxt: this.searchParams.searchTxt, page: this.searchParams.p, show: "events" } });
+    document.getElementById("event-searchtxt").focus();
   }
 
-  setSearchTxt(value: string){
+  setSearchTxt(value: string) {
     this.searchParams.searchTxt = value;
     this.homeService.homeSearchtxt = value;
     this.searchParams.p = 0;

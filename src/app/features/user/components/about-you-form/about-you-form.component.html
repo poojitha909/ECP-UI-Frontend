@@ -1,66 +1,26 @@
 <!-- About You form START-->
 <div class="category-box m-t-40 bg-white">
-    <h3>Personal Details </h3>
+    <h3>Personal Information </h3>
     
     <label class="private-checkbox" for="private-imformation"><input class="uk-checkbox"
         id="private-imformation" type="checkbox" checked> This information is
     private</label>
-    <p>(Note to Content Writer: Add text here explaining how this information will be used)</p>
+    <p>The information you provide here will be used to provide you with a smoother and more relevant experience on this site. We will be using it to match your search with results that are relevant to the information in this section.</p>
     <hr />
 
     <!-- Error box START-->
     <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
-        <p>{{ errorMessage }}</p>
+        <p><span class="uk-icon mr-5" uk-icon="warning"></span> {{ errorMessage }}</p>
     </div>
     <!-- Error box END-->
     <!-- Success box START-->
     <div *ngIf="!isLoading && successMessage" class="uk-alert-success" uk-alert>
-        <p>{{ successMessage }}</p>
+        <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ successMessage }}</p>
     </div>
     <!-- Success box END-->
 
     <form [formGroup]="aboutForm" (ngSubmit)="onSubmit('SAVE_FINAL_CHANGES')" class="uk-form-stacked">
 
-        <div class="uk-margin">
-            <label class="uk-form-label" for="about-you">Tell us something about yourself</label>
-            <div class="uk-form-controls">
-                <textarea class="uk-input min-h-300" formControlName="shortDescription" id="about-you"
-                    placeholder="Type here"></textarea>
-            </div>
-        </div>
-
-        <div class="uk-margin">
-            <label class="uk-form-label" for="Emotional-Challenges">Emotional Challenges</label>
-            <div class="uk-form-controls">
-                <!-- <select class="uk-select" formControlName="emotionalIssues" id="form-stacked-select">
-                    <option>Option 01</option>
-                    <option>Option 02</option>
-                </select> -->
-                <ng-select [addTag]="addTagFn" [items]="emotionalChallenges" [hideSelected]="true"
-                    id="Emotional-Challenges" placeholder="Add Emotional Challenges" multiple="true"
-                    formControlName="emotionalIssues">
-                </ng-select>
-            </div>
-        </div>
-
-        <div class="uk-margin">
-            <label class="uk-form-label" for="Medical-Issues">Medical Issues</label>
-            <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" [items]="medicalIssues" id="Medical-Issues"
-                    placeholder="Add Medical Issues" [hideSelected]="true" multiple="true"
-                    formControlName="medicalIssues">
-                </ng-select>
-            </div>
-        </div>
-
-        <div class="uk-margin">
-            <label class="uk-form-label" for="Other-Difficulties">Other Difficulties</label>
-            <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" [items]="otherDifficulties" placeholder="Add Other Difficulties"
-                    id="Other-Difficulties" [hideSelected]="true" multiple="true" formControlName="otherIssues">
-                </ng-select>
-            </div>
-        </div>
 
         <div class="uk-margin">
             <label class="uk-form-label" for="Languages">Languages</label>
@@ -90,14 +50,59 @@
             </div>
         </div>
 
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="Medical-Issues">Medical Issues</label>
+            <div class="uk-form-controls">
+                <ng-select [addTag]="addTagFn" [items]="medicalIssues" id="Medical-Issues"
+                    placeholder="Add Medical Issues" [hideSelected]="true" multiple="true"
+                    formControlName="medicalIssues">
+                </ng-select>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="Emotional-Challenges">Emotional Challenges</label>
+            <div class="uk-form-controls">
+                <!-- <select class="uk-select" formControlName="emotionalIssues" id="form-stacked-select">
+                    <option>Option 01</option>
+                    <option>Option 02</option>
+                </select> -->
+                <ng-select [addTag]="addTagFn" [items]="emotionalChallenges" [hideSelected]="true"
+                    id="Emotional-Challenges" placeholder="Add Emotional Challenges" multiple="true"
+                    formControlName="emotionalIssues">
+                </ng-select>
+            </div>
+        </div>
+
+       
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="Other-Difficulties">Other Difficulties</label>
+            <div class="uk-form-controls">
+                <ng-select [addTag]="addTagFn" [items]="otherDifficulties" placeholder="Add Other Difficulties"
+                    id="Other-Difficulties" [hideSelected]="true" multiple="true" formControlName="otherIssues">
+                </ng-select>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="about-you">Tell us something about yourself</label>
+            <div class="uk-form-controls">
+                <textarea class="uk-input min-h-300" formControlName="shortDescription" id="about-you"
+                    placeholder="Type here"></textarea>
+            </div>
+        </div>
+       
+
         <hr class="m-t-75" />
         <div uk-grid>
             <button class="uk-button uk-button-transparent uk-modal-close" type="button"
                 (click)="onCancel()">Cancel</button>
-            <div>
+            
                 <button class="m-l-10 uk-button uk-button-default" type="submit"
                     [disabled]="this.aboutForm.invalid">Save Changes</button>
-            </div>
+            
 
         </div>
     </form>

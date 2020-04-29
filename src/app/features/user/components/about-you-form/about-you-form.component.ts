@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-about-you-form',
@@ -69,6 +70,7 @@ export class AboutYouFormComponent implements OnInit {
   errorMessage;
   successMessage;
   isLoading;
+  subscription: Subscription;
 
 
   constructor(
@@ -112,6 +114,11 @@ export class AboutYouFormComponent implements OnInit {
      this.aboutForm.get("otherInterests").valueChanges.subscribe(selectedValue=>{
       this.userService.formEditMessage("editForm")
      });
+     this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
+       if(message=="closeModal"){
+        document.getElementById("about-you").focus();
+       }
+    })
    
 
   }

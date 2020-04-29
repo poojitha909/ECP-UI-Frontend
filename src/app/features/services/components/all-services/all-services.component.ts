@@ -17,6 +17,8 @@ import { SeoService } from 'src/app/core/services/seo.service';
   styleUrls: ['./all-services.component.scss']
 })
 export class AllServicesComponent implements OnInit {
+
+  totalRecords: number = 0;
   // breadcrumbLinks: Breadcrumb[] = [
   //   {
   //     text: 'Home',
@@ -59,7 +61,7 @@ export class AllServicesComponent implements OnInit {
   constructor(
     public ecpService: EpcServiceService,
     private seoService: SeoService,
-    private homeService: HomeService
+    public homeService: HomeService
   ) {
     // this.categories = jdCategoryService.serviceCategories;
     // this.categories = this.activeRoute.snapshot.data.categories;
@@ -67,7 +69,7 @@ export class AllServicesComponent implements OnInit {
     // console.log(this.categoryTypes);
     // Generate meta tag 
     const config: SEO = {
-      title: `All Service - An Elder Spring Initiative by Tata Trusts`,
+      title: `All Service`,
       keywords: 'products,services,events,dscussions',
       description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
       author: `An Elder Spring Initiative by Tata Trusts`,
@@ -95,20 +97,24 @@ export class AllServicesComponent implements OnInit {
     if (this.homeService.homeSearchtxt) {
       this.ecpService.showBg = true;
     }
-    else{
+    else {
       this.ecpService.showBg = false;
     }
+  }
+  // this.searchTextChanged.pipe(
+  //   debounceTime(500),
+  //   distinctUntilChanged()
+  // ).subscribe(() => {
+  //   this.onSearchChange(this.searchPageParam.term);
+  // });
+  // this.currentUrl = encodeURI(window.location.href);
+  // this.mailUrl = `mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20${encodeURI(window.location.href)}`
+  // this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(window.location.href)}`);
+  // this.whatsMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
 
-    // this.searchTextChanged.pipe(
-    //   debounceTime(500),
-    //   distinctUntilChanged()
-    // ).subscribe(() => {
-    //   this.onSearchChange(this.searchPageParam.term);
-    // });
-    // this.currentUrl = encodeURI(window.location.href);
-    // this.mailUrl = `mailto:?subject=%0AThis%20is%20Service%20from%20An%20Elder%20Spring%20Initiative%20by%20Tata%20Trusts&body=%0AService%2DURL:%20${encodeURI(window.location.href)}`
-    // this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(window.location.href)}`);
-    // this.whatsMobileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${encodeURI(window.location.href)}`);
+
+  getTotalCount(counts) {
+    this.totalRecords = counts;
   }
 
   // ngAfterViewInit() {

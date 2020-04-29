@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User, monthOptions, IndividualInfo, UserProfile } from 'src/app/core/interfaces';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-general-info-form',
@@ -15,6 +16,7 @@ export class GeneralInfoFormComponent implements OnInit {
   errorMessage;
   successMessage;
   isLoading;
+  subscription:Subscription;
 
   dateOption: number[] = Array.from({ length: 31 }, (v, k) => k + 1);
   monthOption: any[] = monthOptions;
@@ -66,6 +68,11 @@ export class GeneralInfoFormComponent implements OnInit {
      this.generalInfoForm.get("year").valueChanges.subscribe(selectedValue=>{
       this.userService.formEditMessage("editForm")
      });
+     this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
+      if(message=="closeModal"){
+        document.getElementById("Year").focus();
+      }
+    })
   }
 
   onSubmit() {
@@ -94,8 +101,6 @@ export class GeneralInfoFormComponent implements OnInit {
     } else {
       this.errorMessage = "Invalid DOB";
     }
-
-      console.log('CancelForm after Submit')
       this.cancelForm.emit();
   }
 

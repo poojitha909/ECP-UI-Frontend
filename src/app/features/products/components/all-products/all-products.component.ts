@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/products.service';
 import { Breadcrumb, SEO } from 'src/app/core/interfaces';
@@ -11,7 +11,7 @@ import { stringify } from 'querystring';
   templateUrl: './all-products.component.html',
   styleUrls: ['./all-products.component.scss']
 })
-export class AllProductsComponent implements OnInit, OnDestroy {
+export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   breadcrumbLinks: Breadcrumb[] = [
     {
@@ -34,11 +34,11 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   paramsSubs: any;
   totalRecords: number;
   constructor(private route: ActivatedRoute, private router: Router,
-    public sanitizer: DomSanitizer,
+    private productService: ProductService, public sanitizer: DomSanitizer,
     private homeService: HomeService, public seoService: SeoService) {
     // Generate meta tag 
     const config: SEO = {
-      title: `All Products - An Elder Spring Initiative by Tata Trusts`,
+      title: `All Products`,
       keywords: 'products,services,events,dscussions',
       description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
       author: `An Elder Spring Initiative by Tata Trusts`,
@@ -51,6 +51,10 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
+  }
+
+  ngAfterViewInit() {
+    document.getElementById("productSearch").focus();
   }
 
   ngOnDestroy() {
@@ -90,13 +94,13 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   }
 
   resetSearch(event: any) {
-    if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
-      this.setSearchTxt("");
-      this.productCategory="";
-      this.homeService.productCategory = '';
-      this.showReset = false;
-      this.onSearch()
-    }
+    // if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
+    this.setSearchTxt("");
+    this.productCategory = "";
+    this.homeService.productCategory = '';
+    this.showReset = false;
+    this.onSearch()
+    // }
   }
 
   setSearchTxt(value: string) {
@@ -107,10 +111,12 @@ export class AllProductsComponent implements OnInit, OnDestroy {
 
   onSearch() {
     this.setSearchTxt(this.tempSearchTxt);
-    this.router.navigate(['/products'], { queryParams: { productCategory: this.productCategory, searchTxt: this.searchTxt } });
+    document.getElementById("productSearch").focus();
+    this.homeService.productCategory = '';
+    this.router.navigate(['/products'], { queryParams: { searchTxt: this.searchTxt } });
   }
 
-  showProductCount(value){
+  showProductCount(value) {
     this.totalRecords = value;
   }
 }

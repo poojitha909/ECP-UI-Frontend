@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy,ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, HostListener, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router"
 import { DiscussionService } from '../../services/discussion.service';
@@ -18,7 +18,7 @@ declare var UIkit;
   templateUrl: './discussion-detail-page.component.html',
   styleUrls: ['./discussion-detail-page.component.scss']
 })
-export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
+export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   breadcrumbLinks: Breadcrumb[];
   discussionId: string;
@@ -37,7 +37,10 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
   currentUrl: string;
   whatsappUrl;
   whatsappMobileUrl;
-  afterPublish:boolean=false;
+  currentModelLink: string;
+  afterPublish: boolean = false;
+  showMedia:boolean=true;
+
   private readonly notifier: NotifierService;
   @ViewChild("customNotification", { static: true }) customNotificationTmpl;
   @ViewChild("customNotification1", { static: true }) customNotificationTmpl1;
@@ -46,9 +49,9 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
     private discussionService: DiscussionService, private menuService: MenuService,
     private fb: FormBuilder, private store: StorageHelperService,
     private authService: AuthService, public sanitizer: DomSanitizer,
-    private seoService: SeoService,notifierService: NotifierService) {
-      this.notifier=notifierService
-     }
+    private seoService: SeoService, notifierService: NotifierService) {
+    this.notifier = notifierService
+  }
 
   ngOnInit() {
     this.currentUrl = window.location.href;
@@ -57,6 +60,13 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
     this.paramsSubs = this.route.params.subscribe(params => {
       this.initiate();
     });
+    if (this.route.snapshot.params['id'] == 'preview') {
+      this.showMedia=false;
+    }
+    
+  }
+
+  ngAfterViewInit() {
   }
 
   ngOnDestroy() {
@@ -96,9 +106,9 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
       this.parentReplyId = comment.parentReplyId;
       this.replyId = comment.replyId;
       this.store.clear("new-d-comment");
-      setTimeout( () => {
+      setTimeout(() => {
         UIkit.modal("#reply-modal-discussion").show();
-      },500);
+      }, 500);
     }
     this.replyForm = this.fb.group({
       commentTxt: [comment ? comment.commentTxt : "", Validators.required]
@@ -129,12 +139,13 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
     if (!this.replyForm.valid) {
       return;
     }
-    
+
     if (this.replyId) {
       this.discussionService.editComment(this.replyId, comment.commentTxt).subscribe((response: any) => {
         if (response.data.replies) {
           this.replyForm.reset();
           this.getDiscussion();
+          this.successMessage = "Reply edited successfully.";
           UIkit.modal("#reply-modal-discussion.uk-open").hide();
         }
       });
@@ -144,13 +155,13 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
         if (response.data.replies) {
           this.replyForm.reset();
           this.getDiscussion();
-          //this.successMessage = "Reply Submitted successfully.";
+          this.successMessage = "Reply Submitted successfully.";
           UIkit.modal("#reply-modal-discussion.uk-open").hide();
           this.notifier.show({
             message: "Your comment is successfully submitted",
             type: "success",
             template: this.customNotificationTmpl1
-             });
+          });
         }
       });
     }
@@ -190,12 +201,12 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
         if (response[0]) {
           this.categoryName = response[0].displayMenuName;
           let found = 0;
-          for(let br of this.breadcrumbLinks){
-            if(br.queryParams && br.queryParams.category == this.category){
+          for (let br of this.breadcrumbLinks) {
+            if (br.queryParams && br.queryParams.category == this.category) {
               found = 1;
             }
           }
-          if(found == 0){
+          if (found == 0) {
             this.breadcrumbLinks.push({
               text: this.categoryName,
               link: ['/community'],
@@ -203,7 +214,12 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
             });
           }
         }
-      });
+      },
+        error => { },
+        () => {
+
+        }
+      );
     }
 
     if (this.discussionId == "preview") {
@@ -220,38 +236,47 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
           this.discussion = response.data.discuss;
           this.setSeoTags(this.discussion);
           this.sortedReplies = [];
-          for(let i in response.data.sortedReplies){
+          for (let i in response.data.sortedReplies) {
             this.sortedReplies[this.sortedReplies.length] = response.data.sortedReplies[i];
           }
           this.commentsCount = this.sortedReplies.length;
         }
       });
     }
+
+    setTimeout(() => {
+      document.getElementById("discussionTitleHeader").focus();
+    }, 500);
   }
 
   setSeoTags(discussion: any) {
     let config: SEO = {
-      title: `Dscussions - ${discussion.title} - An Elder Spring Initiative by Tata Trusts`,
+      title: `Discussions - ${discussion.title}`,
       keywords: 'products,services,events,dscussions',
       description: `${discussion.shortSynopsis}`,
       author: `An Elder Spring Initiative by Tata Trusts`,
       image: `${window.location.origin}/assets/imgaes/landing-img/Community-320.png`,
     }
 
-    if (discussion.userProfile && discussion.userProfile.basicProfileInfo && 
-        discussion.userProfile.basicProfileInfo.profileImage && 
-        discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage) {
+    if (discussion.userProfile && discussion.userProfile.basicProfileInfo &&
+      discussion.userProfile.basicProfileInfo.profileImage &&
+      discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage) {
       config.image = discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage;
     }
 
     this.seoService.generateTags(config);
   }
 
-  setParentReplyId(id) {
+  setParentReplyId(id, element) {
     this.replyForm.reset();
     this.parentReplyId = id;
     this.replyId = "";
     this.successMessage = "";
+    this.onOpenModel();
+    this.currentModelLink = element.id;
+    UIkit.modal('#reply-modal-discussion').show();
+    document.getElementById("addCommentTitle").focus();
+
   }
 
   editReply(parentReplyId, reply) {
@@ -266,7 +291,6 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
   }
 
   onPublish() {
-    
     if (!this.user) {
       this.authService.redirectUrl = "community/discussion/preview";
       this.router.navigate(['/user/signin']);
@@ -276,34 +300,49 @@ export class DiscussionDetailPageComponent implements OnInit, OnDestroy {
       message: "Please wait, we are submitting your discussion to Admin",
       type: "info",
       template: this.customNotificationTmpl
-       });
-   setTimeout(()=>{
-    this.discussionService.addDiscussion("P", this.discussion.description, this.discussion.title,
-      this.discussion.userId,
-      this.user.userName,
-      this.discussion.tags,
-      this.discussion.categories,
-      this.discussion.contentType)
-      .subscribe((response: any) => {
-        if (response.data.id != "") {
-          this.notifier.show({
-            message: "Your discussion has created successfully.",
-            type: "success",
-            template: this.customNotificationTmpl1
+    });
+    setTimeout(() => {
+      this.discussionService.addDiscussion("P", this.discussion.description, this.discussion.title,
+        this.discussion.userId,
+        this.user.userName,
+        this.discussion.tags,
+        this.discussion.categories,
+        this.discussion.contentType)
+        .subscribe((response: any) => {
+          if (response.data.id != "") {
+            this.notifier.show({
+              message: "Your discussion has created successfully.",
+              type: "success",
+              template: this.customNotificationTmpl1
+            });
+            this.store.clear("new-discuss");
+            this.store.clear("new-discuss-preview");
+            setTimeout(() => {
+              // this.afterPublish=true
+              this.router.navigate(['/community/discussion', response.data.id]);
+            }, 4200)
+          }
+          else {
+            alert("Oops! something wrong happen, please try again.");
+          }
         });
-          this.store.clear("new-discuss");
-          this.store.clear("new-discuss-preview");
-          setTimeout(()=>{
-            // this.afterPublish=true
-            this.router.navigate(['/community/discussion', response.data.id]);
-          },4200)          
-        }
-        else {
-          alert("Oops! something wrong happen, please try again.");
-        }
-      });
-  },2100)
-}
+    }, 2100)
+  }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscapeKeyHandler(event: KeyboardEvent) {
+    this.onCloseModel();
+  }
+
+  onCloseModel() {
+    document.getElementsByClassName("main-container")[0].removeAttribute("aria-hidden");
+    document.getElementById(this.currentModelLink).focus();
+  }
+
+  onOpenModel() {
+    document.getElementsByClassName("main-container")[0].setAttribute("aria-hidden", "true");
+  }
+
   get formControl() {
     return this.replyForm.controls;
   }

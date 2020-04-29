@@ -6,7 +6,7 @@
     <!-- Bread crumbs End -->
     <div class="uk-container">
         <div class="uk-grid uk-grid-large">
-            <h1 class="heading">{{product?.name}}</h1>
+            <h1 id="productHeader" tabindex=0 class="heading">{{product?.name}}</h1>
         </div>
         <hr class="m-b-30" />
         <div class="uk-grid-large" uk-grid>
@@ -16,8 +16,8 @@
                         {{slide}}
                     </div>
                     <ngb-carousel *ngIf="product && product.images" [activeId]="activeSlideId">
-                        <ng-template *ngFor="let image of product.images" ngbSlide>
-                            <img [imageHandler] [src]="image" alt="Random first slide">
+                        <ng-template *ngFor="let image of product.images;let i =index" ngbSlide>
+                            <img [imageHandler] [src]="image" [attr.alt]="'Product silder image'+ i">
                         </ng-template>
                     </ngb-carousel>
                 </div>
@@ -25,7 +25,7 @@
                     <li class="carousel-thumbnail__item carousel-box list-inline-item"
                         *ngFor="let image of product.images;  let i = index" (click)="setActiveSlide(i)">
                         <a class="selected">
-                            <img class="carousel-thumbnail__img" alt="No Image Found" [src]="image">
+                            <img class="carousel-thumbnail__img" [attr.alt]="'Product carousel image'+ i" [src]="image">
                         </a>
                     </li>
                 </ul>
@@ -42,7 +42,8 @@
 
                 <!-- Submit Rating START-->
                 <div class="rating-box m-t-20 bg-white">
-                    <app-add-rating [userRating]="userRating" ratingOf="product" (submitForm)="onRatingSubmit($event)"></app-add-rating>
+                    <app-add-rating [userRating]="userRating" ratingOf="product" (submitForm)="onRatingSubmit($event)">
+                    </app-add-rating>
                 </div>
                 <!-- Submit Rating END-->
 
@@ -50,15 +51,16 @@
 
                 <div class="m-t-40 category-box bg-white">
                     <div class="m-b-20 uk-visible@s">
-                        <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp"
-                          target="_blank"> </a>
+                        <a [href]="whatsappUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon"
+                            uk-icon="whatsapp" aria-label="Share via Whatsapp" target="_blank"> </a>
                         <a class="social-link" [href]="whatsappUrl" target="_blank">
-                          Share via
-                          Whatsapp</a>
+                            Share via
+                            Whatsapp</a>
                     </div>
-            
+
                     <div class="m-b-20 uk-hidden@s">
-                        <a [href]="whatsappMobileUrl" class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp">
+                        <a [href]="whatsappMobileUrl" aria-label="Share via Whatsapp"
+                            class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp">
                         </a>
                         <a class="social-link" [href]="whatsappMobileUrl">
                             Share via
@@ -67,7 +69,7 @@
 
                     <div class="m-b-20">
                         <a href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age%20for%20product%20'{{product.name}}'&body=Product URL: {{currentUrl}}"
-                            class="uk-icon-button  uk-margin-small-right fb-icon" uk-icon="mail"> </a>
+                            class="uk-icon-button  uk-margin-small-right fb-icon" aria-label="Share via Email" uk-icon="mail"> </a>
                         <a class="social-link"
                             href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age%20for%20product%20'{{product.name}}'&body=Product URL: {{currentUrl}}">
                             Share
@@ -77,7 +79,7 @@
                         <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{ service?.name || service?.basicProfileInfo?.firstName  }}"
                           onclick="javascript:window.open(this.href,
                                   '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
-                          class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"> </a> <a class="social-link"
+                          class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"  aria-label="Share via Facebook"> </a> <a class="social-link"
                           href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{ service?.name || service?.basicProfileInfo?.firstName  }}"
                           onclick="javascript:window.open(this.href,
                                   '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
@@ -115,7 +117,7 @@
                         <hr />
                         <!-- Success box START-->
                         <div *ngIf="reviewSuccessMessage" class="uk-alert-success" uk-alert>
-                            <p>{{ reviewSuccessMessage }}</p>
+                            <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ reviewSuccessMessage }}</p>
                         </div>
                         <!-- Success box END-->
                         <form [formGroup]="reviewForm" class="uk-form-stacked review-form">
@@ -225,13 +227,15 @@
             <div class="uk-modal-body">
                 <div class="uk-child-width-1-1 uk-grid-small" uk-grid>
                     <div>
-                        <p class="font-regular-15 m-b-10 lable">You will be leaving our page and go to Seniority Page</p>
+                        <p class="font-regular-15 m-b-10 lable">You will be leaving our page and go to Seniority Page
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-transparent uk-modal-close close-btn" type="button">No</button>
-                <button class="uk-button uk-button-primary m-l-5 uk-modal-close close-btn" (click)="redirectToSite()" type="button">Yes</button>
+                <button class="uk-button uk-button-primary m-l-5 uk-modal-close close-btn" (click)="redirectToSite()"
+                    type="button">Yes</button>
             </div>
         </div>
     </div>

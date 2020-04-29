@@ -42,7 +42,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
 
     // Generate meta tag 
     const config: SEO = {
-      title: `All Discussions - An Elder Spring Initiative by Tata Trusts`,
+      title: `All Discussions`,
       keywords: 'products,services,events,dscussions',
       description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
       author: `An Elder Spring Initiative by Tata Trusts`,
@@ -58,6 +58,10 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
       this.initiate();
     });
   }
+
+  ngAfterViewInit() {
+  }
+
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
   }
@@ -111,6 +115,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
     if (event.clientX != 0) { // this is to make sure it is an event not raise by hitting enter key
       this.setSearchTxt("");
       this.search();
+      document.getElementById("discussion-searchtxt").focus();
     }
   }
 
@@ -137,7 +142,14 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
           this.search();
         });
       }
-    });
+    },
+      error => { },
+      () => {
+        setTimeout(() => {
+          document.getElementById("discussionListHeader").focus();
+        }, 500);
+      }
+    );
   }
 
 

@@ -7,18 +7,28 @@
                         <h3 class="uk-h4">Categories</h3>
                     </div>
                     <div *ngIf="searchParams?.productCategory !== ''">
-                        <a class="uk-text-danger" (click)="clearSelection()">Clear Selection</a>
+                        <a href="javascript:void(0)" class="uk-text-danger" (click)="clearSelection()">Clear
+                            Selection</a>
                     </div>
                 </div>
                 <ul class="uk-list uk-list-large p-2" *ngIf="catsList!==undefined">
-                    <li *ngFor="let cat of catsList" (click)="onTabChange(cat.id)" class="cursor-pointer"
-                        [ngClass]="{'cat-active': cat.id === searchParams?.productCategory}">{{cat.name}} <span
+                    <li *ngFor="let cat of catsList" class="cursor-pointer"
+                        [ngClass]="{'cat-active': cat.id === searchParams?.productCategory}"
+                        (click)="onTabChange(cat.id)"> <a href="javascript:void(0)"
+                            (click)="onTabChange(cat.id)">{{cat.name}}</a> <span
                             class="uk-badge uk-float-right">{{cat.productCount}}</span></li>
                 </ul>
             </div>
             <app-share-via-media *ngIf="showSharing"></app-share-via-media>
         </div>
         <div class="uk-width-expand@m">
+
+            <!-- pagination info bar -->
+            <div class="page-info-bar" *ngIf="showPagination && totalPages">
+                <p class="font-regular-15 uk-margin-remove">Page <b>{{searchParams.p +1}}</b> of <b>{{totalPages}}</b>
+                </p>
+            </div>
+
             <!-- Sample Implementation on 04-03-20 -->
             <!-- Mobile filter START -->
             <div class="bg-white category-box m-b-20 uk-hidden@s">
@@ -79,7 +89,8 @@
             <!-- Products list  -->
             <div *ngIf="productsList!==undefined && productsList.length > 0 && !isLoading">
                 <app-product-detail-card *ngFor="let proudct of productsList" [product]="proudct"
-                [pageParam]="{searchTxt:searchParams?.searchTxt, page:searchParams.p, productCategory:searchParams.productCategory}" (categoryChange)="onTabChange($event)">
+                    [pageParam]="{searchTxt:searchParams?.searchTxt, page:searchParams.p, productCategory:searchParams.productCategory}"
+                    (categoryChange)="onTabChange($event)">
                 </app-product-detail-card>
             </div>
             <app-pagination *ngIf="showPagination && (productsList && productsList.length > 0) && !isLoading"

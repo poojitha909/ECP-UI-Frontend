@@ -14,41 +14,57 @@
 
   <!-- Search Container starts -->
   <div [ngClass]="{'all-blue': searchTxt!=''}" class="mb-24">
-  <div class="showingResult" class="uk-container search-container ">
-    <!-- Search Form START -->
-    <div class="search-form">
-      <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
-        <div class="uk-width-expand">
-          <form class="uk-search uk-search-default" autocomplete='off'>
-            <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
-              <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
-                <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
-              </button>
-            </span>
-            <input class="uk-search-input font-regular search-box" aria-label="search" [ngClass]="{ 'pr-150':showReset}"
-              [(ngModel)]="tempSearchTxt" (keyup)="onSearchChange($event)" required type="text"
-              placeholder="Search here" name="search" autocomplete='off' />
-          </form>
-        </div>
-        <div>
-          <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
+    <div class="showingResult" class="uk-container search-container ">
+      <!-- Search Form START -->
+      <div class="search-form" role=“search”>
+        <div class="search-field uk-grid-stack uk-grid-small" uk-grid>
+          <div class="uk-width-expand">
+            <form class="uk-search uk-search-default" autocomplete='off'>
+              <input id="communitySearch" class="uk-search-input font-regular search-box" aria-label="search"
+                [ngClass]="{ 'pr-150':showReset}" [(ngModel)]="tempSearchTxt" (keyup)="onSearchChange($event)" required
+                type="text" placeholder="Search here" name="search" autocomplete='off' />
+              <span class="uk-search-icon-flip" [ngClass]="{ 'w-150':showReset}" uk-search-icon>
+                <button class="uk-button-link" style="visibility: hidden"></button>
+                <button *ngIf="showReset" class="reset-link" (click)="resetSearch($event)">
+                  <fa-icon [icon]="['fas', 'times-circle']"></fa-icon><span class="uk-visible@s"> Clear Search</span>
+                </button>
+              </span>
+            </form>
+          </div>
+          <div>
+            <button class="uk-button uk-button-default search-btn" (click)="onSearch()">Search</button>
+          </div>
         </div>
       </div>
+
     </div>
 
-  </div >
-  <ul [ngClass]="{'uk-child-width-expand': searchTxt=='', 'showOnSearchtab': searchTxt!='' }" id="search-tab" uk-tab>
-    <li><a (click)="showAll('discss')" href="#">All Articles & Discussions{{ searchTxt!='' ? " (" + searchData.totalDiscussions + ")" : "" }}</a></li>
-    <li><a (click)="showAll('events')" href="#">All Events{{ searchTxt!='' ? " (" + searchData.totalEvents + ")" : "" }}</a></li>
-  </ul>
-  <ul class="uk-switcher showingSearchResult">
-    <li>
-      <app-discussion-results [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt" (showCount)="showDiscussionCount($event)" ></app-discussion-results>
-    </li>
-    <li>
-      <app-event-results [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt" (showCount)="showEventCount($event)" ></app-event-results>
-    </li>
-  </ul>
+    <div *ngIf="searchTxt" class="result-bar m-l-40 m-r-40 m-b-20">
+      <p class="font-regular-15 uk-margin-remove">Showing
+        <b>{{ searchData.totalEvents + searchData.totalDiscussions}}</b> results for
+        <b>"{{searchTxt}}"</b></p>
+    </div>
+
+    <div class="search-tab">
+      <ul [ngClass]="{'uk-child-width-expand': searchTxt=='', 'showOnSearchtab': searchTxt!='' }" id="search-tab"
+        uk-tab>
+        <li><a (click)="showAll('discss')" href="#">All Articles &
+            Discussions{{ searchTxt!='' ? " (" + searchData.totalDiscussions + ")" : "" }}</a></li>
+        <li><a (click)="showAll('events')" href="#">All
+            Events{{ searchTxt!='' ? " (" + searchData.totalEvents + ")" : "" }}</a></li>
+      </ul>
+
+
+      <ul class="uk-switcher showingSearchResult">
+        <li>
+          <app-discussion-results [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt"
+            (showCount)="showDiscussionCount($event)"></app-discussion-results>
+        </li>
+        <li>
+          <app-event-results [showPagination]="showPagination" [showSharing]="showSharing" [searchTxt]="searchTxt"
+            (showCount)="showEventCount($event)"></app-event-results>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
-

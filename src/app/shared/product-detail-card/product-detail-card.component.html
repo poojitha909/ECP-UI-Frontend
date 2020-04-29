@@ -1,9 +1,9 @@
 <div [routerLink]="['/products', product.id]" [queryParams]="pageParam"
   class="cursor uk-card uk-card-default uk-card-hover uk-grid-collapse uk-child-width-1-2@s uk-margin uk-text-center uk-text-left@m"
-  uk-grid>
+  uk-grid tabindex=-1>
 
   <div class="uk-card-media-left uk-width-1-4@m uk-width-1-3@s p-16">
-    <img class="product-img" src="{{product.images[0]}}" alt="No Image Found">
+    <img class="product-img" src="{{product.images[0]}}" alt="product image">
   </div>
 
   <div class="uk-card-body uk-width-expand uk-flex uk-flex-between uk-flex-column p-16">
@@ -19,7 +19,8 @@
       </div>
     </div>
     <div class="category m-t-20">
-      In: <span (click)="onclick($event,product)" class="category-text">{{product?.productCategory?.name}}</span>
+      In: <a href="javascript:void(0)" (click)="onclick($event,product)"
+        class="category-text">{{product?.productCategory?.name}}</a>
     </div>
   </div>
 

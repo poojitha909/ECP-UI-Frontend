@@ -17,6 +17,7 @@ export class ViewGeneralInfoComponent implements OnInit {
   messages:any;
   subscription: Subscription;
   gender: string;
+  // beforeModalEdit:any;
   constructor(
     public userService: UserService,
     public auth: AuthService,
@@ -26,12 +27,20 @@ export class ViewGeneralInfoComponent implements OnInit {
   ngOnInit() {
     this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
       this.messages=message;
-     
-    })
+      // this.editForm(this.beforeModalEdit)
+    });
+    // this.subscription=this.userService.geteditFormSection().subscribe(res=>{
+    //   if(res==="editSection"){
+    //     this.editProfile.emit({obj: "", action: this.beforeModalEdit})
+    //   }
+    // })
   }
 
   edit(actionName){
+    // console.log('edit on view')
     if(this.messages=='editForm'){
+      // this.beforeModalEdit=actionName;
+      // console.log(this.beforeModalEdit);
       const modalRef = this.modalService.open(ModalComponent);
     }else{
       this.editProfile.emit({obj: "", action: actionName})

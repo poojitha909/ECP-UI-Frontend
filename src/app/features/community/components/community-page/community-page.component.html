@@ -48,9 +48,9 @@
     <div class="search-tab">
       <ul [ngClass]="{'uk-child-width-expand': searchTxt=='', 'showOnSearchtab': searchTxt!='' }" id="search-tab"
         uk-tab>
-        <li><a (click)="showAll('discss')" href="#">All Articles &
+        <li><a (click)="showAll('discss')" href="#"> Articles &
             Discussions{{ searchTxt!='' ? " (" + searchData.totalDiscussions + ")" : "" }}</a></li>
-        <li><a (click)="showAll('events')" href="#">All
+        <li><a (click)="showAll('events')" href="#">
             Events{{ searchTxt!='' ? " (" + searchData.totalEvents + ")" : "" }}</a></li>
       </ul>
 

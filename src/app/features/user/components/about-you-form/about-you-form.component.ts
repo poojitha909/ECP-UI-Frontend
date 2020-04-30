@@ -132,6 +132,7 @@ export class AboutYouFormComponent implements OnInit {
   }
 
   onSubmit(Event) {
+    // this.userService.editFormSection('editSection')
     if (this.aboutForm.valid) {
       this.formControl.language.value.forEach(
         (val, index) => {
@@ -161,7 +162,6 @@ export class AboutYouFormComponent implements OnInit {
           this.errorMessage = "Some unknown internal server error occured";
         });
     }
-    console.log('CancelForm after Submit from ',event)
     this.cancelForm.emit();
   }
 

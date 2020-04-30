@@ -101,7 +101,8 @@ export class GeneralInfoFormComponent implements OnInit {
     } else {
       this.errorMessage = "Invalid DOB";
     }
-      this.cancelForm.emit();
+    this.cancelForm.emit();
+    // this.userService.editFormSection('editSection')
   }
 
   resetAlertMessages() {

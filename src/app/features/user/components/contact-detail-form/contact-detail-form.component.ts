@@ -49,7 +49,7 @@ export class ContactDetailFormComponent implements OnInit {
     this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
       if(message=="closeModal"){
         document.getElementById("city").focus();
-      }    
+        }
     })
   }
 
@@ -77,9 +77,8 @@ export class ContactDetailFormComponent implements OnInit {
           this.errorMessage = "Some unknown internal server error occured";
         });
     }
-    
-      console.log('CancelForm after Submit')
-      this.cancelForm.emit();
+    // this.userService.editFormSection('editSection')
+    this.cancelForm.emit();
   }
 
   resetAlertMessages() {

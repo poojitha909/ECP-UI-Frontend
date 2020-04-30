@@ -32,6 +32,7 @@ export class ViewProfileComponent implements OnInit {
   }
 
   edit(actionName) {
+    // console.log('edit')
     this.editProfile.emit({ obj: "", action: actionName });
   }
 }

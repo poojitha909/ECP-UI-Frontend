@@ -140,8 +140,8 @@
             <p *ngIf="!isDBService && service?.seo_dt?.desc">
               {{service?.seo_dt?.desc }}
             </p>
-            <div *ngIf="isDBService" [innerHTML]="service?.basicProfileInfo?.description"></div>
-            <div *ngIf="!isDBService" [innerHTML]="service?.bizinfo"></div>
+            <div class="service-info" *ngIf="isDBService" [innerHTML]="service?.basicProfileInfo?.description"></div>
+            <div class="service-info" *ngIf="!isDBService" [innerHTML]="service?.bizinfo"></div>
           </div>
           <hr />
         </ng-container>

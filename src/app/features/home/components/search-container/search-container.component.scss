@@ -5,7 +5,7 @@
   font-family: $regular-font;
   border-radius: 8px;
   border: 1px solid #d7e0ef;
-  margin-top: -100px;
+  margin-top: 32px;
   margin-bottom: 30px;
   .header-label {
     font-size: 24px;
@@ -150,16 +150,16 @@
 }
 
 // Mobile Screens
-@media (max-width:641px){
-  .search-container{
+@media (max-width: 641px) {
+  .search-container {
     margin-top: 16px;
     width: 100%;
     height: 72px;
 
     .search-form {
       .search-field {
-        form{
-          input{
+        form {
+          input {
             width: 250px;
             height: 40px;
             box-sizing: border-box;
@@ -175,9 +175,8 @@
           height: 40px;
           text-align: center;
           padding-left: 12px;
+        }
       }
     }
-   
   }
-}
 }

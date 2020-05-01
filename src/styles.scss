@@ -341,13 +341,26 @@ ngb-rating {
 }
 
 /* New Banner */
+// .top-banner {
+//   margin-top: 32px;
+//   border-radius: 4px;
+//   .banner-text {
+//     padding: 32px 40px;
+//   }
+// }
+
 .top-banner {
   margin-top: 32px;
   border-radius: 4px;
+  background: #f1f1f2;
   .banner-text {
     padding: 32px 40px;
   }
+  .banner-img {
+    padding-top: 16px;
+  }
 }
+
 .mb-24 {
   margin-bottom: 24px;
 }
@@ -440,14 +453,12 @@ ngb-rating {
         border-bottom: 2px solid #161c2d;
       }
       &:focus:active {
-        border-radius: 4px;
         border-bottom: 4px solid $font-light-black;
       }
     }
 
     & > .uk-active > a {
       border-bottom: 4px solid #1a73e8;
-      border-radius: 4px;
       color: #1a73e8;
     }
   }

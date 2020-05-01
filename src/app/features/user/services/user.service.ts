@@ -41,6 +41,15 @@ export class UserService {
     this.subject.next(closeModal)
   }
 
+  // editFormSection(editSection){
+  //   console.log(editSection);
+  //   this.subject.next(editSection)
+  // }
+
+  // geteditFormSection():Observable<any>{
+  //   return this.subject.asObservable();
+  // }
+
   createUserProfile(userData: UserProfile): Observable<UserProfile> {
     return this.http.post<any>(ApiConstants.USER_PROFILE, userData).pipe(
       map

@@ -93,6 +93,7 @@ export class ChangeProfilePictureFormComponent implements OnInit {
   }
 
   onSubmit(event) {
+    // this.userService.editFormSection('editSection')
     this.userService.userProfile.basicProfileInfo.firstName = this.formControl.firstName.value;
     this.userService.userProfile.basicProfileInfo.primaryEmail = this.formControl.primaryEmail.value;
     this.userService.userProfile.basicProfileInfo.primaryPhoneNo = this.formControl.primaryPhoneNo.value;
@@ -114,9 +115,6 @@ export class ChangeProfilePictureFormComponent implements OnInit {
           this.errorMessage = "Some unknown internal server error occurred";
         }
       });
-
-    console.log('CancelForm after Submit from ', event)
-
   }
 
   resetAlertMessages() {
@@ -127,6 +125,7 @@ export class ChangeProfilePictureFormComponent implements OnInit {
   onCancel() {
     this.resetAlertMessages();
     this.cancelForm.emit();
+    // this.userService.editFormSection('editSection')
   }
 
 }

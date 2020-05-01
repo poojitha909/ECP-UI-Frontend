@@ -311,7 +311,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
         .subscribe((response: any) => {
           if (response.data.id != "") {
             this.notifier.show({
-              message: "Your discussion has created successfully.",
+              message: "Your article has been published.",
               type: "success",
               template: this.customNotificationTmpl1
             });

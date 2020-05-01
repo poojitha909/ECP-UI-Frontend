@@ -1,11 +1,13 @@
 <!-- About You form START-->
 <div class="category-box m-t-40 bg-white">
     <h3>Personal Information </h3>
-    
-    <label class="private-checkbox" for="private-imformation"><input class="uk-checkbox"
-        id="private-imformation" type="checkbox" checked> This information is
-    private</label>
-    <p>The information you provide here will be used to provide you with a smoother and more relevant experience on this site. We will be using it to match your search with results that are relevant to the information in this section.</p>
+
+    <label class="private-checkbox" for="private-imformation"><input class="uk-checkbox" id="private-imformation"
+            type="checkbox" checked> This information is
+        private</label>
+    <p>The information you provide here will be used to provide you with a smoother and more relevant experience on this
+        site. We will be using it to match your search with results that are relevant to the information in this
+        section.</p>
     <hr />
 
     <!-- Error box START-->
@@ -42,9 +44,9 @@
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="Topic-Interests">Topic of Interests</label>
+            <label class="uk-form-label" for="Topic-Interests"> Topics of Interest</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" id="Topic-Interests" placeholder="Add Topic of Interests"
+                <ng-select [addTag]="addTagFn" id="Topic-Interests" placeholder="Add  Topics of Interest"
                     [hideSelected]="true" multiple="true" formControlName="otherInterests">
                 </ng-select>
             </div>
@@ -75,7 +77,7 @@
             </div>
         </div>
 
-       
+
 
         <div class="uk-margin">
             <label class="uk-form-label" for="Other-Difficulties">Other Difficulties</label>
@@ -93,16 +95,20 @@
                     placeholder="Type here"></textarea>
             </div>
         </div>
-       
+
 
         <hr class="m-t-75" />
         <div uk-grid>
-            <button class="uk-button uk-button-transparent uk-modal-close" type="button"
-                (click)="onCancel()">Cancel</button>
-            
-                <button class="m-l-10 uk-button uk-button-default" type="submit"
-                    [disabled]="this.aboutForm.invalid">Save Changes</button>
-            
+            <div>
+                <button class="uk-button uk-button-transparent uk-modal-close" type="button"
+                    (click)="onCancel()">Cancel</button>
+            </div>
+            <div>
+
+                <button class="uk-button uk-button-default" type="submit" [disabled]="this.aboutForm.invalid">Save
+                    Changes</button>
+            </div>
+
 
         </div>
     </form>

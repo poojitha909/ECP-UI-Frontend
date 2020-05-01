@@ -4,12 +4,17 @@
   margin: 0;
   padding: 0;
 }
-h1 {
+h1,
+h2,
+h3 {
   color: $font-light-black;
+}
+h1 {
   font-family: $regular-font;
   font-weight: bold;
   margin-top: 0px;
   margin-bottom: 0px;
+  font-size: 32px;
 }
 
 .category-box {
@@ -192,4 +197,21 @@ h1 {
   font-size: 18px;
   text-transform: none;
   padding: 0px 30px;
+}
+
+.service-info {
+  h1 {
+    display: none;
+  }
+  h2,
+  h3 {
+    font-family: "HKGroteskRegular";
+    font-size: 24px;
+    font-weight: 600;
+  }
+  p {
+    font-size: 15px;
+    font-family: "HKGroteskRegular";
+    color: #161c2d;
+  }
 }

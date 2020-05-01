@@ -26,6 +26,8 @@ export class ExpertDetailCardComponent implements OnInit {
       this.user = JSON.parse(this.user);  
       if (this.user.id == this.expert.userId) {
         this.isSame = true;
+        this.pageParam['show'] = "expques";
+        this.pageParam['page'] = "";
       }
     }
 

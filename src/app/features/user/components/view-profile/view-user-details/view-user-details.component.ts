@@ -16,6 +16,7 @@ export class ViewUserDetailsComponent implements OnInit {
 
   messages:any;
   subscription: Subscription;
+  // beforeModalEdit:any
   constructor(
     public userService: UserService,
     public auth: AuthService,
@@ -26,10 +27,17 @@ export class ViewUserDetailsComponent implements OnInit {
     this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
       this.messages=message;
     })
+    // this.subscription=this.userService.geteditFormSection().subscribe(res=>{
+    //   if(res==="editSection"){
+    //     this.editProfile.emit({obj: "", action: this.beforeModalEdit})
+    //   }
+    // })
   }
 
   edit(actionName){
+    // console.log('edit on view')
     if(this.messages=='editForm'){
+      // this.beforeModalEdit=actionName;
       const modalRef = this.modalService.open(ModalComponent);
     }else{
       this.editProfile.emit({obj: "", action: actionName})

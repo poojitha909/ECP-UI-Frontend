@@ -25,7 +25,7 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
   whatsMobileUrl;
   selectedCategoryType: Category;
   showShareBox: boolean;
-  services: Service[] = [];
+  services: Service[];
   allService: Service[] = [];
   pageServices: Service[] = [];
   selectedCategory: string = 'All';

@@ -70,9 +70,11 @@ export class AuthService {
     };
     return this.http.post<any>(ApiConstants.LOGIN_OTP, `mobile=${mobileNo}&otp=${code}`, options).pipe(
       map((response) => {
-        this.user$.next(response.data.user);
-        this.user = response.data.user;
-        this.userSession = response.data.sessionId;
+        if (response.data && response.data.user) {
+          this.user$.next(response.data.user);
+          this.user = response.data.user;
+          this.userSession = response.data.sessionId;
+        }
         return response.data;
       })
     );

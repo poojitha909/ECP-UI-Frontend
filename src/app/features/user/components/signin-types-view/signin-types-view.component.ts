@@ -36,7 +36,6 @@ export class SigninTypesViewComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes && changes.otpGenerated && changes.otpGenerated.currentValue) {
-      console.log(changes);
       setTimeout(() => {
         document.getElementById("opttxt").focus();
       }, 500);
@@ -81,7 +80,7 @@ export class SigninTypesViewComponent implements OnInit, OnChanges {
   }
 
   changeNumber() {
-    this.numberError =null;
+    this.numberError = null;
     this.mobileNumber = null;
     this.otpResend = false;
     this.requestForOtp.emit(this.mobileNumber);

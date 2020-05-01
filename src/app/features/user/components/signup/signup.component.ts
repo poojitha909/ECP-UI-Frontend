@@ -73,7 +73,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
     this.auth.getFbUserData(token).subscribe(data => {
       this.user = data.user;
       this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
-      this.welcomeText =true;
+      this.welcomeText = true;
       this.getUserProfile();
       console.log("google login response", this.user);
     },
@@ -91,7 +91,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
     this.auth.getGoogleUserData(token).subscribe(data => {
       this.user = data.user;
       this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
-      this.welcomeText =true;
+      this.welcomeText = true;
       this.getUserProfile();
       console.log("google login response", this.user);
     },
@@ -104,8 +104,8 @@ export class SignupComponent implements OnInit, AfterViewInit {
   }
 
   requestForOtp(number) {
+    this.errorMessage = null;
     if (number) {
-      this.errorMessage = null;
       this.auth.sendOtp(number).subscribe(response => {
         console.log(response);
         if (response.type === "success") {
@@ -127,26 +127,21 @@ export class SignupComponent implements OnInit, AfterViewInit {
     this.isLoading = true;
     this.errorMessage = null;
     this.auth.verfiyOtp(verification.number, verification.code).subscribe(response => {
-      console.log(response);
-      if (response.sessionId && response.user) {
+      if (response && response.sessionId && response.user) {
         this.user = response.user;
         this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
-        this.welcomeText =true;
+        this.welcomeText = true;
         // this.isLoading = false;
         this.getUserProfile();
       } else {
         this.isLoading = false;
-        if (response.message == OtpErrorMessage.otpNotVerified) {
-          this.errorMessage = "Invalid Otp, Please try again!";
-        }
         this.otpFailedNumber = verification.number;
-        // this.isOtpGenerated = false;
+        this.errorMessage = "Invalid Otp, Please try again!";
       }
     },
       error => {
         console.log(error);
         this.isLoading = false;
-        this.errorMessage = error.error.error.errorMsg;
         this.isOtpGenerated = false;
       });
   }

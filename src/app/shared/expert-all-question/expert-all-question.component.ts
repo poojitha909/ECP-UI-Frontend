@@ -63,7 +63,7 @@ export class ExpertAllQuestionComponent implements OnInit, OnDestroy {
     this.user = this.store.retrieve("ECP-USER");
     this.searchParams = {
       p: 0,
-      s: 10000,
+      s: 6,
       askCategory: "",
       askedBy: "",
       answeredBy: "",

@@ -129,6 +129,11 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     if (!this.isDBService) {
       this.getJdDetailRating();
     }
+
+    if (!this.isDBService) {
+      this.service.bizinfo = this.service.bizinfo ? this.service.bizinfo = this.service.bizinfo.replace(/[^\x00-\x7F]/g, "") : "";
+    }
+
   }
 
   ngAfterViewInit() {

@@ -15,7 +15,7 @@ export class AdditionalInfoFormComponent implements OnInit {
   @Input() verifiedString: string;
   // userform: FormGroup;
   userform = this.fb.group({
-    firstName: [this.auth.user.userName || '', Validators.required],
+    firstName: ['', Validators.required],
     primaryEmail: [this.auth.user.email, Validators.required],
     primaryPhoneNo: [this.auth.user.phoneNumber, [Validators.required]]
   });

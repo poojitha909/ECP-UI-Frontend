@@ -79,12 +79,12 @@ export class AboutYouFormComponent implements OnInit {
 
     this.aboutForm = this.fb.group({
       shortDescription: [this.userService.userProfile.basicProfileInfo.shortDescription || ''],
-      emotionalIssues: [this.userService.userProfile.individualInfo.emotionalIssues || ''],
+      emotionalIssues: [this.userService.userProfile.individualInfo.emotionalIssues || null],
       medicalIssues: [this.userService.userProfile.individualInfo.medicalIssues || null],
-      otherIssues: [this.userService.userProfile.individualInfo.otherIssues || ''],
-      language: [this.userService.userProfile.individualInfo.language || '', Validators.required],
+      otherIssues: [this.userService.userProfile.individualInfo.otherIssues || null],
+      language: [this.userService.userProfile.individualInfo.language || null, Validators.required],
       hobbies: [this.userService.userProfile.individualInfo.hobbies || null],
-      otherInterests: [this.userService.userProfile.individualInfo.otherInterests || '']
+      otherInterests: [this.userService.userProfile.individualInfo.otherInterests || null]
     });
   }
 

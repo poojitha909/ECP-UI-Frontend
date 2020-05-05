@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ChangeDetectorRef, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ChangeDetectorRef, OnChanges, SimpleChanges, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { JdCategoryService } from 'src/app/core/services';
 import { Category, Service, serviceParam } from 'src/app/core/interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,7 +13,7 @@ declare var UIkit: any;
   templateUrl: './services-result.component.html',
   styleUrls: ['./services-result.component.scss']
 })
-export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges {
+export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
 
   @Input() internalProcessing: boolean;
   @Input() searchTxt: string;
@@ -114,6 +114,10 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
 
   }
 
+  ngOnDestroy() {
+    document.getElementById("mobile-category-modal").remove();
+  }
+
   showServices() {
     this.ecpService.activePage = this.activePage;
     const start = this.activePage * this.pageSize;
@@ -190,6 +194,8 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
 
   onCategoryChanged(categoryChanges: any) {
     if (categoryChanges) {
+      this.homeService.serviceCategory = categoryChanges.ParentCatid;
+      this.homeService.serviceSubCategory = categoryChanges.catId;
       if (!this.internalProcessing) {
         this.router.navigate(['services'], { queryParams: { category: categoryChanges.ParentCatid, catid: categoryChanges.catId, searchTxt: this.homeService.homeSearchtxt } });
       } else {
@@ -205,14 +211,14 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
           return true
         }
       });
-      this.showingCategory = category;
+      this.showingCategory = selSubCat.name;
       this.selectedCategory = selSubCat.name;
       if (selSubCat.source && selSubCat.source.length > 1) {
         catId = `${selSubCat.source[0].catid},${selSubCat.source[1].catid}`;
       }
 
     } else {
-      this.showingCategory = 'All ' + category;
+      this.selectedCategoryType ? this.showingCategory = 'All ' + this.selectedCategoryType.name : this.showingCategory = 'All Service';
       this.selectedCategory = 'All';
     }
     // !this.selectedCategoryType ? this.searchPageParam.term = category : '';
@@ -391,6 +397,16 @@ export class ServicesResultComponent implements OnInit, AfterViewInit, OnChanges
       this.onCategoryChanged(selectedData);
     } else {
       this.clearSelection();
+    }
+  }
+
+  setCatFilter() {
+    if (this.homeService.serviceCategory) {
+      this.selectedCategoryType = this.categories.find(cat => cat.id === this.homeService.serviceCategory);
+      if (this.homeService.serviceSubCategory) {
+        this.selectedCatid = this.homeService.serviceSubCategory;
+        this.selectedCategory = this.showingCategory;
+      }
     }
   }
 

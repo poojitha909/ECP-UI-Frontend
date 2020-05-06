@@ -105,13 +105,14 @@
             </div>
             <div>
 
-                <button class="uk-button uk-button-default" type="submit" [disabled]="this.aboutForm.invalid">Save
+                <button class="uk-button uk-button-default" type="button" (click)="showOtpModal()" [disabled]="this.aboutForm.invalid">Save
                     Changes</button>
             </div>
 
 
         </div>
     </form>
+    <app-otp-popup [mobileNum]="otpMobile" [showModal]="otpModalShow" (updateOtp)="updateOtp($event)"></app-otp-popup>
 </div>
 
 <!-- About you form END -->

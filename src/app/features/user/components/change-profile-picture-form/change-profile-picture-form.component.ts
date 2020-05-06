@@ -12,7 +12,8 @@ import { Subscription } from 'rxjs';
 export class ChangeProfilePictureFormComponent implements OnInit {
 
   @Output() cancelForm = new EventEmitter();
-  
+  otpModalShow = false;
+  otpMobile: string;
   EditUser: string;
   eventEmitted: any;
   imageData: FormData;
@@ -42,6 +43,7 @@ export class ChangeProfilePictureFormComponent implements OnInit {
     if(this.userService.userProfile.basicProfileInfo.profileImage && this.userService.userProfile.basicProfileInfo.profileImage.thumbnailImage){
       this.profileImage = this.userService.userProfile.basicProfileInfo.profileImage.thumbnailImage;
     }
+    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo;
   }
 
   ngOnInit() {
@@ -92,6 +94,16 @@ export class ChangeProfilePictureFormComponent implements OnInit {
     // console.log(this.profileImage);
   }
 
+  showOtpModal(){
+    this.otpModalShow=true;
+  }
+  updateOtp(otp: string){
+    this.otpModalShow=false;
+    this.userService.userProfile.otp=otp;
+    if(otp!=""){
+      this.onSubmit('SUBMIT_USER_DETAILS');
+    }
+  }
   onSubmit(event) {
     // this.userService.editFormSection('editSection')
     this.userService.userProfile.basicProfileInfo.firstName = this.formControl.firstName.value;

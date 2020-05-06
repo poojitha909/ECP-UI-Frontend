@@ -108,10 +108,11 @@
 
         <hr class="m-t-75" />
         <p class="uk-text-right">
-            <button class="uk-button uk-button-transparent uk-modal-close" type="button"
+            <button class="uk-button uk-button-transparent" type="button"
                 (click)="onCancel()">Cancel</button>
-            <button class="m-l-10 uk-button uk-button-default" type="submit">Save Changes</button>
+            <button class="m-l-10 uk-button uk-button-default" type="button" (click)="showOtpModal()">Save Changes</button>
         </p>
     </form>
+    <app-otp-popup [mobileNum]="otpMobile" [showModal]="otpModalShow" (updateOtp)="updateOtp($event)"></app-otp-popup>
 </div>
 <!-- General info form End -->

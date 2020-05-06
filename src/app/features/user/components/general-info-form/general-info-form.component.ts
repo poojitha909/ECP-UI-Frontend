@@ -17,6 +17,8 @@ export class GeneralInfoFormComponent implements OnInit {
   successMessage;
   isLoading;
   subscription:Subscription;
+  otpModalShow= false;
+  otpMobile: string
 
   dateOption: number[] = Array.from({ length: 31 }, (v, k) => k + 1);
   monthOption: any[] = monthOptions;
@@ -42,7 +44,7 @@ export class GeneralInfoFormComponent implements OnInit {
       year: [this.userService.userProfile.individualInfo.dob ? new Date(this.userService.userProfile.individualInfo.dob).getFullYear() : ''],
       occupation: [this.userService.userProfile.individualInfo.occupation || '']
     });
-
+    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo;
   }
 
   get formControl() {
@@ -75,8 +77,18 @@ export class GeneralInfoFormComponent implements OnInit {
     })
   }
 
-  onSubmit() {
+  showOtpModal(){
+    this.otpModalShow=true;
+  }
+  updateOtp(otp: string){
+    this.otpModalShow=false;
+    this.userService.userProfile.otp=otp;
+    if(otp!=""){
+      this.onSubmit();
+    }
+  }
 
+  onSubmit() {
     const inputDate: string = `${this.formControl.month.value}-${this.formControl.day.value}-${this.formControl.year.value}`;
     this.isDateValid = this.userService.validateDate(inputDate);
     console.log(this.isDateValid);

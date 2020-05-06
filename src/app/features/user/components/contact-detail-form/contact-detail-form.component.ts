@@ -16,6 +16,8 @@ export class ContactDetailFormComponent implements OnInit {
   successMessage;
   isLoading;
   subscription:Subscription;
+  otpModalShow = false;
+  otpMobile: string;
 
   constructor(
     private fb: FormBuilder,
@@ -29,6 +31,7 @@ export class ContactDetailFormComponent implements OnInit {
       streetAddress: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.streetAddress || ''],
       zip: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.zip || '']
     });
+    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo;
 
   }
 
@@ -53,6 +56,17 @@ export class ContactDetailFormComponent implements OnInit {
     })
   }
 
+  showOtpModal(){
+    this.otpModalShow=true;
+  }
+  updateOtp(otp: string){
+    this.otpModalShow=false;
+    this.userService.userProfile.otp=otp;
+    if(otp!=""){
+      this.onSubmit();
+    }
+  }
+
   onSubmit() {
     if (this.contactForm.valid) {
       console.log(this.contactForm.value);
@@ -63,6 +77,7 @@ export class ContactDetailFormComponent implements OnInit {
       this.userService.userProfile.basicProfileInfo.primaryUserAddress.country = 'India'
       this.userService.userProfile.basicProfileInfo.primaryUserAddress.streetAddress = this.formControl.streetAddress.value;
       this.userService.userProfile.basicProfileInfo.primaryUserAddress.zip = this.formControl.zip.value;
+      this.userService.userProfile.otp = "";
       this.isLoading = true;
       this.resetAlertMessages();
 

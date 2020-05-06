@@ -10,7 +10,8 @@ import { Subscription } from 'rxjs';
 })
 export class AboutYouFormComponent implements OnInit {
   @Output() cancelForm = new EventEmitter();
-
+  otpModalShow = false;
+  otpMobile: string;
   aboutForm: FormGroup;
   medicalIssues: string[] = ["Diabetes", "Blood Pressure", "Dementia", "Arthiritis","Others"];
   hobbies: string[] = [
@@ -86,6 +87,7 @@ export class AboutYouFormComponent implements OnInit {
       hobbies: [this.userService.userProfile.individualInfo.hobbies || null],
       otherInterests: [this.userService.userProfile.individualInfo.otherInterests || null]
     });
+    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo;
   }
 
   get formControl() {
@@ -131,7 +133,18 @@ export class AboutYouFormComponent implements OnInit {
     return { id: 0, name: name };
   }
 
-  onSubmit(Event) {
+  showOtpModal(){
+    this.otpModalShow=true;
+  }
+  updateOtp(otp: string){
+    this.otpModalShow=false;
+    this.userService.userProfile.otp=otp;
+    if(otp!=""){
+      this.onSubmit();
+    }
+  }
+
+  onSubmit() {
     // this.userService.editFormSection('editSection')
     if (this.aboutForm.valid) {
       this.formControl.language.value.forEach(

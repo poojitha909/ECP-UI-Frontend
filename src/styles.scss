@@ -352,13 +352,13 @@ ngb-rating {
 .top-banner {
   margin-top: 32px;
   border-radius: 4px;
-  background: #f1f1f2;
+  // background: #f1f1f2;
   .banner-text {
     padding: 32px 40px;
   }
-  .banner-img {
-    padding-top: 16px;
-  }
+  // .banner-img {
+  //   padding-top: 16px;
+  // }
 }
 
 .mb-24 {
@@ -383,11 +383,11 @@ ngb-rating {
   }
 }
 
-@media (min-width: 640px) {
-  .banner-img {
-    padding-right: 40px;
-  }
-}
+// @media (min-width: 640px) {
+//   .banner-img {
+//     padding-right: 40px;
+//   }
+// }
 
 .uk-alert-danger {
   color: #fff;

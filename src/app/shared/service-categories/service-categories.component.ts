@@ -33,8 +33,6 @@ export class ServiceCategoriesComponent implements OnInit {
   }
 
   onCategoryChanged(ParentCatid: string, catId: string) {
-    this.homeService.serviceCategory = ParentCatid;
-    this.homeService.serviceSubCategory = catId;
     const selectedData = {
       ParentCatid: ParentCatid,
       catId: catId

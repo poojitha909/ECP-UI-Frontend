@@ -1,10 +1,10 @@
 <div class="top-banner" id="askExpertBanner">
   <div uk-grid>
     <div class="uk-width-expand uk-flex uk-flex-middle">
-      <p class="banner-text font-regular">Our distinguished experts provide honest, unbiased answers to your questions.
-        All your questions and conversations with an expert remains private between the expert and you.</p>
+      <p class="banner-text font-regular">Every Joy of Age community member has privileged access to our distinguished
+        experts to whom they can ask questions in complete privacy and get professional unbiased answers.</p>
     </div>
-    <div class="uk-flex uk-flex-bottom uk-flex-center uk-width-auto@s">
+    <div class="uk-flex uk-flex-middle uk-flex-center uk-width-auto@s">
       <img class="banner-img" src="/assets/images/landing-img/expert-banner-updated.png" />
     </div>
   </div>
@@ -50,7 +50,7 @@
           x-no-tabbing (click)="showAll('expques')">Questions for me</a></li>
       <li [ngClass]="{'uk-active': show=='ques'}" *ngIf="user?.id && searchTxt==''"><a x-no-tabbing
           (click)="showAll('ques')"> My Questions</a></li>
-      
+
     </ul>
   </div>
   <!-- tab -end -->

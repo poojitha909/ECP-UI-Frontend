@@ -54,7 +54,9 @@ export class AllProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    document.getElementById("productSearch").focus();
+    setTimeout(() => {
+      document.getElementById("productSearch").focus();
+    }, 1);
   }
 
   ngOnDestroy() {

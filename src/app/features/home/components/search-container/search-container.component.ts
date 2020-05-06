@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 
 import { PageParam } from 'src/app/core';
 import { HomeService } from '../../home.service';
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   templateUrl: './search-container.component.html',
   styleUrls: ['./search-container.component.scss']
 })
-export class SearchContainerComponent implements OnInit {
+export class SearchContainerComponent implements OnInit, AfterViewInit {
 
   showReset: boolean;
   searchTextChanged = new Subject<string>();
@@ -31,7 +31,6 @@ export class SearchContainerComponent implements OnInit {
   constructor(private homeService: HomeService, private router: Router) { }
 
   ngOnInit() {
-    document.getElementById("homeSearch").focus();
     this.searchTextChanged.pipe(
       debounceTime(10),
       distinctUntilChanged()
@@ -46,6 +45,12 @@ export class SearchContainerComponent implements OnInit {
       this.showReset = true;
       this.searchTxt = this.searchPageParam.term;
     }
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      document.getElementById("homeSearch").focus();
+    }, 1);
   }
 
   @HostListener('window:click', ['$event.target'])

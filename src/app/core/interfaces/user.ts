@@ -59,6 +59,7 @@ export interface UserProfile {
     featured?: boolean;
     reviewedByUser?: boolean;
     ratedByUser?: boolean;
+    otp?: string;
 }
 
 interface ServiceProviderInfo {

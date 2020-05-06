@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { HomeService } from 'src/app/features/home/home.service';
@@ -13,7 +13,7 @@ import { EpcServiceService } from '../../epc-service.service';
   templateUrl: './search-container.component.html',
   styleUrls: ['./search-container.component.scss']
 })
-export class SearchContainerComponent implements OnInit {
+export class SearchContainerComponent implements OnInit, AfterViewInit {
 
   showReset: boolean;
   selectedValue: string;
@@ -47,7 +47,12 @@ export class SearchContainerComponent implements OnInit {
       //this.ecpService.showBg = true;
       // this.searchService();
     }
-    document.getElementById("serviceSearch").focus();
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      document.getElementById("serviceSearch").focus();
+    }, 1);
   }
 
   @HostListener('window:click', ['$event.target'])

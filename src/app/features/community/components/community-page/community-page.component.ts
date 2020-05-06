@@ -69,7 +69,9 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    document.getElementById("communitySearch").focus();
+    setTimeout(() => {
+      document.getElementById("communitySearch").focus();
+    }, 1);
   }
 
   ngOnDestroy() {

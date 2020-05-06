@@ -57,6 +57,7 @@ import { QuestionExpertNoRecordComponent } from './question-expert-no-record/que
 import { NoRecordsComponent } from './no-records/no-records.component';
 import { EventNoRecordComponent } from './event-no-record/event-no-record.component';
 import { ShareViaMediaComponent } from './share-via-media/share-via-media.component';
+import { OtpPopupComponent } from './opt-popup/otp-popup.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import { ShareViaMediaComponent } from './share-via-media/share-via-media.compon
     QuestionExpertNoRecordComponent,
     NoRecordsComponent,
     EventNoRecordComponent,
-    ShareViaMediaComponent
+    ShareViaMediaComponent,
+    OtpPopupComponent
   ],
   imports: [
     CommonModule,
@@ -167,7 +169,8 @@ import { ShareViaMediaComponent } from './share-via-media/share-via-media.compon
     QuestionExpertNoRecordComponent,
     NoRecordsComponent,
     EventNoRecordComponent,
-    ShareViaMediaComponent
+    ShareViaMediaComponent,
+    OtpPopupComponent
   ]
 })
 export class SharedModule { }

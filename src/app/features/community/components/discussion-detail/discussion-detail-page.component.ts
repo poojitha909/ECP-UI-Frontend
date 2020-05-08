@@ -10,6 +10,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { NotifierService } from "angular-notifier";
+import { UserService } from 'src/app/features/user/services/user.service';
 
 declare var UIkit;
 
@@ -29,6 +30,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
   sortedReplies: any[];
   commentsCount: number;
   user: any;
+  userProfilePreview: any;
   parentReplyId: string;
   replyId: string;
   replyForm: FormGroup;
@@ -49,7 +51,8 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     private discussionService: DiscussionService, private menuService: MenuService,
     private fb: FormBuilder, private store: StorageHelperService,
     private authService: AuthService, public sanitizer: DomSanitizer,
-    private seoService: SeoService, notifierService: NotifierService) {
+    private seoService: SeoService, notifierService: NotifierService,
+    private userService: UserService) {
     this.notifier = notifierService
   }
 
@@ -60,10 +63,6 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.paramsSubs = this.route.params.subscribe(params => {
       this.initiate();
     });
-    if (this.route.snapshot.params['id'] == 'preview') {
-      this.showMedia=false;
-    }
-    
   }
 
   ngAfterViewInit() {
@@ -97,6 +96,15 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
+      if(this.discussionId == 'preview'){
+        this.userService.getUserProfile().subscribe(
+          userProfie => {
+            this.userProfilePreview = userProfie
+          },
+          error => {
+          }
+        );
+      }
     }
     let comment = this.store.retrieve("new-d-comment");
     if (comment) {
@@ -109,6 +117,12 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
       setTimeout(() => {
         UIkit.modal("#reply-modal-discussion").show();
       }, 500);
+    }
+    if (this.route.snapshot.params['id'] == 'preview') {
+      this.showMedia=false;
+    }
+    else{
+      this.showMedia=true;
     }
     this.replyForm = this.fb.group({
       commentTxt: [comment ? comment.commentTxt : "", Validators.required]
@@ -296,37 +310,22 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
       this.router.navigate(['/user/signin']);
       return;
     }
-    this.notifier.show({
-      message: "Please wait, we are submitting your discussion to Admin",
-      type: "info",
-      template: this.customNotificationTmpl
+    this.discussionService.addDiscussion("P", this.discussion.description, this.discussion.title,
+      this.discussion.userId,
+      this.user.userName,
+      this.discussion.tags,
+      this.discussion.categories,
+      this.discussion.contentType)
+    .subscribe((response: any) => {
+      if (response.data.id != "") {
+        this.store.clear("new-discuss");
+        this.store.clear("new-discuss-preview");
+        this.router.navigate(['/community/discussion', response.data.id]);
+      }
+      else {
+        alert("Oops! something wrong happen, please try again.");
+      }
     });
-    setTimeout(() => {
-      this.discussionService.addDiscussion("P", this.discussion.description, this.discussion.title,
-        this.discussion.userId,
-        this.user.userName,
-        this.discussion.tags,
-        this.discussion.categories,
-        this.discussion.contentType)
-        .subscribe((response: any) => {
-          if (response.data.id != "") {
-            this.notifier.show({
-              message: "Your article has been published.",
-              type: "success",
-              template: this.customNotificationTmpl1
-            });
-            this.store.clear("new-discuss");
-            this.store.clear("new-discuss-preview");
-            setTimeout(() => {
-              // this.afterPublish=true
-              this.router.navigate(['/community/discussion', response.data.id]);
-            }, 4200)
-          }
-          else {
-            alert("Oops! something wrong happen, please try again.");
-          }
-        });
-    }, 2100)
   }
 
   @HostListener('document:keydown.escape', ['$event'])

@@ -44,8 +44,9 @@
                 <div *ngIf = "eventId == 'preview'" class= "previewTop">
                     <div class="info">
                         <img class = "imgInformation" src="/assets/images/information.png">
-                        <span class = "para">You are on <b>Preview Screen</b> now. Scroll down and <b>click on "publish"</b>
-                       to publish this event.</span>
+                        <span class = "para">You are previewing your contribution that you are about to post publicly. 
+                            If you are happy with it use the ‘Publish’ button at the bottom to share this with the community, 
+                            or click on the ‘Go back & Edit’  button to continue to improve your contribution.</span>
                     </div>
                 </div>
                 <div class="bg-white category-box">
@@ -114,7 +115,7 @@
                         </div>
                         <div *ngIf="eventId == 'preview'">
                             <hr />
-                            <button class="uk-button uk-button-default m-r-15" (click)="onCancelPublish()">Go Back &
+                            <button class="uk-button uk-button-transparent uk-button-default m-r-15" (click)="onCancelPublish()">Go Back &
                                 Edit</button>
                             <button class="uk-button uk-button-primary"
                                 (click)="onPublish()">{{!!user ? 'Publish' : 'Signin to create this Event'}}</button>

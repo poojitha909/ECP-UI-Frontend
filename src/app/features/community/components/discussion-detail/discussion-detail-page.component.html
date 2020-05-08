@@ -9,9 +9,15 @@
             <div class="uk-width-1-3@m">
                 <div class="category-box top bg-white">
                     <div class="img-container"
-                        *ngIf="discussion.userProfile && discussion.userProfile.basicProfileInfo && discussion.userProfile.basicProfileInfo.profileImage && discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage">
+                        *ngIf="discussionId != 'preview' && discussion?.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage">
                         <img class="user" [imageHandler]
                             [src]="discussion?.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage"
+                            alt="discussion user profile image">
+                    </div>
+                    <div class="img-container"
+                        *ngIf="discussionId == 'preview'">
+                        <img class="user" [imageHandler]
+                            [src]="userProfilePreview?.basicProfileInfo?.profileImage?.thumbnailImage"
                             alt="discussion user profile image">
                     </div>
                     <div class="heading2 username">
@@ -29,8 +35,9 @@
                 <div *ngIf = "discussionId == 'preview'" class= "previewTop">
                     <div class="info">
                         <img class = "imgInformation" src="/assets/images/information.png">
-                        <span class = "para">You are on <b>Preview Screen</b> now. Scroll down and <b>click on "publish"</b>
-                       to publish this discussion.</span>
+                        <span class = "para">You are previewing your contribution that you are about to post publicly. 
+                            If you are happy with it use the ‘Publish’ button at the bottom to share this with the community, 
+                            or click on the ‘Go back & Edit’  button to continue to improve your contribution.</span>
                     </div>
                 </div>
                 <!-- <div *ngIf = "afterPublish" class= "previewTop">
@@ -49,7 +56,7 @@
                     </div>
                     <div *ngIf="discussionId == 'preview'">
                         <hr />
-                        <button class="uk-button uk-button-default m-r-15" (click)="onCancelPublish()">Go Back &
+                        <button class="uk-button uk-button-transparent uk-button-default m-r-15" (click)="onCancelPublish()">Go Back &
                             Edit</button>
                         <button class="uk-button uk-button-primary"
                             (click)="onPublish()">{{!!user ? 'Publish' : 'Signin to create this Discussion'}}</button>
@@ -160,7 +167,10 @@
                 <div id="reply-modal-discussion" role="dialog" aria-labelledby="addCommentTitle" aria-modal="true"
                     uk-modal="bg-close:false;container:false;">
                     <div class="uk-modal-dialog uk-modal-body">
-                        <h1 tabindex=0 id="addCommentTitle" class="font-regular-24 font-weight-600"> {{ parentReplyId!="" ? "Reply to a Comment" : "Add a Comment" }}</h1>
+                        <h1 tabindex=0 id="addCommentTitle" class="font-regular-24 font-weight-600"> {{ 
+                            parentReplyId!="" ? 
+                            (replyId!="" ? "Edit a Reply to Comment" : "Reply to a Comment") : 
+                            (replyId!="" ? "Edit a Comment" : "Add a Comment") }}</h1>
                         <hr />
                         <form [formGroup]="replyForm" (ngSubmit)="addComment()" class="uk-form-stacked reply-form">
                             <div class="uk-margin">

@@ -33,7 +33,9 @@ export class ContactDetailFormComponent implements OnInit {
       streetAddress: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.streetAddress || ''],
       zip: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.zip || '', [Validators.pattern("^[0-9]{6}$")]]
     });
-    this.otpMobile = this.auth.user.phoneNumber;
+    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo ? 
+                      this.userService.userProfile.basicProfileInfo.primaryPhoneNo :
+                      this.auth.user.phoneNumber;
 
   }
 

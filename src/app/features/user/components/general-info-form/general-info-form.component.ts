@@ -46,7 +46,9 @@ export class GeneralInfoFormComponent implements OnInit {
       year: [this.userService.userProfile.individualInfo.dob ? new Date(this.userService.userProfile.individualInfo.dob).getFullYear() : ''],
       occupation: [this.userService.userProfile.individualInfo.occupation || '']
     });
-    this.otpMobile = this.auth.user.phoneNumber;
+    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo ? 
+                      this.userService.userProfile.basicProfileInfo.primaryPhoneNo :
+                      this.auth.user.phoneNumber;
   }
 
   get formControl() {

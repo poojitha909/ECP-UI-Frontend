@@ -89,7 +89,9 @@ export class AboutYouFormComponent implements OnInit {
       hobbies: [this.userService.userProfile.individualInfo.hobbies || null],
       otherInterests: [this.userService.userProfile.individualInfo.otherInterests || null]
     });
-    this.otpMobile = this.auth.user.phoneNumber;
+    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo ? 
+                      this.userService.userProfile.basicProfileInfo.primaryPhoneNo :
+                      this.auth.user.phoneNumber;
   }
 
   get formControl() {

@@ -425,35 +425,30 @@
       <h3 id="contactModalTitle" tabindex=0 class="uk-modal-title">Contact Details</h3>
     </div>
     <div class="uk-modal-body" id="contactBody">
-      <div class="uk-child-width-1-2@s uk-grid-small" uk-grid>
+      <div class="uk-child-width-1-2@s " uk-grid>
+        <div>
+          <p class="font-regular-15 m-b-10 lable">Organisation</p>
+          <p class="font-regular m-t-0"> {{ service?.name || service?.basicProfileInfo?.firstName }}
+          </p>
+        </div>
+
         <div>
 
           <p class="font-regular-15 m-b-10 lable">Email</p>
           <p class="font-regular m-t-0">
             {{ service?.email || service?.basicProfileInfo?.primaryEmail || '-'}}</p>
-
-          <p class="font-regular-15 m-b-10 lable">Organisation</p>
-          <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.seo_dt?.title}}
-          </p>
-          <p *ngIf="isDBService && service?.systemTags.length > 0" class="font-regular m-t-0">
-            <ng-container *ngFor="let tag of service?.systemTags">
-              {{ tag.description}}
-            </ng-container>
-          </p>
-
-
-
         </div>
 
         <div>
           <p class="font-regular-15 m-b-10 lable">Phone Number</p>
           <p *ngIf="!isDBService" class="font-regular m-t-0">
-            {{service?.contact || service?.mobile }}</p>
+            {{service?.contact || service?.mobile || '-' }}</p>
           <p *ngIf="isDBService" class="font-regular m-t-0">
-            {{ service?.basicProfileInfo?.primaryPhoneNo  }}
+            {{ service?.basicProfileInfo?.primaryPhoneNo || '-'  }}
           </p>
+        </div>
 
-
+        <div>
           <p class="font-regular-15 m-b-10 lable">Location</p>
           <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.address}}</p>
           <p *ngIf="isDBService" class="font-regular m-t-0">

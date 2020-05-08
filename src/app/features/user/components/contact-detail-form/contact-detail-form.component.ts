@@ -15,21 +15,21 @@ export class ContactDetailFormComponent implements OnInit {
   errorMessage;
   successMessage;
   isLoading;
-  subscription:Subscription;
+  subscription: Subscription;
   otpModalShow = false;
   otpMobile: string;
 
   constructor(
     private fb: FormBuilder,
     private userService: UserService
-    ) {
+  ) {
     this.contactForm = this.fb.group({
       // primaryEmail: [this.userService.userProfile.basicProfileInfo.primaryEmail || '', Validators.required],
       // primaryPhoneNo: [this.userService.userProfile.basicProfileInfo.primaryPhoneNo || '', Validators.required],
       city: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.city || 'Hyderabad'],
       // country: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.country || 'India'],
       streetAddress: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.streetAddress || ''],
-      zip: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.zip || '']
+      zip: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.zip || '', [Validators.pattern("^[0-9]{6}$")]]
     });
     this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo;
 
@@ -40,44 +40,46 @@ export class ContactDetailFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.contactForm.get("streetAddress").valueChanges.subscribe(selectedValue=>{
+    this.contactForm.get("streetAddress").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
     });
-    this.contactForm.get("zip").valueChanges.subscribe(selectedValue=>{
+    this.contactForm.get("zip").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
     });
-    this.contactForm.get("city").valueChanges.subscribe(selectedValue=>{
+    this.contactForm.get("city").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
     })
-    this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
-      if(message=="closeModal"){
+    this.subscription = this.userService.getFormEditMessage().subscribe(message => {
+      if (message == "closeModal") {
         document.getElementById("city").focus();
-        }
+      }
     })
   }
 
-  showOtpModal(){
-    this.otpModalShow=true;
+  showOtpModal() {
+    this.otpModalShow = true;
   }
-  updateOtp(otp: string){
-    this.otpModalShow=false;
-    this.userService.userProfile.otp=otp;
-    if(otp!=""){
+  updateOtp(otp: string) {
+    this.otpModalShow = false;
+    this.userService.userProfile.otp = otp;
+    if (otp != "") {
       this.onSubmit();
     }
   }
 
   onSubmit() {
     if (this.contactForm.valid) {
-      console.log(this.contactForm.value);
-
+      const oldUserData = {
+        city: this.userService.userProfile.basicProfileInfo.primaryUserAddress.city,
+        streetAddress: this.userService.userProfile.basicProfileInfo.primaryUserAddress.streetAddress,
+        zip: this.userService.userProfile.basicProfileInfo.primaryUserAddress.zip
+      };
       // this.userService.userProfile.basicProfileInfo.primaryEmail = this.formControl.primaryEmail.value;
       // this.userService.userProfile.basicProfileInfo.primaryPhoneNo = this.formControl.primaryPhoneNo.value;
       this.userService.userProfile.basicProfileInfo.primaryUserAddress.city = this.formControl.city.value;
       this.userService.userProfile.basicProfileInfo.primaryUserAddress.country = 'India'
       this.userService.userProfile.basicProfileInfo.primaryUserAddress.streetAddress = this.formControl.streetAddress.value;
       this.userService.userProfile.basicProfileInfo.primaryUserAddress.zip = this.formControl.zip.value;
-      this.userService.userProfile.otp = "";
       this.isLoading = true;
       this.resetAlertMessages();
 
@@ -85,15 +87,24 @@ export class ContactDetailFormComponent implements OnInit {
         response => {
           this.isLoading = false;
           this.successMessage = "User contact information updated successfully"
-          console.log(response);
+          this.cancelForm.emit();
         },
         error => {
           this.isLoading = false;
-          this.errorMessage = "Some unknown internal server error occured";
+
+          this.userService.userProfile.basicProfileInfo.primaryUserAddress.city = oldUserData.city;
+          this.userService.userProfile.basicProfileInfo.primaryUserAddress.streetAddress = oldUserData.streetAddress;
+          this.userService.userProfile.basicProfileInfo.primaryUserAddress.zip = oldUserData.zip;
+          if (error.error.error.errorCode == 3001) {
+            this.errorMessage = "We could not match the OTP you entered with the one that was sent to you. Please retry with the OTP that was sent to your registered mobile number";
+          } else if (error.error.error.errorCode == 3004) {
+            this.errorMessage = error.error.error.errorMsg;
+          } else {
+            this.errorMessage = "Some unknown internal server error occurred";
+          }
         });
     }
     // this.userService.editFormSection('editSection')
-    this.cancelForm.emit();
   }
 
   resetAlertMessages() {

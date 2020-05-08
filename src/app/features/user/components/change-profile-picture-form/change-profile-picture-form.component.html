@@ -2,8 +2,9 @@
 <div class="category-box bg-white">
     <h3>Key Profile Information</h3>
     <div class="uk-width-expand@s">
-        <label class="private-checkbox" for="private-imformation"><input class="uk-checkbox"
-                id="private-imformation" type="checkbox" checked>This information is private unless marked “Visible to users / visitors on site”</label>
+        <label class="private-checkbox" for="private-imformation"><input class="uk-checkbox" id="private-imformation"
+                type="checkbox" checked>This information is private unless marked “Visible to users / visitors on
+            site”</label>
     </div>
     <hr />
     <!-- Error box START-->
@@ -26,7 +27,7 @@
                         <input type="file" (change)="fileChange($event)" accept="image/*">
                         <button class="uk-button uk-button-default w-100" type="button" tabindex="-1">Select a
                             picture</button>
-                            <span style="font-size: 12px;">(Visible to users / visitors on site)</span>
+                        <span style="font-size: 12px;">(Visible to users / visitors on site)</span>
                     </div>
                 </div>
             </div>
@@ -37,7 +38,8 @@
                 <div class="uk-margin">
                     <label class="uk-form-label"
                         [ngClass]="{'uk-text-danger' : formControl.firstName.invalid && ( formControl.firstName.dirty ||  formControl.firstName.touched) }"
-                        for="firstName" >Name<span class="required">*</span> <span>(Visible to users / visitors on site)</span> </label>
+                        for="firstName">Name<span class="required">*</span> <span>(Visible to users / visitors on
+                            site)</span> </label>
                     <div class="uk-form-controls">
                         <input class="uk-input"
                             [ngClass]="{'uk-form-danger' : formControl.firstName.invalid && ( formControl.firstName.dirty ||  formControl.firstName.touched) }"
@@ -51,17 +53,18 @@
                 <div class="uk-margin">
                     <label class="uk-form-label"
                         [ngClass]="{'uk-text-danger' : formControl.primaryEmail.invalid && ( formControl.primaryEmail.dirty ||  formControl.primaryEmail.touched) }"
-                        for="Email-ID">Email ID<span class="required">*</span></label>
+                        for="Email-ID">Email address<span class="required">*</span></label>
                     <div class="uk-form-controls">
                         <input class="uk-input"
                             [ngClass]="{'uk-form-danger' : formControl.primaryEmail.invalid && ( formControl.primaryEmail.dirty ||  formControl.primaryEmail.touched) }"
-                            id="Email-ID" formControlName="primaryEmail" type="text" placeholder="Email ID">
+                            id="Email-ID" formControlName="primaryEmail" type="text" placeholder="Email address">
                         <small aria-describedby="Email-ID"
                             *ngIf="formControl.primaryEmail.invalid && ( formControl.primaryEmail.dirty ||  formControl.primaryEmail.touched)"
                             class="uk-text-danger">
-                            <span *ngIf="formControl.primaryEmail.errors.required">Error: Email ID can't be
-                                empty.</span>
-                            <span *ngIf="formControl.primaryEmail.errors.email">Error: Invalid Email ID, please enter a
+                            <span *ngIf="formControl.primaryEmail.errors.required">Error: Email address is required to
+                                save your key information.</span>
+                            <span *ngIf="formControl.primaryEmail.errors.email">Error: Invalid Email address, please
+                                enter a
                                 valid email ID.</span>
                         </small>
                     </div>
@@ -70,14 +73,15 @@
                 <div class="uk-margin">
                     <label class="uk-form-label"
                         [ngClass]="{'uk-text-danger' : formControl.primaryPhoneNo.invalid && ( formControl.primaryPhoneNo.dirty ||  formControl.primaryPhoneNo.touched) }"
-                        for="Phone-number">Phone number<span class="required">*</span></label>
+                        for="Phone-number">Mobile phone number<span class="required">*</span></label>
                     <div class="uk-form-controls">
                         <input class="uk-input"
                             [ngClass]="{'uk-form-danger' : formControl.primaryPhoneNo.invalid && ( formControl.primaryPhoneNo.dirty ||  formControl.primaryPhoneNo.touched) }"
                             id="Phone-number" formControlName="primaryPhoneNo" type="text" placeholder="Phone number">
                         <small aria-describedby="Phone-number"
                             *ngIf="formControl.primaryPhoneNo.invalid && ( formControl.primaryPhoneNo.dirty ||  formControl.primaryPhoneNo.touched)"
-                            class="uk-text-danger">Error: Phone number can't be empty.</small>
+                            class="uk-text-danger">Error: Mobile phone number is required to save your key
+                            information.</small>
                     </div>
                 </div>
 

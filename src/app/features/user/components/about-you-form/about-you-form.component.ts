@@ -13,7 +13,7 @@ export class AboutYouFormComponent implements OnInit {
   otpModalShow = false;
   otpMobile: string;
   aboutForm: FormGroup;
-  medicalIssues: string[] = ["Diabetes", "Blood Pressure", "Dementia", "Arthiritis","Others"];
+  medicalIssues: string[] = ["Diabetes", "Blood Pressure", "Dementia", "Arthiritis", "Others"];
   hobbies: string[] = [
     "Sports",
     "Music",
@@ -95,33 +95,33 @@ export class AboutYouFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.aboutForm.get("shortDescription").valueChanges.subscribe(selectedValue=>{
-     this.userService.formEditMessage("editForm")
+    this.aboutForm.get("shortDescription").valueChanges.subscribe(selectedValue => {
+      this.userService.formEditMessage("editForm")
     });
-    this.aboutForm.get("emotionalIssues").valueChanges.subscribe(selectedValue=>{
+    this.aboutForm.get("emotionalIssues").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.aboutForm.get("medicalIssues").valueChanges.subscribe(selectedValue=>{
+    });
+    this.aboutForm.get("medicalIssues").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.aboutForm.get("otherIssues").valueChanges.subscribe(selectedValue=>{
+    });
+    this.aboutForm.get("otherIssues").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.aboutForm.get("language").valueChanges.subscribe(selectedValue=>{
+    });
+    this.aboutForm.get("language").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.aboutForm.get("hobbies").valueChanges.subscribe(selectedValue=>{
+    });
+    this.aboutForm.get("hobbies").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.aboutForm.get("otherInterests").valueChanges.subscribe(selectedValue=>{
+    });
+    this.aboutForm.get("otherInterests").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
-       if(message=="closeModal"){
+    });
+    this.subscription = this.userService.getFormEditMessage().subscribe(message => {
+      if (message == "closeModal") {
         document.getElementById("about-you").focus();
-       }
+      }
     })
-   
+
 
   }
 
@@ -133,13 +133,13 @@ export class AboutYouFormComponent implements OnInit {
     return { id: 0, name: name };
   }
 
-  showOtpModal(){
-    this.otpModalShow=true;
+  showOtpModal() {
+    this.otpModalShow = true;
   }
-  updateOtp(otp: string){
-    this.otpModalShow=false;
-    this.userService.userProfile.otp=otp;
-    if(otp!=""){
+  updateOtp(otp: string) {
+    this.otpModalShow = false;
+    this.userService.userProfile.otp = otp;
+    if (otp != "") {
       this.onSubmit();
     }
   }
@@ -151,7 +151,16 @@ export class AboutYouFormComponent implements OnInit {
         (val, index) => {
           val.id = index + 1;
         });
-      console.log(this.aboutForm.value);
+
+      const oldUserData = {
+        shortDescription: this.userService.userProfile.basicProfileInfo.shortDescription,
+        emotionalIssues: this.userService.userProfile.individualInfo.emotionalIssues,
+        medicalIssues: this.userService.userProfile.individualInfo.medicalIssues,
+        otherIssues: this.userService.userProfile.individualInfo.otherIssues,
+        language: this.userService.userProfile.individualInfo.language,
+        hobbies: this.userService.userProfile.individualInfo.hobbies,
+        otherInterests: this.userService.userProfile.individualInfo.otherInterests
+      };
 
       this.userService.userProfile.basicProfileInfo.shortDescription = this.formControl.shortDescription.value;
       this.userService.userProfile.individualInfo.emotionalIssues = this.formControl.emotionalIssues.value;
@@ -167,15 +176,28 @@ export class AboutYouFormComponent implements OnInit {
       this.userService.updateUserProfile(this.userService.userProfile).subscribe(
         response => {
           this.isLoading = false;
-          this.successMessage = "User personal information updated successfully"
-          console.log(response);
+          this.successMessage = "User personal information updated successfully";
+          this.cancelForm.emit();
         },
         error => {
           this.isLoading = false;
-          this.errorMessage = "Some unknown internal server error occured";
+          this.userService.userProfile.basicProfileInfo.shortDescription = oldUserData.shortDescription
+          this.userService.userProfile.individualInfo.emotionalIssues = oldUserData.emotionalIssues;
+          this.userService.userProfile.individualInfo.medicalIssues = oldUserData.medicalIssues;
+          this.userService.userProfile.individualInfo.otherIssues = oldUserData.otherIssues;
+          this.userService.userProfile.individualInfo.language = oldUserData.language;
+          this.userService.userProfile.individualInfo.hobbies = oldUserData.hobbies;
+          this.userService.userProfile.individualInfo.otherInterests = oldUserData.otherInterests;
+          if (error.error.error.errorCode == 3001) {
+            this.errorMessage = "We could not match the OTP you entered with the one that was sent to you. Please retry with the OTP that was sent to your registered mobile number";
+          } else if (error.error.error.errorCode == 3004) {
+            this.errorMessage = error.error.error.errorMsg;
+          } else {
+            this.errorMessage = "Some unknown internal server error occurred";
+          }
         });
     }
-    this.cancelForm.emit();
+
   }
 
   resetAlertMessages() {

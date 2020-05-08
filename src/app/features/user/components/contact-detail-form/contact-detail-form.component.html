@@ -1,9 +1,9 @@
 <!-- Contact detail from -->
 <div class="category-box m-t-40 bg-white">
     <h3>Address</h3>
-    <label class="private-checkbox" for="private-imformation"><input class="uk-checkbox"
-        id="private-imformation" type="checkbox" checked> This information is
-    private</label>
+    <label class="private-checkbox" for="private-imformation"><input class="uk-checkbox" id="private-imformation"
+            type="checkbox" checked> This information is
+        private</label>
     <hr />
     <!-- Error box START-->
     <div *ngIf="!isLoading && errorMessage" class="uk-alert-danger" uk-alert>
@@ -66,16 +66,16 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="city">City</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="city"  formControlName="city" type="text"
-                    placeholder="Enter City">
+                <input class="uk-input" id="city" formControlName="city" type="text" placeholder="Enter City">
             </div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="zip">Zip</label>
+            <label class="uk-form-label" for="zip">Pin Code</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="zip" type="number" formControlName="zip" type="text"
-                    placeholder="Enter zipcode">
+                <input
+                    [ngClass]="{'uk-form-danger' : formControl.zip.invalid && (formControl.zip.dirty || formControl.zip.touched) }"
+                    class="uk-input" id="zip" type="number" formControlName="zip" placeholder="Enter Pin Code">
             </div>
         </div>
 
@@ -83,8 +83,8 @@
         <p class="uk-text-right">
             <button class="uk-button uk-button-transparent uk-modal-close" type="button"
                 (click)="onCancel()">Cancel</button>
-            <button class="m-l-10 uk-button uk-button-default" type="button" (click)="showOtpModal()"
-                [disabled]="contactForm.invalid">Save Changes</button>
+            <button class="m-l-10 uk-button uk-button-default" type="button" [disabled]="contactForm.invalid"
+                (click)="showOtpModal()" [disabled]="contactForm.invalid">Save Changes</button>
         </p>
     </form>
     <app-otp-popup [mobileNum]="otpMobile" [showModal]="otpModalShow" (updateOtp)="updateOtp($event)"></app-otp-popup>

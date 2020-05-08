@@ -17,8 +17,8 @@ export class GeneralInfoFormComponent implements OnInit {
   errorMessage;
   successMessage;
   isLoading;
-  subscription:Subscription;
-  otpModalShow= false;
+  subscription: Subscription;
+  otpModalShow = false;
   otpMobile: string
 
   dateOption: number[] = Array.from({ length: 31 }, (v, k) => k + 1);
@@ -54,68 +54,83 @@ export class GeneralInfoFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.generalInfoForm.get("gender").valueChanges.subscribe(selectedValue=>{
+    this.generalInfoForm.get("gender").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.generalInfoForm.get("maritalStatus").valueChanges.subscribe(selectedValue=>{
+    });
+    this.generalInfoForm.get("maritalStatus").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.generalInfoForm.get("occupation").valueChanges.subscribe(selectedValue=>{
+    });
+    this.generalInfoForm.get("occupation").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.generalInfoForm.get("day").valueChanges.subscribe(selectedValue=>{
+    });
+    this.generalInfoForm.get("day").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.generalInfoForm.get("month").valueChanges.subscribe(selectedValue=>{
+    });
+    this.generalInfoForm.get("month").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.generalInfoForm.get("year").valueChanges.subscribe(selectedValue=>{
+    });
+    this.generalInfoForm.get("year").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
-      if(message=="closeModal"){
+    });
+    this.subscription = this.userService.getFormEditMessage().subscribe(message => {
+      if (message == "closeModal") {
         document.getElementById("Year").focus();
       }
     })
   }
 
-  showOtpModal(){
-    this.otpModalShow=true;
+  showOtpModal() {
+    const inputDate: string = `${this.formControl.month.value}-${this.formControl.day.value}-${this.formControl.year.value}`;
+    this.isDateValid = this.userService.validateDate(inputDate);
+    this.resetAlertMessages();
+    if (this.isDateValid) {
+      this.otpModalShow = true;
+    } else {
+      this.errorMessage = "Selected Date of Birth is invalid, Please select a correct date";
+    }
   }
-  updateOtp(otp: string){
-    this.otpModalShow=false;
-    this.userService.userProfile.otp=otp;
-    if(otp!=""){
+  updateOtp(otp: string) {
+    this.otpModalShow = false;
+    this.userService.userProfile.otp = otp;
+    if (otp != "") {
       this.onSubmit();
     }
   }
 
   onSubmit() {
     const inputDate: string = `${this.formControl.month.value}-${this.formControl.day.value}-${this.formControl.year.value}`;
-    this.isDateValid = this.userService.validateDate(inputDate);
-    console.log(this.isDateValid);
-    this.resetAlertMessages();
-    if (this.isDateValid) {
-      this.userService.userProfile.individualInfo.gender = this.formControl.gender.value;
-      this.userService.userProfile.individualInfo.maritalStatus = this.formControl.maritalStatus.value;
-      this.userService.userProfile.individualInfo.occupation = this.formControl.occupation.value;
-      this.userService.userProfile.individualInfo.dob = new Date(inputDate);
-      console.log(this.userService.userProfile);
-      this.isLoading = true;
-      this.userService.updateUserProfile(this.userService.userProfile).subscribe(
-        response => {
-          this.isLoading = false;
-          this.successMessage = "User information updated successfully"
-          console.log(response);
-        },
-        error => {
-          this.isLoading = false;
-          this.errorMessage = "Some unknown internal server error occured";
-        });
-    } else {
-      this.errorMessage = "Invalid DOB";
-    }
-    this.cancelForm.emit();
+    const oldUserData = {
+      gender: this.userService.userProfile.individualInfo.gender,
+      maritalStatus: this.userService.userProfile.individualInfo.maritalStatus,
+      occupation: this.userService.userProfile.individualInfo.occupation,
+      dob: this.userService.userProfile.individualInfo.dob
+    };
+
+    this.userService.userProfile.individualInfo.gender = this.formControl.gender.value;
+    this.userService.userProfile.individualInfo.maritalStatus = this.formControl.maritalStatus.value;
+    this.userService.userProfile.individualInfo.occupation = this.formControl.occupation.value;
+    this.userService.userProfile.individualInfo.dob = new Date(inputDate);
+    this.isLoading = true;
+    this.userService.updateUserProfile(this.userService.userProfile).subscribe(
+      response => {
+        this.isLoading = false;
+        this.successMessage = "User information updated successfully"
+        this.cancelForm.emit();
+      },
+      error => {
+        this.isLoading = false;
+        this.userService.userProfile.individualInfo.gender = oldUserData.gender;
+        this.userService.userProfile.individualInfo.maritalStatus = oldUserData.maritalStatus;
+        this.userService.userProfile.individualInfo.occupation = oldUserData.occupation;
+        this.userService.userProfile.individualInfo.dob = oldUserData.dob;
+        if (error.error.error.errorCode == 3001) {
+          this.errorMessage = "We could not match the OTP you entered with the one that was sent to you. Please retry with the OTP that was sent to your registered mobile number";
+        } else if (error.error.error.errorCode == 3004) {
+          this.errorMessage = error.error.error.errorMsg;
+        } else {
+          this.errorMessage = "Some unknown internal server error occurred";
+        }
+      });
     // this.userService.editFormSection('editSection')
   }
 

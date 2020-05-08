@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/core';
 
 @Component({
   selector: 'app-about-you-form',
@@ -75,6 +76,7 @@ export class AboutYouFormComponent implements OnInit {
 
 
   constructor(
+    private auth: AuthService,
     private fb: FormBuilder,
     private userService: UserService) {
 
@@ -87,7 +89,7 @@ export class AboutYouFormComponent implements OnInit {
       hobbies: [this.userService.userProfile.individualInfo.hobbies || null],
       otherInterests: [this.userService.userProfile.individualInfo.otherInterests || null]
     });
-    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo;
+    this.otpMobile = this.auth.user.phoneNumber;
   }
 
   get formControl() {

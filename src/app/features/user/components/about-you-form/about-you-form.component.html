@@ -27,8 +27,9 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="Languages">Add languages that you read/write/speak</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addLangFn" id="Languages" [items]="languages" placeholder="Add Languages"
-                    [hideSelected]="true" multiple="true" bindLabel="name" formControlName="language">
+                <ng-select [addTag]="addLangFn" (add)="addLanguage($event)" id="Languages" [items]="languages"
+                    placeholder="Add Languages" [hideSelected]="true" multiple="true" bindLabel="name"
+                    formControlName="language">
                 </ng-select>
             </div>
         </div>
@@ -37,8 +38,9 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="My-Hobbies">Add your hobbies</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" id="My-Hobbies" placeholder="Add Hobbies" [items]="hobbies"
-                    [hideSelected]="true" multiple="true" formControlName="hobbies">
+                <ng-select [addTag]="addLangFn" id="My-Hobbies" (add)="addHobby($event)" placeholder="Add Hobbies"
+                    [items]="hobbies" [hideSelected]="true" multiple="true" bindLabel="name" bindValue="name"
+                    formControlName="hobbies">
                 </ng-select>
             </div>
         </div>

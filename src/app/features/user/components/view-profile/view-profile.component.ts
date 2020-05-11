@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { AuthService } from 'src/app/core';
-import { Gender } from 'src/app/core/interfaces';
+import { Gender, monthOptions } from 'src/app/core/interfaces';
 import { Subscription } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../modal-component';
@@ -17,9 +17,9 @@ export class ViewProfileComponent implements OnInit {
   @Output() editProfile = new EventEmitter<{ obj: any, action: "" }>();
 
   gender: string;
-  messages:any;
+  messages: any;
   subscription: Subscription;
-  
+  dob: string;
   constructor(
     public userService: UserService,
     public auth: AuthService,
@@ -28,7 +28,12 @@ export class ViewProfileComponent implements OnInit {
 
   ngOnInit() {
     this.gender = Object.keys(Gender).find(key => Gender[key] === this.userService.userProfile.individualInfo.gender);
-    console.log(this.gender);
+
+    const month = `${this.userService.userProfile.individualInfo.dob.split("-")[0] ? monthOptions.find(month => month.value === +this.userService.userProfile.individualInfo.dob.split("-")[0]).name : ' '}`;
+    const day = `${this.userService.userProfile.individualInfo.dob.split("-")[1] ? this.userService.userProfile.individualInfo.dob.split("-")[1] : ' '}`;
+    const year = `${this.userService.userProfile.individualInfo.dob.split("-")[2] ? this.userService.userProfile.individualInfo.dob.split("-")[2] : ' '}`;
+
+    this.dob = `${month} ${day} ${year}`;
   }
 
   edit(actionName) {

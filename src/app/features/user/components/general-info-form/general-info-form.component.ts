@@ -41,14 +41,14 @@ export class GeneralInfoFormComponent implements OnInit {
     this.generalInfoForm = this.fb.group({
       gender: [this.userService.userProfile.individualInfo.gender || 0],
       maritalStatus: [this.userService.userProfile.individualInfo.maritalStatus || 'Married'],
-      day: [this.userService.userProfile.individualInfo.dob ? new Date(this.userService.userProfile.individualInfo.dob).getDate() : ''],
-      month: [this.userService.userProfile.individualInfo.dob ? new Date(this.userService.userProfile.individualInfo.dob).getMonth() + 1 : ''],
-      year: [this.userService.userProfile.individualInfo.dob ? new Date(this.userService.userProfile.individualInfo.dob).getFullYear() : ''],
+      day: [this.userService.userProfile.individualInfo.dob.split("-")[1] ? this.userService.userProfile.individualInfo.dob.split("-")[1] : ''],
+      month: [this.userService.userProfile.individualInfo.dob.split("-")[0] ? this.userService.userProfile.individualInfo.dob.split("-")[0] : ''],
+      year: [this.userService.userProfile.individualInfo.dob.split("-")[2] ? this.userService.userProfile.individualInfo.dob.split("-")[2] : ''],
       occupation: [this.userService.userProfile.individualInfo.occupation || '']
     });
-    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo ? 
-                      this.userService.userProfile.basicProfileInfo.primaryPhoneNo :
-                      this.auth.user.phoneNumber;
+    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo ?
+      this.userService.userProfile.basicProfileInfo.primaryPhoneNo :
+      this.auth.user.phoneNumber;
   }
 
   get formControl() {
@@ -83,7 +83,12 @@ export class GeneralInfoFormComponent implements OnInit {
 
   showOtpModal() {
     const inputDate: string = `${this.formControl.month.value}-${this.formControl.day.value}-${this.formControl.year.value}`;
-    this.isDateValid = this.userService.validateDate(inputDate);
+    if (this.formControl.month.value && this.formControl.day.value && this.formControl.year.value) {
+      this.isDateValid = this.userService.validateDate(inputDate);
+    } else {
+      this.isDateValid = true;
+    }
+
     this.resetAlertMessages();
     if (this.isDateValid) {
       this.otpModalShow = true;
@@ -111,7 +116,7 @@ export class GeneralInfoFormComponent implements OnInit {
     this.userService.userProfile.individualInfo.gender = this.formControl.gender.value;
     this.userService.userProfile.individualInfo.maritalStatus = this.formControl.maritalStatus.value;
     this.userService.userProfile.individualInfo.occupation = this.formControl.occupation.value;
-    this.userService.userProfile.individualInfo.dob = new Date(inputDate);
+    this.userService.userProfile.individualInfo.dob = inputDate;
     this.isLoading = true;
     this.userService.updateUserProfile(this.userService.userProfile).subscribe(
       response => {

@@ -3,6 +3,7 @@ import { User, monthOptions, IndividualInfo, UserProfile } from 'src/app/core/in
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/core';
 
 @Component({
   selector: 'app-general-info-form',
@@ -32,6 +33,7 @@ export class GeneralInfoFormComponent implements OnInit {
   generalInfoForm: FormGroup;
 
   constructor(
+    private auth: AuthService,
     private fb: FormBuilder,
     private userService: UserService
   ) {
@@ -44,7 +46,9 @@ export class GeneralInfoFormComponent implements OnInit {
       year: [this.userService.userProfile.individualInfo.dob ? new Date(this.userService.userProfile.individualInfo.dob).getFullYear() : ''],
       occupation: [this.userService.userProfile.individualInfo.occupation || '']
     });
-    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo;
+    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo ? 
+                      this.userService.userProfile.basicProfileInfo.primaryPhoneNo :
+                      this.auth.user.phoneNumber;
   }
 
   get formControl() {

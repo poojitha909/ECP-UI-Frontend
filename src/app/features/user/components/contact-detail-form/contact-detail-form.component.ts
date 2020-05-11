@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/core';
 
 @Component({
   selector: 'app-contact-detail-form',
@@ -20,6 +21,7 @@ export class ContactDetailFormComponent implements OnInit {
   otpMobile: string;
 
   constructor(
+    private auth: AuthService,
     private fb: FormBuilder,
     private userService: UserService
   ) {
@@ -31,7 +33,9 @@ export class ContactDetailFormComponent implements OnInit {
       streetAddress: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.streetAddress || ''],
       zip: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.zip || '', [Validators.pattern("^[0-9]{6}$")]]
     });
-    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo;
+    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo ? 
+                      this.userService.userProfile.basicProfileInfo.primaryPhoneNo :
+                      this.auth.user.phoneNumber;
 
   }
 

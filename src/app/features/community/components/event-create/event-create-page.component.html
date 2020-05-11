@@ -5,7 +5,7 @@
     </div>
     <!-- Bread crumbs End -->
     <div class="uk-container">
-        <h1 tabindex=0 id="addEventHeading" class="heading">Create an Event</h1>
+        <h1 tabindex=0 id="addEventHeading" class="heading">Share an Upcoming Event</h1>
         <hr />
         <div class="inner-container bg-white">
             <div aria-live="polite" aria-atomic="true" *ngIf="successMessage" class="uk-alert-success" uk-alert>
@@ -178,7 +178,7 @@
                     <div>
                         <label for="Address"
                             [ngClass]="{'uk-text-danger' : formControl.address.invalid && ( formControl.address.dirty ||  formControl.address.touched) }"
-                            class="uk-form-label">Address<span class="required">*</span></label>
+                            class="uk-form-label">Event Address<span class="required">*</span></label>
                         <div class="uk-form-controls">
                             <input id="Address"
                                 [ngClass]="{'uk-form-danger' : formControl.address.invalid && ( formControl.address.dirty ||  formControl.address.touched) }"
@@ -203,21 +203,21 @@
                     <div>
                         <label for="organiser-name"
                             [ngClass]="{'uk-text-danger' : formControl.organiser.invalid && ( formControl.organiser.dirty ||  formControl.organiser.touched) }"
-                            class="uk-form-label">Organiser Name<span class="required">*</span></label>
+                            class="uk-form-label">Organiser’s Name<span class="required">*</span></label>
                         <div class="uk-form-controls">
                             <input id="organiser-name"
                                 [ngClass]="{'uk-form-danger' : formControl.organiser.invalid && ( formControl.organiser.dirty ||  formControl.organiser.touched) }"
                                 class="uk-input" formControlName="organiser" placeholder="Organiser Name" />
                             <small aria-describedby="organiser-name"
                                 *ngIf="formControl.organiser.invalid && ( formControl.organiser.dirty ||  formControl.organiser.touched)"
-                                class="uk-text-danger">Error: Organiser Name can't be empty.</small>
+                                class="uk-text-danger">Error: Organiser's Name can't be empty.</small>
 
                         </div>
                     </div>
                     <div>
                         <label for="Languages"
                             [ngClass]="{'uk-text-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
-                            class="uk-form-label">Languages<span class="required">*</span></label>
+                            class="uk-form-label">Primary Language to be used at the Event<span class="required">*</span></label>
                         <div class="uk-form-controls">
                             <input id="Languages"
                                 [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
@@ -233,7 +233,7 @@
                     <div>
                         <label for="Organiser-Email"
                             [ngClass]="{'uk-text-danger' : formControl.orgEmail.invalid && ( formControl.orgEmail.dirty ||  formControl.orgEmail.touched) }"
-                            class="uk-form-label">Organiser Email address</label>
+                            class="uk-form-label">Organiser’s Email Address</label>
                         <div class="uk-form-controls">
                             <input id="Organiser-Email"
                                 [ngClass]="{'uk-form-danger' : formControl.orgEmail.invalid && ( formControl.orgEmail.dirty ||  formControl.orgEmail.touched) }"
@@ -246,14 +246,14 @@
                     <div>
                         <label for="Organiser-Phone"
                             [ngClass]="{'uk-text-danger' : formControl.orgPhone.invalid && ( formControl.orgPhone.dirty ||  formControl.orgPhone.touched) }"
-                            class="uk-form-label">Organiser Phone number<span class="required">*</span></label>
+                            class="uk-form-label">Organiser’s Phone Number<span class="required">*</span></label>
                         <div class="uk-form-controls">
                             <input id="Organiser-Phone"
                                 [ngClass]="{'uk-form-danger' : formControl.orgPhone.invalid && ( formControl.orgPhone.dirty ||  formControl.orgPhone.touched) }"
                                 class="uk-input" formControlName="orgPhone" placeholder="9999999999" />
                             <small aria-describedby="Organiser-Phone"
                                 *ngIf="formControl.orgPhone.invalid && ( formControl.orgPhone.dirty ||  formControl.orgPhone.touched)"
-                                class="uk-text-danger">Error: Please Enter valid Organiser Phone number.</small>
+                                class="uk-text-danger">Error: Please Enter valid Organiser’s Phone Number.</small>
                         </div>
                     </div>
                 </div>

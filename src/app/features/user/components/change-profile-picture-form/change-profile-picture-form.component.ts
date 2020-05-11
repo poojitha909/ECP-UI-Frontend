@@ -98,6 +98,7 @@ export class ChangeProfilePictureFormComponent implements OnInit {
   }
   updateOtp(otp: string) {
     this.userService.userProfile.otp = otp;
+    this.otpModalShow = false;
     if (otp != "") {
       this.onSubmit('SUBMIT_USER_DETAILS');
     }
@@ -119,7 +120,7 @@ export class ChangeProfilePictureFormComponent implements OnInit {
     this.userService.uploadUserImage(this.imageData).subscribe(
       response => {
         this.isLoading = false;
-        this.successMessage = "User information updated successfully"
+        this.successMessage = "User information updated successfully";
         this.cancelForm.emit();
       },
       error => {

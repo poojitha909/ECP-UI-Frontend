@@ -136,7 +136,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
       } else {
         this.isLoading = false;
         this.otpFailedNumber = verification.number;
-        this.errorMessage = "Invalid Otp, Please try again!";
+        this.errorMessage = "We could not match the OTP you entered with the one that was sent to you. Please retry with the OTP that was sent to your registered mobile number";
       }
     },
       error => {

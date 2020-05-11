@@ -7,31 +7,32 @@ import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-modal-component',
   template: `
-    <div class="modal-header">
-      <h4 class="modal-title">Notice!</h4>
-      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <p>Please Save or Cancel your changes before editing new section.</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark"  (click)="close()">Close</button>
+    <div class="uk-modal-body">
+      <h3 class="uk-modal-title">Notice!       <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button></h3>
+
+      <div class="uk-margin">
+        <p>Please Save or Cancel your changes before editing new section.</p>
+      </div>
+      <p class="uk-text-right">
+        <button class="uk-button uk-button-transparent uk-modal-close" type="button"
+          (click)="close()">Cancel</button>
+      </p>
     </div>
   `
 })
-export class ModalComponent implements OnInit{
+export class ModalComponent implements OnInit {
 
   // @Input() public formSection;
 
-  constructor(public activeModal: NgbActiveModal,private userservice:UserService) {}
+  constructor(public activeModal: NgbActiveModal, private userservice: UserService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     // const data=this.formSection
     // console.log(data);
   }
-  close(){
+  close() {
     this.activeModal.close('Close click')
     this.userservice.modalClose("closeModal")
   }

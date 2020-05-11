@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/core';
 import { UserService } from '../../services/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { UserProfile } from 'src/app/core/interfaces';
 
 @Component({
   selector: 'app-change-profile-picture-form',
@@ -25,8 +26,6 @@ export class ChangeProfilePictureFormComponent implements OnInit {
   isLoading;
   subscription: Subscription;
 
-
-
   constructor(
     private auth: AuthService,
     public userService: UserService,
@@ -40,26 +39,28 @@ export class ChangeProfilePictureFormComponent implements OnInit {
 
     });
 
-    if(this.userService.userProfile.basicProfileInfo.profileImage && this.userService.userProfile.basicProfileInfo.profileImage.thumbnailImage){
+    if (this.userService.userProfile.basicProfileInfo.profileImage && this.userService.userProfile.basicProfileInfo.profileImage.thumbnailImage) {
       this.profileImage = this.userService.userProfile.basicProfileInfo.profileImage.thumbnailImage;
     }
-    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo;
+    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo ? 
+                      this.userService.userProfile.basicProfileInfo.primaryPhoneNo :
+                      this.auth.user.phoneNumber;
   }
 
   ngOnInit() {
-    this.basicProfile.get("firstName").valueChanges.subscribe(selectedValue=>{
+    this.basicProfile.get("firstName").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.basicProfile.get("primaryEmail").valueChanges.subscribe(selectedValue=>{
+    });
+    this.basicProfile.get("primaryEmail").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.basicProfile.get("primaryPhoneNo").valueChanges.subscribe(selectedValue=>{
+    });
+    this.basicProfile.get("primaryPhoneNo").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
-       if(message=="closeModal"){
+    });
+    this.subscription = this.userService.getFormEditMessage().subscribe(message => {
+      if (message == "closeModal") {
         document.getElementById("Phone-number").focus();
-       }
+      }
     })
   }
 
@@ -94,18 +95,23 @@ export class ChangeProfilePictureFormComponent implements OnInit {
     // console.log(this.profileImage);
   }
 
-  showOtpModal(){
-    this.otpModalShow=true;
+  showOtpModal() {
+    this.otpModalShow = true;
   }
-  updateOtp(otp: string){
-    this.otpModalShow=false;
-    this.userService.userProfile.otp=otp;
-    if(otp!=""){
+  updateOtp(otp: string) {
+    this.userService.userProfile.otp = otp;
+    if (otp != "") {
       this.onSubmit('SUBMIT_USER_DETAILS');
     }
   }
   onSubmit(event) {
     // this.userService.editFormSection('editSection')
+    const oldUserData = {
+      firstName: this.userService.userProfile.basicProfileInfo.firstName,
+      primaryEmail: this.userService.userProfile.basicProfileInfo.primaryEmail,
+      primaryPhoneNo: this.userService.userProfile.basicProfileInfo.primaryPhoneNo
+    };
+
     this.userService.userProfile.basicProfileInfo.firstName = this.formControl.firstName.value;
     this.userService.userProfile.basicProfileInfo.primaryEmail = this.formControl.primaryEmail.value;
     this.userService.userProfile.basicProfileInfo.primaryPhoneNo = this.formControl.primaryPhoneNo.value;
@@ -117,14 +123,24 @@ export class ChangeProfilePictureFormComponent implements OnInit {
         this.isLoading = false;
         this.successMessage = "User information updated successfully"
         this.cancelForm.emit();
-        console.log(response);
       },
       error => {
         this.isLoading = false;
+        console.log(error);
+        this.userService.userProfile.basicProfileInfo.firstName = oldUserData.firstName;
+        this.userService.userProfile.basicProfileInfo.primaryEmail = oldUserData.primaryEmail;
+        this.userService.userProfile.basicProfileInfo.primaryPhoneNo = oldUserData.primaryPhoneNo;
+
         if (this.imageData) {
           this.errorMessage = "Profile image could not be updated";
         } else {
-          this.errorMessage = "Some unknown internal server error occurred";
+          if (error.error.error.errorCode == 3001) {
+            this.errorMessage = "We could not match the OTP you entered with the one that was sent to you. Please retry with the OTP that was sent to your registered mobile number";
+          } else if (error.error.error.errorCode == 3004) {
+            this.errorMessage = error.error.error.errorMsg;
+          } else {
+            this.errorMessage = "Some unknown internal server error occurred";
+          }
         }
       });
   }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { ApiConstants } from 'src/app/api.constants';
-import { Observable,Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { UserProfile, User } from 'src/app/core/interfaces';
 import { AuthService } from 'src/app/core';
@@ -29,15 +29,15 @@ export class UserService {
     })
   }
 
-  formEditMessage(message){
+  formEditMessage(message) {
     this.subject.next(message);
   }
 
-  getFormEditMessage():Observable<any>{
+  getFormEditMessage(): Observable<any> {
     return this.subject.asObservable();
   }
 
-  modalClose(closeModal){
+  modalClose(closeModal) {
     this.subject.next(closeModal)
   }
 

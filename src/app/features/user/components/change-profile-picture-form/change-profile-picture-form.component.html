@@ -46,7 +46,7 @@
                             id="firstName" formControlName="firstName" type="text" placeholder="Name">
                         <small aria-describedby="firstName"
                             *ngIf="formControl.firstName.invalid && ( formControl.firstName.dirty ||  formControl.firstName.touched)"
-                            class="uk-text-danger">Error: Name is required to save your key information.</small>
+                            class="uk-text-danger">Name is required to save your key information.</small>
                     </div>
                 </div>
 
@@ -61,9 +61,9 @@
                         <small aria-describedby="Email-ID"
                             *ngIf="formControl.primaryEmail.invalid && ( formControl.primaryEmail.dirty ||  formControl.primaryEmail.touched)"
                             class="uk-text-danger">
-                            <span *ngIf="formControl.primaryEmail.errors.required">Error: Email address is required to
+                            <span *ngIf="formControl.primaryEmail.errors.required">Email address is required to
                                 save your key information.</span>
-                            <span *ngIf="formControl.primaryEmail.errors.email">Error: Invalid Email address, please
+                            <span *ngIf="formControl.primaryEmail.errors.email">Invalid Email address, please
                                 enter a
                                 valid email ID.</span>
                         </small>
@@ -80,7 +80,7 @@
                             id="Phone-number" formControlName="primaryPhoneNo" type="text" placeholder="Phone number">
                         <small aria-describedby="Phone-number"
                             *ngIf="formControl.primaryPhoneNo.invalid && ( formControl.primaryPhoneNo.dirty ||  formControl.primaryPhoneNo.touched)"
-                            class="uk-text-danger">Error: Mobile phone number is required to save your key
+                            class="uk-text-danger">Mobile phone number is required to save your key
                             information.</small>
                     </div>
                 </div>

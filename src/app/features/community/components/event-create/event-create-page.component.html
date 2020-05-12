@@ -51,7 +51,7 @@
                         <div class="uk-form-controls">
                             <input
                                 [ngClass]="{'uk-form-danger' : formControl.date.invalid && ( formControl.date.dirty ||  formControl.date.touched) }"
-                                class="uk-input" id="Date" type="date" formControlName="date" min=""
+                                class="uk-input" id="Date" type="date" formControlName="date" [min]="minDate"
                                 placeholder="yyyy-mm-dd" />
                             <small aria-describedby="Date"
                                 *ngIf="formControl.date.invalid && ( formControl.date.dirty ||  formControl.date.touched)"

@@ -72,6 +72,12 @@ export class DiscussionCreatePageComponent implements OnInit {
         }
       }
     });
+    this.authService.userSource.subscribe(
+      user => {
+        if (!user) {
+          this.discussForm.reset();
+        }
+      });
   }
 
   get formControl() {

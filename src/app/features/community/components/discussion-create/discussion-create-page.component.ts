@@ -52,7 +52,7 @@ export class DiscussionCreatePageComponent implements OnInit {
     this.discussForm = this.fb.group({
       title:  [discuss ? discuss.title : "", Validators.required],
       description:  [discuss ? discuss.description : "", Validators.required],
-      category: [discuss && discuss.category ? discuss.category : ""]
+      category: [discuss && discuss.category ? discuss.category : null]
     });
     this.discussForm.valueChanges.subscribe(values => {
       let discuss = null;

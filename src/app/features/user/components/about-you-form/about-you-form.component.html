@@ -31,6 +31,12 @@
                     placeholder="Add Languages" [hideSelected]="true" multiple="true" bindLabel="name"
                     formControlName="language">
                 </ng-select>
+                <small aria-describedby="Languages"
+                    *ngIf="formControl.language.invalid && ( formControl.language.dirty ||  formControl.language.touched)"
+                    class="uk-text-danger">
+                    <span *ngIf="formControl.language.errors.required">Error: Languages is required to
+                        save your personal information.</span>
+                </small>
             </div>
         </div>
 

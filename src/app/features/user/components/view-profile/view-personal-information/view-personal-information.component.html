@@ -11,49 +11,52 @@
 
     <hr>
 
-    <div class="m-t-40">
-        <p class="font-regular-15 m-b-10 lable">Something about yourself</p>
-        <p class="font-regular m-t-0 white-space-wrap">
-            {{userService?.userProfile?.basicProfileInfo?.shortDescription || '-' }}</p>
-
-    </div>
-
-    <div class="m-t-30">
-        <p class="font-regular-15 m-b-10 lable">Emotional Challenges</p>
-        <p class="font-regular m-t-0">{{userService?.userProfile?.individualInfo?.emotionalIssues || '-'}}</p>
-    </div>
-
-    <div class="m-t-30">
-        <p class="font-regular-15 m-b-10 lable">Medical Issues</p>
-        <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.medicalIssues || '-' }}</p>
-    </div>
-
-    <div class="m-t-30">
-        <p class="font-regular-15 m-b-10 lable">Other Challenges</p>
-        <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.otherIssues || '-' }}</p>
-    </div>
-
     <div class="m-t-30">
         <p class="font-regular-15 m-b-10 lable">Language</p>
         <p class="font-regular m-t-0">
-            <ng-conatiner *ngFor="let language of userService?.userProfile?.individualInfo?.language; let i = index">
-                <ng-conatiner *ngIf="i == 0">
-                    {{language.name||'-'}}
-                </ng-conatiner>
-                <ng-conatiner *ngIf="i > 0">
-                    {{','+language.name||'-'}}
-                </ng-conatiner>
-            </ng-conatiner>
+            {{ userService?.userProfile?.individualInfo?.language | arrayToString}}
         </p>
     </div>
 
     <div class="m-t-30">
         <p class="font-regular-15 m-b-10 lable">My Hobbies</p>
-        <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.hobbies || '-'}}</p>
+        <p class="font-regular m-t-0">
+            {{ userService?.userProfile?.individualInfo?.hobbies | arrayToString}}
+        </p>
     </div>
 
     <div class="m-t-30">
-        <p class="font-regular-15 m-b-10 lable"> Topics of Interest</p>
-        <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.otherInterests || '-'}}</p>
+        <p class="font-regular-15 m-b-10 lable">Topics of Interest</p>
+        <p class="font-regular m-t-0">
+            {{ userService?.userProfile?.individualInfo?.otherInterests | arrayToString}}
+        </p>
+    </div>
+
+    <div class="m-t-30">
+        <p class="font-regular-15 m-b-10 lable">Medical Issues</p>
+        <p class="font-regular m-t-0">
+            {{ userService?.userProfile?.individualInfo?.medicalIssues | arrayToString}}
+        </p>
+    </div>
+
+    <div class="m-t-30">
+        <p class="font-regular-15 m-b-10 lable">Emotional Challenges</p>
+        <p class="font-regular m-t-0">
+            {{userService?.userProfile?.individualInfo?.emotionalIssues | arrayToString}}
+        </p>
+    </div>
+
+    <div class="m-t-30">
+        <p class="font-regular-15 m-b-10 lable">Other Challenges</p>
+        <p class="font-regular m-t-0">
+            {{ userService?.userProfile?.individualInfo?.otherIssues | arrayToString}}
+        </p>
+    </div>
+
+    <div class="m-t-40">
+        <p class="font-regular-15 m-b-10 lable">Something about yourself</p>
+        <p class="font-regular m-t-0 white-space-wrap">
+            {{userService?.userProfile?.basicProfileInfo?.shortDescription || '-' }}</p>
+
     </div>
 </div>

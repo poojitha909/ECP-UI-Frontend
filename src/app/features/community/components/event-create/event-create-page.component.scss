@@ -31,3 +31,9 @@
   color: #f0506e !important;
   border-color: #f0506e !important;
 }
+
+.uk-input::-webkit-outer-spin-button,
+.uk-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

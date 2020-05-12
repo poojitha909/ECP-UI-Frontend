@@ -35,6 +35,7 @@ export class ViewGeneralInfoComponent implements OnInit {
     //     this.editProfile.emit({obj: "", action: this.beforeModalEdit})
     //   }
     // })
+    this.gender = Object.keys(Gender).find(key => Gender[key] === this.userService.userProfile.individualInfo.gender);
     if (this.userService.userProfile.individualInfo.dob) {
       let month = "";
       if (this.userService.userProfile.individualInfo.dob.split("-")[0]) {

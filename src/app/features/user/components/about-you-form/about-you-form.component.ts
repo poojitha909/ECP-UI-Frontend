@@ -26,7 +26,7 @@ export class AboutYouFormComponent implements OnInit {
     "Mobility Issues",
     "Hearing Problems",
     "Speech",
-    "No Difficulties"
+    "No Challenges"
   ];
 
   languages: any[];

@@ -280,7 +280,11 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
               // }
               this.getDBserviceReview(this.docId);
               // this.reviewForm.reset();
-              this.reviewSuccessMessage = "Review successfully posted.";
+              if (this.reviewTitle === "Add") {
+                this.reviewSuccessMessage = "Thank you for your review comments.  You can edit or change your comments anytime by clicking on the Edit link on your comment.";
+              } else if (this.reviewTitle === "Edit") {
+                this.reviewSuccessMessage = "Your review comment is updated successfully."
+              }
             }
           },
           error => {

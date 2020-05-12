@@ -25,7 +25,9 @@
 
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="Languages">Add languages that you read/write/speak</label>
+            <label class="uk-form-label"
+                [ngClass]="{'uk-text-danger' : formControl.language.invalid && ( formControl.language.dirty ||  formControl.language.touched) }"
+                for="Languages">Add languages that you read/write/speak</label>
             <div class="uk-form-controls">
                 <ng-select [addTag]="addLangFn" (add)="addLanguage($event)" id="Languages" [items]="languages"
                     placeholder="Add Languages" [hideSelected]="true" multiple="true" bindLabel="name"

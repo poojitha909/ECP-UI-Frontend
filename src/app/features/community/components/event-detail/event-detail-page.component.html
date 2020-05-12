@@ -131,24 +131,25 @@
                 <button class="uk-modal-close-default" aria-label="Close popup" type="button" (click)="onCloseModel()"
                     uk-close></button>
                 <div class="uk-modal-header">
-                    <h2 id="eventContactitle" tabindex=0 class="uk-modal-title">Contact Details</h2>
+                    <h2 id="eventContactitle" tabindex=0 class="uk-modal-title">Organiser Contact Information</h2>
                 </div>
                 <div class="uk-modal-body" id="contactDetails">
                     <div class="uk-child-width-1-2@s uk-grid-small" uk-grid>
                         <div>
-                            <p class="font-regular-15 m-b-10 lable">Email</p>
-                            <p class="font-regular m-t-0">
-                                {{ event?.orgEmail || '-'}}</p>
-                            <p class="font-regular-15 m-b-10 lable">Location</p>
-                            <p class="font-regular m-t-0">{{event?.address}}</p>
-                        </div>
+                            <!-- <p class="font-regular-15 m-b-10 lable">Location</p>
+                            <p class="font-regular m-t-0">{{event?.address}}</p> -->
+                            <p class="font-regular-15 m-b-10 lable">Organiser</p>
+                            <p class="font-regular m-t-0">{{event?.organiser}}</p>
 
-                        <div>
                             <p class="font-regular-15 m-b-10 lable">Phone Number</p>
                             <p class="font-regular m-t-0">
                                 {{event?.orgPhone }}</p>
-                            <p class="font-regular-15 m-b-10 lable">Organiser</p>
-                            <p class="font-regular m-t-0">{{event?.organiser}}</p>
+                        </div>
+
+                        <div>
+                             <p class="font-regular-15 m-b-10 lable">Email</p>
+                            <p class="font-regular m-t-0">
+                                {{ event?.orgEmail || '-'}}</p>
                         </div>
                     </div>
                 </div>

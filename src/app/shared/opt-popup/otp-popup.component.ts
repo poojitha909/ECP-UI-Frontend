@@ -45,8 +45,10 @@ export class OtpPopupComponent implements OnChanges {
   }
 
   submitOtp() {
-    this.updateOtp.next(this.otp);
     UIkit.modal('#modal-otp-input').hide();
+    setTimeout(() => {
+      this.updateOtp.next(this.otp);
+    }, 300);
   }
   cancelOtp() {
     this.otp = "";

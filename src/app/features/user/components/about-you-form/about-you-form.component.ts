@@ -15,20 +15,7 @@ export class AboutYouFormComponent implements OnInit {
   otpMobile: string;
   aboutForm: FormGroup;
   medicalIssues: string[] = ["Diabetes", "Blood Pressure", "Dementia", "Arthiritis", "Others"];
-  hobbies: string[] = [
-    "Sports",
-    "Music",
-    "Playing",
-    "Listening",
-    "Traveling",
-    "Socializing",
-    "Community-work",
-    "Volunteer-Work",
-    "Painting",
-    "Dancing",
-    "Reading", "Writing"
-  ];
-
+  hobbies: any[];
   emotionalChallenges: string[] = [
     "Depression",
     "Mental health issues",
@@ -42,32 +29,7 @@ export class AboutYouFormComponent implements OnInit {
     "No Difficulties"
   ];
 
-  languages: any[] = [
-    {
-      id: 1,
-      name: 'Telugu'
-    },
-    {
-      id: 2,
-      name: 'English'
-    },
-    {
-      id: 3,
-      name: 'Hindi'
-    },
-    {
-      id: 4,
-      name: 'Tamil'
-    },
-    {
-      id: 5,
-      name: 'Urdu'
-    },
-    {
-      id: 6,
-      name: 'Others'
-    }
-  ];
+  languages: any[];
 
   errorMessage;
   successMessage;
@@ -89,9 +51,21 @@ export class AboutYouFormComponent implements OnInit {
       hobbies: [this.userService.userProfile.individualInfo.hobbies || null],
       otherInterests: [this.userService.userProfile.individualInfo.otherInterests || null]
     });
-    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo ? 
-                      this.userService.userProfile.basicProfileInfo.primaryPhoneNo :
-                      this.auth.user.phoneNumber;
+    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo ?
+      this.userService.userProfile.basicProfileInfo.primaryPhoneNo :
+      this.auth.user.phoneNumber;
+
+    this.userService.profileLanguages().subscribe(response => {
+      if (response) {
+        this.languages = response;
+      }
+    });
+
+    this.userService.profileHobbies().subscribe(response => {
+      if (response) {
+        this.hobbies = response;
+      }
+    });
   }
 
   get formControl() {
@@ -135,6 +109,32 @@ export class AboutYouFormComponent implements OnInit {
 
   addLangFn(name) {
     return { id: 0, name: name };
+  }
+
+  addLanguage(lang) {
+    if (lang.name) {
+      const language = this.languages.find(value => lang.name.toLowerCase() === value.name.toLowerCase());
+      if (!language) {
+        this.userService.profileLanguages(lang.name).subscribe(response => {
+          if (response) {
+            this.languages = response;
+          }
+        });
+      }
+    }
+  }
+
+  addHobby(selHobby) {
+    if (selHobby.name) {
+      const hobby = this.hobbies.find(value => selHobby.name.toLowerCase() === value.name.toLowerCase());
+      if (!hobby) {
+        this.userService.profileHobbies(selHobby.name).subscribe(response => {
+          if (response) {
+            this.hobbies = response;
+          }
+        });
+      }
+    }
   }
 
   showOtpModal() {

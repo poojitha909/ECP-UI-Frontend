@@ -50,6 +50,25 @@ export class UserService {
   //   return this.subject.asObservable();
   // }
 
+  profileLanguages(name?: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_LANGUAGES}?name=${name ? name : ""}`).pipe(
+      map
+        ((response) => {
+          return response.data;
+        })
+    );
+  }
+
+  profileHobbies(name?: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_HOBBIES}?name=${name ? name : ""}`).pipe(
+      map
+        ((response) => {
+          return response.data;
+        })
+    );
+  }
+
+
   createUserProfile(userData: UserProfile): Observable<UserProfile> {
     return this.http.post<any>(ApiConstants.USER_PROFILE, userData).pipe(
       map

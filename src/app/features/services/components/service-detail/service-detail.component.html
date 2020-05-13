@@ -270,7 +270,8 @@
                   </h3>
                 </div>
                 <div class="uk-width-auto">
-                  <button class="uk-button uk-button-transparent review-btn-transparent" (click)="writeNewReview()"
+                  <button class="uk-button uk-button-transparent review-btn-transparent"
+                    (click)="writeNewReview($event.target)"
                     id="btnWriteReview">{{  auth.isAuthenticate ? 'Add your review': 'Join Us to Review'  }}</button>
                 </div>
               </div>
@@ -291,7 +292,7 @@
           <li>
             <!--JD Reviews START-->
             <ng-container *ngIf="!isDBService && service.Reviews.length == 0">
-              <h3 class="font-regular-24 font-weight-600">JustDial Reviews(0)</h3>
+              <h3 class="font-regular-24 font-weight-600">No reviews from JustDial users</h3>
 
               <div class="uk-child-width-expand m-t-50 m-b-50" uk-grid>
                 <div class="info">
@@ -305,8 +306,8 @@
             </ng-container>
 
             <ng-container *ngIf="!isDBService && service.Reviews.length > 0">
-              <h3 class="font-regular-24 font-weight-600 m-t-50 m-b-20">JustDial Reviews
-                ({{service.Reviews.length}})
+              <h3 class="font-regular-24 font-weight-600 m-t-50 m-b-20">({{service.Reviews.length}}) popular reviews
+                from JustDial users
               </h3>
               <!-- Demo box -->
               <!-- <div class="category-box m-t-30 bg-white">

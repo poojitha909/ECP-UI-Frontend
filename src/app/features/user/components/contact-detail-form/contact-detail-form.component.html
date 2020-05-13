@@ -77,7 +77,7 @@
             <div class="uk-form-controls">
                 <input
                     [ngClass]="{'uk-form-danger' : formControl.zip.invalid && (formControl.zip.dirty || formControl.zip.touched) }"
-                    class="uk-input" id="zip" type="number" formControlName="zip" placeholder="Enter Pin Code">
+                    class="uk-input" id="zip" type="number" (keyup)="setMaxValue($event.target.value)" formControlName="zip" placeholder="Enter Pin Code">
                 <small aria-describedby="zip"
                     *ngIf="formControl.zip.invalid && ( formControl.zip.dirty ||  formControl.zip.touched)"
                     class="uk-text-danger">Error: Pincode should be of 6 digits.

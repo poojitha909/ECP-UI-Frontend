@@ -4,6 +4,7 @@ import { StorageHelperService } from "../../../../core/services/storage-helper.s
 import { AuthService } from "../../../../core/auth/services/auth.service";
 import { Breadcrumb } from 'src/app/core/interfaces';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import moment from 'moment';
 
 @Component({
   selector: 'app-event-create',
@@ -31,7 +32,8 @@ export class EventCreatePageComponent implements OnInit {
   eventForm: FormGroup;
   successMessage: string;
   user: any;
-
+  minDate = moment(new Date()).add(1,'days').format('YYYY-MM-DD')
+  
   constructor(private router: Router, private store: StorageHelperService,
     private fb: FormBuilder, private authService: AuthService) { }
 

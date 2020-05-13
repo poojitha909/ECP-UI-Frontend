@@ -57,7 +57,7 @@ export class ContactDetailFormComponent implements OnInit {
       if (message == "closeModal") {
         document.getElementById("city").focus();
       }
-    })
+    });
   }
 
   showOtpModal() {
@@ -68,6 +68,13 @@ export class ContactDetailFormComponent implements OnInit {
     this.userService.userProfile.otp = otp;
     if (otp != "") {
       this.onSubmit();
+    }
+  }
+
+  setMaxValue(value) {
+    if (value && value.length > 6) {
+      const zipValue = value.slice(0, 6);
+      this.formControl.zip.setValue(+zipValue);
     }
   }
 

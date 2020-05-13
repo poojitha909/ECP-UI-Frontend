@@ -172,7 +172,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
           this.successMessage = "Reply Submitted successfully.";
           UIkit.modal("#reply-modal-discussion.uk-open").hide();
           this.notifier.show({
-            message: "Your comment is successfully submitted",
+            message: "Your comment has been successfully posted.  You can edit your comment anytime by clicking on the ‘Edit’ link next to your comment",
             type: "success",
             template: this.customNotificationTmpl1
           });

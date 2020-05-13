@@ -39,12 +39,12 @@ export class GeneralInfoFormComponent implements OnInit {
   ) {
 
     this.generalInfoForm = this.fb.group({
-      gender: [this.userService.userProfile.individualInfo.gender || 0],
-      maritalStatus: [this.userService.userProfile.individualInfo.maritalStatus || 'Married'],
-      day: [this.userService.userProfile.individualInfo.dob && this.userService.userProfile.individualInfo.dob.split("-")[1] ? this.userService.userProfile.individualInfo.dob.split("-")[1] : ''],
-      month: [this.userService.userProfile.individualInfo.dob && this.userService.userProfile.individualInfo.dob.split("-")[0] ? this.userService.userProfile.individualInfo.dob.split("-")[0] : ''],
-      year: [this.userService.userProfile.individualInfo.dob && this.userService.userProfile.individualInfo.dob.split("-")[2] ? this.userService.userProfile.individualInfo.dob.split("-")[2] : ''],
-      occupation: [this.userService.userProfile.individualInfo.occupation || '']
+      gender: [this.userService.userProfile.individualInfo.gender || this.userService.userProfile.individualInfo.gender === 0 ? this.userService.userProfile.individualInfo.gender : null],
+      maritalStatus: [this.userService.userProfile.individualInfo.maritalStatus || null],
+      day: [this.userService.userProfile.individualInfo.dob && this.userService.userProfile.individualInfo.dob.split("-")[1] ? this.userService.userProfile.individualInfo.dob.split("-")[1] : null],
+      month: [this.userService.userProfile.individualInfo.dob && this.userService.userProfile.individualInfo.dob.split("-")[0] ? this.userService.userProfile.individualInfo.dob.split("-")[0] : null],
+      year: [this.userService.userProfile.individualInfo.dob && this.userService.userProfile.individualInfo.dob.split("-")[2] ? this.userService.userProfile.individualInfo.dob.split("-")[2] : null],
+      occupation: [this.userService.userProfile.individualInfo.occupation || null]
     });
     this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo ?
       this.userService.userProfile.basicProfileInfo.primaryPhoneNo :
@@ -105,7 +105,7 @@ export class GeneralInfoFormComponent implements OnInit {
   }
 
   onSubmit() {
-    const inputDate: string = `${this.formControl.month.value}-${this.formControl.day.value}-${this.formControl.year.value}`;
+    const inputDate: string = `${this.formControl.month.value ? this.formControl.month.value : ''}-${this.formControl.day.value ? this.formControl.day.value : ''}-${this.formControl.year.value ? this.formControl.year.value : ''}`;
     const oldUserData = {
       gender: this.userService.userProfile.individualInfo.gender,
       maritalStatus: this.userService.userProfile.individualInfo.maritalStatus,
@@ -149,6 +149,18 @@ export class GeneralInfoFormComponent implements OnInit {
   onCancel() {
     this.resetAlertMessages();
     this.cancelForm.emit();
+  }
+
+  ongenderCheck(value: number) {
+    if (this.formControl.gender.value === value) {
+      this.formControl.gender.setValue(null);
+    }
+  }
+
+  onMaritalClick(value: string) {
+    if (this.formControl.maritalStatus.value === value) {
+      this.formControl.maritalStatus.setValue(null);
+    }
   }
 
 }

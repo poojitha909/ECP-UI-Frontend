@@ -23,16 +23,16 @@
                 <legend class="uk-form-label m-0">Gender</legend>
                 <!-- <label class="uk-form-label">Gender</label> -->
                 <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                    <label for="Male"><input class="uk-radio" id="Male" type="radio" formControlName="gender"
-                            [value]="1">
+                    <label for="Male"><input class="uk-radio" id="Male" (click)="ongenderCheck(1)" type="radio"
+                            formControlName="gender" [value]="1">
                         Male</label>
-                    <label for="Female"><input class="uk-radio" id="Female" type="radio" formControlName="gender"
-                            [value]="0"> Female</label>
-                    <label for="Trans"><input class="uk-radio" id="Trans" type="radio" formControlName="gender"
-                            [value]="2">
+                    <label for="Female"><input class="uk-radio" id="Female" (click)="ongenderCheck(0)" type="radio"
+                            formControlName="gender" [value]="0"> Female</label>
+                    <label for="Trans"><input class="uk-radio" id="Trans" (click)="ongenderCheck(2)" type="radio"
+                            formControlName="gender" [value]="2">
                         Trans</label>
-                    <label for="prefer-not-say"><input class="uk-radio" id="prefer-not-say" type="radio"
-                            formControlName="gender" [value]="3"> Prefer not to
+                    <label for="prefer-not-say"><input class="uk-radio" (click)="ongenderCheck(3)" id="prefer-not-say"
+                            type="radio" formControlName="gender" [value]="3"> Prefer not to
                         say</label>
                 </div>
             </fieldset>
@@ -44,16 +44,17 @@
                 <!-- <label class="uk-form-label" for="form-stacked-text">Marital Status</label> -->
                 <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                     <label for="Married"><input class="uk-radio" id="Married" type="radio"
-                            formControlName="maritalStatus" value="Married">
+                            formControlName="maritalStatus" (click)="onMaritalClick('Married')" value="Married">
                         Married</label>
                     <label for="Unmarried"><input class="uk-radio" id="Unmarried" type="radio"
-                            formControlName="maritalStatus" value="Unmarried">
+                            formControlName="maritalStatus" (click)="onMaritalClick('Unmarried')" value="Unmarried">
                         Unmarried</label>
                     <label for="Widowed"><input class="uk-radio" id="Widowed" type="radio"
-                            formControlName="maritalStatus" value="Widowed">
+                            formControlName="maritalStatus" (click)="onMaritalClick('Widowed')" value="Widowed">
                         Widowed</label>
                     <label for="Prefer-not"><input class="uk-radio" id="Prefer-not" type="radio"
-                            formControlName="maritalStatus" value="Prefer not to say">
+                            formControlName="maritalStatus" (click)="onMaritalClick('Prefer not to say')"
+                            value="Prefer not to say">
                         Prefer not to
                         say</label>
                 </div>
@@ -61,34 +62,44 @@
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="Birthday">Date of Birth</label>
+            <label class="uk-form-label" for="Day">Date of Birth</label>
             <div class="uk-child-width-expand@s uk-grid-small" uk-grid>
 
                 <div>
                     <div class="uk-form-controls">
-                        <select class="uk-select" id="Day" formControlName="day">
+                        <!-- <select class="uk-select" id="Day" formControlName="day">
                             <option disabled selected hidden value="">Day</option>
                             <option value="">Prefer not to say</option>
                             <option *ngFor="let n of dateOption" [value]="n">{{n}}</option>
-                        </select>
+                        </select> -->
+                        <ng-select [items]="dateOption" labelForId="Day" placeholder="Day" [searchable]="false"
+                            formControlName="day">
+                        </ng-select>
+
                     </div>
                 </div>
                 <div>
                     <div class="uk-form-controls">
-                        <select class="uk-select" id="Month" formControlName="month">
+                        <!-- <select class="uk-select" id="Month" formControlName="month">
                             <option disabled selected hidden value="">Month</option>
                             <option value="">Prefer not to say</option>
                             <option *ngFor="let month of monthOption" [value]="month.value">{{month.name}}</option>
-                        </select>
+                        </select> -->
+                        <ng-select [items]="monthOption" bindLabel="name" bindValue="value" labelForId="Month"
+                            placeholder="Month" [searchable]="false" formControlName="month">
+                        </ng-select>
                     </div>
                 </div>
                 <div>
                     <div class="uk-form-controls">
-                        <select class="uk-select" id="Year" formControlName="year">
+                        <!-- <select class="uk-select" id="Year" formControlName="year">
                             <option disabled selected hidden value>Year</option>
                             <option value="">Prefer not to say</option>
                             <option *ngFor="let year of yearOptions" [value]="year">{{year}}</option>
-                        </select>
+                        </select> -->
+                        <ng-select [items]="yearOptions" labelForId="Year" placeholder="Year" [searchable]="false"
+                            formControlName="year">
+                        </ng-select>
                     </div>
                 </div>
             </div>
@@ -99,7 +110,7 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="Occupation">What keeps me occupied?</label>
             <div class="uk-form-controls">
-                <select class="uk-select" id="Occupation" formControlName="occupation">
+                <!-- <select class="uk-select" id="Occupation" formControlName="occupation">
                     <option disabled selected hidden value="">Pick one that best describes what occupies your time
                     </option>
                     <option value="">Prefer not to say</option>
@@ -108,7 +119,16 @@
                     <option>I am an active volunteer</option>
                     <option>I am retired and keep busy at home</option>
                     <option>I keep busy with my hobbies and interests</option>
-                </select>
+                </select> -->
+                <ng-select labelForId="Occupation" placeholder="Pick one that best describes what occupies your time"
+                    [searchable]="false" formControlName="occupation">
+                    <ng-option value="I am employed">I am employed</ng-option>
+                    <ng-option value="I manage my own business">I manage my own business</ng-option>
+                    <ng-option value="I am an active volunteer">I am an active volunteer</ng-option>
+                    <ng-option value="I am retired and keep busy at home">I am retired and keep busy at home</ng-option>
+                    <ng-option value="I keep busy with my hobbies and interests">I keep busy with my hobbies and
+                        interests</ng-option>
+                </ng-select>
             </div>
         </div>
 

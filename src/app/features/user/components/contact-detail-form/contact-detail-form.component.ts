@@ -31,11 +31,11 @@ export class ContactDetailFormComponent implements OnInit {
       city: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.city || 'Hyderabad'],
       // country: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.country || 'India'],
       streetAddress: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.streetAddress || ''],
-      zip: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.zip || '', [Validators.pattern("^[0-9]{6}$")]]
+      zip: [this.userService.userProfile.basicProfileInfo.primaryUserAddress.zip || '', [Validators.pattern("^[0-9]{6}$"), Validators.maxLength(6)]]
     });
-    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo ? 
-                      this.userService.userProfile.basicProfileInfo.primaryPhoneNo :
-                      this.auth.user.phoneNumber;
+    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo ?
+      this.userService.userProfile.basicProfileInfo.primaryPhoneNo :
+      this.auth.user.phoneNumber;
 
   }
 
@@ -57,7 +57,7 @@ export class ContactDetailFormComponent implements OnInit {
       if (message == "closeModal") {
         document.getElementById("city").focus();
       }
-    })
+    });
   }
 
   showOtpModal() {
@@ -68,6 +68,13 @@ export class ContactDetailFormComponent implements OnInit {
     this.userService.userProfile.otp = otp;
     if (otp != "") {
       this.onSubmit();
+    }
+  }
+
+  setMaxValue(value) {
+    if (value && value.length > 6) {
+      const zipValue = value.slice(0, 6);
+      this.formControl.zip.setValue(+zipValue);
     }
   }
 

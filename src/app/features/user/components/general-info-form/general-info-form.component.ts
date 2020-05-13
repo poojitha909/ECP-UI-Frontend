@@ -41,9 +41,9 @@ export class GeneralInfoFormComponent implements OnInit {
     this.generalInfoForm = this.fb.group({
       gender: [this.userService.userProfile.individualInfo.gender || 0],
       maritalStatus: [this.userService.userProfile.individualInfo.maritalStatus || 'Married'],
-      day: [this.userService.userProfile.individualInfo.dob.split("-")[1] ? this.userService.userProfile.individualInfo.dob.split("-")[1] : ''],
-      month: [this.userService.userProfile.individualInfo.dob.split("-")[0] ? this.userService.userProfile.individualInfo.dob.split("-")[0] : ''],
-      year: [this.userService.userProfile.individualInfo.dob.split("-")[2] ? this.userService.userProfile.individualInfo.dob.split("-")[2] : ''],
+      day: [this.userService.userProfile.individualInfo.dob && this.userService.userProfile.individualInfo.dob.split("-")[1] ? this.userService.userProfile.individualInfo.dob.split("-")[1] : ''],
+      month: [this.userService.userProfile.individualInfo.dob && this.userService.userProfile.individualInfo.dob.split("-")[0] ? this.userService.userProfile.individualInfo.dob.split("-")[0] : ''],
+      year: [this.userService.userProfile.individualInfo.dob && this.userService.userProfile.individualInfo.dob.split("-")[2] ? this.userService.userProfile.individualInfo.dob.split("-")[2] : ''],
       occupation: [this.userService.userProfile.individualInfo.occupation || '']
     });
     this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo ?

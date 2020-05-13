@@ -58,6 +58,7 @@ import { NoRecordsComponent } from './no-records/no-records.component';
 import { EventNoRecordComponent } from './event-no-record/event-no-record.component';
 import { ShareViaMediaComponent } from './share-via-media/share-via-media.component';
 import { OtpPopupComponent } from './opt-popup/otp-popup.component';
+import { ArrayToStringPipe } from './pipes/array-to-string.pipe';
 
 @NgModule({
   declarations: [
@@ -114,7 +115,8 @@ import { OtpPopupComponent } from './opt-popup/otp-popup.component';
     NoRecordsComponent,
     EventNoRecordComponent,
     ShareViaMediaComponent,
-    OtpPopupComponent
+    OtpPopupComponent,
+    ArrayToStringPipe
   ],
   imports: [
     CommonModule,
@@ -170,7 +172,8 @@ import { OtpPopupComponent } from './opt-popup/otp-popup.component';
     NoRecordsComponent,
     EventNoRecordComponent,
     ShareViaMediaComponent,
-    OtpPopupComponent
+    OtpPopupComponent,
+    ArrayToStringPipe
   ]
 })
 export class SharedModule { }

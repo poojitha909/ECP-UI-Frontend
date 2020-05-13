@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, HostListener, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceDetail, DBReviews, SEO, Breadcrumb, DBRating } from 'src/app/core/interfaces';
 import { EpcServiceService } from '../../epc-service.service';
@@ -14,6 +14,8 @@ declare var UIkit: any;
   styleUrls: ['./service-detail.component.scss'],
 })
 export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('serviceInfo', { static: false }) private serviceInfo: ElementRef;
+
   breadcrumbLinks: Breadcrumb[] = [
     {
       text: 'Home',
@@ -48,6 +50,7 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     s: number
   };
   totalReviewRecords: number;
+  showReadMore: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -144,6 +147,13 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
       document.getElementById("reviewTitle").focus();
     }
     document.getElementById("serviceHeader").focus();
+
+    if ((this.isDBService && this.service.basicProfileInfo.description) || (!this.isDBService && this.service.bizinfo)) {
+
+      if (this.serviceInfo.nativeElement.scrollHeight > this.serviceInfo.nativeElement.offsetHeight) {
+        this.showReadMore = true;
+      }
+    }
   }
 
   get isDBService(): boolean {
@@ -270,7 +280,11 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
               // }
               this.getDBserviceReview(this.docId);
               // this.reviewForm.reset();
-              this.reviewSuccessMessage = "Review successfully posted.";
+              if (this.reviewTitle === "Add") {
+                this.reviewSuccessMessage = "Thank you for your review comments.  You can edit or change your comments anytime by clicking on the Edit link on your comment.";
+              } else if (this.reviewTitle === "Edit") {
+                this.reviewSuccessMessage = "Your review comment is updated successfully."
+              }
             }
           },
           error => {
@@ -483,13 +497,18 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     document.getElementById("contactModalTitle").focus();
   }
 
-
+  openAboutModal(element: any) {
+    this.onOpenModel();
+    this.currentModelLink = element.id;
+    UIkit.modal('#about-us').show();
+    document.getElementById("aboutModalTitle").focus();
+  }
 
   ngOnDestroy() {
     document.getElementById("review-modal").remove();
     document.getElementById("report-modal").remove();
     document.getElementById("contact-sections").remove();
-
+    document.getElementById("about-us").remove();
   }
 
 }

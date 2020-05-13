@@ -14,6 +14,10 @@ export class ApiConstants {
     public static IMAGE_UPLOAD: string = `/BY/api/v1/fileupload`;
     public static GET_LANGUAGES: string = `/BY/api/v1/userProfile/languages`;
     public static GET_HOBBIES: string = `/BY/api/v1/userProfile/hobbies`;
+    public static GET_INTERESTAREAS: string = `/BY/api/v1/userProfile/interestAreas`;
+    public static GET_HEALTHCHALLENGES: string = `/BY/api/v1/userProfile/healthChallenges`;
+    public static GET_EMOTIONALCHALLENGES: string = `/BY/api/v1/userProfile/emotionalChallenges`;
+    public static GET_OTHERCHALLENGES: string = `/BY/api/v1/userProfile/otherChallenges`;
     public static GET_DB_SERVICE_DETAIL: string = `/BY/api/v1/userProfile/serviceProvider`;
     public static GET_DB_SERVICE_REVIEWS: string = `/BY/api/v1/reviewRate/service`;
     public static ADD_LIKE_SERVICE_REVIEWS: string = `/BY/api/v1/reviewRate/service/likeUnlikeReview`;

@@ -68,6 +68,42 @@ export class UserService {
     );
   }
 
+  profileInterests(name?: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_INTERESTAREAS}?name=${name ? name : ""}`).pipe(
+      map
+        ((response) => {
+          return response.data;
+        })
+    );
+  }
+
+  profileEmotionalChallenges(name?: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_EMOTIONALCHALLENGES}?name=${name ? name : ""}`).pipe(
+      map
+        ((response) => {
+          return response.data;
+        })
+    );
+  }
+
+  profileHealthChallenges(name?: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_HEALTHCHALLENGES}?name=${name ? name : ""}`).pipe(
+      map
+        ((response) => {
+          return response.data;
+        })
+    );
+  }
+
+  profileOtherChallenges(name?: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_OTHERCHALLENGES}?name=${name ? name : ""}`).pipe(
+      map
+        ((response) => {
+          return response.data;
+        })
+    );
+  }
+
 
   createUserProfile(userData: UserProfile): Observable<UserProfile> {
     return this.http.post<any>(ApiConstants.USER_PROFILE, userData).pipe(

@@ -48,8 +48,9 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="Topic-Interests">Add areas that interest you</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" id="Topic-Interests" placeholder="Add Areas of Interest"
-                    [hideSelected]="true" multiple="true" formControlName="otherInterests">
+                <ng-select [addTag]="addLangFn" id="Topic-Interests" placeholder="Add Areas of Interest"
+                    [hideSelected]="true" multiple="true" (add)="addInterest($event)" [items]="interests"
+                    formControlName="otherInterests" bindLabel="name" bindValue="name">
                 </ng-select>
             </div>
         </div>
@@ -58,9 +59,9 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="Medical-Issues">Add health challenges that you have</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" [items]="medicalIssues" id="Medical-Issues"
-                    placeholder="Add Health Issues" [hideSelected]="true" multiple="true"
-                    formControlName="medicalIssues">
+                <ng-select [addTag]="addLangFn" [items]="healthChallenges" (add)="addHealthChallenges($event)"
+                    id="Medical-Issues" placeholder="Add Health Issues" [hideSelected]="true" multiple="true"
+                    formControlName="medicalIssues" bindLabel="name" bindValue="name">
                 </ng-select>
             </div>
         </div>
@@ -72,9 +73,9 @@
                     <option>Option 01</option>
                     <option>Option 02</option>
                 </select> -->
-                <ng-select [addTag]="addTagFn" [items]="emotionalChallenges" [hideSelected]="true"
-                    id="Emotional-Challenges" placeholder="Add Emotional Challenges" multiple="true"
-                    formControlName="emotionalIssues">
+                <ng-select [addTag]="addLangFn" [items]="emotionalChallenges" (add)="addEmotionalChallenges($event)"
+                    [hideSelected]="true" id="Emotional-Challenges" placeholder="Add Emotional Challenges"
+                    multiple="true" formControlName="emotionalIssues" bindLabel="name" bindValue="name">
                 </ng-select>
             </div>
         </div>
@@ -84,8 +85,9 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="Other-Difficulties">Add any other challenges that you have</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" [items]="otherDifficulties" placeholder="Add Other Challenges"
-                    id="Other-Difficulties" [hideSelected]="true" multiple="true" formControlName="otherIssues">
+                <ng-select [addTag]="addLangFn" [items]="otherChallenges" (add)="addOtherChallenges($event)"
+                    placeholder="Add Other Challenges" id="Other-Difficulties" [hideSelected]="true" multiple="true"
+                    formControlName="otherIssues" bindLabel="name" bindValue="name">
                 </ng-select>
             </div>
         </div>

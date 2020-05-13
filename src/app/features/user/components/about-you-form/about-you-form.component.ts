@@ -14,21 +14,11 @@ export class AboutYouFormComponent implements OnInit {
   otpModalShow = false;
   otpMobile: string;
   aboutForm: FormGroup;
-  medicalIssues: string[] = ["Diabetes", "Blood Pressure", "Dementia", "Arthiritis", "Others"];
+  healthChallenges: any[];
   hobbies: any[];
-  emotionalChallenges: string[] = [
-    "Depression",
-    "Mental health issues",
-    "No Challenges"
-  ];
-
-  otherDifficulties: string[] = [
-    "Mobility Issues",
-    "Hearing Problems",
-    "Speech",
-    "No Difficulties"
-  ];
-
+  emotionalChallenges: any[];
+  interests: any[];
+  otherChallenges: any[];
   languages: any[];
 
   errorMessage;
@@ -47,7 +37,7 @@ export class AboutYouFormComponent implements OnInit {
       emotionalIssues: [this.userService.userProfile.individualInfo.emotionalIssues || null],
       medicalIssues: [this.userService.userProfile.individualInfo.medicalIssues || null],
       otherIssues: [this.userService.userProfile.individualInfo.otherIssues || null],
-      language: [this.userService.userProfile.individualInfo.language || null, Validators.required],
+      language: [this.userService.userProfile.individualInfo.language || null],
       hobbies: [this.userService.userProfile.individualInfo.hobbies || null],
       otherInterests: [this.userService.userProfile.individualInfo.otherInterests || null]
     });
@@ -66,6 +56,31 @@ export class AboutYouFormComponent implements OnInit {
         this.hobbies = response;
       }
     });
+
+    this.userService.profileInterests().subscribe(response => {
+      if (response) {
+        this.interests = response;
+      }
+    });
+
+    this.userService.profileEmotionalChallenges().subscribe(response => {
+      if (response) {
+        this.emotionalChallenges = response;
+      }
+    });
+
+    this.userService.profileHealthChallenges().subscribe(response => {
+      if (response) {
+        this.healthChallenges = response;
+      }
+    });
+
+    this.userService.profileOtherChallenges().subscribe(response => {
+      if (response) {
+        this.otherChallenges = response;
+      }
+    });
+
   }
 
   get formControl() {
@@ -103,9 +118,9 @@ export class AboutYouFormComponent implements OnInit {
 
   }
 
-  addTagFn(name) {
-    return name;
-  }
+  // addTagFn(name) {
+  //   return name;
+  // }
 
   addLangFn(name) {
     return { id: 0, name: name };
@@ -136,6 +151,59 @@ export class AboutYouFormComponent implements OnInit {
       }
     }
   }
+
+  addInterest(selInterest) {
+    if (selInterest.name) {
+      const interest = this.interests.find(value => selInterest.name.toLowerCase() === value.name.toLowerCase());
+      if (!interest) {
+        this.userService.profileInterests(selInterest.name).subscribe(response => {
+          if (response) {
+            this.interests = response;
+          }
+        });
+      }
+    }
+  }
+
+  addHealthChallenges(selChallenges) {
+    if (selChallenges.name) {
+      const challenge = this.healthChallenges.find(value => selChallenges.name.toLowerCase() === value.name.toLowerCase());
+      if (!challenge) {
+        this.userService.profileHealthChallenges(selChallenges.name).subscribe(response => {
+          if (response) {
+            this.healthChallenges = response;
+          }
+        });
+      }
+    }
+  }
+
+  addOtherChallenges(selChallenges) {
+    if (selChallenges.name) {
+      const challenge = this.otherChallenges.find(value => selChallenges.name.toLowerCase() === value.name.toLowerCase());
+      if (!challenge) {
+        this.userService.profileOtherChallenges(selChallenges.name).subscribe(response => {
+          if (response) {
+            this.otherChallenges = response;
+          }
+        });
+      }
+    }
+  }
+
+  addEmotionalChallenges(selChallenges) {
+    if (selChallenges.name) {
+      const challenge = this.emotionalChallenges.find(value => selChallenges.name.toLowerCase() === value.name.toLowerCase());
+      if (!challenge) {
+        this.userService.profileEmotionalChallenges(selChallenges.name).subscribe(response => {
+          if (response) {
+            this.emotionalChallenges = response;
+          }
+        });
+      }
+    }
+  }
+
 
   showOtpModal() {
     this.otpModalShow = true;

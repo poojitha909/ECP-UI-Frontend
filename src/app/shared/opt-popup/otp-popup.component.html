@@ -5,7 +5,7 @@
       <div class="uk-margin">
         <label class="uk-form-label" for="comment">OTP</label>
         <div class="uk-form-controls">
-          <input id="otp" class="uk-input" placeholder="Please enter OTP" [(ngModel)]="otp" />
+          <input id="otp" class="uk-input" (keydown.enter)="submitOtp()" placeholder="Please enter OTP" [(ngModel)]="otp" />
         </div>
       </div>
       <p class="uk-text-right">

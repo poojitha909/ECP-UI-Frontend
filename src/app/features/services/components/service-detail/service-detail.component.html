@@ -510,26 +510,23 @@
 <!-- This is review modal -->
 <div id="review-modal" role="dialog" aria-labelledby="reviewTitle" aria-modal="true" aria-describedby="reviewForm"
   uk-modal="bg-close:false;container:false;">
-  <div class="uk-modal-dialog">
-    <div class="uk-modal-header">
-      <h3 id="reviewTitle" tabindex=0 class="uk-modal-title">{{reviewTitle}} your review</h3>
-    </div>
-    <!-- <h4 id="reviewTitle" tabindex=0 class="font-regular-24 font-weight-600">{{reviewTitle}} your review</h4> -->
-    <!-- <hr /> -->
-    <div class="uk-modal-body">
-      <form [formGroup]="reviewForm" id="reviewForm" class="uk-form-stacked review-form">
+  <div class="uk-modal-dialog uk-modal-body">
+    <h3 id="reviewTitle" tabindex=0 class="font-regular-24 font-weight-600">{{reviewTitle}} your review</h3>
+    <hr />
+
+    <form [formGroup]="reviewForm" id="reviewForm" class="uk-form-stacked review-form">
 
 
-        <div class="uk-margin">
-          <label class="uk-form-label" for="review-title">Review title<span class="required">*</span></label>
-          <div class="uk-form-controls">
-            <input class="uk-input" id="review-title" formControlName="title" type="text"
-              placeholder="Add a review title">
-          </div>
+      <div class="uk-margin">
+        <label class="uk-form-label" for="review-title">Review title<span class="required">*</span></label>
+        <div class="uk-form-controls">
+          <input class="uk-input" id="review-title" formControlName="title" type="text"
+            placeholder="Add a review title">
         </div>
+      </div>
 
-        <!-- <div class="uk-child-width-1-2@s" uk-grid> -->
-        <!-- <div>
+      <!-- <div class="uk-child-width-1-2@s" uk-grid> -->
+      <!-- <div>
                 <div class="uk-margin">
                   <label class="uk-form-label" for="form-stacked-select">Your Rating<span
                       class="required">*</span></label>
@@ -547,26 +544,23 @@
 
               </div> -->
 
-        <!-- </div> -->
+      <!-- </div> -->
 
-        <div class="uk-margin">
-          <label class="uk-form-label" for="review">Review Comments<span class="required">*</span></label>
-          <div class="uk-form-controls">
-            <textarea formControlName="review" class="uk-input min-h-200" id="review"
-              placeholder="Add your review comments"></textarea>
-          </div>
+      <div class="uk-margin">
+        <label class="uk-form-label" for="review">Review Comments<span class="required">*</span></label>
+        <div class="uk-form-controls">
+          <textarea formControlName="review" class="uk-input min-h-200" id="review"
+            placeholder="Add your review comments"></textarea>
         </div>
+      </div>
 
-
-      </form>
-    </div>
-
-    <div class="uk-modal-footer uk-text-right">
-      <button class="uk-button uk-button-transparent uk-modal-close" (click)="onCloseModel()"
-        type="button">Cancel</button>
-      <button class="uk-button uk-button-default m-l-10 uk-modal-close" (click)="onReviewSubmit()" type="button"
-        [disabled]="reviewForm.invalid">{{ auth.isAuthenticate ? 'Share your review': 'Signin to Review'}}</button>
-    </div>
+      <div class="uk-text-right">
+        <button class="uk-button uk-button-transparent uk-modal-close" (click)="onCloseModel()"
+          type="button">Cancel</button>
+        <button class="uk-button uk-button-default m-l-10 uk-modal-close" (click)="onReviewSubmit()" type="button"
+          [disabled]="reviewForm.invalid">{{ auth.isAuthenticate ? 'Share your review': 'Signin to Review'}}</button>
+      </div>
+    </form>
   </div>
 </div>
 <!-- Write Review Form END-->
@@ -576,50 +570,43 @@
 <!-- This is the modal -->
 <div id="report-modal" role="dialog" aria-labelledby="reportTitle" aria-modal="true" aria-describedby="reportForm"
   uk-modal="bg-close:false;container:false;">
-  <div class="uk-modal-dialog">
-    <div class="uk-modal-header">
-      <h3 id="reportTitle" tabindex=0 class="uk-modal-title">Report</h3>
+  <div class="uk-modal-dialog uk-modal-body">
+    <h3 id="reportTitle" tabindex=0 class="font-regular-24 font-weight-600">Report</h3>
+    <!-- Success box START-->
+    <div aria-live="polite" aria-atomic="true" *ngIf="successMessage" class="uk-alert-success" uk-alert>
+      <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ successMessage }}</p>
     </div>
-
-    <div class="uk-modal-body">
-      <!-- Success box START-->
-      <div aria-live="polite" aria-atomic="true" *ngIf="successMessage" class="uk-alert-success" uk-alert>
-        <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ successMessage }}</p>
+    <!-- Success box END-->
+    <form [formGroup]="reportForm" id="reportForm" (ngSubmit)="onSubmitReport()" class="uk-form-stacked review-form">
+      <div class="uk-margin">
+        <label class="uk-form-label" for="reporting-cause">Cause of
+          Reporting</label>
+        <div class="uk-form-controls">
+          <select formControlName="cause" class="uk-select" id="reporting-cause">
+            <option disabled selected hidden value="">Select your cause of reporting
+            </option>
+            <option>Information provided is incorrect</option>
+            <option>Service Provider is unreachable</option>
+            <option>Service Provider no longer exists</option>
+            <option>Other reasons</option>
+          </select>
+        </div>
       </div>
-      <!-- Success box END-->
-      <form [formGroup]="reportForm" id="reportForm" class="uk-form-stacked review-form">
-        <div class="uk-margin">
-          <label class="uk-form-label" for="reporting-cause">Cause of
-            Reporting</label>
-          <div class="uk-form-controls">
-            <select formControlName="cause" class="uk-select" id="reporting-cause">
-              <option disabled selected hidden value="">Select your cause of reporting
-              </option>
-              <option>Information provided is incorrect</option>
-              <option>Service Provider is unreachable</option>
-              <option>Service Provider no longer exists</option>
-              <option>Other reasons</option>
-            </select>
-          </div>
+
+      <div class="uk-margin">
+        <label class="uk-form-label" for="comment">Comment (optional)</label>
+        <div class="uk-form-controls">
+          <textarea formControlName="comment" id="comment" class="uk-input min-h-200" id="form-stacked-text"
+            placeholder="Enter your comment here"></textarea>
         </div>
+      </div>
 
-        <div class="uk-margin">
-          <label class="uk-form-label" for="comment">Comment (optional)</label>
-          <div class="uk-form-controls">
-            <textarea formControlName="comment" id="comment" class="uk-input min-h-200" id="form-stacked-text"
-              placeholder="Enter your comment here"></textarea>
-          </div>
-        </div>
-
-
-      </form>
-    </div>
-    <div class="uk-modal-footer uk-text-right">
-      <button class="uk-button uk-button-transparent uk-modal-close" (click)="onCloseModel()"
-        type="button">Cancel</button>
-      <button class="m-l-10 uk-button uk-button-default" type="button" (click)="onSubmitReport()"
-        [disabled]="reportForm.invalid">Submit</button>
-    </div>
+      <div class="uk-text-right">
+        <button class="uk-button uk-button-transparent uk-modal-close" (click)="onCloseModel()"
+          type="button">Cancel</button>
+        <button class="m-l-10 uk-button uk-button-default" type="submit" [disabled]="reportForm.invalid">Submit</button>
+      </div>
+    </form>
   </div>
 </div>
 <!-- Report Form MOdel End -->

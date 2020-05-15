@@ -39,15 +39,16 @@ export class ViewGeneralInfoComponent implements OnInit {
     if (this.userService.userProfile.individualInfo.dob) {
       let month = "";
       if (this.userService.userProfile.individualInfo.dob.split("-")[0]) {
-        const monthName = monthOptions.find(month => month.value === +this.userService.userProfile.individualInfo.dob.split("-")[0]);
+        const monthName = monthOptions.find(month => month.value === this.userService.userProfile.individualInfo.dob.split("-")[0]);
         if (monthName) {
           month = monthName.name;
         }
       }
       const day = `${this.userService.userProfile.individualInfo.dob.split("-")[1] ? this.userService.userProfile.individualInfo.dob.split("-")[1] : ''}`;
       const year = `${this.userService.userProfile.individualInfo.dob.split("-")[2] ? this.userService.userProfile.individualInfo.dob.split("-")[2] : ''}`;
-
-      this.dob = `${month} ${day} ${year}`;
+      if (month || day || year) {
+        this.dob = `${month} ${day} ${year}`;
+      }
     }
   }
 

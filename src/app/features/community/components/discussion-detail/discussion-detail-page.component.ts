@@ -159,8 +159,8 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
         if (response.data.replies) {
           this.replyForm.reset();
           this.getDiscussion();
-          this.successMessage = "Reply edited successfully.";
-          UIkit.modal("#reply-modal-discussion.uk-open").hide();
+          this.successMessage = "Your comment has been successfully posted.  You can edit your comment anytime by clicking on the ‘Edit’ link next to your comment";
+          setTimeout( () => {UIkit.modal("#reply-modal-discussion.uk-open").hide(); },3000);
         }
       });
     }
@@ -169,13 +169,8 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
         if (response.data.replies) {
           this.replyForm.reset();
           this.getDiscussion();
-          this.successMessage = "Reply Submitted successfully.";
-          UIkit.modal("#reply-modal-discussion.uk-open").hide();
-          this.notifier.show({
-            message: "Your comment is successfully submitted",
-            type: "success",
-            template: this.customNotificationTmpl1
-          });
+          this.successMessage = "Your comment has been successfully posted.  You can edit your comment anytime by clicking on the ‘Edit’ link next to your comment";
+          setTimeout( () => {UIkit.modal("#reply-modal-discussion.uk-open").hide(); },3000);
         }
       });
     }
@@ -281,15 +276,17 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.seoService.generateTags(config);
   }
 
-  setParentReplyId(id, element) {
+  setParentReplyId(id, element_id) {
     this.replyForm.reset();
     this.parentReplyId = id;
     this.replyId = "";
     this.successMessage = "";
     this.onOpenModel();
-    this.currentModelLink = element.id;
-    UIkit.modal('#reply-modal-discussion').show();
-    document.getElementById("addCommentTitle").focus();
+    console.log(element_id);
+    this.currentModelLink = element_id;
+    //UIkit.modal('#reply-modal-discussion').show();
+    //document.getElementById("addCommentTitle").focus();
+    setTimeout( () => {document.getElementById("Comment").focus();},0);
 
   }
 
@@ -298,6 +295,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.replyId = reply.id;
     this.replyForm.patchValue({ commentTxt: reply.text });
     this.successMessage = "";
+    setTimeout( () => {document.getElementById("Comment").focus();},0);
   }
 
   onCancelPublish() {

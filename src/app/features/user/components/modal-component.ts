@@ -8,9 +8,7 @@ import { UserService } from '../services/user.service';
   selector: 'app-modal-component',
   template: `
     <div class="uk-modal-body">
-      <h3 class="uk-modal-title">Notice!       <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button></h3>
+      <h3 class="uk-modal-title">Notice!</h3>
 
       <div class="uk-margin">
         <p>Please Save or Cancel your changes before editing new section.</p>

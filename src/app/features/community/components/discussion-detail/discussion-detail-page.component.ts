@@ -160,7 +160,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
           this.replyForm.reset();
           this.getDiscussion();
           this.successMessage = "Your comment has been successfully posted.  You can edit your comment anytime by clicking on the ‘Edit’ link next to your comment";
-          setTimeout( () => {UIkit.modal("#reply-modal-discussion.uk-open").hide(); },3000);
+          UIkit.modal("#reply-modal-discussion.uk-open").hide();
         }
       });
     }
@@ -170,7 +170,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
           this.replyForm.reset();
           this.getDiscussion();
           this.successMessage = "Your comment has been successfully posted.  You can edit your comment anytime by clicking on the ‘Edit’ link next to your comment";
-          setTimeout( () => {UIkit.modal("#reply-modal-discussion.uk-open").hide(); },3000);
+          UIkit.modal("#reply-modal-discussion.uk-open").hide(); 
         }
       });
     }
@@ -254,7 +254,13 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     }
 
     setTimeout(() => {
-      document.getElementById("discussionTitleHeader").focus();
+      if(this.successMessage){
+        window.scrollTo(0, document.getElementById("successMessageSection").offsetTop - 100);
+      }
+      else{
+        document.getElementById("discussionTitleHeader").focus();
+      }
+      
     }, 500);
   }
 
@@ -282,7 +288,6 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.replyId = "";
     this.successMessage = "";
     this.onOpenModel();
-    console.log(element_id);
     this.currentModelLink = element_id;
     //UIkit.modal('#reply-modal-discussion').show();
     //document.getElementById("addCommentTitle").focus();
@@ -333,7 +338,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
 
   onCloseModel() {
     document.getElementsByClassName("main-container")[0].removeAttribute("aria-hidden");
-    document.getElementById(this.currentModelLink).focus();
+    //document.getElementById(this.currentModelLink).focus();
   }
 
   onOpenModel() {

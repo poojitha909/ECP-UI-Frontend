@@ -62,6 +62,9 @@
                             (click)="onPublish()">{{!!user ? 'Publish' : 'Signin to create this Discussion'}}</button>
                     </div>
                 </div>
+                <div aria-live="polite" aria-atomic="true" *ngIf="successMessage" id="successMessageSection" class="uk-alert-success" uk-alert>
+                    <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ successMessage }}</p>
+                </div>
                 <div *ngIf="discussionId != 'preview'">
                     <div class="comments-head">
                         <div class="uk-grid-collapse" uk-grid>
@@ -172,9 +175,6 @@
                             (replyId!="" ? "Edit a Reply to Comment" : "Reply to a Comment") : 
                             (replyId!="" ? "Edit a Comment" : "Add a Comment") }}</h1>
                         <hr />
-                        <div aria-live="polite" aria-atomic="true" *ngIf="successMessage" class="uk-alert-success" uk-alert>
-                            <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ successMessage }}</p>
-                        </div>
                         <form [formGroup]="replyForm" (ngSubmit)="addComment()" class="uk-form-stacked reply-form">
                             <div class="uk-margin">
                                 <label class="uk-form-label" for="Comment">Comment<span

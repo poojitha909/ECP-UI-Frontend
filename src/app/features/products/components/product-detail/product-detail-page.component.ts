@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit,ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router";
 import { ProductService } from '../../services/products.service';
@@ -48,7 +48,7 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit {
   reviewSuccessMessage: string;
   reviewTitle: string = 'Add';
   detailReview: any;
-  userRating:DBRating;
+  userRating: DBRating;
   private readonly notifier: NotifierService;
   @ViewChild("customNotification", { static: true }) customNotificationTmpl;
   @ViewChild("customNotification1", { static: true }) customNotificationTmpl1;
@@ -65,7 +65,7 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit {
     public auth: AuthService,
     notifierService: NotifierService
   ) {
-    this.notifier=notifierService;
+    this.notifier = notifierService;
     if (this.productService.selectedCatId && this.productService.selectedCatname) {
       this.breadcrumbLinks[2] = {
         text: '',
@@ -203,7 +203,8 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit {
             response => {
               this.userRating = response;
               this.dbRating.push(response);
-              this.getDetailRating()
+              this.getReviews();
+              this.getDetailRating();
             },
             error => {
               console.log(error);
@@ -295,32 +296,32 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit {
   * Add review
   */
   onReviewSubmit() {
-      if (this.auth.isAuthenticate) {
-        this.reviewSuccessMessage = null;
-        this.reviewForm.controls.productId.setValue(this.productId);
-        this.productService.addReview(this.reviewForm.value).subscribe(
-          response => {
-            if (response) {
-              this.getReviews();
-              this.reviewForm.reset();
-              this.notifier.show({
-                message: "Your review successfully submitted",
-                type: "success",
-                template: this.customNotificationTmpl1
-            });
-
-              this.reviewSuccessMessage = "Review successfully posted.";
-            }
-          },
-          error => {
-            console.log(error);
-          });
-      } else {
-        console.log(this.reviewForm.value);
-        this.store.store("new-p-review", JSON.stringify(this.reviewForm.value));
-        this.authService.redirectUrl = "products/" + this.productId;
-        this.router.navigate(['/user/signin']);
-      }
+    if (this.auth.isAuthenticate) {
+      this.reviewSuccessMessage = null;
+      this.reviewForm.controls.productId.setValue(this.productId);
+      this.productService.addReview(this.reviewForm.value).subscribe(
+        response => {
+          if (response) {
+            this.getReviews();
+            this.reviewForm.reset();
+            //   this.notifier.show({
+            //     message: "Your review successfully submitted",
+            //     type: "success",
+            //     template: this.customNotificationTmpl1
+            // });
+            this.reviewSuccessMessage = "Thank you for your review comments.  You can edit or change your comments anytime by clicking on the Edit link on your comment.";
+            UIkit.modal("#success-review-msg").show();
+          }
+        },
+        error => {
+          console.log(error);
+        });
+    } else {
+      console.log(this.reviewForm.value);
+      this.store.store("new-p-review", JSON.stringify(this.reviewForm.value));
+      this.authService.redirectUrl = "products/" + this.productId;
+      this.router.navigate(['/user/signin']);
+    }
   }
 
   // likeReply(reply) {
@@ -361,11 +362,11 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit {
       });
   }
 
-  editReview(review: DBReviews) {
+  editReview(reviewData: any) {
     //console.log(review,"rev");
     this.reviewSuccessMessage = null;
 
-    this.reviewForm.patchValue(review);
+    this.reviewForm.patchValue(reviewData.review);
     this.reviewTitle = "Edit";
     UIkit.modal("#review-modal").show();
 

@@ -69,7 +69,8 @@
 
                     <div class="m-b-20">
                         <a href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age%20for%20product%20'{{product.name}}'&body=Product URL: {{currentUrl}}"
-                            class="uk-icon-button  uk-margin-small-right fb-icon" aria-label="Share via Email" uk-icon="mail"> </a>
+                            class="uk-icon-button  uk-margin-small-right fb-icon" aria-label="Share via Email"
+                            uk-icon="mail"> </a>
                         <a class="social-link"
                             href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age%20for%20product%20'{{product.name}}'&body=Product URL: {{currentUrl}}">
                             Share
@@ -77,15 +78,16 @@
                     </div>
                     <div>
                         <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{ service?.name || service?.basicProfileInfo?.firstName  }}"
-                          onclick="javascript:window.open(this.href,
+                            onclick="javascript:window.open(this.href,
                                   '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
-                          class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"  aria-label="Share via Facebook"> </a> <a class="social-link"
-                          href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{ service?.name || service?.basicProfileInfo?.firstName  }}"
-                          onclick="javascript:window.open(this.href,
+                            class="uk-icon-button  uk-margin-small-right email-icon" uk-icon="facebook"
+                            aria-label="Share via Facebook"> </a> <a class="social-link"
+                            href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t={{ service?.name || service?.basicProfileInfo?.firstName  }}"
+                            onclick="javascript:window.open(this.href,
                                   '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-                          Share via
-                          Facebook</a>
-                      </div>
+                            Share via
+                            Facebook</a>
+                    </div>
                 </div>
 
             </div>
@@ -100,8 +102,8 @@
                         <table>
                             <tr>
                                 <td><button type="button" (click)="redirectConfirm()"
-                                        class="uk-button uk-button-primary">{{ auth.isAuthenticate ? 'Buy
-                                        On ' + product?.buyFrom : 'Join us to get details'}}</button></td>
+                                        class="uk-button uk-button-primary">{{ auth.isAuthenticate ? 'Buy on our partner site – seniority.in' : 'Join us to get details'}}</button>
+                                </td>
                                 <td><span class="price"> Rs. {{product?.price}}</span></td>
                             </tr>
                         </table>
@@ -113,7 +115,7 @@
                 <!-- This is review modal -->
                 <div id="review-modal" uk-modal>
                     <div class="uk-modal-dialog uk-modal-body">
-                        <h3 class="font-regular-24 font-weight-600">{{reviewTitle}} Review</h3>
+                        <h3 class="font-regular-24 font-weight-600">{{reviewTitle}} your review</h3>
                         <hr />
                         <!-- Success box START-->
                         <div *ngIf="reviewSuccessMessage" class="uk-alert-success" uk-alert>
@@ -124,34 +126,51 @@
 
 
                             <div class="uk-margin">
-                                <label class="uk-form-label" for="review-title">Title<span
+                                <label class="uk-form-label" for="review-title">Review title<span
                                         class="required">*</span></label>
                                 <div class="uk-form-controls">
                                     <input class="uk-input" id="review-title" formControlName="title" type="text"
-                                        placeholder="Write a title for review">
+                                        placeholder="Add a review title">
                                 </div>
                             </div>
 
                             <div class="uk-margin">
-                                <label class="uk-form-label" for="review">Your Review<span
+                                <label class="uk-form-label" for="review">Review Comments<span
                                         class="required">*</span></label>
                                 <div class="uk-form-controls">
                                     <textarea formControlName="review" class="uk-input min-h-200" id="review"
-                                        placeholder="Enter your review here"></textarea>
+                                        placeholder="Add your review comments"></textarea>
                                 </div>
                             </div>
 
                             <div class="uk-text-right">
                                 <button class="uk-button uk-button-transparent uk-modal-close"
                                     type="button">Cancel</button>
-                                <button class="uk-button uk-button-default m-l-5 uk-modal-close"
-                                    (click)="onReviewSubmit()" type="button"
-                                    >{{ auth.isAuthenticate ? 'Post review': 'Join us to review'}}</button>
+                                <button class="uk-button uk-button-default m-l-10 uk-modal-close"
+                                    (click)="onReviewSubmit()"
+                                    type="button">{{ auth.isAuthenticate ? 'Share your review': 'Join us to review'}}</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <!-- Write Review Form END-->
+
+                <!--Review Success Message popup-->
+                <div id="success-review-msg" uk-modal>
+                    <div class="uk-modal-dialog uk-modal-body">
+                        <button class="uk-modal-close-default" type="button" uk-close></button>
+                        <h3 class="font-regular-24 font-weight-600">Review successfully posted</h3>
+                        <hr />
+                        <!-- Success box START-->
+                        <p class="font-regular-15 m-b-10 lable">{{reviewSuccessMessage}}</p>
+
+                        <div class="uk-text-right">
+                            <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
+                        </div>
+
+                    </div>
+                </div>
+
 
                 <!-- Review List START -->
                 <!-- Reviews Section-->
@@ -167,15 +186,15 @@
                             <ng-container *ngIf="reviews.length > 0">
                                 <div class="m-t-50 m-b-20" uk-grid>
                                     <div class="uk-width-expand uk-flex uk-flex-middle">
-                                        <h3 class="font-regular-24 font-weight-600"> Reviews
+                                        <h3 class="font-regular-24 font-weight-600"> Reviews from Joy of Age Members
                                             ({{totalReviewRecords}})
                                         </h3>
                                     </div>
                                     <div class="uk-width-auto">
                                         <button class="uk-button uk-button-transparent review-btn-transparent"
                                             uk-toggle="target: #review-modal"
-                                            (click)="reviewForm.reset();reviewSuccessMessage = null;reviewTitle='Add'">Write
-                                            Review</button>
+                                            (click)="reviewForm.reset();reviewSuccessMessage = null;reviewTitle='Add'">Add
+                                            your review</button>
                                     </div>
                                 </div>
 
@@ -222,20 +241,24 @@
         <div class="uk-modal-dialog">
             <button class="uk-modal-close-default" type="button" uk-close></button>
             <div class="uk-modal-header">
-                <h2 class="uk-modal-title">Leaving Site</h2>
+                <h2 class="uk-modal-title">Leaving Joy of Age</h2>
             </div>
             <div class="uk-modal-body">
                 <div class="uk-child-width-1-1 uk-grid-small" uk-grid>
                     <div>
-                        <p class="font-regular-15 m-b-10 lable">You will be taken to Seniority website to continue your purchase
-                        </p>
+                        <p class="font-regular-15 m-b-10 lable">To purchase the product please visit our product partner
+                            site at ‘seniority.in’</p>
+                        <p class="font-regular-15 m-b-10 lable">Please do share your experience with the product you
+                            purchase on seniority.in on the Joy of Age site as this will help other community members
+                            like you to make an informed decision about the products we list.</p>
                     </div>
                 </div>
             </div>
             <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-transparent uk-modal-close close-btn" type="button">No</button>
+                <button class="uk-button uk-button-transparent uk-modal-close close-btn" type="button">Cancel & Go
+                    Back</button>
                 <button class="uk-button uk-button-primary m-l-5 uk-modal-close close-btn" (click)="redirectToSite()"
-                    type="button">Yes</button>
+                    type="button">Take me to seniority.in</button>
             </div>
         </div>
     </div>

@@ -70,7 +70,7 @@
                             </div>
                             <div class="comments-add uk-width-1-3@s">
                                 <button class="uk-button uk-button-transparent adddiscuss"
-                                    (click)="setParentReplyId('')" uk-toggle="target: #reply-modal-discussion"> Add
+                                id="add-comment" (click)="setParentReplyId('','add-comment')" uk-toggle="target: #reply-modal-discussion"> Add
                                     Comment </button>
                             </div>
                         </div>
@@ -112,8 +112,8 @@
                                         Edit
                                     </a>
                                 </div>
-                                <div class="reply-container" uk-toggle="target: #reply-modal-discussion"
-                                    (click)="setParentReplyId(repliesGroup[0].id)">
+                                <div class="reply-container" id="reply-comment-{{repliesGroup[0].id}}" uk-toggle="target: #reply-modal-discussion"
+                                    (click)="setParentReplyId(repliesGroup[0].id, 'reply-comment-'+repliesGroup[0].id)">
                                     <img class="img" src="/assets/images/reply.svg" alt="No Image Found"> <label
                                         class="reply" for="commentarea">
                                         Reply</label>
@@ -172,6 +172,9 @@
                             (replyId!="" ? "Edit a Reply to Comment" : "Reply to a Comment") : 
                             (replyId!="" ? "Edit a Comment" : "Add a Comment") }}</h1>
                         <hr />
+                        <div aria-live="polite" aria-atomic="true" *ngIf="successMessage" class="uk-alert-success" uk-alert>
+                            <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ successMessage }}</p>
+                        </div>
                         <form [formGroup]="replyForm" (ngSubmit)="addComment()" class="uk-form-stacked reply-form">
                             <div class="uk-margin">
                                 <label class="uk-form-label" for="Comment">Comment<span

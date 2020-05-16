@@ -41,6 +41,7 @@ export class AskQuestionDetailPageComponent implements OnInit {
   replyPage: number;
   replyPageSize: number;
   show:boolean = true;
+  successMessage: string;
   private readonly notifier: NotifierService;
   @ViewChild("customNotification", { static: true }) customNotificationTmpl;
   @ViewChild("customNotification1", { static: true }) customNotificationTmpl1;
@@ -109,6 +110,7 @@ export class AskQuestionDetailPageComponent implements OnInit {
     if (!this.replyForm.valid) {
       return;
     }
+    this.successMessage = "";
     if (!this.user) {
       this.store.store("new-ques-comment", JSON.stringify({ questionId: this.questionId, commentTxt: comment.commentTxt, category: this.category }));
       this.authService.redirectUrl = "ask-question/detail/" + this.questionId;
@@ -128,19 +130,13 @@ export class AskQuestionDetailPageComponent implements OnInit {
               this.totalRecordsReplies = response.data.total;
               this.setReplies(response.data.content);
               if(this.isExpert){
-                this.notifier.show({
-                  message: "Your reply is successfully submitted",
-                  type: "success",
-                  template: this.customNotificationTmpl1
-                   });
-                  }
-                  else{
-                    this.notifier.show({
-                      message: "Your comment is successfully submitted",
-                      type: "success",
-                      template: this.customNotificationTmpl1
-                       });
-                  }
+                this.successMessage = "Your reply has been shared with the community member.";
+                UIkit.modal("#success-review-msg").show();
+              }
+              else {
+                this.successMessage = "Additional details have been shared with the expert.";
+                UIkit.modal("#success-review-msg").show();
+              }
 
             }
           });
@@ -241,7 +237,7 @@ export class AskQuestionDetailPageComponent implements OnInit {
   }
 
   onCancelPublish() {
-    this.router.navigate(["ask-question/add"], { queryParams: { category: this.question.category, answeredBy: this.question.answeredBy.id } });
+    this.router.navigate(["ask-question/add"], { queryParams: { category: this.question.category, answeredBy: this.question.answeredBy.id, editQue:1 } });
   }
 
   onPublish() {

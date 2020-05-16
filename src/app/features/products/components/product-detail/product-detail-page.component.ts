@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router";
 import { ProductService } from '../../services/products.service';
@@ -16,7 +16,7 @@ declare var UIkit;
   templateUrl: './product-detail-page.component.html',
   styleUrls: ['./product-detail-page.component.scss']
 })
-export class ProductDetailPageComponent implements OnInit, AfterViewInit {
+export class ProductDetailPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   breadcrumbLinks: Breadcrumb[] = [
     {
@@ -375,6 +375,11 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit {
   changeReviewPage(page: number) {
     this.reviwePaginate.p = page;
     this.getReviews();
+  }
+
+  ngOnDestroy() {
+    document.getElementById("review-modal").remove();
+    document.getElementById("modal-product-leaving").remove();
   }
 
 }

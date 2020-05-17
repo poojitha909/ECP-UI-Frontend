@@ -6,6 +6,7 @@ import { AuthService } from "../../../../core/auth/services/auth.service";
 import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { SeoService } from 'src/app/core/services/seo.service';
+declare var UIkit;
 
 @Component({
   selector: 'app-ask-question-create',
@@ -108,6 +109,9 @@ export class AskQuestionCreatePageComponent implements OnInit {
       setTimeout( () => { window.scrollTo(0,document.getElementById("questionform").offsetTop); }, 500);
     }
 
+  }
+  showMoreClicked(){
+    UIkit.modal("#detail-description").show();
   }
 
   showQuestions() {

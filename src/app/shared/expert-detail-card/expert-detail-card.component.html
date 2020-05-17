@@ -24,7 +24,7 @@
 
   <div class="uk-width-1-4@m askques">
     <div class="reply-card">
-      {{ expert?.answersCount }} Queries Answered
+      {{ expert?.replyCount }} Interactions
     </div>
     <button *ngIf="isSame==false" class="uk-button uk-button-primary" style="text-overflow: ellipsis;">Ask
       {{ (expertfullName.length>7)? (expertfullName | slice:0:7)+' '+'..':(expertfullName) }}</button>

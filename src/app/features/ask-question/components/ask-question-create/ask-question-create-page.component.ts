@@ -89,7 +89,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
 
     this.quesForm = this.fb.group({
       question: [question ? question.question : "", Validators.required],
-      description: [question ? question.description : "", Validators.required],
+      description: [question ? question.description : ""],
     });
 
     this.askQuesService.getUserProfile(this.answeredBy).subscribe((response: any) => {
@@ -104,6 +104,9 @@ export class AskQuestionCreatePageComponent implements OnInit {
         alert("Oops! something wrong happen, please try again.");
       }
     });
+    if(this.route.snapshot.queryParams['editQue']){
+      setTimeout( () => { window.scrollTo(0,document.getElementById("questionform").offsetTop); }, 500);
+    }
 
   }
 
@@ -173,7 +176,6 @@ export class AskQuestionCreatePageComponent implements OnInit {
     que.answeredBy = { id: this.answeredBy };
     que.askedBy = { id: this.user.id };
     que.answered = false;
-
     this.store.store("new-question-preview", JSON.stringify(que));
     this.router.navigate(['/ask-question/detail/preview']);
   }

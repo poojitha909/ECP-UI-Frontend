@@ -132,12 +132,12 @@
                                     <select id="Duration"
                                         [ngClass]="{'uk-form-danger' : formControl.duration.invalid && ( formControl.duration.dirty ||  formControl.duration.touched) }"
                                         class="uk-select" formControlName="duration">
-                                        <option value="30">Upto an hour</option>
-                                        <option value="60">Upto 2 hours</option>
-                                        <option value="90">Upto 3 hours</option>
-                                        <option value="120">Upto 4 hours</option>
-                                        <option value="150">Half a day event</option>
-                                        <option value="180">Full day event</option>
+                                        <option value="01:00">Upto an hour</option>
+                                        <option value="02:00">Upto 2 hours</option>
+                                        <option value="02:00">Upto 3 hours</option>
+                                        <option value="04:00">Upto 4 hours</option>
+                                        <option value="12:00">Half a day event</option>
+                                        <option value="24:00">Full day event</option>
                                         
                                     </select>
                                     <small aria-describedby="Duration"
@@ -214,14 +214,14 @@
                                 <select id="Languages"
                                 [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
                                 class="uk-select" formControlName="languages">
-                                <option value="90">Telugu</option>
-                                <option value="30">English</option>
-                                <option value="60">Hindi</option>
-                                <option value="90">Tamil</option>
-                                <option value="90">Urdu</option>
-                                <option value="90">Tulu</option>
-                                <option value="90">Malyalam</option>
-                                <option value="90">Greek</option>
+                                <option value="Telugu">Telugu</option>
+                                <option value="English">English</option>
+                                <option value="Hindi">Hindi</option>
+                                <option value="Tamil">Tamil</option>
+                                <option value="Urdu">Urdu</option>
+                                <option value="Tulu">Tulu</option>
+                                <option value="Malyalam">Malyalam</option>
+                                <option value="Greek">Greek</option>
                             </select>
                             <small aria-describedby="Languages"
                                 *ngIf="formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched)"

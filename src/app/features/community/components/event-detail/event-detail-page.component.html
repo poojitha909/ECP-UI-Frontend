@@ -44,9 +44,7 @@
                 <div *ngIf = "eventId == 'preview'" class= "previewTop">
                     <div class="info">
                         <img class = "imgInformation" src="/assets/images/information.png">
-                        <span class = "para">You are previewing your contribution that you are about to post publicly. 
-                            If you are happy with it use the ‘Publish’ button at the bottom to share this with the community, 
-                            or click on the ‘Go back & Edit’  button to continue to improve your contribution.</span>
+                        <span class = "para">You are previewing the upcoming event will be posted publicly. If you are happy with this use the 'Submit for Approval' button at the bottom to share this event with the community, or click on the ‘Go back & Edit’  button to continue to improve the event information</span>
                     </div>
                 </div>
                 <div class="bg-white category-box">
@@ -117,7 +115,7 @@
                             <hr />
                             <button class="uk-button uk-button-transparent uk-button-default m-r-15" (click)="onCancelPublish()">Go Back &
                                 Edit</button>
-                            <button class="uk-button uk-button-primary"
+                            <button class="uk-button uk-button-primary" uk-toggle="target: #modal-sections-events-approval"
                                 (click)="onPublish()">{{!!user ? 'Submit for Approval' : 'Signin to create this Event'}}</button>
                         </div>
                     </div>
@@ -160,6 +158,38 @@
             </div>
           </div>
           <!-- Contact Model END -->
+
+<!-- Submit for Approval START -->
+
+<div id="modal-sections-events-approval" role="dialog" aria-labelledby="eventContactitle" aria-modal="true"
+aria-describedby="contactDetails" class="uk-modal-container" uk-modal="bg-close:false;container:false;">
+<div class="uk-modal-dialog">
+    <button class="uk-modal-close-default" aria-label="Close popup" type="button" (click)="onCloseModel()"
+        uk-close></button>
+    <div class="">
+        <!-- <h2 id="eventContactitle" tabindex=0 class="uk-modal-title"></h2> -->
+        <br>
+    </div>
+    <div class="uk-modal-body" id="contactDetails">
+        <div class="uk-grid-small" uk-grid>
+            <div>
+                <p>Thank you for sharing your Upcoming Event with Joy of Age community. The Joy of Age administrator will review the event and if appropriate will publish this with the Joy of Age community.
+                    In case you do not see your event, please contact the Joy of Age Administrator at admin@joyofage.org</p>
+            </div>
+
+            <!-- <div>
+                <p>In case you do not see your event, please contact the Joy of Age Administrator at 'writetous@joyofage.org’</p>
+            </div> -->
+        </div>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+        <button class="uk-button uk-button-default uk-modal-close close-btn" (click)="onCloseApprovalModel()"
+            type="button">Close</button>
+    </div>
+</div>
+</div>
+<!-- Submit for Approval END -->
+
           <!-- Report Form Model Start -->
           <div id="event-report-modal" uk-modal>
             <div class="uk-modal-dialog uk-modal-body">

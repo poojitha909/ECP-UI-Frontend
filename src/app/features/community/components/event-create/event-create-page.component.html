@@ -208,16 +208,21 @@
                             [ngClass]="{'uk-text-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
                             class="uk-form-label" for="Languages">Primary Language to be used at the Event<span class="required">*</span></label>
                         <div class="uk-form-controls">
-                            <input id="Languages"
+                            <!-- <input id="Languages"
                                 [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
-                                class="uk-input" formControlName="languages" placeholder="Eg.: Hindi, Punjabi, Tamil" />
-                                <!-- <select id="Languages"
+                                class="uk-input" formControlName="languages" placeholder="Eg.: Hindi, Punjabi, Tamil" /> -->
+                                <select id="Languages"
                                 [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
                                 class="uk-select" formControlName="languages">
+                                <option value="90">Telugu</option>
                                 <option value="30">English</option>
                                 <option value="60">Hindi</option>
-                                <option value="90">Telugu</option>
-                            </select> -->
+                                <option value="90">Tamil</option>
+                                <option value="90">Urdu</option>
+                                <option value="90">Tulu</option>
+                                <option value="90">Malyalam</option>
+                                <option value="90">Greek</option>
+                            </select>
                             <small aria-describedby="Languages"
                                 *ngIf="formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched)"
                                 class="uk-text-danger">Languages can't be empty.</small>

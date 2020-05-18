@@ -65,7 +65,8 @@ export class EventCreatePageComponent implements OnInit {
       capacity:  [event ? event.capacity : "", Validators.required],
       eventType:  [event ? event.eventType : "", Validators.required],
       entryFee:  [event ? event.entryFee : "", Validators.required],
-      languages:  [event ? event.languages : "",[Validators.pattern('^[a-zA-Z \-\']+'),Validators.required]],
+      // languages:  [event ? event.languages : "",[Validators.pattern('^[a-zA-Z \-\']+'),Validators.required]],
+      languages:  [event ? event.languages : "",Validators.required],
       organiser:  [event ? event.organiser : "", [Validators.required,Validators.pattern('^[a-zA-Z \-\']+')]]
     });
   }

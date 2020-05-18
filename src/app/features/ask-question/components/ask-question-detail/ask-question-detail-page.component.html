@@ -73,43 +73,44 @@
                 </div>
                 
                 <div class="uk-card uk-card-default" *ngFor="let reply of replies">
-                    <div class="uk-card-header">
-
-                        <div *ngIf="reply.user.id === question.askedBy.id" class="uk-grid-small uk-flex-middle" uk-grid>
-                            <div class="uk-width-auto">
-                                <img class="uk-border-circle" width="40" height="40"
-                                    src="{{askedByProfile?.basicProfileInfo?.profileImage?.thumbnailImage}}" alt="Asked By user image">
+                    <div [ngClass]="{'light-blue-bg' : reply.user.id === question.answeredBy.userId }">
+                        <div class="uk-card-header">
+                            <div *ngIf="reply.user.id === question.askedBy.id" class="uk-grid-small uk-flex-middle" uk-grid>
+                                <div class="uk-width-auto">
+                                    <img class="uk-border-circle" width="40" height="40"
+                                        src="{{askedByProfile?.basicProfileInfo?.profileImage?.thumbnailImage}}" alt="Asked By user image">
+                                </div>
+                                <div class="uk-width-expand">
+                                    <h3 class="uk-card-title uk-margin-remove-bottom">{{reply.user.userName}}</h3>
+                                </div>
+                                <div class="uk-width-auto">
+                                    <p class="uk-text-meta">{{ reply.createdAt | timeago }}</p>
+                                </div>
                             </div>
-                            <div class="uk-width-expand">
-                                <h3 class="uk-card-title uk-margin-remove-bottom">{{reply.user.userName}}</h3>
-                            </div>
-                            <div class="uk-width-auto">
-                                <p class="uk-text-meta">{{ reply.createdAt | timeago }}</p>
-                            </div>
-                        </div>
-                        <div *ngIf="reply.user.id === question.answeredBy.userId" class="uk-grid-small uk-flex-middle"
-                            uk-grid>
-                            <div class="uk-width-auto">
-                                <img class="uk-border-circle" width="40" height="40"
-                                    src="{{question?.answeredBy?.basicProfileInfo?.profileImage?.thumbnailImage}}" alt="Answered By user image">
-                            </div>
-                            <div class="uk-width-expand">
-                                <h3 class="uk-card-title uk-margin-remove-bottom">
-                                    {{question?.answeredBy?.basicProfileInfo?.firstName}}</h3>
-                            </div>
-                            <div class="uk-width-auto">
-                                <p class="uk-text-meta">{{ reply.createdAt | timeago }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="uk-card-body">
-                        <div class="reply_reply" *ngIf="reply.parentText!=''">
-                            <div class="reply_reply_inner">
-                                <b>{{reply.parentUser}}</b><br />
-                                {{reply.parentText}}
+                            <div *ngIf="reply.user.id === question.answeredBy.userId" class="uk-grid-small uk-flex-middle"
+                                uk-grid>
+                                <div class="uk-width-auto">
+                                    <img class="uk-border-circle" width="40" height="40"
+                                        src="{{question?.answeredBy?.basicProfileInfo?.profileImage?.thumbnailImage}}" alt="Answered By user image">
+                                </div>
+                                <div class="uk-width-expand">
+                                    <h3 class="uk-card-title uk-margin-remove-bottom">
+                                        {{question?.answeredBy?.basicProfileInfo?.firstName}}</h3>
+                                </div>
+                                <div class="uk-width-auto">
+                                    <p class="uk-text-meta">{{ reply.createdAt | timeago }}</p>
+                                </div>
                             </div>
                         </div>
-                        <div [innerHTML]="reply.reply">
+                        <div class="uk-card-body">
+                            <div class="reply_reply" *ngIf="reply.parentText!=''">
+                                <div class="reply_reply_inner">
+                                    <b>{{reply.parentUser}}</b><br />
+                                    {{reply.parentText}}
+                                </div>
+                            </div>
+                            <div [innerHTML]="reply.reply">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -138,19 +139,17 @@
     <div id="success-preview-submit-msg" uk-modal="bg-close:false;container:false;" (hide)="onPreviewSubmitSuccess()">
         <div class="uk-modal-dialog uk-modal-body">
             <button class="uk-modal-close-default" type="button" uk-close></button>
-            <h3 class="font-regular-24 font-weight-600"></h3>
+            <h3 class="font-regular-24 font-weight-600">Question submitted!</h3>
             <hr />
             <!-- Success box START-->
             <p class="font-regular-15 m-b-10 lable">
                 Thank you for sharing your question with our expert. 
                 Typically our experts respond within a day or two.<br/>
                 In case you do not see a response to your question in a couple of days, 
-                please contact the Joy of Age Administrator at </p>
-
+                please contact the Joy of Age Administrator at admin@joyofage.org</p>
             <div class="uk-text-right">
                 <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
             </div>
-
         </div>
     </div>
     
@@ -160,7 +159,7 @@
         <hr />
         <form [formGroup]="replyForm" (ngSubmit)="addComment()" class="uk-form-stacked reply-form">
             <div class="uk-margin">
-            <label class="uk-form-label" for="Description">{{isExpert ? 'Reply' : 'More details' }}<span class="required">*</span></label>
+            <label class="uk-form-label" for="Description">{{isExpert ? 'Reply' : 'Add details' }}<span class="required">*</span></label>
             <div class="uk-form-controls">
                 <textarea formControlName="commentTxt" class="uk-input min-h-200" id="Description" #Description
                 placeholder="Enter your comment here"></textarea>

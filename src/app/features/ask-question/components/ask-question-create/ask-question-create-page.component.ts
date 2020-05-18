@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AskQuestionService } from '../../services/ask-question.service';
 import { Router, ActivatedRoute } from "@angular/router";
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
@@ -40,6 +40,8 @@ export class AskQuestionCreatePageComponent implements OnInit {
   questions: any[];
   totalRecords: number;
   rUrl: string;
+  showReadMore: boolean;
+  @ViewChild('shortDesc', { static: false }) private shortDesc: ElementRef;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private askQuesService: AskQuestionService, private store: StorageHelperService,
@@ -100,6 +102,11 @@ export class AskQuestionCreatePageComponent implements OnInit {
         if(!this.category && this.expert.experties[0]){
           this.category = this.expert.experties[0].id;
         }
+        setTimeout( () => { 
+          if (this.shortDesc.nativeElement.scrollHeight > this.shortDesc.nativeElement.offsetHeight) {
+            this.showReadMore = true;
+          }
+        }, 0);
       }
       else {
         alert("Oops! something wrong happen, please try again.");
@@ -112,6 +119,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
   }
   showMoreClicked(){
     UIkit.modal("#detail-description").show();
+    document.getElementById("aboutModalTitle").focus();
   }
 
   showQuestions() {

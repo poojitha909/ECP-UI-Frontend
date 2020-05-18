@@ -51,21 +51,27 @@
                 <div class="inner-container bg-white" *ngIf="expert?.basicProfileInfo?.shortDescription != '' && expert?.basicProfileInfo?.shortDescription != undefined" >
                     <h4>About {{expert.basicProfileInfo.firstName}}</h4>
                     <hr />
-                    <div class="uk-margin white-space-wrap" style="height: 185px;" ellipsis="..." (ellipsis-click-more)="showMoreClicked()">
+                    <div #shortDesc class="white-space-wrap info-h-160">
                         {{ expert?.basicProfileInfo?.shortDescription }}
                     </div>
+                    <a *ngIf="showReadMore" id="readmoreLink" href="javascript:void(0)" (click)="showMoreClicked()"
+            class="cursor-pointer font-regular read-more-link">more...</a>
                 </div>
-                <div id="detail-description" uk-modal="bg-close:false;container:false;">
-                    <div class="uk-modal-dialog uk-modal-body">
-                        <button class="uk-modal-close-default" type="button" uk-close></button>
-                        <!-- Success box START-->
-                        <div class="m-b-10 white-space-wrap">
-                            {{ expert?.basicProfileInfo?.shortDescription }}
+                <div id="detail-description" class="uk-modal-container" uk-modal="bg-close:false;container:false;">
+                    <div class="uk-modal-dialog">
+                        <div class="uk-modal-header">
+                            <h3 id="aboutModalTitle" tabindex=0 class="uk-modal-title">About {{expert.basicProfileInfo.firstName}}</h3>
                         </div>
-                        <div class="uk-text-right">
-                            <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
+                        <div class="uk-modal-body">
+                            <button class="uk-modal-close-default" type="button" uk-close></button>
+                            <!-- Success box START-->
+                            <div class="m-b-10 white-space-wrap">
+                                {{ expert?.basicProfileInfo?.shortDescription }}
+                            </div>
                         </div>
-            
+                        <div class="uk-modal-footer uk-text-right">
+                            <button class="uk-button uk-button-default uk-modal-close" type="button">Close</button>
+                        </div>
                     </div>
                 </div>
                 <div class="inner-container bg-white  m-t-30" id="questionform" >

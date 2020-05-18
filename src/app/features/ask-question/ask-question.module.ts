@@ -9,6 +9,7 @@ import { NoExpertReplyComponent } from './components/no-expert-reply/no-expert-r
 import { AskQuestionDetailPageComponent } from './components/ask-question-detail/ask-question-detail-page.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { NotifierModule,NotifierOptions} from "angular-notifier";
+import { EllipsisModule } from 'ngx-ellipsis';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -62,7 +63,8 @@ const customNotifierOptions: NotifierOptions = {
     SharedModule,
     AskQuestionRoutingModule,
     EditorModule,
-    NotifierModule.withConfig(customNotifierOptions)
+    NotifierModule.withConfig(customNotifierOptions),
+    EllipsisModule
   ]
 })
 export class AskQuestionModule { }

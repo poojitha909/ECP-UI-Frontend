@@ -32,6 +32,7 @@ export class EventCreatePageComponent implements OnInit {
   eventForm: FormGroup;
   successMessage: string;
   user: any;
+  langList: string[];
   minDate = moment(new Date()).add(1,'days').format('YYYY-MM-DD')
   
   constructor(private router: Router, private store: StorageHelperService,
@@ -41,6 +42,14 @@ export class EventCreatePageComponent implements OnInit {
     document.getElementById("addEventHeading").focus();
     this.categoryList = [];
     this.successMessage = "";
+    this.langList = ["English",
+      "Hindi",
+      "Tamil",
+      "Urdu",
+      "Tulu",
+      "Malyalam",
+      "Greek",
+      "Telugu"];
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);

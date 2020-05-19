@@ -1,4 +1,9 @@
 <div aria-live="polite" aria-atomic="true">
+  <!-- Error box START-->
+  <div *ngIf="errorMessage" class="uk-alert-danger" uk-alert>
+    <p><span class="uk-icon mr-5" uk-icon="warning"></span> {{ errorMessage }}</p>
+  </div>
+  <!-- Error box END-->
   <div class="uk-margin uk-text-center">
     <span class="verified-icon font-100"></span>
     <p class="font-regular">{{ verifiedString }}</p>
@@ -18,8 +23,7 @@
       <div class="uk-form-controls">
         <input
           [ngClass]="{'uk-form-danger' : formControl.primaryEmail.invalid && (formControl.primaryEmail.dirty || formControl.primaryEmail.touched) }"
-          class="uk-input" id="Email" type="text" formControlName="primaryEmail"
-          placeholder="Your Email...">
+          class="uk-input" id="Email" type="text" formControlName="primaryEmail" placeholder="Your Email...">
       </div>
     </div>
 

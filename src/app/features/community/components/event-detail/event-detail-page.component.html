@@ -44,7 +44,7 @@
                 <div *ngIf = "eventId == 'preview'" class= "previewTop">
                     <div class="info">
                         <img class = "imgInformation" src="/assets/images/information.png">
-                        <span class = "para">You are previewing the upcoming event will be posted publicly. If you are happy with this use the 'Submit for Approval' button at the bottom to share this event with the community, or click on the ‘Go back & Edit’  button to continue to improve the event information</span>
+                        <span class = "para">You are previewing the upcoming event that will be posted publicly. If you are happy with this use the 'Submit for Approval' button at the bottom to share this event with the community, or click on the ‘Go back & Edit’  button to continue to improve the event information</span>
                     </div>
                 </div>
                 <div class="bg-white category-box">
@@ -161,25 +161,24 @@
 
 <!-- Submit for Approval START -->
 
-<div id="modal-sections-events-approval" role="dialog" aria-labelledby="eventContactitle" aria-modal="true"
-aria-describedby="contactDetails" class="uk-modal-container" uk-modal="bg-close:false;container:false;">
+<div id="modal-sections-events-approval" role="dialog" aria-labelledby="eventApprovaltitle" aria-modal="true"
+aria-describedby="approvalDetails" class="uk-modal-container" uk-modal="bg-close:false;container:false;">
 <div class="uk-modal-dialog">
     <button class="uk-modal-close-default" aria-label="Close popup" type="button" (click)="onCloseModel()"
         uk-close></button>
-    <div class="">
-        <!-- <h2 id="eventContactitle" tabindex=0 class="uk-modal-title"></h2> -->
-        <br>
+    <div class="uk-modal-header">
+        <h2 id="eventApprovaltitle" tabindex=0 class="uk-modal-title">Thank you for sharing your suggestion about an Upcoming Event.</h2>
     </div>
-    <div class="uk-modal-body" id="contactDetails">
+    <div class="uk-modal-body" id="approvalDetails">
         <div class="uk-grid-small" uk-grid>
             <div>
-                <p>Thank you for sharing your Upcoming Event with Joy of Age community. The Joy of Age administrator will review the event and if appropriate will publish this with the Joy of Age community.
-                    In case you do not see your event, please contact the Joy of Age Administrator at admin@joyofage.org</p>
+                <p> The Joy of Age administrator will review the event and if appropriate will publish this with the Joy of Age community.
+                   </p>
             </div>
 
-            <!-- <div>
-                <p>In case you do not see your event, please contact the Joy of Age Administrator at 'writetous@joyofage.org’</p>
-            </div> -->
+            <div>
+                <p> In case you do not see your event, please contact the Joy of Age Administrator at admin@joyofage.org</p>
+            </div>
         </div>
     </div>
     <div class="uk-modal-footer uk-text-right">

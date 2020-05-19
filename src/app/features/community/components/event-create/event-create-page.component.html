@@ -23,7 +23,7 @@
                             placeholder="What’s the title of your event?">
                         <small aria-describedby="Title"
                             *ngIf="formControl.title.invalid && ( formControl.title.dirty ||  formControl.title.touched)"
-                            class="uk-text-danger"> Title can't be empty.</small>
+                            class="uk-text-danger"> Title is required to publish the upcoming event.</small>
                     </div>
                 </div>
                 <div class="uk-margin">
@@ -33,14 +33,14 @@
                     <div class="uk-form-controls">
                         <select
                             [ngClass]="{'uk-form-danger' : formControl.eventType.invalid && ( formControl.eventType.dirty ||  formControl.eventType.touched) }"
-                            class="uk-select" formControlName="eventType" id="Event-Type">
-                            <option value="0">Select Category</option>
+                            class="uk-select" formControlName="eventType" id="Event-Type" placeholder="Pick a Category of your Event">
+                            <option value="" disabled selected>Select Category</option>
                             <option value="1">Outdoor</option>
                             <option value="2">Indoor</option>
                         </select>
                         <small aria-describedby="Event-Type"
                             *ngIf="formControl.eventType.invalid && ( formControl.eventType.dirty ||  formControl.eventType.touched)"
-                            class="uk-text-danger"> Select a category.</small>
+                            class="uk-text-danger">Category is required to publish the upcoming event.</small>
                     </div>
                 </div>
                 <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
@@ -51,12 +51,11 @@
                         <div class="uk-form-controls">
                             <input
                                 [ngClass]="{'uk-form-danger' : formControl.date.invalid && ( formControl.date.dirty ||  formControl.date.touched) }"
-                                class="uk-input" id="Date" type="date" formControlName="date" [min]="minDate"
-                                placeholder="yyyy-mm-dd" />
+                                class="uk-input" id="Date" type="date"  formControlName="date" [min]="minDate"
+                                placeholder="Date" />
                             <small aria-describedby="Date"
                                 *ngIf="formControl.date.invalid && ( formControl.date.dirty ||  formControl.date.touched)"
-                                class="uk-text-danger"> Please enter correct date with dd/mm/yyyy
-                                format.</small>
+                                class="uk-text-danger"> Date is required to publish the upcoming event.</small>
                         </div>
                     </div>
                     <div>
@@ -70,6 +69,7 @@
                                     <select
                                         [ngClass]="{'uk-form-danger' : formControl.startTime.invalid && ( formControl.startTime.dirty ||  formControl.startTime.touched) }"
                                         class="uk-select" id="Start-Time" formControlName="startTime">
+                                        <option value="" disabled selected>Start Time</option>
                                         <option value="00:00">12:00 am</option>
                                         <option value="00:30">12:30 am</option>
                                         <option value="01:00">01:00 am</option>
@@ -121,7 +121,7 @@
                                     </select>
                                     <small aria-describedby="Start-Time"
                                         *ngIf="formControl.startTime.invalid && ( formControl.startTime.dirty ||  formControl.startTime.touched)"
-                                        class="uk-text-danger"> Start time can't be empty.</small>
+                                        class="uk-text-danger"> Start time is required to publish the upcoming event.</small>
                                 </div>
                             </div>
                             <div>
@@ -132,17 +132,18 @@
                                     <select id="Duration"
                                         [ngClass]="{'uk-form-danger' : formControl.duration.invalid && ( formControl.duration.dirty ||  formControl.duration.touched) }"
                                         class="uk-select" formControlName="duration">
-                                        <option value="01:00">Upto an hour</option>
-                                        <option value="02:00">Upto 2 hours</option>
-                                        <option value="02:00">Upto 3 hours</option>
-                                        <option value="04:00">Upto 4 hours</option>
-                                        <option value="12:00">Half a day event</option>
-                                        <option value="24:00">Full day event</option>
+                                        <option value="" disabled selected>Duration</option>
+                                        <option value="0">Upto an hour</option>
+                                        <option value="1">Upto 2 hours</option>
+                                        <option value="3">Upto 3 hours</option>
+                                        <option value="4">Upto 4 hours</option>
+                                        <option value="5">Half a day event</option>
+                                        <option value="6">Full day event</option>
                                         
                                     </select>
                                     <small aria-describedby="Duration"
                                         *ngIf="formControl.duration.invalid && ( formControl.duration.dirty ||  formControl.duration.touched)"
-                                        class="uk-text-danger"> Duration can't be empty.</small>
+                                        class="uk-text-danger"> Duration is required to publish the upcoming event.</small>
                                 </div>
                             </div>
                         </div>
@@ -160,7 +161,7 @@
                         </editor>
                         <small aria-describedby="Description"
                             *ngIf="formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched)"
-                            class="uk-text-danger"> Description can't be empty.</small>
+                            class="uk-text-danger"> Description is required to publish the upcoming event.</small>
                     </div>
                 </div>
                 <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
@@ -174,7 +175,7 @@
                                 class="uk-input" formControlName="address" placeholder="Eg.: HSR layout, sector 6" />
                             <small aria-describedby="Address"
                                 *ngIf="formControl.address.invalid && ( formControl.address.dirty ||  formControl.address.touched)"
-                                class="uk-text-danger"> Address can't be empty.</small>
+                                class="uk-text-danger">Event Address is required to publish the upcoming event.</small>
 
                         </div>
                     </div>
@@ -199,7 +200,7 @@
                                 class="uk-input" formControlName="organiser" placeholder="Organiser Name" />
                             <small aria-describedby="organiser-name"
                                 *ngIf="formControl.organiser.invalid && ( formControl.organiser.dirty ||  formControl.organiser.touched)"
-                                class="uk-text-danger"> Organiser's Name can't be empty.</small>
+                                class="uk-text-danger"> Organiser's Name is required to publish the upcoming event.</small>
 
                         </div>
                     </div>
@@ -208,24 +209,28 @@
                             [ngClass]="{'uk-text-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
                             class="uk-form-label" for="Languages">Primary Language to be used at the Event<span class="required">*</span></label>
                         <div class="uk-form-controls">
-                            <!-- <input id="Languages"
+                            <!-- <ng-select  [addTag]="addLangFn" (add)="addLanguage($event)" id="Languages" [items]="languages"  formControlName="languages"
+                            placeholder="Add Language" [hideSelected]="true"  bindLabel="name"
+                            formControlName="language" [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }">
+                            </ng-select> -->
+                            <!-- <input id="Languages"  
                                 [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
-                                class="uk-input" formControlName="languages" placeholder="Eg.: Hindi, Punjabi, Tamil" /> -->
-                                <select id="Languages"
+                                class="uk-input" formControlName="languages"  placeholder="Language" />-->
+                                <select id="languages"
                                 [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
                                 class="uk-select" formControlName="languages">
-                                <option value="Telugu">Telugu</option>
-                                <option value="English">English</option>
-                                <option value="Hindi">Hindi</option>
-                                <option value="Tamil">Tamil</option>
-                                <option value="Urdu">Urdu</option>
-                                <option value="Tulu">Tulu</option>
-                                <option value="Malyalam">Malyalam</option>
-                                <option value="Greek">Greek</option>
+                                <option value="0">English</option>
+                                <option value="1">Hindi</option>
+                                <option value="2">Tamil</option>
+                                <option value="3">Urdu</option>
+                                <option value="4">Tulu</option>
+                                <option value="5">Malyalam</option>
+                                <option value="6">Greek</option>
+                                <option value="7">Telugu</option>
                             </select>
                             <small aria-describedby="Languages"
                                 *ngIf="formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched)"
-                                class="uk-text-danger">Languages can't be empty.</small>
+                                class="uk-text-danger">Primary Language to be used at the Event is required to publish the upcoming event.</small>
 
                         </div>
                     </div>
@@ -241,7 +246,7 @@
                                 class="uk-input" formControlName="orgEmail" placeholder="abcd@xyz.com" />
                             <small aria-describedby="Organiser-Email"
                                 *ngIf="formControl.orgEmail.invalid && ( formControl.orgEmail.dirty ||  formControl.orgEmail.touched)"
-                                class="uk-text-danger">Please Enter valid Email address.</small>
+                                class="uk-text-danger">Organiser’s Email Address is required to publish the upcoming event.</small>
                         </div>
                     </div>
                     <div>
@@ -254,7 +259,7 @@
                                 class="uk-input" formControlName="orgPhone" placeholder="9999999999" />
                             <small aria-describedby="Organiser-Phone"
                                 *ngIf="formControl.orgPhone.invalid && ( formControl.orgPhone.dirty ||  formControl.orgPhone.touched)"
-                                class="uk-text-danger">Please Enter valid Organiser’s Phone Number.</small>
+                                class="uk-text-danger">Organiser’s Phone Number is required to publish the upcoming event. .</small>
                         </div>
                     </div>
                 </div>
@@ -269,7 +274,7 @@
                                 class="uk-input" formControlName="capacity" placeholder="Eg. 75 People" />
                             <small aria-describedby="Event-Capacity"
                                 *ngIf="formControl.capacity.invalid && ( formControl.capacity.dirty ||  formControl.capacity.touched)"
-                                class="uk-text-danger">Event Capacity can't be empty.</small>
+                                class="uk-text-danger">Event Capacity is required to publish the upcoming event.</small>
                         </div>
                     </div>
                     <div>
@@ -283,7 +288,7 @@
                                 placeholder="Entry Fees (just place 0 in case of free entries)" />
                             <small aria-describedby="Event-Fees"
                                 *ngIf=" formControl.entryFee.invalid && ( formControl.entryFee.dirty ||  formControl.entryFee.touched)"
-                                class="uk-text-danger"> Event Fees (in Rupees) can't be empty.</small>
+                                class="uk-text-danger"> Event Fees (in Rupees) is required to publish the upcoming event.</small>
 
                         </div>
                     </div>

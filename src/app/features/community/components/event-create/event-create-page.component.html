@@ -34,7 +34,7 @@
                         <select
                             [ngClass]="{'uk-form-danger' : formControl.eventType.invalid && ( formControl.eventType.dirty ||  formControl.eventType.touched) }"
                             class="uk-select" formControlName="eventType" id="Event-Type" placeholder="Pick a Category of your Event">
-                            <option value="0" disabled selected>Select Category</option>
+                            <option value="" disabled selected>Select Category</option>
                             <option value="1">Outdoor</option>
                             <option value="2">Indoor</option>
                         </select>

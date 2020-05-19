@@ -193,11 +193,11 @@ export class EventDetailPageComponent implements OnInit {
     setTimeout(() => {
       this.eventService.addEvents(this.event).subscribe((response: any) => {
         if (response.data.id != "") {
-          this.notifier.show({
-            message: "Your event has created successfully submitted for the review process",
-            type: "success",
-            template: this.customNotificationTmpl1
-          });
+          // this.notifier.show({
+          //   message: "Your event has created successfully submitted for the review process",
+          //   type: "success",
+          //   template: this.customNotificationTmpl1
+          // });
           this.store.clear("new-event");
           this.store.clear("new-event-preview");
         }

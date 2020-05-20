@@ -211,7 +211,7 @@
                         <div class="uk-form-controls">
                             <ng-select  [addTag]="addLangFn" (add)="addLanguage($event)" id="Languages" [items]="languages"  formControlName="languages"
                             placeholder="Add Language" [hideSelected]="true"  bindLabel="name"
-                            formControlName="language" [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }">
+                            formControlName="languages" [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }">
                             </ng-select>
                             <!-- <input id="Languages"  
                                 [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"

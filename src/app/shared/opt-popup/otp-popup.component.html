@@ -1,17 +1,19 @@
 <div class="uk-container">
   <div id="modal-otp-input" uk-modal="bg-close:false;container:false;">
     <div class="uk-modal-dialog uk-modal-body">
-        <h3 class="uk-modal-title">Verify OTP</h3>
-        <div class="uk-margin">
-            <label class="uk-form-label" for="comment">OTP</label>
-            <div class="uk-form-controls">
-              <input id="otp" class="uk-input" placeholder="Please enter OTP" [(ngModel)]="otp"/>
-            </div>
+      <h3 class="uk-modal-title">One time password (OTP) verification</h3>
+      <div class="uk-margin">
+        <label class="uk-form-label" for="comment">OTP</label>
+        <div class="uk-form-controls">
+          <input id="otp" class="uk-input" (keydown.enter)="submitOtp()" placeholder="Please enter OTP" [(ngModel)]="otp" />
         </div>
-        <p class="uk-text-right">
-            <button class="uk-button uk-button-transparent uk-modal-close" type="button" (click)="cancelOtp()">Cancel</button>
-            <button class="m-l-10 uk-button uk-button-default uk-modal-close" [disabled]="otp?.length==0" type="button" (click)="submitOtp()">Submit</button>
-        </p>
+      </div>
+      <p class="uk-text-right">
+        <button class="uk-button uk-button-transparent uk-modal-close" type="button"
+          (click)="cancelOtp()">Cancel</button>
+        <button class="m-l-10 uk-button uk-button-default" [disabled]="otp?.length==0" type="button"
+          (click)="submitOtp()">Submit</button>
+      </p>
     </div>
   </div>
 </div>

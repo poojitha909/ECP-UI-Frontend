@@ -4,6 +4,8 @@ import { StorageHelperService } from "../../../../core/services/storage-helper.s
 import { AuthService } from "../../../../core/auth/services/auth.service";
 import { Breadcrumb } from 'src/app/core/interfaces';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import moment from 'moment';
+import { UserService } from 'src/app/features/user/services/user.service';
 
 @Component({
   selector: 'app-event-create',
@@ -31,14 +33,24 @@ export class EventCreatePageComponent implements OnInit {
   eventForm: FormGroup;
   successMessage: string;
   user: any;
-
+  // langList: string[];
+  minDate = moment(new Date()).add(1,'days').format('YYYY-MM-DD')
+  languages:any[];
   constructor(private router: Router, private store: StorageHelperService,
-    private fb: FormBuilder, private authService: AuthService) { }
+    private fb: FormBuilder, private authService: AuthService,private userService:UserService) { }
 
   ngOnInit() {
     document.getElementById("addEventHeading").focus();
     this.categoryList = [];
     this.successMessage = "";
+    // this.langList = ["English",
+    //   "Hindi",
+    //   "Tamil",
+    //   "Urdu",
+    //   "Tulu",
+    //   "Malyalam",
+    //   "Greek",
+    //   "Telugu"];
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
@@ -63,13 +75,37 @@ export class EventCreatePageComponent implements OnInit {
       capacity:  [event ? event.capacity : "", Validators.required],
       eventType:  [event ? event.eventType : "", Validators.required],
       entryFee:  [event ? event.entryFee : "", Validators.required],
-      languages:  [event ? event.languages : "",[Validators.pattern('^[a-zA-Z \-\']+'),Validators.required]],
+      // languages:  [event ? event.languages : "",[Validators.pattern('^[a-zA-Z \-\']+'),Validators.required]],
+      languages:  [event ? event.languages : "",Validators.required],
       organiser:  [event ? event.organiser : "", [Validators.required,Validators.pattern('^[a-zA-Z \-\']+')]]
+    });
+    this.userService.profileLanguages().subscribe(response => {
+      if (response) {
+        this.languages = response;
+      }
     });
   }
 
   get formControl() {
     return this.eventForm.controls;
+  }
+
+
+  addLangFn(name) {
+    return { id: 0, name: name };
+  }
+
+  addLanguage(lang) {
+    if (lang.name) {
+      const language = this.languages.find(value => lang.name.toLowerCase() === value.name.toLowerCase());
+      if (!language) {
+        this.userService.profileLanguages(lang.name).subscribe(response => {
+          if (response) {
+            this.languages = response;
+          }
+        });
+      }
+    }
   }
 
   onReset() {

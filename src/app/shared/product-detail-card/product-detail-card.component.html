@@ -15,7 +15,7 @@
             <span class="star" [class.filled]="fill === 100">&#9733;</span>
           </ng-template>
         </ngb-rating>
-        <span class="ml-15">{{product?.rating}} Ratings</span>
+        <span class="ml-15">{{product?.ratingCount}} Ratings</span>
       </div>
     </div>
     <div class="category m-t-20">
@@ -27,7 +27,7 @@
   <div class="uk-width-1-4@m uk-visible@s  price-border">
     <div class="prize-card">
       <div class="m-0 price">Rs. {{product?.price}}</div>
-      <div class="font-regular">On {{product?.buyFrom | titlecase }}</div>
+      <div class="font-regular">With our product partner</div>
     </div>
   </div>
   <div class="p-16 uk-hidden@s">

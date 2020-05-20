@@ -51,11 +51,30 @@
                 <div class="inner-container bg-white" *ngIf="expert?.basicProfileInfo?.shortDescription != '' && expert?.basicProfileInfo?.shortDescription != undefined" >
                     <h4>About {{expert.basicProfileInfo.firstName}}</h4>
                     <hr />
-                    <div class="uk-margin">
+                    <div #shortDesc class="white-space-wrap info-h-160">
                         {{ expert?.basicProfileInfo?.shortDescription }}
                     </div>
+                    <a *ngIf="showReadMore" id="readmoreLink" href="javascript:void(0)" (click)="showMoreClicked()"
+            class="cursor-pointer font-regular read-more-link">more...</a>
                 </div>
-                <div class="inner-container bg-white  m-t-30">
+                <div id="detail-description" class="uk-modal-container" uk-modal="bg-close:false;container:false;">
+                    <div class="uk-modal-dialog">
+                        <div class="uk-modal-header">
+                            <h3 id="aboutModalTitle" tabindex=0 class="uk-modal-title">About {{expert.basicProfileInfo.firstName}}</h3>
+                        </div>
+                        <div class="uk-modal-body">
+                            <button class="uk-modal-close-default" type="button" uk-close></button>
+                            <!-- Success box START-->
+                            <div class="m-b-10 white-space-wrap">
+                                {{ expert?.basicProfileInfo?.shortDescription }}
+                            </div>
+                        </div>
+                        <div class="uk-modal-footer uk-text-right">
+                            <button class="uk-button uk-button-default uk-modal-close" type="button">Close</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="inner-container bg-white  m-t-30" id="questionform" >
                     <h4>Ask your Question</h4>
                     <hr />
                     <form [formGroup]="quesForm" class="uk-form">
@@ -69,10 +88,9 @@
                         </div>
                         <div class="uk-margin">
                             <label 
-                                [ngClass]="{'uk-text-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }" 
-                                class="uk-form-label" for="description">Description<span class="required">*</span></label>
+                                class="uk-form-label" for="description">Additional details about the question</label>
                             <div class="uk-form-controls">
-                                <editor [ngClass]="{'uk-form-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
+                                <editor 
                                     formControlName="description" 
                                     id="description"
                                     [init]="{menubar:false, statusbar: false, base_url: '/tinymce', plugins: 'lists advlist'}"></editor>
@@ -80,7 +98,7 @@
                         </div>
                         <div class="uk-margin">
                                 <button class="uk-button uk-button-transparent m-r-15" (click)="onReset()">Cancel & Go Back</button>
-                                <button class="uk-button uk-button-default" (click)="onSubmit()">{{!!user ? 'Preview to Post' : 'Join us to Post'}}</button>                        
+                                <button class="uk-button uk-button-default" (click)="onSubmit()">{{!!user ? 'Preview your Question' : 'Join us to Ask Question'}}</button>                        
                         </div>
                     </form>
                 </div>

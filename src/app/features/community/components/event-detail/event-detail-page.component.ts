@@ -184,20 +184,20 @@ export class EventDetailPageComponent implements OnInit {
       this.router.navigate(['/user/signin']);
       return;
     }
-    this.notifier.show({
-      message: "Please wait, we are submitting your event to Admin",
-      type: "info",
-      template: this.customNotificationTmpl
-    });
+    // this.notifier.show({
+    //   message: "Please wait, we are submitting your event to Admin",
+    //   type: "info",
+    //   template: this.customNotificationTmpl
+    // });
 
     setTimeout(() => {
       this.eventService.addEvents(this.event).subscribe((response: any) => {
         if (response.data.id != "") {
-          this.notifier.show({
-            message: "Your event has created successfully submitted for the review process",
-            type: "success",
-            template: this.customNotificationTmpl1
-          });
+          // this.notifier.show({
+          //   message: "Your event has created successfully submitted for the review process",
+          //   type: "success",
+          //   template: this.customNotificationTmpl1
+          // });
           this.store.clear("new-event");
           this.store.clear("new-event-preview");
         }
@@ -208,14 +208,19 @@ export class EventDetailPageComponent implements OnInit {
 
     }, 2200)
 
-    setTimeout(() => {
-      this.router.navigate(['/community'], {
-        queryParams: {
-          show: "events"
-        }
-      });
-    }, 4500)
+    // setTimeout(() => {
+      
+    // }, 3500)
 
+  }
+  onCloseApprovalModel(){
+    this.store.clear("new-event");
+    this.store.clear("new-event-preview");
+    this.router.navigate(['/community'], {
+      queryParams: {
+        show: "events"
+      }
+    });
   }
 
   //   this.eventService.addEvents(this.event).subscribe((response: any) => {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AskQuestionService } from '../../services/ask-question.service';
 import { Router, ActivatedRoute } from "@angular/router";
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
@@ -6,6 +6,7 @@ import { AuthService } from "../../../../core/auth/services/auth.service";
 import { Breadcrumb, SEO } from 'src/app/core/interfaces';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { SeoService } from 'src/app/core/services/seo.service';
+declare var UIkit;
 
 @Component({
   selector: 'app-ask-question-create',
@@ -39,6 +40,8 @@ export class AskQuestionCreatePageComponent implements OnInit {
   questions: any[];
   totalRecords: number;
   rUrl: string;
+  showReadMore: boolean;
+  @ViewChild('shortDesc', { static: false }) private shortDesc: ElementRef;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private askQuesService: AskQuestionService, private store: StorageHelperService,
@@ -89,7 +92,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
 
     this.quesForm = this.fb.group({
       question: [question ? question.question : "", Validators.required],
-      description: [question ? question.description : "", Validators.required],
+      description: [question ? question.description : ""],
     });
 
     this.askQuesService.getUserProfile(this.answeredBy).subscribe((response: any) => {
@@ -99,12 +102,24 @@ export class AskQuestionCreatePageComponent implements OnInit {
         if(!this.category && this.expert.experties[0]){
           this.category = this.expert.experties[0].id;
         }
+        setTimeout( () => { 
+          if (this.shortDesc.nativeElement.scrollHeight > this.shortDesc.nativeElement.offsetHeight) {
+            this.showReadMore = true;
+          }
+        }, 0);
       }
       else {
         alert("Oops! something wrong happen, please try again.");
       }
     });
+    if(this.route.snapshot.queryParams['editQue']){
+      setTimeout( () => { window.scrollTo(0,document.getElementById("questionform").offsetTop); }, 500);
+    }
 
+  }
+  showMoreClicked(){
+    UIkit.modal("#detail-description").show();
+    document.getElementById("aboutModalTitle").focus();
   }
 
   showQuestions() {
@@ -173,7 +188,6 @@ export class AskQuestionCreatePageComponent implements OnInit {
     que.answeredBy = { id: this.answeredBy };
     que.askedBy = { id: this.user.id };
     que.answered = false;
-
     this.store.store("new-question-preview", JSON.stringify(que));
     this.router.navigate(['/ask-question/detail/preview']);
   }

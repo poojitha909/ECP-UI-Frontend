@@ -10,6 +10,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from 'src/app/core/services/seo.service';
 import { NotifierService } from "angular-notifier";
+import { UserService } from 'src/app/features/user/services/user.service';
 
 declare var UIkit;
 
@@ -29,6 +30,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
   sortedReplies: any[];
   commentsCount: number;
   user: any;
+  userProfilePreview: any;
   parentReplyId: string;
   replyId: string;
   replyForm: FormGroup;
@@ -49,7 +51,8 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     private discussionService: DiscussionService, private menuService: MenuService,
     private fb: FormBuilder, private store: StorageHelperService,
     private authService: AuthService, public sanitizer: DomSanitizer,
-    private seoService: SeoService, notifierService: NotifierService) {
+    private seoService: SeoService, notifierService: NotifierService,
+    private userService: UserService) {
     this.notifier = notifierService
   }
 
@@ -60,10 +63,6 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.paramsSubs = this.route.params.subscribe(params => {
       this.initiate();
     });
-    if (this.route.snapshot.params['id'] == 'preview') {
-      this.showMedia=false;
-    }
-    
   }
 
   ngAfterViewInit() {
@@ -97,6 +96,15 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
+      if(this.discussionId == 'preview'){
+        this.userService.getUserProfile().subscribe(
+          userProfie => {
+            this.userProfilePreview = userProfie
+          },
+          error => {
+          }
+        );
+      }
     }
     let comment = this.store.retrieve("new-d-comment");
     if (comment) {
@@ -109,6 +117,12 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
       setTimeout(() => {
         UIkit.modal("#reply-modal-discussion").show();
       }, 500);
+    }
+    if (this.route.snapshot.params['id'] == 'preview') {
+      this.showMedia=false;
+    }
+    else{
+      this.showMedia=true;
     }
     this.replyForm = this.fb.group({
       commentTxt: [comment ? comment.commentTxt : "", Validators.required]
@@ -145,7 +159,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
         if (response.data.replies) {
           this.replyForm.reset();
           this.getDiscussion();
-          this.successMessage = "Reply edited successfully.";
+          this.successMessage = "Your comment has been successfully posted.  You can edit your comment anytime by clicking on the ‘Edit’ link next to your comment";
           UIkit.modal("#reply-modal-discussion.uk-open").hide();
         }
       });
@@ -155,13 +169,8 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
         if (response.data.replies) {
           this.replyForm.reset();
           this.getDiscussion();
-          this.successMessage = "Reply Submitted successfully.";
-          UIkit.modal("#reply-modal-discussion.uk-open").hide();
-          this.notifier.show({
-            message: "Your comment is successfully submitted",
-            type: "success",
-            template: this.customNotificationTmpl1
-          });
+          this.successMessage = "Your comment has been successfully posted.  You can edit your comment anytime by clicking on the ‘Edit’ link next to your comment";
+          UIkit.modal("#reply-modal-discussion.uk-open").hide(); 
         }
       });
     }
@@ -245,7 +254,13 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     }
 
     setTimeout(() => {
-      document.getElementById("discussionTitleHeader").focus();
+      if(this.successMessage){
+        window.scrollTo(0, document.getElementById("successMessageSection").offsetTop - 100);
+      }
+      else{
+        document.getElementById("discussionTitleHeader").focus();
+      }
+      
     }, 500);
   }
 
@@ -267,15 +282,16 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.seoService.generateTags(config);
   }
 
-  setParentReplyId(id, element) {
+  setParentReplyId(id, element_id) {
     this.replyForm.reset();
     this.parentReplyId = id;
     this.replyId = "";
     this.successMessage = "";
     this.onOpenModel();
-    this.currentModelLink = element.id;
-    UIkit.modal('#reply-modal-discussion').show();
-    document.getElementById("addCommentTitle").focus();
+    this.currentModelLink = element_id;
+    //UIkit.modal('#reply-modal-discussion').show();
+    //document.getElementById("addCommentTitle").focus();
+    setTimeout( () => {document.getElementById("Comment").focus();},0);
 
   }
 
@@ -284,6 +300,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.replyId = reply.id;
     this.replyForm.patchValue({ commentTxt: reply.text });
     this.successMessage = "";
+    setTimeout( () => {document.getElementById("Comment").focus();},0);
   }
 
   onCancelPublish() {
@@ -296,37 +313,22 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
       this.router.navigate(['/user/signin']);
       return;
     }
-    this.notifier.show({
-      message: "Please wait, we are submitting your discussion to Admin",
-      type: "info",
-      template: this.customNotificationTmpl
+    this.discussionService.addDiscussion("P", this.discussion.description, this.discussion.title,
+      this.discussion.userId,
+      this.user.userName,
+      this.discussion.tags,
+      this.discussion.categories,
+      this.discussion.contentType)
+    .subscribe((response: any) => {
+      if (response.data.id != "") {
+        this.store.clear("new-discuss");
+        this.store.clear("new-discuss-preview");
+        this.router.navigate(['/community/discussion', response.data.id]);
+      }
+      else {
+        alert("Oops! something wrong happen, please try again.");
+      }
     });
-    setTimeout(() => {
-      this.discussionService.addDiscussion("P", this.discussion.description, this.discussion.title,
-        this.discussion.userId,
-        this.user.userName,
-        this.discussion.tags,
-        this.discussion.categories,
-        this.discussion.contentType)
-        .subscribe((response: any) => {
-          if (response.data.id != "") {
-            this.notifier.show({
-              message: "Your article has been published.",
-              type: "success",
-              template: this.customNotificationTmpl1
-            });
-            this.store.clear("new-discuss");
-            this.store.clear("new-discuss-preview");
-            setTimeout(() => {
-              // this.afterPublish=true
-              this.router.navigate(['/community/discussion', response.data.id]);
-            }, 4200)
-          }
-          else {
-            alert("Oops! something wrong happen, please try again.");
-          }
-        });
-    }, 2100)
   }
 
   @HostListener('document:keydown.escape', ['$event'])
@@ -336,7 +338,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
 
   onCloseModel() {
     document.getElementsByClassName("main-container")[0].removeAttribute("aria-hidden");
-    document.getElementById(this.currentModelLink).focus();
+    //document.getElementById(this.currentModelLink).focus();
   }
 
   onOpenModel() {

@@ -3,6 +3,7 @@ import { User, monthOptions, IndividualInfo, UserProfile } from 'src/app/core/in
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/core';
 
 @Component({
   selector: 'app-general-info-form',
@@ -16,8 +17,8 @@ export class GeneralInfoFormComponent implements OnInit {
   errorMessage;
   successMessage;
   isLoading;
-  subscription:Subscription;
-  otpModalShow= false;
+  subscription: Subscription;
+  otpModalShow = false;
   otpMobile: string
 
   dateOption: number[] = Array.from({ length: 31 }, (v, k) => k + 1);
@@ -32,19 +33,22 @@ export class GeneralInfoFormComponent implements OnInit {
   generalInfoForm: FormGroup;
 
   constructor(
+    private auth: AuthService,
     private fb: FormBuilder,
     private userService: UserService
   ) {
 
     this.generalInfoForm = this.fb.group({
-      gender: [this.userService.userProfile.individualInfo.gender || 0],
-      maritalStatus: [this.userService.userProfile.individualInfo.maritalStatus || 'Married'],
-      day: [this.userService.userProfile.individualInfo.dob ? new Date(this.userService.userProfile.individualInfo.dob).getDate() : ''],
-      month: [this.userService.userProfile.individualInfo.dob ? new Date(this.userService.userProfile.individualInfo.dob).getMonth() + 1 : ''],
-      year: [this.userService.userProfile.individualInfo.dob ? new Date(this.userService.userProfile.individualInfo.dob).getFullYear() : ''],
-      occupation: [this.userService.userProfile.individualInfo.occupation || '']
+      gender: [this.userService.userProfile.individualInfo.gender || this.userService.userProfile.individualInfo.gender === 0 ? this.userService.userProfile.individualInfo.gender : null],
+      maritalStatus: [this.userService.userProfile.individualInfo.maritalStatus || null],
+      day: [this.userService.userProfile.individualInfo.dob && this.userService.userProfile.individualInfo.dob.split("-")[1] ? this.userService.userProfile.individualInfo.dob.split("-")[1] : null],
+      month: [this.userService.userProfile.individualInfo.dob && this.userService.userProfile.individualInfo.dob.split("-")[0] ? this.userService.userProfile.individualInfo.dob.split("-")[0] : null],
+      year: [this.userService.userProfile.individualInfo.dob && this.userService.userProfile.individualInfo.dob.split("-")[2] ? this.userService.userProfile.individualInfo.dob.split("-")[2] : null],
+      occupation: [this.userService.userProfile.individualInfo.occupation || null]
     });
-    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo;
+    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo ?
+      this.userService.userProfile.basicProfileInfo.primaryPhoneNo :
+      this.auth.user.phoneNumber;
   }
 
   get formControl() {
@@ -52,68 +56,88 @@ export class GeneralInfoFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.generalInfoForm.get("gender").valueChanges.subscribe(selectedValue=>{
+    this.generalInfoForm.get("gender").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.generalInfoForm.get("maritalStatus").valueChanges.subscribe(selectedValue=>{
+    });
+    this.generalInfoForm.get("maritalStatus").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.generalInfoForm.get("occupation").valueChanges.subscribe(selectedValue=>{
+    });
+    this.generalInfoForm.get("occupation").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.generalInfoForm.get("day").valueChanges.subscribe(selectedValue=>{
+    });
+    this.generalInfoForm.get("day").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.generalInfoForm.get("month").valueChanges.subscribe(selectedValue=>{
+    });
+    this.generalInfoForm.get("month").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.generalInfoForm.get("year").valueChanges.subscribe(selectedValue=>{
+    });
+    this.generalInfoForm.get("year").valueChanges.subscribe(selectedValue => {
       this.userService.formEditMessage("editForm")
-     });
-     this.subscription=this.userService.getFormEditMessage().subscribe(message=>{
-      if(message=="closeModal"){
+    });
+    this.subscription = this.userService.getFormEditMessage().subscribe(message => {
+      if (message == "closeModal") {
         document.getElementById("Year").focus();
       }
     })
   }
 
-  showOtpModal(){
-    this.otpModalShow=true;
+  showOtpModal() {
+    const inputDate: string = `${this.formControl.month.value}-${this.formControl.day.value}-${this.formControl.year.value}`;
+    if (this.formControl.month.value && this.formControl.day.value && this.formControl.year.value) {
+      this.isDateValid = this.userService.validateDate(inputDate);
+    } else {
+      this.isDateValid = true;
+    }
+
+    this.resetAlertMessages();
+    if (this.isDateValid) {
+      this.otpModalShow = true;
+    } else {
+      this.errorMessage = "Selected Date of Birth is invalid, Please select a correct date";
+    }
   }
-  updateOtp(otp: string){
-    this.otpModalShow=false;
-    this.userService.userProfile.otp=otp;
-    if(otp!=""){
+  updateOtp(otp: string) {
+    this.otpModalShow = false;
+    this.userService.userProfile.otp = otp;
+    if (otp != "") {
       this.onSubmit();
     }
   }
 
   onSubmit() {
-    const inputDate: string = `${this.formControl.month.value}-${this.formControl.day.value}-${this.formControl.year.value}`;
-    this.isDateValid = this.userService.validateDate(inputDate);
-    console.log(this.isDateValid);
-    this.resetAlertMessages();
-    if (this.isDateValid) {
-      this.userService.userProfile.individualInfo.gender = this.formControl.gender.value;
-      this.userService.userProfile.individualInfo.maritalStatus = this.formControl.maritalStatus.value;
-      this.userService.userProfile.individualInfo.occupation = this.formControl.occupation.value;
-      this.userService.userProfile.individualInfo.dob = new Date(inputDate);
-      console.log(this.userService.userProfile);
-      this.isLoading = true;
-      this.userService.updateUserProfile(this.userService.userProfile).subscribe(
-        response => {
-          this.isLoading = false;
-          this.successMessage = "User information updated successfully"
-          console.log(response);
-        },
-        error => {
-          this.isLoading = false;
-          this.errorMessage = "Some unknown internal server error occured";
-        });
-    } else {
-      this.errorMessage = "Invalid DOB";
-    }
-    this.cancelForm.emit();
+    const inputDate: string = `${this.formControl.month.value ? this.formControl.month.value : ''}-${this.formControl.day.value ? this.formControl.day.value : ''}-${this.formControl.year.value ? this.formControl.year.value : ''}`;
+    const oldUserData = {
+      gender: this.userService.userProfile.individualInfo.gender,
+      maritalStatus: this.userService.userProfile.individualInfo.maritalStatus,
+      occupation: this.userService.userProfile.individualInfo.occupation,
+      dob: this.userService.userProfile.individualInfo.dob
+    };
+
+    this.userService.userProfile.individualInfo.gender = this.formControl.gender.value;
+    this.userService.userProfile.individualInfo.maritalStatus = this.formControl.maritalStatus.value;
+    this.userService.userProfile.individualInfo.occupation = this.formControl.occupation.value;
+    this.userService.userProfile.individualInfo.dob = inputDate;
+    this.isLoading = true;
+    this.userService.updateUserProfile(this.userService.userProfile).subscribe(
+      response => {
+        this.isLoading = false;
+        this.successMessage = "User information updated successfully"
+        this.cancelForm.emit();
+      },
+      error => {
+        this.isLoading = false;
+        this.userService.userProfile.individualInfo.gender = oldUserData.gender;
+        this.userService.userProfile.individualInfo.maritalStatus = oldUserData.maritalStatus;
+        this.userService.userProfile.individualInfo.occupation = oldUserData.occupation;
+        this.userService.userProfile.individualInfo.dob = oldUserData.dob;
+        if (error.error.error.errorCode == 3001) {
+          this.errorMessage = "We could not match the OTP you entered with the one that was sent to you. Please retry with the OTP that was sent to your registered mobile number";
+        } else if (error.error.error.errorCode == 3004) {
+          this.errorMessage = error.error.error.errorMsg;
+        } else {
+          this.errorMessage = "Some unknown internal server error occurred";
+        }
+      });
     // this.userService.editFormSection('editSection')
   }
 
@@ -125,6 +149,18 @@ export class GeneralInfoFormComponent implements OnInit {
   onCancel() {
     this.resetAlertMessages();
     this.cancelForm.emit();
+  }
+
+  ongenderCheck(value: number) {
+    if (this.formControl.gender.value === value) {
+      this.formControl.gender.setValue(null);
+    }
+  }
+
+  onMaritalClick(value: string) {
+    if (this.formControl.maritalStatus.value === value) {
+      this.formControl.maritalStatus.setValue(null);
+    }
   }
 
 }

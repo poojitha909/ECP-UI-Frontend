@@ -25,54 +25,57 @@
 
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="Languages">Languages</label>
+            <label class="uk-form-label" for="Languages">Add languages that you read/write/speak</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addLangFn" id="Languages" [items]="languages" placeholder="Add Languages"
-                    [hideSelected]="true" multiple="true" bindLabel="name" formControlName="language">
+                <ng-select [addTag]="addLangFn" (add)="addLanguage($event)" id="Languages" [items]="languages"
+                    placeholder="Add Languages" [hideSelected]="true" multiple="true" bindLabel="name"
+                    formControlName="language">
                 </ng-select>
             </div>
         </div>
 
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="My-Hobbies">My Hobbies</label>
+            <label class="uk-form-label" for="My-Hobbies">Add your hobbies</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" id="My-Hobbies" placeholder="Add Hobbies" [items]="hobbies"
-                    [hideSelected]="true" multiple="true" formControlName="hobbies">
+                <ng-select [addTag]="addLangFn" id="My-Hobbies" (add)="addHobby($event)" placeholder="Add Hobbies"
+                    [items]="hobbies" [hideSelected]="true" multiple="true" bindLabel="name" bindValue="name"
+                    formControlName="hobbies">
                 </ng-select>
             </div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="Topic-Interests"> Topics of Interest</label>
+            <label class="uk-form-label" for="Topic-Interests">Add areas that interest you</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" id="Topic-Interests" placeholder="Add  Topics of Interest"
-                    [hideSelected]="true" multiple="true" formControlName="otherInterests">
+                <ng-select [addTag]="addLangFn" id="Topic-Interests" placeholder="Add Areas of Interest"
+                    [hideSelected]="true" multiple="true" (add)="addInterest($event)" [items]="interests"
+                    formControlName="otherInterests" bindLabel="name" bindValue="name">
                 </ng-select>
             </div>
         </div>
 
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="Medical-Issues">Medical Issues</label>
+            <label class="uk-form-label" for="Medical-Issues">Add health challenges that you have</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" [items]="medicalIssues" id="Medical-Issues"
-                    placeholder="Add Medical Issues" [hideSelected]="true" multiple="true"
-                    formControlName="medicalIssues">
+                <ng-select [addTag]="addLangFn" [items]="healthChallenges" (add)="addHealthChallenges($event)"
+                    id="Medical-Issues" placeholder="Add Health Issues" [hideSelected]="true" multiple="true"
+                    formControlName="medicalIssues" bindLabel="name" bindValue="name">
                 </ng-select>
             </div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="Emotional-Challenges">Emotional Challenges</label>
+            <label class="uk-form-label" for="Emotional-Challenges">Add emotional challenges that you experience</label>
             <div class="uk-form-controls">
                 <!-- <select class="uk-select" formControlName="emotionalIssues" id="form-stacked-select">
                     <option>Option 01</option>
                     <option>Option 02</option>
                 </select> -->
-                <ng-select [addTag]="addTagFn" [items]="emotionalChallenges" [hideSelected]="true"
-                    id="Emotional-Challenges" placeholder="Add Emotional Challenges" multiple="true"
-                    formControlName="emotionalIssues">
+                <ng-select [addTag]="addLangFn" [items]="emotionalChallenges" (add)="addEmotionalChallenges($event)"
+                    [hideSelected]="true" id="Emotional-Challenges" placeholder="Add Emotional Challenges"
+                    multiple="true" formControlName="emotionalIssues" bindLabel="name" bindValue="name">
                 </ng-select>
             </div>
         </div>
@@ -80,16 +83,18 @@
 
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="Other-Difficulties">Other Difficulties</label>
+            <label class="uk-form-label" for="Other-Difficulties">Add any other challenges that you have</label>
             <div class="uk-form-controls">
-                <ng-select [addTag]="addTagFn" [items]="otherDifficulties" placeholder="Add Other Difficulties"
-                    id="Other-Difficulties" [hideSelected]="true" multiple="true" formControlName="otherIssues">
+                <ng-select [addTag]="addLangFn" [items]="otherChallenges" (add)="addOtherChallenges($event)"
+                    placeholder="Add Other Challenges" id="Other-Difficulties" [hideSelected]="true" multiple="true"
+                    formControlName="otherIssues" bindLabel="name" bindValue="name">
                 </ng-select>
             </div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="about-you">Tell us something about yourself</label>
+            <label class="uk-form-label" for="about-you">Use this space to express a little (or a lot) about
+                yourself</label>
             <div class="uk-form-controls">
                 <textarea class="uk-input min-h-300" formControlName="shortDescription" id="about-you"
                     placeholder="Type here"></textarea>
@@ -105,7 +110,8 @@
             </div>
             <div>
 
-                <button class="uk-button uk-button-default" type="button" (click)="showOtpModal()" [disabled]="this.aboutForm.invalid">Save
+                <button class="uk-button uk-button-default" type="button" (click)="showOtpModal()"
+                    [disabled]="this.aboutForm.invalid">Save
                     Changes</button>
             </div>
 

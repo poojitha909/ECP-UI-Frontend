@@ -36,29 +36,31 @@
                 <div *ngIf = "questionId == 'preview'" class= "previewTop">
                     <div class="info">
                         <img class = "imgInformation" src="/assets/images/information.png">
-                        <span class = "para">You are on <b>Preview Screen</b> now. Scroll down and <b>click on "publish"</b>
-                       to publish this question.</span>
+                        <span class = "para">You are previewing your question that you are about to post to the expert. If you are happy with it use the ‘Share your question with the expert’ button at the bottom to privately share it with the expert, or click on the ‘Go Back & Edit’  button to continue to improve your question and its details.</span>
                     </div>
                 </div>
                 <div class="inner-container bg-white" *ngIf="question!==undefined">
                     <h1 class="heading">{{question.question}}</h1>
                     <hr class="m-b-30" />
                     <h3 class="heading1">
-                        Description
+                        Additional details about the question
                     </h3>
+                    <div *ngIf="(question?.description=='')">
+                        (No additional details entered)
+                    </div>
                     <div [innerHTML]="question?.description">
                     </div>
                     <div *ngIf="questionId == 'preview'">
                         <hr/>
-                        <button class="uk-button uk-button-default m-r-15" (click)="onCancelPublish()">Go Back & Edit</button>
-                        <button class="uk-button uk-button-primary" (click)="onPublish()">{{!!user ? 'Publish' : 'Signin to Post'}}</button>
+                        <button class="uk-button uk-button-transparent uk-button-default m-r-15" (click)="onCancelPublish()">Go Back & Edit</button>
+                        <button class="uk-button uk-button-primary" (click)="onPublish()">{{!!user ? 'Share your question with the expert' : 'Signin to share your question'}}</button>
                     </div>
                 </div>
                 <div *ngIf="questionId !== 'preview'" class="comments-head">
                     <div class="uk-grid-collapse" uk-grid>
                         <div class="comments-count uk-width-2-3@s">
                             <h4>
-                                Replies 
+                                Replies & More Details 
                             </h4>
                         </div>
                         <div class="comments-add uk-width-1-3@s">
@@ -71,43 +73,44 @@
                 </div>
                 
                 <div class="uk-card uk-card-default" *ngFor="let reply of replies">
-                    <div class="uk-card-header">
-
-                        <div *ngIf="reply.user.id === question.askedBy.id" class="uk-grid-small uk-flex-middle" uk-grid>
-                            <div class="uk-width-auto">
-                                <img class="uk-border-circle" width="40" height="40"
-                                    src="{{askedByProfile?.basicProfileInfo?.profileImage?.thumbnailImage}}" alt="Asked By user image">
+                    <div [ngClass]="{'light-blue-bg' : reply.user.id === question.answeredBy.userId }">
+                        <div class="uk-card-header">
+                            <div *ngIf="reply.user.id === question.askedBy.id" class="uk-grid-small uk-flex-middle" uk-grid>
+                                <div class="uk-width-auto">
+                                    <img class="uk-border-circle" width="40" height="40"
+                                        src="{{askedByProfile?.basicProfileInfo?.profileImage?.thumbnailImage}}" alt="Asked By user image">
+                                </div>
+                                <div class="uk-width-expand">
+                                    <h3 class="uk-card-title uk-margin-remove-bottom">{{reply.user.userName}}</h3>
+                                </div>
+                                <div class="uk-width-auto">
+                                    <p class="uk-text-meta">{{ reply.createdAt | timeago }}</p>
+                                </div>
                             </div>
-                            <div class="uk-width-expand">
-                                <h3 class="uk-card-title uk-margin-remove-bottom">{{reply.user.userName}}</h3>
-                            </div>
-                            <div class="uk-width-auto">
-                                <p class="uk-text-meta">{{ reply.createdAt | timeago }}</p>
-                            </div>
-                        </div>
-                        <div *ngIf="reply.user.id === question.answeredBy.userId" class="uk-grid-small uk-flex-middle"
-                            uk-grid>
-                            <div class="uk-width-auto">
-                                <img class="uk-border-circle" width="40" height="40"
-                                    src="{{question?.answeredBy?.basicProfileInfo?.profileImage?.thumbnailImage}}" alt="Answered By user image">
-                            </div>
-                            <div class="uk-width-expand">
-                                <h3 class="uk-card-title uk-margin-remove-bottom">
-                                    {{question?.answeredBy?.basicProfileInfo?.firstName}}</h3>
-                            </div>
-                            <div class="uk-width-auto">
-                                <p class="uk-text-meta">{{ reply.createdAt | timeago }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="uk-card-body">
-                        <div class="reply_reply" *ngIf="reply.parentText!=''">
-                            <div class="reply_reply_inner">
-                                <b>{{reply.parentUser}}</b><br />
-                                {{reply.parentText}}
+                            <div *ngIf="reply.user.id === question.answeredBy.userId" class="uk-grid-small uk-flex-middle"
+                                uk-grid>
+                                <div class="uk-width-auto">
+                                    <img class="uk-border-circle" width="40" height="40"
+                                        src="{{question?.answeredBy?.basicProfileInfo?.profileImage?.thumbnailImage}}" alt="Answered By user image">
+                                </div>
+                                <div class="uk-width-expand">
+                                    <h3 class="uk-card-title uk-margin-remove-bottom">
+                                        {{question?.answeredBy?.basicProfileInfo?.firstName}}</h3>
+                                </div>
+                                <div class="uk-width-auto">
+                                    <p class="uk-text-meta">{{ reply.createdAt | timeago }}</p>
+                                </div>
                             </div>
                         </div>
-                        <div [innerHTML]="reply.reply">
+                        <div class="uk-card-body">
+                            <div class="reply_reply" *ngIf="reply.parentText!=''">
+                                <div class="reply_reply_inner">
+                                    <b>{{reply.parentUser}}</b><br />
+                                    {{reply.parentText}}
+                                </div>
+                            </div>
+                            <div [innerHTML]="reply.reply">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -118,19 +121,45 @@
             </div>
         </div>
     </div>
+    
+    <div id="success-review-msg" uk-modal="bg-close:false;container:false;">
+        <div class="uk-modal-dialog uk-modal-body">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <h3 class="font-regular-24 font-weight-600">Successfully {{ isExpert ? 'posted reply' : 'shared additional details.' }}</h3>
+            <hr />
+            <!-- Success box START-->
+            <p class="font-regular-15 m-b-10 lable">{{successMessage}}</p>
 
+            <div class="uk-text-right">
+                <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+    <div id="success-preview-submit-msg" uk-modal="bg-close:false;container:false;" (hide)="onPreviewSubmitSuccess()">
+        <div class="uk-modal-dialog uk-modal-body">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <h3 class="font-regular-24 font-weight-600">Question submitted!</h3>
+            <hr />
+            <!-- Success box START-->
+            <p class="font-regular-15 m-b-10 lable">
+                Thank you for sharing your question with our expert. 
+                Typically our experts respond within a day or two.<br/>
+                In case you do not see a response to your question in a couple of days, 
+                please contact the Joy of Age Administrator at admin@joyofage.org</p>
+            <div class="uk-text-right">
+                <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
     <div id="reply-modal" uk-modal="bg-close:false;container:false;">
         <div class="uk-modal-dialog uk-modal-body">
-        <h1 class="font-regular-24 font-weight-600">{{isExpert? 'Add a Reply':'Add Details'}}</h1>
+        <h1 class="font-regular-24 font-weight-600">{{isExpert? 'Add a Reply':'Add more details to your question'}}</h1>
         <hr />
-        <!-- Success box START-->
-        <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
-            <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ successMessage }}</p>
-        </div>
-        <!-- Success box END-->
         <form [formGroup]="replyForm" (ngSubmit)="addComment()" class="uk-form-stacked reply-form">
             <div class="uk-margin">
-            <label class="uk-form-label" for="Description">Description<span class="required">*</span></label>
+            <label class="uk-form-label" for="Description">{{isExpert ? 'Reply' : 'Add details' }}<span class="required">*</span></label>
             <div class="uk-form-controls">
                 <textarea formControlName="commentTxt" class="uk-input min-h-200" id="Description" #Description
                 placeholder="Enter your comment here"></textarea>
@@ -140,25 +169,10 @@
             <div class="uk-text-right">
                 <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
                 <button class="uk-button uk-button-primary m-l-5" value="submit" >
-                    {{!!user ? 'Post' : 'Join Us to Comment'}}
+                    {{!!user ? ( isExpert ? 'Share Reply' : 'Share Details' ) : 'Join Us to Comment'}}
                 </button>
             </div>
         </form>
         </div>
     </div>
 </div>
-<notifier-container></notifier-container>
-<ng-template #customNotification let-notificationData="notification">
-    <my-custom-alert type="notificationData.type">
-        <img class="icon" src="assets/images/loading5.gif">
-
-        <span class="message">{{ notificationData.message }}</span>
-    </my-custom-alert>
-</ng-template>
-<ng-template #customNotification1 let-notificationData="notification">
-    <my-custom-alert type="notificationData.type">
-        <img class="icon" src="assets/images/verifiedtoast.png">
-
-        <span class="message">{{ notificationData.message }}</span>
-    </my-custom-alert>
-</ng-template>

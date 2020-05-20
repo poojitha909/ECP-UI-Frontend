@@ -7,28 +7,30 @@ declare var UIkit: any;
   templateUrl: './otp-popup.component.html',
   styleUrls: ['./otp-popup.component.scss']
 })
-export class OtpPopupComponent implements OnChanges{
+export class OtpPopupComponent implements OnChanges {
   @Input() showModal: boolean;
   @Input() mobileNum: string;
   @Output() updateOtp = new EventEmitter<string>();
   otp: string;
 
   constructor(private authService: AuthService) {
-    this.otp=""
-  }
-  
-  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
-    this.update();
+    this.otp = ""
   }
 
-  update(){
+  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+    if (changes.showModal.currentValue) {
+      this.update();
+    }
+  }
+
+  update() {
     this.otp = "";
-    if(this.showModal){
+    if (this.showModal) {
       UIkit.modal('#modal-otp-input').show();
-      if(!this.mobileNum){
+      if (!this.mobileNum) {
         alert("No mobile number found to send otp")
       }
-      else{
+      else {
         this.authService.sendOtp(this.mobileNum).subscribe(response => {
           console.log(response);
         },
@@ -37,13 +39,18 @@ export class OtpPopupComponent implements OnChanges{
           });
       }
     }
-    else{
+    else {
       UIkit.modal('#modal-otp-input').hide();
     }
   }
 
   submitOtp() {
-    this.updateOtp.next(this.otp);
+    if (this.otp) {
+      UIkit.modal('#modal-otp-input').hide();
+      setTimeout(() => {
+        this.updateOtp.next(this.otp);
+      }, 300);
+    }
   }
   cancelOtp() {
     this.otp = "";

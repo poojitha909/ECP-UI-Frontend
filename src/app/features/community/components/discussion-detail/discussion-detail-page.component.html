@@ -9,9 +9,15 @@
             <div class="uk-width-1-3@m">
                 <div class="category-box top bg-white">
                     <div class="img-container"
-                        *ngIf="discussion.userProfile && discussion.userProfile.basicProfileInfo && discussion.userProfile.basicProfileInfo.profileImage && discussion.userProfile.basicProfileInfo.profileImage.thumbnailImage">
+                        *ngIf="discussionId != 'preview' && discussion?.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage">
                         <img class="user" [imageHandler]
                             [src]="discussion?.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage"
+                            alt="discussion user profile image">
+                    </div>
+                    <div class="img-container"
+                        *ngIf="discussionId == 'preview'">
+                        <img class="user" [imageHandler]
+                            [src]="userProfilePreview?.basicProfileInfo?.profileImage?.thumbnailImage"
                             alt="discussion user profile image">
                     </div>
                     <div class="heading2 username">
@@ -29,8 +35,9 @@
                 <div *ngIf = "discussionId == 'preview'" class= "previewTop">
                     <div class="info">
                         <img class = "imgInformation" src="/assets/images/information.png">
-                        <span class = "para">You are on <b>Preview Screen</b> now. Scroll down and <b>click on "publish"</b>
-                       to publish this discussion.</span>
+                        <span class = "para">You are previewing your contribution that you are about to post publicly. 
+                            If you are happy with it use the ‘Publish’ button at the bottom to share this with the community, 
+                            or click on the ‘Go back & Edit’  button to continue to improve your contribution.</span>
                     </div>
                 </div>
                 <!-- <div *ngIf = "afterPublish" class= "previewTop">
@@ -49,11 +56,14 @@
                     </div>
                     <div *ngIf="discussionId == 'preview'">
                         <hr />
-                        <button class="uk-button uk-button-default m-r-15" (click)="onCancelPublish()">Go Back &
+                        <button class="uk-button uk-button-transparent uk-button-default m-r-15" (click)="onCancelPublish()">Go Back &
                             Edit</button>
                         <button class="uk-button uk-button-primary"
                             (click)="onPublish()">{{!!user ? 'Publish' : 'Signin to create this Discussion'}}</button>
                     </div>
+                </div>
+                <div aria-live="polite" aria-atomic="true" *ngIf="successMessage" id="successMessageSection" class="uk-alert-success" uk-alert>
+                    <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ successMessage }}</p>
                 </div>
                 <div *ngIf="discussionId != 'preview'">
                     <div class="comments-head">
@@ -63,7 +73,7 @@
                             </div>
                             <div class="comments-add uk-width-1-3@s">
                                 <button class="uk-button uk-button-transparent adddiscuss"
-                                    (click)="setParentReplyId('')" uk-toggle="target: #reply-modal-discussion"> Add
+                                id="add-comment" (click)="setParentReplyId('','add-comment')" uk-toggle="target: #reply-modal-discussion"> Add
                                     Comment </button>
                             </div>
                         </div>
@@ -105,8 +115,8 @@
                                         Edit
                                     </a>
                                 </div>
-                                <div class="reply-container" uk-toggle="target: #reply-modal-discussion"
-                                    (click)="setParentReplyId(repliesGroup[0].id)">
+                                <div class="reply-container" id="reply-comment-{{repliesGroup[0].id}}" uk-toggle="target: #reply-modal-discussion"
+                                    (click)="setParentReplyId(repliesGroup[0].id, 'reply-comment-'+repliesGroup[0].id)">
                                     <img class="img" src="/assets/images/reply.svg" alt="No Image Found"> <label
                                         class="reply" for="commentarea">
                                         Reply</label>
@@ -160,7 +170,10 @@
                 <div id="reply-modal-discussion" role="dialog" aria-labelledby="addCommentTitle" aria-modal="true"
                     uk-modal="bg-close:false;container:false;">
                     <div class="uk-modal-dialog uk-modal-body">
-                        <h1 tabindex=0 id="addCommentTitle" class="font-regular-24 font-weight-600"> {{ parentReplyId!="" ? "Reply to a Comment" : "Add a Comment" }}</h1>
+                        <h1 tabindex=0 id="addCommentTitle" class="font-regular-24 font-weight-600"> {{ 
+                            parentReplyId!="" ? 
+                            (replyId!="" ? "Edit a Reply to Comment" : "Reply to a Comment") : 
+                            (replyId!="" ? "Edit a Comment" : "Add a Comment") }}</h1>
                         <hr />
                         <form [formGroup]="replyForm" (ngSubmit)="addComment()" class="uk-form-stacked reply-form">
                             <div class="uk-margin">

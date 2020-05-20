@@ -8,8 +8,8 @@
         <div class="uk-width-auto uk-flex uk-flex-middle">
             <a href="javascript:void(0)" (click)="edit('GENERAL_INFO')" class="edit font-regular">Edit</a>
         </div>
-         <!-- Edit Model START -->
-         <div id="modal-sections" class="uk-modal-container" uk-modal>
+        <!-- Edit Model START -->
+        <div id="modal-sections" class="uk-modal-container" uk-modal>
             <div class="uk-modal-dialog">
                 <button class="uk-modal-close-default" type="button" uk-close></button>
                 <div class="uk-modal-header">
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-          <!-- Edit Model END -->
+        <!-- Edit Model END -->
     </div>
     <hr />
     <div class="uk-child-width-1-2@s m-t-40" uk-grid>
@@ -36,19 +36,19 @@
             <p class="font-regular m-t-0">{{ gender || '-'}}</p>
         </div>
         <div>
-            <p class="font-regular-15 m-b-10 lable">Occuption</p>
-            <p class="font-regular m-t-0">{{ userService.userProfile?.individualInfo?.occupation  || '-'}}</p>
-        </div>
-        <div>
-            <p class="font-regular-15 m-b-10 lable">Birthday</p>
-            <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.dob | date : 'longDate' || '-'}}
-            </p>
-        </div>
-
-        <div>
             <p class="font-regular-15 m-b-10 lable">Marital Status</p>
             <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.maritalStatus|| '-' }}</p>
         </div>
 
+        <div>
+            <p class="font-regular-15 m-b-10 lable">Date of Birth</p>
+            <p class="font-regular m-t-0">{{ dob || '-' }}
+            </p>
+        </div>
+
+        <div>
+            <p class="font-regular-15 m-b-10 lable">Occuption</p>
+            <p class="font-regular m-t-0">{{ userService.userProfile?.individualInfo?.occupation  || '-'}}</p>
+        </div>
     </div>
 </div>

@@ -21,12 +21,12 @@
                 {{ userService.userProfile?.basicProfileInfo?.firstName || '-'}}
             </p>
 
-            <p class="font-regular-15 m-b-10 lable">Email ID</p>
+            <p class="font-regular-15 m-b-10 lable">Email address</p>
             <p class="font-regular m-t-0">
                 {{  userService.userProfile?.basicProfileInfo?.primaryEmail || auth.user.email || '-'}}
             </p>
 
-            <p class="font-regular-15 m-b-10 lable">Phone number</p>
+            <p class="font-regular-15 m-b-10 lable">Mobile phone number</p>
             <p class="font-regular m-t-0">
                 {{  userService.userProfile?.basicProfileInfo?.primaryPhoneNo|| auth.user.phoneNumber ||  '-' }}</p>
         </div>
@@ -49,21 +49,21 @@
             <p class="font-regular-15 m-b-10 lable">Gender</p>
             <p class="font-regular m-t-0">{{ gender || '-' | titlecase}}</p>
         </div>
-        <div>
-            <p class="font-regular-15 m-b-10 lable">Occupation</p>
-            <p class="font-regular m-t-0">{{ userService.userProfile?.individualInfo?.occupation  || '-'}}</p>
-        </div>
-        <div>
-            <p class="font-regular-15 m-b-10 lable">Date of Birth</p>
-            <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.dob | date : 'longDate' || '-'}}
-            </p>
-        </div>
 
         <div>
             <p class="font-regular-15 m-b-10 lable">Marital Status</p>
             <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.maritalStatus|| '-' }}</p>
         </div>
 
+        <div>
+            <p class="font-regular-15 m-b-10 lable">Date of Birth</p>
+            <p class="font-regular m-t-0">{{ dob || '-' }}
+            </p>
+        </div>
+        <div>
+            <p class="font-regular-15 m-b-10 lable">Occupation</p>
+            <p class="font-regular m-t-0">{{ userService.userProfile?.individualInfo?.occupation  || '-'}}</p>
+        </div>
     </div>
 </div>
 <!-- General Information END-->
@@ -99,7 +99,7 @@
         </div>
 
         <div>
-            <p class="font-regular-15 m-b-10 lable">ZIP</p>
+            <p class="font-regular-15 m-b-10 lable">Pin Code</p>
             <p class="font-regular m-t-0">
                 {{ userService?.userProfile?.basicProfileInfo?.primaryUserAddress?.zip || '-'}}</p>
         </div>
@@ -121,47 +121,51 @@
 
     <hr>
     <div class="m-t-30">
-        <p class="font-regular-15 m-b-10 lable">Language</p>
+        <p class="font-regular-15 m-b-10 lable">Languages</p>
         <p class="font-regular m-t-0">
-            <ng-conatiner *ngFor="let language of userService?.userProfile?.individualInfo?.language; let i = index">
-                <ng-conatiner *ngIf="i == 0">
-                    {{language.name||'-'}}
-                </ng-conatiner>
-                <ng-conatiner *ngIf="i > 0">
-                    {{','+language.name||'-'}}
-                </ng-conatiner>
-            </ng-conatiner>
+            {{ userService?.userProfile?.individualInfo?.language | arrayToString}}
         </p>
     </div>
 
     <div class="m-t-30">
-        <p class="font-regular-15 m-b-10 lable">My Hobbies</p>
-        <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.hobbies || '-'}}</p>
+        <p class="font-regular-15 m-b-10 lable">Hobbies</p>
+        <p class="font-regular m-t-0">
+            {{ userService?.userProfile?.individualInfo?.hobbies | arrayToString}}
+        </p>
     </div>
 
     <div class="m-t-30">
-        <p class="font-regular-15 m-b-10 lable">Topics of Interest</p>
-        <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.otherInterests || '-'}}</p>
+        <p class="font-regular-15 m-b-10 lable">Interest Areas</p>
+        <p class="font-regular m-t-0">
+            {{ userService?.userProfile?.individualInfo?.otherInterests | arrayToString}}
+        </p>
     </div>
 
     <div class="m-t-30">
-        <p class="font-regular-15 m-b-10 lable">Medical Issues</p>
-        <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.medicalIssues || '-' }}</p>
+        <p class="font-regular-15 m-b-10 lable">Health Challenges</p>
+        <p class="font-regular m-t-0">
+            {{ userService?.userProfile?.individualInfo?.medicalIssues | arrayToString}}
+        </p>
     </div>
 
     <div class="m-t-30">
         <p class="font-regular-15 m-b-10 lable">Emotional Challenges</p>
-        <p class="font-regular m-t-0">{{userService?.userProfile?.individualInfo?.emotionalIssues || '-'}}</p>
+        <p class="font-regular m-t-0">
+            {{userService?.userProfile?.individualInfo?.emotionalIssues | arrayToString}}
+        </p>
     </div>
 
     <div class="m-t-30">
-        <p class="font-regular-15 m-b-10 lable">Other Difficulties</p>
-        <p class="font-regular m-t-0">{{ userService?.userProfile?.individualInfo?.otherIssues || '-' }}</p>
+        <p class="font-regular-15 m-b-10 lable">Other Challenges</p>
+        <p class="font-regular m-t-0">
+            {{ userService?.userProfile?.individualInfo?.otherIssues | arrayToString}}
+        </p>
     </div>
 
     <div class="m-t-40">
         <p class="font-regular-15 m-b-10 lable">Something about yourself</p>
-        <p class="font-regular m-t-0">{{ userService?.userProfile?.basicProfileInfo?.shortDescription || '-' }}</p>
+        <p class="font-regular m-t-0 white-space-wrap">
+            {{userService?.userProfile?.basicProfileInfo?.shortDescription || '-' }}</p>
 
     </div>
 </div>

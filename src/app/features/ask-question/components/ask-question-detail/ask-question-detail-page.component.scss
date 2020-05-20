@@ -188,21 +188,18 @@
   font-size:15px;
   line-height: 165%;
   columns: #161C2D;
- 
 }
-
 .imgInformation{
   width:24px;
   height:24px;
-  left:12px;
-  margin-left:10px;
 }
 .info{
   margin-top: 7px;
+  padding: 0 15px;
 }
 .previewTop{
   width:776px;
-  height:42px;
+  min-height:42px;
   top:291px;
   left:589px;
   background: #E8B24A;
@@ -210,4 +207,7 @@
   box-sizing:border-box;
   border-radius: 4px;
   margin-bottom: 16px;
+}
+.light-blue-bg{
+  background-color: #ecf4ff;
 }

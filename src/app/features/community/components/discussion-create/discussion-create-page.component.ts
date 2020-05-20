@@ -48,13 +48,18 @@ export class DiscussionCreatePageComponent implements OnInit {
     if (discuss) {
       discuss = JSON.parse(discuss);
       this.discussId = discuss.discussId;
-      this.store.clear("new-discuss");
     }
     this.discussForm = this.fb.group({
       title:  [discuss ? discuss.title : "", Validators.required],
       description:  [discuss ? discuss.description : "", Validators.required],
-      category: [discuss && discuss.category ? discuss.category : ""]
+      category: [discuss && discuss.category ? discuss.category : null]
     });
+    this.discussForm.valueChanges.subscribe(values => {
+      let discuss = null;
+      discuss = { ...values };
+      discuss.discussId = this.discussId;
+      this.store.store("new-discuss", JSON.stringify(discuss));
+    })
     this.menuService.getMenus("564071623e60f5b66f62df27", "").subscribe((response: any) => {
       const data = response;
       this.categoryList = [];
@@ -67,6 +72,12 @@ export class DiscussionCreatePageComponent implements OnInit {
         }
       }
     });
+    this.authService.userSource.subscribe(
+      user => {
+        if (!user) {
+          this.discussForm.reset();
+        }
+      });
   }
 
   get formControl() {
@@ -83,7 +94,7 @@ export class DiscussionCreatePageComponent implements OnInit {
     
     discuss = { ...this.discussForm.value };
     discuss.discussId = this.discussId;
-    this.store.store("new-discuss", JSON.stringify(discuss));
+    
     if(!this.user) {
       this.authService.redirectUrl = "community/discussion/add";
       this.router.navigate(['/user/signin']);

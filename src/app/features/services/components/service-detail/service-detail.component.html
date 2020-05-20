@@ -134,17 +134,47 @@
       <!-- service informations START-->
       <div class="info category-box bg-white">
         <!-- About -->
-        <ng-container *ngIf="service?.seo_dt?.desc || service?.basicProfileInfo?.description || service?.bizinfo">
-          <div>
-            <h3 class="font-regular-24 font-weight-600">About</h3>
-            <p *ngIf="!isDBService && service?.seo_dt?.desc">
-              {{service?.seo_dt?.desc }}
-            </p>
-            <div class="service-info" *ngIf="isDBService" [innerHTML]="service?.basicProfileInfo?.description"></div>
-            <div class="service-info" *ngIf="!isDBService" [innerHTML]="service?.bizinfo"></div>
+        <div>
+          <h3 class="font-regular-24 font-weight-600">About</h3>
+          <!-- <p *ngIf="!isDBService && service?.seo_dt?.desc">
+            {{service?.seo_dt?.desc }}
+          </p> -->
+          <div #serviceInfo class="service-info info-h-155"
+            *ngIf="service?.basicProfileInfo?.description || service?.bizinfo">
+            <div *ngIf="isDBService" [innerHTML]="service?.basicProfileInfo?.description"></div>
+            <div *ngIf="!isDBService" [innerHTML]="service?.bizinfo"></div>
           </div>
-          <hr />
-        </ng-container>
+
+          <a *ngIf="showReadMore" id="readmoreLink" href="javascript:void(0)" (click)="openAboutModal($event.target)"
+            class="cursor-pointer font-regular read-more-link">more...</a>
+
+          <!-- This is service details modal -->
+          <div id="about-us" role="dialog" aria-labelledby="aboutModalTitle" aria-modal="true"
+            aria-describedby="aboutBody" class="uk-modal-container" uk-modal="bg-close:false;container:false;">
+            <div class="uk-modal-dialog">
+              <!-- <button class="uk-modal-close-default" aria-label="Close popup" type="button" (click)="onCloseModel()"
+                uk-close></button> -->
+              <div class="uk-modal-header">
+                <h3 id="aboutModalTitle" tabindex=0 class="uk-modal-title">About</h3>
+              </div>
+              <div class="uk-modal-body" id="aboutBody">
+                <div class="service-info" *ngIf="service?.basicProfileInfo?.description || service?.bizinfo">
+                  <div *ngIf="isDBService" [innerHTML]="service?.basicProfileInfo?.description"></div>
+                  <div *ngIf="!isDBService" [innerHTML]="service?.bizinfo"></div>
+                </div>
+              </div>
+              <div class="uk-modal-footer uk-text-right review-form">
+                <button class="uk-button uk-button-default uk-modal-close" (click)="onCloseModel();"
+                  type="button">Close</button>
+              </div>
+            </div>
+          </div>
+
+
+          <p class="font-regular" *ngIf="!service?.basicProfileInfo?.description && !service?.bizinfo">Not provided</p>
+        </div>
+        <!-- About END-->
+        <!-- <hr />
 
         <h3 class="font-regular-24 font-weight-600">Details</h3>
         <div class="uk-child-width-1-2@s" uk-grid>
@@ -154,13 +184,7 @@
             <p class="font-regular m-t-0">
               {{ service?.email || service?.basicProfileInfo?.primaryEmail || '-'}}</p>
           </div>
-          <!-- <p class="font-regular-15 m-b-10 lable">Organisation</p>
-            <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.seo_dt?.title}}</p>
-            <p *ngIf="isDBService && service?.systemTags.length > 0" class="font-regular m-t-0">
-              <ng-container *ngFor="let tag of service?.systemTags">
-                {{ tag.description}}
-              </ng-container>
-            </p> -->
+
           <div>
             <p class="font-regular-15 m-b-10 lable">Phone Number</p>
             <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.contact || service?.mobile ||'-' }}</p>
@@ -199,7 +223,7 @@
 
           </div>
 
-        </div>
+        </div> -->
 
       </div>
       <!-- service informations END-->
@@ -241,13 +265,14 @@
             <ng-container *ngIf="dbReview.length > 0">
               <div class="m-t-50 m-b-20" uk-grid>
                 <div class="uk-width-expand uk-flex uk-flex-middle">
-                  <h3 class="font-regular-24 font-weight-600"> Reviews
+                  <h3 class="font-regular-24 font-weight-600"> Reviews from Joy of Age Members
                     ({{totalReviewRecords}})
                   </h3>
                 </div>
                 <div class="uk-width-auto">
-                  <button class="uk-button uk-button-transparent review-btn-transparent" (click)="writeNewReview()"
-                    id="btnWriteReview">{{  auth.isAuthenticate ? 'Write Review': 'Join Us to Review'  }}</button>
+                  <button class="uk-button uk-button-transparent review-btn-transparent"
+                    (click)="writeNewReview($event.target)"
+                    id="btnWriteReview">{{  auth.isAuthenticate ? 'Add your review': 'Join Us to Review'  }}</button>
                 </div>
               </div>
 
@@ -267,7 +292,7 @@
           <li>
             <!--JD Reviews START-->
             <ng-container *ngIf="!isDBService && service.Reviews.length == 0">
-              <h3 class="font-regular-24 font-weight-600">JustDial Reviews(0)</h3>
+              <h3 class="font-regular-24 font-weight-600">No reviews from JustDial users</h3>
 
               <div class="uk-child-width-expand m-t-50 m-b-50" uk-grid>
                 <div class="info">
@@ -281,8 +306,8 @@
             </ng-container>
 
             <ng-container *ngIf="!isDBService && service.Reviews.length > 0">
-              <h3 class="font-regular-24 font-weight-600 m-t-50 m-b-20">JustDial Reviews
-                ({{service.Reviews.length}})
+              <h3 class="font-regular-24 font-weight-600 m-t-50 m-b-20">{{service.Reviews.length}} popular reviews
+                from JustDial users
               </h3>
               <!-- Demo box -->
               <!-- <div class="category-box m-t-30 bg-white">
@@ -419,48 +444,56 @@
 <div id="contact-sections" role="dialog" aria-labelledby="contactModalTitle" aria-modal="true"
   aria-describedby="contactBody" class="uk-modal-container" uk-modal="bg-close:false;container:false;">
   <div class="uk-modal-dialog">
-    <button class="uk-modal-close-default" aria-label="Close popup" type="button" (click)="onCloseModel()"
-      uk-close></button>
+    <!-- <button class="uk-modal-close-default" aria-label="Close popup" type="button" (click)="onCloseModel()"
+      uk-close></button> -->
     <div class="uk-modal-header">
       <h3 id="contactModalTitle" tabindex=0 class="uk-modal-title">Contact Details</h3>
     </div>
     <div class="uk-modal-body" id="contactBody">
-      <div class="uk-child-width-1-2@s uk-grid-small" uk-grid>
+      <div class="uk-child-width-1-2@s " uk-grid>
+
         <div>
-
-          <p class="font-regular-15 m-b-10 lable">Email</p>
-          <p class="font-regular m-t-0">
-            {{ service?.email || service?.basicProfileInfo?.primaryEmail || '-'}}</p>
-
-          <p class="font-regular-15 m-b-10 lable">Organisation</p>
-          <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.seo_dt?.title}}
+          <p class="font-regular-15 m-b-10 lable">Phone Number(s)</p>
+          <p *ngIf="!isDBService" class="font-regular m-t-0">
+            {{service?.contact || service?.mobile || 'Not provided' }}</p>
+          <p *ngIf="isDBService" class="font-regular m-t-0">
+            {{ service?.basicProfileInfo?.primaryPhoneNo || 'Not provided'  }}
           </p>
-          <p *ngIf="isDBService && service?.systemTags.length > 0" class="font-regular m-t-0">
-            <ng-container *ngFor="let tag of service?.systemTags">
-              {{ tag.description}}
-            </ng-container>
-          </p>
-
-
-
         </div>
 
-        <div>
-          <p class="font-regular-15 m-b-10 lable">Phone Number</p>
-          <p *ngIf="!isDBService" class="font-regular m-t-0">
-            {{service?.contact || service?.mobile }}</p>
-          <p *ngIf="isDBService" class="font-regular m-t-0">
-            {{ service?.basicProfileInfo?.primaryPhoneNo  }}
+        <div *ngIf="!isDBService">
+          <p class="font-regular-15 m-b-10 lable">Timings</p>
+          <p class="font-regular m-t-0">{{ service.HoursOfOperation }}</p>
+        </div>
+
+        <!-- <div>
+          <p class="font-regular-15 m-b-10 lable">Organisation</p>
+          <p class="font-regular m-t-0"> {{ service?.name || service?.basicProfileInfo?.firstName }}
           </p>
+        </div> -->
+
+        <div>
+
+          <p class="font-regular-15 m-b-10 lable">Email Address(es)</p>
+          <p class="font-regular m-t-0">
+            {{ service?.email || service?.basicProfileInfo?.primaryEmail || 'Not provided'}}</p>
+        </div>
 
 
+        <div>
           <p class="font-regular-15 m-b-10 lable">Location</p>
-          <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.address}}</p>
+          <p *ngIf="!isDBService" class="font-regular m-t-0">{{service?.address || 'Not provided'}}</p>
           <p *ngIf="isDBService" class="font-regular m-t-0">
             {{service?.basicProfileInfo?.primaryUserAddress.streetAddress}}
             {{service?.basicProfileInfo?.primaryUserAddress.zip}}
             {{service?.basicProfileInfo?.primaryUserAddress.country}}
           </p>
+        </div>
+
+        <div>
+          <p class="font-regular-15 m-b-10 lable">City</p>
+          <p class="font-regular m-t-0">
+            {{service.city || service?.basicProfileInfo?.primaryUserAddress.city || 'Not provided' | titlecase}}</p>
         </div>
 
       </div>
@@ -478,16 +511,17 @@
 <div id="review-modal" role="dialog" aria-labelledby="reviewTitle" aria-modal="true" aria-describedby="reviewForm"
   uk-modal="bg-close:false;container:false;">
   <div class="uk-modal-dialog uk-modal-body">
-    <h4 id="reviewTitle" tabindex=0 class="font-regular-24 font-weight-600">{{reviewTitle}} Review</h4>
+    <h3 id="reviewTitle" tabindex=0 class="font-regular-24 font-weight-600">{{reviewTitle}} your review</h3>
     <hr />
 
     <form [formGroup]="reviewForm" id="reviewForm" class="uk-form-stacked review-form">
 
 
       <div class="uk-margin">
-        <label class="uk-form-label" for="review-title">Title<span class="required">*</span></label>
+        <label class="uk-form-label" for="review-title">Review title<span class="required">*</span></label>
         <div class="uk-form-controls">
-          <input class="uk-input" id="review-title" formControlName="title" type="text" placeholder="Enter your title">
+          <input class="uk-input" id="review-title" formControlName="title" type="text"
+            placeholder="Add a review title">
         </div>
       </div>
 
@@ -513,18 +547,18 @@
       <!-- </div> -->
 
       <div class="uk-margin">
-        <label class="uk-form-label" for="review">Your Review<span class="required">*</span></label>
+        <label class="uk-form-label" for="review">Review Comments<span class="required">*</span></label>
         <div class="uk-form-controls">
           <textarea formControlName="review" class="uk-input min-h-200" id="review"
-            placeholder="Enter your review here"></textarea>
+            placeholder="Add your review comments"></textarea>
         </div>
       </div>
 
       <div class="uk-text-right">
         <button class="uk-button uk-button-transparent uk-modal-close" (click)="onCloseModel()"
           type="button">Cancel</button>
-        <button class="uk-button uk-button-default m-l-5 uk-modal-close" (click)="onReviewSubmit()" type="button"
-          [disabled]="reviewForm.invalid">{{ auth.isAuthenticate ? 'Post Review': 'Signin to Review'}}</button>
+        <button class="uk-button uk-button-default m-l-10 uk-modal-close" (click)="onReviewSubmit()" type="button"
+          [disabled]="reviewForm.invalid">{{ auth.isAuthenticate ? 'Share your review': 'Signin to Review'}}</button>
       </div>
     </form>
   </div>
@@ -537,7 +571,8 @@
 <div id="report-modal" role="dialog" aria-labelledby="reportTitle" aria-modal="true" aria-describedby="reportForm"
   uk-modal="bg-close:false;container:false;">
   <div class="uk-modal-dialog uk-modal-body">
-    <h3 id="reportTitle" tabindex=0 class="uk-modal-title">Report</h3>
+    <h3 id="reportTitle" tabindex=0 class="font-regular-24 font-weight-600">Report</h3>
+    <hr />
     <!-- Success box START-->
     <div aria-live="polite" aria-atomic="true" *ngIf="successMessage" class="uk-alert-success" uk-alert>
       <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ successMessage }}</p>
@@ -567,11 +602,11 @@
         </div>
       </div>
 
-      <p class="uk-text-right">
+      <div class="uk-text-right">
         <button class="uk-button uk-button-transparent uk-modal-close" (click)="onCloseModel()"
           type="button">Cancel</button>
         <button class="m-l-10 uk-button uk-button-default" type="submit" [disabled]="reportForm.invalid">Submit</button>
-      </p>
+      </div>
     </form>
   </div>
 </div>

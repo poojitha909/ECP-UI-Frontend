@@ -20,7 +20,7 @@ export class AdditionalInfoFormComponent implements OnInit {
     primaryPhoneNo: [this.auth.user.phoneNumber, [Validators.required]]
   });
   userIdType = UserIdType;
-
+  errorMessage: string;
   get formControl() {
     return this.userform.controls;
   }
@@ -45,6 +45,7 @@ export class AdditionalInfoFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.errorMessage = null;
     if (this.userform.valid) {
 
       let userData: UserProfile = {
@@ -66,6 +67,7 @@ export class AdditionalInfoFormComponent implements OnInit {
         },
         error => {
           console.log(error);
+          error.error.error ? this.errorMessage = error.error.error.errorMsg : this.errorMessage = "Something went wrong!";
         })
       console.log(userData);
 

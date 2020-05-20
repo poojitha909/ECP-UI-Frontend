@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { ApiConstants } from 'src/app/api.constants';
-import { Observable,Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { UserProfile, User } from 'src/app/core/interfaces';
 import { AuthService } from 'src/app/core';
@@ -29,15 +29,15 @@ export class UserService {
     })
   }
 
-  formEditMessage(message){
+  formEditMessage(message) {
     this.subject.next(message);
   }
 
-  getFormEditMessage():Observable<any>{
+  getFormEditMessage(): Observable<any> {
     return this.subject.asObservable();
   }
 
-  modalClose(closeModal){
+  modalClose(closeModal) {
     this.subject.next(closeModal)
   }
 
@@ -49,6 +49,61 @@ export class UserService {
   // geteditFormSection():Observable<any>{
   //   return this.subject.asObservable();
   // }
+
+  profileLanguages(name?: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_LANGUAGES}?name=${name ? name : ""}`).pipe(
+      map
+        ((response) => {
+          return response.data;
+        })
+    );
+  }
+
+  profileHobbies(name?: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_HOBBIES}?name=${name ? name : ""}`).pipe(
+      map
+        ((response) => {
+          return response.data;
+        })
+    );
+  }
+
+  profileInterests(name?: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_INTERESTAREAS}?name=${name ? name : ""}`).pipe(
+      map
+        ((response) => {
+          return response.data;
+        })
+    );
+  }
+
+  profileEmotionalChallenges(name?: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_EMOTIONALCHALLENGES}?name=${name ? name : ""}`).pipe(
+      map
+        ((response) => {
+          return response.data;
+        })
+    );
+  }
+
+  profileHealthChallenges(name?: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_HEALTHCHALLENGES}?name=${name ? name : ""}`).pipe(
+      map
+        ((response) => {
+          return response.data;
+        })
+    );
+  }
+
+  profileOtherChallenges(name?: string): Observable<any> {
+    return this.http.get<any>(`${ApiConstants.GET_OTHERCHALLENGES}?name=${name ? name : ""}`).pipe(
+      map
+        ((response) => {
+          return response.data;
+        })
+    );
+  }
+
 
   createUserProfile(userData: UserProfile): Observable<UserProfile> {
     return this.http.post<any>(ApiConstants.USER_PROFILE, userData).pipe(

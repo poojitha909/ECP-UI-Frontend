@@ -209,10 +209,10 @@
                             [ngClass]="{'uk-text-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
                             class="uk-form-label" for="Languages">Primary Language to be used at the Event<span class="required">*</span></label>
                         <div class="uk-form-controls">
-                            <!-- <ng-select  [addTag]="addLangFn" (add)="addLanguage($event)" id="Languages" [items]="languages"  formControlName="languages"
+                            <ng-select  [addTag]="addLangFn" (add)="addLanguage($event)" id="Languages" [items]="languages"  formControlName="languages"
                             placeholder="Add Language" [hideSelected]="true"  bindLabel="name"
                             formControlName="language" [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }">
-                            </ng-select> -->
+                            </ng-select>
                             <!-- <input id="Languages"  
                                 [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
                                 class="uk-input" formControlName="languages"  placeholder="Language" />-->
@@ -228,10 +228,10 @@
                                 <option value="6">Greek</option>
                                 <option value="7">Telugu</option>
                             </select> -->
-                            <ng-select id="languages" [items]="langList"
+                            <!-- <ng-select id="languages" [items]="languages"
                                 [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
                                 placeholder="Select Category" [hideSelected]="true"  formControlName="languages">
-                            </ng-select>
+                            </ng-select> -->
                             <small aria-describedby="Languages"
                                 *ngIf="formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched)"
                                 class="uk-text-danger">Primary Language to be used at the Event is required to publish the upcoming event.</small>

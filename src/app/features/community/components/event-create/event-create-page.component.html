@@ -33,8 +33,8 @@
                     <div class="uk-form-controls">
                         <select
                             [ngClass]="{'uk-form-danger' : formControl.eventType.invalid && ( formControl.eventType.dirty ||  formControl.eventType.touched) }"
-                            class="uk-select" formControlName="eventType" id="Event-Type">
-                            <option value="0">Select Category</option>
+                            class="uk-select" formControlName="eventType" id="Event-Type" placeholder="Pick a Category of your Event">
+                            <option value="" disabled selected>Select Category</option>
                             <option value="1">Outdoor</option>
                             <option value="2">Indoor</option>
                         </select>
@@ -51,8 +51,8 @@
                         <div class="uk-form-controls">
                             <input
                                 [ngClass]="{'uk-form-danger' : formControl.date.invalid && ( formControl.date.dirty ||  formControl.date.touched) }"
-                                class="uk-input" id="Date" type="date" formControlName="date" [min]="minDate"
-                                placeholder="yyyy-mm-dd" />
+                                class="uk-input" id="Date" type="date"  formControlName="date" [min]="minDate"
+                                placeholder="Date" />
                             <small aria-describedby="Date"
                                 *ngIf="formControl.date.invalid && ( formControl.date.dirty ||  formControl.date.touched)"
                                 class="uk-text-danger"> Date is required to publish the upcoming event.</small>
@@ -69,6 +69,7 @@
                                     <select
                                         [ngClass]="{'uk-form-danger' : formControl.startTime.invalid && ( formControl.startTime.dirty ||  formControl.startTime.touched) }"
                                         class="uk-select" id="Start-Time" formControlName="startTime">
+                                        <option value="" disabled selected>Start Time</option>
                                         <option value="00:00">12:00 am</option>
                                         <option value="00:30">12:30 am</option>
                                         <option value="01:00">01:00 am</option>
@@ -131,12 +132,13 @@
                                     <select id="Duration"
                                         [ngClass]="{'uk-form-danger' : formControl.duration.invalid && ( formControl.duration.dirty ||  formControl.duration.touched) }"
                                         class="uk-select" formControlName="duration">
-                                        <option value="01:00">Upto an hour</option>
-                                        <option value="02:00">Upto 2 hours</option>
-                                        <option value="02:00">Upto 3 hours</option>
-                                        <option value="04:00">Upto 4 hours</option>
-                                        <option value="12:00">Half a day event</option>
-                                        <option value="24:00">Full day event</option>
+                                        <option value="" disabled selected>Duration</option>
+                                        <option value="0">Upto an hour</option>
+                                        <option value="1">Upto 2 hours</option>
+                                        <option value="3">Upto 3 hours</option>
+                                        <option value="4">Upto 4 hours</option>
+                                        <option value="5">Half a day event</option>
+                                        <option value="6">Full day event</option>
                                         
                                     </select>
                                     <small aria-describedby="Duration"
@@ -207,21 +209,10 @@
                             [ngClass]="{'uk-text-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
                             class="uk-form-label" for="Languages">Primary Language to be used at the Event<span class="required">*</span></label>
                         <div class="uk-form-controls">
-                            <!-- <input id="Languages"
-                                [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
-                                class="uk-input" formControlName="languages" placeholder="Eg.: Hindi, Punjabi, Tamil" /> -->
-                                <select id="Languages"
-                                [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
-                                class="uk-select" formControlName="languages">
-                                <option value="Telugu">Telugu</option>
-                                <option value="English">English</option>
-                                <option value="Hindi">Hindi</option>
-                                <option value="Tamil">Tamil</option>
-                                <option value="Urdu">Urdu</option>
-                                <option value="Tulu">Tulu</option>
-                                <option value="Malyalam">Malyalam</option>
-                                <option value="Greek">Greek</option>
-                            </select>
+                            <ng-select  [addTag]="addLangFn" (add)="addLanguage($event)" id="Languages" [items]="languages"  
+                            placeholder="Add Language" [hideSelected]="true"  [multiple]="false" bindLabel="name" formControlName="languages" 
+                            [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }">
+                            </ng-select>
                             <small aria-describedby="Languages"
                                 *ngIf="formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched)"
                                 class="uk-text-danger">Primary Language to be used at the Event is required to publish the upcoming event.</small>

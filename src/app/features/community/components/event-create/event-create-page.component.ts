@@ -81,7 +81,10 @@ export class EventCreatePageComponent implements OnInit {
     });
     this.userService.profileLanguages().subscribe(response => {
       if (response) {
-        this.languages = response;
+        this.languages = [];
+        response.map( (lang) => {
+          this.languages[this.languages.length] =  lang.name 
+        })
       }
     });
   }

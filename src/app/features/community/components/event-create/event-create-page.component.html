@@ -210,7 +210,7 @@
                             class="uk-form-label" for="Languages">Primary Language to be used at the Event<span class="required">*</span></label>
                         <div class="uk-form-controls">
                             <ng-select  [addTag]="addLangFn" (add)="addLanguage($event)" id="Languages" [items]="languages"  
-                            placeholder="Add Language" [hideSelected]="true"  multiple="False" bindLabel="name" formControlName="languages" 
+                            placeholder="Add Language" [hideSelected]="true"  [multiple]="false" bindLabel="name" formControlName="languages" 
                             [ngClass]="{'uk-form-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }">
                             </ng-select>
                             <small aria-describedby="Languages"

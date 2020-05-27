@@ -2,9 +2,10 @@
     <div class="uk-container uk-container-large">
         <div class="signup-title" uk-grid>
             <div class="uk-flex uk-flex-middle uk-width-expand">
-                <h1 id="signin-header" tabindex=0>{{welcomeText? 'Welcome to Joy of Age Community':'Join the Joy of Age Community'}}</h1>
+                <h1 id="signin-header" tabindex=0>
+                    {{welcomeText? 'Welcome to Joy of Age Community':'Join the Joy of Age Community'}}</h1>
             </div>
-            <div class="uk-width-auto">
+            <div *ngIf="!user" class="uk-width-auto">
                 <a routerLink="/"><span class="close-icon" data-uk-tooltip title="Cancel Join Us"></span></a>
             </div>
         </div>
@@ -49,14 +50,15 @@
                                 <span class="uk-text-justify ">Participate in Discussions.</span>
                             </li>
                             <li>
-                                 <span class="uk-text-justify" >Know Events happening around you.</span> 
+                                <span class="uk-text-justify">Know Events happening around you.</span>
                             </li>
                             <li>
                                 <span class="uk-text-justify">Find Products and Services that suit your need.</span>
                             </li>
 
                             <li>
-                                 <span class="uk-text-justify" >Post your queries and get Expert guidance with assured confidentiality.</span> 
+                                <span class="uk-text-justify">Post your queries and get Expert guidance with assured
+                                    confidentiality.</span>
                             </li>
                         </ul>
                     </div>

@@ -80,25 +80,25 @@ export class DiscussionService {
         if (queryParams == "") {
             return of([]);
         }
-        const url = "/community/discussion/" + discussId;
+        const url = window.location.origin + "/community/discussion/" + discussId;
         return this.http.post<any[]>(`${this.discussionDetailUrl}?${queryParams}`,{discussId,parentReplyId,text,url});
     }
 
     likeDiscussionReply(discussId:string): Observable<any[]> {
-        const url = "/community/discussion/" + discussId;
+        const url = window.location.origin + "/community/discussion/" + discussId;
         return this.http.post<any[]>(`${this.discussionLikeUrl}?type=0&discussId=${discussId}&url=${url}`,{discussId,url});
     }
     unlikeDiscussionReply(discussId:string): Observable<any[]> {
-        const url = "/community/discussion/" + discussId;
+        const url = window.location.origin + "/community/discussion/" + discussId;
         return this.http.put<any[]>(`${this.discussionLikeUrl}?type=0&discussId=${discussId}`,{discussId,url});
     }
 
     likeReply(discussId:string, replyId:string): Observable<any[]> {
-        const url = "/community/discussion/" + discussId;
+        const url = window.location.origin + "/community/discussion/" + discussId;
         return this.http.post<any[]>(`${this.discussionReplyLikeUrl}?type=1&replyId=${replyId}&url=${url}`,{replyId,url});
     }
     unlikeReply(discussId:string, replyId:string): Observable<any[]> {
-        const url = "/community/discussion/" + discussId;
+        const url = window.location.origin + "/community/discussion/" + discussId;
         return this.http.put<any[]>(`${this.discussionReplyLikeUrl}?type=1&replyId=${replyId}`,{replyId,url});
     }
 }

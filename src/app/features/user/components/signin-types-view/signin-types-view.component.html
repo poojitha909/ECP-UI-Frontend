@@ -13,11 +13,11 @@
   <!-- Error box END-->
   <div class="category-box bg-white" role="region" aria-labelledby="mobile-signi">
 
-    <h2 class="m-0" id="mobile-signin">Sign In With Phone Number</h2>
+    <h2 class="m-0" id="mobile-signin">Sign In With Mobile Number</h2>
     <hr class="mt-10" />
     <div class="uk-form-stacked">
       <div class="uk-margin">
-        <label class="uk-form-label" for="Phone-Number">Phone Number</label>
+        <label class="uk-form-label" for="Phone-Number">Mobile Number</label>
         <div class="uk-form-controls">
 
           <!-- <div class="uk-inline mobile-number">
@@ -32,7 +32,7 @@
 
           <input class="uk-input" [ngClass]="{'uk-form-danger' : mobile.invalid && (mobile.dirty || mobile.touched) }"
             id="Phone-Number" type="number" [(ngModel)]="mobileNumber" (keydown.enter)="requestOtp()"
-            placeholder="Enter Phone Number..." required #mobile="ngModel" [disabled]="otpGenerated" />
+            placeholder="Enter Mobile Number without Country Code" required #mobile="ngModel" [disabled]="otpGenerated" />
 
         </div>
       </div>

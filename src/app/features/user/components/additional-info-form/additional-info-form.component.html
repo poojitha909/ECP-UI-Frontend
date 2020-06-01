@@ -4,57 +4,69 @@
     <p><span class="uk-icon mr-5" uk-icon="warning"></span> {{ errorMessage }}</p>
   </div>
   <!-- Error box END-->
-  <div class="uk-margin uk-text-center">
+  <!-- <div class="uk-margin uk-text-center">
     <span class="verified-icon font-100"></span>
     <p class="font-regular">{{ verifiedString }}</p>
+  </div> -->
+  <div class="category-box bg-white">
+    <h3 class="m-b-10">Welcome to Joy of Age!</h3>
+    <p class="font-regular">It is a long established fact that a reader will be distracted by the readable content of a
+      page when looking at its layout distracted by the readable content of a page when looking at its layout</p>
+
   </div>
-  <form class="uk-form-stacked" [formGroup]="userform">
-    <div class="uk-margin">
-      <label class="uk-form-label" for="firstName">Please enter your name</label>
-      <div class="uk-form-controls">
-        <input class="uk-input" id="firstName"
-          [ngClass]="{'uk-form-danger' : formControl.firstName.invalid && (formControl.firstName.dirty || formControl.firstName.touched) }"
-          type="text" formControlName="firstName" placeholder="Your Display Name...">
-      </div>
-    </div>
 
-    <div [hidden]="auth.user?.userIdType === userIdType.EMAIL" class="uk-margin">
-      <label class="uk-form-label" for="Email">Email</label>
-      <div class="uk-form-controls">
-        <input
-          [ngClass]="{'uk-form-danger' : formControl.primaryEmail.invalid && (formControl.primaryEmail.dirty || formControl.primaryEmail.touched) }"
-          class="uk-input" id="Email" type="text" formControlName="primaryEmail" placeholder="Your Email...">
+  <div class="category-box bg-white m-t-20">
+    <h3 class="m-0">User Details</h3>
+    <hr class="m-t-10" />
+    <form class="uk-form-stacked uk-grid-small" [formGroup]="userform" uk-grid>
+      <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="firstName">Please enter your name</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" id="firstName"
+            [ngClass]="{'uk-form-danger' : formControl.firstName.invalid && (formControl.firstName.dirty || formControl.firstName.touched) }"
+            type="text" formControlName="firstName" placeholder="Your Display Name...">
+        </div>
       </div>
-    </div>
 
-    <div [hidden]="auth.user?.userIdType === userIdType.MOBILE" class="uk-margin">
-      <label class="uk-form-label" for="Mobile-Number">Mobile Number</label>
-      <div class="uk-form-controls">
-        <input
-          [ngClass]="{'uk-form-danger' : formControl.primaryPhoneNo.invalid && (formControl.primaryPhoneNo.dirty || formControl.primaryPhoneNo.touched) }"
-          class="uk-input" id="Mobile-Number" type="number" formControlName="primaryPhoneNo"
-          placeholder="Your Mobile Number...">
+      <div [hidden]="auth.user?.userIdType === userIdType.EMAIL" class="uk-width-1-2@s">
+        <label class="uk-form-label" for="Email">Email</label>
+        <div class="uk-form-controls">
+          <input
+            [ngClass]="{'uk-form-danger' : formControl.primaryEmail.invalid && (formControl.primaryEmail.dirty || formControl.primaryEmail.touched) }"
+            class="uk-input" id="Email" type="text" formControlName="primaryEmail" placeholder="Your Email...">
+        </div>
       </div>
-    </div>
-    <!-- <div class="uk-margin">
-      <label class="uk-form-label" for="form-stacked-text">Age</label>
-      <div class="uk-form-controls">
-        <input class="uk-input" id="form-stacked-text" type="text" placeholder="Your age in years...">
+
+      <div [hidden]="auth.user?.userIdType === userIdType.MOBILE" class="uk-width-1-2@s">
+        <label class="uk-form-label" for="Mobile-Number">Mobile Number</label>
+        <div class="uk-form-controls">
+          <input
+            [ngClass]="{'uk-form-danger' : formControl.primaryPhoneNo.invalid && (formControl.primaryPhoneNo.dirty || formControl.primaryPhoneNo.touched) }"
+            class="uk-input" id="Mobile-Number" type="number" formControlName="primaryPhoneNo"
+            placeholder="Your Mobile Number...">
+        </div>
       </div>
-    </div> -->
+      <!-- <div class="uk-margin">
+        <label class="uk-form-label" for="form-stacked-text">Age</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Your age in years...">
+        </div>
+      </div> -->
 
-    <!-- <div class="uk-margin">
-      <div class="uk-form-label">Gender</div>
-      <label class="mr-4"><input class="uk-radio" value="1" type="radio" formControlName="gender" checked> Male</label>
-      <label class="mr-4"><input class="uk-radio" value="0" type="radio" formControlName="gender"> Female</label>
-      <label><input class="uk-radio" type="radio" value="3" formControlName="gender"> Transgender</label>
-    </div> -->
-
-    <div class="uk-margin">
-      <button class="uk-button uk-button-default submit-btn w-100" [disabled]="userform.invalid"
-        (click)="onSubmit()">Submit</button>
-    </div>
-  </form>
+      <!-- <div class="uk-margin">
+        <div class="uk-form-label">Gender</div>
+        <label class="mr-4"><input class="uk-radio" value="1" type="radio" formControlName="gender" checked> Male</label>
+        <label class="mr-4"><input class="uk-radio" value="0" type="radio" formControlName="gender"> Female</label>
+        <label><input class="uk-radio" type="radio" value="3" formControlName="gender"> Transgender</label>
+      </div> -->
+      <div class="uk-width-1-1">
+        <hr />
+        <button class="uk-button uk-button-default uk-float-right uk-margin-small-left" [disabled]="userform.invalid"
+          (click)="onSubmit()">Submit</button>
+        <button routerLink="/" class="uk-button uk-button-transparent uk-float-right">Skip</button>
+      </div>
+    </form>
+  </div>
 
   <!-- <div class="uk-padding-small skip">
     Skip this step. <a routerLink="/">Go back Home</a>

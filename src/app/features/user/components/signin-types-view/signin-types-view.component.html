@@ -7,17 +7,18 @@
 
   <div *ngIf="otpGenerated" role="alert" aria-live="polite" aria-atomic="true"
     class="uk-alert-success uk-animation-fade" uk-alert>
-    <p><span class="uk-icon mr-5" uk-icon="info"></span> OTP {{ otpResend ? 'resent': 'sent' }} successfully to <b>{{mobileNumber}}</b></p>
+    <p><span class="uk-icon mr-5" uk-icon="info"></span> OTP {{ otpResend ? 'resent': 'sent' }} successfully to
+      <b>{{mobileNumber}}</b></p>
   </div>
 
   <!-- Error box END-->
   <div class="category-box bg-white" role="region" aria-labelledby="mobile-signi">
 
-    <h2 class="m-0" id="mobile-signin">Sign In With Mobile Number</h2>
+    <h2 class="m-0" id="mobile-signin">Join Us Using Phone Number</h2>
     <hr class="mt-10" />
     <div class="uk-form-stacked">
       <div class="uk-margin">
-        <label class="uk-form-label" for="Phone-Number">Mobile Number</label>
+        <label class="uk-form-label" for="Phone-Number">Phone Number</label>
         <div class="uk-form-controls">
 
           <!-- <div class="uk-inline mobile-number">
@@ -32,7 +33,8 @@
 
           <input class="uk-input" [ngClass]="{'uk-form-danger' : mobile.invalid && (mobile.dirty || mobile.touched) }"
             id="Phone-Number" type="number" [(ngModel)]="mobileNumber" (keydown.enter)="requestOtp()"
-            placeholder="Enter Mobile Number without Country Code" required #mobile="ngModel" [disabled]="otpGenerated" />
+            placeholder="Enter Phone Number without Country Code" required #mobile="ngModel"
+            [disabled]="otpGenerated" />
 
         </div>
       </div>
@@ -71,21 +73,18 @@
 
   </div>
 
-  <hr class="mt-50 mb-50" />
-
+  <hr class="uk-divider-icon mt-50 mb-50">
 
   <div class="uk-child-width-1-2@l" uk-grid>
     <div>
-      <button class="fb-btn uk-button uk-button-default font-regular" (click)="signinWithFacebook()">
-        Login with Facebook
-        <fa-icon [icon]="['fab', 'facebook']" [style]="{'float': 'right'}"></fa-icon>
+      <button class="fb-btn uk-button uk-button-default font-regular" (click)="signinWithFacebook()">Continue with
+        Facebook <fa-icon [icon]="['fab', 'facebook']" [style]="{'float': 'right'}"></fa-icon>
       </button>
     </div>
 
     <div>
-      <button class="google-btn uk-button uk-button-default font-regular" (click)="signinWithGoogle()">
-        Login with Google
-        <fa-icon [icon]="['fab','google']" [style]="{'float': 'right'}"></fa-icon>
+      <button class="google-btn uk-button uk-button-default font-regular" (click)="signinWithGoogle()">Continue with
+        Google <fa-icon [icon]="['fab','google']" [style]="{'float': 'right'}"></fa-icon>
       </button>
     </div>
   </div>

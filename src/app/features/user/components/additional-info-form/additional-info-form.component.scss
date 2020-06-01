@@ -1,25 +1,42 @@
 @import "src/assets/css/variables.scss";
-.skip{
-    background-color: #E4EEFB;
+.skip {
+    background-color: #e4eefb;
     border-radius: 4px;
 }
-a{
-    color: #1A72E8;
+a {
+    color: #1a72e8;
 }
-.uk-input{
+.uk-input {
     border-radius: 4px;
     height: 48px;
 }
-.uk-radio{
+.uk-radio {
     height: 24px;
     width: 24px;
 }
+h1,
+h2,
+h3 {
+    font-family: "HKGroteskRegular";
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 32px;
+    color: rgba(22, 28, 45, 0.68);
+}
+// .submit-btn {
+//     height: 48px;
+//     border-radius: 4px;
+//     font-size: $font-small;
+//     &:active,
+//     &:hover {
+//         border: 2px solid #1a72e8;
+//     }
+// }
 
-.submit-btn{
-    height: 48px;
+.category-box {
+    border: 1px solid #d7e0ef;
+    box-sizing: border-box;
     border-radius: 4px;
-    font-size: $font-small;
-    &:active,&:hover{
-        border: 2px solid #1A72E8;
-    }
+    padding: 16px;
 }

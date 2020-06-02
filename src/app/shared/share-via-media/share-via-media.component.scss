@@ -1,33 +1,19 @@
 @import "../../../assets/css/variables.scss";
 
-.category-box{
-    border: 1px solid #D7E0EF;
-    box-sizing: border-box;
-    border-radius: 4px;
-    padding: 16px;    
-    margin-bottom: 30px;
-    .uk-badge{
-        background: #D9DADC;
-        color: #000;
-        border-radius:5px;
-    }
-  }
-
-  .social-link{
+.category-box {
+  border: 1px solid #d7e0ef;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 30px;
+  .uk-badge {
+    background: #d9dadc;
     color: #000;
+    border-radius: 5px;
   }
-  .whatapp-icon{
-    background:#009487;
-    color:#fff;
-  }
+}
 
-  .fb-icon{
-      background:#2a415e;
-      color:#fff;
-  }
+.social-link {
+  color: #000;
+}
 
-  .email-icon{
-      background:#1772eb;
-      color:#fff;
-
-  }

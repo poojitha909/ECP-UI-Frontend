@@ -36,14 +36,17 @@
 
     .sign-in-button {
       button {   
-        border-radius: 4px;
-        font-size: 18px;
+        // border-radius: 4px;
+        // font-size: 18px;
         border: none;
-        text-transform: none;
         padding: 5px 30px;
+        // text-transform: none;
         // max-width: 160px;
         // width: 100%;
         // height: 48px;
+        &:focus{
+          outline: -webkit-focus-ring-color auto 2px;
+        }
       }
       .uk-dropdown {
         padding: 15px;
@@ -189,58 +192,58 @@
     padding-bottom: 16px;
   }
 }
-.seperate-box {
-  border-bottom: 1px solid #d7e0ef;
-  margin-top: 24px;
-  .location {
-    color: $default-font-color;
-    font-size: $font-small;
-    padding: 12px;
-    button {
-      border-radius: 4px;
-      border: 1px solid #d7e0ef;
-      color: $font-light-black;
-      word-wrap: none;
-      text-transform: capitalize;
-    }
-  }
-  .sign-in-button {
-    button {
+// .seperate-box {
+//   border-bottom: 1px solid #d7e0ef;
+//   margin-top: 24px;
+//   .location {
+//     color: $default-font-color;
+//     font-size: $font-small;
+//     padding: 12px;
+//     button {
+//       border-radius: 4px;
+//       border: 1px solid #d7e0ef;
+//       color: $font-light-black;
+//       word-wrap: none;
+//       text-transform: capitalize;
+//     }
+//   }
+//   .sign-in-button {
+//     // button {
 
-      border-radius: 4px;
-      font-size: 18px;
-      border: none;
-      text-transform: none;
-      width: 160px;
-      margin: 12px 0;
-    }
-    .uk-dropdown {
-      padding: 12px;
-      color: #000;
-      border-radius: 4px;
-      .uk-dropdown-nav {
-        &::before {
-          border-bottom-style: solid;
-          content: "";
-          display: block;
-          height: 0;
-          position: absolute;
-          width: 0;
-          border: 6px solid;
-          border-color: transparent transparent #fff transparent;
-          z-index: 99;
-          bottom: 100%; /* At the top of the tooltip */
-          left: 50%;
-          margin-left: -5px;
-          // left: 10px;
-          // top: -12px;
-          // left: auto;
-          // right: 10px;
-        }
-      }
-    }
-  }
-}
+//     //   border-radius: 4px;
+//     //   font-size: 18px;
+//     //   border: none;
+//     //   text-transform: none;
+//     //   width: 160px;
+//     //   margin: 12px 0;
+//     // }
+//     .uk-dropdown {
+//       padding: 12px;
+//       color: #000;
+//       border-radius: 4px;
+//       .uk-dropdown-nav {
+//         &::before {
+//           border-bottom-style: solid;
+//           content: "";
+//           display: block;
+//           height: 0;
+//           position: absolute;
+//           width: 0;
+//           border: 6px solid;
+//           border-color: transparent transparent #fff transparent;
+//           z-index: 99;
+//           bottom: 100%; /* At the top of the tooltip */
+//           left: 50%;
+//           margin-left: -5px;
+//           // left: 10px;
+//           // top: -12px;
+//           // left: auto;
+//           // right: 10px;
+//         }
+//       }
+//     }
+//   }
+// }
 
 .helpline-note {
   button {

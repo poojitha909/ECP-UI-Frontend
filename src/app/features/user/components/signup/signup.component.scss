@@ -1,29 +1,42 @@
-a{
-    color: #1A72E8;
+a {
+    color: #1a72e8;
 }
-.signup-title{
-    h1{
-        font-size: 24px;
-        font-family:"HKGroteskRegular";    
+.signup-title {
+    h1,
+    h2,
+    h3 {
+        font-family: "HKGroteskRegular";
+        font-weight: bold;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        font-size: 32px;
+        color: rgba(22, 28, 45, 0.68);
     }
-    padding: 0 24px;
 }
 
-hr{
-    margin: 8px;
-}
-
-.signup-detail{
-      padding-top: 48px;
-    .list{
-        @media (min-width: 1200px) {
-        .uk-list{
-            padding: 0 14px;
-        }
-    }
-        background-color: #ECF4FF;
+.signup-detail {
+    padding-top: 48px;
+    .list {
+        background-color: #ecf4ff;
         border-radius: 8px;
     }
-  
 }
 
+.uk-modal-dialog {
+    width: 385px;
+    border-radius: 4px;
+}
+.loading-modal-dialog {
+    color: #fff;
+    background: #2a415e;
+}
+.success-modal-dialog {
+    color: rgba(22, 28, 45, 0.68);
+    h3 {
+        font-family: "HKGroteskRegular";
+        font-weight: bold;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        font-size: 24px;
+    }
+}

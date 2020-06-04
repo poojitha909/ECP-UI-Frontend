@@ -18,7 +18,7 @@
     <hr class="mt-10" />
     <div class="uk-form-stacked">
       <div class="uk-margin">
-        <label class="uk-form-label" for="Phone-Number">Phone Number</label>
+        <label class="uk-form-label" for="Phone-Number">Enter Your Mobile Number</label>
         <div class="uk-form-controls">
 
           <!-- <div class="uk-inline mobile-number">
@@ -33,7 +33,7 @@
 
           <input class="uk-input" [ngClass]="{'uk-form-danger' : mobile.invalid && (mobile.dirty || mobile.touched) }"
             id="Phone-Number" type="number" [(ngModel)]="mobileNumber" (keydown.enter)="requestOtp()"
-            placeholder="Enter Phone Number without Country Code" required #mobile="ngModel"
+            placeholder="Enter Mobile Number without Country Code" required #mobile="ngModel"
             [disabled]="otpGenerated" />
 
         </div>

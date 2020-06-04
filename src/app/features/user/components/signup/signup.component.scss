@@ -1,24 +1,36 @@
 a {
     color: #1a72e8;
 }
-.signup-title {
-    h1,
-    h2,
-    h3 {
-        font-family: "HKGroteskRegular";
-        font-weight: bold;
-        margin-top: 0px;
-        margin-bottom: 0px;
-        font-size: 32px;
-        color: rgba(22, 28, 45, 0.68);
-    }
+h1 {
+    font-family: "HKGroteskRegular";
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 32px;
+    color: rgba(22, 28, 45, 0.68);
+}
+
+h3 {
+    font-family: "HKGroteskRegular";
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: rgba(22, 28, 45, 0.68);
+    font-size: 24px;
 }
 
 .signup-detail {
-    padding-top: 48px;
+    margin-top: 56px;
     .list {
         background-color: #ecf4ff;
-        border-radius: 8px;
+        padding: 24px 34px;
+        fa-icon {
+            color: rgba(22, 28, 45, 0.68);
+        }
+        .uk-list {
+            font-family: "HKGroteskRegular";
+            font-size: 18px;
+        }
     }
 }
 
@@ -32,11 +44,9 @@ a {
 }
 .success-modal-dialog {
     color: rgba(22, 28, 45, 0.68);
-    h3 {
-        font-family: "HKGroteskRegular";
-        font-weight: bold;
-        margin-top: 0px;
-        margin-bottom: 0px;
-        font-size: 24px;
-    }
+}
+.box-border {
+    border: 1px solid #d7e0ef;
+    box-sizing: border-box;
+    border-radius: 4px;
 }

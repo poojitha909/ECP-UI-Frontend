@@ -8,18 +8,20 @@
     color: $font-color-black;
     font-family: $regular-font;
     .discussion-summary-head{
-        align-items: center;
+        // align-items: center;
         background-color: #D7E0EF;
         border-radius: 4px;
         min-height: 70px;
         padding: 0 15px;
         margin: 7px;
         .discussion-title{
+            font-weight: bold;
             font-size: 18px;
             line-height: 27px;
             color: $primary-txt-color;
+            padding-top: 5px;
             a{
-                color: #212942;
+                color: #2A415E;
             }
         }
     }

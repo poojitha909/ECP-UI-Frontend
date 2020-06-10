@@ -1,6 +1,8 @@
 <div tabindex=-1 class="event-summary bg-white uk-height-1-1 uk-card-hover cursor-pointer uk-flex uk-flex uk-flex-column uk-flex-between"
     *ngIf="event?.isPast == isPast || isPast==0" [routerLink]="['/community/event', event?.id ]" [queryParams]="pageParam">
     <div class="event-summary-head uk-grid uk-grid-collapse">
+        <div 
+        [ngClass]="{'outdoor-icon' : event?.eventType== 1, 'indoor-icon' : event?.eventType==2 }"></div>
         <h3 class="event-title">
             <a [routerLink]="['/community/event', event?.id ]"> {{event?.title}}</a>
         </h3>

@@ -33,14 +33,14 @@
                     <div class="uk-form-controls">
                         <select
                             [ngClass]="{'uk-form-danger' : formControl.eventType.invalid && ( formControl.eventType.dirty ||  formControl.eventType.touched) }"
-                            class="uk-select" formControlName="eventType" id="Event-Type" placeholder="Pick a Category of your Event">
-                            <option value="" disabled selected>Select Category</option>
+                            class="uk-select" formControlName="eventType" id="Event-Type" placeholder="Pick an Event Type">
+                            <option value="" disabled selected>Select Event Type</option>
                             <option value="1">Outdoor</option>
                             <option value="2">Indoor</option>
                         </select>
                         <small aria-describedby="Event-Type"
                             *ngIf="formControl.eventType.invalid && ( formControl.eventType.dirty ||  formControl.eventType.touched)"
-                            class="uk-text-danger">Category is required to publish the upcoming event.</small>
+                            class="uk-text-danger">Event Type is required to publish the upcoming event.</small>
                     </div>
                 </div>
                 <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>

@@ -1,29 +1,52 @@
-a{
-    color: #1A72E8;
+a {
+    color: #1a72e8;
 }
-.signup-title{
-    h1{
-        font-size: 24px;
-        font-family:"HKGroteskRegular";    
-    }
-    padding: 0 24px;
-}
-
-hr{
-    margin: 8px;
+h1 {
+    font-family: "HKGroteskRegular";
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 32px;
+    color: rgba(22, 28, 45, 0.68);
 }
 
-.signup-detail{
-      padding-top: 48px;
-    .list{
-        @media (min-width: 1200px) {
-        .uk-list{
-            padding: 0 14px;
+h3 {
+    font-family: "HKGroteskRegular";
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: rgba(22, 28, 45, 0.68);
+    font-size: 24px;
+}
+
+.signup-detail {
+    margin-top: 56px;
+    .list {
+        background-color: #ecf4ff;
+        padding: 24px 34px;
+        fa-icon {
+            color: rgba(22, 28, 45, 0.68);
+        }
+        .uk-list {
+            font-family: "HKGroteskRegular";
+            font-size: 18px;
         }
     }
-        background-color: #ECF4FF;
-        border-radius: 8px;
-    }
-  
 }
 
+.uk-modal-dialog {
+    width: 385px;
+    border-radius: 4px;
+}
+.loading-modal-dialog {
+    color: #fff;
+    background: #2a415e;
+}
+.success-modal-dialog {
+    color: rgba(22, 28, 45, 0.68);
+}
+.box-border {
+    border: 1px solid #d7e0ef;
+    box-sizing: border-box;
+    border-radius: 4px;
+}

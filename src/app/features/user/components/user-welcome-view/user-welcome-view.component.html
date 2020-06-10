@@ -1,0 +1,13 @@
+<div class="category-box bg-white">
+    <h2 class="m-b-10">Welcome back, {{ auth.user.userName || auth.user.email || auth.user.phoneNumber }}!</h2>
+    <p class="font-regular m-b-40">We missed you here.</p>
+    <hr />
+    <div class="m-t-20 uk-child-width-1-2@s uk-grid-small" uk-grid>
+        <div>
+            <button routerLink="/user" class="uk-button uk-button-transparent w-100">Go To My Profile</button>
+        </div>
+        <div>
+            <button routerLink="/" class="uk-button uk-button-default w-100">Explore</button>
+        </div>
+    </div>
+</div>

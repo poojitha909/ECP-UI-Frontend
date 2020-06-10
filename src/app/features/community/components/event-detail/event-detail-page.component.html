@@ -49,7 +49,9 @@
                 </div>
                 <div class="bg-white category-box">
                     <h4 class="publish-on">Published on: <span>{{event.createdAt | date:'dd MMM yyyy' }} at
-                            {{event?.datetime | date:'shortTime' }}</span></h4>
+                            {{event?.datetime | date:'shortTime' }}</span>
+                        <span [ngClass]="{'outdoor-icon' : event?.eventType== 1, 'indoor-icon' : event?.eventType==2 }"></span>
+                    </h4>
                     <h1 id="eventHeader" tabindex=0 class="heading">{{event.title}}</h1>
                     <hr />
                     <div class="uk-grid uk-child-width-1-2@m">

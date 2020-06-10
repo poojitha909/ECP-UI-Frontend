@@ -20,6 +20,7 @@ import { ViewAddressDetailsComponent } from './components/view-profile/view-addr
 import { ViewPersonalInformationComponent } from './components/view-profile/view-personal-information/view-personal-information.component';
 import { ModalComponent } from './components/modal-component';
 import { SharedModule } from 'src/app/shared';
+import { UserWelcomeViewComponent } from './components/user-welcome-view/user-welcome-view.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { SharedModule } from 'src/app/shared';
     ViewUserDetailsComponent, 
     ViewGeneralInfoComponent, 
     ViewAddressDetailsComponent, 
-    ViewPersonalInformationComponent,ModalComponent],
+    ViewPersonalInformationComponent,ModalComponent, UserWelcomeViewComponent],
     
   imports: [
     CommonModule,

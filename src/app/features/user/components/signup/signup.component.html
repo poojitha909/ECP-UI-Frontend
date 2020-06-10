@@ -1,27 +1,26 @@
 <div class="uk-section">
     <div class="uk-container uk-container-large">
-        <div class="signup-title" uk-grid>
-            <div class="uk-flex uk-flex-middle uk-width-expand">
-                <h1 id="signin-header" tabindex=0>
-                    {{welcomeText? 'Welcome to Joy of Age Community':'Join the Joy of Age Community'}}</h1>
-            </div>
-            <div *ngIf="!user" class="uk-width-auto">
+        <div class="signup-title">
+
+            <h1 id="signin-header" tabindex=0>
+                {{welcomeText? 'Welcome to Joy of Age Community':'Join the Joy of Age Community'}}</h1>
+            <!-- <div *ngIf="!user" class="uk-width-auto">
                 <a routerLink="/"><span class="close-icon" data-uk-tooltip title="Cancel Join Us"></span></a>
-            </div>
+            </div> -->
         </div>
         <hr>
-        <div class="uk-child-width-1-2@s uk-padding-small" uk-grid>
+        <div class="uk-child-width-1-2@s m-t-40" uk-grid>
             <div class="uk-visible@s uk-flex" role="banner">
-                <img src=" assets/images/illustration.png" alt="illustration icon" />
+                <img src=" assets/images/illustration.png" class="w-100 box-border" alt="illustration icon" />
             </div>
             <div class="uk-hidden@s">
-                <img src=" assets/images/illustration-mobile.png" alt="No Image Found" />
+                <img class="box-border" src=" assets/images/illustration-mobile.png" alt="No Image Found" />
             </div>
             <div>
 
-                <div *ngIf="isLoading" class="uk-text-center pt-40">
+                <!-- <div *ngIf="isLoading" class="uk-text-center pt-40">
                     <div class="spinner-border"></div>
-                </div>
+                </div> -->
 
                 <!-- SignIn types View START -->
                 <ng-container *ngIf="!isLoading && !user">
@@ -37,38 +36,84 @@
                 </ng-container>
 
                 <!-- Addidtional info form  -->
-                <ng-container *ngIf="user && !isLoading">
+                <ng-container *ngIf="isNewUser && !isLoading && user">
                     <app-additional-info-form [verifiedString]="verifiedString"></app-additional-info-form>
                 </ng-container>
+                <ng-container *ngIf="!isNewUser && !isLoading && user">
+                    <app-user-welcome-view></app-user-welcome-view>
+                </ng-container>
+            </div>
+        </div>
 
-                <!-- Signup discription link START-->
-                <div *ngIf="!user" class="signup-detail uk-text-center">
-                    <div class="list uk-padding" role="banner">
-                        <h3>Join the Joy of Age Community</h3>
-                        <ul class="uk-list">
-                            <li>
-                                <span class="uk-text-justify ">Participate in Discussions.</span>
-                            </li>
-                            <li>
-                                <span class="uk-text-justify">Know Events happening around you.</span>
-                            </li>
-                            <li>
-                                <span class="uk-text-justify">Find Products and Services that suit your need.</span>
-                            </li>
+        <!-- Signup discription link START-->
+        <div class="signup-detail">
+            <div class="list box-border" role="banner">
+                <h3 class="m-b-10">Why Sign In</h3>
+                <hr class="m-t-0" />
+                <ul class="uk-list uk-list-large">
+                    <li>
+                        <fa-icon [icon]="['fas', 'star']" class="uk-margin-small-right"></fa-icon> Participate in
+                        Discussions
+                    </li>
+                    <li>
+                        <fa-icon [icon]="['fas', 'star']" class="uk-margin-small-right"></fa-icon> Know Events happening
+                        around you
+                    </li>
+                    <li>
+                        <fa-icon [icon]="['fas', 'star']" class="uk-margin-small-right"></fa-icon> Find Products and
+                        Services that suit your need
+                    </li>
+                    <li>
+                        <fa-icon [icon]="['fas', 'star']" class="uk-margin-small-right"></fa-icon> Post your queries and
+                        get Expert guidance with assured confidentiality
+                    </li>
 
-                            <li>
-                                <span class="uk-text-justify">Post your queries and get Expert guidance with assured
-                                    confidentiality.</span>
-                            </li>
-                        </ul>
+                    <!-- <li>
+                        <fa-icon [icon]="['fas', 'star']" class="uk-margin-small-right"></fa-icon> Post your queries and
+                        get Expert guidance with assured
+                        confidentiality.
+                    </li> -->
+                </ul>
+            </div>
+            <!-- <div class="member uk-padding-small">
+                                Already a member? <a class="m-l-1" routerLink="/user/signin">Signin here</a>
+                            </div> -->
+        </div>
+        <!-- Signup discription link END-->
+
+        <!-- <a class="uk-button uk-button-default" href="#loading-modal" uk-toggle>Open</a> -->
+
+        <div id="loading-modal" class="uk-flex-top" uk-modal="esc-close:false;bg-close:false;container:false;">
+            <div class="uk-modal-dialog p-15 uk-margin-auto-vertical"
+                [ngClass]="isLoading ? 'loading-modal-dialog' :'success-modal-dialog'">
+                <div *ngIf="isLoading" class="uk-grid-small" uk-grid>
+                    <div>
+                        <img class="icon" src="assets/images/loading5.gif">
                     </div>
-                    <!-- <div class="member uk-padding-small">
-                        Already a member? <a class="m-l-1" routerLink="/user/signin">Signin here</a>
-                    </div> -->
+                    <div class="uk-flex uk-flex-middle">
+                        <div>
+                            <p class="font-regular-15 m-0">Please Wait!</p>
+                            <p class="font-regular-15 m-0">We are logging you in.</p>
+                        </div>
+                    </div>
                 </div>
-                <!-- Signup discription link END-->
+                <div *ngIf="!isLoading" class="uk-grid-small" uk-grid>
+                    <div>
+                        <img class="icon" src="assets/images/verified-success.png">
+                    </div>
+                    <div class="uk-flex uk-flex-middle">
+                        <div>
+                            <h3 class="m-0" *ngIf="isNewUser">Welcome to Joy of Age</h3>
+                            <h3 class="m-0" *ngIf="!isNewUser">Welcome back, {{user?.userName}}</h3>
+                            <p class="font-regular-15 m-0">There’s a lot to explore here for you</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+
+
 </div>
 <app-footer></app-footer>

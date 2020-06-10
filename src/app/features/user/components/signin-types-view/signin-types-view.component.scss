@@ -1,64 +1,75 @@
 @import "src/assets/css/variables.scss";
 h2{
-        font-size: 24px;
-        font-family:"HKGroteskRegular";
+    font-family: "HKGroteskRegular";
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 24px;
+    color: rgba(22, 28, 45, 0.68);
 }
 
-.uk-input{
+.uk-input {
     border-radius: 4px;
     height: 48px;
 }
 
-.fb-btn{
-    background-color: #4267B2;
+.fb-btn {
+    background-color: #4267b2;
     color: #ffffff;
     border-radius: 4px;
     text-transform: unset;
+    padding: 0 10px;
     width: 100%;
-    &:active,&:hover{
+    &:active,
+    &:hover {
         background-color: #ffffff;
-        color: #4267B2;
+        color: #4267b2;
     }
 }
 
-.google-btn{
-    background-color: #E32816;
+.google-btn {
+    background-color: #528df9;
     color: #ffffff;
     border-radius: 4px;
     text-transform: unset;
+    padding: 0 10px;
     width: 100%;
-    &:active,&:hover{
+    &:active,
+    &:hover {
         background-color: #ffffff;
-        color: #E32816;
+        color: #528df9;
     }
 }
 
-.otp-btn{
+.otp-btn {
     height: 48px;
     background-color: #1a73e8;
     border-radius: 4px;
     color: #ffffff;
     font-size: $font-small;
-    &:active,&:hover{
+    &:active,
+    &:hover {
         background-color: #ffffff;
         color: #1a73e8;
     }
 }
 
-.mobile-number{
+.mobile-number {
     width: 100%;
-    a{
+    a {
         width: 135px;
         color: #1a73e8;
     }
 }
 
-.resend-otp{
+.link {
     color: #1a73e8;
     font-size: 14px;
+    font-family: "HKGroteskRegular";
 }
 
-input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
@@ -68,4 +79,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     box-sizing: border-box;
     border-radius: 4px;
     padding: 16px;
+}
+
+.uk-divider-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='20' width='20'%3E%3Ctext font-family='Arial, Helvetica, sans-serif' x='0' y='15'%3EOr%3C/text%3E%3C/svg%3E") !important;
 }

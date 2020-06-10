@@ -1,25 +1,28 @@
 @import "src/assets/css/variables.scss";
 
 .event-summary{
+    position: relative;
     border: solid 1px #D7E0EF;
     margin-bottom:20px;
     border-radius: 4px;
     text-align: start;
     color: $font-color-black;
     .event-summary-head{
-        align-items: center;
+        // align-items: center;
         background-color: #D7E0EF;
         border-radius: 4px;
         min-height: 70px;
         padding: 0 15px;
         margin: 7px;
         .event-title{
-            // font-weight: bold;
+            font-weight: bold;
             font-size: 18px;
             line-height: 27px;
             color: $primary-txt-color;
+            padding-top: 5px;
+            padding-right: 15px;
             a{
-                color: #212942;
+                color: #2A415E;
             }
         }
     }
@@ -55,21 +58,21 @@
         background-image: url(/assets/images/outdoor.svg);
         background-size: contain;
         display: inline-block;
-        width: 35px;
-        height: 35px;
-        position: relative;
-        top: -10px;
-        right: -35px;
+        width: 28px;
+        height: 28px;
+        position: absolute;
+        top: 12px;
+        right: 12px;
     }
     .indoor-icon{
         background-image: url(/assets/images/indoor.svg);
         background-size: contain;
         display: inline-block;
-        width: 35px;
-        height: 35px;
-        position: relative;
-        top: -10px;
-        right: -35px;
+        width: 28px;
+        height: 28px;
+        position: absolute;
+        top: 12px;
+        right: 12px;
     }
     
 }

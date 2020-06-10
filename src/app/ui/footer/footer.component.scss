@@ -33,11 +33,13 @@
   }
 
   .JoyofAge {
-    margin-right: -160px;
-    .response {
-      margin-right: -64px;
-      margin-top: 31px;
-    }
+    background: #232e48;
+    border-radius: 4px;
+    // margin-right: -160px;
+    // .response {
+    //   margin-right: -64px;
+    //   margin-top: 31px;
+    // }
   }
 
   .ourpartners {
@@ -79,6 +81,11 @@
     opacity: 0.7;
     width: 25px;
     height: 25px;
+    &:focus{
+      background-color: #ebebeb;
+      color: #666;
+      outline: -webkit-focus-ring-color auto 1px;
+    }
   }
 
   .font-small {

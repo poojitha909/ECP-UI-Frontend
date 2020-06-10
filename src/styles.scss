@@ -187,9 +187,7 @@ ngb-rating {
 
   .uk-button-default {
     border-radius: 4px;
-
     font-size: 18px;
-
     text-transform: none;
     padding: 1px 30px;
   }
@@ -235,21 +233,17 @@ ngb-rating {
   pointer-events: all;
 }
 
-.uk-button-default:focus:active {
+.uk-button-default:focus:active,.uk-button-primary:focus:active {
   background: #0050ba;
   color: #ffffff;
 }
 
-.uk-button-default {
+.uk-button-default,.uk-button-primary {
   color: #ffffff;
   background: #1a73e8;
-  &:hover {
+  &:hover,&:focus  {
     background: #529bfb;
     color: #ffffff;
-  }
-  &:focus {
-    color: #ffffff;
-    background: #1a73e8;
   }
   &:disabled {
     color: #a2a4ab;
@@ -267,15 +261,10 @@ ngb-rating {
   color: #1a73e8;
   background: transparent;
   border: 1px solid #1a73e8;
-  &:hover {
+  &:hover,&:focus {
     background: transparent;
     color: #529bfb;
     border: 1px solid #529bfb;
-  }
-  &:focus {
-    color: #1a73e8;
-    background: transparent;
-    border: 1px solid #1a73e8;
   }
   &:disabled {
     color: #c7c9cd;
@@ -507,13 +496,34 @@ ngb-rating {
   white-space: pre-wrap;
 }
 .uk-form-danger .ng-select-container {
-  border-color: #FF0000;
+  border-color: #ff0000;
   height: 40px;
   // border: 1px solid #D7E0EF;
 }
 .ng-select.ng-select-single .ng-select-container {
-  
   height: 40px;
-  border: 1px solid #D7E0EF;
-  
+  border: 1px solid #d7e0ef;
+}
+.whatapp-icon {
+  background: #009487;
+  color: #fff;
+  &:focus {
+    outline: -webkit-focus-ring-color auto 2px;
+  }
+}
+
+.fb-icon {
+  background: #2a415e;
+  color: #fff;
+  &:focus {
+    outline: -webkit-focus-ring-color auto 2px;
+  }
+}
+
+.email-icon {
+  background: #1772eb;
+  color: #fff;
+  &:focus {
+    outline: -webkit-focus-ring-color auto 2px;
+  }
 }

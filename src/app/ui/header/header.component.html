@@ -3,7 +3,7 @@
     <div class="uk-grid-small" uk-grid>
       <div class="uk-width-auto">
         <div class="logo-tagline uk-text-left@s uk-text-center">
-          <img style="width: 170px;height: 64px;" routerLink="/" src="assets/images/Nav_logo.png" />
+          <img style="width: 140px;height: 84px;" routerLink="/" src="assets/images/JOA Logo Light RGB.svg" />
           <!-- <div class="logo">
             <button class="uk-button uk-button-default" routerLink="/">Joy of Age</button>
           </div>
@@ -53,8 +53,8 @@
         <hr class="m-t-40" />
         <ul class="uk-nav uk-nav-default">
           <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
-          [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home</a>
-        </li>
+            [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home</a>
+          </li>
           <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
             [routerLinkActiveOptions]="{exact: false}"><a routerLink="/community">Engage with us</a></li>
           <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
@@ -67,14 +67,14 @@
           <li class="uk-nav-divider"></li>
           <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
             [routerLinkActiveOptions]="{exact: false}"><a routerLink="/about">About us</a></li>
-            
-            <li *ngIf="auth.isAuthenticate" class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
+
+          <li *ngIf="auth.isAuthenticate" class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
             [routerLinkActiveOptions]="{exact: false}"><a routerLink="/user">User Profile</a></li>
-            <li class="uk-nav-divider"></li>
+          <li class="uk-nav-divider"></li>
           <li *ngIf="!auth.isAuthenticate" class="uk-nav-header" (click)="closeMobileMenu()"
             routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a routerLink="/user/signin">Join
               us</a></li>
-       
+
           <li *ngIf="auth.isAuthenticate" class="uk-nav-header" (click)="closeMobileMenu();logout();"><a
               routerLink="/about">Logout</a></li>
         </ul>

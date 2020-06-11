@@ -269,7 +269,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
       title: `Discussions - ${discussion.title}`,
       keywords: 'products,services,events,dscussions',
       description: `${discussion.shortSynopsis}`,
-      author: `An Elder Spring Initiative by Tata Trusts`,
+      author: `Social alpha`,
       image: `${window.location.origin}/assets/imgaes/landing-img/Community-320.png`,
     }
 

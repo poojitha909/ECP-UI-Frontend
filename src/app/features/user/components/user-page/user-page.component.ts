@@ -32,7 +32,7 @@ export class UserPageComponent implements OnInit, AfterViewInit {
     private modalService:NgbModal
   ) {
     this.userService.userProfile = this.activeRoute.snapshot.data.userData;
-    this.titleService.setTitle("User Profile - Elderly Care Platform");
+    this.titleService.setTitle("User Profile - Joy of Age Platform");
 
   }
 

@@ -14,9 +14,9 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     // Generate meta tag 
     const config: SEO = {
       title: 'Home - Joy of Age',
-      keywords: 'Elderly Care, products, services, events, discussions',
+      keywords: 'products, services, events, discussions',
       description: 'Supported by Tata Trusts',
-      author: 'Social Alpa',
+      author: 'Social alpha',
       image: `${window.location.origin}/assets/imgaes/landing-img/Landing-320.png`
     }
     this.seoService.generateTags(config);

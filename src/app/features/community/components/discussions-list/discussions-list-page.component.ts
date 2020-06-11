@@ -45,7 +45,7 @@ export class DiscussionsListPageComponent implements OnInit, OnDestroy {
       title: `All Discussions`,
       keywords: 'products,services,events,dscussions',
       description: 'An online presence for elders to find reliable products and services. And engage in Events and Discussions',
-      author: `An Elder Spring Initiative by Tata Trusts`,
+      author: `Social alpha`,
       image: `${window.location.origin}/assets/imgaes/landing-img/Community-320.png`,
     }
 

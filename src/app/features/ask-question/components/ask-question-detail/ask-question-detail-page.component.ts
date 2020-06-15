@@ -200,7 +200,7 @@ export class AskQuestionDetailPageComponent implements OnInit {
       title: `Question - ${question.question}`,
       keywords: 'products,services,events,dscussions',
       description: `${question.description}`,
-      author: `An Elder Spring Initiative by Tata Trusts`,
+      author: `Social alpha`,
       image: `${window.location.origin}/assets/imgaes/landing-img/Ask-320.png`,
     }
     if (question.answeredBy.basicProfileInfo.profileImage && question.answeredBy.basicProfileInfo.profileImage.thumbnailImage) {

@@ -102,7 +102,7 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
       title: `Service - ${this.isDBService ? this.service.basicProfileInfo.firstName : this.service.name}`,
       keywords: 'products,services,events,dscussions',
       description: `${this.isDBService ? this.service.basicProfileInfo.description : 'Just Dail Service'}`,
-      author: `An Elder Spring Initiative by Tata Trusts`,
+      author: `Social alpha`,
       image: `${window.location.origin}/assets/imgaes/landing-img/Services-320.png`,
     }
     if (this.isDBService && this.service.basicProfileInfo.profileImage && this.service.basicProfileInfo.profileImage.original) {

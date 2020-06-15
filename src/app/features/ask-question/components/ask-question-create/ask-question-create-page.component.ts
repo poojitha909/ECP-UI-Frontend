@@ -151,7 +151,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
       title: `Ask our expert - ${expert.basicProfileInfo.firstName}`,
       keywords: 'products,services,events,dscussions',
       description: `Experties in ${experties}`,
-      author: `An Elder Spring Initiative by Tata Trusts`,
+      author: `Social alpha`,
       image: `${expert.profileImage ? expert.thumbnailImage : window.location.origin + '/assets/imgaes/landing-img/Ask-320.png'}`,
     }
 

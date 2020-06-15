@@ -33,7 +33,7 @@ export class SeoService {
     this.titleService.setTitle( seoConfig.title );
 
     this.meta.updateTag({ name: 'twitter:card', content: 'summary' });
-    this.meta.updateTag({ name: 'twitter:site', content: 'An Elder Spring Initiative by Tata Trusts' });
+    this.meta.updateTag({ name: 'twitter:site', content: 'Joy of Age by Tata Trusts' });
     this.meta.updateTag({ name: 'twitter:title', content: seoConfig.title });
     this.meta.updateTag({ name: 'twitter:description', content: seoConfig.description });
     this.meta.updateTag({ name: 'twitter:image', content: seoConfig.image });
@@ -41,7 +41,7 @@ export class SeoService {
     this.meta.updateTag({ property: 'fb:app_id', content: this.config.facebook.clientId });
     this.meta.updateTag({ property: 'og:type', content: 'article' });
     this.meta.updateTag({
-      property: 'og:site_name', content: `An Elder Spring Initiative by Tata Trusts`
+      property: 'og:site_name', content: `Joy of Age by Tata Trusts`
     });
     this.meta.updateTag({ property: 'og:title', content: seoConfig.title });
     this.meta.updateTag({ property: 'og:description', content: seoConfig.description });

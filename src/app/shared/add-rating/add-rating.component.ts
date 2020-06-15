@@ -38,7 +38,7 @@ export class AddRatingComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnChanges(simpleChanges: SimpleChanges) {
     if (simpleChanges) {
       if (this.auth.isAuthenticate) {
-        console.log(this.userRating);
+        // console.log(this.userRating);
         this.userRating ? this.btnText = 'Edit Rating' : this.btnText = 'Submit';
       } else {
         this.btnText = 'Signin to Submit';

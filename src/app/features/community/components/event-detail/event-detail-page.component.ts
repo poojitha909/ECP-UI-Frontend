@@ -130,7 +130,7 @@ export class EventDetailPageComponent implements OnInit {
       title: `Event Details- ${event.title}`,
       keywords: 'products,services,events,dscussions',
       description: `${event.description}`,
-      author: `An Elder Spring Initiative by Tata Trusts`,
+      author: `Social alpha`,
       image: `${window.location.origin}/assets/imgaes/landing-img/Community-320.png`,
     }
 

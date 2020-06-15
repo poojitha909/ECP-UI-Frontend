@@ -142,7 +142,7 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit, OnDest
       title: `Shop Easy - ${product.name}`,
       keywords: 'products,services,events,dscussions',
       description: `${product.description}`,
-      author: `An Elder Spring Initiative by Tata Trusts`,
+      author: `Social alpha`,
       image: `${product.images ? product.images[0] : window.location.origin + '/assets/imgaes/landing-img/Product-320.png'}`,
     }
 

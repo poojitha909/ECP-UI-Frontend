@@ -18,9 +18,9 @@
             </div>
             <div>
 
-                <!-- <div *ngIf="isLoading" class="uk-text-center pt-40">
+                <div *ngIf="isLoading" class="uk-text-center pt-40">
                     <div class="spinner-border"></div>
-                </div> -->
+                </div>
 
                 <!-- SignIn types View START -->
                 <ng-container *ngIf="!isLoading && !user">
@@ -83,7 +83,7 @@
 
         <!-- <a class="uk-button uk-button-default" href="#loading-modal" uk-toggle>Open</a> -->
 
-        <div id="loading-modal" class="uk-flex-top" uk-modal="esc-close:false;bg-close:false;container:false;">
+        <!-- <div id="loading-modal" class="uk-flex-top" uk-modal="esc-close:false;bg-close:false;container:false;">
             <div class="uk-modal-dialog p-15 uk-margin-auto-vertical"
                 [ngClass]="isLoading ? 'loading-modal-dialog' :'success-modal-dialog'">
                 <div *ngIf="isLoading" class="uk-grid-small" uk-grid>
@@ -110,7 +110,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
 

@@ -71,7 +71,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
   //Get Facebook user details
   getFbUserData(token) {
     this.isLoading = true;
-    UIkit.modal('#loading-modal').show();
+    // UIkit.modal('#loading-modal').show();
     this.auth.getFbUserData(token).subscribe(data => {
       this.user = data.user;
       this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
@@ -84,14 +84,14 @@ export class SignupComponent implements OnInit, AfterViewInit {
         this.isLoading = false;
         this.errorMessage = error.error.error.errorMsg;
         this.isOtpGenerated = false;
-        UIkit.modal('#loading-modal').hide();
+        // UIkit.modal('#loading-modal').hide();
       });
   }
 
   //Get Google user details
   getGoogleUserData(token) {
     this.isLoading = true;
-    UIkit.modal('#loading-modal').show();
+    // UIkit.modal('#loading-modal').show();
     this.auth.getGoogleUserData(token).subscribe(data => {
       this.user = data.user;
       this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
@@ -104,7 +104,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
         this.isLoading = false;
         this.errorMessage = error.error.error.errorMsg;
         this.isOtpGenerated = false;
-        UIkit.modal('#loading-modal').hide();
+        // UIkit.modal('#loading-modal').hide();
       });
   }
 
@@ -130,7 +130,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
 
   verfiyOtp(verification) {
     this.isLoading = true;
-    UIkit.modal('#loading-modal').show();
+    // UIkit.modal('#loading-modal').show();
     this.errorMessage = null;
     this.auth.verfiyOtp(verification.number, verification.code).subscribe(response => {
       if (response && response.sessionId && response.user) {
@@ -141,7 +141,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
         this.getUserProfile();
       } else {
         this.isLoading = false;
-        UIkit.modal('#loading-modal').hide();
+        // UIkit.modal('#loading-modal').hide();
         this.otpFailedNumber = verification.number;
         this.errorMessage = "We could not match the OTP you entered with the one that was sent to you. Please retry with the OTP that was sent to your registered mobile number";
       }
@@ -150,7 +150,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
         console.log(error);
         this.isLoading = false;
         this.isOtpGenerated = false;
-        UIkit.modal('#loading-modal').hide();
+        // UIkit.modal('#loading-modal').hide();
       });
   }
 
@@ -197,16 +197,16 @@ export class SignupComponent implements OnInit, AfterViewInit {
           this.isNewUser = true;
           this.isLoading = false;
         }
-        setTimeout(() => {
-          UIkit.modal('#loading-modal').hide();
-        }, 3000);
+        // setTimeout(() => {
+        //   UIkit.modal('#loading-modal').hide();
+        // }, 3000);
       },
       error => {
         this.isNewUser = true;
         this.isLoading = false;
         this.errorMessage = error.error.error.errorMsg;
         this.isOtpGenerated = false;
-        UIkit.modal('#loading-modal').hide();
+        // UIkit.modal('#loading-modal').hide();
       }
     );
   }

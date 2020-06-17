@@ -177,13 +177,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
 
   }
 
-  // likeDiscussion() {
-  //   this.discussionService.likeDiscussionReply(this.discussionId).subscribe((response: any) => {
-  //     if (response.data.id) {
-  //       this.discussion.aggrLikeCount = response.data.aggrLikeCount;
-  //     }
-  //   });
-  // }
+  
 
   likeReply(reply) {
     if (reply.likedByUser) {
@@ -289,8 +283,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.successMessage = "";
     this.onOpenModel();
     this.currentModelLink = element_id;
-    //UIkit.modal('#reply-modal-discussion').show();
-    //document.getElementById("addCommentTitle").focus();
+   
     setTimeout( () => {document.getElementById("Comment").focus();},0);
 
   }
@@ -338,7 +331,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
 
   onCloseModel() {
     document.getElementsByClassName("main-container")[0].removeAttribute("aria-hidden");
-    //document.getElementById(this.currentModelLink).focus();
+    
   }
 
   onOpenModel() {

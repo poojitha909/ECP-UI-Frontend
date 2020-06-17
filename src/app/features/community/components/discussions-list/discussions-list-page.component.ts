@@ -15,7 +15,7 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class DiscussionsListPageComponent implements OnInit, OnDestroy {
 
-  // @Input() hide: false;
+  
 
   discussionsList: any[];
   selCategory: string;

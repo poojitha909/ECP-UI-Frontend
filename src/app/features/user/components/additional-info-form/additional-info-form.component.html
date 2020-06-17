@@ -20,11 +20,11 @@
     <hr class="m-t-10" />
     <form class="uk-form-stacked uk-grid-small" [formGroup]="userform" uk-grid>
       <div class="uk-width-1-2@s">
-        <label class="uk-form-label" for="firstName">Please enter your name</label>
+        <label class="uk-form-label" for="firstName">Name</label>
         <div class="uk-form-controls">
           <input class="uk-input" id="firstName"
             [ngClass]="{'uk-form-danger' : formControl.firstName.invalid && (formControl.firstName.dirty || formControl.firstName.touched) }"
-            type="text" formControlName="firstName" placeholder="Your Display Name...">
+            type="text" formControlName="firstName" placeholder="Enter Name...">
         </div>
       </div>
 
@@ -33,7 +33,7 @@
         <div class="uk-form-controls">
           <input
             [ngClass]="{'uk-form-danger' : formControl.primaryEmail.invalid && (formControl.primaryEmail.dirty || formControl.primaryEmail.touched) }"
-            class="uk-input" id="Email" type="text" formControlName="primaryEmail" placeholder="Your Email...">
+            class="uk-input" id="Email" type="text" formControlName="primaryEmail" placeholder="Enter Email...">
         </div>
       </div>
 
@@ -43,7 +43,7 @@
           <input
             [ngClass]="{'uk-form-danger' : formControl.primaryPhoneNo.invalid && (formControl.primaryPhoneNo.dirty || formControl.primaryPhoneNo.touched) }"
             class="uk-input" id="Mobile-Number" type="number" formControlName="primaryPhoneNo"
-            placeholder="Your Mobile Number...">
+            placeholder="Enter Mobile Number...">
         </div>
       </div>
       <!-- <div class="uk-margin">
@@ -62,9 +62,9 @@
       <div class="uk-width-1-1">
         <hr />
         <button class="uk-button uk-button-default uk-float-right uk-margin-small-left" [disabled]="userform.invalid"
-          (click)="onSubmit()">Submit</button>
+          (click)="onSubmit()">Register me</button>
         <button routerLink="/" *ngIf="auth?.user && auth.user.email"
-          class="uk-button uk-button-transparent uk-float-right">Skip</button>
+          class="uk-button uk-button-transparent uk-float-right">I do not wish to register</button>
       </div>
     </form>
   </div>

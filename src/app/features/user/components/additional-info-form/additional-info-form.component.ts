@@ -47,10 +47,9 @@ export class AdditionalInfoFormComponent implements OnInit {
   onSubmit() {
     this.errorMessage = null;
     if (this.userform.valid) {
-
       let userData: UserProfile = {
         userId: this.auth.user.id,
-        basicProfileInfo: this.userform.value
+        basicProfileInfo: this.userform.getRawValue()
       };
 
       this.userService.createUserProfile(userData).subscribe(

@@ -47,7 +47,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   logout() {
-    this.auth.logout().subscribe(response => console.log(response));
+    this.auth.logout().subscribe(response => {
+      this.router.url.startsWith('/user') ? this.router.navigateByUrl("/") : null;
+    }
+    );
   }
 
   closeMobileMenu() {

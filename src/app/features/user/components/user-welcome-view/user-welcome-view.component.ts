@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-welcome-view',
@@ -9,14 +8,9 @@ import { Router } from '@angular/router';
 })
 export class UserWelcomeViewComponent implements OnInit {
 
-  constructor(public auth: AuthService, private router: Router) { }
+  constructor(public auth: AuthService) { }
 
   ngOnInit() {
-    this.auth.userSource.subscribe(user => {
-      if (!user) {
-        this.router.navigateByUrl('/');
-      }
-    })
   }
 
 }

@@ -46,7 +46,7 @@
                         {{discussion?.createdAt | date:'shortTime' }}</h4>
                     <h1 tabindex=0 id="discussionTitleHeader" class="heading">{{discussion.title}}</h1>
                     <hr />
-                    <h4 class="heading2">Description</h4>
+                    <h4 *ngIf="discussionId == 'preview'" class="heading2">Description</h4>
                     <div class="description" [innerHTML]="discussion.text">
                     </div>
                     <div *ngIf="discussionId == 'preview'">

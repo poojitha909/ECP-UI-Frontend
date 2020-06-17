@@ -9,14 +9,14 @@
     <p class="font-regular">{{ verifiedString }}</p>
   </div> -->
   <div class="category-box bg-white">
-    <h3 class="m-b-10">Welcome to Joy of Age!</h3>
-    <p class="font-regular">It is a long established fact that a reader will be distracted by the readable content of a
-      page when looking at its layout distracted by the readable content of a page when looking at its layout</p>
+    <h3 class="m-b-10">Registration</h3>
+    <p class="font-regular">Only registered community members can share articles, start discussions, suggest
+      events, ask questions to experts, rate, review, comment on products and services.</p>
 
   </div>
 
   <div class="category-box bg-white m-t-20">
-    <h3 class="m-0">User Details</h3>
+    <h3 class="m-0">Your profile information</h3>
     <hr class="m-t-10" />
     <form class="uk-form-stacked uk-grid-small" [formGroup]="userform" uk-grid>
       <div class="uk-width-1-2@s">
@@ -63,7 +63,8 @@
         <hr />
         <button class="uk-button uk-button-default uk-float-right uk-margin-small-left" [disabled]="userform.invalid"
           (click)="onSubmit()">Submit</button>
-        <!-- <button routerLink="/" class="uk-button uk-button-transparent uk-float-right">Skip</button> -->
+        <button routerLink="/" *ngIf="auth?.user && auth.user.email"
+          class="uk-button uk-button-transparent uk-float-right">Skip</button>
       </div>
     </form>
   </div>

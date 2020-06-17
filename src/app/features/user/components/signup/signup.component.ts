@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/core';
-import { User, SocialAccount, UserIdType, OtpErrorMessage } from 'src/app/core/interfaces';
+import { OtpErrorMessage } from 'src/app/core/interfaces';
 import { UserService } from '../../services/user.service';
 import { Title } from '@angular/platform-browser';
 import { ConfigurationService } from 'src/app/core/services/configuration.service';

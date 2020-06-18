@@ -39,7 +39,7 @@
 
                 <!-- Addidtional info form  -->
                 <ng-container *ngIf="isNewUser && !isLoading && user">
-                    <app-additional-info-form [verifiedString]="verifiedString"></app-additional-info-form>
+                    <app-additional-info-form [verifiedString]="verifiedString" (doNotRegister)="doNotRegister()"></app-additional-info-form>
                 </ng-container>
                 <ng-container *ngIf="!isNewUser && !isLoading && user">
                     <app-user-welcome-view></app-user-welcome-view>

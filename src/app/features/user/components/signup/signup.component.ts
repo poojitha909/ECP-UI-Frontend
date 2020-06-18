@@ -36,8 +36,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
 
     this.configServ.loadConfigurations().subscribe((c) => {
       this.config = c;
-    })
-    this.user = this.auth.user;
+    });
     this.titleService.setTitle("Sign In - Joy of Age");
   }
 
@@ -73,11 +72,11 @@ export class SignupComponent implements OnInit, AfterViewInit {
     this.isLoading = true;
     // UIkit.modal('#loading-modal').show();
     this.auth.getFbUserData(token).subscribe(data => {
-      this.user = data.user;
-      this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
-      this.welcomeText = true;
+      this.user = this.auth.user;
+      // this.user = data.user;
+      // this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
+      // this.welcomeText = true;
       this.getUserProfile();
-      console.log("google login response", this.user);
     },
       error => {
         console.log(error);
@@ -93,11 +92,11 @@ export class SignupComponent implements OnInit, AfterViewInit {
     this.isLoading = true;
     // UIkit.modal('#loading-modal').show();
     this.auth.getGoogleUserData(token).subscribe(data => {
-      this.user = data.user;
-      this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
-      this.welcomeText = true;
+      this.user = this.auth.user;
+      // this.user = data.user;
+      // this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
+      // this.welcomeText = true;
       this.getUserProfile();
-      console.log("google login response", this.user);
     },
       error => {
         console.log(error);
@@ -133,12 +132,12 @@ export class SignupComponent implements OnInit, AfterViewInit {
     // UIkit.modal('#loading-modal').show();
     this.errorMessage = null;
     this.auth.verfiyOtp(verification.number, verification.code).subscribe(response => {
-      if (response && response.sessionId && response.user) {
-        this.user = response.user;
-        this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
-        this.welcomeText = true;
-        // this.isLoading = false;
+      if (response) {
+        this.user = this.auth.user;
         this.getUserProfile();
+        // this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;
+        // this.welcomeText = true;
+        // this.isLoading = false;
       } else {
         this.isLoading = false;
         // UIkit.modal('#loading-modal').hide();
@@ -179,36 +178,52 @@ export class SignupComponent implements OnInit, AfterViewInit {
   }
 
   getUserProfile() {
-    this.userService.getUserProfile().subscribe(
-      userProfie => {
-        if (userProfie.basicProfileInfo.firstName) {
-
-          if (this.auth.redirectUrl) {
-            const redirect = this.auth.redirectUrl;
-            this.auth.removeRedirectUrl();
-            this.router.navigateByUrl(redirect);
+    if (this.auth.user && this.auth.user.id) {
+      this.userService.getUserProfile().subscribe(
+        userProfie => {
+          if (userProfie.basicProfileInfo.firstName) {
+            if (this.auth.redirectUrl) {
+              const redirect = this.auth.redirectUrl;
+              this.auth.removeRedirectUrl();
+              this.router.navigateByUrl(redirect);
+            }
+            this.isNewUser = false;
+            this.isLoading = false;
           }
-          this.isNewUser = false;
-          this.isLoading = false;
-        } else {
-          let user = this.auth.user;
-          user.hasProfile = false;
-          this.auth.user = user;
+          // } else {
+          //   let user = this.auth.user;
+          //   user.hasProfile = false;
+          //   this.auth.user = user;
+          //   this.isNewUser = true;
+          //   this.isLoading = false;
+          // }
+          // setTimeout(() => {
+          //   UIkit.modal('#loading-modal').hide();
+          // }, 3000);
+        },
+        error => {
           this.isNewUser = true;
           this.isLoading = false;
+          this.isOtpGenerated = false;
+          this.errorMessage = error.error.error.errorMsg;
+          // UIkit.modal('#loading-modal').hide();
         }
-        // setTimeout(() => {
-        //   UIkit.modal('#loading-modal').hide();
-        // }, 3000);
-      },
-      error => {
-        this.isNewUser = true;
-        this.isLoading = false;
-        this.errorMessage = error.error.error.errorMsg;
-        this.isOtpGenerated = false;
-        // UIkit.modal('#loading-modal').hide();
-      }
-    );
+      );
+    } else {
+      // let user = this.auth.user;
+      // user.hasProfile = false;
+      // this.auth.user = user;
+      this.isNewUser = true;
+      this.isLoading = false;
+    }
+
+  }
+
+  doNotRegister(){
+    this.auth.clearUserStorage();
+    this.user = undefined;
+    this.isOtpGenerated = false;
+    this.router.navigateByUrl("/user/signin");
   }
 
 }

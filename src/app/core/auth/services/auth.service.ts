@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
-import { User, DBReviews } from '../../interfaces';
+import { User, DBReviews, UserProfile } from '../../interfaces';
 import { ApiConstants } from 'src/app/api.constants';
 
 import { AppConstants } from 'src/app/app.constants';
@@ -22,9 +22,13 @@ export class AuthService {
     const url = `${ApiConstants.LOGIN_SOCIAL_USER}?token=${token}&platform=facebook`;// https://graph.facebook.com/me?fields=id,name,email&access_token=${token}`
     return this.http.get<any>(url).pipe(
       map((response) => {
-        this.user$.next(response.data.user);
-        this.user = response.data.user;
-        this.userSession = response.data.sessionId;
+        if (response.data && response.data.sessionId) {
+          this.userSession = response.data.sessionId;
+          this.user = response.data.user;
+          this.user$.next(response.data.user);
+        } else {
+          this.user = response.data;
+        }
         return response.data;
       })
     );
@@ -34,9 +38,13 @@ export class AuthService {
     const url = `${ApiConstants.LOGIN_SOCIAL_USER}?token=${token}&platform=google`;// `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`
     return this.http.get<any>(url).pipe(
       map((response) => {
-        this.user$.next(response.data.user);
-        this.user = response.data.user;
-        this.userSession = response.data.sessionId;
+        if (response.data && response.data.sessionId) {
+          this.userSession = response.data.sessionId;
+          this.user = response.data.user;
+          this.user$.next(response.data.user);
+        } else {
+          this.user = response.data;
+        }
         return response.data;
       })
     );
@@ -70,20 +78,49 @@ export class AuthService {
     };
     return this.http.post<any>(ApiConstants.LOGIN_OTP, `mobile=${mobileNo}&otp=${code}`, options).pipe(
       map((response) => {
-        if (response.data && response.data.user) {
-          this.user$.next(response.data.user);
-          this.user = response.data.user;
+        if (response.data && response.data.sessionId) {
           this.userSession = response.data.sessionId;
+          this.user = response.data.user;
+          this.user$.next(response.data.user);
+        } else {
+          this.user = response.data;
         }
         return response.data;
+
       })
+    );
+  }
+
+  registerUser(userProfile: UserProfile): Observable<User> {
+    return this.http.post<any>(`${ApiConstants.USER_SIGNUP}`, this.user).pipe(
+      map
+        ((response) => {
+          if (response.data && response.data.sessionId) {
+            this.userSession = response.data.sessionId;
+            this.user = response.data.user;
+            this.user$.next(response.data.user);
+            userProfile.userId = response.data.user.id;
+          }
+          return response.data;
+        }),
+      switchMap(() => this.http.post<any>(`${ApiConstants.USER_PROFILE}`, userProfile).pipe(
+        map
+          ((response) => {
+            if (response.data.basicProfileInfo.firstName !== this.user.userName) {
+              let currentUser: User = this.user;
+              currentUser.userName = response.data.basicProfileInfo.firstName;
+              this.user = currentUser;
+            }
+            return response.data;
+          })
+      ))
     );
   }
 
   logout(): Observable<any> {
     return this.http.get<any>(ApiConstants.USER_LOGOUT).pipe(map(response => {
       if (response) {
-        this.storage.clear();
+        this.clearUserStorage();
         this.user$.next(null);
       }
     }));
@@ -180,6 +217,10 @@ export class AuthService {
     });
 
     return result
+  }
+
+  clearUserStorage() {
+    this.storage.clear()
   }
 
 }

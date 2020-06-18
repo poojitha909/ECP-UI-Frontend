@@ -61,10 +61,10 @@
       </div> -->
       <div class="uk-width-1-1">
         <hr />
-        <button class="uk-button uk-button-default uk-float-right uk-margin-small-left" [disabled]="userform.invalid"
+        <button class="uk-button uk-button-default uk-float-right uk-margin-small-left m-b-10" [disabled]="userform.invalid"
           (click)="onSubmit()">Register me</button>
-        <button routerLink="/" *ngIf="auth?.user && auth.user.email"
-          class="uk-button uk-button-transparent uk-float-right">I do not wish to register</button>
+        <button (click)="notToRegister()" class="uk-button uk-button-transparent uk-float-right">I do not wish to
+          register</button>
       </div>
     </form>
   </div>

@@ -42,9 +42,7 @@ export class ChangeProfilePictureFormComponent implements OnInit {
     if (this.userService.userProfile.basicProfileInfo.profileImage && this.userService.userProfile.basicProfileInfo.profileImage.thumbnailImage) {
       this.profileImage = this.userService.userProfile.basicProfileInfo.profileImage.thumbnailImage;
     }
-    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo ? 
-                      this.userService.userProfile.basicProfileInfo.primaryPhoneNo :
-                      this.auth.user.phoneNumber;
+    this.otpMobile = this.auth.user.phoneNumber || this.auth.user.email;
   }
 
   ngOnInit() {

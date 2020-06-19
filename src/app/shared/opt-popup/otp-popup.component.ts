@@ -28,7 +28,7 @@ export class OtpPopupComponent implements OnChanges {
     if (this.showModal) {
       UIkit.modal('#modal-otp-input').show();
       if (!this.mobileNum) {
-        alert("No mobile number found to send otp")
+        alert("No mobile number or email address found to send otp")
       }
       else {
         this.authService.sendOtp(this.mobileNum).subscribe(response => {

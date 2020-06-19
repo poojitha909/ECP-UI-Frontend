@@ -157,6 +157,10 @@ export class UserService {
         switchMap(() => this.http.put<any>(`${ApiConstants.USER_PROFILE}/${user.userId}`, user).pipe(
           map
             ((response) => {
+              let currentUser: User = this.auth.user;
+              currentUser.phoneNumber = response.data.basicProfileInfo.primaryPhoneNo;
+              currentUser.email = response.data.basicProfileInfo.primaryEmail;
+              this.auth.user = currentUser;
               return response.data;
             })
         ))
@@ -165,6 +169,10 @@ export class UserService {
       return this.http.put<any>(`${ApiConstants.USER_PROFILE}/${user.userId}`, user).pipe(
         map
           ((response) => {
+            let currentUser: User = this.auth.user;
+            currentUser.phoneNumber = response.data.basicProfileInfo.primaryPhoneNo;
+            currentUser.email = response.data.basicProfileInfo.primaryEmail;
+            this.auth.user = currentUser;
             return response.data;
           })
       );

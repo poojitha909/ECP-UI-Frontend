@@ -62,9 +62,9 @@
       <div class="uk-width-1-1">
         <hr />
         <button class="uk-button uk-button-default uk-float-right uk-margin-small-left" [disabled]="userform.invalid"
-          (click)="onSubmit()">Register me</button>
+          (click)="onSubmit()">Submit</button>
         <button routerLink="/" *ngIf="auth?.user && auth.user.email"
-          class="uk-button uk-button-transparent uk-float-right">I do not wish to register</button>
+          class="uk-button uk-button-transparent uk-float-right">Skip</button>
       </div>
     </form>
   </div>

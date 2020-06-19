@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import * as CryptoJS from 'crypto-js';
 import { environment } from 'src/environments/environment';
-// import { LocalStorageService } from 'ngx-webstorage';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class StorageHelperService {
    */
   public store(key: string, value: any) {
 
-    // this.storage.store(key, CryptoJS.AES.encrypt(value));
+    
     localStorage.setItem(key, CryptoJS.AES.encrypt(value, environment.encryptKey));
   }
 
@@ -30,7 +30,7 @@ export class StorageHelperService {
    */
   public storeSession(key: string, value: any) {
 
-    // this.storage.store(key, CryptoJS.AES.encrypt(value));
+  
     sessionStorage.setItem(key, CryptoJS.AES.encrypt(value, environment.encryptKey));
   }
 
@@ -52,10 +52,6 @@ export class StorageHelperService {
    * @param key 
    */
   public retrieve(key: string): any {
-    // if (key && this.storage.retrieve(key)) {
-    //   return CryptoJS.AES.decrypt(this.storage.retrieve(key));
-    // }
-    // return;
     if (key && localStorage.getItem(key)) {
       return CryptoJS.AES.decrypt(localStorage.getItem(key), environment.encryptKey).toString(CryptoJS.enc.Utf8);
     }
@@ -67,7 +63,7 @@ export class StorageHelperService {
    * @param key 
    */
   public clearSession(key?: string) {
-    // this.storage.clear(key);
+    
     if (key) {
       sessionStorage.removeItem(key);
     } else {
@@ -79,7 +75,7 @@ export class StorageHelperService {
    * Clear LS
    */
   public clear(key?: string) {
-    // this.storage.clear(key);
+    
     if (key) {
       localStorage.removeItem(key);
     } else {

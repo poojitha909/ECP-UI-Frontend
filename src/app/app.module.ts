@@ -7,8 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './core';
 import { ConfigurationService } from './core/services/configuration.service';
 
-// import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-// import { NgxWebstorageModule } from 'ngx-webstorage';
 
 
 @NgModule({

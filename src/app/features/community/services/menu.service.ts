@@ -21,7 +21,7 @@ export class MenuService {
     }
 
     setsharemedia(shareMedia:string){
-        // console.log(shareMedia)
+        
         this.shareMedia.next(shareMedia)
     }
 

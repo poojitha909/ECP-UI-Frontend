@@ -2,10 +2,6 @@
     <!-- Bread crumbs Start -->
     <div class="breadcrumbs">
         <app-breadcrumb [breadcrumbLinks]="breadcrumbLinks"></app-breadcrumb>
-        <!-- <ul class="uk-breadcrumb">
-            <li routerLink="/community" class="fa fa-angle-right">Community</li>
-            <li routerLink="/community/discussions" class="fa fa-angle-right">All Articles & Discussions</li>
-        </ul> -->
     </div>
     <!-- Bread crumbs End -->
     <div class="uk-container">
@@ -28,9 +24,7 @@
                     [ngClass]="{'uk-text-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
                     class="uk-form-label" for="Content">Content<span class="required">*</span></label>
                 <div class="uk-form-controls">
-                    <!-- <textarea 
-                        [ngClass]="{'uk-form-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
-                        class="uk-textarea" formControlName="description" rows="5" placeholder="Add your content here!"></textarea> -->
+                    
                     <editor
                         [ngClass]="{'uk-form-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
                         id="Content" formControlName="description"
@@ -43,13 +37,7 @@
                     [ngClass]="{'uk-text-danger' : formControl.category.invalid && ( formControl.category.dirty ||  formControl.category.touched) }"
                     class="uk-form-label" for="Category">Pick a Category</label>
                 <div class="uk-form-controls">
-                    <!-- <select
-                        [ngClass]="{'uk-form-danger' : formControl.category.invalid && ( formControl.category.dirty ||  formControl.category.touched) }"
-                        class="uk-select" formControlName="category" id="Category">
-                        <option value="">Select Category</option>
-                        <option *ngFor="let cat of categoryList | keyvalue" value="{{cat.key}}">{{cat.value.label}}
-                        </option>
-                    </select> -->
+                    
                     <ng-select id="Category" [items]="categoryList | keyvalue"
                         placeholder="Select Category" [hideSelected]="true" bindLabel="value.label" bindValue="key"
                         formControlName="category">

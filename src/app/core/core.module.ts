@@ -19,7 +19,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NgbModule,
     FontAwesomeModule,
     NgSelectModule
-    // NgxPaginationModule
+    
   ],
   exports: [
     FormsModule,
@@ -27,7 +27,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReactiveFormsModule,
     FontAwesomeModule,
     NgSelectModule
-    // NgxPaginationModule
+    
   ]
 })
 export class CoreModule {

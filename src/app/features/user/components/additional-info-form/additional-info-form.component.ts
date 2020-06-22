@@ -41,13 +41,19 @@ export class AdditionalInfoFormComponent implements OnInit {
       this.userService.formEditMessage("editForm")
     });
     this.userform.get("primaryPhoneNo").valueChanges.subscribe(selectedValue => {
+      if (selectedValue) {
+        const phoneNumber = selectedValue.toString();
+        if (phoneNumber.length > 10) {
+          this.formControl.primaryPhoneNo.setValue(phoneNumber.slice(0, 10));
+        }
+      }
       this.userService.formEditMessage("editForm")
     });
   }
 
   onSubmit() {
     this.errorMessage = null;
-    if (this.userform.valid) {
+    if (this.userform.valid && this.mobileValidation()) {
       let userData: UserProfile = {
         basicProfileInfo: this.userform.getRawValue()
       };
@@ -68,11 +74,20 @@ export class AdditionalInfoFormComponent implements OnInit {
           console.log(error);
           error.error.error ? this.errorMessage = error.error.error.errorMsg : this.errorMessage = "Something went wrong!";
         })
+    } else {
+      this.errorMessage = "Please enter a valid mobile number";
     }
   }
 
   notToRegister() {
     this.doNotRegister.emit();
+  }
+
+  mobileValidation(): boolean {
+    if (this.formControl.primaryPhoneNo.value.toString().length !== 10) {
+      return false
+    }
+    return true;
   }
 
 }

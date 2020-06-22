@@ -92,6 +92,12 @@ export class AuthService {
   }
 
   registerUser(userProfile: UserProfile): Observable<User> {
+    if (userProfile.basicProfileInfo.primaryPhoneNo || userProfile.basicProfileInfo.primaryEmail) {
+      const temp = this.user;
+      temp.phoneNumber = userProfile.basicProfileInfo.primaryPhoneNo;
+      temp.email = userProfile.basicProfileInfo.primaryEmail;
+      this.user = temp;
+    }
     return this.http.post<any>(`${ApiConstants.USER_SIGNUP}`, this.user).pipe(
       map
         ((response) => {

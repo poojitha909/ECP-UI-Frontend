@@ -41,9 +41,7 @@ export class AboutYouFormComponent implements OnInit {
       hobbies: [this.userService.userProfile.individualInfo.hobbies || null],
       otherInterests: [this.userService.userProfile.individualInfo.otherInterests || null]
     });
-    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo ?
-      this.userService.userProfile.basicProfileInfo.primaryPhoneNo :
-      this.auth.user.phoneNumber;
+    this.otpMobile = this.auth.user.phoneNumber || this.auth.user.email;
 
     this.userService.profileLanguages().subscribe(response => {
       if (response) {

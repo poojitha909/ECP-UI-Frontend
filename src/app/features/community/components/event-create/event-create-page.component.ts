@@ -33,7 +33,7 @@ export class EventCreatePageComponent implements OnInit {
   eventForm: FormGroup;
   successMessage: string;
   user: any;
-  // langList: string[];
+  
   minDate = moment(new Date()).add(1,'days').format('YYYY-MM-DD')
   languages:any[];
   constructor(private router: Router, private store: StorageHelperService,
@@ -43,14 +43,7 @@ export class EventCreatePageComponent implements OnInit {
     document.getElementById("addEventHeading").focus();
     this.categoryList = [];
     this.successMessage = "";
-    // this.langList = ["English",
-    //   "Hindi",
-    //   "Tamil",
-    //   "Urdu",
-    //   "Tulu",
-    //   "Malyalam",
-    //   "Greek",
-    //   "Telugu"];
+    
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
@@ -68,14 +61,14 @@ export class EventCreatePageComponent implements OnInit {
       description: [event ? event.description : "", Validators.required],
       address: [event ? event.address : "", Validators.required],
       landmark: [event ? event.landmark : ""],
-      //orgEmail:  [event ? event.orgEmail : "", [Validators.required,Validators.email]],
+     
       orgEmail: [event ? event.orgEmail : ""],
-      //orgPhone:  [event ? event.orgPhone : "", [Validators.required,Validators.pattern(/^\+?\d{1,2}[- ]?\d{2}[- ]?\d{4}[- ]?\d{4}$/)] ],
+      
       orgPhone:  [event ? event.orgPhone : "", [Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
       capacity:  [event ? event.capacity : "", Validators.required],
       eventType:  [event ? event.eventType : "", Validators.required],
       entryFee:  [event ? event.entryFee : "", Validators.required],
-      // languages:  [event ? event.languages : "",[Validators.pattern('^[a-zA-Z \-\']+'),Validators.required]],
+     
       languages:  [event ? event.languages : "",Validators.required],
       organiser:  [event ? event.organiser : "", [Validators.required,Validators.pattern('^[a-zA-Z \-\']+')]]
     });
@@ -142,15 +135,6 @@ export class EventCreatePageComponent implements OnInit {
 
     this.store.store("new-event-preview", JSON.stringify( event ));
     this.router.navigate(['/community/event/preview',{id:'preview'}]);
-    // this.eventService.addEvents( event ).subscribe((response: any) => {
-    //   if (response.data.id != "") {
-    //     //this.router.navigate(['/community/events']);
-    //     this.eventForm.reset();
-    //     this.successMessage = "Event submittted successfully for review, once reviewed it will start appearing on site."
-    //   }
-    //   else {
-    //     alert("Oops! something wrong happen, please try again.");
-    //   }
-    // });
+    
   }
 }

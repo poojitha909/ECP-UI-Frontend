@@ -35,16 +35,14 @@ export class ChangeProfilePictureFormComponent implements OnInit {
     this.basicProfile = this.fb.group({
       firstName: [this.userService.userProfile.basicProfileInfo.firstName || '', Validators.required],
       primaryEmail: [this.userService.userProfile.basicProfileInfo.primaryEmail || '', [Validators.required, Validators.email]],
-      primaryPhoneNo: [this.userService.userProfile.basicProfileInfo.primaryPhoneNo || '', Validators.required],
+      primaryPhoneNo: [this.userService.userProfile.basicProfileInfo.primaryPhoneNo || '', [Validators.required]],
 
     });
 
     if (this.userService.userProfile.basicProfileInfo.profileImage && this.userService.userProfile.basicProfileInfo.profileImage.thumbnailImage) {
       this.profileImage = this.userService.userProfile.basicProfileInfo.profileImage.thumbnailImage;
     }
-    this.otpMobile = this.userService.userProfile.basicProfileInfo.primaryPhoneNo ? 
-                      this.userService.userProfile.basicProfileInfo.primaryPhoneNo :
-                      this.auth.user.phoneNumber;
+    this.otpMobile = this.auth.user.phoneNumber || this.auth.user.email;
   }
 
   ngOnInit() {
@@ -55,6 +53,12 @@ export class ChangeProfilePictureFormComponent implements OnInit {
       this.userService.formEditMessage("editForm")
     });
     this.basicProfile.get("primaryPhoneNo").valueChanges.subscribe(selectedValue => {
+      if (selectedValue) {
+        const phoneNumber = selectedValue.toString();
+        if (phoneNumber.length > 10) {
+          this.formControl.primaryPhoneNo.setValue(phoneNumber.slice(0, 10));
+        }
+      }
       this.userService.formEditMessage("editForm")
     });
     this.subscription = this.userService.getFormEditMessage().subscribe(message => {
@@ -107,43 +111,47 @@ export class ChangeProfilePictureFormComponent implements OnInit {
   }
   onSubmit(event) {
     // this.userService.editFormSection('editSection')
-    const oldUserData = {
-      firstName: this.userService.userProfile.basicProfileInfo.firstName,
-      primaryEmail: this.userService.userProfile.basicProfileInfo.primaryEmail,
-      primaryPhoneNo: this.userService.userProfile.basicProfileInfo.primaryPhoneNo
-    };
+    if (this.mobileValidation()) {
+      const oldUserData = {
+        firstName: this.userService.userProfile.basicProfileInfo.firstName,
+        primaryEmail: this.userService.userProfile.basicProfileInfo.primaryEmail,
+        primaryPhoneNo: this.userService.userProfile.basicProfileInfo.primaryPhoneNo
+      };
 
-    this.userService.userProfile.basicProfileInfo.firstName = this.formControl.firstName.value;
-    this.userService.userProfile.basicProfileInfo.primaryEmail = this.formControl.primaryEmail.value;
-    this.userService.userProfile.basicProfileInfo.primaryPhoneNo = this.formControl.primaryPhoneNo.value;
-    this.isLoading = true;
-    this.resetAlertMessages();
+      this.userService.userProfile.basicProfileInfo.firstName = this.formControl.firstName.value;
+      this.userService.userProfile.basicProfileInfo.primaryEmail = this.formControl.primaryEmail.value;
+      this.userService.userProfile.basicProfileInfo.primaryPhoneNo = this.formControl.primaryPhoneNo.value;
+      this.isLoading = true;
+      this.resetAlertMessages();
 
-    this.userService.uploadUserImage(this.imageData).subscribe(
-      response => {
-        this.isLoading = false;
-        this.successMessage = "User information updated successfully";
-        this.cancelForm.emit();
-      },
-      error => {
-        this.isLoading = false;
-        console.log(error);
-        this.userService.userProfile.basicProfileInfo.firstName = oldUserData.firstName;
-        this.userService.userProfile.basicProfileInfo.primaryEmail = oldUserData.primaryEmail;
-        this.userService.userProfile.basicProfileInfo.primaryPhoneNo = oldUserData.primaryPhoneNo;
+      this.userService.uploadUserImage(this.imageData).subscribe(
+        response => {
+          this.isLoading = false;
+          this.successMessage = "User information updated successfully";
+          this.cancelForm.emit();
+        },
+        error => {
+          this.isLoading = false;
+          console.log(error);
+          this.userService.userProfile.basicProfileInfo.firstName = oldUserData.firstName;
+          this.userService.userProfile.basicProfileInfo.primaryEmail = oldUserData.primaryEmail;
+          this.userService.userProfile.basicProfileInfo.primaryPhoneNo = oldUserData.primaryPhoneNo;
 
-        if (this.imageData) {
-          this.errorMessage = "Profile image could not be updated";
-        } else {
-          if (error.error.error.errorCode == 3001) {
-            this.errorMessage = "We could not match the OTP you entered with the one that was sent to you. Please retry with the OTP that was sent to your registered mobile number";
-          } else if (error.error.error.errorCode == 3004) {
-            this.errorMessage = error.error.error.errorMsg;
+          if (this.imageData) {
+            this.errorMessage = "Profile image could not be updated";
           } else {
-            this.errorMessage = "Some unknown internal server error occurred";
+            if (error.error.error.errorCode == 3001) {
+              this.errorMessage = "We could not match the OTP you entered with the one that was sent to you. Please retry with the OTP that was sent to your registered mobile number";
+            } else if (error.error.error.errorCode == 3004) {
+              this.errorMessage = error.error.error.errorMsg;
+            } else {
+              this.errorMessage = "Some unknown internal server error occurred";
+            }
           }
-        }
-      });
+        });
+    } else {
+      this.errorMessage = "Please enter a valid mobile number";
+    }
   }
 
   resetAlertMessages() {
@@ -157,4 +165,11 @@ export class ChangeProfilePictureFormComponent implements OnInit {
     // this.userService.editFormSection('editSection')
   }
 
+  mobileValidation(): boolean {
+    console.log(this.formControl.primaryPhoneNo.value);
+    if (this.formControl.primaryPhoneNo.value.toString().length !== 10) {
+      return false
+    }
+    return true;
+  }
 }

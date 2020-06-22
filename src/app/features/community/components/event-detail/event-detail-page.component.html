@@ -26,20 +26,7 @@
 
 
 
-                <!-- <div class="m-t-30 category-box favourite" *ngIf="user!=undefined && user!=null">
-                    <div *ngIf="!markIt" (click)="markFavourite()">
-                        <a class="uk-icon-button  uk-margin-small-right favourite-icon" uk-icon="heart"></a>
-                        <a> Favourite this Event</a>
-                    </div>
-                    <div *ngIf="markIt" (click)="markFavourite()">
-                        <a class="uk-icon-button  uk-margin-small-right favourite-icon" uk-icon="ban"></a>
-                        <a> Un-Favourite this Event</a>
-                    </div>
-                </div>
-                <div class="m-t-40 category-box favourite" *ngIf="user==undefined || user==null">
-                    <a class="uk-icon-button  uk-margin-small-right favourite-icon" uk-icon="user"></a>
-                    <a (click)="markFavourite()"> Join Us to favourite this Event</a>
-                </div> -->
+                
             </div>
             <div class="uk-width-2-3@m">
                 <div *ngIf="eventId == 'preview'" class="previewTop">
@@ -143,8 +130,7 @@
                 <div class="uk-modal-body" id="contactDetails">
                     <div class="uk-child-width-1-2@s uk-grid-small" uk-grid>
                         <div>
-                            <!-- <p class="font-regular-15 m-b-10 lable">Location</p>
-                            <p class="font-regular m-t-0">{{event?.address}}</p> -->
+                            
                             <p class="font-regular-15 m-b-10 lable">Organiser</p>
                             <p class="font-regular m-t-0">{{event?.organiser}}</p>
 

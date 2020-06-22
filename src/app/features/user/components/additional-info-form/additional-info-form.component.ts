@@ -84,7 +84,7 @@ export class AdditionalInfoFormComponent implements OnInit {
   }
 
   mobileValidation(): boolean {
-    if (this.formControl.primaryPhoneNo.value.toString().length !== 10) {
+    if (this.formControl.primaryPhoneNo.value && this.formControl.primaryPhoneNo.value.toString().length !== 10) {
       return false
     }
     return true;

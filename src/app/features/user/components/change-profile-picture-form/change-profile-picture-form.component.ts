@@ -35,7 +35,7 @@ export class ChangeProfilePictureFormComponent implements OnInit {
     this.basicProfile = this.fb.group({
       firstName: [this.userService.userProfile.basicProfileInfo.firstName || '', Validators.required],
       primaryEmail: [this.userService.userProfile.basicProfileInfo.primaryEmail || '', [Validators.required, Validators.email]],
-      primaryPhoneNo: [this.userService.userProfile.basicProfileInfo.primaryPhoneNo || '', [Validators.required]],
+      primaryPhoneNo: [this.userService.userProfile.basicProfileInfo.primaryPhoneNo || '', Validators.required],
 
     });
 
@@ -166,7 +166,6 @@ export class ChangeProfilePictureFormComponent implements OnInit {
   }
 
   mobileValidation(): boolean {
-    console.log(this.formControl.primaryPhoneNo.value);
     if (this.formControl.primaryPhoneNo.value.toString().length !== 10) {
       return false
     }

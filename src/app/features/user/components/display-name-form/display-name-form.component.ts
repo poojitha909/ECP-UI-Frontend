@@ -37,17 +37,17 @@ export class DisplayNameFormComponent implements OnInit {
     if (this.userForm.valid) {
       this.isLoading = true;
       this.resetAlertMessages();
-      this.userService.changeUserName(this.userForm.value).subscribe(
-        response => {
-          this.isLoading = false;
-          this.successMessage = "User name updated successfully"
-          // this.router.navigateByUrl("/");
-        },
-        error => {
-          this.isLoading = false;
-          this.errorMessage = "Some unknown internal server error occured";
-          console.log(error);
-        })
+      // this.userService.changeUserName(this.userForm.value).subscribe(
+      //   response => {
+      //     this.isLoading = false;
+      //     this.successMessage = "User name updated successfully"
+      //     // this.router.navigateByUrl("/");
+      //   },
+      //   error => {
+      //     this.isLoading = false;
+      //     this.errorMessage = "Some unknown internal server error occured";
+      //     console.log(error);
+      //   })
     }
     
   }

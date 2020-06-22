@@ -105,23 +105,23 @@ export class UserService {
   }
 
 
-  createUserProfile(userData: UserProfile): Observable<UserProfile> {
-    return this.http.post<any>(ApiConstants.USER_PROFILE, userData).pipe(
-      map
-        ((response) => {
-          if (response.data.basicProfileInfo && response.data.basicProfileInfo.firstName) {
-            let currentUser: User = this.auth.user;
-            currentUser.userName = response.data.basicProfileInfo.firstName;
-            currentUser.hasProfile = true;
-            this.auth.user = currentUser;
-          } else if (response.data.sessionId) {
-            this.auth.userSession = response.data.sessionId;
-            this.auth.user = response.data.user;
-          }
-          return response.data;
-        })
-    );
-  }
+  // createUserProfile(userData: UserProfile): Observable<UserProfile> {
+  //   return this.http.post<any>(ApiConstants.USER_PROFILE, userData).pipe(
+  //     map
+  //       ((response) => {
+  //         if (response.data.basicProfileInfo && response.data.basicProfileInfo.firstName) {
+  //           let currentUser: User = this.auth.user;
+  //           currentUser.userName = response.data.basicProfileInfo.firstName;
+  //           currentUser.hasProfile = true;
+  //           this.auth.user = currentUser;
+  //         } else if (response.data.sessionId) {
+  //           this.auth.userSession = response.data.sessionId;
+  //           this.auth.user = response.data.user;
+  //         }
+  //         return response.data;
+  //       })
+  //   );
+  // }
 
   getUserProfile(): Observable<UserProfile> {
     return this.http.get<any>(`${ApiConstants.USER_PROFILE}/${this.auth.user.id}`).pipe(
@@ -132,51 +132,50 @@ export class UserService {
     );
   }
 
-  changeUserName(user: User): Observable<User> {
-    return this.http.post<any>(`${ApiConstants.USER_SIGNUP}`, user).pipe(
-      map
-        ((response) => {
-          if (response && response.data) {
-            let currentUser: User = this.auth.user;
-            currentUser.userName = response.data.userName;
-            this.auth.user = currentUser;
-            return response.data;
-          }
-        })
-    );
-  }
+  // changeUserName(user: User): Observable<User> {
+  //   return this.http.post<any>(`${ApiConstants.USER_SIGNUP}`, user).pipe(
+  //     map
+  //       ((response) => {
+  //         if (response && response.data) {
+  //           let currentUser: User = this.auth.user;
+  //           currentUser.userName = response.data.userName;
+  //           this.auth.user = currentUser;
+  //           return response.data;
+  //         }
+  //       })
+  //   );
+  // }
 
   updateUserProfile(user: UserProfile): Observable<any> {
-    user.userId = this.auth.user.id;
-    if (user.basicProfileInfo.firstName !== this.auth.user.userName) {
-      const userData: User = {
-        id: user.userId,
-        userName: user.basicProfileInfo.firstName
-      }
-      return this.changeUserName(userData).pipe(
-        switchMap(() => this.http.put<any>(`${ApiConstants.USER_PROFILE}/${user.userId}`, user).pipe(
-          map
-            ((response) => {
-              let currentUser: User = this.auth.user;
-              currentUser.phoneNumber = response.data.basicProfileInfo.primaryPhoneNo;
-              currentUser.email = response.data.basicProfileInfo.primaryEmail;
-              this.auth.user = currentUser;
-              return response.data;
-            })
-        ))
-      )
-    } else {
-      return this.http.put<any>(`${ApiConstants.USER_PROFILE}/${user.userId}`, user).pipe(
-        map
-          ((response) => {
+    return this.http.put<any>(`${ApiConstants.USER_PROFILE}/${user.userId}`, user).pipe(
+      map
+        ((response) => {
+          if (response.data.basicProfileInfo.firstName !== this.auth.user.userName) {
             let currentUser: User = this.auth.user;
-            currentUser.phoneNumber = response.data.basicProfileInfo.primaryPhoneNo;
-            currentUser.email = response.data.basicProfileInfo.primaryEmail;
+            currentUser.userName = response.data.basicProfileInfo.firstName;
             this.auth.user = currentUser;
-            return response.data;
-          })
-      );
-    }
+          }
+          return response.data;
+        })
+    );
+    // user.userId = this.auth.user.id;
+    // if (user.basicProfileInfo.firstName !== this.auth.user.userName) {
+    //   const userData: User = {
+    //     id: user.userId,
+    //     userName: user.basicProfileInfo.firstName
+    //   }
+    //   return this.changeUserName(userData).pipe(
+    //     switchMap(() => this.http.put<any>(`${ApiConstants.USER_PROFILE}/${user.userId}`, user).pipe(
+    //       map
+    //         ((response) => {
+    //           return response.data;
+    //         })
+    //     ))
+    //   )
+    // } else {
+
+    // }
+
   }
 
   uploadUserImage(userImage: FormData): Observable<any> {

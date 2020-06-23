@@ -12,12 +12,12 @@
         </div>
         <hr>
         <div class="uk-child-width-1-2@s m-t-40" uk-grid>
-            <div class="uk-visible@s uk-flex" role="banner">
-                <img src=" assets/images/illustration.png" class="w-100 box-border" alt="" />
+            <div class="uk-flex" role="banner">
+                <img src=" assets/images/JOA Symbol Outline Color RGB.svg" class="w-100 box-border" alt="" />
             </div>
-            <div class="uk-hidden@s">
+            <!-- <div class="uk-hidden@s">
                 <img class="box-border" src=" assets/images/illustration-mobile.png" alt="" />
-            </div>
+            </div> -->
             <div>
 
                 <div *ngIf="isLoading" class="uk-text-center pt-40">
@@ -39,7 +39,8 @@
 
                 <!-- Addidtional info form  -->
                 <ng-container *ngIf="isNewUser && !isLoading && user">
-                    <app-additional-info-form [verifiedString]="verifiedString" (doNotRegister)="doNotRegister()"></app-additional-info-form>
+                    <app-additional-info-form [verifiedString]="verifiedString" (doNotRegister)="doNotRegister()">
+                    </app-additional-info-form>
                 </ng-container>
                 <ng-container *ngIf="!isNewUser && !isLoading && user">
                     <app-user-welcome-view></app-user-welcome-view>

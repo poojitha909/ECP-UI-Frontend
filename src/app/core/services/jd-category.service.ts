@@ -10,11 +10,10 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class JdCategoryService {
-  // serviceCategories: Category[];
+  
   constructor(private http: HttpClient) { }
 
   fetchAllCategories(param:serviceParam): Observable<any> {
-
     let queryParams: string = '';
 
     Object.keys(param)
@@ -29,7 +28,6 @@ export class JdCategoryService {
     return this.http.get<any>(`${ApiConstants.GET_SERVICE_CATEGORIES}?${queryParams}`).pipe(
       map(response => {
         if (response && response.data) {
-          // this.serviceCategories = response.data
           return response.data
         }
       })

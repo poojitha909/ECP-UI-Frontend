@@ -31,7 +31,6 @@ export class SigninTypesViewComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log(this.router.url);
   }
 
   ngOnChanges(changes: SimpleChanges) {

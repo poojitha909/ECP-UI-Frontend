@@ -9,22 +9,22 @@
     <p class="font-regular">{{ verifiedString }}</p>
   </div> -->
   <div class="category-box bg-white">
-    <h3 class="m-b-10">Welcome to Joy of Age!</h3>
-    <p class="font-regular">It is a long established fact that a reader will be distracted by the readable content of a
-      page when looking at its layout distracted by the readable content of a page when looking at its layout</p>
+    <h3 class="m-b-10">Registration</h3>
+    <p class="font-regular">Only registered community members can share articles, start discussions, suggest
+      events, ask questions to experts, rate, review, comment on products and services.</p>
 
   </div>
 
   <div class="category-box bg-white m-t-20">
-    <h3 class="m-0">User Details</h3>
+    <h3 class="m-0">Your profile information</h3>
     <hr class="m-t-10" />
     <form class="uk-form-stacked uk-grid-small" [formGroup]="userform" uk-grid>
       <div class="uk-width-1-2@s">
-        <label class="uk-form-label" for="firstName">Please enter your name</label>
+        <label class="uk-form-label" for="firstName">Name</label>
         <div class="uk-form-controls">
           <input class="uk-input" id="firstName"
             [ngClass]="{'uk-form-danger' : formControl.firstName.invalid && (formControl.firstName.dirty || formControl.firstName.touched) }"
-            type="text" formControlName="firstName" placeholder="Your Display Name...">
+            type="text" formControlName="firstName" placeholder="Enter Name...">
         </div>
       </div>
 
@@ -33,7 +33,7 @@
         <div class="uk-form-controls">
           <input
             [ngClass]="{'uk-form-danger' : formControl.primaryEmail.invalid && (formControl.primaryEmail.dirty || formControl.primaryEmail.touched) }"
-            class="uk-input" id="Email" type="text" formControlName="primaryEmail" placeholder="Your Email...">
+            class="uk-input" id="Email" type="text" formControlName="primaryEmail" placeholder="Enter Email...">
         </div>
       </div>
 
@@ -43,7 +43,7 @@
           <input
             [ngClass]="{'uk-form-danger' : formControl.primaryPhoneNo.invalid && (formControl.primaryPhoneNo.dirty || formControl.primaryPhoneNo.touched) }"
             class="uk-input" id="Mobile-Number" type="number" formControlName="primaryPhoneNo"
-            placeholder="Your Mobile Number...">
+            placeholder="Enter Mobile Number...">
         </div>
       </div>
       <!-- <div class="uk-margin">
@@ -61,9 +61,10 @@
       </div> -->
       <div class="uk-width-1-1">
         <hr />
-        <button class="uk-button uk-button-default uk-float-right uk-margin-small-left" [disabled]="userform.invalid"
-          (click)="onSubmit()">Submit</button>
-        <button routerLink="/" class="uk-button uk-button-transparent uk-float-right">Skip</button>
+        <button class="uk-button uk-button-default uk-float-right uk-margin-small-left m-b-10"
+          [disabled]="userform.invalid" (click)="onSubmit()">Register me</button>
+        <button (click)="notToRegister()" class="uk-button uk-button-transparent uk-float-right">I do not wish to
+          register</button>
       </div>
     </form>
   </div>

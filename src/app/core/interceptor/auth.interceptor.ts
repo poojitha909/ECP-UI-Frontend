@@ -50,12 +50,6 @@ export class AuthInterceptor implements HttpInterceptor {
             catchError(error => {
                 if (error instanceof HttpErrorResponse) {
                     switch ((<HttpErrorResponse>error).status) {
-                        // case 401:
-                        // this.storage.clear();
-                        // const redirectUrl = encodeURIComponent(window.location.href);
-
-                        // window.location.href = `${ENV.PUBLIC_APP}/sign-in?appType=${AppType.Dashboard}&url=${redirectUrl}`;
-                        // return of();
                         case 400:
                             this.auth.logout();
                             return of();

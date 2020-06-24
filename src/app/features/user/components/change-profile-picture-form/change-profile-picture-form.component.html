@@ -77,7 +77,7 @@
                     <div class="uk-form-controls">
                         <input class="uk-input"
                             [ngClass]="{'uk-form-danger' : formControl.primaryPhoneNo.invalid && ( formControl.primaryPhoneNo.dirty ||  formControl.primaryPhoneNo.touched) }"
-                            id="Phone-number" formControlName="primaryPhoneNo" type="text" placeholder="Phone number">
+                            id="Phone-number" formControlName="primaryPhoneNo" type="number" placeholder="Phone number">
                         <small aria-describedby="Phone-number"
                             *ngIf="formControl.primaryPhoneNo.invalid && ( formControl.primaryPhoneNo.dirty ||  formControl.primaryPhoneNo.touched)"
                             class="uk-text-danger">Mobile phone number is required to save your key

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserProfile, UserIdType } from 'src/app/core/interfaces';
 import { AuthService } from 'src/app/core';
@@ -13,11 +13,12 @@ import { Router } from '@angular/router';
 export class AdditionalInfoFormComponent implements OnInit {
 
   @Input() verifiedString: string;
+  @Output() doNotRegister = new EventEmitter();
   // userform: FormGroup;
   userform = this.fb.group({
-    firstName: ['', Validators.required],
-    primaryEmail: [this.auth.user.email, Validators.required],
-    primaryPhoneNo: [this.auth.user.phoneNumber, [Validators.required]]
+    firstName: [{ value: this.auth.user.email ? this.auth.user.userName : '', disabled: !!this.auth.user.email }, Validators.required],
+    primaryEmail: [this.auth.user.email, Validators.email],
+    primaryPhoneNo: [this.auth.user.phoneNumber]
   });
   userIdType = UserIdType;
   errorMessage: string;
@@ -40,20 +41,24 @@ export class AdditionalInfoFormComponent implements OnInit {
       this.userService.formEditMessage("editForm")
     });
     this.userform.get("primaryPhoneNo").valueChanges.subscribe(selectedValue => {
+      if (selectedValue) {
+        const phoneNumber = selectedValue.toString();
+        if (phoneNumber.length > 10) {
+          this.formControl.primaryPhoneNo.setValue(phoneNumber.slice(0, 10));
+        }
+      }
       this.userService.formEditMessage("editForm")
     });
   }
 
   onSubmit() {
     this.errorMessage = null;
-    if (this.userform.valid) {
-
+    if (this.userform.valid && this.mobileValidation()) {
       let userData: UserProfile = {
-        userId: this.auth.user.id,
-        basicProfileInfo: this.userform.value
+        basicProfileInfo: this.userform.getRawValue()
       };
 
-      this.userService.createUserProfile(userData).subscribe(
+      this.auth.registerUser(userData).subscribe(
         response => {
           if (response) {
             if (this.auth.redirectUrl) {
@@ -69,9 +74,20 @@ export class AdditionalInfoFormComponent implements OnInit {
           console.log(error);
           error.error.error ? this.errorMessage = error.error.error.errorMsg : this.errorMessage = "Something went wrong!";
         })
-      console.log(userData);
-
+    } else {
+      this.errorMessage = "Please enter a valid mobile number";
     }
+  }
+
+  notToRegister() {
+    this.doNotRegister.emit();
+  }
+
+  mobileValidation(): boolean {
+    if (this.formControl.primaryPhoneNo.value && this.formControl.primaryPhoneNo.value.toString().length !== 10) {
+      return false
+    }
+    return true;
   }
 
 }

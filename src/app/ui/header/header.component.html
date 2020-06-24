@@ -3,7 +3,8 @@
     <div class="uk-grid-small" uk-grid>
       <div class="uk-width-auto">
         <div class="logo-tagline uk-text-left@s uk-text-center">
-          <img style="width: 140px;height: 84px;" routerLink="/" src="assets/images/JOA Logo Light RGB.svg" />
+          <img alt="Joy of age logo" style="width: 140px;height: 84px;" routerLink="/"
+            src="assets/images/JOA Logo WO Tagline Light RGB.svg" />
           <!-- <div class="logo">
             <button class="uk-button uk-button-default" routerLink="/">Joy of Age</button>
           </div>
@@ -24,12 +25,14 @@
                   class="uk-button uk-button-default">{{ auth.user.userName || auth.user.email || auth.user.phoneNumber }}</button>
                 <div uk-dropdown="pos: bottom-left">
                   <ul class="uk-nav uk-dropdown-nav">
-                    <li><a class="uk-padding-remove font-regular" (click)="navigateUser()">
+                    <li><a tabindex=0 (keydown.enter)="navigateUser()" class="uk-padding-remove font-regular"
+                        (click)="navigateUser()">
                         <fa-icon icon="user" [style]="{'margin-right':'20px','color':'#1A73E8'}"></fa-icon>My Profile
                       </a>
                     </li>
                     <hr />
-                    <li><a (click)="logout()" class="uk-padding-remove font-regular">
+                    <li><a tabindex=0 (keydown.enter)="logout()" (click)="logout()"
+                        class="uk-padding-remove font-regular">
                         <fa-icon icon="sign-out-alt" [style]="{'margin-right':'20px','color':'#1A73E8'}"></fa-icon>
                         Logout
                       </a></li>

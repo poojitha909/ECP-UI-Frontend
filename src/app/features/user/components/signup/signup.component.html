@@ -3,24 +3,26 @@
         <div class="signup-title">
 
             <h1 id="signin-header" tabindex=0>
-                {{welcomeText? 'Welcome to Joy of Age Community':'Join the Joy of Age Community'}}</h1>
+                <!-- {{welcomeText? 'Welcome to Joy of Age Community':'Join the Joy of Age Community'}} -->
+                Join the Joy of Age Community
+            </h1>
             <!-- <div *ngIf="!user" class="uk-width-auto">
                 <a routerLink="/"><span class="close-icon" data-uk-tooltip title="Cancel Join Us"></span></a>
             </div> -->
         </div>
         <hr>
         <div class="uk-child-width-1-2@s m-t-40" uk-grid>
-            <div class="uk-visible@s uk-flex" role="banner">
-                <img src=" assets/images/illustration.png" class="w-100 box-border" alt="illustration icon" />
+            <div class="uk-flex" role="banner">
+                <img src=" assets/images/JOA Symbol Outline Color RGB.svg" class="w-100 box-border" alt="" />
             </div>
-            <div class="uk-hidden@s">
-                <img class="box-border" src=" assets/images/illustration-mobile.png" alt="No Image Found" />
-            </div>
+            <!-- <div class="uk-hidden@s">
+                <img class="box-border" src=" assets/images/illustration-mobile.png" alt="" />
+            </div> -->
             <div>
 
-                <!-- <div *ngIf="isLoading" class="uk-text-center pt-40">
+                <div *ngIf="isLoading" class="uk-text-center pt-40">
                     <div class="spinner-border"></div>
-                </div> -->
+                </div>
 
                 <!-- SignIn types View START -->
                 <ng-container *ngIf="!isLoading && !user">
@@ -37,7 +39,8 @@
 
                 <!-- Addidtional info form  -->
                 <ng-container *ngIf="isNewUser && !isLoading && user">
-                    <app-additional-info-form [verifiedString]="verifiedString"></app-additional-info-form>
+                    <app-additional-info-form [verifiedString]="verifiedString" (doNotRegister)="doNotRegister()">
+                    </app-additional-info-form>
                 </ng-container>
                 <ng-container *ngIf="!isNewUser && !isLoading && user">
                     <app-user-welcome-view></app-user-welcome-view>
@@ -46,7 +49,7 @@
         </div>
 
         <!-- Signup discription link START-->
-        <div class="signup-detail">
+        <!-- <div class="signup-detail">
             <div class="list box-border" role="banner">
                 <h3 class="m-b-10">Why Sign In</h3>
                 <hr class="m-t-0" />
@@ -67,23 +70,14 @@
                         <fa-icon [icon]="['fas', 'star']" class="uk-margin-small-right"></fa-icon> Post your queries and
                         get Expert guidance with assured confidentiality
                     </li>
-
-                    <!-- <li>
-                        <fa-icon [icon]="['fas', 'star']" class="uk-margin-small-right"></fa-icon> Post your queries and
-                        get Expert guidance with assured
-                        confidentiality.
-                    </li> -->
                 </ul>
             </div>
-            <!-- <div class="member uk-padding-small">
-                                Already a member? <a class="m-l-1" routerLink="/user/signin">Signin here</a>
-                            </div> -->
-        </div>
+        </div> -->
         <!-- Signup discription link END-->
 
         <!-- <a class="uk-button uk-button-default" href="#loading-modal" uk-toggle>Open</a> -->
 
-        <div id="loading-modal" class="uk-flex-top" uk-modal="esc-close:false;bg-close:false;container:false;">
+        <!-- <div id="loading-modal" class="uk-flex-top" uk-modal="esc-close:false;bg-close:false;container:false;">
             <div class="uk-modal-dialog p-15 uk-margin-auto-vertical"
                 [ngClass]="isLoading ? 'loading-modal-dialog' :'success-modal-dialog'">
                 <div *ngIf="isLoading" class="uk-grid-small" uk-grid>
@@ -110,7 +104,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
 

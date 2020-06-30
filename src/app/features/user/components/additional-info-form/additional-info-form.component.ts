@@ -57,23 +57,43 @@ export class AdditionalInfoFormComponent implements OnInit {
       let userData: UserProfile = {
         basicProfileInfo: this.userform.getRawValue()
       };
-
-      this.auth.registerUser(userData).subscribe(
-        response => {
-          if (response) {
-            if (this.auth.redirectUrl) {
-              const redirect = this.auth.redirectUrl;
-              this.auth.removeRedirectUrl();
-              this.router.navigateByUrl(redirect);
-            } else {
-              this.router.navigateByUrl("/");
+      if (this.auth.user && this.auth.user.id) {
+        userData.userId = this.auth.user.id;
+        this.userService.createUserProfile(userData).subscribe(
+          response => {
+            if (response) {
+              if (this.auth.redirectUrl) {
+                const redirect = this.auth.redirectUrl;
+                this.auth.removeRedirectUrl();
+                this.router.navigateByUrl(redirect);
+              } else {
+                this.router.navigateByUrl("/");
+              }
             }
-          }
-        },
-        error => {
-          console.log(error);
-          error.error.error ? this.errorMessage = error.error.error.errorMsg : this.errorMessage = "Something went wrong!";
-        })
+          },
+          error => {
+            console.log(error);
+            error.error.error ? this.errorMessage = error.error.error.errorMsg : this.errorMessage = "Something went wrong!";
+          });
+      } else {
+        this.auth.registerUser(userData).subscribe(
+          response => {
+            if (response) {
+              if (this.auth.redirectUrl) {
+                const redirect = this.auth.redirectUrl;
+                this.auth.removeRedirectUrl();
+                this.router.navigateByUrl(redirect);
+              } else {
+                this.router.navigateByUrl("/");
+              }
+            }
+          },
+          error => {
+            console.log(error);
+            error.error.error ? this.errorMessage = error.error.error.errorMsg : this.errorMessage = "Something went wrong!";
+          });
+      }
+
     } else {
       this.errorMessage = "Please enter a valid mobile number";
     }

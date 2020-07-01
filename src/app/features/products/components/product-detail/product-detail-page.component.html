@@ -101,7 +101,7 @@
                     <div class="buynow">
                         <table>
                             <tr>
-                                <td><button type="button" (click)="redirectConfirm()"
+                                <td><button type="button" id="buy-btn" (click)="redirectConfirm($event.target)"
                                         class="uk-button uk-button-primary">{{ auth.isAuthenticate ? 'Buy on our partner site – seniority.in' : 'Join us to get details'}}</button>
                                 </td>
                                 <td><span class="price"> Rs. {{product?.price}}</span></td>
@@ -115,7 +115,8 @@
                 <!-- This is review modal -->
                 <div id="review-modal" uk-modal="bg-close:false;container:false;" appTrapModalFocus>
                     <div class="uk-modal-dialog uk-modal-body">
-                        <h3 id="reviewTitle" tabindex=0 class="font-regular-24 font-weight-600">{{reviewTitle}} your review</h3>
+                        <h3 id="reviewTitle" tabindex=0 class="font-regular-24 font-weight-600">{{reviewTitle}} your
+                            review</h3>
                         <hr />
                         <!-- Success box START-->
                         <div *ngIf="reviewSuccessMessage" class="uk-alert-success" uk-alert>
@@ -145,8 +146,8 @@
                             </div>
 
                             <div class="uk-text-right">
-                                <button class="uk-button uk-button-transparent uk-modal-close"
-                                    type="button">Cancel</button>
+                                <button class="uk-button uk-button-transparent uk-modal-close" type="button"
+                                    (click)="onCloseModel()">Cancel</button>
                                 <button class="uk-button uk-button-default m-l-10"
                                     type="submit">{{ auth.isAuthenticate ? 'Share your review': 'Join us to review'}}</button>
                             </div>
@@ -191,9 +192,9 @@
                                         </h3>
                                     </div>
                                     <div class="uk-width-auto">
-                                        <button class="uk-button uk-button-transparent review-btn-transparent"
-                                            uk-toggle="target: #review-modal"
-                                            (click)="reviewForm.reset();reviewSuccessMessage = null;reviewTitle='Add'">Add
+                                        <button id="add-review-btn"
+                                            class="uk-button uk-button-transparent review-btn-transparent"
+                                            (click)="addReview($event.target)">Add
                                             your review</button>
                                     </div>
                                 </div>
@@ -237,9 +238,10 @@
         </div>
     </div>
     <!-- Contact Model START -->
-    <div id="modal-product-leaving" class="uk-modal-container" uk-modal appTrapModalFocus>
+    <div id="modal-product-leaving" class="uk-modal-container" uk-modal="bg-close:false;container:false;"
+        appTrapModalFocus>
         <div class="uk-modal-dialog">
-            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <button class="uk-modal-close-default" type="button" (click)="onCloseModel()" uk-close></button>
             <div class="uk-modal-header">
                 <h2 id="buy-product-title" tabindex=0 class="uk-modal-title">Leaving Joy of Age</h2>
             </div>
@@ -255,7 +257,8 @@
                 </div>
             </div>
             <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-transparent uk-modal-close close-btn" type="button">Cancel & Go
+                <button class="uk-button uk-button-transparent uk-modal-close close-btn" type="button"
+                    (click)="onCloseModel()">Cancel & Go
                     Back</button>
                 <button class="uk-button uk-button-primary m-l-5 uk-modal-close close-btn" (click)="redirectToSite()"
                     type="button">Take me to seniority.in</button>

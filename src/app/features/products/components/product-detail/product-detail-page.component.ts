@@ -49,6 +49,8 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit, OnDest
   reviewTitle: string = 'Add';
   detailReview: any;
   userRating: DBRating;
+  currentModelLink: string;
+
   private readonly notifier: NotifierService;
   @ViewChild("customNotification", { static: true }) customNotificationTmpl;
   @ViewChild("customNotification1", { static: true }) customNotificationTmpl1;
@@ -152,15 +154,27 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit, OnDest
   redirectToSite() {
     window.open(this.product.buyLink);
   }
-  redirectConfirm() {
+
+  redirectConfirm(element: any) {
     if (this.user) {
+      this.onOpenModel();
       UIkit.modal("#modal-product-leaving").show();
       document.getElementById("buy-product-title").focus();
+      this.currentModelLink = element.id;
     }
     else {
       this.authService.redirectUrl = "/products/" + this.product.id;
       this.router.navigate(['/user/signin']);
     }
+  }
+
+  addReview(element: any) {
+    this.reviewForm.reset();
+    this.reviewSuccessMessage = null;
+    this.reviewTitle = 'Add';
+    UIkit.modal("#review-modal").show();
+    document.getElementById("reviewTitle").focus();
+    this.currentModelLink = element.id;
   }
 
   getReviews() {
@@ -379,6 +393,15 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit, OnDest
   changeReviewPage(page: number) {
     this.reviwePaginate.p = page;
     this.getReviews();
+  }
+
+  onCloseModel() {
+    document.getElementsByClassName("main-container")[0].removeAttribute("aria-hidden");
+    document.getElementById(this.currentModelLink).focus();
+  }
+
+  onOpenModel() {
+    document.getElementsByClassName("main-container")[0].setAttribute("aria-hidden", "true");
   }
 
   ngOnDestroy() {

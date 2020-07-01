@@ -113,16 +113,17 @@
 
                 <!-- Write Review Form START-->
                 <!-- This is review modal -->
-                <div id="review-modal" uk-modal>
+                <div id="review-modal" uk-modal="bg-close:false;container:false;" appTrapModalFocus>
                     <div class="uk-modal-dialog uk-modal-body">
-                        <h3 class="font-regular-24 font-weight-600">{{reviewTitle}} your review</h3>
+                        <h3 id="reviewTitle" tabindex=0 class="font-regular-24 font-weight-600">{{reviewTitle}} your review</h3>
                         <hr />
                         <!-- Success box START-->
                         <div *ngIf="reviewSuccessMessage" class="uk-alert-success" uk-alert>
                             <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ reviewSuccessMessage }}</p>
                         </div>
                         <!-- Success box END-->
-                        <form [formGroup]="reviewForm" class="uk-form-stacked review-form">
+                        <form focusInvalidInput [formGroup]="reviewForm" (ngSubmit)="onReviewSubmit()"
+                            class="uk-form-stacked review-form">
 
 
                             <div class="uk-margin">
@@ -146,9 +147,8 @@
                             <div class="uk-text-right">
                                 <button class="uk-button uk-button-transparent uk-modal-close"
                                     type="button">Cancel</button>
-                                <button class="uk-button uk-button-default m-l-10 uk-modal-close"
-                                    (click)="onReviewSubmit()"
-                                    type="button">{{ auth.isAuthenticate ? 'Share your review': 'Join us to review'}}</button>
+                                <button class="uk-button uk-button-default m-l-10"
+                                    type="submit">{{ auth.isAuthenticate ? 'Share your review': 'Join us to review'}}</button>
                             </div>
                         </form>
                     </div>
@@ -237,11 +237,11 @@
         </div>
     </div>
     <!-- Contact Model START -->
-    <div id="modal-product-leaving" class="uk-modal-container" uk-modal>
+    <div id="modal-product-leaving" class="uk-modal-container" uk-modal appTrapModalFocus>
         <div class="uk-modal-dialog">
             <button class="uk-modal-close-default" type="button" uk-close></button>
             <div class="uk-modal-header">
-                <h2 class="uk-modal-title">Leaving Joy of Age</h2>
+                <h2 id="buy-product-title" tabindex=0 class="uk-modal-title">Leaving Joy of Age</h2>
             </div>
             <div class="uk-modal-body">
                 <div class="uk-child-width-1-1 uk-grid-small" uk-grid>

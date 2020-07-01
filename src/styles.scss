@@ -244,6 +244,8 @@ ngb-rating {
   &:hover,&:focus  {
     background: #529bfb;
     color: #ffffff;
+  }
+  &:focus  {
     outline: -webkit-focus-ring-color auto 5px;
   }
   &:disabled {
@@ -266,6 +268,8 @@ ngb-rating {
     background: transparent;
     color: #529bfb;
     border: 1px solid #529bfb;
+  }
+  &:focus  {
     outline: -webkit-focus-ring-color auto 5px;
   }
   &:disabled {

@@ -189,6 +189,10 @@ export class SignupComponent implements OnInit, AfterViewInit {
             }
             this.isNewUser = false;
             this.isLoading = false;
+          } else {
+            console.log(userProfie);
+            this.isNewUser = true;
+            this.isLoading = false;
           }
           // } else {
           //   let user = this.auth.user;
@@ -219,7 +223,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
 
   }
 
-  doNotRegister(){
+  doNotRegister() {
     this.auth.clearUserStorage();
     this.user = undefined;
     this.isOtpGenerated = false;

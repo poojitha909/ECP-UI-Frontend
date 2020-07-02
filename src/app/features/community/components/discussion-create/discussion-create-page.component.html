@@ -21,6 +21,17 @@
             </div>
             <div class="uk-margin">
                 <label
+                    [ngClass]="{'uk-text-danger' : formControl.title.invalid && ( formControl.title.dirty ||  formControl.title.touched) }"
+                    class="uk-form-label" for="Title">Image<span class="required">*</span></label>
+                <div class="uk-form-controls">
+                    <input
+                        [ngClass]="{'uk-form-danger' : formControl.file.invalid && ( formControl.file.dirty ||  formControl.file.touched) }"
+                        class="uk-input" formControlName="file" id="file" type="file" (change)="fileChange($event)" accept="image/*"
+                        placeholder="Select image for article">
+                </div>
+            </div>
+            <div class="uk-margin">
+                <label
                     [ngClass]="{'uk-text-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
                     class="uk-form-label" for="Content">Content<span class="required">*</span></label>
                 <div class="uk-form-controls">

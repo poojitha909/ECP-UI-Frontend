@@ -47,6 +47,9 @@
                     <h1 tabindex=0 id="discussionTitleHeader" class="heading">{{discussion.title}}</h1>
                     <hr />
                     <h4 *ngIf="discussionId == 'preview'" class="heading2">Description</h4>
+                    <div class="main-img" *ngIf="discussion?.articlePhotoFilename?.titleImage">
+                        <img [src]="discussion?.articlePhotoFilename?.titleImage"/>
+                    </div>
                     <div class="description" [innerHTML]="discussion.text">
                     </div>
                     <div *ngIf="discussionId == 'preview'">

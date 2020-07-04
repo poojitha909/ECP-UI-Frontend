@@ -59,6 +59,7 @@ import { EventNoRecordComponent } from './event-no-record/event-no-record.compon
 import { ShareViaMediaComponent } from './share-via-media/share-via-media.component';
 import { OtpPopupComponent } from './opt-popup/otp-popup.component';
 import { ArrayToStringPipe } from './pipes/array-to-string.pipe';
+import { TrapModalFocusDirective } from './directives/trap-modal-focus.directive';
 
 @NgModule({
   declarations: [
@@ -116,7 +117,8 @@ import { ArrayToStringPipe } from './pipes/array-to-string.pipe';
     EventNoRecordComponent,
     ShareViaMediaComponent,
     OtpPopupComponent,
-    ArrayToStringPipe
+    ArrayToStringPipe,
+    TrapModalFocusDirective
   ],
   imports: [
     CommonModule,
@@ -173,7 +175,8 @@ import { ArrayToStringPipe } from './pipes/array-to-string.pipe';
     EventNoRecordComponent,
     ShareViaMediaComponent,
     OtpPopupComponent,
-    ArrayToStringPipe
+    ArrayToStringPipe,
+    TrapModalFocusDirective
   ]
 })
 export class SharedModule { }

@@ -150,7 +150,7 @@
 
           <!-- This is service details modal -->
           <div id="about-us" role="dialog" aria-labelledby="aboutModalTitle" aria-describedby="aboutBody"
-            class="uk-modal-container" uk-modal="bg-close:false;container:false;">
+            class="uk-modal-container" uk-modal="bg-close:false;container:false;" appTrapModalFocus>
             <div class="uk-modal-dialog">
               <!-- <button class="uk-modal-close-default" aria-label="Close popup" type="button" (click)="onCloseModel()"
                 uk-close></button> -->
@@ -442,7 +442,7 @@
 
 <!-- Contact Model START -->
 <div id="contact-sections" role="dialog" aria-labelledby="contactModalTitle" aria-describedby="contactBody"
-  class="uk-modal-container" uk-modal="bg-close:false;container:false;">
+  class="uk-modal-container" uk-modal="bg-close:false;container:false;" appTrapModalFocus>
   <div class="uk-modal-dialog">
     <!-- <button class="uk-modal-close-default" aria-label="Close popup" type="button" (click)="onCloseModel()"
       uk-close></button> -->
@@ -509,12 +509,13 @@
 <!-- Write Review Form START-->
 <!-- This is review modal -->
 <div id="review-modal" role="dialog" aria-labelledby="reviewTitle" aria-describedby="reviewForm"
-  uk-modal="bg-close:false;container:false;">
+  uk-modal="bg-close:false;container:false;" appTrapModalFocus>
   <div class="uk-modal-dialog uk-modal-body">
     <h3 id="reviewTitle" tabindex=0 class="font-regular-24 font-weight-600">{{reviewTitle}} your review</h3>
     <hr />
 
-    <form [formGroup]="reviewForm" id="reviewForm" class="uk-form-stacked review-form">
+    <form focusInvalidInput [formGroup]="reviewForm" (ngSubmit)="onReviewSubmit()" id="reviewForm"
+      class="uk-form-stacked review-form">
 
 
       <div class="uk-margin">
@@ -557,8 +558,8 @@
       <div class="uk-text-right">
         <button class="uk-button uk-button-transparent uk-modal-close" (click)="onCloseModel()"
           type="button">Cancel</button>
-        <button class="uk-button uk-button-default m-l-10 uk-modal-close" (click)="onReviewSubmit()" type="button"
-          [disabled]="reviewForm.invalid">{{ auth.isAuthenticate ? 'Share your review': 'Signin to Review'}}</button>
+        <button class="uk-button uk-button-default m-l-10"
+          type="submit">{{ auth.isAuthenticate ? 'Share your review': 'Signin to Review'}}</button>
       </div>
     </form>
   </div>
@@ -569,7 +570,7 @@
 
 <!-- This is the modal -->
 <div id="report-modal" role="dialog" aria-labelledby="reportTitle" aria-describedby="reportForm"
-  uk-modal="bg-close:false;container:false;">
+  uk-modal="bg-close:false;container:false;" appTrapModalFocus>
   <div class="uk-modal-dialog uk-modal-body">
     <h3 id="reportTitle" tabindex=0 class="font-regular-24 font-weight-600">Report</h3>
     <hr />
@@ -578,7 +579,8 @@
       <p><span class="uk-icon mr-5" uk-icon="info"></span> {{ successMessage }}</p>
     </div>
     <!-- Success box END-->
-    <form [formGroup]="reportForm" id="reportForm" (ngSubmit)="onSubmitReport()" class="uk-form-stacked review-form">
+    <form focusInvalidInput [formGroup]="reportForm" id="reportForm" (ngSubmit)="onSubmitReport()"
+      class="uk-form-stacked review-form">
       <div class="uk-margin">
         <label class="uk-form-label" for="reporting-cause">Cause of
           Reporting</label>
@@ -605,7 +607,7 @@
       <div class="uk-text-right">
         <button class="uk-button uk-button-transparent uk-modal-close" (click)="onCloseModel()"
           type="button">Cancel</button>
-        <button class="m-l-10 uk-button uk-button-default" type="submit" [disabled]="reportForm.invalid">Submit</button>
+        <button class="m-l-10 uk-button uk-button-default" type="submit">Submit</button>
       </div>
     </form>
   </div>

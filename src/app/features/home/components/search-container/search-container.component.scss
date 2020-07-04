@@ -160,13 +160,17 @@
       .search-field {
         form {
           input {
-            width: 250px;
             height: 40px;
-            box-sizing: border-box;
-            border-radius: 4px;
-            margin-right: 12px;
           }
         }
+        // form {
+        //   input {
+        //     width: 250px;
+        //     box-sizing: border-box;
+        //     border-radius: 4px;
+        //     margin-right: 12px;
+        //   }
+        // }
         .search-btn {
           border-radius: 4px;
           font-size: 18px;

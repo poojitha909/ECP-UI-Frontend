@@ -279,6 +279,7 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
               //   this.service.aggrRatingPercentage = totalrating / (this.dbReview.length + 1);
               // }
               this.getDBserviceReview(this.docId);
+              UIkit.modal('#review-modal').hide();
               // this.reviewForm.reset();
               if (this.reviewTitle === "Add") {
                 this.reviewSuccessMessage = "Thank you for your review comments.  You can edit or change your comments anytime by clicking on the Edit link on your comment.";
@@ -298,24 +299,26 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   onSubmitReport() {
-    if (this.auth.isAuthenticate) {
-      this.ecpService.addDBserviceReport(this.reportForm.value).subscribe(
-        response => {
-          if (response) {
-            this.reportForm.reset();
-            this.successMessage = "Service report was sent to site admin successfully."
-            setTimeout(() => {
-              UIkit.modal('#report-modal').hide();
-              this.onCloseModel();
-            }, 5000);
-          }
-        },
-        error => {
-          console.log(error);
-        });
-    } else {
-      this.auth.redirectUrl = this.router.url;
-      this.router.navigateByUrl('/user/signin');
+    if (this.reportForm.valid) {
+      if (this.auth.isAuthenticate) {
+        this.ecpService.addDBserviceReport(this.reportForm.value).subscribe(
+          response => {
+            if (response) {
+              this.reportForm.reset();
+              this.successMessage = "Service report was sent to site admin successfully."
+              setTimeout(() => {
+                UIkit.modal('#report-modal').hide();
+                this.onCloseModel();
+              }, 5000);
+            }
+          },
+          error => {
+            console.log(error);
+          });
+      } else {
+        this.auth.redirectUrl = this.router.url;
+        this.router.navigateByUrl('/user/signin');
+      }
     }
   }
 

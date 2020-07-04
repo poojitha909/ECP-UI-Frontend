@@ -245,6 +245,9 @@ ngb-rating {
     background: #529bfb;
     color: #ffffff;
   }
+  &:focus  {
+    outline: -webkit-focus-ring-color auto 5px;
+  }
   &:disabled {
     color: #a2a4ab;
     background-color: #c7c9cd;
@@ -265,6 +268,9 @@ ngb-rating {
     background: transparent;
     color: #529bfb;
     border: 1px solid #529bfb;
+  }
+  &:focus  {
+    outline: -webkit-focus-ring-color auto 5px;
   }
   &:disabled {
     color: #c7c9cd;

@@ -312,7 +312,8 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
       this.discussion.tags,
       this.discussion.categories,
       this.discussion.contentType,
-      this.discussion.articlePhotoFilename)
+      this.discussion.articlePhotoFilename,
+      this.discussion.linkInfo)
     .subscribe((response: any) => {
       if (response.data.id != "") {
         this.store.clear("new-discuss");

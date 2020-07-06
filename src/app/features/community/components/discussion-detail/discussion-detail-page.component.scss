@@ -181,10 +181,14 @@
     color: #000;
   }
 }
-.main-img img{
+.main-img img, .main-img iframe{
   display:block;
   margin: auto;
   max-height: 500px;
+  width: 100%;
+}
+.main-img iframe{
+  height: 500px;
 }
 .uk-button-transparent {
   background-color: transparent;

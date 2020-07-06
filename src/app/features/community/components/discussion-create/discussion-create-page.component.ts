@@ -38,6 +38,7 @@ export class DiscussionCreatePageComponent implements OnInit {
   discussForm: FormGroup;
   user: any;
   fileData: FormData;
+  linkInfoUrl: string;
 
 
   constructor(private route: ActivatedRoute, private router: Router, 
@@ -60,7 +61,8 @@ export class DiscussionCreatePageComponent implements OnInit {
       title:  [discuss ? discuss.title : "", Validators.required],
       description:  [discuss ? discuss.description : "", Validators.required],
       category: [discuss && discuss.category ? discuss.category : null],
-      file: [""]
+      file: [""],
+      linkInfoUrl: [""]
     });
     this.discussForm.valueChanges.subscribe(values => {
       let discuss = null;
@@ -120,11 +122,29 @@ export class DiscussionCreatePageComponent implements OnInit {
     
     if(this.fileData){
       this.uploadFile(this.fileData,"discussion_image").subscribe( file => {
-        this.storeThenRedirect(discuss,file);
+        if(this.linkInfoUrl){
+         this.getLinkInfo().subscribe( linkinfo => {
+            discuss.linkInfo = linkinfo;
+            this.storeThenRedirect(discuss,file);
+         })
+        }
+        else{
+          discuss.linkInfo = null;
+          this.storeThenRedirect(discuss,file);
+        }
       })
     }
     else{
-      this.storeThenRedirect(discuss,"");
+      if(this.linkInfoUrl){
+        this.getLinkInfo().subscribe( linkinfo => {
+           discuss.linkInfo = linkinfo;
+           this.storeThenRedirect(discuss,"");
+        })
+       }
+       else{
+         discuss.linkInfo = null;
+         this.storeThenRedirect(discuss,"");
+       }
     }
   }
 
@@ -141,7 +161,10 @@ export class DiscussionCreatePageComponent implements OnInit {
                                       titleImage: file,
                                       thumbnailImage:file
                                     } : null ,
-      contentType: 0};
+      contentType: 0,
+      linkInfo: discuss.linkInfo
+    };
+    console.log(obj)
     this.store.store("new-discuss-preview", JSON.stringify(obj));
     this.router.navigate(['/community/discussion/preview',{id:'preview'}]);
   }
@@ -156,12 +179,26 @@ export class DiscussionCreatePageComponent implements OnInit {
       this.fileData.append("description", "discussion_image_description");
     }
   }
+  linkInfoUrlChange(event){
+    this.linkInfoUrl = event.target.value
+  }
 
   uploadFile(formData: FormData,type: string): Observable<any> {
     return this.http.post<any>(ApiConstants.IMAGE_UPLOAD + "?typ="+type, formData).pipe(
       map((response) => {
         if (response && response.data) {
           return response.data[0];
+        }
+      })
+    );
+  }
+
+  getLinkInfo(){
+    return this.http.get<any>(ApiConstants.GET_LINK_INFO + "?url="+ encodeURI(this.linkInfoUrl) ).pipe(
+      map((response) => {
+        console.log(response);
+        if (response && response.data) {
+          return response.data;
         }
       })
     );

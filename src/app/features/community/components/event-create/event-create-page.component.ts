@@ -33,6 +33,8 @@ export class EventCreatePageComponent implements OnInit {
   eventForm: FormGroup;
   successMessage: string;
   user: any;
+  selectedValue: any = '';
+
   
   minDate = moment(new Date()).add(1,'days').format('YYYY-MM-DD')
   languages:any[];
@@ -53,25 +55,47 @@ export class EventCreatePageComponent implements OnInit {
       event = JSON.parse(event);
       this.store.clear("new-event");
     }
-    this.eventForm = this.fb.group({
-      title: [event ? event.title : "", Validators.required],
-      date: [event ? event.date : "", Validators.required],
-      startTime: [event ? event.startTime : "", Validators.required],
-      duration: [event ? event.duration : "", Validators.required],
-      description: [event ? event.description : "", Validators.required],
-      address: [event ? event.address : "", Validators.required],
-      landmark: [event ? event.landmark : ""],
-     
-      orgEmail: [event ? event.orgEmail : ""],
-      
-      orgPhone:  [event ? event.orgPhone : "", [Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
-      capacity:  [event ? event.capacity : "", Validators.required],
-      eventType:  [event ? event.eventType : "", Validators.required],
-      entryFee:  [event ? event.entryFee : "", Validators.required],
-     
-      languages:  [event ? event.languages : "",Validators.required],
-      organiser:  [event ? event.organiser : "", [Validators.required,Validators.pattern('^[a-zA-Z \-\']+')]]
-    });
+    
+      this.eventForm = this.fb.group({
+        title: [event ? event.title : "", Validators.required],
+        date: [event ? event.date : "", Validators.required],
+        startTime: [event ? event.startTime : "", Validators.required],
+        duration: [event ? event.duration : "", Validators.required],
+        description: [event ? event.description : "", Validators.required],
+        address: [event ? event.address : "", Validators.required],
+        landmark: [event ? event.landmark : ""],
+        orgEmail: [event ? event.orgEmail : "",Validators.required],
+        orgPhone:  [event ? event.orgPhone : "", [Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
+        capacity:  [event ? event.capacity : "", Validators.required],
+        eventType:  [event ? event.eventType : "", Validators.required],
+        entryFee:  [event ? event.entryFee : "", Validators.required],
+       
+        languages:  [event ? event.languages : "",Validators.required],
+        organiser:  [event ? event.organiser : "", [Validators.required,Validators.pattern('^[a-zA-Z \-\']+')]]
+      });
+  
+    this.eventForm.get('eventType').valueChanges.subscribe(value=>{
+      if(value==3){
+      this.eventForm = this.fb.group({
+        title: [event ? event.title : "", Validators.required],
+        date: [event ? event.date : "", Validators.required],
+        startTime: [event ? event.startTime : "", Validators.required],
+        duration: [event ? event.duration : "", Validators.required],
+        description: [event ? event.description : "", Validators.required],
+        address: [event ? event.address : "Online Event"],
+        landmark: [event ? event.landmark : ""],
+        orgEmail: [event ? event.orgEmail : "",Validators.required],
+        orgPhone:  [event ? event.orgPhone : ""],
+        capacity:  [event ? event.capacity : ""],
+        eventType:  [event ? event.eventType : "", Validators.required],
+        entryFee:  [event ? event.entryFee : "", Validators.required],
+        languages:  [event ? event.languages : ""],
+        organiser:  [event ? event.organiser : "", [Validators.required,Validators.pattern('^[a-zA-Z \-\']+')]]
+      });
+    }
+    })
+
+
     this.userService.profileLanguages().subscribe(response => {
       if (response) {
         this.languages = [];

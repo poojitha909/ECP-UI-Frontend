@@ -2,7 +2,7 @@
     *ngIf="event?.isPast == isPast || isPast==0" [routerLink]="['/community/event', event?.id ]" [queryParams]="pageParam">
     <div class="event-summary-head uk-grid uk-grid-collapse">
         <div 
-        [ngClass]="{'outdoor-icon' : event?.eventType== 1, 'indoor-icon' : event?.eventType==2 }"></div>
+        [ngClass]="{'outdoor-icon' : event?.eventType== 1, 'indoor-icon' : event?.eventType==2,'online-icon' : event?.eventType==3 }"></div>
         <h3 class="event-title">
             <a [routerLink]="['/community/event', event?.id ]"> {{event?.title}}</a>
         </h3>

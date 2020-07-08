@@ -38,9 +38,7 @@ export class DiscussionCreatePageComponent implements OnInit {
   discussForm: FormGroup;
   user: any;
   fileData: FormData;
-  linkInfoUrl: string;
-
-
+  
   constructor(private route: ActivatedRoute, private router: Router, 
     private discussionService: DiscussionService, private menuService: MenuService,
     private store: StorageHelperService, private authService: AuthService,
@@ -62,7 +60,7 @@ export class DiscussionCreatePageComponent implements OnInit {
       description:  [discuss ? discuss.description : "", Validators.required],
       category: [discuss && discuss.category ? discuss.category : null],
       file: [""],
-      linkInfoUrl: [""]
+      linkInfoUrl: [discuss && discuss.linkInfoUrl ? discuss.linkInfoUrl : ""]
     });
     this.discussForm.valueChanges.subscribe(values => {
       let discuss = null;
@@ -122,8 +120,8 @@ export class DiscussionCreatePageComponent implements OnInit {
     
     if(this.fileData){
       this.uploadFile(this.fileData,"discussion_image").subscribe( file => {
-        if(this.linkInfoUrl){
-         this.getLinkInfo().subscribe( linkinfo => {
+        if(discuss.linkInfoUrl){
+         this.getLinkInfo(discuss.linkInfoUrl).subscribe( linkinfo => {
             discuss.linkInfo = linkinfo;
             this.storeThenRedirect(discuss,file);
          })
@@ -135,8 +133,8 @@ export class DiscussionCreatePageComponent implements OnInit {
       })
     }
     else{
-      if(this.linkInfoUrl){
-        this.getLinkInfo().subscribe( linkinfo => {
+      if(discuss.linkInfoUrl){
+        this.getLinkInfo(discuss.linkInfoUrl).subscribe( linkinfo => {
            discuss.linkInfo = linkinfo;
            this.storeThenRedirect(discuss,"");
         })
@@ -162,7 +160,8 @@ export class DiscussionCreatePageComponent implements OnInit {
                                       thumbnailImage:file
                                     } : null ,
       contentType: 0,
-      linkInfo: discuss.linkInfo
+      linkInfo: discuss.linkInfo,
+      linkInfoUrl: discuss.linkInfoUrl
     };
     console.log(obj)
     this.store.store("new-discuss-preview", JSON.stringify(obj));
@@ -179,9 +178,6 @@ export class DiscussionCreatePageComponent implements OnInit {
       this.fileData.append("description", "discussion_image_description");
     }
   }
-  linkInfoUrlChange(event){
-    this.linkInfoUrl = event.target.value
-  }
 
   uploadFile(formData: FormData,type: string): Observable<any> {
     return this.http.post<any>(ApiConstants.IMAGE_UPLOAD + "?typ="+type, formData).pipe(
@@ -193,8 +189,8 @@ export class DiscussionCreatePageComponent implements OnInit {
     );
   }
 
-  getLinkInfo(){
-    return this.http.get<any>(ApiConstants.GET_LINK_INFO + "?url="+ encodeURI(this.linkInfoUrl) ).pipe(
+  getLinkInfo(url){
+    return this.http.get<any>(ApiConstants.GET_LINK_INFO + "?url="+ encodeURI(url) ).pipe(
       map((response) => {
         console.log(response);
         if (response && response.data) {

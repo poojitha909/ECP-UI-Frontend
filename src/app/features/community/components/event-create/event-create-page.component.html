@@ -303,10 +303,16 @@
                     </div>
                     <!-- online -->
                     <div *ngIf="selectedValue == 3">
-                        <label for="Organiser-Phone" class="uk-form-label">Organiser’s Phone Number</label>
+                        <label for="Organiser-Phone"
+                            [ngClass]="{'uk-text-danger' : formControl.orgPhone.invalid && ( formControl.orgPhone.dirty ||  formControl.orgPhone.touched) }"
+                            class="uk-form-label">Organiser’s Phone Number</label>
                         <div class="uk-form-controls">
-                            <input id="Organiser-Phone" class="uk-input" formControlName="orgPhone" placeholder="9999999999" />
-                            
+                            <input id="Organiser-Phone"
+                                [ngClass]="{'uk-form-danger' : formControl.orgPhone.invalid && ( formControl.orgPhone.dirty ||  formControl.orgPhone.touched) }"
+                                class="uk-input" formControlName="orgPhone" placeholder="9999999999" />
+                            <small aria-describedby="Organiser-Phone"
+                                *ngIf="formControl.orgPhone.invalid && ( formControl.orgPhone.dirty ||  formControl.orgPhone.touched)"
+                                class="uk-text-danger">Organiser’s Phone Number is required to publish the upcoming event. .</small>
                         </div>
                     </div>
                     <!-- online ends -->

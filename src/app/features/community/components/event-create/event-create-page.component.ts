@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
 import { AuthService } from "../../../../core/auth/services/auth.service";
 import { Breadcrumb } from 'src/app/core/interfaces';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import moment from 'moment';
 import { UserService } from 'src/app/features/user/services/user.service';
 
@@ -35,7 +35,6 @@ export class EventCreatePageComponent implements OnInit {
   user: any;
   selectedValue: any = '';
 
-  
   minDate = moment(new Date()).add(1,'days').format('YYYY-MM-DD')
   languages:any[];
   constructor(private router: Router, private store: StorageHelperService,
@@ -45,7 +44,6 @@ export class EventCreatePageComponent implements OnInit {
     document.getElementById("addEventHeading").focus();
     this.categoryList = [];
     this.successMessage = "";
-    
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
@@ -55,44 +53,35 @@ export class EventCreatePageComponent implements OnInit {
       event = JSON.parse(event);
       this.store.clear("new-event");
     }
-    
-      this.eventForm = this.fb.group({
-        title: [event ? event.title : "", Validators.required],
-        date: [event ? event.date : "", Validators.required],
-        startTime: [event ? event.startTime : "", Validators.required],
-        duration: [event ? event.duration : "", Validators.required],
-        description: [event ? event.description : "", Validators.required],
-        address: [event ? event.address : "", Validators.required],
-        landmark: [event ? event.landmark : ""],
-        orgEmail: [event ? event.orgEmail : "",Validators.required],
-        orgPhone:  [event ? event.orgPhone : "", [Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
-        capacity:  [event ? event.capacity : "", Validators.required],
-        eventType:  [event ? event.eventType : "", Validators.required],
-        entryFee:  [event ? event.entryFee : "", Validators.required],
-       
-        languages:  [event ? event.languages : "",Validators.required],
-        organiser:  [event ? event.organiser : "", [Validators.required,Validators.pattern('^[a-zA-Z \-\']+')]]
-      });
-  
-    this.eventForm.get('eventType').valueChanges.subscribe(value=>{
-      if(value==3){
-      this.eventForm = this.fb.group({
-        title: [event ? event.title : "", Validators.required],
-        date: [event ? event.date : "", Validators.required],
-        startTime: [event ? event.startTime : "", Validators.required],
-        duration: [event ? event.duration : "", Validators.required],
-        description: [event ? event.description : "", Validators.required],
-        address: [event ? event.address : "Online Event"],
-        landmark: [event ? event.landmark : ""],
-        orgEmail: [event ? event.orgEmail : "",Validators.required],
-        orgPhone:  [event ? event.orgPhone : ""],
-        capacity:  [event ? event.capacity : ""],
-        eventType:  [event ? event.eventType : "", Validators.required],
-        entryFee:  [event ? event.entryFee : "", Validators.required],
-        languages:  [event ? event.languages : ""],
-        organiser:  [event ? event.organiser : "", [Validators.required,Validators.pattern('^[a-zA-Z \-\']+')]]
-      });
-    }
+    this.eventForm = this.fb.group({
+      title: [event ? event.title : "", Validators.required],
+      date: [event ? event.date : "", Validators.required],
+      startTime: [event ? event.startTime : "", Validators.required],
+      duration: [event ? event.duration : "", Validators.required],
+      description: [event ? event.description : "", Validators.required],
+      address: [event ? event.address : "", Validators.required],
+      landmark: [event ? event.landmark : ""],
+      orgEmail: [event ? event.orgEmail : "", Validators.required],
+      orgPhone: [event ? event.orgPhone : "", [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      capacity: [event ? event.capacity : "", Validators.required],
+      eventType: [event ? event.eventType : "", Validators.required],
+      entryFee: [event ? event.entryFee : "", Validators.required],
+
+      languages: [event ? event.languages : "", Validators.required],
+      organiser: [event ? event.organiser : "", [Validators.required, Validators.pattern('^[a-zA-Z \-\']+')]]
+    });
+
+    this.eventType.valueChanges.subscribe(value=>{
+      if(value == 3) {
+        this.address.patchValue("Online Event");
+        this.address.updateValueAndValidity();
+        this.capacity.setValidators(null);
+        this.capacity.updateValueAndValidity();
+       this.languagesField.setValidators(null);
+       this.languagesField.updateValueAndValidity();
+       this.orgPhone.setValidators([Validators.minLength(10),Validators.maxLength(10)]);
+       this.orgPhone.updateValueAndValidity();
+      }
     })
 
 
@@ -104,6 +93,23 @@ export class EventCreatePageComponent implements OnInit {
         })
       }
     });
+  }
+
+  get eventType(): FormControl {
+    return this.eventForm.get("eventType") as FormControl;
+  }
+  get address(): FormControl {
+    return this.eventForm.get("address") as FormControl;
+  }
+
+  get orgPhone(): FormControl{
+    return this.eventForm.get("orgPhone") as FormControl;
+  }
+  get capacity(): FormControl{
+    return this.eventForm.get("capacity") as FormControl;
+  }
+  get languagesField(): FormControl{
+    return this.eventForm.get("languages") as FormControl;
   }
 
   get formControl() {
@@ -159,6 +165,5 @@ export class EventCreatePageComponent implements OnInit {
 
     this.store.store("new-event-preview", JSON.stringify( event ));
     this.router.navigate(['/community/event/preview',{id:'preview'}]);
-    
   }
 }

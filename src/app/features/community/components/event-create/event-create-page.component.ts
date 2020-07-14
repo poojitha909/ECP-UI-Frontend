@@ -137,7 +137,7 @@ export class EventCreatePageComponent implements OnInit {
   onReset() {
     this.successMessage = "";
     this.eventForm.reset();
-    this.router.navigate(['/community']);
+    this.router.navigate(['/community',{show:'events'}]);
   }
 
   onSubmit() {

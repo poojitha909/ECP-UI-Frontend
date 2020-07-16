@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { DiscussionService } from '../../services/discussion.service';
 import { MenuService } from '../../services/menu.service';
@@ -8,10 +7,6 @@ import { AuthService } from "../../../../core/auth/services/auth.service";
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
 import { Breadcrumb } from 'src/app/core/interfaces';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { ApiConstants } from 'src/app/api.constants';
-import { Observable } from 'rxjs';
-import { map, mergeMap, switchMap } from 'rxjs/operators';
-
 @Component({
   selector: 'app-discussion-create-page',
   templateUrl: './discussion-create-page.component.html',
@@ -37,12 +32,11 @@ export class DiscussionCreatePageComponent implements OnInit {
   categoryList: any[];
   discussForm: FormGroup;
   user: any;
-  fileData: FormData;
-  
+
+
   constructor(private route: ActivatedRoute, private router: Router, 
     private discussionService: DiscussionService, private menuService: MenuService,
-    private store: StorageHelperService, private authService: AuthService,
-    private fb: FormBuilder, private http: HttpClient) { }
+    private store: StorageHelperService, private authService: AuthService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.discussId = this.route.snapshot.params['id'];
@@ -58,9 +52,7 @@ export class DiscussionCreatePageComponent implements OnInit {
     this.discussForm = this.fb.group({
       title:  [discuss ? discuss.title : "", Validators.required],
       description:  [discuss ? discuss.description : "", Validators.required],
-      category: [discuss && discuss.category ? discuss.category : null],
-      file: [""],
-      linkInfoUrl: [discuss && discuss.linkInfoUrl ? discuss.linkInfoUrl : ""]
+      category: [discuss && discuss.category ? discuss.category : null]
     });
     this.discussForm.valueChanges.subscribe(values => {
       let discuss = null;
@@ -117,86 +109,14 @@ export class DiscussionCreatePageComponent implements OnInit {
       return;
     }
     
-    
-    if(this.fileData){
-      this.uploadFile(this.fileData,"discussion_image").subscribe( file => {
-        if(discuss.linkInfoUrl){
-         this.getLinkInfo(discuss.linkInfoUrl).subscribe( linkinfo => {
-            discuss.linkInfo = linkinfo;
-            this.storeThenRedirect(discuss,file);
-         })
-        }
-        else{
-          discuss.linkInfo = null;
-          this.storeThenRedirect(discuss,file);
-        }
-      })
-    }
-    else{
-      if(discuss.linkInfoUrl){
-        this.getLinkInfo(discuss.linkInfoUrl).subscribe( linkinfo => {
-           discuss.linkInfo = linkinfo;
-           this.storeThenRedirect(discuss,"");
-        })
-       }
-       else{
-         discuss.linkInfo = null;
-         this.storeThenRedirect(discuss,"");
-       }
-    }
-  }
-
-  storeThenRedirect(discuss,file){
-    let obj = {
+    this.store.store("new-discuss-preview", JSON.stringify({
       description: discuss.description,
       title: discuss.title,
       userId: this.user.id,
       userName: this.user.userName,
       tags: discuss.category ? this.categoryList[discuss.category].tags : [],
       categories: discuss.category ? [this.categoryList[discuss.category].id] : [],
-      articlePhotoFilename: file ? {
-                                      original:"null",
-                                      titleImage: file,
-                                      thumbnailImage:file
-                                    } : null ,
-      contentType: 0,
-      linkInfo: discuss.linkInfo,
-      linkInfoUrl: discuss.linkInfoUrl
-    };
-    console.log(obj)
-    this.store.store("new-discuss-preview", JSON.stringify(obj));
+      contentType: 0}));
     this.router.navigate(['/community/discussion/preview',{id:'preview'}]);
-  }
-
-  fileChange(event) {
-    let fileList: FileList = event.target.files;
-    if (fileList.length > 0) {
-      let file: File = fileList[0];
-      this.fileData = new FormData();
-      this.fileData.append('images', file);
-      this.fileData.append("name", "discussion_image");
-      this.fileData.append("description", "discussion_image_description");
-    }
-  }
-
-  uploadFile(formData: FormData,type: string): Observable<any> {
-    return this.http.post<any>(ApiConstants.IMAGE_UPLOAD + "?typ="+type, formData).pipe(
-      map((response) => {
-        if (response && response.data) {
-          return response.data[0];
-        }
-      })
-    );
-  }
-
-  getLinkInfo(url){
-    return this.http.get<any>(ApiConstants.GET_LINK_INFO + "?url="+ encodeURI(url) ).pipe(
-      map((response) => {
-        console.log(response);
-        if (response && response.data) {
-          return response.data;
-        }
-      })
-    );
   }
 }

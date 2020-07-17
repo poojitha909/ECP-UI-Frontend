@@ -74,6 +74,16 @@
         top: 12px;
         right: 12px;
     }
+    .online-icon{
+        background-image: url(/assets/images/online.svg);
+        background-size: contain;
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+    }
     
 }
 @media(max-width:640px){

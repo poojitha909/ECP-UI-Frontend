@@ -49,6 +49,8 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit, OnDest
   reviewTitle: string = 'Add';
   detailReview: any;
   userRating: DBRating;
+  currentModelLink: string;
+
   private readonly notifier: NotifierService;
   @ViewChild("customNotification", { static: true }) customNotificationTmpl;
   @ViewChild("customNotification1", { static: true }) customNotificationTmpl1;
@@ -152,14 +154,27 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit, OnDest
   redirectToSite() {
     window.open(this.product.buyLink);
   }
-  redirectConfirm() {
+
+  redirectConfirm(element: any) {
     if (this.user) {
+      this.onOpenModel();
       UIkit.modal("#modal-product-leaving").show();
+      document.getElementById("buy-product-title").focus();
+      this.currentModelLink = element.id;
     }
     else {
       this.authService.redirectUrl = "/products/" + this.product.id;
       this.router.navigate(['/user/signin']);
     }
+  }
+
+  addReview(element: any) {
+    this.reviewForm.reset();
+    this.reviewSuccessMessage = null;
+    this.reviewTitle = 'Add';
+    UIkit.modal("#review-modal").show();
+    document.getElementById("reviewTitle").focus();
+    this.currentModelLink = element.id;
   }
 
   getReviews() {
@@ -296,31 +311,34 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit, OnDest
   * Add review
   */
   onReviewSubmit() {
-    if (this.auth.isAuthenticate) {
-      this.reviewSuccessMessage = null;
-      this.reviewForm.controls.productId.setValue(this.productId);
-      this.productService.addReview(this.reviewForm.value).subscribe(
-        response => {
-          if (response) {
-            this.getReviews();
-            this.reviewForm.reset();
-            //   this.notifier.show({
-            //     message: "Your review successfully submitted",
-            //     type: "success",
-            //     template: this.customNotificationTmpl1
-            // });
-            this.reviewSuccessMessage = "Thank you for your review comments.  You can edit or change your comments anytime by clicking on the Edit link on your comment.";
-            UIkit.modal("#success-review-msg").show();
-          }
-        },
-        error => {
-          console.log(error);
-        });
-    } else {
-      console.log(this.reviewForm.value);
-      this.store.store("new-p-review", JSON.stringify(this.reviewForm.value));
-      this.authService.redirectUrl = "products/" + this.productId;
-      this.router.navigate(['/user/signin']);
+    if (this.reviewForm.valid) {
+      if (this.auth.isAuthenticate) {
+        this.reviewSuccessMessage = null;
+        this.reviewForm.controls.productId.setValue(this.productId);
+        this.productService.addReview(this.reviewForm.value).subscribe(
+          response => {
+            if (response) {
+              this.getReviews();
+              UIkit.modal("#review-modal").hide();
+              this.reviewForm.reset();
+              //   this.notifier.show({
+              //     message: "Your review successfully submitted",
+              //     type: "success",
+              //     template: this.customNotificationTmpl1
+              // });
+              this.reviewSuccessMessage = "Thank you for your review comments.  You can edit or change your comments anytime by clicking on the Edit link on your comment.";
+              UIkit.modal("#success-review-msg").show();
+            }
+          },
+          error => {
+            console.log(error);
+          });
+      } else {
+        console.log(this.reviewForm.value);
+        this.store.store("new-p-review", JSON.stringify(this.reviewForm.value));
+        this.authService.redirectUrl = "products/" + this.productId;
+        this.router.navigate(['/user/signin']);
+      }
     }
   }
 
@@ -375,6 +393,15 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit, OnDest
   changeReviewPage(page: number) {
     this.reviwePaginate.p = page;
     this.getReviews();
+  }
+
+  onCloseModel() {
+    document.getElementsByClassName("main-container")[0].removeAttribute("aria-hidden");
+    document.getElementById(this.currentModelLink).focus();
+  }
+
+  onOpenModel() {
+    document.getElementsByClassName("main-container")[0].setAttribute("aria-hidden", "true");
   }
 
   ngOnDestroy() {

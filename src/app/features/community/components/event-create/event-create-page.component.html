@@ -31,12 +31,13 @@
                         [ngClass]="{'uk-text-danger' : formControl.eventType.invalid && ( formControl.eventType.dirty ||  formControl.eventType.touched) }"
                         class="uk-form-label" for="Event-Type">Pick an Event Type<span class="required">*</span></label>
                     <div class="uk-form-controls">
-                        <select
+                        <select [(ngModel)]="selectedValue"
                             [ngClass]="{'uk-form-danger' : formControl.eventType.invalid && ( formControl.eventType.dirty ||  formControl.eventType.touched) }"
                             class="uk-select" formControlName="eventType" id="Event-Type" placeholder="Pick an Event Type">
                             <option value="" disabled selected>Select Event Type</option>
                             <option value="1">Outdoor</option>
                             <option value="2">Indoor</option>
+                            <option value="3">Online</option>
                         </select>
                         <small aria-describedby="Event-Type"
                             *ngIf="formControl.eventType.invalid && ( formControl.eventType.dirty ||  formControl.eventType.touched)"
@@ -165,7 +166,7 @@
                     </div>
                 </div>
                 <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
-                    <div>
+                    <div *ngIf="selectedValue != 3">
                         <label for="Address"
                             [ngClass]="{'uk-text-danger' : formControl.address.invalid && ( formControl.address.dirty ||  formControl.address.touched) }"
                             class="uk-form-label">Event Address<span class="required">*</span></label>
@@ -179,6 +180,16 @@
 
                         </div>
                     </div>
+
+
+                    <!-- Online  -->
+                    <div *ngIf="selectedValue == 3">
+                        <label for="Address" class="uk-form-label">Event Address</label>
+                        <div class="uk-form-controls">
+                            <input id="Address" class="uk-input" formControlName="address" placeholder="Online Event" />
+                        </div>
+                    </div>
+                    <!-- Online ends -->
                     <div>
                         <label for="Landmark"
                             [ngClass]="{'uk-text-danger' : formControl.landmark.invalid && ( formControl.landmark.dirty ||  formControl.landmark.touched) }"
@@ -190,7 +201,7 @@
                     </div>
                 </div>
                 <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
-                    <div>
+                    <div *ngIf="selectedValue != 3">
                         <label for="organiser-name"
                             [ngClass]="{'uk-text-danger' : formControl.organiser.invalid && ( formControl.organiser.dirty ||  formControl.organiser.touched) }"
                             class="uk-form-label">Organiser’s Name<span class="required">*</span></label>
@@ -204,7 +215,23 @@
 
                         </div>
                     </div>
-                    <div>
+                    <!-- Online -->
+                    <div *ngIf="selectedValue == 3"> 
+                        <label for="organiser-name"
+                            [ngClass]="{'uk-text-danger' : formControl.organiser.invalid && ( formControl.organiser.dirty ||  formControl.organiser.touched) }"
+                            class="uk-form-label">Organiser’s Name<span class="required">*</span></label>
+                        <div class="uk-form-controls">
+                            <input id="organiser-name"
+                                [ngClass]="{'uk-form-danger' : formControl.organiser.invalid && ( formControl.organiser.dirty ||  formControl.organiser.touched) }"
+                                class="uk-input" formControlName="organiser" placeholder="Organiser Name" />
+                            <small aria-describedby="organiser-name"
+                                *ngIf="formControl.organiser.invalid && ( formControl.organiser.dirty ||  formControl.organiser.touched)"
+                                class="uk-text-danger"> Organiser's Name is required to publish the upcoming event.</small>
+
+                        </div>
+                    </div>
+                    <!-- Online -->
+                    <div *ngIf="selectedValue !=3"> 
                         <label for="Languages"
                             [ngClass]="{'uk-text-danger' : formControl.languages.invalid && ( formControl.languages.dirty ||  formControl.languages.touched) }"
                             class="uk-form-label" for="Languages">Primary Language to be used at the Event<span class="required">*</span></label>
@@ -219,9 +246,19 @@
 
                         </div>
                     </div>
+                    <!-- Online -->
+                    <div *ngIf="selectedValue == 3">
+                        <label for="Languages"class="uk-form-label" for="Languages">Primary Language to be used at the Event</label>
+                        <div class="uk-form-controls">
+                            <ng-select  [addTag]="addLangFn" (add)="addLanguage($event)" id="Languages" [items]="languages"  
+                            placeholder="Add Language" [hideSelected]="true"  [multiple]="false" bindLabel="name" formControlName="languages">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <!-- Online -->
                 </div>
                 <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
-                    <div>
+                    <div *ngIf="selectedValue != 3">
                         <label for="Organiser-Email"
                             [ngClass]="{'uk-text-danger' : formControl.orgEmail.invalid && ( formControl.orgEmail.dirty ||  formControl.orgEmail.touched) }"
                             class="uk-form-label">Organiser’s Email Address</label>
@@ -234,7 +271,24 @@
                                 class="uk-text-danger">Organiser’s Email Address is required to publish the upcoming event.</small>
                         </div>
                     </div>
-                    <div>
+
+
+                    <!-- online -->
+                    <div *ngIf="selectedValue == 3">
+                        <label for="Organiser-Email"
+                            [ngClass]="{'uk-text-danger' : formControl.orgEmail.invalid && ( formControl.orgEmail.dirty ||  formControl.orgEmail.touched) }"
+                            class="uk-form-label">Organiser’s Email Address <span class="required">*</span></label>
+                        <div class="uk-form-controls">
+                            <input id="Organiser-Email"
+                                [ngClass]="{'uk-form-danger' : formControl.orgEmail.invalid && ( formControl.orgEmail.dirty ||  formControl.orgEmail.touched) }"
+                                class="uk-input" formControlName="orgEmail" placeholder="abcd@xyz.com" />
+                            <small aria-describedby="Organiser-Email"
+                                *ngIf="formControl.orgEmail.invalid && ( formControl.orgEmail.dirty ||  formControl.orgEmail.touched)"
+                                class="uk-text-danger">Organiser’s Email Address is required to publish the upcoming event.</small>
+                        </div>
+                    </div>
+                    <!-- online ends-->
+                    <div *ngIf="selectedValue != 3">
                         <label for="Organiser-Phone"
                             [ngClass]="{'uk-text-danger' : formControl.orgPhone.invalid && ( formControl.orgPhone.dirty ||  formControl.orgPhone.touched) }"
                             class="uk-form-label">Organiser’s Phone Number<span class="required">*</span></label>
@@ -247,9 +301,24 @@
                                 class="uk-text-danger">Organiser’s Phone Number is required to publish the upcoming event. .</small>
                         </div>
                     </div>
+                    <!-- online -->
+                    <div *ngIf="selectedValue == 3">
+                        <label for="Organiser-Phone"
+                            [ngClass]="{'uk-text-danger' : formControl.orgPhone.invalid && ( formControl.orgPhone.dirty ||  formControl.orgPhone.touched) }"
+                            class="uk-form-label">Organiser’s Phone Number</label>
+                        <div class="uk-form-controls">
+                            <input id="Organiser-Phone"
+                                [ngClass]="{'uk-form-danger' : formControl.orgPhone.invalid && ( formControl.orgPhone.dirty ||  formControl.orgPhone.touched) }"
+                                class="uk-input" formControlName="orgPhone" placeholder="9999999999" />
+                            <small aria-describedby="Organiser-Phone"
+                                *ngIf="formControl.orgPhone.invalid && ( formControl.orgPhone.dirty ||  formControl.orgPhone.touched)"
+                                class="uk-text-danger">Organiser’s Phone Number is required to publish the upcoming event. .</small>
+                        </div>
+                    </div>
+                    <!-- online ends -->
                 </div>
                 <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
-                    <div>
+                    <div *ngIf="selectedValue != 3">
                         <label for="Event-Capacity"
                             [ngClass]="{'uk-text-danger' : formControl.capacity.invalid && ( formControl.capacity.dirty ||  formControl.capacity.touched) }"
                             class="uk-form-label">Event Capacity<span class="required">*</span></label>
@@ -262,6 +331,16 @@
                                 class="uk-text-danger">Event Capacity is required to publish the upcoming event.</small>
                         </div>
                     </div>
+
+                    <!-- online -->
+                    <div *ngIf="selectedValue == 3">
+                        <label for="Event-Capacity" class="uk-form-label">Event Capacity</label>
+                        <div class="uk-form-controls">
+                            <input id="Event-Capacity" class="uk-input" formControlName="capacity" placeholder="Eg. 75 People" />
+                            
+                        </div>
+                    </div>
+                    <!-- Online Ends -->
                     <div>
                         <label for="Event-Fees"
                             [ngClass]="{'uk-text-danger' : formControl.entryFee.invalid && ( formControl.entryFee.dirty ||  formControl.entryFee.touched) }"

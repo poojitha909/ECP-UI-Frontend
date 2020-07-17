@@ -14,7 +14,7 @@ import { DiscussionNoRecordComponent } from './components/discussion-no-record/d
 import { SharedModule } from '../../shared';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { NotifierModule,NotifierOptions} from "angular-notifier";
-
+import { SafeUrlPipe } from '../../shared/pipes/safe-url.pipe';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -68,7 +68,8 @@ const customNotifierOptions: NotifierOptions = {
     DiscussionCreatePageComponent,
     DiscussionSummaryComponent,
     EventDetailPageComponent,
-    DiscussionsListPageComponent
+    DiscussionsListPageComponent,
+    SafeUrlPipe
   ],
   imports: [
     CommonModule,

@@ -108,6 +108,9 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
     if (this.route.snapshot.queryParams['show']) {
       this.show = this.route.snapshot.queryParams['show'];
     }
+    if(this.route.snapshot.params['show'] == 'events'){
+      this.show="events"
+    }
     else {
       this.show = "discss";
     }

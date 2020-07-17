@@ -22,8 +22,8 @@ export class DiscussionService {
     }
 
     addDiscussion(discussType: string, text: string, title: string, userId: string, username:string,
-             systemTags: string[], topicId: string[], contentType: number): Observable<any[]> {
-        return this.http.post<any[]>(`${this.discussionUrl}`,{discussType,text,title,userId,username,systemTags,topicId,contentType});
+             systemTags: string[], topicId: string[], contentType: number, articlePhotoFilename: any, linkInfo:any): Observable<any[]> {
+        return this.http.post<any[]>(`${this.discussionUrl}`,{discussType,text,title,userId,username,systemTags,topicId,contentType,articlePhotoFilename,linkInfo});
     }
     
     searchDiscussions(searchPageParams: any): Observable<any[]> {

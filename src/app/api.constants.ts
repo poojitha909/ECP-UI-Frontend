@@ -12,6 +12,7 @@ export class ApiConstants {
     public static USER_LOGOUT: string = `/BY/api/v1/users/logout`;
     public static USER_PROFILE: string = `/BY/api/v1/userProfile`;
     public static IMAGE_UPLOAD: string = `/BY/api/v1/fileupload`;
+    public static GET_LINK_INFO: string = `/BY/api/v1/discuss/getLinkInfo`;
     public static GET_LANGUAGES: string = `/BY/api/v1/userProfile/languages`;
     public static GET_HOBBIES: string = `/BY/api/v1/userProfile/hobbies`;
     public static GET_INTERESTAREAS: string = `/BY/api/v1/userProfile/interestAreas`;

@@ -14,11 +14,17 @@ export class AdditionalInfoFormComponent implements OnInit {
 
   @Input() verifiedString: string;
   @Output() doNotRegister = new EventEmitter();
+  //Temp user Profile image Url
+  userImages: string[] = [
+    "/assets/images/user/JOA Symbol Grayscale RGB.svg",
+    "/assets/images/user/JOA Symbol Outline Color RGB.svg",
+    "/assets/images/user/JOA Title WO Tagline Dark RGB.svg"
+  ]
   // userform: FormGroup;
   userform = this.fb.group({
     firstName: [{ value: this.auth.user.email ? this.auth.user.userName : '', disabled: !!this.auth.user.email }, Validators.required],
     primaryEmail: [this.auth.user.email, Validators.email],
-    primaryPhoneNo: [this.auth.user.phoneNumber]
+    primaryPhoneNo: [this.auth.user.phoneNumber],
   });
   userIdType = UserIdType;
   errorMessage: string;
@@ -55,7 +61,13 @@ export class AdditionalInfoFormComponent implements OnInit {
     this.errorMessage = null;
     if (this.userform.valid && this.mobileValidation()) {
       let userData: UserProfile = {
-        basicProfileInfo: this.userform.getRawValue()
+        basicProfileInfo: {
+          profileImage: {
+            thumbnailImage: this.userImages[Math.floor(Math.random() * this.userImages.length)]
+          },
+          ...this.userform.getRawValue()
+        }
+
       };
       if (this.auth.user && this.auth.user.id) {
         userData.userId = this.auth.user.id;

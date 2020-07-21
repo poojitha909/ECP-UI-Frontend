@@ -7,6 +7,11 @@ import { AuthService } from "../../../../core/auth/services/auth.service";
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
 import { Breadcrumb } from 'src/app/core/interfaces';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
+import ImageResize from 'quill-image-resize-module';
+import Quill from 'quill';
+Quill.register('modules/imageResize', ImageResize);
+
 @Component({
   selector: 'app-discussion-create-page',
   templateUrl: './discussion-create-page.component.html',

@@ -25,16 +25,16 @@
                     class="uk-form-label" for="Content">Content<span class="required">*</span></label>
                 <div class="uk-form-controls">
                     
-                    <!-- <editor
+                    <editor
                         [ngClass]="{'uk-form-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
                         id="Content" formControlName="description"
                         [init]="{menubar:false, statusbar: false, base_url: '/tinymce', plugins: 'lists advlist', content_css : '/assets/css/mce_editor.css'}">
-                    </editor> -->
-                    <quill-editor
+                    </editor>
+                    <!-- <quill-editor
                         [ngClass]="{'uk-form-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
                         id="Content" formControlName="description"
                     >
-                    </quill-editor>
+                    </quill-editor> -->
                 </div>
             </div>
             <div class="uk-margin">

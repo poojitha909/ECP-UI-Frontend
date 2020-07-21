@@ -15,7 +15,6 @@ import { SharedModule } from '../../shared';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { NotifierModule,NotifierOptions} from "angular-notifier";
 import { SafeUrlPipe } from '../../shared/pipes/safe-url.pipe';
-import { QuillModule } from 'ngx-quill';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -78,18 +77,7 @@ const customNotifierOptions: NotifierOptions = {
     CoreModule,
     SharedModule,
     EditorModule,
-    NotifierModule.withConfig(customNotifierOptions),
-    QuillModule.forRoot({
-      modules: {
-        imageResize: true,
-        toolbar: [
-          ['bold', 'italic', 'underline', 'strike'],
-          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-          ['link', 'image', 'video'],
-          ['clean']
-        ]
-      }
-    })
+    NotifierModule.withConfig(customNotifierOptions)
   ]
 })
 export class CommunityModule { }

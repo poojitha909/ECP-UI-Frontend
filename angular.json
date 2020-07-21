@@ -39,16 +39,14 @@
               }
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/quill/dist/quill.snow.css"
+              "src/styles.scss"
             ],
             "scripts": [
               "node_modules/uikit/dist/js/uikit.min.js",
               "node_modules/uikit/dist/js/uikit-icons.min.js",
               "node_modules/crypto-js/crypto-js.js",
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/tinymce/tinymce.min.js",
-              "node_modules/quill/dist/quill.js"
+              "node_modules/tinymce/tinymce.min.js"
             ]
           },
           "configurations": {

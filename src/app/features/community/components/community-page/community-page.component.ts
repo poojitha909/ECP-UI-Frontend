@@ -105,10 +105,8 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
       this.setSearchTxt(this.homeService.homeSearchtxt);
       this.showReset = true;
     }
-    if (this.route.snapshot.queryParams['show']) {
+    if (this.route.snapshot.queryParams['show']||this.route.snapshot.params['show'] =='events') {
       this.show = this.route.snapshot.queryParams['show'];
-    }
-    if(this.route.snapshot.params['show'] == 'events'){
       this.show="events"
     }
     else {

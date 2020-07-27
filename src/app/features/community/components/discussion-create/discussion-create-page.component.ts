@@ -9,8 +9,10 @@ import { Breadcrumb } from 'src/app/core/interfaces';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
 import ImageResize from 'quill-image-resize-module';
+import imageUpload from 'quill-plugin-image-upload';
 import Quill from 'quill';
 Quill.register('modules/imageResize', ImageResize);
+Quill.register('modules/imageUpload', imageUpload);
 
 @Component({
   selector: 'app-discussion-create-page',

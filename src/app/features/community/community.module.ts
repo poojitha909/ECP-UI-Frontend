@@ -99,7 +99,7 @@ const customNotifierOptions: NotifierOptions = {
               })
               .then(response => response.json())
               .then(data => {
-                resolve(data[0])
+                resolve(data.data[0])
               })
               .catch(error => {
                 console.error(error)

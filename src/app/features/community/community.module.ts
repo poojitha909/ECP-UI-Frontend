@@ -15,6 +15,8 @@ import { SharedModule } from '../../shared';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { NotifierModule,NotifierOptions} from "angular-notifier";
 import { SafeUrlPipe } from '../../shared/pipes/safe-url.pipe';
+import { QuillModule } from 'ngx-quill';
+import { ApiConstants } from 'src/app/api.constants';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -77,7 +79,42 @@ const customNotifierOptions: NotifierOptions = {
     CoreModule,
     SharedModule,
     EditorModule,
-    NotifierModule.withConfig(customNotifierOptions)
+    NotifierModule.withConfig(customNotifierOptions),
+    QuillModule.forRoot({
+      modules: {
+        imageResize: true,
+        imageUpload: {
+          upload: file => {
+            return new Promise((resolve, reject) => {
+              const formData = new FormData()
+              formData.append('images', file);
+              formData.append("name", "discussion_image");
+              formData.append("description", "discussion_image_description");
+              fetch(ApiConstants.IMAGE_UPLOAD + "?typ=discussion_image", {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json' 
+                },
+                body: formData
+              })
+              .then(response => response.json())
+              .then(data => {
+                resolve(data.data[0])
+              })
+              .catch(error => {
+                console.error(error)
+              })
+            });
+          }
+        },
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'],
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          ['link', 'image', 'video'],
+          ['clean']
+        ]
+      }
+    })
   ]
 })
 export class CommunityModule { }

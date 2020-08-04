@@ -12,7 +12,7 @@ export class OtpPopupComponent implements OnChanges {
   @Input() mobileNum: string;
   @Output() updateOtp = new EventEmitter<string>();
   otp: string;
-
+  isUnusedOtpLeft:boolean = false;
   constructor(private authService: AuthService) {
     this.otp = ""
   }
@@ -31,12 +31,16 @@ export class OtpPopupComponent implements OnChanges {
         alert("No mobile number or email address found to send otp")
       }
       else {
-        this.authService.sendOtp(this.mobileNum).subscribe(response => {
-          console.log(response);
-        },
-          error => {
-            console.log(error);
-          });
+        if(this.isUnusedOtpLeft==false){
+          this.authService.sendOtp(this.mobileNum).subscribe(response => {
+            this.isUnusedOtpLeft = true;
+            console.log(response);
+          },
+            error => {
+              console.log(error);
+            });
+        }
+     
       }
     }
     else {
@@ -48,6 +52,7 @@ export class OtpPopupComponent implements OnChanges {
     if (this.otp) {
       UIkit.modal('#modal-otp-input').hide();
       setTimeout(() => {
+        this.isUnusedOtpLeft = false;
         this.updateOtp.next(this.otp);
       }, 300);
     }

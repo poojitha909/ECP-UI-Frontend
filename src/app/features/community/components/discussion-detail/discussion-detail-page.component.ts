@@ -230,13 +230,14 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
       this.discussion = JSON.parse(this.discussion);
       this.discussion.createdAt = new Date();
       this.discussion.username = this.discussion.userName;
-      this.discussion.text = this.discussion.description;
+      this.discussion.text =  this.sanitizer.bypassSecurityTrustHtml(this.discussion.description);
       this.discussion.userProfile = { basicProfileInfo: { profileImage: { thumbnailImage: "" } } };
     }
     else {
       this.discussionService.getDiscussion(this.discussionId).subscribe((response: any) => {
         if (response.data.discuss) {
           this.discussion = response.data.discuss;
+          this.discussion.text = this.sanitizer.bypassSecurityTrustHtml(this.discussion.text);
           this.setSeoTags(this.discussion);
           this.sortedReplies = [];
           for (let i in response.data.sortedReplies) {

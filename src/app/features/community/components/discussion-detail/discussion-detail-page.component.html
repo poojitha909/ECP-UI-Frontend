@@ -12,12 +12,12 @@
                         *ngIf="discussionId != 'preview' && discussion?.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage">
                         <img class="user" [imageHandler]
                             [src]="discussion?.userProfile?.basicProfileInfo?.profileImage?.thumbnailImage"
-                            alt="discussion user profile image">
+                            alt="discussing user image">
                     </div>
                     <div class="img-container" *ngIf="discussionId == 'preview'">
                         <img class="user" [imageHandler]
                             [src]="userProfilePreview?.basicProfileInfo?.profileImage?.thumbnailImage"
-                            alt="discussion user profile image">
+                            alt="discussing user image">
                     </div>
                     <div class="heading2 username">
                         {{discussion.username}}
@@ -40,7 +40,7 @@
                             or click on the ‘Go back & Edit’ button to continue to improve your contribution.</span>
                     </div>
                 </div>
-                
+
                 <div class="bg-white category-box">
                     <h4 class="publish-on">Published On: {{discussion.createdAt | date:'dd MMM yyyy' }} at
                         {{discussion?.createdAt | date:'shortTime' }}</h4>
@@ -48,11 +48,11 @@
                     <hr />
                     <h4 *ngIf="discussionId == 'preview'" class="heading2">Description</h4>
                     <div class="main-img" *ngIf="discussion?.articlePhotoFilename?.titleImage">
-                        <img [src]="discussion?.articlePhotoFilename?.titleImage"/>
+                        <img [src]="discussion?.articlePhotoFilename?.titleImage" />
                     </div>
                     <div class="main-img" *ngIf="discussion?.linkInfo?.url">
-                        <iframe [src]="discussion?.linkInfo?.embeddedVideo | safeurl" 
-                            frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        <iframe [src]="discussion?.linkInfo?.embeddedVideo | safeurl" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
                         </iframe>
                     </div>
@@ -110,7 +110,7 @@
                             </div>
                             <div class="uk-grid-collapse uk-child-width-expand@s" uk-grid>
                                 <div *ngIf="repliesGroup[0].userId != user?.id" class="like-container">
-                                    <img class="img" src="/assets/images/like-outline.svg" alt="No Image Found"
+                                    <img class="img" src="/assets/images/like-outline.svg" alt=""
                                         (click)="likeReply(repliesGroup[0])">
                                     <span class="like" (click)="likeReply(repliesGroup[0])">
                                         {{repliesGroup[0].likeCount}}
@@ -122,12 +122,13 @@
                                         Edit
                                     </a>
                                 </div>
-                                <div class="reply-container" id="reply-comment-{{repliesGroup[0].id}}"
-                                    uk-toggle="target: #reply-modal-discussion"
-                                    (click)="setParentReplyId(repliesGroup[0].id, 'reply-comment-'+repliesGroup[0].id)">
-                                    <img class="img" src="/assets/images/reply.svg" alt="No Image Found"> <label
-                                        class="reply" for="commentarea">
-                                        Reply</label>
+                                <div class="reply-container">
+                                    <a href="javascript:void(0)" id="reply-comment-{{repliesGroup[0].id}}"
+                                        uk-toggle="target: #reply-modal-discussion"
+                                        (click)="setParentReplyId(repliesGroup[0].id, 'reply-comment-'+repliesGroup[0].id)">
+                                        <img class="img" src="/assets/images/reply.svg" alt=""> <label class="reply"
+                                            for="commentarea">
+                                            Reply</label></a>
                                 </div>
                             </div>
                         </div>
@@ -176,7 +177,7 @@
                 </div>
 
                 <div id="reply-modal-discussion" role="dialog" aria-labelledby="addCommentTitle"
-                    uk-modal="bg-close:false;container:false;">
+                    uk-modal="bg-close:false;" appTrapModalFocus>
                     <div class="uk-modal-dialog uk-modal-body">
                         <h1 tabindex=0 id="addCommentTitle" class="font-regular-24 font-weight-600"> {{ 
                             parentReplyId!="" ? 
@@ -194,7 +195,7 @@
                             </div>
 
                             <div class="uk-text-right">
-                                <button class="uk-button uk-button-transparent uk-modal-close"
+                                <button (click)="onCloseModel()" class="uk-button uk-button-transparent uk-modal-close"
                                     type="button">Cancel</button>
                                 <button class="uk-button uk-button-primary m-l-5" type="submit">
                                     {{!!user ? 'Post' : 'Sign In to Comment'}}

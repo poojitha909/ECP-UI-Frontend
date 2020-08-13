@@ -15,6 +15,10 @@ declare var UIkit: any;
 })
 export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('serviceInfo', { static: false }) private serviceInfo: ElementRef;
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscapeKeyHandler(event: KeyboardEvent) {
+    this.onCloseModel();
+  }
 
   breadcrumbLinks: Breadcrumb[] = [
     {
@@ -144,8 +148,11 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
       this.auth.removeServiceReviewForm();
       this.onOpenModel();
       UIkit.modal('#review-modal').show();
-      document.getElementById("reviewTitle").focus();
+      UIkit.util.on('#review-modal', 'shown', () => {
+        document.getElementById("reviewTitle").focus();
+      });
     }
+
     document.getElementById("serviceHeader").focus();
 
     if ((this.isDBService && this.service.basicProfileInfo.description) || (!this.isDBService && this.service.bizinfo)) {
@@ -323,15 +330,19 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   reportFormToggle(element: any) {
+
     if (this.auth.isAuthenticate) {
       this.onOpenModel();
       UIkit.modal('#report-modal').show();
-      document.getElementById("reportTitle").focus();
+      UIkit.util.on('#report-modal', 'shown', () => {
+        document.getElementById("reportTitle").focus();
+      });
       this.currentModelLink = element.id;
     } else {
       this.auth.redirectUrl = this.router.url;
       this.router.navigateByUrl('/user/signin');
     }
+
   }
 
   getDetailRating() {
@@ -444,7 +455,9 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     this.reviewForm.patchValue(editData.review);
     this.reviewTitle = "Edit";
     UIkit.modal('#review-modal').show();
-    document.getElementById("reviewTitle").focus();
+    UIkit.util.on('#review-modal', 'shown', () => {
+      document.getElementById("reviewTitle").focus();
+    });
     this.currentModelLink = editData.elementId;
   }
 
@@ -455,7 +468,9 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
       this.reviewTitle = 'Add';
       this.onOpenModel();
       UIkit.modal('#review-modal').show();
-      document.getElementById("reviewTitle").focus();
+      UIkit.util.on('#review-modal', 'shown', () => {
+        document.getElementById("reviewTitle").focus();
+      });
       this.currentModelLink = element.id;
     } else {
       this.auth.redirectUrl = this.router.url;
@@ -479,10 +494,7 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     this.getDBserviceReview(this.docId);
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
-  onEscapeKeyHandler(event: KeyboardEvent) {
-    this.onCloseModel();
-  }
+
 
   onCloseModel() {
     document.getElementsByClassName("main-container")[0].removeAttribute("aria-hidden");
@@ -497,14 +509,18 @@ export class ServiceDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     this.onOpenModel();
     this.currentModelLink = element.id;
     UIkit.modal('#contact-sections').show();
-    document.getElementById("contactModalTitle").focus();
+    UIkit.util.on('#contact-sections', 'shown', () => {
+      document.getElementById("contactModalTitle").focus();
+    });
   }
 
   openAboutModal(element: any) {
     this.onOpenModel();
     this.currentModelLink = element.id;
     UIkit.modal('#about-us').show();
-    document.getElementById("aboutModalTitle").focus();
+    UIkit.util.on('#about-us', 'shown', () => {
+      document.getElementById("aboutModalTitle").focus();
+    });
   }
 
   ngOnDestroy() {

@@ -80,6 +80,9 @@
     }
     .reply-container {
       text-align: right;
+      a{
+        color: #666;
+      }
       .reply {
         cursor: pointer;
       }

@@ -88,10 +88,12 @@
             </div>
             <!-- Products list  -->
             <div *ngIf="productsList!==undefined && productsList.length > 0 && !isLoading">
-                <app-product-detail-card *ngFor="let proudct of productsList" [product]="proudct"
-                    [pageParam]="{searchTxt:searchParams?.searchTxt, page:searchParams.p, productCategory:searchParams.productCategory}"
-                    (categoryChange)="onTabChange($event)">
-                </app-product-detail-card>
+                <div *ngFor="let proudct of productsList;let i=index" role="group" [attr.aria-label]="'Product ' + i">
+                    <app-product-detail-card [product]="proudct"
+                        [pageParam]="{searchTxt:searchParams?.searchTxt, page:searchParams.p, productCategory:searchParams.productCategory}"
+                        (categoryChange)="onTabChange($event)">
+                    </app-product-detail-card>
+                </div>
             </div>
             <app-pagination *ngIf="showPagination && (productsList && productsList.length > 0) && !isLoading"
                 [totalRecords]="totalRecords" [currentPage]="searchParams?.p" [perPage]="searchParams?.s"

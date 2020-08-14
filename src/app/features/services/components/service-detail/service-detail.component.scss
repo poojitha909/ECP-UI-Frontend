@@ -73,12 +73,12 @@ h1 {
   }
   .verified {
     position: relative;
-    button {
+    .verified-img {
+      color: #ffffff;
       right: 10px;
       position: absolute;
       background-color: $primary-btn;
       border-radius: 4px;
-      color: #fff;
       padding: 7px 10px;
       display: flex;
       top: 10px;

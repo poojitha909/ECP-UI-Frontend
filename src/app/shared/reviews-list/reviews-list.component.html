@@ -43,7 +43,9 @@
       <div class="uk-width-expand">
         <ng-container *ngIf="userId !== review.userId">
 
-          <a class="like-link" (click)="likeUnlikeReview(review.id)">
+          <a role="button" href="javascript:void(0)"
+            [attr.aria-label]="userUpvoted(review.likeCount) ?'You Liked': 'Like button'" class="like-link"
+            (click)="likeUnlikeReview(review.id)">
             <ng-container *ngIf="userUpvoted(review.likeCount)">
               <fa-icon [icon]="['far', 'thumbs-up']" class="m-r-5 font-22 upvoted"></fa-icon>
             </ng-container>

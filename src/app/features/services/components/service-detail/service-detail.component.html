@@ -24,7 +24,11 @@
           <img [imageHandler] *ngIf="!isDBService" [src]="service?.disp_pic" alt="Service image" />
           <img [imageHandler] *ngIf="isDBService" [src]="service?.basicProfileInfo?.profileImage?.original"
             alt="service image" />
-          <button *ngIf="service?.verified == '1'"><span class="verified-icon-w"></span></button>
+          <!-- <button *ngIf="service?.verified == '1'"><span class="verified-icon-w"></span></button> -->
+          <div class="verified-img" role="img" aria-label="Verified Service" tabindex=-1
+            *ngIf="service?.verified == '1'">
+            <span class="verified-icon-w"></span>
+          </div>
         </div>
         <div class="uk-text-center">
           <p class="m-t-20 m-b-0 uk-text-bold font-regular">

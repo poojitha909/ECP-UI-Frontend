@@ -280,9 +280,10 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.successMessage = "";
     this.onOpenModel();
     this.currentModelLink = element_id;
-
-    setTimeout(() => { document.getElementById("Comment").focus(); }, 0);
-
+    UIkit.modal("#reply-modal-discussion").show();
+    UIkit.util.on('#reply-modal-discussion', 'shown', () => {
+      document.getElementById("addCommentTitle").focus();
+    });
   }
 
   editReply(parentReplyId, reply) {
@@ -290,7 +291,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.replyId = reply.id;
     this.replyForm.patchValue({ commentTxt: reply.text });
     this.successMessage = "";
-    setTimeout(() => { document.getElementById("Comment").focus(); }, 0);
+    // setTimeout(() => { document.getElementById("Comment").focus(); }, 0);
   }
 
   onCancelPublish() {

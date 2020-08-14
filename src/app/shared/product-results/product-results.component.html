@@ -88,7 +88,7 @@
             </div>
             <!-- Products list  -->
             <div *ngIf="productsList!==undefined && productsList.length > 0 && !isLoading">
-                <div *ngFor="let proudct of productsList;let i=index" role="group" [attr.aria-label]="'Product ' + i">
+                <div *ngFor="let proudct of productsList;let i=index;" role="group" [attr.aria-label]="'Product ' + i">
                     <app-product-detail-card [product]="proudct"
                         [pageParam]="{searchTxt:searchParams?.searchTxt, page:searchParams.p, productCategory:searchParams.productCategory}"
                         (categoryChange)="onTabChange($event)">

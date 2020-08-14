@@ -8,7 +8,8 @@
   </div>
 
   <div class="uk-card-body uk-width-expand p-16">
-    <h3 tabindex=0 class="font-regular fname">{{expert.basicProfileInfo.firstName}}</h3>
+    <h3 class="font-regular"> <a [routerLink]="isSame ? ['/ask-question'] : ['/ask-question/add']"
+        [queryParams]="pageParam" class="fname" (click)="navigate()">{{expert.basicProfileInfo.firstName}}</a></h3>
     <p class="expertdetial">
       {{ expert?.workTitle }} &nbsp;
     </p>

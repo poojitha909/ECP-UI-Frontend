@@ -4,7 +4,7 @@
             <div class="category-box bg-white">
                 <div uk-grid>
                     <div class="uk-width-expand">
-                        <h3 class="uk-h4">Categories</h3>
+                        <h2 class="uk-h4">Categories</h2>
                     </div>
                     <div *ngIf="searchParams.tags !== ''">
                         <a href="javascript:void(0)" class="uk-text-danger" (click)="clearSelection()">Clear
@@ -35,8 +35,8 @@
         <div class="uk-width-expand@m">
             <!-- pagination info bar -->
             <div class="page-info-bar" *ngIf="showPagination && totalPages">
-                <p class="font-regular-15 uk-margin-remove">Page <b>{{searchParams.p +1}}</b> of <b>{{totalPages}}</b>
-                </p>
+                <h2 class="font-regular-15 uk-margin-remove">Page <b>{{searchParams.p +1}}</b> of <b>{{totalPages}}</b>
+                </h2>
             </div>
 
             <div *ngIf="isLoading" class="m-t-50 uk-text-center">
@@ -44,7 +44,8 @@
             </div>
             <div *ngIf="discussionsList!==undefined && discussionsList.length > 0 && !isLoading" class="m-b-30">
                 <div class="uk-flex-left uk-text-center uk-child-width-1-2@m" uk-grid>
-                    <div *ngFor="let discussion of discussionsList;let i=index" role="group" [attr.aria-label]="'Discussion ' + i">
+                    <div *ngFor="let discussion of discussionsList;let i=index" role="group"
+                        [attr.aria-label]="'Discussion ' + i">
                         <app-dicussion-summary-card [category]="selCategory"
                             [pageParam]="{category:selCategory, searchTxt:searchParams.searchTxt, page:searchParams.p, show:'discss'}"
                             [discussion]="discussion">

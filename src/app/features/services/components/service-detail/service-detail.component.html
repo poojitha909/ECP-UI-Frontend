@@ -46,7 +46,7 @@
           <!-- <button class="uk-button uk-button-default" uk-toggle="target: #modal-sections">Contact Service
             Provider</button> -->
           <a href="javascript:void(0)" class="uk-button uk-button-default" id="btnContactProvider"
-            aria-label="Opens popup with service contact detail" (click)="openContactModel($event.target)">Contact
+            aria-label="Contact Service Provider opens a dialog" (click)="openContactModel($event.target)">Contact
             Service
             Provider</a>
 
@@ -139,7 +139,7 @@
       <div class="info category-box bg-white">
         <!-- About -->
         <div>
-          <h3 class="font-regular-24 font-weight-600">About</h3>
+          <h2 class="font-regular-24 font-weight-600">About</h2>
           <!-- <p *ngIf="!isDBService && service?.seo_dt?.desc">
             {{service?.seo_dt?.desc }}
           </p> -->
@@ -269,9 +269,9 @@
             <ng-container *ngIf="dbReview.length > 0">
               <div class="m-t-50 m-b-20" uk-grid>
                 <div class="uk-width-expand uk-flex uk-flex-middle">
-                  <h3 class="font-regular-24 font-weight-600"> Reviews from Joy of Age Members
+                  <h2 class="font-regular-24 font-weight-600"> Reviews from Joy of Age Members
                     ({{totalReviewRecords}})
-                  </h3>
+                  </h2>
                 </div>
                 <div class="uk-width-auto">
                   <button class="uk-button uk-button-transparent review-btn-transparent"

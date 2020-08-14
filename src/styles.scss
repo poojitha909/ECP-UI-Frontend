@@ -233,19 +233,22 @@ ngb-rating {
   pointer-events: all;
 }
 
-.uk-button-default:focus:active,.uk-button-primary:focus:active {
+.uk-button-default:focus:active,
+.uk-button-primary:focus:active {
   background: #0050ba;
   color: #ffffff;
 }
 
-.uk-button-default,.uk-button-primary {
+.uk-button-default,
+.uk-button-primary {
   color: #ffffff;
   background: #1a73e8;
-  &:hover,&:focus  {
+  &:hover,
+  &:focus {
     background: #529bfb;
     color: #ffffff;
   }
-  &:focus  {
+  &:focus {
     outline: -webkit-focus-ring-color auto 5px;
   }
   &:disabled {
@@ -264,12 +267,13 @@ ngb-rating {
   color: #1a73e8;
   background: transparent;
   border: 1px solid #1a73e8;
-  &:hover,&:focus {
+  &:hover,
+  &:focus {
     background: transparent;
     color: #529bfb;
     border: 1px solid #529bfb;
   }
-  &:focus  {
+  &:focus {
     outline: -webkit-focus-ring-color auto 5px;
   }
   &:disabled {
@@ -532,4 +536,27 @@ ngb-rating {
   &:focus {
     outline: -webkit-focus-ring-color auto 2px;
   }
+}
+.uk-text-meta {
+  color: $font-light-black;
+}
+
+.reset-link {
+  margin: 0 5px;
+  background: none;
+  color: red;
+  border: none;
+  padding: 0 !important;
+  font: inherit;
+  cursor: pointer;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }

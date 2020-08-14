@@ -84,18 +84,6 @@
       outline: none;
     }
   }
-  .reset-link {
-    margin: 0 5px;
-    background: none;
-    color: red;
-    border: none;
-    padding: 0 !important;
-    font: inherit;
-    cursor: pointer;
-    &:focus {
-      outline: none;
-    }
-  }
   
 }
 
@@ -220,19 +208,6 @@
        }
     }
     
-    .reset-link{
-      margin: 0 5px;
-        background:none;
-        color: red;
-         border:none; 
-         padding:0!important;
-         font: inherit;
-         cursor: pointer;
-         &:focus{
-          outline:none;
-         }
-    
-    }
   }
   .search-form::after {
     visibility: hidden;

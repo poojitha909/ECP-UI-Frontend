@@ -23,11 +23,11 @@
                         <p><b>{{expert?.basicProfileInfo?.firstName}}</b></p>
                         <p>{{expert.workTitle}}</p>
                         <p>
-                            <span *ngFor="let ex of expert.experties; let idx = index;" routerLink="/ask-question"
-                                [queryParams]="{category: ex.id }">
+                            <a class="read-more-link" *ngFor="let ex of expert.experties; let idx = index;"
+                                routerLink="/ask-question" [queryParams]="{category: ex.id }">
                                 {{ex.name}}
                                 {{ (idx == (expert.experties.length -1)) ? "": "," }}
-                            </span>
+                            </a>
                         </p>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                 <div class="category-box info">
                     <div>
                         <a class="uk-margin-small-right">
-                            <img src="/assets/images/secure.png" alt="Secure icon" />
+                            <img src="/assets/images/secure.png" alt="Secure" />
                         </a>
                         <a> All conversations are private</a>
                     </div>
@@ -51,7 +51,7 @@
             <div class="uk-width-expand@m">
                 <div class="inner-container bg-white"
                     *ngIf="expert?.basicProfileInfo?.shortDescription != '' && expert?.basicProfileInfo?.shortDescription != undefined">
-                    <h4>About {{expert?.basicProfileInfo?.firstName}}</h4>
+                    <h2 class="uk-h4">About {{expert?.basicProfileInfo?.firstName}}</h2>
                     <hr />
                     <div #shortDesc class="white-space-wrap info-h-160">
                         {{ expert?.basicProfileInfo?.shortDescription }}
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="inner-container bg-white  m-t-30" id="questionform">
-                    <h4>Ask your Question</h4>
+                    <h2 class="uk-h4">Ask your Question</h2>
                     <hr />
                     <form [formGroup]="quesForm" class="uk-form">
                         <div class="uk-margin">

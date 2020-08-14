@@ -63,18 +63,6 @@
         }
       }
     }
-    .reset-link {
-      margin: 0 5px;
-      background: none;
-      color: red;
-      border: none;
-      padding: 0 !important;
-      font: inherit;
-      cursor: pointer;
-      &:focus {
-        outline: none;
-      }
-    }
   }
   @media (max-width: 640px) {
     .search-form {
@@ -239,19 +227,6 @@
         width: 100%;
         margin-top: -1px;
       }
-    }
-    .reset-link{
-      margin: 0 5px;
-        background:none;
-        color: red;
-         border:none; 
-         padding:0!important;
-         font: inherit;
-         cursor: pointer;
-         &:focus{
-          outline:none;
-         }
-    
     }
   }
   .search-form::after {

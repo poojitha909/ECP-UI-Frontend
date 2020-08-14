@@ -1,4 +1,5 @@
-<div *ngFor="let review of dbReview" class="category-box m-b-30 bg-white">
+<div *ngFor="let review of dbReview;let i=index" class="category-box m-b-30 bg-white" role="group"
+  [attr.aria-label]="'Review '+i">
   <div uk-grid>
     <div class="uk-width-expand">
       <div class="child-width-auto" uk-grid>
@@ -7,8 +8,8 @@
             alt="review user profile image" />
         </div>
         <div class="p-l-20 info">
-          <p class="font-regular m-0">
-            {{ review.userName }}</p>
+          <h3 class="font-regular m-0">
+            {{ review.userName }}</h3>
           <p class="font-regular-15 m-0 lable">{{review.contributors}} Contributions</p>
         </div>
       </div>

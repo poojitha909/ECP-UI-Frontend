@@ -112,7 +112,19 @@ export class UserService {
   }
 
   mergeAccounts(newAccountId:string, oldAccountId:string): Observable<UserProfile>{
-    return this.http.get<any>(ApiConstants.MERGE_ACCOUNTS+'?newAccountId='+newAccountId+'&oldAccountId='+oldAccountId)
+    return this.http.get<any>(ApiConstants.MERGE_ACCOUNTS+'?newAccountId='+newAccountId+'&oldAccountId='+oldAccountId).pipe(map
+      ((response) => {
+        if (response.data.basicProfileInfo && response.data.basicProfileInfo.firstName) {
+          let currentUser: User = this.auth.user;
+          currentUser.userName = response.data.basicProfileInfo.firstName;
+          currentUser.hasProfile = true;
+          this.auth.user = currentUser;
+        } else if (response.data.sessionId) {
+          this.auth.userSession = response.data.sessionId;
+          this.auth.user = response.data.user;
+        }
+        return response.data;
+      }))
   }
 
   createUserProfile(userData: UserProfile): Observable<UserProfile> {

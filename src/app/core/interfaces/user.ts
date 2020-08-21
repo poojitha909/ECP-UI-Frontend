@@ -19,7 +19,6 @@ export interface User {
     userTags?: string[];
     permissions?: any[];
     hasProfile?: boolean;
-    userId?:string;
 }
 
 export enum SocialAccount {

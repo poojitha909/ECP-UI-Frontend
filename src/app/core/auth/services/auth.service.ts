@@ -91,7 +91,7 @@ export class AuthService {
     );
   }
 
-  registerUser(userProfile: UserProfile): Observable<User> {
+  registerUser(userProfile: UserProfile): Observable<UserProfile> {
     if (userProfile.basicProfileInfo.primaryPhoneNo || userProfile.basicProfileInfo.primaryEmail) {
       const temp = this.user;
       temp.phoneNumber = userProfile.basicProfileInfo.primaryPhoneNo;

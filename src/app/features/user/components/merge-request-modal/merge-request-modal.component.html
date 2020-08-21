@@ -1,0 +1,18 @@
+<div class="uk-container">
+    <div id="modal-merge-req" uk-modal="bg-close:false;container:false;">
+      <div class="uk-modal-dialog uk-modal-body">
+        <h3 class="uk-modal-title">Another registration found!</h3>
+        <div class="uk-margin">
+          <div>
+            Your {{isTypeMobile==true?'mobile number':'email ID'}} has been already registered, Would you like to merge your accounts?
+          </div>
+        </div>
+        <p class="uk-text-right">
+          <button class="uk-button uk-button-transparent uk-modal-close" type="button"
+            (click)="doNotMerge()">No, thanks</button>
+          <button class="m-l-10 uk-button uk-button-default" type="button"
+            (click)="proceedWithMerging()">Yes, merge my accounts</button>
+        </p>
+      </div>
+    </div>
+  </div>

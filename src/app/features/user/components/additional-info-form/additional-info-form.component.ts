@@ -14,6 +14,12 @@ export class AdditionalInfoFormComponent implements OnInit {
 
   @Input() verifiedString: string;
   @Output() doNotRegister = new EventEmitter();
+  
+  //FOR MERGING ACCOUNTS
+  isMergeRequired = false;
+  showMergeModel = false
+  oldAccountDetails: UserProfile;
+
   //Temp user Profile image Url
   userImages: string[] = [
     "/assets/images/user/JOA Symbol Grayscale RGB.svg",
@@ -58,6 +64,32 @@ export class AdditionalInfoFormComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.auth.user.userIdType === this.userIdType.MOBILE) {
+      this.userService.validateEmailPresence(this.userform.get('primaryEmail').value).subscribe(
+        res => {
+          if (res.data != false) {
+            this.oldAccountDetails = res.data;
+            this.showMergeModel = true;
+          } else {
+            this.proceedSignup()
+          }
+        }
+      )
+    } else {
+      this.userService.validatePhoneNumberPresence(this.userform.get('primaryPhoneNo').value).subscribe(
+        res => {
+          if (res.data != false) {
+            this.oldAccountDetails = res.data;
+            this.showMergeModel = true;
+          } else {
+            this.proceedSignup()
+          }
+        }
+      )
+    }
+  }
+
+  proceedSignup() {
     this.errorMessage = null;
     if (this.userform.valid && this.mobileValidation()) {
       let userData: UserProfile = {
@@ -74,12 +106,12 @@ export class AdditionalInfoFormComponent implements OnInit {
         this.userService.createUserProfile(userData).subscribe(
           response => {
             if (response) {
-              if (this.auth.redirectUrl) {
-                const redirect = this.auth.redirectUrl;
-                this.auth.removeRedirectUrl();
-                this.router.navigateByUrl(redirect);
+              if (this.isMergeRequired === true) {
+                this.userService.mergeAccounts(response.userId, this.oldAccountDetails.id).subscribe(res => {
+                  this.redirectAfterSignup();
+                })
               } else {
-                this.router.navigateByUrl("/");
+                this.redirectAfterSignup();
               }
             }
           },
@@ -91,12 +123,12 @@ export class AdditionalInfoFormComponent implements OnInit {
         this.auth.registerUser(userData).subscribe(
           response => {
             if (response) {
-              if (this.auth.redirectUrl) {
-                const redirect = this.auth.redirectUrl;
-                this.auth.removeRedirectUrl();
-                this.router.navigateByUrl(redirect);
+              if (this.isMergeRequired === true) {
+                this.userService.mergeAccounts(response.userId, this.oldAccountDetails.id).subscribe(res => {
+                  this.redirectAfterSignup();
+                })
               } else {
-                this.router.navigateByUrl("/");
+                this.redirectAfterSignup();
               }
             }
           },
@@ -108,6 +140,16 @@ export class AdditionalInfoFormComponent implements OnInit {
 
     } else {
       this.errorMessage = "Please enter a valid mobile number";
+    }
+  }
+
+  redirectAfterSignup() {
+    if (this.auth.redirectUrl) {
+      const redirect = this.auth.redirectUrl;
+      this.auth.removeRedirectUrl();
+      this.router.navigateByUrl(redirect);
+    } else {
+      this.router.navigateByUrl("/");
     }
   }
 

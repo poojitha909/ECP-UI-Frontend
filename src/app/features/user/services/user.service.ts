@@ -104,6 +104,16 @@ export class UserService {
     );
   }
 
+  validateEmailPresence(email: string): Observable<any> {
+    return this.http.get<any>(ApiConstants.VALIDATE_EMAIL_PRESENCE+'?email='+email)
+  }
+  validatePhoneNumberPresence(phoneNumber: string): Observable<any> {
+    return this.http.get<any>(ApiConstants.VALIDATE_PHONE_NUMBER_PRESENCE+'?phoneNumber='+phoneNumber)
+  }
+
+  mergeAccounts(newAccountId:string, oldAccountId:string): Observable<UserProfile>{
+    return this.http.get<any>(ApiConstants.MERGE_ACCOUNTS+'?newAccountId='+newAccountId+'&oldAccountId='+oldAccountId)
+  }
 
   createUserProfile(userData: UserProfile): Observable<UserProfile> {
     return this.http.post<any>(ApiConstants.USER_PROFILE, userData).pipe(

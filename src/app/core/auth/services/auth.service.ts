@@ -78,18 +78,15 @@ export class AuthService {
     };
     return this.http.post<any>(ApiConstants.LOGIN_OTP, `mobile=${mobileNo}&otp=${code}`, options).pipe(
       map((response) => {
-        if(response.data && response.data.user.isActive=="Active"){
-          if (response.data && response.data.sessionId) {
-            this.userSession = response.data.sessionId;
-            this.user = response.data.user;
-            this.user$.next(response.data.user);
-          } else {
-            this.user = response.data;
-          }
-          return response.data;
-        }else{
-          return false;
+        if (response.data && response.data.sessionId) {
+          this.userSession = response.data.sessionId;
+          this.user = response.data.user;
+          this.user$.next(response.data.user);
+        } else {
+          this.user = response.data;
         }
+        return response.data;
+
       })
     );
   }

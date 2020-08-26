@@ -25,7 +25,6 @@ export class SignupComponent implements OnInit, AfterViewInit {
   user: any;
   config: any;
   isNewUser: boolean;
-  showMergedModal:boolean = false;
 
   constructor(
     private activeroute: ActivatedRoute,
@@ -133,11 +132,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
     // UIkit.modal('#loading-modal').show();
     this.errorMessage = null;
     this.auth.verfiyOtp(verification.number, verification.code).subscribe(response => {
-      if(response==false){
-        this.showMergedModal = true;
-        this.isLoading = false;
-        this.errorMessage = null;
-      } else if (response) {
+      if (response) {
         this.user = this.auth.user;
         this.getUserProfile();
         // this.verifiedString = `Welcome ${this.user.userName || this.user.email || this.user.phoneNumber}`;

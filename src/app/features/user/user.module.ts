@@ -22,6 +22,7 @@ import { ModalComponent } from './components/modal-component';
 import { SharedModule } from 'src/app/shared';
 import { UserWelcomeViewComponent } from './components/user-welcome-view/user-welcome-view.component';
 import { MergeRequestModalComponent } from './components/merge-request-modal/merge-request-modal.component';
+import { MergedAccountModalComponent } from './components/merged-account-modal/merged-account-modal.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { MergeRequestModalComponent } from './components/merge-request-modal/mer
     ViewGeneralInfoComponent, 
     ViewAddressDetailsComponent,
     MergeRequestModalComponent, 
-    ViewPersonalInformationComponent,ModalComponent, UserWelcomeViewComponent],
+    ViewPersonalInformationComponent,ModalComponent, UserWelcomeViewComponent, MergedAccountModalComponent],
     
   imports: [
     CommonModule,

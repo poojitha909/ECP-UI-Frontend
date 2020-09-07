@@ -111,8 +111,8 @@ export class UserService {
     return this.http.get<any>(ApiConstants.VALIDATE_PHONE_NUMBER_PRESENCE+'?phoneNumber='+phoneNumber)
   }
 
-  mergeAccounts(newAccountId:string, oldAccountId:string): Observable<UserProfile>{
-    return this.http.get<any>(ApiConstants.MERGE_ACCOUNTS+'?newAccountId='+newAccountId+'&oldAccountId='+oldAccountId).pipe(map
+  mergeAccounts(newAccountId:string, oldAccountId:string, isRetrieveOldAccountInfo:boolean): Observable<UserProfile>{
+    return this.http.get<any>(ApiConstants.MERGE_ACCOUNTS+'?newAccountId='+newAccountId+'&oldAccountId='+oldAccountId+'&isRetrieveOldAccountInfo='+isRetrieveOldAccountInfo).pipe(map
       ((response) => {
         if (response.data.basicProfileInfo && response.data.basicProfileInfo.firstName) {
           let currentUser: User = this.auth.user;

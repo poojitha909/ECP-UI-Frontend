@@ -1,0 +1,21 @@
+@import "src/assets/css/variables.scss";
+h2{
+    font-family: "HKGroteskRegular";
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 24px;
+    color: rgba(22, 28, 45, 0.68);
+}
+
+.uk-input {
+    border-radius: 4px;
+    height: 48px;
+}
+.mobile-number {
+    width: 100%;
+    a {
+        width: 135px;
+        color: #1a73e8;
+    }
+}

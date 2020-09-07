@@ -91,6 +91,17 @@ export class AuthService {
     );
   }
 
+  verfiyOtpWithoutLogin(mobileNo, code): Observable<any> {
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    };
+    return this.http.post<any>(ApiConstants.LOGIN_OTP, `mobile=${mobileNo}&otp=${code}`, options).pipe(
+      map((response) => {
+        return response.data;
+      })
+    );
+  }
+
   registerUser(userProfile: UserProfile): Observable<UserProfile> {
     if (userProfile.basicProfileInfo.primaryPhoneNo || userProfile.basicProfileInfo.primaryEmail) {
       const temp = this.user;

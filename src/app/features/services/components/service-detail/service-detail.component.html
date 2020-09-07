@@ -24,7 +24,11 @@
           <img [imageHandler] *ngIf="!isDBService" [src]="service?.disp_pic" alt="Service image" />
           <img [imageHandler] *ngIf="isDBService" [src]="service?.basicProfileInfo?.profileImage?.original"
             alt="service image" />
-          <button *ngIf="service?.verified == '1'"><span class="verified-icon-w"></span></button>
+          <!-- <button *ngIf="service?.verified == '1'"><span class="verified-icon-w"></span></button> -->
+          <div class="verified-img" role="img" aria-label="Verified Service" tabindex=-1
+            *ngIf="service?.verified == '1'">
+            <span class="verified-icon-w"></span>
+          </div>
         </div>
         <div class="uk-text-center">
           <p class="m-t-20 m-b-0 uk-text-bold font-regular">
@@ -42,7 +46,7 @@
           <!-- <button class="uk-button uk-button-default" uk-toggle="target: #modal-sections">Contact Service
             Provider</button> -->
           <a href="javascript:void(0)" class="uk-button uk-button-default" id="btnContactProvider"
-            aria-label="Opens popup with service contact detail" (click)="openContactModel($event.target)">Contact
+            aria-label="Contact Service Provider opens a dialog" (click)="openContactModel($event.target)">Contact
             Service
             Provider</a>
 
@@ -135,7 +139,7 @@
       <div class="info category-box bg-white">
         <!-- About -->
         <div>
-          <h3 class="font-regular-24 font-weight-600">About</h3>
+          <h2 class="font-regular-24 font-weight-600">About</h2>
           <!-- <p *ngIf="!isDBService && service?.seo_dt?.desc">
             {{service?.seo_dt?.desc }}
           </p> -->
@@ -150,7 +154,7 @@
 
           <!-- This is service details modal -->
           <div id="about-us" role="dialog" aria-labelledby="aboutModalTitle" aria-describedby="aboutBody"
-            class="uk-modal-container" uk-modal="bg-close:false;container:false;" appTrapModalFocus>
+            class="uk-modal-container" uk-modal="bg-close:false;" appTrapModalFocus>
             <div class="uk-modal-dialog">
               <!-- <button class="uk-modal-close-default" aria-label="Close popup" type="button" (click)="onCloseModel()"
                 uk-close></button> -->
@@ -265,9 +269,9 @@
             <ng-container *ngIf="dbReview.length > 0">
               <div class="m-t-50 m-b-20" uk-grid>
                 <div class="uk-width-expand uk-flex uk-flex-middle">
-                  <h3 class="font-regular-24 font-weight-600"> Reviews from Joy of Age Members
+                  <h2 class="font-regular-24 font-weight-600"> Reviews from Joy of Age Members
                     ({{totalReviewRecords}})
-                  </h3>
+                  </h2>
                 </div>
                 <div class="uk-width-auto">
                   <button class="uk-button uk-button-transparent review-btn-transparent"
@@ -442,7 +446,7 @@
 
 <!-- Contact Model START -->
 <div id="contact-sections" role="dialog" aria-labelledby="contactModalTitle" aria-describedby="contactBody"
-  class="uk-modal-container" uk-modal="bg-close:false;container:false;" appTrapModalFocus>
+  class="uk-modal-container" uk-modal="bg-close:false;" appTrapModalFocus>
   <div class="uk-modal-dialog">
     <!-- <button class="uk-modal-close-default" aria-label="Close popup" type="button" (click)="onCloseModel()"
       uk-close></button> -->
@@ -509,7 +513,7 @@
 <!-- Write Review Form START-->
 <!-- This is review modal -->
 <div id="review-modal" role="dialog" aria-labelledby="reviewTitle" aria-describedby="reviewForm"
-  uk-modal="bg-close:false;container:false;" appTrapModalFocus>
+  uk-modal="bg-close:false;" appTrapModalFocus>
   <div class="uk-modal-dialog uk-modal-body">
     <h3 id="reviewTitle" tabindex=0 class="font-regular-24 font-weight-600">{{reviewTitle}} your review</h3>
     <hr />
@@ -570,7 +574,7 @@
 
 <!-- This is the modal -->
 <div id="report-modal" role="dialog" aria-labelledby="reportTitle" aria-describedby="reportForm"
-  uk-modal="bg-close:false;container:false;" appTrapModalFocus>
+  uk-modal="bg-close:false;" appTrapModalFocus>
   <div class="uk-modal-dialog uk-modal-body">
     <h3 id="reportTitle" tabindex=0 class="font-regular-24 font-weight-600">Report</h3>
     <hr />

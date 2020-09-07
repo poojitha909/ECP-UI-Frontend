@@ -59,7 +59,7 @@
             <!-- Events list  -->
             <div *ngIf="eventsList!==undefined && eventsList.length > 0 && !isLoading">
                 <div class="uk-flex-left uk-text-center uk-child-width-1-2@m m-b-30" uk-grid>
-                    <div *ngFor="let event of eventsList">
+                    <div *ngFor="let event of eventsList;let i=index" role="group" [attr.aria-label]="'Event ' + i">
                         <app-event-summary-card [event]="event"
                             [pageParam]="{ past:this.searchParams.pastEvents, searchTxt:this.searchParams.searchTxt, page:this.searchParams.p, show:'events' }"
                             [isPast]="searchParams.pastEvents">

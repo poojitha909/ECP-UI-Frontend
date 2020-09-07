@@ -41,7 +41,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
   whatsappMobileUrl;
   currentModelLink: string;
   afterPublish: boolean = false;
-  showMedia:boolean=true;
+  showMedia: boolean = true;
 
   private readonly notifier: NotifierService;
   @ViewChild("customNotification", { static: true }) customNotificationTmpl;
@@ -68,10 +68,6 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
   ngAfterViewInit() {
   }
 
-  ngOnDestroy() {
-    this.paramsSubs.unsubscribe();
-  }
-
   initiate() {
     this.discussionId = this.route.snapshot.params['id'];
     this.successMessage = "";
@@ -96,7 +92,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.user = this.store.retrieve("ECP-USER");
     if (this.user) {
       this.user = JSON.parse(this.user);
-      if(this.discussionId == 'preview'){
+      if (this.discussionId == 'preview') {
         this.userService.getUserProfile().subscribe(
           userProfie => {
             this.userProfilePreview = userProfie
@@ -119,10 +115,10 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
       }, 500);
     }
     if (this.route.snapshot.params['id'] == 'preview') {
-      this.showMedia=false;
+      this.showMedia = false;
     }
-    else{
-      this.showMedia=true;
+    else {
+      this.showMedia = true;
     }
     this.replyForm = this.fb.group({
       commentTxt: [comment ? comment.commentTxt : "", Validators.required]
@@ -170,14 +166,14 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
           this.replyForm.reset();
           this.getDiscussion();
           this.successMessage = "Your comment has been successfully posted.  You can edit your comment anytime by clicking on the ‘Edit’ link next to your comment";
-          UIkit.modal("#reply-modal-discussion.uk-open").hide(); 
+          UIkit.modal("#reply-modal-discussion.uk-open").hide();
         }
       });
     }
 
   }
 
-  
+
 
   likeReply(reply) {
     if (reply.likedByUser) {
@@ -230,7 +226,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
       this.discussion = JSON.parse(this.discussion);
       this.discussion.createdAt = new Date();
       this.discussion.username = this.discussion.userName;
-      this.discussion.text =  this.sanitizer.bypassSecurityTrustHtml(this.discussion.description);
+      this.discussion.text = this.sanitizer.bypassSecurityTrustHtml(this.discussion.description);
       this.discussion.userProfile = { basicProfileInfo: { profileImage: { thumbnailImage: "" } } };
     }
     else {
@@ -249,13 +245,13 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     }
 
     setTimeout(() => {
-      if(this.successMessage){
+      if (this.successMessage) {
         window.scrollTo(0, document.getElementById("successMessageSection").offsetTop - 100);
       }
-      else{
+      else {
         document.getElementById("discussionTitleHeader").focus();
       }
-      
+
     }, 500);
   }
 
@@ -284,9 +280,10 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.successMessage = "";
     this.onOpenModel();
     this.currentModelLink = element_id;
-   
-    setTimeout( () => {document.getElementById("Comment").focus();},0);
-
+    UIkit.modal("#reply-modal-discussion").show();
+    UIkit.util.on('#reply-modal-discussion', 'shown', () => {
+      document.getElementById("addCommentTitle").focus();
+    });
   }
 
   editReply(parentReplyId, reply) {
@@ -294,7 +291,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
     this.replyId = reply.id;
     this.replyForm.patchValue({ commentTxt: reply.text });
     this.successMessage = "";
-    setTimeout( () => {document.getElementById("Comment").focus();},0);
+    // setTimeout(() => { document.getElementById("Comment").focus(); }, 0);
   }
 
   onCancelPublish() {
@@ -315,16 +312,16 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
       this.discussion.contentType,
       this.discussion.articlePhotoFilename,
       this.discussion.linkInfo)
-    .subscribe((response: any) => {
-      if (response.data.id != "") {
-        this.store.clear("new-discuss");
-        this.store.clear("new-discuss-preview");
-        this.router.navigate(['/community/discussion', response.data.id]);
-      }
-      else {
-        alert("Oops! something wrong happen, please try again.");
-      }
-    });
+      .subscribe((response: any) => {
+        if (response.data.id != "") {
+          this.store.clear("new-discuss");
+          this.store.clear("new-discuss-preview");
+          this.router.navigate(['/community/discussion', response.data.id]);
+        }
+        else {
+          alert("Oops! something wrong happen, please try again.");
+        }
+      });
   }
 
   @HostListener('document:keydown.escape', ['$event'])
@@ -334,7 +331,7 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
 
   onCloseModel() {
     document.getElementsByClassName("main-container")[0].removeAttribute("aria-hidden");
-    
+    document.getElementById(this.currentModelLink).focus();
   }
 
   onOpenModel() {
@@ -350,5 +347,10 @@ export class DiscussionDetailPageComponent implements OnInit, AfterViewInit, OnD
    */
   setDefaultPic(e) {
     e.target.src = "/assets/images/default-thumbnail.png";
+  }
+
+  ngOnDestroy() {
+    this.paramsSubs.unsubscribe();
+    document.getElementById("reply-modal-discussion").remove();
   }
 }

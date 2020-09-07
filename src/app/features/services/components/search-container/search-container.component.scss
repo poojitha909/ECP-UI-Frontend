@@ -3,7 +3,7 @@
 .search-container {
   // background-color: #ecf4ff;
   font-family: $regular-font;
- 
+
   // border: 1px solid #d7e0ef;
   margin-top: 32px;
   margin-bottom: 24px;
@@ -49,13 +49,13 @@
     }
   }
 
-  .search-bg{
+  .search-bg {
     padding: 32px 40px;
     border-radius: 8px;
     background-color: #ecf4ff;
     border: 1px solid #d7e0ef;
   }
-  
+
   @media (max-width: 640px) {
     .search-bg {
       padding: 16px;
@@ -91,19 +91,6 @@
   font-family: $regular-font;
   font-size: 16px;
   line-height: 1em;
-  &:focus {
-    outline: none;
-  }
-}
-
-.reset-link {
-  margin: 0 5px;
-  background: none;
-  color: red;
-  border: none;
-  padding: 0 !important;
-  font: inherit;
-  cursor: pointer;
   &:focus {
     outline: none;
   }

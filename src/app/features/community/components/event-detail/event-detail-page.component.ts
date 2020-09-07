@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router";
 import { EventService } from '../../services/events.service';
@@ -30,8 +30,9 @@ export class EventDetailPageComponent implements OnInit {
     {
       text: 'All Events',
       link: '/community',
-      queryParams: { 
-        show: "events"}
+      queryParams: {
+        show: "events"
+      }
     }
   ];
   eventId: string;
@@ -45,12 +46,17 @@ export class EventDetailPageComponent implements OnInit {
   whatsappMobileUrl;
   eventReportForm: FormGroup;
   successMessage: string;
+  currentModelLink: string;
   publish: boolean = false;
   ShowReportEvent: boolean = true;
   private readonly notifier: NotifierService;
   @ViewChild("customNotification", { static: true }) customNotificationTmpl;
   @ViewChild("customNotification1", { static: true }) customNotificationTmpl1;
 
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscapeKeyHandler(event: KeyboardEvent) {
+    this.onCloseModel();
+  }
 
   constructor(private router: Router, private route: ActivatedRoute,
     private eventService: EventService, private store: StorageHelperService,
@@ -69,9 +75,7 @@ export class EventDetailPageComponent implements OnInit {
 
   }
 
-  ngOnDestroy() {
-    this.paramsSubs.unsubscribe();
-  }
+
 
   initiate() {
     this.currentUrl = window.location.href;
@@ -160,19 +164,19 @@ export class EventDetailPageComponent implements OnInit {
     this.router.navigate(["community/event/add"]);
   }
 
-  
+
   onPublish() {
     if (!this.user) {
       this.authService.redirectUrl = "community/event/preview";
       this.router.navigate(['/user/signin']);
       return;
     }
-    
+
 
     setTimeout(() => {
       this.eventService.addEvents(this.event).subscribe((response: any) => {
         if (response.data.id != "") {
-          
+
           this.store.clear("new-event");
           this.store.clear("new-event-preview");
         }
@@ -183,10 +187,10 @@ export class EventDetailPageComponent implements OnInit {
 
     }, 2200)
 
-    
+
 
   }
-  onCloseApprovalModel(){
+  onCloseApprovalModel() {
     this.store.clear("new-event");
     this.store.clear("new-event-preview");
     this.router.navigate(['/community'], {
@@ -196,36 +200,70 @@ export class EventDetailPageComponent implements OnInit {
     });
   }
 
-  
 
 
-  reportFormToggle() {
+
+  reportFormToggle(element: any) {
     if (this.user) {
+      this.onOpenModel();
       UIkit.modal('#event-report-modal').show();
+      this.currentModelLink = element.id;
+      UIkit.util.on('#event-report-modal', 'shown', () => {
+        // do something
+        document.getElementById("reportTitle").focus();
+      });
     } else {
       this.authService.redirectUrl = this.router.url;
       this.router.navigateByUrl('/user/signin');
     }
   }
   onSubmitReport() {
-    if (this.user) {
-      this.eventService.reportEvent(this.eventReportForm.value).subscribe(
-        response => {
-          if (response) {
-            this.eventReportForm.reset();
-            this.successMessage = "Event report was sent to site admin successfully."
-            setTimeout(() => {
-              UIkit.modal('#event-report-modal').hide();
-            }, 5000);
-          }
-        },
-        error => {
-          console.log(error);
-        });
-      console.log(this.eventReportForm.value);
-    } else {
-      this.authService.redirectUrl = this.router.url;
-      this.router.navigateByUrl('/user/signin');
+    if (this.eventReportForm.valid) {
+      if (this.user) {
+        this.eventService.reportEvent(this.eventReportForm.value).subscribe(
+          response => {
+            if (response) {
+              this.eventReportForm.reset();
+              this.successMessage = "Event report was sent to site admin successfully."
+              setTimeout(() => {
+                UIkit.modal('#event-report-modal').hide();
+                this.onCloseModel();
+              }, 5000);
+            }
+          },
+          error => {
+            console.log(error);
+          });
+        console.log(this.eventReportForm.value);
+      } else {
+        this.authService.redirectUrl = this.router.url;
+        this.router.navigateByUrl('/user/signin');
+      }
     }
+  }
+
+  onCloseModel() {
+    document.getElementsByClassName("main-container")[0].removeAttribute("aria-hidden");
+    document.getElementById(this.currentModelLink).focus();
+  }
+
+  onOpenModel() {
+    document.getElementsByClassName("main-container")[0].setAttribute("aria-hidden", "true");
+  }
+
+  openContactModel(element: any) {
+    this.onOpenModel();
+    this.currentModelLink = element.id;
+    UIkit.modal('#modal-sections-events').show();
+    UIkit.util.on('#modal-sections-events', 'shown', () => {
+      // do something
+      document.getElementById("eventContactitle").focus();
+    });
+  }
+
+  ngOnDestroy() {
+    this.paramsSubs.unsubscribe();
+    document.getElementById("modal-sections-events").remove();
+    document.getElementById("event-report-modal").remove();
   }
 }

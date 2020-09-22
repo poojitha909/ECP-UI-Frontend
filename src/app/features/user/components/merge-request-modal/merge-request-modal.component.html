@@ -1,0 +1,120 @@
+<div class="uk-container">
+  <div id="modal-merge-req" uk-modal="bg-close:false;container:false;">
+    <ng-container *ngIf="mergingRequired==false; else mergeRequired">
+      <div class="uk-modal-dialog uk-modal-body">
+        <h3 class="uk-modal-title">Another registration found!</h3>
+        <div class="uk-margin">
+          <div>
+            Your {{isTypeMobile==true?'mobile number':'email ID'}} has been already registered, Would you like to merge
+            your accounts?
+          </div>
+        </div>
+        <p class="uk-text-right">
+          <button class="uk-button uk-button-transparent uk-modal-close" type="button" (click)="doNotMerge()">No,
+            thanks</button>
+          <button class="m-l-10 uk-button uk-button-default" type="button" (click)="mergingRequired = true">Yes, merge
+            my
+            accounts</button>
+        </p>
+      </div>
+    </ng-container>
+    <ng-template #mergeRequired>
+      <div class="uk-modal-dialog uk-modal-body" *ngIf="oldAccountDetails && newUserDetails">
+        <h3 class="uk-modal-title">Choose your primary account details</h3>
+        <div class="uk-margin">
+          <div class="row">
+            <div class="col col-md-6">
+              <div class="uk-width">
+                <label class="uk-form-label">Name</label>
+                <div class="uk-form-controls">
+                  <input disabled="true" class="uk-input" type="text" [value]="oldAccountDetails.userName"
+                    placeholder="Name...">
+                </div>
+              </div>
+              <div class="uk-width">
+                <label class="uk-form-label">Mobile Number</label>
+                <div class="uk-form-controls">
+                  <input disabled="true" class="uk-input" type="text" [value]="oldAccountDetails.phoneNumber"
+                    placeholder="Mobile Number...">
+                </div>
+              </div>
+              <div class="uk-width">
+                <label class="uk-form-label">Email</label>
+                <div class="uk-form-controls">
+                  <input disabled="true" class="uk-input" type="text" [value]="oldAccountDetails.email"
+                    placeholder="Email...">
+                </div>
+              </div>
+              <div class="uk-width" style="text-align: center;">
+                <button class="uk-button uk-button-default" style="margin-top: 20px;" [disabled]="isOTPSent"
+                  (click)="isRetrieveOldAccountInfo = true; requestOtp()">Set as Primary</button>
+              </div>
+            </div>
+            <div class="col col-md-6">
+              <div class="uk-width">
+                <label class="uk-form-label">Name</label>
+                <div class="uk-form-controls">
+                  <input disabled="true" class="uk-input" type="text" [value]="newUserDetails.firstName"
+                    placeholder="Name...">
+                </div>
+              </div>
+              <div class="uk-width">
+                <label class="uk-form-label">Mobile Number</label>
+                <div class="uk-form-controls">
+                  <input disabled="true" class="uk-input" type="text" [value]="newUserDetails.primaryPhoneNo"
+                    placeholder="Mobile Number...">
+                </div>
+              </div>
+              <div class="uk-width">
+                <label class="uk-form-label">Email</label>
+                <div class="uk-form-controls">
+                  <input disabled="true" class="uk-input" type="text" [value]="newUserDetails.primaryEmail"
+                    placeholder="Email...">
+                </div>
+              </div>
+              <div class="uk-width" style="text-align: center;">
+                <button class="uk-button uk-button-default" style="margin-top: 20px;" [disabled]="isOTPSent"
+                  (click)="isRetrieveOldAccountInfo = false; requestOtp()">Set as Primary</button>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-12">
+              <div *ngIf="errorMessage!=''" role="alert" aria-live="polite" aria-atomic="true"
+                class="uk-alert-danger uk-animation-fade" uk-alert>
+                <p><span class="uk-icon mr-5" uk-icon="warning"></span> {{ errorMessage }}</p>
+              </div>
+
+              <div *ngIf="isOTPSent == true" role="alert" aria-live="polite" aria-atomic="true"
+                class="uk-alert-success uk-animation-fade" uk-alert>
+                <p><span class="uk-icon mr-5" uk-icon="info"></span> OTP sent successfully to
+                  <b>{{oldAccountDetails.phoneNumber}}</b></p>
+              </div>
+            </div>
+            <div class="col col-md-12" *ngIf="isOTPSent==true">
+              <div class="uk-width">
+
+                <label class="uk-form-label" for="opttxt">OTP</label>
+                <div class="uk-form-controls">
+                  <div class="uk-inline mobile-number">
+                    <input id="opttxt" class="uk-input" aria-label="otpcode input" type="number" name="otpcode"
+                      [(ngModel)]="otpForMergingWithOldAccount" placeholder="Enter OTP"
+                      (keydown.enter)="requestOtp()" />
+                    <a (click)="requestOtp()" href="javascript:void(0)" class="uk-form-icon uk-form-icon-flip"> Resend
+                      OTP</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col col-md-12" *ngIf="isOTPSent==true">
+              <div class="uk-width" style="text-align: right;">
+                <button class="uk-button uk-button-default" style="margin-top: 20px;"
+                  [disabled]="otpForMergingWithOldAccount!=''?false:true" (click)="verifyOtp()">Complete Signup</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

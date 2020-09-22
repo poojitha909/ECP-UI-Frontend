@@ -159,8 +159,10 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit, OnDest
     if (this.user) {
       this.onOpenModel();
       UIkit.modal("#modal-product-leaving").show();
-      document.getElementById("buy-product-title").focus();
       this.currentModelLink = element.id;
+      UIkit.util.on('#modal-product-leaving', 'shown', () => {
+        document.getElementById("buy-product-title").focus();
+      });
     }
     else {
       this.authService.redirectUrl = "/products/" + this.product.id;
@@ -173,7 +175,9 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit, OnDest
     this.reviewSuccessMessage = null;
     this.reviewTitle = 'Add';
     UIkit.modal("#review-modal").show();
-    document.getElementById("reviewTitle").focus();
+    UIkit.util.on('#review-modal', 'shown', () => {
+      document.getElementById("reviewTitle").focus();
+    });
     this.currentModelLink = element.id;
   }
 
@@ -387,6 +391,9 @@ export class ProductDetailPageComponent implements OnInit, AfterViewInit, OnDest
     this.reviewForm.patchValue(reviewData.review);
     this.reviewTitle = "Edit";
     UIkit.modal("#review-modal").show();
+    UIkit.util.on('#review-modal', 'shown', () => {
+      document.getElementById("reviewTitle").focus();
+    });
 
   }
 

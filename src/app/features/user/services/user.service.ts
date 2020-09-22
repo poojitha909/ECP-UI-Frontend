@@ -104,17 +104,34 @@ export class UserService {
     );
   }
 
+  validateEmailPresence(email: string): Observable<any> {
+    return this.http.get<any>(ApiConstants.VALIDATE_EMAIL_PRESENCE+'?email='+email)
+  }
+  validatePhoneNumberPresence(phoneNumber: string): Observable<any> {
+    return this.http.get<any>(ApiConstants.VALIDATE_PHONE_NUMBER_PRESENCE+'?phoneNumber='+phoneNumber)
+  }
+
+  mergeAccounts(newAccountId:string, oldAccountId:string, isRetrieveOldAccountInfo:boolean): Observable<UserProfile>{
+    return this.http.get<any>(ApiConstants.MERGE_ACCOUNTS+'?newAccountId='+newAccountId+'&oldAccountId='+oldAccountId+'&isRetrieveOldAccountInfo='+isRetrieveOldAccountInfo).pipe(map
+      ((response) => {
+        if (response.data.basicProfileInfo && response.data.basicProfileInfo.firstName) {
+          let currentUser: User = this.auth.user;
+          currentUser.userName = response.data.basicProfileInfo.firstName;
+          currentUser.hasProfile = true;
+          this.auth.user = currentUser;
+        } else if (response.data.sessionId) {
+          this.auth.userSession = response.data.sessionId;
+          this.auth.user = response.data.user;
+        }
+        return response.data;
+      }))
+  }
 
   createUserProfile(userData: UserProfile): Observable<UserProfile> {
     return this.http.post<any>(ApiConstants.USER_PROFILE, userData).pipe(
       map
         ((response) => {
-          if (response.data.basicProfileInfo && response.data.basicProfileInfo.firstName) {
-            let currentUser: User = this.auth.user;
-            currentUser.userName = response.data.basicProfileInfo.firstName;
-            currentUser.hasProfile = true;
-            this.auth.user = currentUser;
-          } else if (response.data.sessionId) {
+          if (response.data.sessionId) {
             this.auth.userSession = response.data.sessionId;
             this.auth.user = response.data.user;
           }

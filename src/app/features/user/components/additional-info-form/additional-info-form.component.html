@@ -73,3 +73,5 @@
     Skip this step. <a routerLink="/">Go back Home</a>
   </div> -->
 </div>
+
+<app-merge-request-modal [showModal]="showMergeModel" [isTypeMobile]="auth.user?.userIdType === userIdType.MOBILE" [oldAccountDetails]="oldAccountDetails" [newUserDetails]="userform.getRawValue()" (isMergeRequired)="isMergeRequired=$event; proceedSignup()" (onModalVisibilityChange)="showMergeModel=$event" ></app-merge-request-modal>

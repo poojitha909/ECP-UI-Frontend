@@ -23,7 +23,9 @@ h3{
 
 .verified {
   position: relative;
-  button {
+  .verified-img {
+    color: #ffffff;
+    background: #1a73e8;
     right: 10px;
     position: absolute;
     border-radius: 4px;

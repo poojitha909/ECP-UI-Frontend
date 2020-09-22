@@ -1,3 +1,4 @@
+<h1 class="sr-only">Services for you</h1>
 <div>
   <div class="top-banner" id="serviceBanner">
     <div uk-grid>
@@ -7,12 +8,12 @@
           for Hyderabad area.</p>
       </div>
       <div class="uk-flex uk-flex-middle uk-flex-center uk-width-auto@s">
-        <img class="banner-img" alt=”” src="/assets/images/landing-img/service-banner-updated.png" />
+        <img class="banner-img" alt="" src="/assets/images/landing-img/service-banner-updated.png" />
       </div>
     </div>
   </div>
 
-  <div [ngClass]="{'blue-bg': ecpService.showBg}">
+  <div [ngClass]="{'blue-bg': ecpService.showBg}" role=“search”>
     <!-- Search Container starts -->
     <app-search-container></app-search-container>
     <!-- Search Container ends -->

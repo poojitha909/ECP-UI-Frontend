@@ -18,7 +18,9 @@ export class NoReviewComponent implements OnInit {
     if (this.auth.isAuthenticate) {
       document.getElementsByClassName("main-container")[0].setAttribute("aria-hidden", "true");
       UIkit.modal('#review-modal').show();
-      document.getElementById("reviewTitle").focus();
+      UIkit.util.on('#review-modal', 'shown', () => {
+        document.getElementById("reviewTitle").focus();
+      });
     } else {
       this.auth.redirectUrl = this.router.url;
       this.router.navigateByUrl('/user/signin');

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { AskQuestionService } from '../../services/ask-question.service';
 import { Router, ActivatedRoute } from "@angular/router";
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
@@ -41,7 +41,13 @@ export class AskQuestionCreatePageComponent implements OnInit {
   totalRecords: number;
   rUrl: string;
   showReadMore: boolean;
+  currentModelLink;
   @ViewChild('shortDesc', { static: false }) private shortDesc: ElementRef;
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscapeKeyHandler(event: KeyboardEvent) {
+    this.onCloseModel();
+  }
 
   constructor(private route: ActivatedRoute, private router: Router,
     private askQuesService: AskQuestionService, private store: StorageHelperService,
@@ -53,9 +59,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
     });
     document.getElementById("askExpertHeading").focus();
   }
-  ngOnDestroy() {
-    this.paramsSubs.unsubscribe();
-  }
+
 
   initiate() {
     this.searchParams = {
@@ -70,15 +74,15 @@ export class AskQuestionCreatePageComponent implements OnInit {
       this.user = JSON.parse(this.user);
       this.searchParams.askedBy = this.user.id;
     }
-    this.rUrl="?";
+    this.rUrl = "?";
     if (this.route.snapshot.queryParams['expertCategory']) {
       this.category = this.route.snapshot.queryParams['expertCategory'];
-      this.rUrl= this.rUrl + "category=" + this.category + "&";
+      this.rUrl = this.rUrl + "category=" + this.category + "&";
     }
     if (this.route.snapshot.queryParams['answeredBy']) {
       this.answeredBy = this.route.snapshot.queryParams['answeredBy'];
       this.searchParams.answeredBy = this.route.snapshot.queryParams['answeredBy'];
-      this.rUrl= this.rUrl + "answeredBy=" + this.answeredBy + "&";
+      this.rUrl = this.rUrl + "answeredBy=" + this.answeredBy + "&";
     }
     if (this.searchParams.askedBy && this.searchParams.answeredBy) {
       this.showQuestions();
@@ -99,10 +103,10 @@ export class AskQuestionCreatePageComponent implements OnInit {
       if (response.data.id != "") {
         this.expert = response.data;
         this.setSeoTags(this.expert);
-        if(!this.category && this.expert.experties[0]){
+        if (!this.category && this.expert.experties[0]) {
           this.category = this.expert.experties[0].id;
         }
-        setTimeout( () => { 
+        setTimeout(() => {
           if (this.shortDesc.nativeElement.scrollHeight > this.shortDesc.nativeElement.offsetHeight) {
             this.showReadMore = true;
           }
@@ -112,14 +116,19 @@ export class AskQuestionCreatePageComponent implements OnInit {
         alert("Oops! something wrong happen, please try again.");
       }
     });
-    if(this.route.snapshot.queryParams['editQue']){
-      setTimeout( () => { window.scrollTo(0,document.getElementById("questionform").offsetTop); }, 500);
+    if (this.route.snapshot.queryParams['editQue']) {
+      setTimeout(() => { window.scrollTo(0, document.getElementById("questionform").offsetTop); }, 500);
     }
 
   }
-  showMoreClicked(){
-    UIkit.modal("#detail-description").show();
-    document.getElementById("aboutModalTitle").focus();
+
+  showMoreClicked(element: any) {
+    this.onOpenModel();
+    this.currentModelLink = element.id;
+    UIkit.modal('#detail-description').show();
+    UIkit.util.on('#detail-description', 'shown', () => {
+      document.getElementById("aboutModalTitle").focus();
+    });
   }
 
   showQuestions() {
@@ -134,9 +143,12 @@ export class AskQuestionCreatePageComponent implements OnInit {
     });
   }
 
-  redirectToQuestions(){
-    this.router.navigate(['/ask-question/'],{ queryParams: { 
-    show: "ques"}});
+  redirectToQuestions() {
+    this.router.navigate(['/ask-question/'], {
+      queryParams: {
+        show: "ques"
+      }
+    });
   }
 
   setSeoTags(expert: any) {
@@ -170,7 +182,7 @@ export class AskQuestionCreatePageComponent implements OnInit {
   onSubmit() {
     this.store.store("new-question", JSON.stringify(this.quesForm.value));
     if (!this.user) {
-      this.authService.redirectUrl = "/ask-question/add"+this.rUrl;
+      this.authService.redirectUrl = "/ask-question/add" + this.rUrl;
       this.router.navigate(['/user/signin']);
       return;
     }
@@ -191,4 +203,22 @@ export class AskQuestionCreatePageComponent implements OnInit {
     this.store.store("new-question-preview", JSON.stringify(que));
     this.router.navigate(['/ask-question/detail/preview']);
   }
+
+
+  onCloseModel() {
+    document.getElementsByClassName("main-container")[0].removeAttribute("aria-hidden");
+    document.getElementById(this.currentModelLink).focus();
+  }
+
+  onOpenModel() {
+    document.getElementsByClassName("main-container")[0].setAttribute("aria-hidden", "true");
+  }
+
+
+
+  ngOnDestroy() {
+    this.paramsSubs.unsubscribe();
+    document.getElementById("detail-description").remove();
+  }
+
 }

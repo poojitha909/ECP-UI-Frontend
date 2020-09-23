@@ -31,6 +31,7 @@
                         [init]="{menubar:false, statusbar: false, base_url: '/tinymce', plugins: 'lists advlist', content_css : '/assets/css/mce_editor.css'}">
                     </editor> -->
                     <quill-editor
+                    (onEditorCreated)='editorInit($event)'
                         [ngClass]="{'uk-form-danger' : formControl.description.invalid && ( formControl.description.dirty ||  formControl.description.touched) }"
                         id="Content" formControlName="description"
                     >

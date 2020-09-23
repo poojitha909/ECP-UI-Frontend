@@ -16,7 +16,7 @@ export class AdditionalInfoFormComponent implements OnInit {
   @Output() doNotRegister = new EventEmitter();
   
   //FOR MERGING ACCOUNTS
-  isMergeRequired = false;
+  isMergeRequired:any = false;
   showMergeModel = false
   oldAccountDetails: UserProfile;
 
@@ -106,8 +106,8 @@ export class AdditionalInfoFormComponent implements OnInit {
         this.userService.createUserProfile(userData).subscribe(
           response => {
             if (response) {
-              if (this.isMergeRequired === true) {
-                this.userService.mergeAccounts(response.userId, this.oldAccountDetails.id).subscribe(res => {
+              if (this.isMergeRequired != false) {
+                this.userService.mergeAccounts(response.userId, this.oldAccountDetails.id, this.isMergeRequired.isRetrieveOldAccountInfo).subscribe(res => {
                   this.redirectAfterSignup();
                 })
               } else {
@@ -123,8 +123,8 @@ export class AdditionalInfoFormComponent implements OnInit {
         this.auth.registerUser(userData).subscribe(
           response => {
             if (response) {
-              if (this.isMergeRequired === true) {
-                this.userService.mergeAccounts(response.userId, this.oldAccountDetails.id).subscribe(res => {
+              if (this.isMergeRequired != false) {
+                this.userService.mergeAccounts(response.userId, this.oldAccountDetails.id, this.isMergeRequired.isRetrieveOldAccountInfo).subscribe(res => {
                   this.redirectAfterSignup();
                 })
               } else {

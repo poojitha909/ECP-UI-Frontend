@@ -93,7 +93,7 @@
             </div>
             <div class="uk-width-2-3@m">
                 <div class="category-box bg-white">
-                    <h3 class="heading2">About</h3>
+                    <h2 class="heading2">About</h2>
                     <div class="description">
                         {{product?.description}}
                     </div>
@@ -113,7 +113,7 @@
 
                 <!-- Write Review Form START-->
                 <!-- This is review modal -->
-                <div id="review-modal" uk-modal="bg-close:false;container:false;" appTrapModalFocus>
+                <div id="review-modal" uk-modal="bg-close:false;" appTrapModalFocus>
                     <div class="uk-modal-dialog uk-modal-body">
                         <h3 id="reviewTitle" tabindex=0 class="font-regular-24 font-weight-600">{{reviewTitle}} your
                             review</h3>
@@ -187,9 +187,9 @@
                             <ng-container *ngIf="reviews.length > 0">
                                 <div class="m-t-50 m-b-20" uk-grid>
                                     <div class="uk-width-expand uk-flex uk-flex-middle">
-                                        <h3 class="font-regular-24 font-weight-600"> Reviews from Joy of Age Members
+                                        <h2 class="font-regular-24 font-weight-600"> Reviews from Joy of Age Members
                                             ({{totalReviewRecords}})
-                                        </h3>
+                                        </h2>
                                     </div>
                                     <div class="uk-width-auto">
                                         <button id="add-review-btn"
@@ -238,10 +238,8 @@
         </div>
     </div>
     <!-- Contact Model START -->
-    <div id="modal-product-leaving" class="uk-modal-container" uk-modal="bg-close:false;container:false;"
-        appTrapModalFocus>
+    <div id="modal-product-leaving" class="uk-modal-container" uk-modal="bg-close:false;" appTrapModalFocus>
         <div class="uk-modal-dialog">
-            <button class="uk-modal-close-default" type="button" (click)="onCloseModel()" uk-close></button>
             <div class="uk-modal-header">
                 <h2 id="buy-product-title" tabindex=0 class="uk-modal-title">Leaving Joy of Age</h2>
             </div>

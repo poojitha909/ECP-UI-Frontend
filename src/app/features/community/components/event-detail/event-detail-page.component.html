@@ -11,14 +11,16 @@
                     <h3>{{event.organiser}}</h3>
                     <p>Organiser</p>
                     <div>
-                        <button class="uk-button uk-button-default cont-org" uk-toggle="target: #modal-sections-events">
+                        <button id="contact-btn" class="uk-button uk-button-default cont-org"
+                            (click)="openContactModel($event.target)">
                             Contact
                             Organiser</button>
                     </div>
-                    <p *ngIf="ShowReportEvent">
-                        <a style="cursor:pointer;" (click)="reportFormToggle()"><img
+                    <div class="m-t-10 m-b-20 uk-text-center">
+                        <a *ngIf="ShowReportEvent" href="javascript:void(0)" id="report-link"
+                            (click)="reportFormToggle($event.target)"><img
                                 src="/assets/images/flag.svg">{{ authService.isAuthenticate ? 'Report this Event/Organizer': 'Join us to Report Event/Organizer'}}</a>
-                    </p>
+                    </div>
                 </div>
                 <div *ngIf="ShowReportEvent">
                     <app-share-via-media></app-share-via-media>
@@ -26,7 +28,7 @@
 
 
 
-                
+
             </div>
             <div class="uk-width-2-3@m">
                 <div *ngIf="eventId == 'preview'" class="previewTop">
@@ -39,30 +41,30 @@
                     </div>
                 </div>
                 <div class="bg-white category-box">
-                    <h4 class="publish-on">Published on: <span>{{event.createdAt | date:'dd MMM yyyy' }} at
+                    <p class="publish-on">Published on: <span>{{event.createdAt | date:'dd MMM yyyy' }} at
                             {{event?.datetime | date:'shortTime' }}</span>
                         <span
                             [ngClass]="{'outdoor-icon' : event?.eventType== 1, 'indoor-icon' : event?.eventType==2 }"></span>
-                    </h4>
+                    </p>
                     <h1 id="eventHeader" tabindex=0 class="heading">{{event.title}}</h1>
                     <hr />
                     <div class="uk-grid uk-child-width-1-2@m">
                         <div>
-                            <img src="/assets/images/date.png" alt="date icon"
+                            <img src="/assets/images/date.png" alt="date"
                                 class="icons-ev">{{event?.datetime | date:'EEEE, dd MMM yyyy' }}
                             <!-- date only -->
                         </div>
                         <div>
-                            <img src="/assets/images/location.png" alt="location icon"
+                            <img src="/assets/images/location.png" alt="location"
                                 class="icons-ev">{{event?.address}}
                         </div>
                         <div>
-                            <img src="/assets/images/time.png" alt="clock icon"
+                            <img src="/assets/images/time.png" alt="clock"
                                 class="icons-ev">{{event?.datetime | date:'shortTime' }}
                             <!-- time only -->
                         </div>
                         <div>
-                            <img src="/assets/images/phone.png" alt="phone icon" class="icons-ev">{{event?.orgPhone}}
+                            <img src="/assets/images/phone.png" alt="phone" class="icons-ev">{{event?.orgPhone}}
                             <!-- time only -->
                         </div>
                     </div>
@@ -120,17 +122,15 @@
         </div>
         <!-- Contact Model START -->
         <div id="modal-sections-events" role="dialog" aria-labelledby="eventContactitle"
-            aria-describedby="contactDetails" class="uk-modal-container" uk-modal="bg-close:false;container:false;">
+            aria-describedby="contactDetails" class="uk-modal-container" uk-modal="bg-close:false;" appTrapModalFocus>
             <div class="uk-modal-dialog">
-                <button class="uk-modal-close-default" aria-label="Close popup" type="button" (click)="onCloseModel()"
-                    uk-close></button>
                 <div class="uk-modal-header">
                     <h2 id="eventContactitle" tabindex=0 class="uk-modal-title">Organiser Contact Information</h2>
                 </div>
                 <div class="uk-modal-body" id="contactDetails">
                     <div class="uk-child-width-1-2@s uk-grid-small" uk-grid>
                         <div>
-                            
+
                             <p class="font-regular-15 m-b-10 lable">Organiser</p>
                             <p class="font-regular m-t-0">{{event?.organiser}}</p>
 
@@ -188,15 +188,17 @@
         <!-- Submit for Approval END -->
 
         <!-- Report Form Model Start -->
-        <div id="event-report-modal" uk-modal>
+        <div id="event-report-modal" role="dialog" aria-labelledby="reportTitle" aria-describedby="reportForm"
+            uk-modal="bg-close:false;" appTrapModalFocus>
             <div class="uk-modal-dialog uk-modal-body">
-                <h3 class="uk-modal-title">Report</h3>
+                <h3 tabindex="0" id="reportTitle" class="uk-modal-title">Report</h3>
                 <!-- Success box START-->
                 <div *ngIf="successMessage" class="uk-alert-success" uk-alert>
                     <p>{{ successMessage }}</p>
                 </div>
                 <!-- Success box END-->
-                <form [formGroup]="eventReportForm" (ngSubmit)="onSubmitReport()" class="uk-form-stacked review-form">
+                <form [formGroup]="eventReportForm" id="reportForm" (ngSubmit)="onSubmitReport()"
+                    class="uk-form-stacked review-form">
                     <div class="uk-margin">
                         <label class="uk-form-label" for="comment">Message</label>
                         <div class="uk-form-controls">
@@ -205,9 +207,9 @@
                         </div>
                     </div>
                     <p class="uk-text-right">
-                        <button class="uk-button uk-button-transparent uk-modal-close" type="button">Cancel</button>
-                        <button class="m-l-10 uk-button uk-button-default" type="submit"
-                            [disabled]="eventReportForm.invalid">Submit</button>
+                        <button class="uk-button uk-button-transparent uk-modal-close" (click)="onCloseModel()"
+                            type="button">Cancel</button>
+                        <button class="m-l-10 uk-button uk-button-default" type="submit">Submit</button>
                     </p>
                 </form>
             </div>

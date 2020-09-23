@@ -12,7 +12,7 @@
     margin: 64px 0 24px 0;
   }
   .comments-count {
-    h4 {
+    h2 {
       font-family: $regular-font;
       font-size: 24px;
     }
@@ -21,6 +21,8 @@
     text-transform: capitalize;
     float: right;
     height: 38px;
+    color: #0050ba;
+    border: 1px solid #0050ba;
   }
   .textblue {
     color: $primary-txt-color;
@@ -74,12 +76,16 @@
     }
     .like,
     .reply {
+      color:#666;
       font-size: 18px;
       display: inline-block;
       vertical-align: middle;
     }
     .reply-container {
       text-align: right;
+      a{
+        color: #666;
+      }
       .reply {
         cursor: pointer;
       }
@@ -124,8 +130,8 @@
   }
   .publish-on {
     font-size: 15px;
-    color: rgba(22, 28, 45, 0.68);
-    opacity: 0.5;
+    font-weight: 600;
+    color: $font-light-black;
   }
   .heading {
     font-family: $regular-font;

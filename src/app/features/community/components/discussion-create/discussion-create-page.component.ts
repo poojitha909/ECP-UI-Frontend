@@ -115,7 +115,7 @@ export class DiscussionCreatePageComponent implements OnInit {
     if (!this.discussForm.valid) {
       return;
     }
-    
+    // discuss.description = discuss.description.replace(/<p><br><\/p>/g, "");
     this.store.store("new-discuss-preview", JSON.stringify({
       description: discuss.description,
       title: discuss.title,
@@ -125,5 +125,27 @@ export class DiscussionCreatePageComponent implements OnInit {
       categories: discuss.category ? [this.categoryList[discuss.category].id] : [],
       contentType: 0}));
     this.router.navigate(['/community/discussion/preview',{id:'preview'}]);
+  }
+
+  editorInit(quill: any){
+    quill.clipboard.matchVisual = false
+    quill.clipboard.addMatcher(Node.ELEMENT_NODE, function(node, delta){
+      // console.log(typeof delta)
+
+      delta.forEach(e => {
+        console.log(e)
+        if(e.insert){
+          // console.log("line = "+e.insert)
+          if(e.insert=='\n' || e.insert==" "){
+            e.insert=''
+          }
+        }
+        if(e.attributes){
+          e.attributes.color = '';
+          e.attributes.background = '';
+        }
+      });
+      return delta;
+    });
   }
 }

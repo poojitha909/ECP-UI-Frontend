@@ -560,3 +560,9 @@ ngb-rating {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
+@media (max-width: 640px) {
+  .uk-offcanvas-bar{
+    width: 240px;
+  }
+}

@@ -111,6 +111,13 @@ export class UserService {
     return this.http.get<any>(ApiConstants.VALIDATE_PHONE_NUMBER_PRESENCE+'?phoneNumber='+phoneNumber)
   }
 
+  validateEmailPresenceForUpdate(userId:string, email: string): Observable<any> {
+    return this.http.get<any>(ApiConstants.VALIDATE_EMAIL_PRESENCE_FOR_UPDATE+'?email='+email+'&userId='+userId)
+  }
+  validatePhoneNumberPresenceForUpdate(userId:string, phoneNumber: string): Observable<any> {
+    return this.http.get<any>(ApiConstants.VALIDATE_PHONE_NUMBER_PRESENCE_FOR_UPDATE+'?phoneNumber='+phoneNumber+'&userId='+userId)
+  }
+
   mergeAccounts(newAccountId:string, oldAccountId:string, isRetrieveOldAccountInfo:boolean): Observable<UserProfile>{
     return this.http.get<any>(ApiConstants.MERGE_ACCOUNTS+'?newAccountId='+newAccountId+'&oldAccountId='+oldAccountId+'&isRetrieveOldAccountInfo='+isRetrieveOldAccountInfo).pipe(map
       ((response) => {

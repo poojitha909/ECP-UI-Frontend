@@ -8,6 +8,7 @@ declare var UIkit: any;
   styleUrls: ['./merge-request-modal.component.scss']
 })
 export class MergeRequestModalComponent implements OnChanges {
+  @Input() isWhileRegistration = true
   @Input() showModal: boolean = false;
   @Input() isTypeMobile: boolean = true;
   @Input() oldAccountDetails: any;
@@ -41,8 +42,8 @@ export class MergeRequestModalComponent implements OnChanges {
   }
 
   verifyOtp(){
-    this.auth.verfiyOtpWithoutLogin(this.oldAccountDetails.phoneNumber, this.otpForMergingWithOldAccount).subscribe(response => {
-      if (response) {
+    this.auth.validateOTP(this.oldAccountDetails.phoneNumber, this.otpForMergingWithOldAccount).subscribe(response=>{
+      if (response==true) {
         this.proceedWithMerging()
       } else {
         this.errorMessage = "We could not match the OTP you entered with the one that was sent to you. Please retry with the OTP that was sent to your registered mobile number";
@@ -51,7 +52,18 @@ export class MergeRequestModalComponent implements OnChanges {
       error => {
         console.log(error);
         this.isOTPSent = false;
-      });
+    });
+    // this.auth.verfiyOtpWithoutLogin(this.oldAccountDetails.phoneNumber, this.otpForMergingWithOldAccount).subscribe(response => {
+    //   if (response) {
+    //     this.proceedWithMerging()
+    //   } else {
+    //     this.errorMessage = "We could not match the OTP you entered with the one that was sent to you. Please retry with the OTP that was sent to your registered mobile number";
+    //   }
+    // },
+    //   error => {
+    //     console.log(error);
+    //     this.isOTPSent = false;
+    //   });
   }
 
   requestOtp(){

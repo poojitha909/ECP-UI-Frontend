@@ -32,6 +32,12 @@
       margin: 0 !important;
     }
   }
+  
+}
+.top-banner{
+  .banner-text2{
+    font-size: 16px;
+  }
 }
 .home-banner{
   border: none;
@@ -113,4 +119,37 @@
 .homecards{
     margin-left: -40px;
     margin-right: -47px;
+}
+
+@media (max-width: 640px) {
+  // .banner-text2{
+  //   font-size: 14px;
+  // }
+  // .font-regular{
+  //   font-size: 16px;
+  // }
+  .top-banner{
+    margin-top: 0px;
+    .banner-img{
+      display: none;
+    }
+    .banner-text {
+      padding: 20px 20px;
+  }
+  .font-regular{
+    font-size: 16px;
+  }
+  .banner-text2{
+    font-size: 14px;
+  }
+  }
+  .search-container{
+    margin-top: 0px;
+  }
+  .quote-line >a{
+    font-size: 14px;
+  }
+  .uk-grid  .uk-grid, .uk-grid > .uk-grid-margin, * + .uk-grid-margin {
+    margin-top: 20px;
+}
 }

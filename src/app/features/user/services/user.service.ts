@@ -104,6 +104,9 @@ export class UserService {
     );
   }
 
+  updateNewsletterPreference(mobile: string, otp:string, isSubscribedForNewsletter:boolean): Observable<any> {
+    return this.http.get<any>(ApiConstants.UNSUBSCRIBE_NEWSLETTER+'?mobile='+mobile+'&otp='+otp+'&isSubscribedForNewsletter='+isSubscribedForNewsletter)
+  }
   validateEmailPresence(email: string): Observable<any> {
     return this.http.get<any>(ApiConstants.VALIDATE_EMAIL_PRESENCE+'?email='+email)
   }

@@ -20,3 +20,27 @@
       border-radius: 4px;
     }
 }
+
+@media (max-width: 640px) {
+    .breadcrumbs {
+      margin-top: 20px;
+  }
+  .discussion-create{
+    .heading{
+      font-size: 18px;
+    }
+    margin-bottom: 30px;
+  }
+  * + hr, * + .uk-hr {
+    margin-top: -10px;
+}
+  .inner-container{
+      .uk-button{
+        font-size: 14px;
+      }
+      .uk-button-default{
+        margin-top: 10px;
+        margin-bottom: -30px;
+      }
+  }
+}

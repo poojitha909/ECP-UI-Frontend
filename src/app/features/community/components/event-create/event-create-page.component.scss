@@ -37,3 +37,27 @@
   -webkit-appearance: none;
   margin: 0;
 }
+
+@media(max-width:640px){
+  .breadcrumbs{
+    margin-top: 20px;
+  }
+  .breadcrumbs .uk-breadcrumb {
+    font-size: 18px;
+  }
+  .event-create{
+    .heading{
+      font-size: 18px;
+    }
+  }
+* + hr, * + .uk-hr {
+  margin-top: -11px;
+}
+.uk-button-transparent {
+  margin-bottom: 10px;
+}
+.uk-button-default{
+margin-bottom: -20px;
+}
+
+}

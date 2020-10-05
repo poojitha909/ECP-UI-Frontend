@@ -50,10 +50,10 @@
 
     <div class="search-tab">
       <ul [ngClass]="{'uk-child-width-expand': searchTxt=='', 'showOnSearchtab': searchTxt!='' }" id="search-tab"
-        uk-tab>
-        <li><a (click)="showAll('discss')" href="#"> Articles &
+        uk-tab >
+        <li><a (click)="showAll('discss')" href="#" > Articles &
             Discussions{{ searchTxt!='' ? " (" + searchData.totalDiscussions + ")" : "" }}</a></li>
-        <li><a (click)="showAll('events')" href="#">
+        <li><a (click)="showAll('events')" href="#" >
             Events <span class="ev-sub-head">(Currently for Hyderabad
               only)</span>{{ searchTxt!='' ? " (" + searchData.totalEvents + ")" : "" }}</a></li>
       </ul>

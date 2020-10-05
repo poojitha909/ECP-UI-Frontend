@@ -98,3 +98,13 @@
     <app-otp-popup [mobileNum]="otpMobile" [showModal]="otpModalShow" (updateOtp)="updateOtp($event)"></app-otp-popup>
 </div>
 <!-- Change picture form END-->
+
+
+<app-merge-request-modal 
+    [showModal]="showMergeModel" 
+    [isTypeMobile]="mergePopupTypeisMobile"
+    [oldAccountDetails]="oldAccountDetails"
+    [newUserDetails]="newAccountDetails"
+    [isWhileRegistration]="false"
+    (isMergeRequired)="isMergeRequired=$event; proceedUpdate(null)"
+    (onModalVisibilityChange)="showMergeModel=$event" ></app-merge-request-modal>

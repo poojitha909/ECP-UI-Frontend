@@ -41,6 +41,10 @@ export class ApiConstants {
     public static ASK_QUESTION_SERVICES: string = `${ApiConstants.BASE_URL}/BY/api/v1/ask`;
     public static VALIDATE_EMAIL_PRESENCE: string = `${ApiConstants.BASE_URL}/BY/api/v1/users/validateEmailPresence`;
     public static VALIDATE_PHONE_NUMBER_PRESENCE: string = `${ApiConstants.BASE_URL}/BY/api/v1/users/vaidateMobileNumberPresence`;
+    public static VALIDATE_EMAIL_PRESENCE_FOR_UPDATE: string = `${ApiConstants.BASE_URL}/BY/api/v1/users/validateEmailPresenceForUpdate`;
+    public static VALIDATE_PHONE_NUMBER_PRESENCE_FOR_UPDATE: string = `${ApiConstants.BASE_URL}/BY/api/v1/users/vaidateMobileNumberPresenceForUpdate`;
     public static MERGE_ACCOUNTS: string = `${ApiConstants.BASE_URL}/BY/api/v1/users/mergeAccounts`;
+    public static VALIDATE_OTP: string = `${ApiConstants.BASE_URL}/BY/api/v1/users/validateOTP`;
+    public static UNSUBSCRIBE_NEWSLETTER: string = `${ApiConstants.BASE_URL}/BY/api/v1/users/unsubscribeNewsLetter`;
     
 }

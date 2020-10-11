@@ -36,7 +36,7 @@ export class ShareViaMediaComponent implements OnInit {
     })
     this.currentUrl = encodeURI(window.location.href)
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(this.currentUrl)}`);
-    this.whatsappMblUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://api.whatsapp.com/send?text=${encodeURI(this.currentUrl)}')
+    this.whatsappMblUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://api.whatsapp.com/send?text='+this.currentUrl)
     
   }
 

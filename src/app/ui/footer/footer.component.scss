@@ -4,6 +4,9 @@
   background-color: $dark-blue-2;
   font-family: $regular-font;
   color: #ffffff;
+  .uk-container{
+    padding-top: 40px;
+  }
   h2 {
     font-family: $regular-font;
     font-weight: 700;
@@ -12,38 +15,20 @@
     margin: 0 0 12px 0;
   }
   .help-line {
-    // span {
-    //   margin-right: 3px;
-    // }
     .font-regular-19{
       font-family: $regular-font;
       font-size: 19px;
     }
 
-    // font-size: 15px;
-    // text-transform: none;
-    // background-color: $dark-blue-1;
-    // color: #ffffff;
-    // border: unset;
-    // border-radius: 4px;
-    // padding: 32px;
     p {
       color: #929aa6;
     }
-    // &:active,&:hover{
-    //   background-color: #ffffff;
-    //   color: $primary-btn;
-    // }
+   
   }
 
   .JoyofAge {
     background: #232e48;
     border-radius: 4px;
-    // margin-right: -160px;
-    // .response {
-    //   margin-right: -64px;
-    //   margin-top: 31px;
-    // }
   }
 
   .ourpartners {
@@ -107,77 +92,7 @@
       padding-left: 100px;
     }
   }
-  // .footer-upper {
-  //   padding-top: 44px;
-  //   .upper-grid {
-  //     .logo-tagline {
-  //       .logo {
-  //         h1 {
-  //           margin-bottom: 0;
-  //           color: #ffffff;
-  //           font-size: 32px;
-  //           font-weight: 600;
-  //         }
-  //       }
-  //       .tagline {
-  //         color: $default-font-color;
-  //         font-size: $font-small;
-  //         line-height: 24px;
-  //       }
-  //     }
-
-  //   }
-  // }
-  // .footer-lower {
-  //   padding-top: 54px;
-  //   padding-bottom: 60px;
-  //   .column-grid {
-  //     .col-link {
-  //       h4 {
-  //         font-size: 18px;
-  //         color: $default-font-color;
-  //         font-weight: 900;
-  //       }
-  //       ul {
-  //         padding: 0;
-  //         li {
-  //           list-style-type: none;
-  //           margin-bottom: 16px;
-  //           a {
-  //             color: #ffffff;
-  //             font-size: 18px;
-  //             text-decoration: underline $default-font-color;
-  //             &:hover,
-  //             &focus {
-  //               text-decoration: unset;
-  //               color: $primary-btn;
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-
-  // .uk-nav-default {
-  //       & > li > a{
-  //         font-size: 18px;
-  //         color: $default-font-color;
-  //         font-weight: 900;
-  //     }
-  //     .uk-nav-sub{
-  //         a{
-  //           color: #ffffff;
-  //           font-size: 18px;
-  //           text-decoration: underline $default-font-color;
-  //           &:hover,
-  //           &focus {
-  //             text-decoration: unset;
-  //             color: $primary-btn;
-  //           }
-  //       }
-  //     }
-  // }
+  
 
   .light-title {
     color: #929aa6;
@@ -198,6 +113,9 @@
 
 .p-t-20 {
   padding-top: 20px;
+}
+.bottom-footer{
+  margin-top: 50px;
 }
 
 .location {
@@ -225,6 +143,10 @@
         margin-bottom: 40px;
       }
     }
+    // .JoyofAgeMbl{
+    //   visibility: collapse;
+    //   // margin-left: -87px
+    // }
 
     .ourpartners {
       margin-right: 0px;
@@ -247,4 +169,106 @@
 .divider-r-light {
   padding-right: 20px;
   border-right: 1px solid #2d3758;
+}
+
+// @media (max-width: 640px){
+//   .p-t-40 {
+//     padding-top: 16px !important;
+//   }
+// .footer{
+//   .help-line{
+//     p{
+//       margin-top: 10px;
+//       margin-left: 10px;
+//     }
+//     .font-regular-19 {
+//       font-family: "HKGroteskRegular";
+//       font-size: 16px;
+//     }
+//   } 
+//   .JoyofAge{
+//       visibility: collapse; 
+//       margin-top: -100px;
+//   }
+
+//   .uk-grid-medium .uk-grid-margin{
+//     margin-top: -70px;
+//     margin-bottom: -40px;
+//   }
+//   .feature a{
+//     float: right;
+//   }
+//   .feature{
+//     float: left;
+//   }
+//     hr{
+//       margin-top: 8px;
+//       margin-bottom: 8px;
+//     }
+   
+  
+// }
+// .divider-r-light {
+//   padding-right: 0px;
+//   border-right: 0px solid #2d3758;
+// } 
+// }
+@media (max-width: 640px){
+  .footer{
+    font-size: 14px;
+    .uk-container{
+      margin-top: 0px;
+      padding-top: 20px;
+    }
+    margin-top: -10px;
+    .help-line{
+      .font-regular-19{
+        font-size: 16px;
+      }
+      * + p, * + ul, * + ol, * + dl, * + pre, * + address, * + fieldset, * + figure {
+        margin-top: 20px;
+    }
+    p{
+      margin-top: 5px;
+      margin-left: 20px;
+    }
+    }
+    hr{
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .font-regular-15{
+      font-size: 14px;
+    }
+    .divider-r-light{
+      border-right: 0px solid #2d3758;
+  }
+  .logo{
+    margin-top: 20px;
+    width: 180px;
+    height: 102px;
+    margin-left: 155px;
+    .img{
+      height: 100px;
+    }
+  }
+  .follow{
+    margin-top: 10px;
+  }
+  .modules{
+    margin-top: -102px;
+  }
+  .bottom-footer{
+    margin-top: 0px;
+  }
+  .link{
+    margin-bottom: 15px;
+  }
+.font-small{
+  margin-top: -5px;
+}
+.uk-icon-button{
+  margin-top: 10px;
+}
+  }
 }

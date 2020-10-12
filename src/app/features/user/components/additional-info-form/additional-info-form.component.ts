@@ -31,6 +31,7 @@ export class AdditionalInfoFormComponent implements OnInit {
     firstName: [{ value: this.auth.user.email ? this.auth.user.userName : '', disabled: !!this.auth.user.email }, Validators.required],
     primaryEmail: [this.auth.user.email, Validators.email],
     primaryPhoneNo: [this.auth.user.phoneNumber],
+    isSubscribedForNewsletter:[false, Validators.required]
   });
   userIdType = UserIdType;
   errorMessage: string;
@@ -90,6 +91,7 @@ export class AdditionalInfoFormComponent implements OnInit {
   }
 
   proceedSignup() {
+    console.log(this.userform.getRawValue())
     this.errorMessage = null;
     if (this.userform.valid && this.mobileValidation()) {
       let userData: UserProfile = {

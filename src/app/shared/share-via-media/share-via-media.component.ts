@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/core';
 export class ShareViaMediaComponent implements OnInit {
 
   whatsappUrl;
+  whatsappMblUrl;
   currentUrl: string;
   profileName: string;
   message: string = "I found this on the Joy of Age community and thought it would be of interest to you! Click on the below link to know more:";
@@ -35,6 +36,8 @@ export class ShareViaMediaComponent implements OnInit {
     })
     this.currentUrl = encodeURI(window.location.href)
     this.whatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web.whatsapp.com/send?text=${encodeURI(this.currentUrl)}`);
+    this.whatsappMblUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://api.whatsapp.com/send?text='+this.currentUrl)
+    
   }
 
 }

@@ -33,6 +33,14 @@
     }
   }
   margin-bottom: 24px;
+  .banner-text2{
+    font-size: 16px;
+  }
+}
+.top-banner{
+  .banner-text2{
+    font-size: 16px;
+  }
 }
 .ev-sub-head{
   font-size: 15px;
@@ -356,4 +364,37 @@
 
 .all-blue .showingSearchResult {
   padding: 0 40px;
+}
+
+@media (max-width: 640px) {
+  .community-page{
+      .top-banner{
+        margin-top: 0px;
+        .banner-img{
+          display: none;
+        }
+        .banner-text {
+          padding: 20px 20px;
+      }
+      .font-regular{
+        font-size: 16px;
+      }
+      .banner-text2{
+        font-size: 14px;
+      }
+      }
+      .search-container{
+        margin-top: 0px;
+      }
+  }
+
+  .search-tab .uk-tab > * > a {
+    font-size: 13px;
+  }
+  .ev-sub-head{
+    font-size: 10px;
+  }
+  .search-container{
+    margin-bottom: -10px;
+  }
 }

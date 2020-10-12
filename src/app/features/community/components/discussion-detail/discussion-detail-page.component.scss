@@ -257,3 +257,58 @@ select {
   border-radius: 4px;
   margin-bottom: 16px;
 }
+
+@media (max-width:640px){
+  .discussion-detail{
+    margin-bottom: 30px;
+    .uk-container{
+      margin-top: 15px;
+      .category-box{
+        margin-bottom: 10px;
+        .img-container{
+          height: 100px;
+        }
+        .heading2{
+          font-size: 15px;
+        }
+      }
+      .publish-on{
+        font-size: 14px;
+      }
+      .heading{
+        font-size: 20px;
+      }
+      hr{
+        margin: 15px 0px;
+      }
+      .uk-button-transparent{
+        font-size: 14px;
+      }
+    }
+  }
+    .discussion-detail .category-box img.user{
+      max-height: 100px;
+  }
+  .breadcrumbs {
+    margin-top: 20px;
+}
+.previewTop{
+  width: 330px;
+  min-height:42px;
+  top:291px;
+  left:589px;
+  background: #E8B24A;
+  border: 1px solid rgba(22,28,45,0.16);
+  box-sizing:border-box;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+.info{
+  margin-top: 7px;
+  padding: 0 17px;
+  width: 333px;
+}
+.para{
+  font-size: 14px;
+}
+}

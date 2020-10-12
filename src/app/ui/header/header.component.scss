@@ -10,6 +10,10 @@
       color: #fff;
     }
   }
+  .logo-tagline{
+      width: 140px;
+      height: 84px;
+  }
   .uk-grid {
     .logo-tagline {
       .logo {
@@ -267,6 +271,15 @@
 // Mobile Screens
 @media (max-width: 640px) { 
   .header {
-    padding-bottom: 16px;
+    height: 80px;
+    .logo-tagline{
+      width: 100px;
+    }
+    .nav-menu{
+      margin-bottom: 30px;
+    }
+    .uk-offcanvas{
+      width: 240px;
+    }
   }
 }

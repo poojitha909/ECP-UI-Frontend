@@ -20,6 +20,13 @@ export class ViewProfileComponent implements OnInit {
   messages: any;
   subscription: Subscription;
   dob: string;
+
+  isLetterEditDisabled: boolean = true;
+  otpModalShow: boolean = false;
+  otpMobile: string;
+  newsLetterSubscriptionStatus: boolean;
+  isLoading = false;
+
   constructor(
     public userService: UserService,
     public auth: AuthService,
@@ -43,10 +50,28 @@ export class ViewProfileComponent implements OnInit {
         this.dob = `${month} ${day} ${year}`;
       }
     }
+
+    try { this.newsLetterSubscriptionStatus = JSON.parse(this.userService.userProfile.basicProfileInfo.isSubscribedForNewsletter + "".toLowerCase()); } catch (e) { console.warn(e) }
   }
 
   edit(actionName) {
     // console.log('edit')
     this.editProfile.emit({ obj: "", action: actionName });
   }
+
+  showOtpModal() {
+    this.otpModalShow = true;
+  }
+
+  updateOtp(otp: string) {
+    this.otpModalShow = false;
+    let mobile = (this.userService.userProfile.basicProfileInfo.primaryPhoneNo) ? (this.userService.userProfile.basicProfileInfo.primaryPhoneNo) : this.auth.user.phoneNumber;
+    this.isLoading = true;
+    this.userService.updateNewsletterPreference(mobile, otp, this.userService.userProfile.basicProfileInfo.isSubscribedForNewsletter).subscribe(res => {
+      this.isLoading = false;
+      this.isLetterEditDisabled = true;
+      try { this.newsLetterSubscriptionStatus = JSON.parse(this.userService.userProfile.basicProfileInfo.isSubscribedForNewsletter + "".toLowerCase()); } catch (e) { console.warn(e) }
+    }, err => this.isLoading = false);
+  }
+
 }

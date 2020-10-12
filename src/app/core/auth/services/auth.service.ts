@@ -102,9 +102,21 @@ export class AuthService {
     );
   }
 
+  validateOTP(mobileNo, code): Observable<any> {
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    };
+    return this.http.post<any>(ApiConstants.VALIDATE_OTP, `mobile=${mobileNo}&otp=${code}`, options).pipe(
+      map((response) => {
+        return response.data;
+      })
+    );
+  }
+
   registerUser(userProfile: UserProfile): Observable<UserProfile> {
     if (userProfile.basicProfileInfo.primaryPhoneNo || userProfile.basicProfileInfo.primaryEmail) {
       const temp = this.user;
+      temp.isSubscribedForNewsletter = userProfile.basicProfileInfo.isSubscribedForNewsletter;
       temp.phoneNumber = userProfile.basicProfileInfo.primaryPhoneNo;
       temp.email = userProfile.basicProfileInfo.primaryEmail;
       this.user = temp;

@@ -109,7 +109,9 @@
             <div class="col col-md-12" *ngIf="isOTPSent==true">
               <div class="uk-width" style="text-align: right;">
                 <button class="uk-button uk-button-default" style="margin-top: 20px;"
-                  [disabled]="otpForMergingWithOldAccount!=''?false:true" (click)="verifyOtp()">Complete Signup</button>
+                  [disabled]="otpForMergingWithOldAccount!=''?false:true" (click)="verifyOtp()">
+                  {{isWhileRegistration==true?'Complete Signup':'Save Changes'}}
+                  </button>
               </div>
             </div>
           </div>

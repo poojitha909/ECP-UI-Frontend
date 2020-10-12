@@ -4,6 +4,7 @@ import { EventService } from '../../../app/features/community/services/events.se
 import { DomSanitizer } from '@angular/platform-browser';
 import { HomeService } from 'src/app/features/home/home.service';
 import { MenuService } from 'src/app/features/community/services/menu.service';
+declare var UIkit: any;
 
 @Component({
   selector: 'app-event-results',
@@ -174,5 +175,8 @@ export class EventResultsComponent implements OnInit, OnChanges {
     else {
       this.showEvents();
     }
+  }
+  applyFilter(){
+    UIkit.modal('#events-mobile-category-modal').hide();
   }
 }

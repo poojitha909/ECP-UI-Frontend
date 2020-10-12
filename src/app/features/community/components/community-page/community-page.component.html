@@ -5,7 +5,9 @@
     <div uk-grid>
       <div class="uk-width-expand uk-flex uk-flex-middle">
         <p class="banner-text font-regular">The Joy of Age community seeks your active participation by sharing
-          articles, engaging in discussions and sharing details of events happening near you.</p>
+          articles, engaging in discussions and sharing details of events happening near you. <br>
+          <span class="banner-text2">*For sharing articles,comments or events, please register with your mobile or email id. (Join Us button on top right-hand corner) </span>
+        </p>
       </div>
       <div class="uk-flex uk-flex-middle uk-flex-center uk-width-auto@s">
         <img alt="" class="banner-img" src="/assets/images/landing-img/community-banner-updated.png" />
@@ -48,12 +50,13 @@
 
     <div class="search-tab">
       <ul [ngClass]="{'uk-child-width-expand': searchTxt=='', 'showOnSearchtab': searchTxt!='' }" id="search-tab"
-        uk-tab>
-        <li><a (click)="showAll('discss')" href="#"> Articles &
+        uk-tab >
+        <li><a (click)="showAll('discss')" href="#" > Articles &
             Discussions{{ searchTxt!='' ? " (" + searchData.totalDiscussions + ")" : "" }}</a></li>
-        <li><a (click)="showAll('events')" href="#">
-            Events <span class="ev-sub-head">(Currently for Hyderabad
-              only)</span>{{ searchTxt!='' ? " (" + searchData.totalEvents + ")" : "" }}</a></li>
+        <li><a (click)="showAll('events')" href="#" >
+            Events 
+            <!-- <span class="ev-sub-head">(Currently for Hyderabad only)</span> -->
+            {{ searchTxt!='' ? " (" + searchData.totalEvents + ")" : "" }}</a></li>
       </ul>
 
 

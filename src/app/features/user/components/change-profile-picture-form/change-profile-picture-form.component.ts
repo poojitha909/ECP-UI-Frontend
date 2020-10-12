@@ -26,6 +26,19 @@ export class ChangeProfilePictureFormComponent implements OnInit {
   isLoading;
   subscription: Subscription;
 
+  //FOR MERGING ACCOUNTS
+  isMergeRequired: any = false;
+  showMergeModel = false
+  oldAccountDetails: UserProfile;
+  newAccountDetails = { firstName: "", primaryPhoneNo: "", primaryEmail: "" }
+  mergePopupTypeisMobile = true
+
+  static defaultUserDetails = {
+    firstname: "",
+    phoneNumber: "",
+    email: ""
+  }
+
   constructor(
     private auth: AuthService,
     public userService: UserService,
@@ -41,6 +54,13 @@ export class ChangeProfilePictureFormComponent implements OnInit {
 
     if (this.userService.userProfile.basicProfileInfo.profileImage && this.userService.userProfile.basicProfileInfo.profileImage.thumbnailImage) {
       this.profileImage = this.userService.userProfile.basicProfileInfo.profileImage.thumbnailImage;
+      //old details
+      ChangeProfilePictureFormComponent.defaultUserDetails.firstname = this.userService.userProfile.basicProfileInfo.firstName;
+      ChangeProfilePictureFormComponent.defaultUserDetails.email = this.userService.userProfile.basicProfileInfo.primaryEmail;
+      ChangeProfilePictureFormComponent.defaultUserDetails.phoneNumber = this.userService.userProfile.basicProfileInfo.primaryPhoneNo;
+      console.log(this.userService.userProfile.userId)
+      console.log(this.userService.userProfile.basicProfileInfo.primaryEmail)
+      console.log(this.userService.userProfile.basicProfileInfo.primaryPhoneNo)
     }
     this.otpMobile = this.auth.user.phoneNumber || this.auth.user.email;
   }
@@ -110,6 +130,45 @@ export class ChangeProfilePictureFormComponent implements OnInit {
     }
   }
   onSubmit(event) {
+
+    this.newAccountDetails.firstName = ChangeProfilePictureFormComponent.defaultUserDetails.firstname;
+    this.newAccountDetails.primaryEmail = ChangeProfilePictureFormComponent.defaultUserDetails.email;
+    this.newAccountDetails.primaryPhoneNo = ChangeProfilePictureFormComponent.defaultUserDetails.phoneNumber;
+
+    if (this.mobileValidation()) {
+      if (this.formControl.primaryEmail.value != ChangeProfilePictureFormComponent.defaultUserDetails.email) {
+        this.mergePopupTypeisMobile = true
+        this.userService.validateEmailPresenceForUpdate(this.userService.userProfile.userId,
+          this.formControl.primaryEmail.value).subscribe(
+            res => {
+              if (res.data != false) {
+                this.oldAccountDetails = res.data;
+                this.showMergeModel = true;
+              } else {
+                this.proceedUpdate(event);
+              }
+            }
+          )
+      } else if (this.formControl.primaryPhoneNo.value != ChangeProfilePictureFormComponent.defaultUserDetails.phoneNumber) {
+        this.mergePopupTypeisMobile = false
+        this.userService.validatePhoneNumberPresenceForUpdate(this.userService.userProfile.userId,
+          this.formControl.primaryPhoneNo.value).subscribe(
+            res => {
+              if (res.data != false) {
+                this.oldAccountDetails = res.data;
+                this.showMergeModel = true;
+              } else {
+                this.proceedUpdate(event);
+              }
+            }
+          )
+      } else {
+        this.proceedUpdate(event);
+      }
+    }
+  }
+
+  proceedUpdate(event) {
     // this.userService.editFormSection('editSection')
     if (this.mobileValidation()) {
       const oldUserData = {
@@ -119,16 +178,32 @@ export class ChangeProfilePictureFormComponent implements OnInit {
       };
 
       this.userService.userProfile.basicProfileInfo.firstName = this.formControl.firstName.value;
+      if(this.isMergeRequired != false){
+        this.userService.userProfile.basicProfileInfo.primaryEmail = ChangeProfilePictureFormComponent.defaultUserDetails.email;
+        this.userService.userProfile.basicProfileInfo.primaryPhoneNo = ChangeProfilePictureFormComponent.defaultUserDetails.phoneNumber;
+      }else{
       this.userService.userProfile.basicProfileInfo.primaryEmail = this.formControl.primaryEmail.value;
       this.userService.userProfile.basicProfileInfo.primaryPhoneNo = this.formControl.primaryPhoneNo.value;
+      }
+      
       this.isLoading = true;
       this.resetAlertMessages();
 
       this.userService.uploadUserImage(this.imageData).subscribe(
         response => {
-          this.isLoading = false;
-          this.successMessage = "User information updated successfully";
-          this.cancelForm.emit();
+
+          if (this.isMergeRequired != false) {
+            this.userService.mergeAccounts(response.userId, this.oldAccountDetails.id, this.isMergeRequired.isRetrieveOldAccountInfo).subscribe(res => {
+              this.isLoading = false;
+              this.successMessage = "User information updated successfully";
+              this.cancelForm.emit();
+              location.reload();
+            })
+          } else {
+            this.isLoading = false;
+            this.successMessage = "User information updated successfully";
+            this.cancelForm.emit();
+          }
         },
         error => {
           this.isLoading = false;

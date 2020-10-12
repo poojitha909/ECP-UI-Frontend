@@ -9,6 +9,8 @@ export interface User {
     verificationCodeExpiry?: number;
     socialSignOnId?: string;
     socialSignOnPlatform?: string;
+    isSubscribedForNewsletter?:boolean
+    mergedUserAccountId?:string
     passwordCode?: string;
     passwordCodeExpiry?: any;
     userRoleId?: string;
@@ -98,6 +100,7 @@ interface BasicProfileInfo {
     secondaryPhoneNos?: any[];
     description?: any;
     photoGalleryURLs?: any[];
+    isSubscribedForNewsletter?:boolean;
     primaryUserAddress?: PrimaryUserAddress;
     otherAddresses?: any[];
     shortDescription?: any;

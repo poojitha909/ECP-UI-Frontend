@@ -1,4 +1,4 @@
-<div  routerLink="/ask-question/detail/{{question?.id}}" [queryParams]="pageParam" class="cursor uk-card uk-card-hover uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+<div  routerLink="/ask-question/detail/{{question?.id}}" [queryParams]="pageParam" class="cursor uk-card uk-card-hover uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-visible@s" uk-grid>
   <div class="uk-card-media-left uk-width-1-4 uk-width-1-6@s p-16" *ngIf="viewby == 'user'">
     <img class="image-user" [imageHandler] [src]="question?.answeredBy?.basicProfileInfo?.profileImage?.thumbnailImage" height="156" alt="Answered by profile image">
   </div>
@@ -29,3 +29,40 @@
     </div>
   </div>
 </div>
+
+<!-- Mobile view start here -->
+
+
+<div  routerLink="/ask-question/detail/{{question?.id}}" [queryParams]="pageParam" class="cursor uk-card uk-card-hover uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-hidden@s " uk-grid>
+  <div class="uk-card-media-left uk-width-1-4 uk-width-1-6@s p-16" *ngIf="viewby == 'user'">
+    <img class="image-user" [imageHandler] [src]="question?.answeredBy?.basicProfileInfo?.profileImage?.thumbnailImage" height="156" alt="Answered by profile image">
+  </div>
+  <div class="uk-card-media-left uk-width-1-4 uk-width-1-6@s p-16" *ngIf="viewby == 'expert'">
+    <img class="image-user" [imageHandler] [src]="question?.askedByProfile?.basicProfileInfo?.profileImage?.thumbnailImage" height="156" alt="Asked by profile image">
+  </div>
+
+  <div class="uk-card-body uk-width-expand p-16">
+    <h3 class="font-regular fname">{{question?.question}}</h3>
+    <p class="expertdetial" *ngIf="viewby == 'user'">
+      Question for <b>{{question?.answeredBy?.basicProfileInfo?.firstName}}</b><br/>
+      {{question?.lastModifiedAt | timeago}}
+    </p>
+    <p class="expertdetial" *ngIf="viewby == 'expert'">
+      Asked By <b>{{question?.askedBy?.userName}}</b><br/>
+      {{question?.createdAt | timeago}}
+    </p>
+    <div class="category" (click)="cardClick($event,question?.askCategory)">
+      <span >
+        {{question?.askCategory?.name}}
+      </span>
+    </div>
+    <div class="uk-width-1-6  reply-border">
+      <div class="reply-card">
+        <div class="m-0 replycnt" *ngIf="question?.replyCount > 0"> <img src="/assets/images/comments.svg" alt="comment">{{question?.replyCount}} Replies</div>
+        <div class="m-0 replycnt" *ngIf="question?.replyCount <= 0">No Replies</div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+<!-- End here -->

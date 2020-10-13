@@ -11,7 +11,7 @@
     <!-- Bread crumbs End -->
     <div class="uk-container">
         <h1 tabindex=0 id="askExpertHeading" class="heading">Ask an Expert</h1>
-        <hr class="m-b-30" />
+        <hr class="m-b-30  " />
         <div uk-grid>
             <div class="uk-width-1-3@m">
                 <div class="category-box p-0 bg-white" *ngIf="expert!==undefined">
@@ -124,7 +124,7 @@
                         </div>
                     </div>
                 </div>
-                <div *ngIf="questions?.length > 0">
+                <div class="detailcard" *ngIf="questions?.length > 0">
                     <app-question-detail-card *ngFor="let question of questions" [question]="question">
                     </app-question-detail-card>
                 </div>

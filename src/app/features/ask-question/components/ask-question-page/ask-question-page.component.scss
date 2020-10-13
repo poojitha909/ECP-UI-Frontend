@@ -125,6 +125,9 @@
       margin: auto;
     }
   }
+  .banner-text2{
+    font-size: 16px;
+  }
   .uk-card {
     border-radius: 4px;
     border: solid 1px #d7e0ef;
@@ -225,35 +228,36 @@
     background-image: url("/assets/images/landing-img/Ask-1440.png");
   }
 }
-// .tab{
-//   margin-top: 24px;
-// }
 
-// Sample Implementation on 05/03/20
-
-// @media(min-width:1024px){
-//   .dark{
-//     display: none;
-//   }
-// }
-
-// .uk-tab {
-//   &::before {
-//     border-bottom: none;
-//   }
-
-//   & > * > a {
-//     border-bottom: 3px solid #161c2d3d;
-//     font-size: 18px;
-//     line-height: 165%;
-//     text-transform: unset;
-//   }
-
-//   & > .uk-active > a {
-//     color: #1a73e8;
-//     border-color: #1e87f0;
-//   }
-// }
 .all-blue .uk-tab  .uk-active > a {
   max-width: 250px;
+}
+.banner-text2{
+  font-size: 16px;
+}
+@media (max-width: 640px) {
+
+  .top-banner{
+    .banner-text{
+      padding: 0px 20px;
+      margin-top: -10px;
+    }
+    .font-regular{
+      font-size: 16px;
+    }
+    .banner-text2{
+      font-size: 14px;
+    }
+    .banner-img{
+      display: none;
+    }
+  }
+  .search-container{
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+  .search-tab .uk-tab > * > a{
+    font-size: 13px;
+  }
+
 }

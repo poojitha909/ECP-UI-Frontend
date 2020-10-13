@@ -62,3 +62,43 @@ a{
 .category-text{
     color:#1a72e8
 }
+@media(max-width:640px){
+    
+    .uk-grid + .uk-grid-collapse, .uk-grid-collapse > .uk-grid-margin{
+        margin-top: -15px;
+    }
+    .p-16{
+        text-align: center;
+    }
+    .image-user{
+        inline-size: inherit;
+    }
+    .reply-card{
+        text-align: center;
+        margin-top: 0px;
+        background-color: #ECF4FF;
+        border-radius: 4px;
+        line-height: 44px;
+        font-size: 14px;
+        width: 124px;
+        max-width: 100%;
+        margin: 15px;
+    }
+    .askques button{
+        display: block;
+        bottom: 17px;
+        position: absolute;
+        width: 153px;
+        max-width: 100%;
+        font-size: 14px;
+        margin-left: 155px;
+        line-height: 41px;
+    }
+    .expertdetial{
+        margin-top: -22px;
+        margin-bottom: 0px;
+    }
+    
+    
+    
+}

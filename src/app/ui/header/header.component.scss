@@ -11,7 +11,7 @@
     }
   }
   .logo-tagline{
-      width: 140px;
+      width: 200px;
       height: 84px;
   }
   .uk-grid {
@@ -35,6 +35,9 @@
           color: $default-font-color;
           font-size: 18px;
         }
+      }
+      img {
+        margin-top: 25px;
       }
     }
 
@@ -280,6 +283,14 @@
     }
     .uk-offcanvas{
       width: 240px;
+    }
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .logo-tagline {
+    img{
+      margin-top: 15px !important;
     }
   }
 }

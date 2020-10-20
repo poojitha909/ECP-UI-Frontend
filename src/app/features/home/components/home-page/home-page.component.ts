@@ -13,7 +13,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
 
     // Generate meta tag 
     const config: SEO = {
-      title: 'Home - Joy of Age',
+      title: 'Home - SEENAGE LIFE',
       keywords: 'products, services, events, discussions',
       description: 'Supported by Tata Trusts',
       author: 'Social alpha',

@@ -102,3 +102,27 @@
       margin-top: 9px;
     }
   }
+  @media(max-width:640px){
+      .uk-container{
+          .page-info-bar{
+              padding: 10px 10px;
+          }
+          .font-regular-15{
+              font-size: 15px;
+          }
+      }
+      .mcategory-box{
+            height: 55px;
+            margin-bottom: 15px;
+            border: 1px solid #D7E0EF;
+            box-sizing: border-box;
+            border-radius: 4px;
+            padding: 7px;
+            .light-text{
+                margin: 8px;
+            }
+      }
+
+      
+    
+}

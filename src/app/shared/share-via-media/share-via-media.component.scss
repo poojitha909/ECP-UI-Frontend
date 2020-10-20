@@ -11,9 +11,29 @@
     color: #000;
     border-radius: 5px;
   }
+  .link{
+    margin-bottom: 20px;
+  }
 }
 
 .social-link {
   color: #000;
 }
 
+@media (max-width: 640px) {
+  .category-box{
+    height: 125px;
+    padding: 20px;
+    margin-bottom: 0px;
+    .link{
+      margin-bottom: 5px;
+    }
+    .uk-icon-button{
+      width: 25px;
+      height: 25px;
+    }
+  }
+  .whatsappUrl{
+    display: none;
+  }
+}

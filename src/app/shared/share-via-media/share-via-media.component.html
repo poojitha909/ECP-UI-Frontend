@@ -1,13 +1,18 @@
 <div class="m-t-30 bg-white category-box bg-white">
-    <div class="m-b-20">
+    <div class="link">
         <!-- <a [href]="whatsappUrl" aria-label="Share via Whatsapp" target="_blank"> </a> -->
-        <a class="social-link" [href]="whatsappUrl" target="_blank">
+        <a  class="social-link  uk-visible@s" [href]="whatsappUrl" target="_blank">
             <span class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp">
             </span>
             Share via
             Whatsapp</a>
+        <a class="social-link  uk-hidden@s" [href]="whatsappMblUrl" target="_blank">
+                <span class="uk-icon-button  uk-margin-small-right whatapp-icon" uk-icon="whatsapp">
+                </span>
+                Share via
+                Whatsapp</a>
     </div>
-    <div class="m-b-20">
+    <div class="link">
         <!-- <a href="mailto:?subject=%0ACheck%20this%20website%20Joy%20of%20Age&body=%0AService%2DURL:%20{{currentUrl}}"
             class="uk-icon-button  uk-margin-small-right fb-icon" aria-label="Share via Email" uk-icon="mail">
         </a>  -->
@@ -18,7 +23,7 @@
             Share via
             Email</a>
     </div>
-    <div>
+    <div class="link">
         <!-- <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}&t=Elder%20Spring%20Services" onclick="javascript:window.open(this.href,
                 '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
             class="uk-icon-button  uk-margin-small-right email-icon" aria-label="Share via Facebook" uk-icon="facebook">

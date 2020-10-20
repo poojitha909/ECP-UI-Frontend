@@ -13,3 +13,9 @@
         color: #2A415E;
     }
 }
+
+@media (max-width: 640px) {
+    .uk-breadcrumb > * > *{
+        font-size: 14px;
+    }
+}

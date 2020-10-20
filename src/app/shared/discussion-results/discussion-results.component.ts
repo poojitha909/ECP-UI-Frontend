@@ -4,6 +4,7 @@ import { MenuService } from '../../features/community/services/menu.service'
 import { DiscussionService } from '../../features/community/services/discussion.service'
 import { DomSanitizer } from '@angular/platform-browser';
 import { HomeService } from 'src/app/features/home/home.service';
+declare var UIkit: any;
 
 @Component({
   selector: 'app-discussion-results',
@@ -33,6 +34,9 @@ export class DiscussionResultsComponent implements OnInit, OnChanges {
   isLoading: boolean;
   totalPages: number;
 
+  showingDiscussion :string;
+
+
   constructor(private route: ActivatedRoute, private router: Router,
     private discussionService: DiscussionService, private menuService: MenuService,
     public sanitizer: DomSanitizer, private homeService: HomeService
@@ -43,6 +47,7 @@ export class DiscussionResultsComponent implements OnInit, OnChanges {
     this.paramsSubs = this.route.queryParams.subscribe(params => {
       this.initiate();
     });
+    console.log(this.searchParams.tags,'tags asdfghjk')
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -54,6 +59,7 @@ export class DiscussionResultsComponent implements OnInit, OnChanges {
   ngOnDestroy() {
     this.paramsSubs.unsubscribe();
   }
+  
 
   initiate() {
     this.currentUrl = encodeURI(window.location.href);
@@ -176,4 +182,26 @@ export class DiscussionResultsComponent implements OnInit, OnChanges {
       this.isLoading = false;
     });
   }
+
+  applyFilter() {
+    UIkit.modal('#article-mobile-category-modal').hide();
+    if (this.selCategory) {
+      this.router.navigate(['/community'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt} });
+    } else {
+      this.clearSelection();
+    }
+  }
+
+
+  // onTabChange(value) {
+  //   this.selCategory = value;
+  //   this.searchParams.p = 0;
+  //   this.homeService.discussCategory = this.selCategory;
+  //   if (this.showPagination) {
+  //     this.router.navigate(['/community'], { queryParams: { category: this.selCategory, searchTxt: this.searchParams.searchTxt, show: "discss" } });
+  //   }
+  //   else {
+  //     this.search();
+  //   }
+  // }
 }

@@ -33,6 +33,7 @@ export class AskQuestionExpertsComponent implements OnInit, OnChanges, OnDestroy
   totalPages: number;
   currentUrl: string;
   whatsappUrl;
+  showingExperts:string;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private store: StorageHelperService, private askQuesService: AskQuestionService, private shareMedia: MenuService,
@@ -157,5 +158,8 @@ export class AskQuestionExpertsComponent implements OnInit, OnChanges, OnDestroy
     else {
       this.showExperts();
     }
+  }
+  applyFilter(){
+    
   }
 }

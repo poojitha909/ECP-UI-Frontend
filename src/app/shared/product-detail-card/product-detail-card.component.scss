@@ -56,3 +56,28 @@ a {
 .product-img {
   height: 156px;
 }
+@media(max-width:640px){
+  .product-detail{
+    height: 280px;
+    .p-16{
+      padding: 0px;
+    }
+    .product-img{
+      height: 80px;
+      margin-top: 25px;
+    }
+    .font-regular{
+      font-size: 16px;
+    }
+    .m-t-20{
+      margin-top: 0px !important;
+    }
+    .m-t-20\@s {
+      margin-top: -15px !important;
+    }
+    .category{
+      font-size: 16px;
+      bottom: 18px;
+    }
+  }
+}

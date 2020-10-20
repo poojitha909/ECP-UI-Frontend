@@ -31,6 +31,12 @@
                       </a>
                     </li>
                     <hr />
+                    <li><a tabindex=0 (keydown.enter)="navigateUser()" class="uk-padding-remove font-regular"
+                      (click)="navigateEventsRegister()">
+                      <fa-icon icon="user" [style]="{'margin-right':'20px','color':'#1A73E8'}"></fa-icon>Register Events
+                    </a>
+                  </li>
+                    <hr />
                     <li><a tabindex=0 (keydown.enter)="logout()" (click)="logout()"
                         class="uk-padding-remove font-regular">
                         <fa-icon icon="sign-out-alt" [style]="{'margin-right':'20px','color':'#1A73E8'}"></fa-icon>

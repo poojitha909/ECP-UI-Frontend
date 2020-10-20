@@ -4,6 +4,7 @@ import { ErrorComponent, AboutUsComponent } from './shared';
 import { LayoutComponent } from './ui';
 import { UserTermsComponent } from './shared/user-terms/user-terms.component';
 import { UserPolicyComponent } from './shared/user-policy/user-policy.component';
+import { EventsRegisterFormComponent} from './shared/events-register-form/events-register-form.component'
 
 const routes: Routes = [
   {
@@ -49,6 +50,10 @@ const routes: Routes = [
       {
         path: 'user',
         loadChildren: () => import('src/app/features/user/user.module').then((mod) => mod.UserModule)
+      },
+      {
+        path:'events-register',
+        component: EventsRegisterFormComponent
       }
     ]
   },

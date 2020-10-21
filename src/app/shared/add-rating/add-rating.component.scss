@@ -36,3 +36,19 @@
 .add-filled {
   color: #e8b24a;
 }
+
+@media(max-width:640px){
+  .add-rating{
+    height: 60px;
+    margin-bottom: -30px;
+  }
+  .review-form{
+    .p-25{
+      padding: 25px !important;
+      margin-top: 10px;
+    }
+    .uk-button-default{
+      margin-top: -30px;
+    }
+  }
+}

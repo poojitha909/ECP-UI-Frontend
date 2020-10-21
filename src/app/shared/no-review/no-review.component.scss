@@ -8,3 +8,17 @@
 h3 {
     color: rgba(22, 28, 45, 0.68);
 }
+@media(max-width:640px){
+    .font-regular-24{
+        font-size: 18px;
+    }
+    .m-t-50 {
+        margin-top: 15px !important;
+    }
+    .review-btn{
+        padding: 0px 9px;
+    }
+    .m-b-50 {
+        margin-bottom: 0px !important;
+    }
+}

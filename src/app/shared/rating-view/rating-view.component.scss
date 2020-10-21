@@ -65,3 +65,13 @@
       background-color: #a0a2a9;
     }
   }
+  @media(max-width:640px){
+    .rating{
+      height: 90px;
+      h3{
+        font-size: 30px;
+        margin-top: 25px; 
+      }
+    }
+
+  }

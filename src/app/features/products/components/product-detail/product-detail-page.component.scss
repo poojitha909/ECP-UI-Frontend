@@ -246,3 +246,50 @@
   top:32px;
 
 }
+@media(max-width:640px){
+  .breadcrumbs {
+    margin-top: 20px;
+  }
+  .product-detail{
+    .heading{
+      font-size: 20px;
+    }
+    .m-b-30 {
+      margin-bottom: 20px !important;
+    }
+    .share-options{
+      margin-top: 20px !important;
+      margin-bottom: -20px;
+    }
+    .description{
+      font-size: 16px;
+      margin-top: -10px;
+    }
+    * + hr, * + .uk-hr {
+      margin-top: 10px;
+    }
+    .uk-button-primary, .uk-button {
+      border-radius: 4px;
+      font-size: 16px;
+      line-height: 25px;
+    }  
+    .price{
+      font-size: 18px;
+      line-height: 27px;
+      font-weight: bold;
+      display: table;
+    }
+    .buynow{
+      margin-top: -15px;
+    }
+    .m-t-30 {
+      margin-top: 0px !important;
+    }
+    
+  }
+  .review-form  {
+    .uk-button-transparent{
+      margin-bottom: 10px;
+    }
+  }
+}

@@ -63,3 +63,25 @@ a{
 .reply-border{
     padding: 16px;
 }
+@media(max-width:640px){
+    .reply-card{
+        width: 210px;
+        height: 48px;
+        margin-left: -19px;
+        margin-bottom: -30px;
+    }
+    .expertdetial{
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    .fname{
+        margin-bottom: -20px;
+    }
+    .m-0{
+        margin: 10px !important;
+    }
+    .image-user{
+        height: 200px;
+        max-width: 140%;
+    }
+}

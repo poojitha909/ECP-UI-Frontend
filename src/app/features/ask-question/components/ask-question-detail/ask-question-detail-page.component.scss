@@ -198,3 +198,66 @@
 .light-blue-bg{
   background-color: #ecf4ff;
 }
+@media(max-width:640px){
+    .breadcrumbs {
+      margin-top: 0px;
+    }
+    .ask-detail .category-box .body p {
+      margin: 0 0 0px 0;
+      font-size: 16px;
+      text-align: center;
+  }
+  .ask-detail .category-box.info{
+    margin: 13px 0px 13px 0px;
+  }
+  .ask-detail{
+    .heading{
+      font-size: 16px;
+    }
+    .heading1{
+      font-size: 16px;
+    }
+  }
+  * + hr, * + .uk-hr {
+    margin-top: -15px;
+  }
+  .m-b-30 {
+    margin-bottom: -30px !important;
+  }
+  p, ul, ol, dl, pre, address, fieldset, figure {
+    margin: 0 0 20px 0;
+  }
+  .ask-detail .comments-head{
+    margin: 15px 0 -40px 0;
+  }
+  .ask-detail .comments-count h4 {
+    font-size: 18px;
+  }
+  .uk-button-primary, .uk-button {
+    font-size: 14px;
+  }
+  .uk-modal-body {
+    padding: 12px 12px;
+    .font-regular-24 {
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    .reply-form{
+      .uk-margin{
+        margin-bottom: 17px;
+        margin-top: -12px;
+      }
+    }
+  }
+
+
+}
+@media(max-width:640px){
+  .uk-button-primary, .uk-button {
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+  .previewTop{
+    width: 330px;
+  }
+}

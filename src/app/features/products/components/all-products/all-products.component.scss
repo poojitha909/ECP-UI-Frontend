@@ -146,3 +146,22 @@
     background-image: url("/assets/images/landing-img/Product-1440.png");
   }
 }
+
+@media(max-width:640px){
+  .top-banner{
+    margin-top: 22px;
+    .banner-text{
+      padding: 0px 20px;
+    }
+    .font-regular{
+      font-size: 16px;
+    }
+    .banner-img{
+      display: none;
+    }
+  }
+  .search-container{
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}

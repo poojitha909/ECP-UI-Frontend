@@ -60,6 +60,7 @@ import { ShareViaMediaComponent } from './share-via-media/share-via-media.compon
 import { OtpPopupComponent } from './opt-popup/otp-popup.component';
 import { ArrayToStringPipe } from './pipes/array-to-string.pipe';
 import { TrapModalFocusDirective } from './directives/trap-modal-focus.directive';
+import { EventsRegisterFormComponent } from './events-register-form/events-register-form.component';
 
 @NgModule({
   declarations: [
@@ -118,7 +119,8 @@ import { TrapModalFocusDirective } from './directives/trap-modal-focus.directive
     ShareViaMediaComponent,
     OtpPopupComponent,
     ArrayToStringPipe,
-    TrapModalFocusDirective
+    TrapModalFocusDirective,
+    EventsRegisterFormComponent
   ],
   imports: [
     CommonModule,

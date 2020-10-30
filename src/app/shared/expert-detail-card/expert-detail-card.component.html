@@ -7,7 +7,7 @@
       (error)="setDefaultPic($event)" alt="Expert's profile image" />
   </div>
 
-  <div class="uk-card-body uk-width-expand p-16">
+  <div class="uk-card-body uk-width-expand p-16 ">
     <h3 class="font-regular"> <a [routerLink]="isSame ? ['/ask-question'] : ['/ask-question/add']"
         [queryParams]="pageParam" class="fname" (click)="navigate()">{{expert.basicProfileInfo.firstName}}</a></h3>
     <p class="expertdetial">
@@ -28,7 +28,7 @@
       {{ expert?.replyCount }} Interactions
     </div>
     <button *ngIf="isSame==false" class="uk-button uk-button-primary" style="text-overflow: ellipsis;">Ask
-      {{ (expertfullName.length>7)? (expertfullName | slice:0:7)+' '+'..':(expertfullName) }}</button>
+      {{ (expertfullName.length>7)? (expertfullName | slice:0:6)+' '+'..':(expertfullName) }}</button>
     <button *ngIf="isSame==true" class="uk-button uk-button-primary" style="padding: 0px">Questions for
       me</button>
   </div>

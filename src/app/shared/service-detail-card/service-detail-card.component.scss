@@ -38,3 +38,14 @@ h3{
     }
   }
 }
+@media(max-width:640px){
+  .h-150{
+    height: 100px !important;
+  }
+  p-16{
+    padding: 10px;
+  }
+  .m-b-10 {
+    margin-bottom: -20px !important;
+  }
+}

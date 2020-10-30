@@ -285,7 +285,7 @@
                 (submitEditForm)="editReview($event)"></app-reviews-list>
               <!-- Review Box END-->
 
-              <app-pagination *ngIf="(dbReview && dbReview.length > 0)" [totalRecords]="totalReviewRecords"
+              <app-pagination class="pagination" *ngIf="(dbReview && dbReview.length > 0)" [totalRecords]="totalReviewRecords"
                 [currentPage]="reviwePaginate.p" [perPage]="reviwePaginate.s"
                 (pageChangeCall)="changeReviewPage($event)">
               </app-pagination>

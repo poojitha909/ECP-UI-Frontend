@@ -25,3 +25,18 @@
       color: #1a73e8;
     }
   }
+  @media(max-width:640px){
+    .category-box{
+      padding: 10px;
+      .review-avatar{
+        width: 40px;
+        height: 40px;
+      }
+      * + hr, * + .uk-hr {
+        margin-top: 10px;
+      }
+      m-t-30 {
+        margin-top: 10px !important;
+      }
+    }
+  }

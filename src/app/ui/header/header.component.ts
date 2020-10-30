@@ -46,6 +46,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.router.navigateByUrl("/user");
   }
 
+  navigateEventsRegister(){
+    this.router.navigateByUrl("/events-register")
+  }
+  
   logout() {
     this.auth.logout().subscribe(response => {
       this.router.url.startsWith('/user') ? this.router.navigateByUrl("/") : null;

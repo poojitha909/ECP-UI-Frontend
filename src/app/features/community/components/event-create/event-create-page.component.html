@@ -357,6 +357,29 @@
                         </div>
                     </div>
                 </div>
+                <!-- interested in joining a hobby club on our website -->
+                <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
+                    <div>
+                        <label for="Event-Fees"
+                            [ngClass]="{'uk-text-danger' : formControl.entryFee.invalid && ( formControl.entryFee.dirty ||  formControl.entryFee.touched) }"
+                            class="uk-form-label">Would you be interested in joining a hobby club on our website?<span class="required">*</span></label>
+                        <div class="uk-form-controls">
+                            <input id="Event-Fees"
+                                [ngClass]="{'uk-form-danger' : formControl.entryFee.invalid && ( formControl.entryFee.dirty ||  formControl.entryFee.touched) }"
+                                class="uk-input" type="number" formControlName="entryFee"
+                                placeholder="If yes, please list your hobbies" />
+                            <small aria-describedby="Event-Fees"
+                                *ngIf=" formControl.entryFee.invalid && ( formControl.entryFee.dirty ||  formControl.entryFee.touched)"
+                                class="uk-text-danger"> Please list your hobbies</small>
+
+                        </div>
+                    </div>
+                </div> 
+
+                <h6><span class="required">*</span>This event has limited seats, 
+                    <!-- so you may not be accommodated, or,  -->
+                    If we have too few participants we may postpone or cancel.
+                    In either case, we will repeat the event and notify you accordingly.</h6>
                 <div class="uk-margin">
                     <button class="uk-button uk-button-transparent m-r-15" (click)="onReset()">Cancel & Go Back</button>
                     <button class="uk-button uk-button-default"

@@ -1,5 +1,5 @@
 <!-- Pagination start -->
-<div class="uk-container pagination" *ngIf="items.length > 1">
+<div class="uk-container pagination uk-visible@s" *ngIf="items.length > 1">
   <ul class="uk-pagination" uk-margin>
     <li class="cursor-pointer pg-align-1 first" *ngIf="currentPage>0" (click)="callParent(0)">
       <div class="pagePrev">
@@ -28,3 +28,35 @@
   </ul>
 </div>
 <!-- Pagination end -->
+
+<!-- Mobile View -->
+
+<div class="uk-container pagination uk-hidden@s" *ngIf="items.length > 1">
+  <ul class="uk-pagination" uk-margin>
+    <li class="cursor-pointer pg-align-1 first" *ngIf="currentPage>0" (click)="callParent(0)">
+      <div class="pagePrev">
+        <span uk-pagination-previous></span><a class="pagePrev" aria-label="First page" href="javascript:void(0)">
+          First</a>
+      </div>
+    </li>
+    <li class="cursor-pointer pg-align-1" *ngIf="currentPage>0" (click)="callParent(currentPage-1)">
+      <div class="pagePrev">
+        <span uk-pagination-previous></span> <a class="pagePrev" aria-label="Previous page" href="javascript:void(0)">
+          Previous</a>
+      </div>
+    </li>
+    <li class="pagenum" *ngFor="let i of items" [ngClass]="{'uk-active': i==currentPage}" (click)="callParent(i)">
+      <a href="javascript:void(0)" [attr.aria-label]="getPageLabel(i)">{{i+1}}</a></li>
+    <li class="cursor-pointer pg-align-2" *ngIf="currentPage<lastPage" (click)="callParent(currentPage -- 1)">
+      <div class="pageNext">
+        <a class="pageNext" aria-label="Next page" href="javascript:void(0)"> Next </a><span uk-pagination-next></span>
+      </div>
+    </li>
+    <li class="cursor-pointer pg-align-2" *ngIf="currentPage<lastPage" (click)="callParent(lastPage)">
+      <div class="pageNext">
+        <a class="pageNext" aria-label="Last page" href="javascript:void(0)"> Last </a><span uk-pagination-next></span>
+      </div>
+    </li>
+  </ul>
+</div>
+<!--  -->

@@ -45,6 +45,6 @@ export class ApiConstants {
     public static VALIDATE_PHONE_NUMBER_PRESENCE_FOR_UPDATE: string = `${ApiConstants.BASE_URL}/BY/api/v1/users/vaidateMobileNumberPresenceForUpdate`;
     public static MERGE_ACCOUNTS: string = `${ApiConstants.BASE_URL}/BY/api/v1/users/mergeAccounts`;
     public static VALIDATE_OTP: string = `${ApiConstants.BASE_URL}/BY/api/v1/users/validateOTP`;
-    public static UNSUBSCRIBE_NEWSLETTER: string = `${ApiConstants.BASE_URL}/BY/api/v1/users/unsubscribeNewsLetter`;
+    public static UPDATE_EMAIL_SUBCRIPTION: string = `${ApiConstants.BASE_URL}/BY/api/v1/users/updateEmailSubscription`;
     
 }

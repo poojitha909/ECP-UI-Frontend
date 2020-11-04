@@ -67,7 +67,11 @@ export class ViewProfileComponent implements OnInit {
     this.otpModalShow = false;
     let mobile = (this.userService.userProfile.basicProfileInfo.primaryPhoneNo) ? (this.userService.userProfile.basicProfileInfo.primaryPhoneNo) : this.auth.user.phoneNumber;
     this.isLoading = true;
-    this.userService.updateNewsletterPreference(mobile, otp, this.userService.userProfile.basicProfileInfo.isSubscribedForNewsletter).subscribe(res => {
+    this.userService.updateNewsletterPreference(mobile, otp, 
+      this.userService.userProfile.basicProfileInfo.isSubscribedForNewsletter,
+      this.userService.userProfile.basicProfileInfo.isSubscribedForLearningAcademy,
+      this.userService.userProfile.basicProfileInfo.isSubscribedForSecondaryCareer
+      ).subscribe(res => {
       this.isLoading = false;
       this.isLetterEditDisabled = true;
       try { this.newsLetterSubscriptionStatus = JSON.parse(this.userService.userProfile.basicProfileInfo.isSubscribedForNewsletter + "".toLowerCase()); } catch (e) { console.warn(e) }

@@ -101,6 +101,8 @@ interface BasicProfileInfo {
     description?: any;
     photoGalleryURLs?: any[];
     isSubscribedForNewsletter?:boolean;
+    isSubscribedForSecondaryCareer?:boolean;
+    isSubscribedForLearningAcademy?:boolean;
     primaryUserAddress?: PrimaryUserAddress;
     otherAddresses?: any[];
     shortDescription?: any;

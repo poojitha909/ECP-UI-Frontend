@@ -38,6 +38,11 @@
       margin-left: 0px;
     }
   }
+  .logo{
+    img{
+      height: 130px;
+    }
+  }
 
   .links {
     margin-left: 40px;
@@ -244,12 +249,13 @@
       border-right: 0px solid #2d3758;
   }
   .logo{
+    
     margin-top: 20px;
     width: 180px;
     height: 102px;
     margin-left: 155px;
     .img{
-      height: 100px;
+      height: 150px;
     }
   }
   .follow{

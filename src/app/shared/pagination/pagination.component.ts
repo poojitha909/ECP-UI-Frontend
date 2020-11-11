@@ -33,7 +33,7 @@ export class PaginationComponent implements OnChanges {
     const pages = Math.ceil(this.totalRecords / this.perPage);
     this.items = [];
     let start =  ( (this.activeItem - 3) > 0 ) ? (this.activeItem - 3) : 0;
-    let end =  ( pages < (start + 7) ) ? pages : (start + 7);
+    let end =  ( pages < (start + 3) ) ? pages : (start + 3);
     for (let i = 0; i < end-start; i++) {
       this.items[i] = start + i;
     }

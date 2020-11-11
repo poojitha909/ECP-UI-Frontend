@@ -11,7 +11,7 @@
     }
   }
   .logo-tagline{
-      width: 200px;
+      width: 280px;
       height: 84px;
   }
   .uk-grid {
@@ -37,7 +37,8 @@
         }
       }
       img {
-        margin-top: 25px;
+          margin-top: 5px;
+          margin-left: -25px;
       }
     }
 
@@ -276,7 +277,7 @@
   .header {
     height: 80px;
     .logo-tagline{
-      width: 100px;
+      width: 170px;
     }
     .nav-menu{
       margin-bottom: 30px;
@@ -290,7 +291,7 @@
 @media only screen and (max-width: 720px) {
   .logo-tagline {
     img{
-      margin-top: 15px !important;
+      margin-top: 0px !important;
     }
   }
 }

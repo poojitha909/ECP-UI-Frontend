@@ -5,6 +5,7 @@ import { LayoutComponent } from './ui';
 import { UserTermsComponent } from './shared/user-terms/user-terms.component';
 import { UserPolicyComponent } from './shared/user-policy/user-policy.component';
 import { EventsRegisterFormComponent} from './shared/events-register-form/events-register-form.component'
+import { JobsForYouComponent } from './features/jobs-for-you/jobs-for-you.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,10 @@ const routes: Routes = [
       {
         path:'events-register',
         component: EventsRegisterFormComponent
+      },
+      {
+        path:'jobs-for-you',
+        component:JobsForYouComponent
       }
     ]
   },

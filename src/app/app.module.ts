@@ -6,11 +6,12 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './core';
 import { ConfigurationService } from './core/services/configuration.service';
+import { JobsForYouComponent } from './features/jobs-for-you/jobs-for-you.component';
 
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, JobsForYouComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule],
   bootstrap: [AppComponent],
   providers: [

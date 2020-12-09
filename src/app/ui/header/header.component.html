@@ -1,9 +1,9 @@
 <div class="header" role="banner">
   <div class="uk-container">
     <div class="uk-grid-small" uk-grid>
-      <div class="uk-width-auto" >
+      <div class="uk-width-auto">
         <div class="logo-tagline uk-text-left@s uk-text-center">
-          <img alt="Joy of age logo"  routerLink="/" style="width: 100% !important;"
+          <img alt="Joy of age logo" routerLink="/" style="width: 100% !important;"
             src="assets/images/complete_logo.png" />
           <!-- <div class="logo">
             <button class="uk-button uk-button-default" routerLink="/">Joy of Age</button>
@@ -32,10 +32,11 @@
                     </li>
                     <hr />
                     <li><a tabindex=0 (keydown.enter)="navigateUser()" class="uk-padding-remove font-regular"
-                      (click)="navigateEventsRegister()">
-                      <fa-icon icon="user" [style]="{'margin-right':'20px','color':'#1A73E8'}"></fa-icon>Register Events
-                    </a>
-                  </li>
+                        (click)="navigateEventsRegister()">
+                        <fa-icon icon="user" [style]="{'margin-right':'20px','color':'#1A73E8'}"></fa-icon>Register
+                        Events
+                      </a>
+                    </li>
                     <hr />
                     <li><a tabindex=0 (keydown.enter)="logout()" (click)="logout()"
                         class="uk-padding-remove font-regular">
@@ -72,6 +73,8 @@
           <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
             [routerLinkActiveOptions]="{exact: false}"><a routerLink="/products">Products for you</a></li>
           <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
+            [routerLinkActiveOptions]="{exact: false}"><a routerLink="/jobs">Job Hunt</a></li>
+          <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
             [routerLinkActiveOptions]="{exact: false}"><a routerLink="/services">Services for you</a></li>
           <li class="uk-nav-divider"></li>
           <li class="uk-nav-header" (click)="closeMobileMenu()" routerLinkActive="uk-active"
@@ -107,6 +110,8 @@
         <li routerLinkActive="uk-active" #link4="routerLinkActive" [routerLinkActiveOptions]="{exact: false}"><a
             [attr.aria-current]="link4.isActive ? 'page':false" routerLink="/products">Products
             for You</a></li>
+        <li routerLinkActive="uk-active" #link4="routerLinkActive" [routerLinkActiveOptions]="{exact: false}"><a
+            [attr.aria-current]="link4.isActive ? 'page':false" routerLink="/jobs">Job Hunt</a></li>
         <li routerLinkActive="uk-active" #link5="routerLinkActive" [routerLinkActiveOptions]="{exact: false}"><a
             [attr.aria-current]="link5.isActive ? 'page':false" routerLink="/services">Services for You</a></li>
         <!-- <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}"><a

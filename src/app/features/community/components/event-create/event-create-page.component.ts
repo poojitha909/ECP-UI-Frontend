@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { StorageHelperService } from "../../../../core/services/storage-helper.service";
 import { AuthService } from "../../../../core/auth/services/auth.service";
@@ -6,6 +6,7 @@ import { Breadcrumb } from 'src/app/core/interfaces';
 import { Validators, FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import moment from 'moment';
 import { UserService } from 'src/app/features/user/services/user.service';
+import { EventService } from '../../services/events.service';
 
 @Component({
   selector: 'app-event-create',
@@ -25,8 +26,9 @@ export class EventCreatePageComponent implements OnInit {
     {
       text: 'All Events',
       link: '/community',
-      queryParams: { 
-        show: "events"}
+      queryParams: {
+        show: "events"
+      }
     }
   ];
   categoryList: any[];
@@ -35,12 +37,33 @@ export class EventCreatePageComponent implements OnInit {
   user: any;
   selectedValue: any = '';
 
-  minDate = moment(new Date()).add(1,'days').format('YYYY-MM-DD')
-  languages:any[];
-  constructor(private router: Router, private store: StorageHelperService,
-    private fb: FormBuilder, private authService: AuthService,private userService:UserService) { }
+
+  mainCategories = []
+  subCategories = []
+
+  minDate = moment(new Date()).add(1, 'days').format('YYYY-MM-DD')
+  languages: any[];
+  constructor(private cdRef: ChangeDetectorRef, private router: Router, private store: StorageHelperService,
+    private fb: FormBuilder, private authService: AuthService, private userService: UserService, private eventService: EventService) { }
+
+  fetchSubCategory(e) {
+    let id = undefined
+    this.mainCategories.forEach(m => {
+      if (m.name == e) {
+        id = m.id;
+      }
+    });
+    this.eventService.getSubCategories(id).subscribe(res => {
+      this.subCategories = res;
+    })
+  }
 
   ngOnInit() {
+    this.eventService.getMainCategories().subscribe(res => {
+      this.mainCategories = res;
+      console.log(res)
+      this.cdRef.detectChanges();
+    });
     document.getElementById("addEventHeading").focus();
     this.categoryList = [];
     this.successMessage = "";
@@ -67,20 +90,23 @@ export class EventCreatePageComponent implements OnInit {
       eventType: [event ? event.eventType : "", Validators.required],
       entryFee: [event ? event.entryFee : "", Validators.required],
 
+      mainCategory: [event ? event.mainCategory : "", Validators.required],
+      subCategory: [event ? event.subCategory : "", Validators.required],
+
       languages: [event ? event.languages : "", Validators.required],
       organiser: [event ? event.organiser : "", [Validators.required, Validators.pattern('^[a-zA-Z \-\']+')]]
     });
 
-    this.eventType.valueChanges.subscribe(value=>{
-      if(value == 3) {
+    this.eventType.valueChanges.subscribe(value => {
+      if (value == 3) {
         this.address.patchValue("Online Event");
         this.address.updateValueAndValidity();
         this.capacity.setValidators(null);
         this.capacity.updateValueAndValidity();
-       this.languagesField.setValidators(null);
-       this.languagesField.updateValueAndValidity();
-       this.orgPhone.setValidators([Validators.minLength(10),Validators.maxLength(10)]);
-       this.orgPhone.updateValueAndValidity();
+        this.languagesField.setValidators(null);
+        this.languagesField.updateValueAndValidity();
+        this.orgPhone.setValidators([Validators.minLength(10), Validators.maxLength(10)]);
+        this.orgPhone.updateValueAndValidity();
       }
     })
 
@@ -88,8 +114,8 @@ export class EventCreatePageComponent implements OnInit {
     this.userService.profileLanguages().subscribe(response => {
       if (response) {
         this.languages = [];
-        response.map( (lang) => {
-          this.languages[this.languages.length] =  lang.name 
+        response.map((lang) => {
+          this.languages[this.languages.length] = lang.name
         })
       }
     });
@@ -102,13 +128,13 @@ export class EventCreatePageComponent implements OnInit {
     return this.eventForm.get("address") as FormControl;
   }
 
-  get orgPhone(): FormControl{
+  get orgPhone(): FormControl {
     return this.eventForm.get("orgPhone") as FormControl;
   }
-  get capacity(): FormControl{
+  get capacity(): FormControl {
     return this.eventForm.get("capacity") as FormControl;
   }
-  get languagesField(): FormControl{
+  get languagesField(): FormControl {
     return this.eventForm.get("languages") as FormControl;
   }
 
@@ -137,12 +163,12 @@ export class EventCreatePageComponent implements OnInit {
   onReset() {
     this.successMessage = "";
     this.eventForm.reset();
-    this.router.navigate(['/community'],{queryParams:{show: 'events' }});
+    this.router.navigate(['/community'], { queryParams: { show: 'events' } });
   }
 
   onSubmit() {
     this.successMessage = "";
-    this.store.store("new-event", JSON.stringify( this.eventForm.value ));
+    this.store.store("new-event", JSON.stringify(this.eventForm.value));
     if (!this.user) {
       this.authService.redirectUrl = "/community/event/add";
       this.router.navigate(['/user/signin']);
@@ -163,7 +189,7 @@ export class EventCreatePageComponent implements OnInit {
     delete event.date;
     delete event.startTime;
 
-    this.store.store("new-event-preview", JSON.stringify( event ));
-    this.router.navigate(['/community/event/preview',{id:'preview'}]);
+    this.store.store("new-event-preview", JSON.stringify(event));
+    this.router.navigate(['/community/event/preview', { id: 'preview' }]);
   }
 }

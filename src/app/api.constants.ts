@@ -28,6 +28,8 @@ export class ApiConstants {
     public static GET_SERVICE_RATEINGS: string = `${ApiConstants.BASE_URL}/BY/api/v1/reviewRate/serviceRatings`;
     public static ADD_EVENT_REPORT: string = `${ApiConstants.BASE_URL}/BY/api/v1/event/reportEvent`;
     public static EVENTS_SERVICES: string = `${ApiConstants.BASE_URL}/BY/api/v1/event`;
+    public static EVENTS_MAIN_CAT_SERVICES: string = `${ApiConstants.BASE_URL}/BY/api/v1/event/main-categories`;
+    public static EVENTS_SUB_CAT_SERVICES: string = `${ApiConstants.BASE_URL}/BY/api/v1/event/sub-categories?mainCatId=`;
     public static SEND_OTP: string = `${ApiConstants.BASE_URL}/BY/api/v1/users/sendOtp`;
     public static RESEND_OTP: string = `${ApiConstants.BASE_URL}/BY/api/v1/users/resendOtp`;
     public static LOGIN_OTP: string = `${ApiConstants.BASE_URL}/BY/api/v1/users/otpLogin`;

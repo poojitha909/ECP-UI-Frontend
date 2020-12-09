@@ -50,6 +50,14 @@ export class EventService {
         return this.http.get<any[]>(`${this.eventUrl}?${queryParams}`);
     }
 
+    getMainCategories(): Observable<any[]> {
+        return this.http.get<any[]>(ApiConstants.EVENTS_MAIN_CAT_SERVICES);
+    }
+    
+    getSubCategories(mainCat: string): Observable<any[]> {
+        return this.http.get<any[]>(ApiConstants.EVENTS_SUB_CAT_SERVICES+mainCat);
+    }
+
     addEvents(event: any): Observable<any[]> {
         return this.http.post<any[]>(`${this.eventUrl}`,{...event});
     }

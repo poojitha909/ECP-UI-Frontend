@@ -44,6 +44,45 @@
                             class="uk-text-danger">Event Type is required to publish the upcoming event.</small>
                     </div>
                 </div>
+
+                <!-- <div class="uk-margin">
+                    <label
+                        [ngClass]="{'uk-text-danger' : formControl.mainCategory.invalid && ( formControl.mainCategory.dirty ||  formControl.mainCategory.touched) }"
+                        class="uk-form-label" for="Event-Type">Main Category<span class="required">*</span></label>
+                    <div class="uk-form-controls">
+                        <select
+                            [ngClass]="{'uk-form-danger' : formControl.mainCategory.invalid && ( formControl.mainCategory.dirty ||  formControl.mainCategory.touched) }"
+                            class="uk-select" formControlName="mainCategory" id="Event-Type" (change)="fetchSubCategory($event.target.value)" placeholder="Pick an Event Main Category">
+                            <option value="" disabled selected>Select Event Main Category</option>
+                            <ng-container *ngFor="let item of mainCategories">
+                                <option [value]="item.name" >{{item.name}}</option>
+                            </ng-container>
+                        </select>
+                        <small aria-describedby="Event-Type"
+                            *ngIf="formControl.mainCategory.invalid && ( formControl.mainCategory.dirty ||  formControl.mainCategory.touched)"
+                            class="uk-text-danger">Main Category is required to publish the upcoming event.</small>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label
+                        [ngClass]="{'uk-text-danger' : formControl.subCategory.invalid && ( formControl.subCategory.dirty ||  formControl.subCategory.touched) }"
+                        class="uk-form-label" for="Event-Type">Sub Category<span class="required">*</span></label>
+                    <div class="uk-form-controls">
+                        <select 
+                            [ngClass]="{'uk-form-danger' : formControl.subCategory.invalid && ( formControl.subCategory.dirty ||  formControl.subCategory.touched) }"
+                            class="uk-select" formControlName="subCategory" id="Event-Type" placeholder="Pick an Event Main Category">
+                            <option value="" disabled selected>Select Event Sub Category</option>
+                            <ng-container *ngFor="let item of subCategories">
+                                <option [value]="item.name">{{item.name}}</option>
+                            </ng-container>
+                        </select>
+                        <small aria-describedby="Event-Type"
+                            *ngIf="formControl.subCategory.invalid && ( formControl.subCategory.dirty ||  formControl.subCategory.touched)"
+                            class="uk-text-danger">Sub Category is required to publish the upcoming event.</small>
+                    </div>
+                </div> -->
+
                 <div class="uk-margin uk-grid-small uk-child-width-1-2@m" uk-grid>
                     <div>
                         <label

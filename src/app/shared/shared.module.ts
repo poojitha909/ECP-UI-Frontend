@@ -120,7 +120,7 @@ import { EventsRegisterFormComponent } from './events-register-form/events-regis
     OtpPopupComponent,
     ArrayToStringPipe,
     TrapModalFocusDirective,
-    EventsRegisterFormComponent
+    EventsRegisterFormComponent,
   ],
   imports: [
     CommonModule,

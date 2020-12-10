@@ -1,1 +1,107 @@
-<p>job-search works!</p>
+<div class="container">
+
+    <div class="row" style="margin:2rem auto;">
+        <div class="col-md-10 d-flex align-items-center">
+            <p>At Joy of Age, you can easily find products specially curated for you. Member reviews, ratings and
+                comments help you make the right purchase decision.</p>
+        </div>
+        <div class="col-md-2">
+            <img src="assets/images/landing-img/product-banner-updated.png" alt="">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12"
+            style="background-color: #EBF5FF; border: 1px solid #D7E1EF; padding-top: 15px; padding-bottom: 15px; border-radius: 5px;">
+            <div class="row">
+                <div class="col-md-4">
+                    <ng-select [(ngModel)]="location" (change)="location = $event" placeholder="City" (search)="getLocations($event)">
+                        <ng-option *ngFor="let car of locationList" [value]="car">{{car.locationTitle}}</ng-option>
+                    </ng-select>
+                </div>
+                <div class="col">
+                    <input class="uk-input" [(ngModel)]="jobSearchKey" placeholder="Search by title, skill, or company"  />
+                </div>
+                <div class="col-md-2">
+                    <button class="uk-button uk-button-default"
+                        (click)="searchJobs()">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 30px; margin-bottom: 30px;">
+        <div class="col-md-5" style="background-color: light#1a73e8; max-height: 80vh; overflow-y: scroll;">
+            
+            <div *ngFor="let item of jobList" class="row" style="border: 1px solid #eee;" (click)="activeJob = item">
+                <div class="col-md-2 d-flex align-items-center"><img id="image" src="assets/images/fav.png"></div>
+                <div class="col-md-10">
+                    <div class="row mt10">
+                        <div class="col">
+                            <p class="noMarginB" style="color: #1a73e8; font-weight: 600;" >{{item.jobTitle}}</p>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col">
+                            <p class="noMarginB addressTxt">{{item.jobLocation}}</p>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col">
+                            <p class="noMarginB">You have a preffered skill badge</p>
+                        </div>
+                    </div> -->
+                    <div class="row" style="margin-bottom: 10px;">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <p class="noMarginB smTxt">posted on posted on {{item.postedOn | date}}</p>
+                                </div>
+                                <!-- <div class="col-md-5">
+                                    <p id="apply">Apply</p>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-7" *ngIf="activeJob">
+            <div class="row" id="colum55">
+                <div class="col-md-3 d-flex align-items-center"><img src="assets/images/fav.png" style="width: 100%;"></div>
+                <div class="col-md-9">
+                    <div class="row mt10">
+                        <div class="col">
+                            <p class="noMarginB" style="color: #1a73e8; font-weight: 600;">{{activeJob.jobTitle}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p  class="noMarginB addressTxt">{{activeJob.jobLocation}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="smTxt">posted on {{activeJob.postedOn | date}}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 20px;">
+                        <div class="col"><button class="btn btn-primary button" type="button">APPLY</button></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt10">
+                <div class="col">
+                    <p style="font-weight: 600; margin-bottom: 0;">Description</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <p>{{activeJob.jobDescription}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

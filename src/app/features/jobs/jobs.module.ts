@@ -8,6 +8,7 @@ import { CoreModule } from 'src/app/core';
 import { JobsRoutingModule } from './jobs-routing.module';
 import { SharedModule } from 'src/app/shared';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -57,7 +58,8 @@ const customNotifierOptions: NotifierOptions = {
     JobsRoutingModule,
     SharedModule,
     NgbCarouselModule,
-    NotifierModule.withConfig(customNotifierOptions)
+    NotifierModule.withConfig(customNotifierOptions),
+    NgSelectModule
   ]
 })
 export class JobsModule { }

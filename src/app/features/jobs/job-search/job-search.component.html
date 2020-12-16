@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-md-2">
                     <button class="uk-button uk-button-default"
-                        (click)="searchJobs()">Search</button>
+                        (click)="searchJobs();">Search</button>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
     <div class="row" style="margin-top: 30px; margin-bottom: 30px;">
         <div class="col-md-5" style="background-color: light#1a73e8; max-height: 80vh; overflow-y: scroll;">
             
-            <div *ngFor="let item of jobList" class="row" style="border: 1px solid #eee;" (click)="activeJob = item">
+            <div *ngFor="let item of jobList" class="row" style="border: 1px solid #eee;" (click)="activeJob = item; isApplyClicked = false">
                 <div class="col-md-2 d-flex align-items-center"><img id="image" src="assets/images/fav.png"></div>
                 <div class="col-md-10">
                     <div class="row mt10">
@@ -69,7 +69,7 @@
         </div>
         <div class="col-md-7" *ngIf="activeJob">
             <div class="row" id="colum55">
-                <div class="col-md-3 d-flex align-items-center"><img src="assets/images/fav.png" style="width: 100%;"></div>
+                <div class="col-md-3"><img src="assets/images/fav.png" style="width: 100%;margin-top: 10px;"></div>
                 <div class="col-md-9">
                     <div class="row mt10">
                         <div class="col">
@@ -87,7 +87,44 @@
                         </div>
                     </div>
                     <div class="row" style="margin-bottom: 20px;">
-                        <div class="col"><button class="btn btn-primary button" type="button">APPLY</button></div>
+                        <div class="col" *ngIf="isApplyClicked!=true && activeJob['isApplied']==undefined">
+                            <button class="btn btn-primary button" type="button" (click)="isApplyClicked = true">APPLY</button>
+                        </div>
+                        <div class="col" *ngIf="isApplyClicked!=true && activeJob['isApplied']!=undefined">
+                            <p style="font-size: 12px;margin-bottom: 0px; color: rgb(0, 129, 43);">You've successfully applied for this job</p>
+                        </div>
+                        <ng-container *ngIf="isApplyClicked==true">
+                            <div class="col-12" *ngIf="errorText!=''">
+                                <p style="font-size: 12px;margin-bottom: 0px; color: rgb(163, 0, 0);">{{errorText}}</p>
+                            </div>
+                            <div class="col col-md-6">
+                                <label>First Name</label>
+                                <input class="uk-input" [(ngModel)]="firstName" type="text" placeholder="First Name"  />
+                            </div>
+                            <div class="col col-md-6">
+                                <label>Last Name</label>
+                                <input class="uk-input" [(ngModel)]="lastName" type="text" placeholder="Last Name"  />
+                            </div>
+                            <div class="col col-md-6">
+                                <label>Date of Birth</label>
+                                <input class="uk-input" [(ngModel)]="dob" type="date" placeholder="Date of Birth"  />
+                            </div>
+                            <div class="col col-md-6">
+                                <label>Email</label>
+                                <input class="uk-input" [(ngModel)]="emailID" type="email" placeholder="Email"  />
+                            </div>
+                            <div class="col col-md-6">
+                                <label>Mobile Number</label>
+                                <input class="uk-input" [(ngModel)]="mobileNo" type="number" placeholder="Mobile Number"  />
+                            </div>
+                            <div class="col col-md-6">
+                                <label>Resume</label>
+                                <input class="mt10" type="file" accept="application/pdf,.doc,.docx,application/msword"
+                                (change)="onSelectFile($event)" />
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary button mt10" style="float: right;" type="button" (click)="applyForJob(activeJob.reqID)">SUBMIT</button></div>
+                        </ng-container>
                     </div>
                 </div>
             </div>

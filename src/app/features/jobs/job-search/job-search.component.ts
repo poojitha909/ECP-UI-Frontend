@@ -36,9 +36,9 @@ export class JobSearchComponent implements OnInit {
     stateID: any,
   }[] = []
   isApplyClicked = false
-
+  isJobNotFound = false
   jobList = []
-
+  isAppliedWithoutJob = false
   errorText = ''
   constructor(private http: HttpClient) { }
 
@@ -59,6 +59,7 @@ export class JobSearchComponent implements OnInit {
 
 
   public searchJobs() {
+    this.isAppliedWithoutJob = false;
     console.log(this.location, this.jobSearchKey);
     if (this.location.rid != undefined)
       this.http.post<any>("https://prodapi.staffinggo.in/api/CSS/Consultant/GetPostedRequirementList",
@@ -118,6 +119,12 @@ export class JobSearchComponent implements OnInit {
         }
       ).subscribe(res => {
         this.jobList = res.dataObject
+        if(res.dataObject==undefined || res.dataObject==null){
+          this.isJobNotFound = true;
+          
+        }else{
+          this.isJobNotFound = false;
+        }
       })
   }
 
@@ -171,8 +178,13 @@ export class JobSearchComponent implements OnInit {
           "noticePeriod": "15",
           "userIP": "103.6.158.211"
         }).subscribe(res => {
-          this.activeJob['isApplied'] = true
+          
           this.isApplyClicked = false
+          if(reqId==0){
+            this.isAppliedWithoutJob = true;
+          }else{
+            this.activeJob['isApplied'] = true
+          }
         })
     }
   }

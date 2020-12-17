@@ -15,30 +15,81 @@
             style="background-color: #EBF5FF; border: 1px solid #D7E1EF; padding-top: 15px; padding-bottom: 15px; border-radius: 5px;">
             <div class="row">
                 <div class="col-md-4">
-                    <ng-select [(ngModel)]="location" (change)="location = $event" placeholder="City" (search)="getLocations($event)">
+                    <ng-select [(ngModel)]="location" (change)="location = $event" placeholder="City"
+                        (search)="getLocations($event)">
                         <ng-option *ngFor="let car of locationList" [value]="car">{{car.locationTitle}}</ng-option>
                     </ng-select>
                 </div>
                 <div class="col">
-                    <input class="uk-input" [(ngModel)]="jobSearchKey" placeholder="Search by title, skill, or company"  />
+                    <input class="uk-input" [(ngModel)]="jobSearchKey"
+                        placeholder="Search by title, skill, or company" />
                 </div>
                 <div class="col-md-2">
-                    <button class="uk-button uk-button-default"
-                        (click)="searchJobs();">Search</button>
+                    <button class="uk-button uk-button-default" (click)="searchJobs();">Search</button>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="row" style="margin-top: 30px; margin-bottom: 30px;">
+        <div class="col-md-5" *ngIf="isJobNotFound==true && isAppliedWithoutJob==false">
+            <p>No Jobs Found!</p>
+        </div>
+        <div class="col-md-7" *ngIf="isJobNotFound==true">
+            <div class="row">
+                <div class="col-12" *ngIf="isAppliedWithoutJob==true">
+                    <p style="font-size: 12px;margin-bottom: 0px; color: rgb(0, 129, 43);">You've successfully
+                        submitted your details.</p>
+                </div>
+
+                <ng-container *ngIf="isAppliedWithoutJob==false">
+                    <div class="col-12">
+                        <p>It's alright, submit your details; let us do the hunt for you :)</p>
+                    </div>
+                    <div class="col-12" *ngIf="errorText!=''">
+                        <p style="font-size: 12px;margin-bottom: 0px; color: rgb(163, 0, 0);">{{errorText}}</p>
+                    </div>
+                    <div class="col col-md-6">
+                        <label>First Name</label>
+                        <input class="uk-input" [(ngModel)]="firstName" type="text" placeholder="First Name" />
+                    </div>
+                    <div class="col col-md-6">
+                        <label>Last Name</label>
+                        <input class="uk-input" [(ngModel)]="lastName" type="text" placeholder="Last Name" />
+                    </div>
+                    <div class="col col-md-6">
+                        <label>Date of Birth</label>
+                        <input class="uk-input" [(ngModel)]="dob" type="date" placeholder="Date of Birth" />
+                    </div>
+                    <div class="col col-md-6">
+                        <label>Email</label>
+                        <input class="uk-input" [(ngModel)]="emailID" type="email" placeholder="Email" />
+                    </div>
+                    <div class="col col-md-6">
+                        <label>Mobile Number</label>
+                        <input class="uk-input" [(ngModel)]="mobileNo" type="number" placeholder="Mobile Number" />
+                    </div>
+                    <div class="col col-md-6">
+                        <label>Resume</label>
+                        <input class="mt10" type="file" accept="application/pdf,.doc,.docx,application/msword"
+                            (change)="onSelectFile($event)" />
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary button mt10" style="float: right;" type="button"
+                            (click)="applyForJob(0)">SUBMIT</button></div>
+                </ng-container>
+
+            </div>
+        </div>
         <div class="col-md-5" style="background-color: light#1a73e8; max-height: 80vh; overflow-y: scroll;">
-            
-            <div *ngFor="let item of jobList" class="row" style="border: 1px solid #eee;" (click)="activeJob = item; isApplyClicked = false">
+
+            <div *ngFor="let item of jobList" class="row" style="border: 1px solid #eee;"
+                (click)="activeJob = item; isApplyClicked = false">
                 <div class="col-md-2 d-flex align-items-center"><img id="image" src="assets/images/fav.png"></div>
                 <div class="col-md-10">
                     <div class="row mt10">
                         <div class="col">
-                            <p class="noMarginB" style="color: #1a73e8; font-weight: 600;" >{{item.jobTitle}}</p>
+                            <p class="noMarginB" style="color: #1a73e8; font-weight: 600;">{{item.jobTitle}}</p>
                         </div>
                     </div>
                     <div class="row ">
@@ -67,6 +118,7 @@
             </div>
 
         </div>
+
         <div class="col-md-7" *ngIf="activeJob">
             <div class="row" id="colum55">
                 <div class="col-md-3"><img src="assets/images/fav.png" style="width: 100%;margin: 10px 0px;"></div>
@@ -78,7 +130,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <p  class="noMarginB addressTxt">{{activeJob.jobLocation}}</p>
+                            <p class="noMarginB addressTxt">{{activeJob.jobLocation}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -88,10 +140,12 @@
                     </div>
                     <div class="row" style="margin-bottom: 20px;">
                         <div class="col" *ngIf="isApplyClicked!=true && activeJob['isApplied']==undefined">
-                            <button class="btn btn-primary button" type="button" (click)="isApplyClicked = true">APPLY</button>
+                            <button class="btn btn-primary button" type="button"
+                                (click)="isApplyClicked = true">APPLY</button>
                         </div>
                         <div class="col" *ngIf="isApplyClicked!=true && activeJob['isApplied']!=undefined">
-                            <p style="font-size: 12px;margin-bottom: 0px; color: rgb(0, 129, 43);">You've successfully applied for this job</p>
+                            <p style="font-size: 12px;margin-bottom: 0px; color: rgb(0, 129, 43);">You've successfully
+                                applied for this job</p>
                         </div>
                         <ng-container *ngIf="isApplyClicked==true">
                             <div class="col-12" *ngIf="errorText!=''">
@@ -99,31 +153,33 @@
                             </div>
                             <div class="col col-md-6">
                                 <label>First Name</label>
-                                <input class="uk-input" [(ngModel)]="firstName" type="text" placeholder="First Name"  />
+                                <input class="uk-input" [(ngModel)]="firstName" type="text" placeholder="First Name" />
                             </div>
                             <div class="col col-md-6">
                                 <label>Last Name</label>
-                                <input class="uk-input" [(ngModel)]="lastName" type="text" placeholder="Last Name"  />
+                                <input class="uk-input" [(ngModel)]="lastName" type="text" placeholder="Last Name" />
                             </div>
                             <div class="col col-md-6">
                                 <label>Date of Birth</label>
-                                <input class="uk-input" [(ngModel)]="dob" type="date" placeholder="Date of Birth"  />
+                                <input class="uk-input" [(ngModel)]="dob" type="date" placeholder="Date of Birth" />
                             </div>
                             <div class="col col-md-6">
                                 <label>Email</label>
-                                <input class="uk-input" [(ngModel)]="emailID" type="email" placeholder="Email"  />
+                                <input class="uk-input" [(ngModel)]="emailID" type="email" placeholder="Email" />
                             </div>
                             <div class="col col-md-6">
                                 <label>Mobile Number</label>
-                                <input class="uk-input" [(ngModel)]="mobileNo" type="number" placeholder="Mobile Number"  />
+                                <input class="uk-input" [(ngModel)]="mobileNo" type="number"
+                                    placeholder="Mobile Number" />
                             </div>
                             <div class="col col-md-6">
                                 <label>Resume</label>
                                 <input class="mt10" type="file" accept="application/pdf,.doc,.docx,application/msword"
-                                (change)="onSelectFile($event)" />
+                                    (change)="onSelectFile($event)" />
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-primary button mt10" style="float: right;" type="button" (click)="applyForJob(activeJob.reqID)">SUBMIT</button></div>
+                                <button class="btn btn-primary button mt10" style="float: right;" type="button"
+                                    (click)="applyForJob(activeJob.reqID)">SUBMIT</button></div>
                         </ng-container>
                     </div>
                 </div>
@@ -140,5 +196,5 @@
             </div>
         </div>
     </div>
-    
+
 </div>

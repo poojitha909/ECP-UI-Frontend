@@ -14,19 +14,26 @@
         <div class="col-12"
             style="background-color: #EBF5FF; border: 1px solid #D7E1EF; padding-top: 15px; padding-bottom: 15px; border-radius: 5px;">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <ng-select [(ngModel)]="location" (change)="location = $event" placeholder="City"
                         (search)="getLocations($event)">
                         <ng-option *ngFor="let car of locationList" [value]="car">{{car.locationTitle}}</ng-option>
                     </ng-select>
                 </div>
-                <div class="col">
+                <div class="col-md-4">
                     <input class="uk-input" [(ngModel)]="jobSearchKey"
                         placeholder="Search by title, skill, or company" />
                 </div>
                 <div class="col-md-2">
                     <button class="uk-button uk-button-default" (click)="searchJobs();">Search</button>
                 </div>
+                <div class="col-md-1">
+                   <span style="position: relative; top:10px;">OR</span>
+                </div>
+                <div class="col-md-2">
+                    <span (click)="openApply=true" class="sbtresume" style="color: #1C72E8;position: relative; top:10px;">Submit My Resume</span>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -35,7 +42,7 @@
         <div class="col-md-5" *ngIf="isJobNotFound==true && isAppliedWithoutJob==false">
             <p>No Jobs Found!</p>
         </div>
-        <div class="col-md-7" *ngIf="isJobNotFound==true">
+        <div class="col-md-7" *ngIf="isJobNotFound==true || openApply==true">
             <div class="row">
                 <div class="col-12" *ngIf="isAppliedWithoutJob==true">
                     <p style="font-size: 12px;margin-bottom: 0px; color: rgb(0, 129, 43);">You've successfully
@@ -44,7 +51,7 @@
 
                 <ng-container *ngIf="isAppliedWithoutJob==false">
                     <div class="col-12">
-                        <p>It's alright, submit your details; let us do the hunt for you :)</p>
+                        <p>Submit your details; let us do the hunt for you :)</p>
                     </div>
                     <div class="col-12" *ngIf="errorText!=''">
                         <p style="font-size: 12px;margin-bottom: 0px; color: rgb(163, 0, 0);">{{errorText}}</p>

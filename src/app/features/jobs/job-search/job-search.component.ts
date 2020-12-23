@@ -40,6 +40,7 @@ export class JobSearchComponent implements OnInit {
   jobList = []
   isAppliedWithoutJob = false
   errorText = ''
+  openApply = false;
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
@@ -59,6 +60,7 @@ export class JobSearchComponent implements OnInit {
 
 
   public searchJobs() {
+    this.openApply = false;
     this.isAppliedWithoutJob = false;
     console.log(this.location, this.jobSearchKey);
     if (this.location.rid != undefined)

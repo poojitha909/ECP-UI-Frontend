@@ -62,72 +62,96 @@ export class JobSearchComponent implements OnInit {
   public searchJobs() {
     this.openApply = false;
     this.isAppliedWithoutJob = false;
-    console.log(this.location, this.jobSearchKey);
-    if (this.location.rid != undefined)
-      this.http.post<any>("https://prodapi.staffinggo.in/api/CSS/Consultant/GetPostedRequirementList",
-        {
-          "cid": 2003,
-          "sourceID": 42520,
-          "sourcingAgencyID": 0,
-          "userIP": "",
-          "dataFilter": [
-            // {
-            //   "filterDataType": 3,
-            //   "filterColumnName": "Experience",
-            //   "filterVal": 0,
-            //   "filterText": null,
-            //   "filterIDs": null,
-            //   "filterDates": null,
-            //   "filterDecimals": [
-            //     1,
-            //     3
-            //   ]
-            // },
-            // {
-            //   "filterDataType": 2,
-            //   "filterColumnName": "PostedDate",
-            //   "filterVal": 0,
-            //   "filterText": null,
-            //   "filterIDs": null,
-            //   "filterDates": [
-            //     "20-Nov-2020",
-            //     "27-Nov-2020"
-            //   ],
-            //   "filterDecimals": null
-            // },
-            {
-              "filterDataType": 0,
-              "filterColumnName": "Keywords",
-              "filterVal": 0,
-              "filterText": [
-                this.jobSearchKey
-              ],
-              "filterIDs": null,
-              "filterDates": null,
-              "filterDecimals": null
-            },
-            {
-              "filterDataType": 1,
-              "filterColumnName": "Location",
-              "filterVal": 0,
-              "filterText": null,
-              "filterIDs": [
-                this.location.rid
-              ],
-              "filterDates": null,
-              "filterDecimals": null
-            }
-          ]
-        }
-      ).subscribe(res => {
-        this.jobList = res.dataObject
-        if(res.dataObject==undefined || res.dataObject==null){
-          this.isJobNotFound = true;
-          
-        }else{
-          this.isJobNotFound = false;
-        }
-      })
+    let req;
+    if (this.location != undefined) {
+      req = {
+        "cid": 2003,
+        "sourceID": 42520,
+        "sourcingAgencyID": 0,
+        "userIP": "",
+        "dataFilter": [
+          // {
+          //   "filterDataType": 3,
+          //   "filterColumnName": "Experience",
+          //   "filterVal": 0,
+          //   "filterText": null,
+          //   "filterIDs": null,
+          //   "filterDates": null,
+          //   "filterDecimals": [
+          //     1,
+          //     3
+          //   ]
+          // },
+          // {
+          //   "filterDataType": 2,
+          //   "filterColumnName": "PostedDate",
+          //   "filterVal": 0,
+          //   "filterText": null,
+          //   "filterIDs": null,
+          //   "filterDates": [
+          //     "20-Nov-2020",
+          //     "27-Nov-2020"
+          //   ],
+          //   "filterDecimals": null
+          // },
+          {
+            "filterDataType": 0,
+            "filterColumnName": "Keywords",
+            "filterVal": 0,
+            "filterText": [
+              this.jobSearchKey
+            ],
+            "filterIDs": null,
+            "filterDates": null,
+            "filterDecimals": null
+          },
+          {
+            "filterDataType": 1,
+            "filterColumnName": "Location",
+            "filterVal": 0,
+            "filterText": null,
+            "filterIDs": [
+              this.location.rid
+            ],
+            "filterDates": null,
+            "filterDecimals": null
+          }
+        ]
+      }
+    }
+    else {
+      req = {
+        "cid": 2003,
+        "sourceID": 42520,
+        "sourcingAgencyID": 0,
+        "userIP": "",
+        "dataFilter": [
+          {
+            "filterDataType": 0,
+            "filterColumnName": "Keywords",
+            "filterVal": 0,
+            "filterText": [
+              this.jobSearchKey
+            ],
+            "filterIDs": null,
+            "filterDates": null,
+            "filterDecimals": null
+          }
+        ]
+      }
+    }
+
+    this.http.post<any>("https://prodapi.staffinggo.in/api/CSS/Consultant/GetPostedRequirementList",
+      req
+    ).subscribe(res => {
+      this.jobList = res.dataObject
+      if (res.dataObject == undefined || res.dataObject == null) {
+        this.isJobNotFound = true;
+
+      } else {
+        this.isJobNotFound = false;
+      }
+    })
   }
 
   public getJobDetail() {
@@ -155,7 +179,7 @@ export class JobSearchComponent implements OnInit {
       this.errorText = 'Enter Email ID!';
     } else if (this.mobileNo == '') {
       this.errorText = 'Enter Mobile Number!';
-    }  else if (this.resumeDocumentB64 == '') {
+    } else if (this.resumeDocumentB64 == '') {
       this.errorText = 'Upload Resume!';
     } else {
       this.http.post<any>("https://prodapi.staffinggo.in/api/CSS/Consultant/ApplyForPostedRequirement",
@@ -180,11 +204,11 @@ export class JobSearchComponent implements OnInit {
           "noticePeriod": "15",
           "userIP": "103.6.158.211"
         }).subscribe(res => {
-          
+
           this.isApplyClicked = false
-          if(reqId==0){
+          if (reqId == 0) {
             this.isAppliedWithoutJob = true;
-          }else{
+          } else {
             this.activeJob['isApplied'] = true
           }
         })
@@ -196,23 +220,23 @@ export class JobSearchComponent implements OnInit {
     let isAllSizeValid = true;
 
     if (event.target.files && event.target.files[0]) {
-        for (let i = 0; i < event.target.files.length; i++) {
-            if (((event.target.files[i].size / 1024) / 1024) > 5) {
-                isAllSizeValid = false;
-            }
+      for (let i = 0; i < event.target.files.length; i++) {
+        if (((event.target.files[i].size / 1024) / 1024) > 5) {
+          isAllSizeValid = false;
         }
+      }
     }
     if (isAllSizeValid == true) {
-        if (event.target.files && event.target.files[0]) {
-            for (let i = 0; i < event.target.files.length; i++) {
-                var reader = new FileReader();
-                reader.onload = (event: any) => {
-                    this.resumeDocumentB64 = event.target.result;
-                }
-                reader.readAsDataURL(event.target.files[i]);
-            }
+      if (event.target.files && event.target.files[0]) {
+        for (let i = 0; i < event.target.files.length; i++) {
+          var reader = new FileReader();
+          reader.onload = (event: any) => {
+            this.resumeDocumentB64 = event.target.result;
+          }
+          reader.readAsDataURL(event.target.files[i]);
         }
-    }else{
+      }
+    } else {
       this.errorText = "Resume size should not be greater than 5MB"
     }
   }
